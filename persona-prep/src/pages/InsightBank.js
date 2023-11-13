@@ -4,7 +4,7 @@ export default function InsightBank(){
     return(
         <div>
             <NavBar/>
-            <h2>Insight Bank</h2>
+            <h2>Insight bank new</h2>
         </div>
         
     )
