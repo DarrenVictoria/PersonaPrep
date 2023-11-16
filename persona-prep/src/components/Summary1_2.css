@@ -1,0 +1,40 @@
+.summarysubdiv{
+  margin-top: 170px;
+  display:block;  
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding-left: 11px;
+}
+
+.summary-container{
+    width: 797px;
+    max-width: 100%;
+    position: relative;
+}
+.summary-remaining-words{
+    bottom: 8px;
+    right: 12px;
+    position: absolute;
+}
+
+.summary-text-area{
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 25px;
+    box-sizing: border-box;
+    padding: 10px;
+    overflow: auto;
+    resize: vertical;
+    height: 140.094px;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.summarymaindiv{
+    padding: 10px;
+}

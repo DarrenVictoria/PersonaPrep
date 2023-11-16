@@ -1,0 +1,7 @@
+/*below name is given for the labels that are top on every selection box in the facultydetails i have moved the label towards right by ading margin*/
+.labelname{
+    margin-left: 20px;
+}
+.Facultymaindiv{
+    padding: 10px;
+}
