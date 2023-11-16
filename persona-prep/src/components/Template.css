@@ -1,0 +1,96 @@
+/* To align the header which has the logo and the name of form*/
+.container>div {
+    padding: 10px; 
+    display: flex;
+    align-items: center;
+    
+    
+  }
+
+
+/* To align the logo to left corner of the header*/
+  .logo{
+    text-align: left;
+    
+  }
+  
+
+/* To align the form name to right corner of the header */
+  .variable{
+    text-align: right;
+  }
+
+
+  /*To change the font size,family,color of the form names*/
+ .variablename{
+  font-family: Inter;
+  font-size: 45px;
+  color: rgb(255, 255, 255);
+  }
+
+
+  body {
+    margin: auto;
+  }
+  
+
+  html,body {
+    box-sizing: border-box;
+    height: 100%;
+    padding: 20px;
+    font-family: Inter;
+  }
+  
+
+  .container>div{
+    background-color: #292727; 
+  }
+
+  
+  .page{
+    border: 2px solid black;
+    border-radius: 50px 50px 50px 50px;
+    background: #D9D9D9;
+    margin: auto;
+  }
+
+  
+  .container {
+    border-radius: 45px 45px 0px 0px;
+    background:#292727;
+    display: flex;
+    padding-left: 25px;
+    padding-right: 25px;
+    text-align: center;
+  }
+  
+
+  .container> .logo{
+    border-radius: 39px 0px 0px 0px;
+    left: auto;
+  }
+  
+
+  .container> .variable{
+    border-radius: 0px 39px 0px 0px;
+    margin-left: auto;
+  }
+  
+
+  .page > div {
+    flex: 1;  
+  }
+  
+
+  .bodyform {
+    padding-top: 16px;
+    padding-left: 16px;
+  }
+  
+
+  .page{  
+    flex: 1px;
+  }
+  
+
+  
