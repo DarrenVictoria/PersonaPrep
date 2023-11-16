@@ -62,7 +62,7 @@ export default function NavBar() {
               aria-haspopup="true"
               aria-expanded={open ? "true" : undefined}
             >
-              <Avatar  sx={{ width: 50, height: 50 }}>M</Avatar>
+              <Avatar  sx={{ width: 35, height: 35 }}>M</Avatar>
             </IconButton>
           </Tooltip>
         </Box>
