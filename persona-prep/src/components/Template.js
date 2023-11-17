@@ -21,6 +21,7 @@ import Projects_2 from './StepperPages/Projects2.js';
 import Projects_3 from './StepperPages/Projects3.js';
 import Summary_1 from './StepperPages/Summary1.js';
 import Summary_2 from './StepperPages/Summary2.js';
+import logo from '../assets/logo/Persona Prep Light.png';
 const Template = () => {
     const cvs_instance = useRef();
     const [currentPageIndex, setCurrentPageIndex] = useState(0)
@@ -28,7 +29,7 @@ const Template = () => {
     return(
 <div className="page" style={{backgroundColor: "white"}}>
             <div className="container">
-                <div class="logo"><img src="/Logo/Persona1.png" alt="logo"/></div>
+                <div class="logo"><img src={logo} alt="logo" style={{width:'120px'}}/></div>
                 <div className="variable">
                     {
                         (currentPageIndex == 0) && <p className="variablename"></p>
