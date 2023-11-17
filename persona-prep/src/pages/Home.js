@@ -244,26 +244,28 @@ export default function SplitLayout() {
 
           <Box style={TotalIB} sx={{ width: '100%' }}>
       <Grid container rowSpacing={2} columnSpacing={{ xs: 0.5, sm: 1, md: 2 }}>
-        <Grid item xs={12} sm={6} md={6} className={`grid-item additional-feature-item-1`} onClick={() => redirectTo('https://www.example.com/feature1')}>
-          <Item style={{ backgroundColor: '#973381', height: '7rem', position: 'relative', top: '50%', transform: 'translateY(-50%)', display: 'flex', alignItems: 'center', paddingLeft: '1rem', border: '3px solid #000' }}>
-            <h1 className="IBText">Interview Bank</h1>
-            <IconButton
-              style={{ position: 'absolute', top: '50%', right: '10%', transform: 'translateY(-50%)' }}
-            >
-              <RecordVoiceOverIcon style={{ fontSize: '4rem' }} />
-            </IconButton>
-          </Item>
-        </Grid>
-        <Grid item xs={12} sm={6} md={6} className={`grid-item additional-feature-item-2`} onClick={() => redirectTo('https://www.example.com/feature2')}>
-          <Item style={{ backgroundColor: '#DEB113', height: '7rem', position: 'relative', top: '50%', transform: 'translateY(-50%)', display: 'flex', alignItems: 'center', paddingLeft: '1rem' , border: '3px solid #000' }}>
-            <h1 className="IBText">Corporate Login</h1>
-            <IconButton
-              style={{ position: 'absolute', top: '50%', right: '10%', transform: 'translateY(-50%)' }}
-            >
-              <KeyIcon style={{ fontSize: '4rem' }} />
-            </IconButton>
-          </Item>
-        </Grid>
+                <Grid item xs={12} sm={6} md={6} className={`grid-item additional-feature-item-1`} onClick={() => redirectTo('https://www.example.com/feature1')}>
+            <Item style={{ backgroundColor: '#973381', height: '7rem', position: 'relative', display: 'flex', alignItems: 'center', paddingLeft: '1rem', paddingRight: '2rem', border: '3px solid #000' }}>
+              <h1 className="IBText">Interview Bank</h1>
+              <IconButton
+                style={{ position: 'absolute', top: '50%', right: '5%', transform: 'translateY(-50%)' }}
+              >
+                <RecordVoiceOverIcon style={{ fontSize: '4rem' }} />
+              </IconButton>
+            </Item>
+          </Grid>
+
+            <Grid item xs={12} sm={6} md={6} className={`grid-item additional-feature-item-2`} onClick={() => redirectTo('https://www.example.com/feature2')}>
+        <Item style={{ backgroundColor: '#DEB113', height: '7rem', position: 'relative', display: 'flex', alignItems: 'center', paddingLeft: '1rem', paddingRight: '2rem', border: '3px solid #000' }}>
+          <h1 className="IBText">Corporate Login</h1>
+          <IconButton
+            style={{ position: 'absolute', top: '50%', right: '5%', transform: 'translateY(-50%)' }}
+          >
+            <KeyIcon style={{ fontSize: '4rem' }} />
+          </IconButton>
+        </Item>
+      </Grid>
+
       </Grid>
     </Box>
 
