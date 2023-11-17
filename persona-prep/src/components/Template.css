@@ -34,12 +34,7 @@
   }
   
 
-  html,body {
-    box-sizing: border-box;
-    height: 100%;
-    padding: 20px;
-    font-family: Inter;
-  }
+  
   
 
   .container>div{

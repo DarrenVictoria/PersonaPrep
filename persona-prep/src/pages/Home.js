@@ -185,6 +185,7 @@ const gridItems = [
 
 
 export default function SplitLayout() {
+
     const TotalIB = {
       paddingLeft: '5%',
       paddingRight: '5%',
