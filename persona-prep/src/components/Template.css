@@ -1,4 +1,4 @@
-/* General styles for larger screens */
+
 .formtemp-header-container {
   padding: 10px;
   display: flex;
@@ -47,31 +47,12 @@
     flex-direction: column;
   }
 
-<<<<<<< Updated upstream
-
-  body {
-    margin: auto;
-  }
-  
-
-  html,body {
-    box-sizing: border-box;
-    height: 100%;
-    padding: 20px;
-    font-family: Inter;
-  }
-  
-
-  .container>div{
-    background-color: #292727; 
-=======
   .logo,
   .formtemp-variable {
     border-radius: 0;
     text-align: left;
     padding: 10px;
     margin: 0;
->>>>>>> Stashed changes
   }
 
   .formtemp-variable {
