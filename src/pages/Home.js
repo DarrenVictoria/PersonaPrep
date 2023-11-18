@@ -84,7 +84,7 @@ const gridItems = [
     },
     {
       id: 2,
-      title: "Another Title",
+      title: "CICD Test",
       position: 'relative',
       background: `
         linear-gradient(0deg, #C5F9E7 0%, #C5F9E7 100%),
