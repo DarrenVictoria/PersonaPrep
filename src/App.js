@@ -5,7 +5,9 @@ import {BrowserRouter,Routes,Route} from 'react-router-dom'
 
 import Home from './pages/Home'
 import InsightBank from './pages/InsightBank'
-import InterviewBank from './pages/InterviewBank'
+import InterviewBank from './pages/interviewBank'
+import Insightblog from "./pages/insightBlog"
+import Login from "./pages/login"
 import NoPage from './pages/NoPage'
 
 
@@ -30,6 +32,8 @@ function App() {
           <Route path="/home" element={<Home />}/>
           <Route path="/insightbank" element={<InsightBank />}/>
           <Route path="/interviewbank" element={<InterviewBank />}/>
+          <Route path="/insightblog" element={<Insightblog />}/>
+          <Route path="/login" element={<Login />}/>
           <Route path="*" element={<NoPage />}/>
         </Routes>
     </BrowserRouter>
