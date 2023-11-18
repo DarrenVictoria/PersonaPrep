@@ -29,6 +29,7 @@ jobs:
         run: npm run build
 
       - name: Set CI to false and Deploy to Firebase Hosting
+        
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
@@ -39,3 +40,8 @@ jobs:
             export CI=false
             # Additional environment variables or commands if needed
             node your_script.js
+
+        env: 
+            PROJECT_PATH: ./persona-prep
+
+       
