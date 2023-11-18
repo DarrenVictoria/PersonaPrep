@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Change Directory to persona-prep
-        run: cd PersonaPrep/persona-prep
+        run: cd persona-prep
       
       - uses: actions/checkout@v3
 
