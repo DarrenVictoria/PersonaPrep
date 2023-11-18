@@ -110,7 +110,7 @@ const gridItems = [
     },
     {
       id: 4,
-      title: "Another Title",
+      title: "CI CD Tester New Latest",
       position: 'relative',
       background: `
       linear-gradient(0deg, #708090 0%, #708090 100%),
@@ -123,7 +123,7 @@ const gridItems = [
     },
     {
       id: 5,
-      title: "Another Title",
+      title: "12345",
       position: 'relative',
       background: `
         linear-gradient(0deg, #F9C5ED 0%, #F9C5ED 100%),
