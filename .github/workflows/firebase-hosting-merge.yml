@@ -34,6 +34,7 @@ jobs:
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_PERSONAPREP }}'
+          config: 'persona-prep/firebase.json'
           channelId: live
           projectId: personaprep
           run: |
@@ -41,7 +42,6 @@ jobs:
             # Additional environment variables or commands if needed
             node your_script.js
 
-        env: 
-            PROJECT_PATH: ./persona-prep
+        
 
        
