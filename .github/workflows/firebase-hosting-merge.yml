@@ -9,14 +9,14 @@ jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+      
       - name: List of directories
         run: ls
         
       - name: Change Directory to persona-prep
         run: cd persona-prep
       
-      - uses: actions/checkout@v3
-
       - name: Install Dependencies
         run: npm ci
 
