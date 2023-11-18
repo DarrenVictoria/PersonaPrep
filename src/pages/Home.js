@@ -91,7 +91,7 @@ const gridItems = [
         linear-gradient(0deg, #C5F9E7 0%, #C5F9E7 100%),
         #C5F9E7
       `,
-      height: '9rem',
+      height: 'CI CD Tester New',
       border: '3px solid #000',
       url: 'https://www.example.com/page2',
     },
