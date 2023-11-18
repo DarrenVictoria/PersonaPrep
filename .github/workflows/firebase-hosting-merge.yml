@@ -18,9 +18,11 @@ jobs:
         run: cd persona-prep
       
       - name: Install Dependencies
+        working-directory: .persona-prep
         run: npm ci
 
       - name: Build
+        working-directory: .persona-prep
         run: npm run build
 
       - name: Deploy to Firebase Hosting
