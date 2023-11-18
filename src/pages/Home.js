@@ -123,7 +123,7 @@ const gridItems = [
     },
     {
       id: 5,
-      title: "Another Title",
+      title: "12345",
       position: 'relative',
       background: `
         linear-gradient(0deg, #F9C5ED 0%, #F9C5ED 100%),
