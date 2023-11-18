@@ -27,62 +27,62 @@ const Template = () => {
     const [currentPageIndex, setCurrentPageIndex] = useState(0)
 
     return(
-<div className="page" style={{backgroundColor: "white"}}>
-            <div className="container">
+<div className="formtemp-page">
+            <div className="formtemp-header-container">
                 <div class="logo"><img src={logo} alt="logo" style={{width:'120px'}}/></div>
-                <div className="variable">
+                <div className="formtemp-variable">
                     {
-                        (currentPageIndex == 0) && <p className="variablename"></p>
+                        (currentPageIndex == 0) && <p className="formtemp-variablename"></p>
                     }
                     {
-                        (currentPageIndex == 1) && <p className="variablename">Personal Information</p>
+                        (currentPageIndex == 1) && <p className="formtemp-variablename">Personal Information</p>
                     }
                     {
-                        (currentPageIndex == 2) && <p className="variablename">Contacts Details 1/2</p>
+                        (currentPageIndex == 2) && <p className="formtemp-variablename">Contacts Details 1/2</p>
                     }
                     {
-                        (currentPageIndex == 3) && <p className="variablename">Contacts Details 2/2</p>
+                        (currentPageIndex == 3) && <p className="formtemp-variablename">Contacts Details 2/2</p>
                     }
                     {
-                        (currentPageIndex == 4) && <p className="variablename">Summary Data 1/2</p>
+                        (currentPageIndex == 4) && <p className="formtemp-variablename">Summary Data 1/2</p>
                     }
                     {
-                        (currentPageIndex == 5) && <p className="variablename">Summary Data 2/2</p>
+                        (currentPageIndex == 5) && <p className="formtemp-variablename">Summary Data 2/2</p>
                     }
                     {
-                        (currentPageIndex == 6) && <p className="variablename">School Education 1/2</p>
+                        (currentPageIndex == 6) && <p className="formtemp-variablename">School Education 1/2</p>
                     }
                     {
-                        (currentPageIndex == 7) && <p className="variablename">School Education 2/2</p>
+                        (currentPageIndex == 7) && <p className="formtemp-variablename">School Education 2/2</p>
                     }
                     {
-                        (currentPageIndex == 8) && <p className="variablename">University Education</p>
+                        (currentPageIndex == 8) && <p className="formtemp-variablename">University Education</p>
                     }
                     {
-                        (currentPageIndex == 9) && <p className="variablename">Work Experience 1/3</p>
+                        (currentPageIndex == 9) && <p className="formtemp-variablename">Work Experience 1/3</p>
                     }
                     {
-                        (currentPageIndex == 10) && <p className="variablename">Work Experience 2/3</p>
+                        (currentPageIndex == 10) && <p className="formtemp-variablename">Work Experience 2/3</p>
                     }
                     {
-                        (currentPageIndex == 11) && <p className="variablename">Work Experience 3/3</p>
+                        (currentPageIndex == 11) && <p className="formtemp-variablename">Work Experience 3/3</p>
                     }
                     {
-                        (currentPageIndex == 12) && <p className="variablename">Project Experience 1/3</p>
+                        (currentPageIndex == 12) && <p className="formtemp-variablename">Project Experience 1/3</p>
                     }
                     {
-                        (currentPageIndex == 13) && <p className="variablename">Project Experience 2/3</p>
+                        (currentPageIndex == 13) && <p className="formtemp-variablename">Project Experience 2/3</p>
                     }
                     {
-                        (currentPageIndex == 14) && <p className="variablename">Project Experience 3/3</p>
+                        (currentPageIndex == 14) && <p className="formtemp-variablename">Project Experience 3/3</p>
                     }
                     
                 </div>
             </div>
-            <div className="bodyform">
+            <div className="formtemp-bodyform">
                 <Grid container spacing={2}>
                     <Grid xs={4} style={{padding: "25px"}}>
-                        <CustomVerticalStepper ref={cvs_instance}></CustomVerticalStepper>
+                        <CustomVerticalStepper ref={cvs_instance} ></CustomVerticalStepper>
                     </Grid>
                     <Grid xs={8} style={{backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", paddingLeft: "10px", borderLeft: "2px solid black"}}>
                     <form style={{height: '100%', position: 'relative'}}>

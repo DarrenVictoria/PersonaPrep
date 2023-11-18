@@ -7,16 +7,13 @@ import Typography from '@mui/material/Typography';
 
 const StepperCustomIcon = ({ active, completed, icon, }) => {
   return (
-    <div style={{backgroundColor: "gray", margin: "3px", borderRadius: "50%", width: "8px", height: "8px", padding: "5px", justifyContent: "center", alignItems: "center",}}>
+    <div style={{backgroundColor: "gray", margin: "3px", borderRadius: "50%", width: "20px", height: "20px", padding: "5px", justifyContent: "center", alignItems: "center",display:"flex"}}>
       <div style={{
         backgroundColor: active || completed ? "white" : "black",
         color: "white",
-        height: "8px",
-        width: "8px",
+        height: "12px",
+        width: "12px",
         borderRadius: "50%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
         fontSize: "1rem",
       }}>
       </div>
