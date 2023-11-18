@@ -25,11 +25,14 @@ jobs:
         working-directory: persona-prep
         run: npm run build
 
-      - name: Deploy to Firebase Hosting
+      - name: Set CI to false and Deploy to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_PERSONAPREP }}'
           channelId: live
           projectId: personaprep
-
+          run: |
+            export CI=false
+            # Additional environment variables or commands if needed
+            node your_script.js
