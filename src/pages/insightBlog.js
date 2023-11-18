@@ -6,7 +6,7 @@ import cvmistake from '../assets/images/illustration-cv-mistakes.png'
 
 export default function Insightblog(){
     return(
-        <div className='container'>
+        <div className='insightBlog-container'>
             <BlogHeader 
                 title="5 Top Mistakes in CV's"
                 tags="Other stuff"
