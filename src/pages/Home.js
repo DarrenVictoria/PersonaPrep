@@ -84,20 +84,20 @@ const gridItems = [
     },
     {
       id: 2,
-      title: "CICD Test",
+      title: "CICD",
       position: 'relative',
       background: `
         linear-gradient(0deg, #C5F9E7 0%, #C5F9E7 100%),
         linear-gradient(0deg, #C5F9E7 0%, #C5F9E7 100%),
         #C5F9E7
       `,
-      height: 'CI CD Tester New',
+      height: '9rem',
       border: '3px solid #000',
       url: 'https://www.example.com/page2',
     },
     {
       id: 3,
-      title: "Another Title",
+      title: "CI CD Tester New",
       position: 'relative',
       background: `
       linear-gradient(0deg, #C5CAF9 0%, #C5CAF9 100%),
