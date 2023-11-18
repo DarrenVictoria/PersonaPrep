@@ -5,7 +5,7 @@ import {BrowserRouter,Routes,Route} from 'react-router-dom'
 
 import Home from './pages/Home'
 import InsightBank from './pages/InsightBank'
-import InterviewBank from './pages/interviewBank'
+import InterviewBank from './pages/InterviewBank'
 import Insightblog from "./pages/insightBlog"
 import Login from "./pages/login"
 import NoPage from './pages/NoPage'
