@@ -5,9 +5,9 @@ import Thumbnail from './Thumbnail';
 
 export default function TranscriptCard({name, date, position, detail, path, category}){
     return(
-        // <div className={`transcript-card ${category !== '' && 'hide-card'}`} data-category={category}>
-        <div className='transcript-card'>
-            <div className='transcript-card-details'>
+        // <div className={`interviewBank-transcriptCard ${category !== '' && 'interviewBank-hideCard'}`} data-category={category}>
+        <div className='interviewBank-transcriptCard'>
+            <div className='interviewBank-transcriptCardDetails'>
                 <TranscriptLabels name={name} date={date} />
                 <JobPosition position={position} />
                 <InterviewDetails detail={detail} />

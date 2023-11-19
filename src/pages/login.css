@@ -1,53 +1,44 @@
-/* html {
+/* .login-umm{
     height: 100%;
     margin: 0;
     display: flex;
     align-items: center;
     justify-content: center;
 } */
-/* .umm{
-    height: 100%;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-} */
-.container{
+.login-container{
     /* margin: 100px auto; */
     margin: auto;
     margin-top: 70px;
     padding: 60px 0;
-    /* background-color: beige; */
     border: 2px solid #000;
     border-radius: 15px;
-    /* height: 200px; */
-    /* align-items: center; */
     text-align: center;
     width: 500px;
 }
-.header{
+.login-header{
     font-size: 25px;
 }
-.header span{
+.login-header span{
     font-size: 25px;
     font-weight: 700;
     display: block;
 }
-.header img{
+.login-header img{
+    width: 100px;
     display: block;
     margin: 10px auto;
 }
-.slider{
+.login-slider{
     margin: 30px 0 25px;
 }
-.slider div{
+.login-slider div{
     display: inline;
     background-color: rgb(197, 191, 191);
     padding: 5px 20px;
     border-radius: 5px;
     font-size: 18px;
 }
-.ms-login{
+.login-msLogin{
     display: flex;
     width: 200px;
     margin: 5px auto;
@@ -56,59 +47,22 @@
     border-radius: 15px;
     place-items: center;
 }
-.ms-login img{
+.login-msLogin img{
     width: 25px;
     margin-right: 25px;
 }
 
 @media (max-width: 700px){
-    .umm{
+    .login-umm{
         display: flex;
         /* height: 100%;
         margin: 0;
         align-items: center;
         justify-content: center; */
     }
-    .container{
+    .login-container{
         width: 100%;
         padding: 60px 40px;
         margin-top: 0;
     }
-    html {
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
 }
-
-/*
-.slider {
-    display: flex;
-    margin: 30px 0 25px;
-    position: relative;
-}
-
-.slider-inner {
-    display: flex;
-    transition: transform 0.5s ease; 
-}
-
-.option {
-    cursor: pointer;
-    background-color: rgb(197, 191, 191);
-    padding: 5px 20px;
-    font-size: 18px;
-}
-
-.option.selected {
-    background-color: black;
-    color: white;
-}
-.student{
-    border-radius: 15px 0 0 15px ;
-}
-.corp{
-    border-radius: 0 15px 15px 0 ;
-}
-*/

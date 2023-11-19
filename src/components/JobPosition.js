@@ -1,6 +1,6 @@
 export default function JobPosition(props){
     return(
-        <div className='job-position'>
+        <div className='interviewBank-jobPosition'>
             {props.position}
         </div>
     )

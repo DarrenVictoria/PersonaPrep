@@ -4,7 +4,7 @@ import linkedin from '../assets/images/linkedin.png'
 import share from '../assets/images/share.png'
 export default function BlogShareIcons(){
     return(
-        <div className='blog-share-icons'>
+        <div className='insightBlog-blogShareIcons'>
             <img src={facebook} alt=""/>
             <img src={twitter} alt=""/>
             <img src={linkedin} alt=""/>
