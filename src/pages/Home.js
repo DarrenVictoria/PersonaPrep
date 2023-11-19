@@ -11,7 +11,14 @@ import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
 import KeyIcon from '@mui/icons-material/Key';
 import DiversityPicture from '../assets/images/DiversityPicture.svg';
 import NForceLogo from '../assets/images/NForceLogo.svg';
-import {MDBCarousel,MDBCarouselInner,MDBCarouselItem,MDBContainer,MDBRow,MDBCol,MDBIcon,} from "mdb-react-ui-kit";
+import Marquee from "react-fast-marquee";
+import Testemonials from '../components/Testemonials';
+import Footer from '../components/footer'
+
+
+
+
+
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -34,7 +41,7 @@ const LeftSide = () => (
       <img
         src={DiversityPicture}
         alt="GroupIcon"
-        style={{ width: '100%', height: 'auto', objectFit: 'contain',padding:'5%' }}
+        style={{ width: '100%', height: 'auto', objectFit: 'contain',padding:'5%',maxHeight:'600px' }}
       />
     </div>
   </div>
@@ -50,7 +57,7 @@ const RightSide = () => (
         
       />
       <h2  style={{padding: '2%',fontFamily: 'Inter', fontWeight: '900'}}>Who are we at NSBM NFORCE</h2>
-      <p style={{paddingLeft: '2%',fontFamily: 'Inter'}} >NFORCE – NSBM for Career and Entrepreneurship is the Unit belonging to NSBM Green University which prepares the students for the world of work. For the first time in Sri Lanka, NSBM Green University, positioned the university career guidance as a corporate entity NFORCE, to give the exposure of corporates to the students from the beginning itself. NFORCE is responsible for making the graduates’ future ready to win the corporate world as well as to promote entrepreneurship among students.</p>
+      <p style={{paddingLeft: '2%',paddingBottom: '2%',fontFamily: 'Inter'}} >NFORCE – NSBM for Career and Entrepreneurship is the Unit belonging to NSBM Green University which prepares the students for the world of work. For the first time in Sri Lanka, NSBM Green University, positioned the university career guidance as a corporate entity NFORCE, to give the exposure of corporates to the students from the beginning itself. NFORCE is responsible for making the graduates’ future ready to win the corporate world as well as to promote entrepreneurship among students.</p>
     </div>
     <button style={{  borderRadius: '20px', background: '#000', paddingLeft: '6%',paddingRight: '6%' }}>
   <h2 style={{ color: '#FFFFFF', fontFamily: 'Inter' }}>Meet the devs</h2>
@@ -84,7 +91,7 @@ const gridItems = [
     },
     {
       id: 2,
-      title: "CICD",
+      title: "Reasons for CV to be rejected ",
       position: 'relative',
       background: `
         linear-gradient(0deg, #C5F9E7 0%, #C5F9E7 100%),
@@ -97,7 +104,7 @@ const gridItems = [
     },
     {
       id: 3,
-      title: "CI CD Tester New",
+      title: "Cv Design Inconsistencies ",
       position: 'relative',
       background: `
       linear-gradient(0deg, #C5CAF9 0%, #C5CAF9 100%),
@@ -110,7 +117,7 @@ const gridItems = [
     },
     {
       id: 4,
-      title: "CI CD Tester New Latest",
+      title: "Interview Mistake Bank ",
       position: 'relative',
       background: `
       linear-gradient(0deg, #708090 0%, #708090 100%),
@@ -123,7 +130,7 @@ const gridItems = [
     },
     {
       id: 5,
-      title: "Darren",
+      title: "Weak CV Objective/Profile",
       position: 'relative',
       background: `
         linear-gradient(0deg, #F9C5ED 0%, #F9C5ED 100%),
@@ -136,7 +143,7 @@ const gridItems = [
     },
     {
       id: 6,
-      title: "Another Title",
+      title: "Interview Anxiety/Nerves",
       position: 'relative',
       background: `
         linear-gradient(0deg, #FDC883 0%, #FDC883 100%),
@@ -233,6 +240,73 @@ export default function SplitLayout() {
             
       </div>
     </div>
+    <Marquee style={{marginTop:'1%',marginBottom:'1%'}}> 
+
+    <div className="professional-text-container">
+    <h3 className="professional-text">Streamline</h3>
+</div>
+
+<div className="professional-text-container">
+    <h3 className="professional-text">Enhance</h3>
+</div>
+
+<div className="professional-text-container">
+    <h3 className="professional-text">Optimize</h3>
+</div>
+
+<div className="professional-text-container">
+    <h3 className="professional-text">Expedite</h3>
+</div>
+
+<div className="professional-text-container">
+    <h3 className="professional-text">Simplify</h3>
+</div>
+
+<div className="professional-text-container">
+    <h3 className="professional-text">Automate</h3>
+</div>
+
+<div className="professional-text-container">
+    <h3 className="professional-text">Facilitate</h3>
+</div>
+
+<div className="professional-text-container">
+    <h3 className="professional-text">Customize</h3>
+</div>
+
+<div className="professional-text-container">
+    <h3 className="professional-text">Accelerate</h3>
+</div>
+
+<div className="professional-text-container">
+    <h3 className="professional-text">Refine</h3>
+</div>
+
+<div className="professional-text-container">
+    <h3 className="professional-text">Tailor</h3>
+</div>
+
+<div className="professional-text-container">
+    <h3 className="professional-text">Improve</h3>
+</div>
+
+<div className="professional-text-container">
+    <h3 className="professional-text">Personalize</h3>
+</div>
+
+<div className="professional-text-container">
+    <h3 className="professional-text">Revolutionize</h3>
+</div>
+
+<div className="professional-text-container">
+    <h3 className="professional-text">Modernize</h3>
+</div>
+<div className="professional-text-container">
+    <h3 className="professional-text">Fasttrack</h3>
+</div>
+
+    
+    </Marquee>
      <h1 className="inter-bold ">Insight Bank</h1>
       
       
@@ -270,14 +344,15 @@ export default function SplitLayout() {
 
       </Grid>
     </Box>
+    
 
-
-
+   
+       
     <ThreeColumnLayout/>
 
     <h1 className="inter-bold-center">Get in Touch</h1>
 
-          <Grid style={{ margin: '3%' }} container rowSpacing={1} columnSpacing={{ xs: 0, sm: 0, md: 0 }}>
+          <Grid style={{ margin: '1%' }} container rowSpacing={1} columnSpacing={{ xs: 0, sm: 0, md: 0 }}>
         <Grid item xs={4}>
           <Item style={{ border: '5px solid #000', background: '#D9D9D9', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', borderRadius: 0 }}>
             Phone: +9438472948<br />
@@ -302,12 +377,12 @@ export default function SplitLayout() {
         </Grid>
       </Grid>
 
-
+      
 
 
     
    
-
+      <Footer/>
 
 
 

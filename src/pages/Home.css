@@ -34,7 +34,7 @@
 
 .inter-bold-center {
   font-family: 'Inter', sans-serif;
-  font-weight: bold;
+  font-weight: 900;
   text-align: center;
   
 }
@@ -115,6 +115,21 @@
   margin-top: 0;
   margin-right: '5rem';
 }
+
+.professional-text-container {
+  display: inline-block;
+  padding: 10px;
+  background-color: #d3d3d3; /* Gray box background color */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Mild black drop shadow */
+  margin-right: 10px; /* Add some margin between marquee items */
+}
+
+.professional-text {
+  font-weight: bold;
+  color: #000; /* Black text color */
+  margin: 0; /* Remove default margin */
+}
+
 
 
 
