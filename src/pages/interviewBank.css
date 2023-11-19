@@ -4,7 +4,12 @@
 .interview-details img{
     display: none;
 }
-
+.container{
+    padding: 0 4%;
+}
+.container h1{
+    font-size: 5vw;
+}
 
 .topics h3, .transcript h3{
     font-size: 3vw;
