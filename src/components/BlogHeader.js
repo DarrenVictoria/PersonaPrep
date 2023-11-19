@@ -5,13 +5,13 @@ import BlogShareIcons from './BlogShareIcons';
 
 export default function BlogHeader({title, tags, date}){
     return(
-        <div className='blog-header'>
-            <div className='left-col'>
+        <div className='insightBlog-blogHeader'>
+            <div className='insightBlog-leftCol'>
                 <BlogTitle title={title}/>
                 <BlogTags tags={tags}/>
             </div>
 
-            <div className='right-col'>
+            <div className='insightBlog-rightCol'>
                 <BlogDate date={date}/>
                 <BlogShareIcons />
             </div>

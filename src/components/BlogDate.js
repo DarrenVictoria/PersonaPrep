@@ -1,6 +1,6 @@
 export default function BlogDate(props){
     return(
-        <div className='blog-date'>
+        <div className='insightBlog-blogDate'>
             {props.date}
         </div>
     )

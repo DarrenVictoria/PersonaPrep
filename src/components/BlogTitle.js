@@ -1,8 +1,6 @@
-// import React from "react";
-
 export default function BlogTitle(props){
     return(
-        <div className='blog-title'>
+        <div className='insightBlog-blogTitle'>
             {props.title}
         </div>
     )

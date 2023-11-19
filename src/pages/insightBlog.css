@@ -1,29 +1,29 @@
-.container{
+.insightBlog-container{
     padding: 0 4%;
 }
-.blog-header{
+.insightBlog-blogHeader{
     display: flex;
     justify-content: space-between;
     align-items: center;
     /* margin: 0 20px; */
 }
-.left-col{
+.insightBlog-leftCol{
     display: flex;
     flex: 3;
     flex-direction: column;
 }
-.right-col{
+.insightBlog-rightCol{
     display: flex;
     flex: 1;
     flex-direction: column;
     /* justify-content: flex-end; */
     align-items: flex-end;
 }
-.blog-title{
+.insightBlog-blogTitle{
     font-size: 5vw;
     font-weight: 700;
 }
-.blog-date{
+.insightBlog-blogDate{
     font-size: 10px;
     background-color: black;
     color: white;
@@ -32,65 +32,62 @@
     border-radius: 20px;
     margin-bottom: 10px;
 }
-.blog-share-icons{
+.insightBlog-blogShareIcons{
     display: flex;
     gap: 10px;
     align-items: center;
 }
-.blog-share-icons img{
+.insightBlog-blogShareIcons img{
     width: 20px;
     height: 20px;
 }
 
 
-.blog-details {
+.insightBlog-blogDetails {
     max-width: 90%;
     margin: 20px auto;
     padding: 20px 55px;
     background-color: burlywood;
     border-radius: 20px;
 }
-.blog-details img{
+.insightBlog-blogDetails img{
     width: 100%;
     margin-bottom: 10px;
 }
-.blog-details p{
+.insightBlog-blogDetails p{
     text-align: justify;
 }
 
 
-.numbered-list {
+.insightBlog-numberedList {
     display: flex;
     flex-direction: column;
 }
-.list {
+.insightBlog-list {
     display: flex;
     margin-bottom: 10px;
 }
-.number {
+.insightBlog-number {
     /* flex-shrink: 0; */
     margin-right: 10px; 
 }
-/* .list-detail {
-    flex-grow: 1;
-} */
-.list-detail span{
+.insightBlog-listDetail span{
     font-weight: bold;
 }
 
 @media(max-width: 700px){
-    .blog-details{
+    .insightBlog-blogDetails{
         max-width: 80%;
         border: 2px solid black;
         padding: 20px 35px;
     }
-    .blog-details img{
+    .insightBlog-blogDetails img{
         margin-bottom: 25px;
     }
-    .blog-title{
+    .insightBlog-blogTitle{
         font-size: 6vw;
     }
-    .left-col{
+    .insightBlog-leftCol{
         margin-right: 5px;
     }
 }

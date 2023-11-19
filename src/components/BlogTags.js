@@ -1,6 +1,6 @@
 export default function BlogTags(props){
     return(
-        <div className='blog-tags'>
+        <div className='insightBlog-blogTags'>
             {props.tags}
         </div>
     )

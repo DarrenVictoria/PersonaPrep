@@ -11,9 +11,9 @@ export default function InterviewBank(){
     // }
 
     return(
-        <div className="container">
+        <div className="interviewBank-container">
             <h1 >Interview Bank</h1>
-            <div className="topics">
+            <div className="interviewBank-topics">
                 <h3>Topics</h3>
                 <div>
                     {/* <button onClick={() => filterCard('computing')}>Computing</button> */}
@@ -24,7 +24,7 @@ export default function InterviewBank(){
                 </div>
             </div>
 
-            <div className="transcript">
+            <div className="interviewBank-transcript">
                 <h3>Interview Transcripts</h3>
                 <TranscriptCard 
                     // category={selectedCategory}
