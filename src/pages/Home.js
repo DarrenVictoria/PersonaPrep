@@ -13,7 +13,7 @@ import DiversityPicture from '../assets/images/DiversityPicture.svg';
 import NForceLogo from '../assets/images/NForceLogo.svg';
 import {MDBCarousel,MDBCarouselInner,MDBCarouselItem,MDBContainer,MDBRow,MDBCol,MDBIcon,} from "mdb-react-ui-kit";
 
-//Added a change to the Cd 
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -30,11 +30,11 @@ const LeftSide = () => (
      
     </div>
     <div style={{ width: '100%', maxHeight: '500px', overflow: 'hidden', marginTop: '20px' }}>
-    <h1 style={{ marginTop: '5%',marginLeft:'3%'}}>TEAM BEHIND{'\n'} THE PROJECT</h1>
+    <h1 style={{ marginTop: '10%',marginLeft:'8%',fontFamily: 'Inter'}}>Team behind{'\n'} the project</h1>
       <img
         src={DiversityPicture}
         alt="GroupIcon"
-        style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
+        style={{ width: '100%', height: 'auto', objectFit: 'contain',padding:'5%' }}
       />
     </div>
   </div>
@@ -49,11 +49,11 @@ const RightSide = () => (
         style={{ width: '10%', height: 'auto', objectFit: 'contain',marginBottom:'-2%',marginTop:'2%',marginLeft:'2%' }}
         
       />
-      <h2>Who are we at NSBM NFORCE</h2>
-      <p>NFORCE – NSBM for Career and Entrepreneurship is the Unit belonging to NSBM Green University which prepares the students for the world of work. For the first time in Sri Lanka, NSBM Green University, positioned the university career guidance as a corporate entity NFORCE, to give the exposure of corporates to the students from the beginning itself. NFORCE is responsible for making the graduates’ future ready to win the corporate world as well as to promote entrepreneurship among students.</p>
+      <h2  style={{padding: '2%',fontFamily: 'Inter', fontWeight: '900'}}>Who are we at NSBM NFORCE</h2>
+      <p style={{paddingLeft: '2%',fontFamily: 'Inter'}} >NFORCE – NSBM for Career and Entrepreneurship is the Unit belonging to NSBM Green University which prepares the students for the world of work. For the first time in Sri Lanka, NSBM Green University, positioned the university career guidance as a corporate entity NFORCE, to give the exposure of corporates to the students from the beginning itself. NFORCE is responsible for making the graduates’ future ready to win the corporate world as well as to promote entrepreneurship among students.</p>
     </div>
-    <button style={{ marginTop: '10px', borderRadius: '2px', background: '#000', outline: 'none', padding: '5px' }}>
-  <h2 style={{ color: '#FFFFFF', fontFamily: 'Inter', margin: '0' }}>Meet the devs</h2>
+    <button style={{  borderRadius: '20px', background: '#000', paddingLeft: '6%',paddingRight: '6%' }}>
+  <h2 style={{ color: '#FFFFFF', fontFamily: 'Inter' }}>Meet the devs</h2>
 </button>
 
 
@@ -277,25 +277,31 @@ export default function SplitLayout() {
 
     <h1 className="inter-bold-center">Get in Touch</h1>
 
-        <Grid style={{margin:'3%'}} container rowSpacing={1} columnSpacing={{ xs: 0, sm: 0, md: 0 }}>
-      <Grid xs={4} >
-        <Item style={{ border: '5px solid #000', background: '#D9D9D9' }}>Phone .+9438472948<br />
-Fax +94873738787<br />
-into@hgmlegal.com</Item>
+          <Grid style={{ margin: '3%' }} container rowSpacing={1} columnSpacing={{ xs: 0, sm: 0, md: 0 }}>
+        <Grid item xs={4}>
+          <Item style={{ border: '5px solid #000', background: '#D9D9D9', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', borderRadius: 0 }}>
+            Phone: +9438472948<br />
+            Fax: +94873738787<br />
+            into@hgmlegal.com
+          </Item>
+        </Grid>
+        <Grid item xs={4}>
+          <Item style={{ border: '5px solid #000', background: '#D9D9D9', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', borderRadius: 0 }}>
+            PO Box 105-900<br />
+            Auckland City<br />
+            Auckland 1143 New
+          </Item>
+        </Grid>
+        <Grid item xs={4}>
+          <Item style={{ border: '5px solid #000', background: '#D9D9D9', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', borderRadius: 0 }}>
+            Physical<br />
+            Level 16<br />
+            45 Queen Street<br />
+            Auckland 1010
+          </Item>
+        </Grid>
       </Grid>
-      <Grid xs={4}>
-        <Item style={{ border: '5px solid #000', background: '#D9D9D9' }}>PO Box 105-900<br />
-Auckland City<br />
-Auckland 1143 New</Item>
-      </Grid>
-      <Grid xs={4}>
-        <Item style={{ border: '5px solid #000', background: '#D9D9D9' }}>Physical
-Level 16<br />
-45 Queen Street<br />
-Auckland 1010<br />
-</Item>
-      </Grid>
-    </Grid>
+
 
 
 
