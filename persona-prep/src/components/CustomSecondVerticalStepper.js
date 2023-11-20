@@ -23,15 +23,15 @@ const StepperCustomIcon = ({ active, completed }) => {
 
 const steps = [
   {
-    label: 'Step A',
+    label: 'sample data 1',
   },
   {
-    label: 'Step B',
+    label: 'sample data 2',
   },
   {
-    label: 'Step C',
+    label: 'sample data 3',
   },
-  // Add more steps as needed
+  
 ];
 
 const CustomSecondVerticalStepper = forwardRef((props, ref) => {
