@@ -23,6 +23,7 @@ const StepperCustomIcon = ({ active, completed }) => {
 
 const steps = [
   {
+<<<<<<< Updated upstream:persona-prep/src/components/CustomSecondVerticalStepper.js
     label: 'sample data 1',
   },
   {
@@ -32,6 +33,17 @@ const steps = [
     label: 'sample data 3',
   },
   
+=======
+    label: 'Step A',
+  },
+  {
+    label: 'Step B',
+  },
+  {
+    label: 'Step C',
+  },
+  // Add more steps as needed
+>>>>>>> Stashed changes:src/components/CustomSecondVerticalStepper.js
 ];
 
 const CustomSecondVerticalStepper = forwardRef((props, ref) => {
