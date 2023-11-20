@@ -130,7 +130,7 @@ const gridItems = [
     },
     {
       id: 5,
-      title: "Weak CV Objective/Profile",
+      title: "Weak CV Objectives",
       position: 'relative',
       background: `
         linear-gradient(0deg, #F9C5ED 0%, #F9C5ED 100%),
@@ -303,6 +303,9 @@ export default function SplitLayout() {
 </div>
 <div className="professional-text-container">
     <h3 className="professional-text">Fasttrack</h3>
+</div>
+<div className="professional-text-container">
+    <h3 className="professional-text">Personalise</h3>
 </div>
 
     
