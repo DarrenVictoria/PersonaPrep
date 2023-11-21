@@ -28,10 +28,138 @@
     background-color: #ffffff;
     padding: 10px;
     margin: 5px;
+    overflow-y: auto;
     
   }
+
+/*Below css is for the color theme table*/
   
-  /* Responsive styles */
+.TemplateSelection-responsiveColorTableContainer {
+  overflow-x: auto;
+}
+
+.TemplateSelection-ColorTableHeading {
+  text-align: left;
+  font-size: 20px;
+  font-family: Inter;
+}
+.TemplateSelection-ColorTablecolumnheading{
+  font-family: Inter;
+  font-size: 20px;
+}
+
+.TemplateSelection-ColorTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.TemplateSelection-ColorCell {
+  padding: 8px;
+  text-align: center;
+}
+
+.TemplateSelection-ColorButton {
+  width: 150px;
+  height: 43px;
+  max-width: 100%;
+  margin: 1px;
+  padding: 8px;
+  color: white;
+  font-family: Inter;
+  font-size: 20px;
+  border: none;
+  border-radius: 4px;
+  
+}
+
+.FirstRowColorButton1 {
+  background-color: red;
+}
+
+.FirstRowColorButton2 {
+  background-color: blue;
+}
+
+.SecondRowColorButton1 {
+  background-color: green;
+}
+
+.SecondRowColorButton2 {
+  background-color: yellow;
+}
+
+.ThirdRowColorButton1 {
+  background-color: orange;
+}
+
+.ThirdRowColorButton2 {
+  background-color: purple;
+}
+
+
+/*css for the typography table*/
+.TemplateSelection-ResponsiveTypographyTableContainer {
+  overflow-x: auto;
+}
+
+.TemplateSelection-TypographyTableHeading {
+  text-align: left;
+}
+
+.TemplateSelection-TypographyTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.TemplateSelection-TypographyCell {
+  padding: 8px;
+  text-align: center;
+}
+
+.TemplateSelection-TypographyButton {
+  width: 154px;
+  height: 42px;
+  max-width: 100%;
+  margin: 1px;
+  padding: 8px;
+  color: white;
+  font-size: 20px;
+  border: none;
+  border-radius: 25px;
+  background-color: black;
+}
+.FirstRowTypographyButton1 {
+  font-family: Calibri;
+}
+
+.FirstRowTypographyButton2 {
+  font-family: Cambria;
+}
+
+.SecondRowTypographyButton1 {
+  font-family: Helvetica;
+}
+
+.SecondRowTypographyButton2 {
+  font-family: Georgia;
+}
+
+.ThirdRowTypographyButton1 {
+  font-family: Verdana;
+}
+
+.ThirdRowTypographyButton2 {
+  font-family: Garamond;
+}
+.FourthRowTypographyButton2 {
+  font-family: Trebuchet MS;
+}
+.FourthRowTypographyButton2 {
+  font-family: Lato;
+}
+
+  
+  /* Below css is to make the template selection form responsive  */
   @media (max-width: 600px) {
     .TemplateSelection-Container {
       flex-direction: column;
@@ -40,7 +168,7 @@
   
     .TemplateSelection-LeftColumn {
         width: 100%;
-      /*flex: none; *//* Reset the width for full width on smaller screens */
+     
     }
   
     .TemplateSelection-RightColumn {
@@ -49,6 +177,9 @@
   
     .TemplateSelection-RightRow {
       flex: none;
+    }
+    .TemplateSelection-maindiv{
+      padding-bottom: 40px;
     }
   }
   
