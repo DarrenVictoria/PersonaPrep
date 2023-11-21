@@ -8,6 +8,7 @@ import InsightBank from './pages/InsightBank'
 import InterviewBank from './pages/InterviewBank'
 import Insightblog from "./pages/insightBlog"
 import Login from "./pages/login"
+import Dashboard from "./pages/Dashboard"
 import NoPage from './pages/NoPage'
 
 
@@ -34,6 +35,7 @@ function App() {
           <Route path="/interviewbank" element={<InterviewBank />}/>
           <Route path="/insightblog" element={<Insightblog />}/>
           <Route path="/login" element={<Login />}/>
+          <Route path="/dashboard" element={<Dashboard />}/>
           <Route path="*" element={<NoPage />}/>
         </Routes>
     </BrowserRouter>

@@ -1,0 +1,52 @@
+/* Dashboard.css */
+
+.UserProfileDiv {
+    background-color: #D3D3D3;
+    border: 2px solid #000;
+    padding: 20px;
+    text-align: left; /* Left align by default */
+    margin: 20px;
+    display: flex;
+    flex-direction: row; /* Default to row layout */
+    align-items: center;
+    justify-content: flex-start; /* Default to left align horizontally */
+  }
+  
+  .UserProfileDiv .avatar-container {
+    margin-right: 20px; /* Move the margin to the right for spacing */
+  }
+  
+  .UserProfileDiv .avatar-container img {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .UserProfileDiv .details-container {
+    text-align: left; /* Left align the text */
+  }
+  
+  /* Center horizontally when in mobile size */
+  @media (max-width: 767px) {
+    .UserProfileDiv {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+  
+    .UserProfileDiv .avatar-container {
+      margin-right: 0; /* Remove margin for centered avatar in mobile */
+      margin-bottom: 20px; /* Move the margin to the bottom for spacing */
+    }
+  }
+
+
+.recruitment-status-container {
+    background-color: #D3D3D3; /* Gray color */
+    border: 2px solid #000; /* Black border */
+    padding: 20px;
+    text-align: left;
+    margin: 20px;
+    
+  }
+  
