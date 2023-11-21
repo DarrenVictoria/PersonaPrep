@@ -1,0 +1,48 @@
+/* YourComponent.css */
+
+.TemplateSelection-Container {
+    display: flex;
+    height: 610px;
+  }
+  
+  .TemplateSelection-LeftColumn {
+    width: 640px;
+    /*flex: 1.5;*/ /* Adjust the width of the left column as needed */
+    background-color: #c0c0c0;
+    padding: 20px;
+  }
+  
+  .TemplateSelection-RightColumn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .TemplateSelection-RightRow {
+    flex: 1;
+    background-color: #e0e0e0;
+    padding: 10px;
+    margin: 5px;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .TemplateSelection-Container {
+      flex-direction: column;
+      height: auto;
+    }
+  
+    .TemplateSelection-LeftColumn {
+        width: 100%;
+      /*flex: none; *//* Reset the width for full width on smaller screens */
+    }
+  
+    .TemplateSelection-RightColumn {
+      flex: none;
+    }
+  
+    .TemplateSelection-RightRow {
+      flex: none;
+    }
+  }
+  
