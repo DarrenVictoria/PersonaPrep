@@ -23,43 +23,43 @@ const TemplateSelection = () => {
                             <tbody>
                                 <tr>
                                     <td className="TemplateSelection-ColorCell">
-                                    <button className="TemplateSelection-ColorButton FirstRowColorButton1">Red</button>
+                                        <button className="TemplateSelection-ColorButton FirstRowColorButton1">Red</button>
                                     </td>
                                     <td className="TemplateSelection-ColorCell">
-                                    <button className="TemplateSelection-ColorButton FirstRowColorButton2">Blue</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className="TemplateSelection-ColorCell">
-                                    <button className="TemplateSelection-ColorButton SecondRowColorButton1">Green</button>
-                                    </td>
-                                    <td className="TemplateSelection-ColorCell">
-                                    <button className="TemplateSelection-ColorButton SecondRowColorButton2">Yellow</button>
+                                        <button className="TemplateSelection-ColorButton FirstRowColorButton2">Blue</button>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td className="TemplateSelection-ColorCell">
-                                    <button className="TemplateSelection-ColorButton ThirdRowColorButton1">Orange</button>
+                                        <button className="TemplateSelection-ColorButton SecondRowColorButton1">Green</button>
                                     </td>
                                     <td className="TemplateSelection-ColorCell">
-                                    <button className="TemplateSelection-ColorButton ThirdRowColorButton2">Purple</button>
+                                        <button className="TemplateSelection-ColorButton SecondRowColorButton2">Yellow</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td className="TemplateSelection-ColorCell">
+                                        <button className="TemplateSelection-ColorButton ThirdRowColorButton1">Orange</button>
+                                    </td>
+                                    <td className="TemplateSelection-ColorCell">
+                                        <button className="TemplateSelection-ColorButton ThirdRowColorButton2">Purple</button>
                                     </td>
                                 </tr>
                                 {/* Below i added more sample buttons in the color theme table just to check the scroll bar */}
                                 <tr>
                                     <td className="TemplateSelection-ColorCell">
-                                    <button className="TemplateSelection-ColorButton ThirdRowColorButton1">Orange</button>
+                                        <button className="TemplateSelection-ColorButton ThirdRowColorButton1">Orange</button>
                                     </td>
                                     <td className="TemplateSelection-ColorCell">
-                                    <button className="TemplateSelection-ColorButton ThirdRowColorButton2">Purple</button>
+                                        <button className="TemplateSelection-ColorButton ThirdRowColorButton2">Purple</button>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td className="TemplateSelection-ColorCell">
-                                    <button className="TemplateSelection-ColorButton ThirdRowColorButton1">Orange</button>
+                                        <button className="TemplateSelection-ColorButton ThirdRowColorButton1">Orange</button>
                                     </td>
                                     <td className="TemplateSelection-ColorCell">
-                                    <button className="TemplateSelection-ColorButton ThirdRowColorButton2">Purple</button>
+                                        <button className="TemplateSelection-ColorButton ThirdRowColorButton2">Purple</button>
                                     </td>
                                 </tr>
                         
@@ -75,43 +75,43 @@ const TemplateSelection = () => {
                             <tbody>
                                 <tr>
                                     <td className="TemplateSelection-TypographyCell">
-                                    <button className="TemplateSelection-TypographyButton FirstRowTypographyButton1">Calibri</button>
+                                        <button className="TemplateSelection-TypographyButton FirstRowTypographyButton1">Calibri</button>
                                     </td>
                                     <td className="TemplateSelection-TypographyCell">
-                                    <button className="TemplateSelection-TypographyButton FirstRowTypographyButton2">Cambria</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className="TemplateSelection-TypographyCell">
-                                    <button className="TemplateSelection-TypographyButton SecondRowTypographyButton1">Helvetica</button>
-                                    </td>
-                                    <td className="TemplateSelection-TypographyCell">
-                                    <button className="TemplateSelection-TypographyButton SecondRowTypographyButton2">Georgia</button>
+                                        <button className="TemplateSelection-TypographyButton FirstRowTypographyButton2">Cambria</button>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td className="TemplateSelection-TypographyCell">
-                                    <button className="TemplateSelection-TypographyButton ThirdRowTypographyButton1">Verdana</button>
+                                        <button className="TemplateSelection-TypographyButton SecondRowTypographyButton1">Helvetica</button>
                                     </td>
                                     <td className="TemplateSelection-TypographyCell">
-                                    <button className="TemplateSelection-TypographyButton ThirdRowTypographyButton2">Garamond</button>
+                                        <button className="TemplateSelection-TypographyButton SecondRowTypographyButton2">Georgia</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td className="TemplateSelection-TypographyCell">
+                                        <button className="TemplateSelection-TypographyButton ThirdRowTypographyButton1">Verdana</button>
+                                    </td>
+                                    <td className="TemplateSelection-TypographyCell">
+                                        <button className="TemplateSelection-TypographyButton ThirdRowTypographyButton2">Garamond</button>
                                     </td>
                                 </tr>
                                 {/* Below i added more sample buttons in the typography table  just to check the scroll bar */}
                                 <tr>
                                     <td className="TemplateSelection-TypographyCell">
-                                    <button className="TemplateSelection-TypographyButton FourthRowTypographyButton1">Trebuchet MS</button>
+                                        <button className="TemplateSelection-TypographyButton FourthRowTypographyButton1">Trebuchet MS</button>
                                     </td>
                                     <td className="TemplateSelection-TypographyCell">
-                                    <button className="TemplateSelection-TypographyButton FourthRowTypographyButton2">Lato</button>
+                                        <button className="TemplateSelection-TypographyButton FourthRowTypographyButton2">Lato</button>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td className="TemplateSelection-TypographyCell">
-                                    <button className="TemplateSelection-TypographyButton ThirdRowTypographyButton1">Orange</button>
+                                        <button className="TemplateSelection-TypographyButton ThirdRowTypographyButton1">Orange</button>
                                     </td>
                                     <td className="TemplateSelection-TypographyCell">
-                                    <button className="TemplateSelection-TypographyButton ThirdRowTypographyButton2">Purple</button>
+                                        <button className="TemplateSelection-TypographyButton ThirdRowTypographyButton2">Purple</button>
                                     </td>
                                 </tr>
                             </tbody>
