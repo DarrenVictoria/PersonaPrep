@@ -1,13 +1,17 @@
 import React from 'react';
 import '../TemplateSelection.css';
 
-const colors = ['Red', 'Green', 'Blue'];
+
 
 const TemplateSelection = () => {
   return (
     <div className='TemplateSelection-maindiv'>
         <div className='TemplateSelection-Container'>
-            <div className='TemplateSelection-LeftColumn'>Templates</div>
+            <div className='TemplateSelection-LeftColumn'>
+                <h2>Templates</h2>
+            
+            
+            </div>
             <div className='TemplateSelection-RightColumn'>
                 {/*the below is the first div tag with the class name 'TemplateSelection-RightRow' is the Color theme table*/}
                 <div className='TemplateSelection-RightRow'>
