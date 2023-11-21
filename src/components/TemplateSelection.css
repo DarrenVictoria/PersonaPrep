@@ -3,13 +3,18 @@
 .TemplateSelection-Container {
     display: flex;
     height: 610px;
+    padding-right: 18px;
   }
   
   .TemplateSelection-LeftColumn {
-    width: 640px;
-    /*flex: 1.5;*/ /* Adjust the width of the left column as needed */
-    background-color: #c0c0c0;
+    /*width: 640px;*/
+    flex: 1.5; /* Adjust the width of the left column as needed */
+    background-color: #ffffff;
     padding: 20px;
+    margin: 5px;
+    margin-top: 5px;
+    box-sizing: border-box !important;
+    
   }
   
   .TemplateSelection-RightColumn {
@@ -20,13 +25,14 @@
   
   .TemplateSelection-RightRow {
     flex: 1;
-    background-color: #e0e0e0;
+    background-color: #ffffff;
     padding: 10px;
     margin: 5px;
+    
   }
   
   /* Responsive styles */
-  @media (max-width: 768px) {
+  @media (max-width: 600px) {
     .TemplateSelection-Container {
       flex-direction: column;
       height: auto;
