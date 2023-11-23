@@ -4,6 +4,7 @@
     display: flex;
     height: 610px;
     padding-right: 18px;
+    
   }
   
   .TemplateSelection-LeftColumn {
@@ -14,13 +15,14 @@
     margin: 5px;
     margin-top: 5px;
     box-sizing: border-box !important;
-    
+    overflow-y: auto;
   }
   
   .TemplateSelection-RightColumn {
     flex: 1;
     display: flex;
     flex-direction: column;
+   
   }
   
   .TemplateSelection-RightRow {
@@ -31,7 +33,76 @@
     overflow-y: auto;
     
   }
+/*Below css is for the template table*/
 
+.TemplateSelection-ResponsiveTemplateTableContainer {
+  overflow-x: auto;
+  
+}
+
+.TemplateSelection-TemplateTableHeading {
+  text-align: left;
+}
+
+.TemplateSelection-TemplateTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.TemplateSelection-TemplateCell {
+  padding: 8px;
+  align-items: center;
+  
+ 
+}
+
+.TemplateSelection-Templatediv {
+  width: 185px;
+  height: 259px;
+  max-width: 100%;
+  margin: 1px;
+  padding: 8px;
+  color: white;
+  font-size: 20px;
+  border: none;
+  /*border-radius: 25px;*/
+  background-color: black;
+
+  /*display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;*/
+}
+.FirstRowTemplatediv1 {
+  font-family: Calibri;
+  
+}
+
+.FirstRowTemplatediv2 {
+  font-family: Cambria;
+}
+
+.SecondRowTemplatediv1 {
+  font-family: Helvetica;
+}
+
+.SecondRowTemplatediv2 {
+  font-family: Georgia;
+}
+
+.ThirdRowTemplatediv1 {
+  font-family: Verdana;
+}
+
+.ThirdRowTemplatediv2 {
+  font-family: Garamond;
+}
+.FourthRowTemplatediv2 {
+  font-family: Trebuchet MS;
+}
+.FourthRowTemplatediv2 {
+  font-family: Lato;
+}
 /*Below css is for the color theme table*/
   
 .TemplateSelection-responsiveColorTableContainer {
@@ -100,6 +171,7 @@
 /*css for the typography table*/
 .TemplateSelection-ResponsiveTypographyTableContainer {
   overflow-x: auto;
+  
 }
 
 .TemplateSelection-TypographyTableHeading {
@@ -160,7 +232,7 @@
 
   
   /* Below css is to make the template selection form responsive  */
-  @media (max-width: 600px) {
+  @media (max-width: 1000px) {
     .TemplateSelection-Container {
       flex-direction: column;
       height: auto;
