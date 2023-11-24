@@ -1,13 +1,60 @@
 import React from 'react';
 import '../TemplateSelection.css';
 
-const colors = ['Red', 'Green', 'Blue'];
+
 
 const TemplateSelection = () => {
   return (
     <div className='TemplateSelection-maindiv'>
         <div className='TemplateSelection-Container'>
-            <div className='TemplateSelection-LeftColumn'>Templates</div>
+            <div className='TemplateSelection-LeftColumn'>
+                <h2 className="TemplateSelection-TemplateTableHeading">Templates</h2>
+                <table className="TemplateSelection-TemplateTable">
+                            <tbody>
+                                <tr>
+                                    <td className="TemplateSelection-TemplateCell">
+                                        <div className="TemplateSelection-Templatediv FirstRowTemplatediv1">Template1</div>
+                                    </td>
+                                    <td className="TemplateSelection-TemplateCell">
+                                        <div className="TemplateSelection-Templatediv FirstRowTemplatediv2">Template2</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td className="TemplateSelection-TemplateCell">
+                                        <div className="TemplateSelection-Templatediv SecondRowTemplatediv1">Template3</div>
+                                    </td>
+                                    <td className="TemplateSelection-TemplateCell">
+                                        <div className="TemplateSelection-Templatediv SecondRowTemplatediv2">Template4</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td className="TemplateSelection-TemplateCell">
+                                        <div className="TemplateSelection-Templatediv ThirdRowTemplatediv1">Template5</div>
+                                    </td>
+                                    <td className="TemplateSelection-TemplateCell">
+                                        <div className="TemplateSelection-Templatediv ThirdRowTemplatediv2">Template6</div>
+                                    </td>
+                                </tr>
+                              
+                                <tr>
+                                    <td className="TemplateSelection-TemplateCell">
+                                        <div className="TemplateSelection-Templatediv FourthRowTemplatediv1">Template7 </div>
+                                    </td>
+                                    <td className="TemplateSelection-TemplateCell">
+                                        <div className="TemplateSelection-Templatediv FourthRowTemplatediv2">Template8</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td className="TemplateSelection-TemplateCell">
+                                        <div className="TemplateSelection-Templatediv ThirdRowTemplatediv1">Template9</div>
+                                    </td>
+                                    <td className="TemplateSelection-TemplateCell">
+                                        <div className="TemplateSelection-Templatediv ThirdRowTemplatediv2">Template10</div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+            </div>
             <div className='TemplateSelection-RightColumn'>
                 {/*the below is the first div tag with the class name 'TemplateSelection-RightRow' is the Color theme table*/}
                 <div className='TemplateSelection-RightRow'>
