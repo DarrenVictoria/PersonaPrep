@@ -3,17 +3,17 @@ import BlogTags from './BlogTags';
 import BlogDate from './BlogDate';
 import BlogShareIcons from './BlogShareIcons';
 
-export default function BlogHeader({title, tags, date}){
+export default function BlogHeader({title, tag1, tag2, date}){
     return(
         <div className='insightBlog-blogHeader'>
             <div className='insightBlog-leftCol'>
                 <BlogTitle title={title}/>
-                <BlogTags tags={tags}/>
+                <BlogTags tag1={tag1} tag2={tag2}/>
             </div>
 
             <div className='insightBlog-rightCol'>
                 <BlogDate date={date}/>
-                <BlogShareIcons />
+                <BlogShareIcons title={title} tag1={tag1} tag2={tag2}/>
             </div>
         </div>
     )
