@@ -8,11 +8,6 @@ const TemplateSelection = () => {
     <div className='TemplateSelection-maindiv'>
         <div className='TemplateSelection-Container'>
             <div className='TemplateSelection-LeftColumn'>
-<<<<<<< Updated upstream
-                <h2>Templates</h2>
-            
-            
-=======
                 <h2 className="TemplateSelection-TemplateTableHeading">Templates</h2>
                 <table className="TemplateSelection-TemplateTable">
                             <tbody>
@@ -59,7 +54,6 @@ const TemplateSelection = () => {
                                 </tr>
                             </tbody>
                         </table>
->>>>>>> Stashed changes
             </div>
             <div className='TemplateSelection-RightColumn'>
                 {/*the below is the first div tag with the class name 'TemplateSelection-RightRow' is the Color theme table*/}
