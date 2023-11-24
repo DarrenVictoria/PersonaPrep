@@ -49,6 +49,8 @@ const RecruitementStatus = () => {
       <MenuItem value="inProgress">Recruited</MenuItem>
       <MenuItem value="completed">Recruitment Pending</MenuItem>
       <MenuItem value="pending">Not Recruited</MenuItem>
+      <MenuItem value="pending">Offer Extended</MenuItem>
+      <MenuItem value="pending">On hold</MenuItem>
     </Select>
   </FormControl>
 </div>
@@ -227,10 +229,12 @@ const RecruitementStatus = () => {
   
         {/* Drop to Upload Box */}
         <h2>Upload File</h2>
+        
         <div style={{ border: '2px dashed #000', padding: '20px', width: '40%', borderRadius: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <CloudUploadIcon style={{ fontSize: '3rem', marginBottom: '10px' }} />
           <p>Drop your file here or click to upload</p>
         </div>
+        
   
         {/* Submit Feedback Button */}
         <Button variant="contained" style={{ backgroundColor: '#000', color: '#fff', marginTop: '3.5rem' }}>
