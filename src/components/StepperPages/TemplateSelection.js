@@ -1,6 +1,6 @@
 import React from 'react';
 import '../TemplateSelection.css';
-
+import LandingTop from '../../assets/images/image4.png'
 
 
 const TemplateSelection = () => {
@@ -13,43 +13,43 @@ const TemplateSelection = () => {
                             <tbody>
                                 <tr>
                                     <td className="TemplateSelection-TemplateCell">
-                                        <div className="TemplateSelection-Templatediv FirstRowTemplatediv1">Template1</div>
+                                        <div className="TemplateSelection-Templatediv FirstRowTemplatediv1"><img src={LandingTop} alt='image'className='TemplateSelection-image'/></div>
                                     </td>
                                     <td className="TemplateSelection-TemplateCell">
-                                        <div className="TemplateSelection-Templatediv FirstRowTemplatediv2">Template2</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className="TemplateSelection-TemplateCell">
-                                        <div className="TemplateSelection-Templatediv SecondRowTemplatediv1">Template3</div>
-                                    </td>
-                                    <td className="TemplateSelection-TemplateCell">
-                                        <div className="TemplateSelection-Templatediv SecondRowTemplatediv2">Template4</div>
+                                        <div className="TemplateSelection-Templatediv FirstRowTemplatediv2"><img src={LandingTop} alt='image'className='TemplateSelection-image'/></div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td className="TemplateSelection-TemplateCell">
-                                        <div className="TemplateSelection-Templatediv ThirdRowTemplatediv1">Template5</div>
+                                        <div className="TemplateSelection-Templatediv SecondRowTemplatediv1"><img src={LandingTop} alt='image'className='TemplateSelection-image'/></div>
                                     </td>
                                     <td className="TemplateSelection-TemplateCell">
-                                        <div className="TemplateSelection-Templatediv ThirdRowTemplatediv2">Template6</div>
+                                        <div className="TemplateSelection-Templatediv SecondRowTemplatediv2"><img src={LandingTop} alt='image'className='TemplateSelection-image'/></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td className="TemplateSelection-TemplateCell">
+                                        <div className="TemplateSelection-Templatediv ThirdRowTemplatediv1"><img src={LandingTop} alt='image'className='TemplateSelection-image'/></div>
+                                    </td>
+                                    <td className="TemplateSelection-TemplateCell">
+                                        <div className="TemplateSelection-Templatediv ThirdRowTemplatediv2"><img src={LandingTop} alt='image'className='TemplateSelection-image'/></div>
                                     </td>
                                 </tr>
                               
                                 <tr>
                                     <td className="TemplateSelection-TemplateCell">
-                                        <div className="TemplateSelection-Templatediv FourthRowTemplatediv1">Template7 </div>
+                                        <div className="TemplateSelection-Templatediv FourthRowTemplatediv1"><img src={LandingTop} alt='image'className='TemplateSelection-image'/></div>
                                     </td>
                                     <td className="TemplateSelection-TemplateCell">
-                                        <div className="TemplateSelection-Templatediv FourthRowTemplatediv2">Template8</div>
+                                        <div className="TemplateSelection-Templatediv FourthRowTemplatediv2"><img src={LandingTop} alt='image'className='TemplateSelection-image'/></div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td className="TemplateSelection-TemplateCell">
-                                        <div className="TemplateSelection-Templatediv ThirdRowTemplatediv1">Template9</div>
+                                        <div className="TemplateSelection-Templatediv ThirdRowTemplatediv1"><img src={LandingTop} alt='image'className='TemplateSelection-image'/></div>
                                     </td>
                                     <td className="TemplateSelection-TemplateCell">
-                                        <div className="TemplateSelection-Templatediv ThirdRowTemplatediv2">Template10</div>
+                                        <div className="TemplateSelection-Templatediv ThirdRowTemplatediv2"><img src={LandingTop} alt='image'className='TemplateSelection-image'/></div>
                                     </td>
                                 </tr>
                             </tbody>
