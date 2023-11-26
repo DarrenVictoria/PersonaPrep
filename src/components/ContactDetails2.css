@@ -1,19 +1,13 @@
-.Contactdetails2-Subdiv {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /*padding-top: 100px*/
-    min-height: 100vh;
-}
   
   .Contactdetails2-LeftColumn {
     flex: 2;
     height: auto;
-    /*background-color: lightblue;*/
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    /*justify-content: center;
+    align-items: center;*/
+    justify-content: flex-start;
+    align-items: flex-start;
     
     
 
@@ -22,18 +16,13 @@
   .Contactdetails2-RightColumn {
     flex: 1;
     height: auto;
-    background-color: lightgreen;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center
+    align-items: center;
+    /*justify-content: flex-start;
+    align-items: flex-end;*/
     
-   
-    
-    
-    
-   /* align-self:flex-start;*/
-    /*width: auto;*/
     
   }
   
@@ -41,4 +30,9 @@
     padding: 10px;
     display: flex;
     flex-direction: row;
+    padding-top: 300px;
+   
+  }
+  .Contactdetails2-LeftColumnTextField{
+    border-radius: 20px;
   }
