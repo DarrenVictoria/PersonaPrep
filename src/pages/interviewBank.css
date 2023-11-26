@@ -6,16 +6,15 @@
 }
 .interviewBank-container{
     padding: 0 4%;
+    margin-bottom: 40px;
 }
 .interviewBank-container h1{
     font-size: 5vw;
+    margin: 10px 0;
 }
 
 .interviewBank-topics h3, .interviewBank-transcript h3{
     font-size: 3vw;
-    /* display: inline-block;
-    border-bottom: 4px solid #000;
-    width: 80px; */
     position: relative;
 }
 .interviewBank-topics h3::after, .interviewBank-transcript h3::after {
@@ -97,17 +96,18 @@
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
-        /* margin: 0 20px; */
+        margin-left: 25px;
     }
     .interviewBank-topics h3, .interviewBank-transcript h3{
         font-size: 5vw;
+    }
+    .interviewBank-transcript h3{
+        margin-bottom: 35px;
     }
     .interviewBank-topics h3::after{
         width: 10%;
     }
     .interviewBank-topics div button{
-        /* display: flex; */
-        /* justify-content: space-around; */
         font-size: 4vw;
     }
     .interviewBank-transcript h3::after{
@@ -119,6 +119,10 @@
     }
     .interviewBank-thumbnail{
         order: -1;
+    }
+    .interviewBank-thumbnail img{
+        width: 100%;
+        height: 200px;
     }
     .interviewBank-transcriptLabels div{
         font-size: 12px;
