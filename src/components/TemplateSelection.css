@@ -76,36 +76,7 @@
   height: 100%;
   object-fit: cover;
 }
-.FirstRowTemplatediv1 {
-  font-family: Calibri;
-  
-}
 
-.FirstRowTemplatediv2 {
-  font-family: Cambria;
-}
-
-.SecondRowTemplatediv1 {
-  font-family: Helvetica;
-}
-
-.SecondRowTemplatediv2 {
-  font-family: Georgia;
-}
-
-.ThirdRowTemplatediv1 {
-  font-family: Verdana;
-}
-
-.ThirdRowTemplatediv2 {
-  font-family: Garamond;
-}
-.FourthRowTemplatediv2 {
-  font-family: Trebuchet MS;
-}
-.FourthRowTemplatediv2 {
-  font-family: Lato;
-}
 /*Below css is for the color theme table*/
   
 .TemplateSelection-responsiveColorTableContainer {
