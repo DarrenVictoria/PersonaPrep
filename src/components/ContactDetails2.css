@@ -1,15 +1,13 @@
   
   .Contactdetails2-LeftColumn {
-    flex: 2;
+    flex: 1;
     height: auto;
     display: flex;
     flex-direction: column;
-    /*justify-content: center;
-    align-items: center;*/
-    justify-content: flex-start;
+    justify-content: center;
     align-items: flex-start;
-    
-    
+    max-width: 100%;
+    padding-left: 60px;
 
   }
   
@@ -20,19 +18,23 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /*justify-content: flex-start;
-    align-items: flex-end;*/
-    
-    
+    max-width: 100%;
+    padding-right: 30px;
+    padding-left: 30px;
   }
   
   .Contactdetails2-Maindiv {
-    padding: 10px;
+    /*padding: 10px;*/
     display: flex;
     flex-direction: row;
-    padding-top: 300px;
-   
+   /* padding-top: 250px;*/
+    flex-wrap: wrap;
+    height: 100vh;
   }
-  .Contactdetails2-LeftColumnTextField{
-    border-radius: 20px;
+  
+  /*.Contactdetails2-RightColumnCard{
+    overflow-y: auto;
+    
+    
   }
+  */
