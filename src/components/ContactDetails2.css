@@ -1,44 +1,40 @@
-.Contactdetails2-Subdiv {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /*padding-top: 100px*/
-    min-height: 100vh;
-}
   
   .Contactdetails2-LeftColumn {
-    flex: 2;
+    flex: 1;
     height: auto;
-    /*background-color: lightblue;*/
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    
-    
+    align-items: flex-start;
+    max-width: 100%;
+    padding-left: 60px;
 
   }
   
   .Contactdetails2-RightColumn {
     flex: 1;
     height: auto;
-    background-color: lightgreen;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center
-    
-   
-    
-    
-    
-   /* align-self:flex-start;*/
-    /*width: auto;*/
-    
+    align-items: center;
+    max-width: 100%;
+    padding-right: 30px;
+    padding-left: 30px;
   }
   
   .Contactdetails2-Maindiv {
-    padding: 10px;
+    /*padding: 10px;*/
     display: flex;
     flex-direction: row;
+   /* padding-top: 250px;*/
+    flex-wrap: wrap;
+    height: 100vh;
   }
+  
+  /*.Contactdetails2-RightColumnCard{
+    overflow-y: auto;
+    
+    
+  }
+  */
