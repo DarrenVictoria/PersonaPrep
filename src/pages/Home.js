@@ -1,6 +1,7 @@
 import NavBar from '../components/Navbar';
 import './Home.css';
 import * as React from "react";
+import { useNavigate } from 'react-router-dom';
 import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Unstable_Grid2";
 import Paper from "@mui/material/Paper";
@@ -218,8 +219,8 @@ export default function SplitLayout() {
       left: '10px', // Adjust this value for your desired padding
     };
 
-    const redirectToGoogle = () => {
-        window.location.href = 'https://www.google.com/';
+    const redirectToStartForm = () => {
+        window.location.href = '/startform';
       };
     
       const redirectToYoutube = () => {
@@ -240,7 +241,7 @@ export default function SplitLayout() {
     <h1 className="inter-picturebox">Resumes Refined ,<br /> Interviews Perfected</h1>
   </div>
   <div className="right-box">
-    <div className="top-right-box" onClick={redirectToGoogle}>
+    <div className="top-right-box cv-box" onClick={redirectToStartForm}>
       <div className="box-content">
         <div>
           <h2 className="inter-top">CV Generator</h2>
@@ -253,7 +254,7 @@ export default function SplitLayout() {
         </div>
       </div>
     </div>
-    <div className="bottom-right-box" onClick={redirectToYoutube}>
+    <div className="bottom-right-box interview-box" onClick={redirectToYoutube}>
       <div className="box-content">
         <div>
           <h2 className="inter-top">Interview Simulator</h2>
