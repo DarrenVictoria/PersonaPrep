@@ -1,14 +1,13 @@
-/* .login-umm{
-    height: 100%;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-} */
+.login-main{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* transform: translate(-50%, -50%); */
+    opacity: 0;
+    animation: slideDown 0.5s ease-in-out 0.5s forwards;
+}
 .login-container{
-    /* margin: 100px auto; */
     margin: auto;
-    margin-top: 70px;
     padding: 60px 0;
     border: 2px solid #000;
     border-radius: 15px;
@@ -24,23 +23,36 @@
     display: block;
 }
 .login-header img{
-    width: 100px;
+    width: 120px;
     display: block;
     margin: 10px auto;
 }
 .login-slider{
-    margin: 30px 0 25px;
+    width: 250px;
+	margin: 35px auto;
+	position: relative;
+	border-radius: 30px;
+	background: rgb(197, 191, 191);
 }
-.login-slider div{
-    display: inline;
-    background-color: rgb(197, 191, 191);
-    padding: 5px 20px;
-    border-radius: 5px;
-    font-size: 18px;
+.login-slider div {
+    position: absolute;
+    width: 140px;
+    height: 100%;
+    background: #000;
+    border-radius: 30px;
+    transition: .5s;
+}
+.login-slider button {
+	padding: 10px 30px;
+	cursor: pointer;
+	background: transparent;
+	border: 0;
+	position: relative;
+	text-align: center;
 }
 .login-msLogin{
     display: flex;
-    width: 200px;
+    width: 270px;
     margin: 5px auto;
     padding: 5px 30px ;
     border: 1px solid #000;
@@ -53,16 +65,22 @@
 }
 
 @media (max-width: 700px){
-    .login-umm{
+    .login-main{
         display: flex;
-        /* height: 100%;
-        margin: 0;
-        align-items: center;
-        justify-content: center; */
     }
     .login-container{
         width: 100%;
         padding: 60px 40px;
-        margin-top: 0;
+    }
+}
+
+@keyframes slideDown {
+    from{
+        transform: translate(-50%, -60%);
+        opacity: 0;
+    }
+    to{
+        transform: translate(-50%, -50%);
+        opacity: 1;
     }
 }
