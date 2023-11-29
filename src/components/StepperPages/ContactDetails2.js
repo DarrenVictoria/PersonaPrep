@@ -99,7 +99,7 @@ const ContactDetails_2 = () => {
 
      
       <div className='Contactdetails2-RightColumn'>
-        <Card variant="outlined" sx={{ height:'100%',maxHeight: '450px', width:'100%',maxWidth: '363px',borderRadius:'15px',overflowY:'auto','@media (min-width:768px)':{overflowY:'hidden',},}}className='Contactdetails2-RightColumnCard'>
+        <Card variant="outlined" sx={{ height:'100%',maxHeight: '450px', width:'100%',maxWidth: '363px',borderRadius:'15px',overflowY:'auto',overflowX:'auto','@media (min-width:768px)':{overflowY:'hidden',},}}className='Contactdetails2-RightColumnCard'>
           <CardContent >
             <Typography variant="h5" component="div"sx={{ textAlign: 'center' }}>
               Social Media tips
