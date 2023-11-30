@@ -12,7 +12,8 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';// for the right colum
 //import Box from "@mui/material/Box"; //did not use this for the grid since it effects some css i have applied and comented temperory incase any issue come we can  uncomment it
 //import Paper from "@mui/material/Paper";
 //import InputAdornment from '@mui/material/InputAdornment';
-//import Icon from '@mui/material/Icon';
+import IconButton from '@mui/material/IconButton';
+import AddIcon from '@mui/icons-material/Add'
 import Button from '@mui/material/Button';
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
@@ -72,7 +73,7 @@ const ContactDetails_1 = () => {
               </Grid>
               <Grid item xs={12}>
                 
-                  <Typography>Other Portfolio links</Typography>
+                  <Typography>Other Portfolio links <IconButton color="primary"style={{ backgroundColor: 'black', borderRadius: '50%',width:'22px',height:'22px' }}><AddIcon style={{ color: 'white' }} /></IconButton></Typography>
                   <TextField type="text" variant="outlined" fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
                 
               </Grid>
