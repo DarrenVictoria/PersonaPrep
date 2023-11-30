@@ -8,17 +8,87 @@ import List from '@mui/material/List';// for the right column
 import ListItem from '@mui/material/ListItem';// for the right column
 import ListItemText from '@mui/material/ListItemText';// for the right column
 import ListItemAvatar from '@mui/material/ListItemAvatar';// for the right column
+//import { styled } from "@mui/material/styles";
+//import Box from "@mui/material/Box"; //did not use this for the grid since it effects some css i have applied and comented temperory incase any issue come we can  uncomment it
+//import Paper from "@mui/material/Paper";
+//import InputAdornment from '@mui/material/InputAdornment';
+//import Icon from '@mui/material/Icon';
+import Button from '@mui/material/Button';
+import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
 import cphone from '../../assets/images/iconcphone.svg';
 import cmail from '../../assets/images/iconcmail.svg';
 import cfolder from '../../assets/images/iconcfolder.svg';
 const ContactDetails_1 = () => {
-   
+  
     return(
     <div className='Contactdetails1-Maindiv'>
      
         
       <div className='Contactdetails1-LeftColumn'>
-        
+            {/*<Box sx={{ flexGrow: 1 }}>*/}
+            <Grid container spacing={2} >
+              <Grid item xs={6}>
+                
+                  <Typography>*Phone</Typography>
+                  <TextField type="text" variant="outlined" fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}} />
+                
+              </Grid>
+              <Grid item xs={6}>
+                
+                  <Typography>*Email</Typography>
+                  <TextField type="email" variant="outlined" fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
+                
+              </Grid>
+              <Grid item xs={6}>
+                
+                  <Typography>*District</Typography>
+                  <TextField type="text" variant="outlined" fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
+                
+              </Grid>
+              <Grid item xs={6}>
+                
+                  <Typography>*City</Typography>
+                  <TextField type="text" variant="outlined" fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
+                
+              </Grid>
+              <Grid item xs={6}>
+                
+                  <Typography>*Postalcode</Typography>
+                  <TextField type="text" variant="outlined" fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
+                
+              </Grid>
+              <Grid item xs={6}>
+                
+                  <Typography>*Country</Typography>
+                  <TextField type="text" variant="outlined" fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
+                
+              </Grid>
+              <Grid item xs={12}>
+                
+                  <Typography>*Portfolio Website</Typography>
+                  <TextField type="text" variant="outlined" fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
+                
+              </Grid>
+              <Grid item xs={12}>
+                
+                  <Typography>Other Portfolio links</Typography>
+                  <TextField type="text" variant="outlined" fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
+                
+              </Grid>
+              <Grid item xs={3}>
+                
+              <Button variant="outlined" fullWidth style={{ borderRadius: '25px', backgroundColor: 'black',color:'white',fontSize:'20px',fontFamily:'inter',fontStyle:'normal',fontWeight:700 ,textTransform: 'none'}}>Figma</Button>
+              
+              </Grid>
+              <Grid item xs={3}>
+                
+                
+              <Button variant="outlined" fullWidth style={{ borderRadius: '25px', backgroundColor: 'black',color:'white',fontSize:'20px',fontFamily:'inter',fontStyle:'normal',fontWeight:700 ,textTransform: 'none' }}>Behance</Button>
+              
+              </Grid>
+            </Grid>
+          {/*</Box>*/}
               
       </div>
             
