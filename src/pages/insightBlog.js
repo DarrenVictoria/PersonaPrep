@@ -3,11 +3,13 @@ import './insightBlog.css'
 import BlogHeader from '../components/BlogHeader'
 import cvmistake from '../assets/images/illustration-cv-mistakes.png'
 import Footer from '../components/footer'
+import Navbar from '../components/Navbar'
 
 
 export default function Insightblog(){
     return(
         <div>
+            <Navbar />
             <div className='insightBlog-container'>
                 <BlogHeader 
                     title="5 Top Mistakes in CV's"
