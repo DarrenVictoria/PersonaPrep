@@ -3,26 +3,43 @@ import TranscriptCard from '../components/TranscriptCard'
 import thumbnail from '../assets/images/post-thumbnail.png'
 import { useState } from 'react'
 import Footer from '../components/footer'
+import NavBar from '../components/Navbar'
+import { Button, styled } from '@mui/material'
+
+const TopicsBtn = styled(Button)(({theme}) => ({
+    fontSize: '1.5vw',
+    color: '#fff',
+    backgroundColor: '#000',
+    border: 'none',
+    borderRadius: '10px',
+    [theme.breakpoints.down('sm')]: {
+        fontSize: '3vw'
+    },
+    ':hover': {
+        backgroundColor: '#000',
+        border: 'none',
+    }
+}))
 
 export default function InterviewBank(){
     // const [selectedCategory, setSelectedCategory] = useState('');
-
     // const filterCard = (category) => {
     //     setSelectedCategory(category);
     // }
 
     return(
         <div>
+            <NavBar />
             <div className="interviewBank-container">
                 <h1 >Interview Bank</h1>
                 <div className="interviewBank-topics">
                     <h3>Topics</h3>
                     <div>
                         {/* <button onClick={() => filterCard('computing')}>Computing</button> */}
-                        <button>Computing</button>
-                        <button>Business</button>
-                        <button>Engineering</button>
-                        <button>Science</button>
+                        <TopicsBtn variant='outlined'>Computing</TopicsBtn>
+                        <TopicsBtn variant='outlined'>Business</TopicsBtn>
+                        <TopicsBtn variant='outlined'>Engineering</TopicsBtn>
+                        <TopicsBtn variant='outlined'>Science</TopicsBtn>
                     </div>
                 </div>
 

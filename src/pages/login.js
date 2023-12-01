@@ -2,6 +2,7 @@ import './login.css'
 import logoColored from '../assets/logo/Persona Prep Coloured.png'
 import msLogo from '../assets/images/microsoft-logo.png'
 import { useState } from 'react';
+import { Button } from '@mui/material';
 
 export default function Login(){
     const [toggle, setToggle] = useState(0);
@@ -18,6 +19,13 @@ export default function Login(){
         setToggle(0);
         setCorpTxt('black');
         setStudentTxt('white');
+    }
+
+    const msLoginBtn = {
+        color: '#000',
+        border: '1px solid #000',
+        borderRadius: '15px',
+        textTransform: 'none'
     }
 
     return(
@@ -38,8 +46,7 @@ export default function Login(){
                     </button>
                 </div>
                 <div className='login-msLogin'>
-                    <img src={msLogo} alt='Microsoft' />
-                    <span>Log in with Microsoft</span>
+                    <Button variant='outlined' style={msLoginBtn} ><img src={msLogo} alt='Microsoft' />Log in with Microsoft</Button>
                 </div>
             </div>
         </div>

@@ -50,7 +50,7 @@
 	position: relative;
 	text-align: center;
 }
-.login-msLogin{
+/* .login-msLogin{
     display: flex;
     width: 270px;
     margin: 5px auto;
@@ -58,9 +58,9 @@
     border: 1px solid #000;
     border-radius: 15px;
     place-items: center;
-}
+} */
 .login-msLogin img{
-    width: 25px;
+    width: 20px;
     margin-right: 25px;
 }
 

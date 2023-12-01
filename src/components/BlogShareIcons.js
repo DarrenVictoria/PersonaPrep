@@ -33,7 +33,7 @@ export default function BlogShareIcons(props){
                                 url: window.location.href,
                             });
                         } catch (error) {
-                            console.error('Error sharing:', error);
+                            console.error(error);
                         }
                     }
                 );
@@ -46,7 +46,7 @@ export default function BlogShareIcons(props){
             <a id='fb' href='#' target='_blank'><img src={facebook} alt="Fb"/></a>
             <a id='twitter' href='#' target='_blank'><img src={twitter} alt="Twitter"/></a>
             <a id='linkedin' href='#' target='_blank'><img src={linkedin} alt="LinkedIn"/></a>
-            <a id='share' href='#' target='_blank'><img src={share} alt="Share"/></a>
+            <a id='share' href='#'><img src={share} alt="Share"/></a>
         </div>
     )
 }
