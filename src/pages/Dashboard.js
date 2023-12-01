@@ -92,7 +92,7 @@ const RecruitementStatus = () => {
               <h1>Edit CV</h1>
               <p>Make seamless adjustments, update information, and elevate your CV effortlessly.</p>
             </div>
-            <ArrowForwardIcon style={{ fontSize: '4rem',marginRight:'1.8rem' }} />
+            <ArrowForwardIcon style={{ fontSize: '4rem',marginRight:'.8rem' }} />
           </div>
         </div>
   

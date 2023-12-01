@@ -263,7 +263,7 @@ export default function SplitLayout() {
           </p>
         </div>
         <div className="arrow-icon">
-          <ArrowForwardIcon style={{ fontSize: '2.5rem',marginRight:'1rem' }}/>
+          <ArrowForwardIcon style={{ fontSize: '2.5rem',marginRight:'2.5rem' }}/>
         </div>
       </div>
     </div>
