@@ -4,7 +4,7 @@
     left: 50%;
     /* transform: translate(-50%, -50%); */
     opacity: 0;
-    animation: slideDown 0.5s ease-in-out 0.5s forwards;
+    animation: slideDown 0.5s ease-in-out 0.5s forwards; 
 }
 .login-container{
     margin: auto;
@@ -13,6 +13,7 @@
     border-radius: 15px;
     text-align: center;
     width: 500px;
+    background-color: #fff;
 }
 .login-header{
     font-size: 25px;

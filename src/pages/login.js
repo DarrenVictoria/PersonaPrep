@@ -1,8 +1,11 @@
 import './login.css'
 import logoColored from '../assets/logo/Persona Prep Coloured.png'
 import msLogo from '../assets/images/microsoft-logo.png'
+import loginBg from '../assets/images/Login Background.svg'
 import { useState } from 'react';
-import { Button } from '@mui/material';
+import { Button } from '@mui/material'
+
+console.log(loginBg)
 
 export default function Login(){
     const [toggle, setToggle] = useState(0);
@@ -29,24 +32,26 @@ export default function Login(){
     }
 
     return(
-        <div className='login-main'>
-            <div className='login-container'>
-                <div className='login-header'>
-                    <span>Login to</span>
-                    <img src={logoColored} alt='Logo'/>
-                    with your Microsoft <br /> Account as
-                </div>
-                <div className="login-slider">
-                    <div style={{left: `${toggle}px`}}></div>
-                    <button onClick={leftClick}>
-                        <span style={{color: `${studentTxt}`}}>Student</span>
-                    </button>
-                    <button onClick={rightClick} id='btn'>
-                        <span style={{color: `${corpTxt}`}}>Corporate</span>
-                    </button>
-                </div>
-                <div className='login-msLogin'>
-                    <Button variant='outlined' style={msLoginBtn} ><img src={msLogo} alt='Microsoft' />Log in with Microsoft</Button>
+        <div style={{backgroundImage: `url('${loginBg}')`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', height: '100vh'}}>
+            <div className='login-main'>
+                <div className='login-container'>
+                    <div className='login-header'>
+                        <span>Login to</span>
+                        <img src={logoColored} alt='Logo'/>
+                        with your Microsoft <br /> Account as
+                    </div>
+                    <div className="login-slider">
+                        <div style={{left: `${toggle}px`}}></div>
+                        <button onClick={leftClick}>
+                            <span style={{color: `${studentTxt}`}}>Student</span>
+                        </button>
+                        <button onClick={rightClick} id='btn'>
+                            <span style={{color: `${corpTxt}`}}>Corporate</span>
+                        </button>
+                    </div>
+                    <div className='login-msLogin'>
+                        <Button variant='outlined' style={msLoginBtn} ><img src={msLogo} alt='Microsoft' />Log in with Microsoft</Button>
+                    </div>
                 </div>
             </div>
         </div>
