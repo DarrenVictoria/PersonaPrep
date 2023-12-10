@@ -39,6 +39,7 @@ const WorkExperience_2 = () => {
                         onSelect={setEmploymentType}
                         disabledOptions={[]}
                         width="312px"
+                        //the above width does not work have to fix it in the Editable select option
                     />
                 </Grid>
             </Grid>

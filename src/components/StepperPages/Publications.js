@@ -19,9 +19,9 @@ import { useState } from 'react';
 const Publications = () => {
     const[month,setMonth]= React.useState("");
     const[year,setYear]= React.useState("");
-    const[currentProjects, setCurrentProjects]= useState("");
-    const currentprojInputchange = (value)=>{
-        setCurrentProjects(value);
+    const[currentProjects, setCurrentProjects]= useState("");//this is for the custom multiline text field and need to edit this according to the text field later
+    const currentprojInputchange = (value)=>{//this is for the custom multiline text field and need to edit this according to the text field later
+        setCurrentProjects(value);//this is for the custom multiline text field and need to edit this according to the text field later
     }
     return(
         <div className='Publications-Maindiv'>
