@@ -1,0 +1,43 @@
+  
+  .Certification1-LeftColumn {
+    flex: 1;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 100%;
+    padding-left: 60px;
+    box-sizing: border-box;
+    
+  }
+  .Certification1LeftColumn-textfield{
+    border-radius: 25px;
+  }
+  .Certification1-RightColumn {
+    flex: 1;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    padding-right: 30px;
+    padding-left: 30px;
+  }
+  
+  .Certification1-Maindiv {
+    /*padding: 10px;*/
+    display: flex;
+    flex-direction: row;
+   /* padding-top: 250px;*/
+    flex-wrap: wrap;
+    height: 100vh;
+  }
+  
+  /*.Certification1-RightColumnCard{
+    overflow-y: auto;
+    
+    
+  }
+  */
