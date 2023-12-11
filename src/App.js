@@ -4,7 +4,6 @@ import {BrowserRouter,Routes,Route, useNavigate } from 'react-router-dom'
 
 
 import Home from './pages/Home'
-import InsightBank from './pages/InsightBank'
 import InterviewBank from './pages/InterviewBank'
 import Insightblog from "./pages/insightBlog"
 import Login from "./pages/login"
@@ -32,7 +31,6 @@ function App() {
           <Route index element={<Home/>} />
           <Route path="/startform" element={<Template />}/>
           <Route path="/home" element={<Home />}/>
-          <Route path="/insightbank" element={<InsightBank />}/>
           <Route path="/interviewbank" element={<InterviewBank />}/>
           <Route path="/insightblog" element={<Insightblog />}/>
           <Route path="/login" element={<Login />}/>

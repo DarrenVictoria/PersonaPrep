@@ -101,7 +101,7 @@ const gridItems = [
       `,
       height: '9rem',
       border: '3px solid #000',
-      url: 'https://www.example.com/page1',
+      url: '/insightblog',
     },
     {
       id: 2,
@@ -263,7 +263,7 @@ export default function SplitLayout() {
           </p>
         </div>
         <div className="arrow-icon">
-          <ArrowForwardIcon style={{ fontSize: '2.5rem',marginRight:'2.5rem' }}/>
+          <ArrowForwardIcon style={{ fontSize: '2.5rem',marginRight:'1rem' }}/>
         </div>
       </div>
     </div>
