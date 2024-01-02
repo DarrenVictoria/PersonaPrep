@@ -4,6 +4,7 @@ import { useAutocomplete } from "@mui/base/useAutocomplete";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import { styled } from "@mui/material/styles";
+import { Typography } from "@mui/material";
 import { autocompleteClasses } from "@mui/material/Autocomplete";
 
 const Root = styled("div")(
@@ -15,12 +16,16 @@ const Root = styled("div")(
 `
 );
 
-const Label = styled("label")`
+const Label = styled(Typography)(
+  ({ theme }) => `
   padding: 0 0 4px;
   line-height: 1.5;
   display: block;
-  font-size: 20px;
-`;
+  font-size: 16px;
+  font-weight:540;
+  
+`
+);
 
 const InputWrapper = styled("div")(
   ({ theme, width, height }) => `
@@ -58,6 +63,9 @@ const InputWrapper = styled("div")(
     margin: 0;
     outline: 0;
     border-radius: 25px;
+  }
+  @media (max-width: 600px) {
+    width: 100%;
   }
 `
 );
@@ -162,7 +170,7 @@ const Listbox = styled("ul")(
 `
 );
 
-function CustomizedHook({ width = 300, height = 90, data = [] ,label = "Customized hook" }) {
+function CustomizedHook({ width = 300, height = 90, data = [] ,label = "" }) {
   const {
     getRootProps,
     getInputLabelProps,

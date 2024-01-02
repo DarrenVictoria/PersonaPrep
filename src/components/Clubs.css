@@ -1,0 +1,43 @@
+  
+  .Clubs-LeftColumn {
+    flex: 1;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 100%;
+    padding-left: 60px;
+    box-sizing: border-box;
+    
+  }
+  .ClubsLeftColumn-textfield{
+    border-radius: 25px;
+  }
+  .Clubs-RightColumn {
+    flex: 1;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    padding-right: 30px;
+    padding-left: 30px;
+  }
+  
+  .Clubs-Maindiv {
+    /*padding: 10px;*/
+    display: flex;
+    flex-direction: row;
+   /* padding-top: 250px;*/
+    flex-wrap: wrap;
+    height: 100vh;
+  }
+  
+  /*.Clubs-RightColumnCard{
+    overflow-y: auto;
+    
+    
+  }
+  */
