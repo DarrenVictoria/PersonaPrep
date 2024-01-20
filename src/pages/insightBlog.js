@@ -1,20 +1,26 @@
-import React from 'react';
-import './insightBlog.css';
-import BlogHeader from '../components/BlogHeader';
+import React from 'react'
+import './insightBlog.css'
+import BlogHeader from '../components/BlogHeader'
 import cvmistake from '../assets/images/illustration-cv-mistakes.png'
+import Footer from '../components/footer'
+import Navbar from '../components/Navbar'
 
 
 export default function Insightblog(){
     return(
-        <div className='insightBlog-container'>
-            <BlogHeader 
-                title="5 Top Mistakes in CV's"
-                tags="Other stuff"
-                date="November 13, 2023"
-            />
+        <div>
+            <Navbar />
+            <div className='insightBlog-container'>
+                <BlogHeader 
+                    title="5 Top Mistakes in CV's"
+                    tag1="CV"
+                    tag2="MISTAKES"
+                    date="November 13, 2023"
+                />
 
-            <div className='insightBlog-blogDetails'>
-                <img src={cvmistake} alt='' className='insightBlog-blogImg'/>
+                <div className='insightBlog-blogImage'>
+                    <img src={cvmistake} alt='blog' className='insightBlog-blogImg'/>
+                </div>
                 <p>Your CV is often the first impression a potential employer has of you, making it crucial to present yourself in the best light possible. However, certain common mistakes can hinder your chances of landing your dream job. In this post, we'll discuss the top five mistakes to avoid when crafting your CV, ensuring that you showcase your skills and experience effectively.</p>
 
                 <div className='insightBlog-numberedList'>
@@ -54,7 +60,10 @@ export default function Insightblog(){
                 <p>
                     Crafting an effective CV is crucial for securing your desired job. By avoiding these common mistakes, you can significantly improve your chances of standing out to potential employers. Remember to focus on clear, error-free content that highlights your skills, experiences, and achievements, making your CV a powerful tool in your job search arsenal.
                 </p>
+                {/* <div className='insightBlog-blogDetails'>
+                </div> */}
             </div>
+            <Footer />
         </div>
     )
 }

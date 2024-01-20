@@ -1,11 +1,16 @@
 .insightBlog-container{
-    padding: 0 4%;
+    max-width: 90%;
+    margin: 30px auto;
+    margin-top: 45px;
+    padding: 20px 50px;
+    background-color: burlywood;
+    border-radius: 20px;
 }
 .insightBlog-blogHeader{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* margin: 0 20px; */
+    margin-bottom: 25px;
 }
 .insightBlog-leftCol{
     display: flex;
@@ -16,11 +21,10 @@
     display: flex;
     flex: 1;
     flex-direction: column;
-    /* justify-content: flex-end; */
     align-items: flex-end;
 }
 .insightBlog-blogTitle{
-    font-size: 5vw;
+    font-size: 4vw;
     font-weight: 700;
 }
 .insightBlog-blogDate{
@@ -30,31 +34,52 @@
     padding: 6px 10px;
     border: none;
     border-radius: 20px;
-    margin-bottom: 10px;
+    margin: 15px 0;
+    
 }
 .insightBlog-blogShareIcons{
+    margin-top: 5px;
     display: flex;
     gap: 10px;
     align-items: center;
 }
 .insightBlog-blogShareIcons img{
-    width: 20px;
-    height: 20px;
+    width: 23px;
+    height: 23px;
+}
+.insightBlog-blogTags{
+    margin-top: 10px;
+}
+.insightBlog-blogTags span{
+    font-size: 10px;
+    background-color: #000;
+    color: #fff;
+    margin-right: 10px;
+    padding: 6px 10px;
 }
 
 
-.insightBlog-blogDetails {
+/* .insightBlog-blogDetails {
     max-width: 90%;
     margin: 20px auto;
     padding: 20px 55px;
     background-color: burlywood;
     border-radius: 20px;
+} */
+.insightBlog-blogImage{
+    display: flex;
+    margin-top: 50px;
 }
-.insightBlog-blogDetails img{
-    width: 100%;
+.insightBlog-blogImage img{
+    width: 600px;
+    height: auto;
+    max-width: 100%;
+    max-height: 380px;
+    margin: 0 auto;
     margin-bottom: 10px;
+    border-radius: 20px;
 }
-.insightBlog-blogDetails p{
+.insightBlog-container p{
     text-align: justify;
 }
 
@@ -76,12 +101,19 @@
 }
 
 @media(max-width: 700px){
-    .insightBlog-blogDetails{
-        max-width: 80%;
+    /* .insightBlog-blogDetails{
+        max-width: 100%;
         border: 2px solid black;
         padding: 20px 35px;
+    } */
+    .insightBlog-container{
+        max-width: 95%;
+        border: 2px solid black;
+        padding: 20px 25px;
     }
-    .insightBlog-blogDetails img{
+    .insightBlog-blogImage img{
+        width: 100%;
+        height: 200px;
         margin-bottom: 25px;
     }
     .insightBlog-blogTitle{

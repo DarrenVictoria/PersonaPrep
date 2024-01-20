@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+
+
 *{
   box-sizing: border-box;
 }
@@ -12,6 +16,18 @@
   margin:10px;
   
 }
+
+.inter-picturebox {
+  color: #000;
+  font-size: 50px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+  margin:10px;
+  
+}
+
 
 .inter-bold {
   font-family: 'Inter', sans-serif;
@@ -41,6 +57,7 @@
 
 .inter-top {
   color: #000;
+  font-size: 35px;
   font-family: Inter;
   font-style: normal;
   font-weight: 800;
@@ -128,6 +145,35 @@
   font-weight: bold;
   color: #000; /* Black text color */
   margin: 0; /* Remove default margin */
+}
+
+
+.grid-item {
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+}
+
+
+.box-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.arrow-icon {
+  display: flex;
+  align-items: center;
+}
+
+.cv-box:hover,
+.interview-box:hover {
+  transform: scale(1.02);
+  transition: transform 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 
