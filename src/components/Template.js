@@ -150,9 +150,9 @@ const Template = () => {
                         {currentPageIndex<=14?(
                         <CustomVerticalStepper ref={cvs_instance} ></CustomVerticalStepper>) : (<CustomSecondVerticalStepper ref={secondStepperRef}></CustomSecondVerticalStepper>)}
                     </Grid>
-                    <Grid xs={12} style={{backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", paddingLeft: "10px"}}>
+                    <Grid xs={12} style={{backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
                     <form style={{height: '100%', position: 'relative'}}>
-                        <div style={{marginBottom: '125px', marginRight: '75px'}}>
+                        <div style={{marginBottom: '125px', marginRight: '75px',marginLeft:'75px'}}>
                             {
                                 (currentPageIndex === 0) && <FacultyDetails></FacultyDetails>
                             }
@@ -222,7 +222,7 @@ const Template = () => {
                         </div>
 
                         <Grid container spacing={2} style={{position: 'absolute', bottom: 10}}>
-                            <Grid xs={6}>
+                            <Grid xs={6} paddingLeft={'10px'}>
                                 <Button startIcon={<ArrowBackIcon />} style={back} onClick={() => { if (currentPageIndex <= 14 && cvs_instance.current) { cvs_instance.current.handleBack(); if (currentPageIndex > 0) { setCurrentPageIndex(currentPageIndex - 1); } } else if (secondStepperRef.current) {  secondStepperRef.current.handleBack(); setCurrentPageIndex((prevIndex) => prevIndex - 1); }}}>Go Back</Button>
                             </Grid>
                                 

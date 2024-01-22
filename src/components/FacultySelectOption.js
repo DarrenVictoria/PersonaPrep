@@ -39,7 +39,7 @@ export default function Choose({options, onSelect, disabledOptions }) {
   return (
     <div>
        {/*The sx in the FormControl is to adjust the width of the selection box*/}
-      <FormControl sx={{ m: 1, width: 'auto', mt: 3,'@media(min-width:600px)':{width: 300}}}>
+      <FormControl sx={{ m: 1, width: 'auto', mt: 3,'@media(min-width:600px)':{width: 300},'@media(min-width:500px)':{width: 300},'@media(min-width:400px)':{width: 300},'@media(max-width:468px)':{width: 250}}}>
         <Select
           value={personName}
           onChange={handleChange}
