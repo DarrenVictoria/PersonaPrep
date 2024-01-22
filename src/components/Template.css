@@ -1,5 +1,72 @@
-
 .formtemp-header-container {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  background-color: #292727;
+  border-radius: 45px 45px 0px 0px;
+  text-align: center;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.logo {
+  text-align: left;
+  border-radius: 39px 0px 0px 0px;
+}
+
+.formtemp-variable {
+  text-align: right;
+  border-radius: 0px 39px 0px 0px;
+  margin-left: auto;
+}
+
+.formtemp-variablename {
+  font-family: 'Inter', sans-serif;
+  font-size: 45px;
+  color: rgb(255, 255, 255);
+  display: flex;
+}
+
+.formtemp-page {
+  border: 2px solid black;
+  border-radius: 50px 50px 50px 50px;
+  background: #ffffff;
+  margin: 20px;
+  margin-left: 35px;
+  margin-right: 35px;
+  overflow: hidden; /* Prevent inner components from escaping the border */
+}
+
+.formtemp-bodyform {
+  padding-top: 16px;
+  padding-left: 16px;
+  height:100%;
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 600px) {
+  .formtemp-header-container {
+    flex-direction: column;
+  }
+
+  .logo,
+  .formtemp-variable {
+    border-radius: 0;
+    text-align: left;
+    padding: 10px;
+    margin: 0;
+  }
+
+  .formtemp-variable { 
+    text-align: left;
+  }
+
+     /* .formtemp-page {
+    //border-radius: 0; Remove border radius for smaller screens
+  }   */
+}
+
+/* .formtemp-header-container {
   padding: 10px;
   display: flex;
   align-items: center;
@@ -40,11 +107,11 @@
 .formtemp-bodyform {
   padding-top: 16px;
   padding-left: 16px;
-}
+} */
 
 
 /* Responsive styles for smaller screens */
-@media (max-width: 600px) {
+/* @media (max-width: 600px) {
   .formtemp-header-container {
     flex-direction: column;
   }
@@ -62,8 +129,8 @@
     text-align: left;
   }
 
-  .formtemp-page {
-    /*border-radius: 0;*/
+  /* .formtemp-page {
+    //border-radius: 0;
     border-radius: 50px 50px 50px 50px;
   }
-}
+} */ 

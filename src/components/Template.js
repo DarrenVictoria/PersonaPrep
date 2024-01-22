@@ -145,14 +145,14 @@ const Template = () => {
                 </div>
             </div>
             <div className="formtemp-bodyform">
-                <Grid container spacing={2}>
-                    <Grid xs={4} style={{padding: "25px"}}>
+                <Grid container spacing={2} style={{height: '100%'}}>
+                    <Grid xs={4} style={{padding: "25px", display: "none"}}>
                         {currentPageIndex<=14?(
                         <CustomVerticalStepper ref={cvs_instance} ></CustomVerticalStepper>) : (<CustomSecondVerticalStepper ref={secondStepperRef}></CustomSecondVerticalStepper>)}
                     </Grid>
-                    <Grid xs={8} style={{backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", paddingLeft: "10px", borderLeft: "2px solid black"}}>
+                    <Grid xs={12} style={{backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", paddingLeft: "10px"}}>
                     <form style={{height: '100%', position: 'relative'}}>
-                        <div style={{marginBottom: '75px'}}>
+                        <div style={{marginBottom: '125px', marginRight: '75px'}}>
                             {
                                 (currentPageIndex === 0) && <FacultyDetails></FacultyDetails>
                             }
@@ -227,7 +227,11 @@ const Template = () => {
                             </Grid>
                                 
                             <Grid xs={6}>
-                                <Button style={next} onClick={() => {if(currentPageIndex<=14 && cvs_instance.current){cvs_instance.current.handleNext(); if (currentPageIndex < cvs_instance.current.getPageLength()){setCurrentPageIndex((prev)=>prev+1);}}else if(secondStepperRef.current){secondStepperRef.current.handleNext();setCurrentPageIndex((prev)=>prev+1);}}}>Next Step</Button>
+                                {
+                                    // Change this if you are adding any more pages
+                                    (currentPageIndex < 20) && <Button style={next} onClick={() => {if(currentPageIndex<=14 && cvs_instance.current){cvs_instance.current.handleNext(); if (currentPageIndex < cvs_instance.current.getPageLength()){setCurrentPageIndex((prev)=>prev+1);}}else if(secondStepperRef.current){secondStepperRef.current.handleNext();setCurrentPageIndex((prev)=>prev+1);}}}>Next Step</Button>
+                                }
+                                
                             </Grid>
                         </Grid>
                     </form>
