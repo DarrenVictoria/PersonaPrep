@@ -77,7 +77,7 @@ const RecruitementStatus = () => {
     return (
       <div>
         <h2 style={{ fontFamily: 'Inter', fontWeight: 'bold', fontSize: '24px', margin: '10px 0',marginLeft:'2%' }}>CV Generator</h2>
-      <div style={{ 
+      <div className="cv-container" style={{ 
         display: 'flex',
         backgroundColor: '#D3D3D3',
         border: '2px solid #000',
@@ -85,7 +85,7 @@ const RecruitementStatus = () => {
         padding:'1rem'
       }}>
         {/* Left Section (Replica of CV Generator Box) */}
-        <div style={{ 
+        <div className="left-section" style={{ 
           width: '60%', 
           padding: '20px',
           boxSizing: 'border-box',
@@ -112,10 +112,11 @@ const RecruitementStatus = () => {
         </div>
   
         {/* Right Section (Four Buttons) */}
-        <div style={{ 
+        <div className="right-section" style={{ 
           width: '40%', 
           display: 'flex', 
           flexDirection: 'column',
+          padding:'15px'
         }}>
           <Button className='cv-gen-butt' style={{ flex: 1, margin: '1%', border: '3px solid #000', backgroundColor: '#ffffff',color:'#000000' }} >Export CV <OutboxIcon style={{marginLeft:'3%'}}/> </Button>
           <Button className='cv-gen-butt' style={{ flex: 1, margin: '1%', border: '3px solid #000', backgroundColor: '#ffffff',color:'#000000' }}>Quick View <SlideshowIcon style={{marginLeft:'3%'}}/></Button>
@@ -141,7 +142,7 @@ const RecruitementStatus = () => {
       }}>
         {/* Left Section (Replica of CV Generator Box) */}
         <div style={{ 
-          width: '60%', 
+          width: '100%', 
           padding: '20px',
           boxSizing: 'border-box',
         }}>
@@ -168,7 +169,7 @@ const RecruitementStatus = () => {
   
         
         <div style={{ 
-          width: '40%', 
+          width: '0%', 
           display: 'flex', 
           flexDirection: 'column',
         }}>

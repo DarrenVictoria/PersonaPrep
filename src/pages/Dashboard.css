@@ -38,6 +38,20 @@
       margin-right: 0; /* Remove margin for centered avatar in mobile */
       margin-bottom: 20px; /* Move the margin to the bottom for spacing */
     }
+
+    .cv-container {
+      flex-direction: column; /* Display in a column layout */
+    }
+  
+    .cv-box { 
+      width: 100%;
+      margin-top: 20px; /* Add some space between the components */
+    }
+  
+    .right-section {
+      width: 100%; /* Set full width for mobile */
+      margin-top: 1rem; /* Add some space between the left and right sections */
+    }
   }
 
 
