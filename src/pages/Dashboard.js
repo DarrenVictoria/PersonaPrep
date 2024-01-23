@@ -12,7 +12,7 @@ import SlideshowIcon from '@mui/icons-material/Slideshow';
 import AddLinkIcon from '@mui/icons-material/AddLink';
 import ShareIcon from '@mui/icons-material/Share';
 import TextField from '@mui/material/TextField';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import FileUpload from '../components/FileUpload';
 
 
 
@@ -27,7 +27,7 @@ const UserProfileDiv = () => {
         <div style={{ textAlign: 'left' }}>
           <h1 style={{ fontFamily: 'Inter', fontWeight: 'bold', fontSize: '50px', margin: 0 }}>John Doe</h1>
           <p style={{ fontFamily: 'Inter', fontSize: '20px', margin: '5% 0' }}>BSc.(Hons) in Software Engineering</p>
-          <p style={{ fontFamily: 'Inter', fontSize: '16px', margin: '5% 0' }}>CV Status: <Button variant="contained" style={{ backgroundColor: '#00FF00', color: '#000', fontWeight: 'bold' }}>
+          <p style={{ fontFamily: 'Inter', fontSize: '16px', margin: '8% 0' , }}>CV Status: <Button variant="contained" style={{ backgroundColor: '#00FF00', color: '#000', fontWeight: 'bold' }}>
             Created
           </Button></p>
           
@@ -220,8 +220,8 @@ const RecruitementStatus = () => {
         <h2>Type</h2>
   
         {/* Another React Select Box */}
-        <Select defaultValue="Select Type" style={{ minWidth: '150px', margin: '10px 0',width:'20%' }}>
-          <MenuItem value="" disabled>Type</MenuItem>
+        <Select defaultValue="" style={{ minWidth: '150px', margin: '10px 0',width:'20%' }}>
+          <MenuItem value="">Type</MenuItem>
           <MenuItem value="type1">Bug</MenuItem>
           <MenuItem value="type2">Benefit</MenuItem>
           <MenuItem value="type3">Error</MenuItem>
@@ -229,11 +229,10 @@ const RecruitementStatus = () => {
   
         {/* Drop to Upload Box */}
         <h2>Upload File</h2>
+
+        <FileUpload/>
         
-        <div style={{ border: '2px dashed #000', padding: '20px', width: '40%', borderRadius: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <CloudUploadIcon style={{ fontSize: '3rem', marginBottom: '10px' }} />
-          <p>Drop your file here or click to upload</p>
-        </div>
+        
         
   
         {/* Submit Feedback Button */}
@@ -252,7 +251,7 @@ const Dashboard =() =>{
 
         <div>
             <NavBar/>
-            <h1 style={{marginLeft:'2%',fontSize:'2rem'}}>User Dashboard</h1>
+            <p><span class="fancy">User Dashboard</span></p>
             <UserProfileDiv/>
             <RecruitementStatus/>
             <CVGenerator/>

@@ -31,14 +31,6 @@ export default function NavBar() {
         paddingRight:"0.3rem",
       };
 
-      
-
-
-
-      
-
-    
-
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
