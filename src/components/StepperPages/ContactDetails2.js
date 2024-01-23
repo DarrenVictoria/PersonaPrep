@@ -55,7 +55,7 @@ const ContactDetails_2 = () => {
                 {/* CheckboxListWithTextField component code */}
           <h1 style={{marginBottom:'5px'}}>Social network accounts</h1> <p style={{marginTop:'2px'}}>Indicate the desired communication method</p> 
               
-        <List dense style={{ width: '100%', maxWidth: 700, bgcolor: 'white', height: '389px' }}>
+        <List dense style={{ width: '100%', maxWidth: 700, bgcolor: 'white', height: '375px' }}>
               {[0, 1, 2, 3, 4].map((value, index) => {
                   const labelId = `checkbox-list-secondary-label-${value}`;
                   const sampleNames = ['GitHub', 'Linken In', 'Twitter', 'Stackoverflow','Medium'];
@@ -99,7 +99,7 @@ const ContactDetails_2 = () => {
 
      
       <div className='Contactdetails2-RightColumn'>
-        <Card variant="outlined" sx={{ height:'100%',maxHeight: '450px', width:'100%',maxWidth: '363px',borderRadius:'15px',overflowY:'auto',overflowX:'auto','@media (min-width:768px)':{overflowY:'hidden',},}}className='Contactdetails2-RightColumnCard'>
+        <Card variant="outlined" sx={{ height:'100%',maxHeight: '450px', width:'100%',maxWidth: '363px',borderRadius:'15px',overflowY:'auto',overflowX:'auto','@media (min-width:768px)':{overflowY:'hidden',},'@media (max-width:430px)':{maxHeight:'350px'},}}className='Contactdetails2-RightColumnCard'>
           <CardContent >
             <Typography variant="h5" component="div"sx={{ textAlign: 'center' }}>
               Social Media tips
