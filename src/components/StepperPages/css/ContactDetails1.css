@@ -6,11 +6,11 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     max-width: 100%;
     /* padding-left: 30px; */
     box-sizing: border-box;
-    padding: 0;
+    padding: 10px;
     
   }
   .Contactdetails1LeftColumn-textfield{
@@ -24,26 +24,31 @@
     justify-content: center;
     align-items: center;
     max-width: 100%;
-    padding: 0;
     box-sizing: border-box;
-    
-    /* padding-right: 30px;
-    padding-left: 30px; */
+    padding-right: 30px;
+    padding-left: 30px; 
   }
   
   .Contactdetails1-Maindiv {
     display: flex;
-    /* flex-direction: row; */
-    justify-content: center; /* Center content horizontally */
-    align-items: center; /* Center content vertically */
-    height: 100vh;
-    margin: 0; /* Remove default margin */
-    /*padding: 10px;*/
-    /* display: flex;
-    flex-direction: row; */
-   /* padding-top: 250px;*/
-    /* flex-wrap: wrap;
-    height: 100vh; */
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+  }
+  @media (max-width: 540px) {
+    .Contactdetails1-Maindiv {
+      flex-direction: column; /* Change back to column layout for smaller screens */
+    }
+  
+    .Contactdetails1-LeftColumn,
+    .Contactdetails1-RightColumn {
+      padding: 0 10px; /* Further adjusted padding for smaller screens */
+    }
+  
+    .Contactdetails1-RightColumn {
+      order: 1; /* Move right column to the top on smaller screens */
+      margin-top: 20px; /* Add margin to separate the columns */
+    }
   }
   
   /*.Contactdetails1-RightColumnCard{

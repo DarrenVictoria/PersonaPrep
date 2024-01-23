@@ -32,9 +32,23 @@
     flex-direction: row;
    /* padding-top: 250px;*/
     flex-wrap: wrap;
-    height: 100vh;
+    
   }
+  @media (max-width: 540px) {
+    .Clubs-Maindiv {
+      flex-direction: column; /* Change back to column layout for smaller screens */
+    }
   
+    .Clubs-LeftColumn,
+    .Clubs-RightColumn {
+      padding: 0 10px; /* Further adjusted padding for smaller screens */
+    }
+  
+    .Clubs-RightColumn {
+      order: 1; /* Move right column to the top on smaller screens */
+      margin-top: 20px; /* Add margin to separate the columns */
+    }
+  }
   /*.Clubs-RightColumnCard{
     overflow-y: auto;
     

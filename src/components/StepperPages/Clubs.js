@@ -105,7 +105,7 @@ const Clubs = () => {
 
  
     <div className='Clubs-RightColumn'>
-      <CustomizedHook width={457} height={373} data={dataset} label='Roles Played'/>
+      <CustomizedHook width={457}  height={373} data={dataset} label='Roles Played'/>
     </div>
 </div>  
 
