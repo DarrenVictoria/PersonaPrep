@@ -1,5 +1,5 @@
 import React from 'react';
-import '../ContactDetails1.css';
+import './css/ContactDetails1.css';
 import Card from '@mui/material/Card'; //this is for the card in the right column
 import CardContent from '@mui/material/CardContent'; //this is for the card in the right column
 import Typography from '@mui/material/Typography'; //this is for the card in the right column

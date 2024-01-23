@@ -3,7 +3,7 @@ import { useState } from 'react';
 import TextArea from '../TextArea';
 import EditableChoose from '../EditableSelectOption';
 import Grid from '@mui/material/Grid';
-import '../WorkExperience2.css';
+import './css/WorkExperience2.css';
 
 const WorkExperience_2 = () => {
     // The below code is for the textarea

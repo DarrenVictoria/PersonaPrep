@@ -1,9 +1,9 @@
 import React from 'react'
 import './insightBlog.css'
 import BlogHeader from '../../components/BlogHeader'
-import cvmistake from '../assets/images/illustration-cv-mistakes.png'
-import Footer from '../../components/nav-footer/footer'
-import Navbar from '../../components/nav-footer/Navbar'
+import cvmistake from '../../assets/images/illustration-cv-mistakes.png'
+import Footer from '../../components/footer'
+import Navbar from '../../components/Navbar'
 
 
 export default function Insightblog(){

@@ -1,5 +1,5 @@
 import React from 'react';
-import '../Publication.css';
+import './css/Publication.css';
 import Card from '@mui/material/Card'; //this is for the card in the right column
 import CardContent from '@mui/material/CardContent'; //this is for the card in the right column
 import Typography from '@mui/material/Typography'; //this is for the card in the right column

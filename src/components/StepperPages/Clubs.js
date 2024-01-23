@@ -1,5 +1,5 @@
 import React from 'react';
-import '../Clubs.css';
+import './css/Clubs.css';
 import Typography from '@mui/material/Typography'; //this is for the card in the right column
 import Grid from "@mui/material/Grid";
 import EditableChoose from '../EditableSelectOption';

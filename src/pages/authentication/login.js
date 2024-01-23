@@ -1,7 +1,7 @@
 import './login.css'
-import logoColored from '../assets/logo/Persona Prep Coloured.png'
-import msLogo from '../assets/images/microsoft-logo.png'
-import loginBg from '../assets/images/Login Background.svg'
+import logoColored from '../../assets/logo/Persona Prep Coloured.png'
+import msLogo from '../../assets/images/microsoft-logo.png'
+import loginBg from '../../assets/images/Login Background.svg'
 import { useState } from 'react';
 import { Button } from '@mui/material'
 

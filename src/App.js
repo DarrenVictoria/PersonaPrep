@@ -5,12 +5,12 @@ import { auth, firestore } from './firebase';
 
 
 import Home from './pages/Home'
-import InterviewBank from './pages/InterviewBank'
-import Insightblog from "./pages/insightBlog"
-import Login from "./pages/login"
+import InterviewBank from './pages/interviewbank/InterviewBank'
+import Insightblog from "./pages/insightblog/insightBlog"
+import Login from "./pages/authentication/login"
 import Dashboard from "./pages/Dashboard"
 import NoPage from './pages/NoPage'
-import Template from "./components/Template"
+import Template from "./pages/interviewforms/Template"
 
 
 import "@fontsource/inter"; // Defaults to weight 400

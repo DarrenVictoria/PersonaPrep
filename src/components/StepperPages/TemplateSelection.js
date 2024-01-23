@@ -1,5 +1,5 @@
 import React from 'react';
-import '../TemplateSelection.css';
+import './css/TemplateSelection.css';
 import image5 from '../../assets/images/image5.png'
 
 

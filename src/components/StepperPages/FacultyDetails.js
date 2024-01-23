@@ -1,5 +1,5 @@
 import React from 'react';
-import '../FacultyDetails.css';
+import './css/FacultyDetails.css';
 import Choose from '../FacultySelectOption';
 const FacultyDetails = () => {
     const[selectedFaculty,setSelectedFaculty]=React.useState('');

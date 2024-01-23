@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import TextArea from '../TextArea';
-import '../Summary1_2.css';
+import './css/Summary1_2.css';
 const Summary_2 = () => {
     const[careergoals, setCareerGoals]= useState("");
     const[personalattributes, setPersonalAttributes]=useState("");
