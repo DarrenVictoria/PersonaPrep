@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "personaprep"
-  }
+    "default": "personaprep",
+    "building": "personaprep"
+  },
+  "targets": {},
+  "etags": {}
 }

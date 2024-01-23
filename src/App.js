@@ -1,6 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import {BrowserRouter,Routes,Route, useNavigate } from 'react-router-dom'
+import { auth, firestore } from './firebase';
 
 
 import Home from './pages/Home'
