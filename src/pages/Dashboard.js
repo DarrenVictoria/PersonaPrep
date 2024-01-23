@@ -37,22 +37,36 @@ const UserProfileDiv = () => {
   );
 }
 
+//handle submit of the form below 
+const handleSubmit = (event) => {
+  event.preventDefault();
+  // Add logic for handling form submission here
+};
+
 const RecruitementStatus = () => {
     return (
   <div>
     <h2 style={{ fontFamily: 'Inter', fontWeight: 'bold', fontSize: '24px', margin: '10px 0',marginLeft:'2%' }}>Recruitement Status</h2>
 <div className="recruitment-status-container">
   <h5 style={{ fontFamily: 'Inter', fontWeight: 'bold', fontSize: '24px', margin: '10px 0' }}>Please select your current recruitement status ?</h5>
-  <FormControl style={{width:'20%',marginTop:'1%'}}>
-    <Select defaultValue="Select Status" style={{ minWidth: '150px' }}>
-      <MenuItem value="" disabled>Select Status</MenuItem>
-      <MenuItem value="inProgress">Recruited</MenuItem>
-      <MenuItem value="completed">Recruitment Pending</MenuItem>
-      <MenuItem value="pending">Not Recruited</MenuItem>
-      <MenuItem value="pending">Offer Extended</MenuItem>
-      <MenuItem value="pending">On hold</MenuItem>
-    </Select>
-  </FormControl>
+  <form onSubmit={handleSubmit}>
+      <FormControl style={{ width: '20%', marginTop: '1%' }}>
+        <Select defaultValue="Select Status" style={{ minWidth: '150px' }}>
+          <MenuItem value="" disabled>Select Status</MenuItem>
+          <MenuItem value="inProgress">Recruited</MenuItem>
+          <MenuItem value="completed">Recruitment Pending</MenuItem>
+          <MenuItem value="pending">Not Recruited</MenuItem>
+          <MenuItem value="pending">Offer Extended</MenuItem>
+          <MenuItem value="pending">On hold</MenuItem>
+        </Select>
+      </FormControl>
+      <br />
+      
+
+      <Button type="submit" variant="contained" style={{ backgroundColor: '#000', color: '#fff', marginTop: '1.5rem' }}>
+        Update status
+      </Button>
+    </form>
 </div>
 </div>
 
@@ -68,6 +82,7 @@ const RecruitementStatus = () => {
         backgroundColor: '#D3D3D3',
         border: '2px solid #000',
         margin: '20px',
+        padding:'1rem'
       }}>
         {/* Left Section (Replica of CV Generator Box) */}
         <div style={{ 
@@ -76,7 +91,7 @@ const RecruitementStatus = () => {
           boxSizing: 'border-box',
         }}>
           {/* CV Generator Box Replica */}
-          <div style={{ 
+          <div className="cv-box" style={{ 
             padding: '35px', 
             textAlign: 'left',
             background: `
@@ -89,10 +104,10 @@ const RecruitementStatus = () => {
             alignItems: 'center',
           }}>
             <div>
-              <h1>Edit CV</h1>
+              <h1>Edit your CV</h1>
               <p>Make seamless adjustments, update information, and elevate your CV effortlessly.</p>
             </div>
-            <ArrowForwardIcon style={{ fontSize: '4rem',marginRight:'.8rem' }} />
+            
           </div>
         </div>
   
@@ -102,10 +117,10 @@ const RecruitementStatus = () => {
           display: 'flex', 
           flexDirection: 'column',
         }}>
-          <Button style={{ flex: 1, margin: '1%', border: '3px solid #000', backgroundColor: '#ffffff',color:'#000000'}}>Export CV <OutboxIcon style={{marginLeft:'3%'}}/> </Button>
-          <Button style={{ flex: 1, margin: '1%', border: '3px solid #000', backgroundColor: '#ffffff',color:'#000000' }}>Quick View <SlideshowIcon style={{marginLeft:'3%'}}/></Button>
-          <Button style={{ flex: 1, margin: '1%', border: '3px solid #000', backgroundColor: '#ffffff',color:'#000000' }}>Export Link <AddLinkIcon style={{marginLeft:'3%'}}/></Button>
-          <Button style={{ flex: 1, margin: '1%', border: '3px solid #000', backgroundColor: '#ffffff',color:'#000000' }}>Social Share <ShareIcon style={{marginLeft:'3%'}}/></Button>
+          <Button className='cv-gen-butt' style={{ flex: 1, margin: '1%', border: '3px solid #000', backgroundColor: '#ffffff',color:'#000000' }} >Export CV <OutboxIcon style={{marginLeft:'3%'}}/> </Button>
+          <Button className='cv-gen-butt' style={{ flex: 1, margin: '1%', border: '3px solid #000', backgroundColor: '#ffffff',color:'#000000' }}>Quick View <SlideshowIcon style={{marginLeft:'3%'}}/></Button>
+          <Button className='cv-gen-butt' style={{ flex: 1, margin: '1%', border: '3px solid #000', backgroundColor: '#ffffff',color:'#000000' }}>Export Link <AddLinkIcon style={{marginLeft:'3%'}}/></Button>
+          <Button className='cv-gen-butt'style={{ flex: 1, margin: '1%', border: '3px solid #000', backgroundColor: '#ffffff',color:'#000000' }}>Social Share <ShareIcon style={{marginLeft:'3%'}}/></Button>
         </div>
       </div>
       </div>
@@ -122,6 +137,7 @@ const RecruitementStatus = () => {
         backgroundColor: '#D3D3D3',
         border: '2px solid #000',
         margin: '20px',
+        padding:'1rem'
       }}>
         {/* Left Section (Replica of CV Generator Box) */}
         <div style={{ 
@@ -130,7 +146,7 @@ const RecruitementStatus = () => {
           boxSizing: 'border-box',
         }}>
           {/* CV Generator Box Replica */}
-          <div style={{ 
+          <div className="interview-box" style={{ 
             padding: '35px', 
             textAlign: 'left',
             background: `
@@ -143,10 +159,10 @@ const RecruitementStatus = () => {
             alignItems: 'center',
           }}>
             <div>
-              <h1>AI Interview Simulator</h1>
+              <h1>Take an AI Interview</h1>
               <p>Sharpen your interview skills and boost your confidence with our AI-driven Mock Interview experience.</p>
             </div>
-            <ArrowForwardIcon style={{ fontSize: '4rem',marginRight:'1.8rem' }} />
+            
           </div>
         </div>
   
@@ -236,7 +252,7 @@ const RecruitementStatus = () => {
         
   
         {/* Submit Feedback Button */}
-        <Button variant="contained" style={{ backgroundColor: '#000', color: '#fff', marginTop: '3.5rem' }}>
+        <Button variant="contained" style={{ backgroundColor: '#000', color: '#fff', marginTop: '1.5rem' }}>
           Submit Feedback
         </Button>
       </div>
@@ -251,7 +267,7 @@ const Dashboard =() =>{
 
         <div>
             <NavBar/>
-            <p><span class="fancy">User Dashboard</span></p>
+            <p style={{marginBottom:'2rem'}}><span class="fancy">User Dashboard</span></p>
             <UserProfileDiv/>
             <RecruitementStatus/>
             <CVGenerator/>

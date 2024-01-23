@@ -78,3 +78,18 @@
     }
   }
   
+
+  .cv-box:hover,
+.interview-box:hover {
+  transform: scale(1.02);
+  transition: transform 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+
+
+.cv-gen-butt:hover{
+  transform: scale(1.02);
+  transition: transform 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
