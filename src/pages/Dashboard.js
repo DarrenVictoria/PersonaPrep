@@ -14,6 +14,8 @@ import ShareIcon from '@mui/icons-material/Share';
 import TextField from '@mui/material/TextField';
 import FileUpload from '../components/FileUpload';
 
+import {useForm} from 'react-hook-form';
+
 
 
 const UserProfileDiv = () => {
@@ -37,21 +39,24 @@ const UserProfileDiv = () => {
   );
 }
 
-//handle submit of the form below 
-const handleSubmit = (event) => {
-  event.preventDefault();
-  // Add logic for handling form submission here
-};
+const onSubmit = data => {
+  console.log(data);
+}
+
 
 const RecruitementStatus = () => {
+  const { register, handleSubmit, reset} = useForm();
     return (
   <div>
     <h2 style={{ fontFamily: 'Inter', fontWeight: 'bold', fontSize: '24px', margin: '10px 0',marginLeft:'2%' }}>Recruitement Status</h2>
 <div className="recruitment-status-container">
   <h5 style={{ fontFamily: 'Inter', fontWeight: 'bold', fontSize: '24px', margin: '10px 0' }}>Please select your current recruitement status ?</h5>
-  <form onSubmit={handleSubmit}>
+  
+  
+  
+  <form onSubmit={handleSubmit(onSubmit)}>
       <FormControl style={{ width: '20%', marginTop: '1%' }}>
-        <Select defaultValue="Select Status" style={{ minWidth: '150px' }}>
+        <Select defaultValue="Select Status" style={{ minWidth: '150px' }} >
           <MenuItem value="" disabled>Select Status</MenuItem>
           <MenuItem value="inProgress">Recruited</MenuItem>
           <MenuItem value="completed">Recruitment Pending</MenuItem>
@@ -59,6 +64,8 @@ const RecruitementStatus = () => {
           <MenuItem value="pending">Offer Extended</MenuItem>
           <MenuItem value="pending">On hold</MenuItem>
         </Select>
+
+        <input type="text" name="FirstName" inputRef={register} />
       </FormControl>
       <br />
       
