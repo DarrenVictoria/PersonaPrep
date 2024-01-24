@@ -14,10 +14,15 @@
     padding: 20px;
     margin: 5px;
     margin-top: 5px;
-    box-sizing: border-box !important;
+    box-sizing: border-box;
+    max-height: 610px;
     overflow-y: auto;
     
   }
+  
+  /* .TemplateSelection-TemplateRow{
+     padding-top: 20px; 
+  } */
   
   .TemplateSelection-RightColumn {
     flex: 1;
@@ -50,9 +55,8 @@
   border-collapse: collapse;
 }
 
-.TemplateSelection-TemplateCell {
+.TemplateSelection-TemplateCell-Left,.TemplateSelection-TemplateCell-Right {
   padding: 8px;
-  
   text-align: center;
   vertical-align: middle;
   
@@ -206,15 +210,18 @@
 
   
   /* Below css is to make the template selection form responsive  */
-  @media (max-width: 1000px) {
+  /* @media (max-width: 376px) and (min-width: 339px) {
     .TemplateSelection-Container {
       flex-direction: column;
+      justify-content: center;
+      align-items: center;
       height: auto;
+      padding-right: 0px;
     }
-  
     .TemplateSelection-LeftColumn {
-        width: 100%;
-     
+      width: 220px;
+      max-height: 350px;
+    
     }
   
     .TemplateSelection-RightColumn {
@@ -223,9 +230,201 @@
   
     .TemplateSelection-RightRow {
       flex: none;
+      width: 220px;
     }
     .TemplateSelection-maindiv{
       padding-bottom: 40px;
     }
+  } */
+  @media (max-width:376px){
+    .TemplateSelection-Container {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: auto;
+      padding-right: 0px;
+    }
+    .TemplateSelection-LeftColumn {
+      width: 220px;
+      max-height: 350px;
+    
+    }
+  
+    .TemplateSelection-RightColumn {
+      flex: none;
+    }
+  
+    .TemplateSelection-RightRow {
+      flex: none;
+      width: 220px;
+    }
+    .TemplateSelection-maindiv{
+      padding-bottom: 40px;
+    }
+  
+  }
+  @media (max-width:528px) and (min-width: 377px) {
+    .TemplateSelection-Container {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: auto;
+      padding-right: 0px;
+    }
+    .TemplateSelection-LeftColumn {
+      width: 250px;
+      max-height: 350px;
+    
+    }
+  
+    .TemplateSelection-RightColumn {
+      flex: none;
+    }
+  
+    .TemplateSelection-RightRow {
+      flex: none;
+      width: 250px;
+    }
+    .TemplateSelection-maindiv{
+      padding-bottom: 40px;
+    }
+  
+  }
+
+  @media (max-width: 540px) and (min-width: 529px) {
+    .TemplateSelection-Container {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: auto;
+      padding-right: 0px;
+    }
+    .TemplateSelection-LeftColumn {
+      width: 280px;
+      max-height: 350px;
+    
+    }
+  
+    .TemplateSelection-RightColumn {
+      flex: none;
+    }
+  
+    .TemplateSelection-RightRow {
+      flex: none;
+      width: 280px;
+    }
+    .TemplateSelection-maindiv{
+      padding-bottom: 40px;
+    }
+  
+  
+  }
+  @media (max-width: 739px) and (min-width: 541px) {
+    .TemplateSelection-Container {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: auto;
+      padding-right: 0px;
+    }
+    .TemplateSelection-LeftColumn {
+      width: 280px;
+      max-height: 350px;
+    
+    }
+  
+    .TemplateSelection-RightColumn {
+      flex: none;
+    }
+  
+    .TemplateSelection-RightRow {
+      flex: none;
+      width: 280px;
+    }
+    .TemplateSelection-maindiv{
+      padding-bottom: 40px;
+    }
+  
+  
+  }
+  @media (max-width: 769px) and (min-width: 740px) {
+    .TemplateSelection-Container {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: auto;
+      padding-right: 0px;
+    }
+    .TemplateSelection-LeftColumn {
+      width: 600px;
+      max-height: 400px;
+    
+    }
+  
+    .TemplateSelection-RightColumn {
+      flex: none;
+    }
+  
+    .TemplateSelection-RightRow {
+      flex: none;
+      width: 600px;
+    }
+    .TemplateSelection-maindiv{
+      padding-bottom: 40px;
+    }
+  }
+  @media (max-width: 821px) and (min-width: 780px) {
+    .TemplateSelection-Container {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: auto;
+      padding-right: 0px;
+    }
+    .TemplateSelection-LeftColumn {
+      width: 580px;
+      max-height: 400px;
+    
+    }
+  
+    .TemplateSelection-RightColumn {
+      flex: none;
+    }
+  
+    .TemplateSelection-RightRow {
+      flex: none;
+      width: 580px;
+    }
+    .TemplateSelection-maindiv{
+      padding-bottom: 40px;
+    }
+  }
+  @media (max-width: 1016px) and (min-width: 822px) {
+    .TemplateSelection-Container {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: auto;
+      padding-right: 0px;
+    }
+    .TemplateSelection-LeftColumn {
+      width: 700px;
+      max-height: 400px;
+    
+    }
+  
+    .TemplateSelection-RightColumn {
+      flex: none;
+    }
+  
+    .TemplateSelection-RightRow {
+      flex: none;
+      width: 700px;
+    }
+    .TemplateSelection-maindiv{
+      padding-bottom: 40px;
+    }
+  
+  
   }
   

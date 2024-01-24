@@ -11,44 +11,44 @@ const TemplateSelection = () => {
                 <h2 className="TemplateSelection-TemplateTableHeading">Templates</h2>
                 <table className="TemplateSelection-TemplateTable">
                             <tbody>
-                                <tr>
-                                    <td className="TemplateSelection-TemplateCell">
+                                <tr className="TemplateSelection-TemplateRow">
+                                    <td className="TemplateSelection-TemplateCell-Left">
                                         <div className="TemplateSelection-Templatediv FirstRowTemplatediv1"><img src={image5} alt='image'className='TemplateSelection-image'/></div>
                                     </td>
-                                    <td className="TemplateSelection-TemplateCell">
+                                    <td className="TemplateSelection-TemplateCell-Right">
                                         <div className="TemplateSelection-Templatediv FirstRowTemplatediv2"><img src={image5} alt='image'className='TemplateSelection-image'/></div>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td className="TemplateSelection-TemplateCell">
+                                <tr className="TemplateSelection-TemplateRow">
+                                    <td className="TemplateSelection-TemplateCell-Left">
                                         <div className="TemplateSelection-Templatediv SecondRowTemplatediv1"><img src={image5} alt='image'className='TemplateSelection-image'/></div>
                                     </td>
-                                    <td className="TemplateSelection-TemplateCell">
+                                    <td className="TemplateSelection-TemplateCell-Right">
                                         <div className="TemplateSelection-Templatediv SecondRowTemplatediv2"><img src={image5} alt='image'className='TemplateSelection-image'/></div>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td className="TemplateSelection-TemplateCell">
+                                <tr className="TemplateSelection-TemplateRow">
+                                    <td className="TemplateSelection-TemplateCell-Left">
                                         <div className="TemplateSelection-Templatediv ThirdRowTemplatediv1"><img src={image5} alt='image'className='TemplateSelection-image'/></div>
                                     </td>
-                                    <td className="TemplateSelection-TemplateCell">
+                                    <td className="TemplateSelection-TemplateCell-Right">
                                         <div className="TemplateSelection-Templatediv ThirdRowTemplatediv2"><img src={image5} alt='image'className='TemplateSelection-image'/></div>
                                     </td>
                                 </tr>
                               
-                                <tr>
-                                    <td className="TemplateSelection-TemplateCell">
+                                <tr className="TemplateSelection-TemplateRow">
+                                    <td className="TemplateSelection-TemplateCell-Left">
                                         <div className="TemplateSelection-Templatediv FourthRowTemplatediv1"><img src={image5} alt='image'className='TemplateSelection-image'/></div>
                                     </td>
-                                    <td className="TemplateSelection-TemplateCell">
+                                    <td className="TemplateSelection-TemplateCell-Right">
                                         <div className="TemplateSelection-Templatediv FourthRowTemplatediv2"><img src={image5} alt='image'className='TemplateSelection-image'/></div>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td className="TemplateSelection-TemplateCell">
+                                <tr className="TemplateSelection-TemplateRow">
+                                    <td className="TemplateSelection-TemplateCell-Left">
                                         <div className="TemplateSelection-Templatediv ThirdRowTemplatediv1"><img src={image5} alt='image'className='TemplateSelection-image'/></div>
                                     </td>
-                                    <td className="TemplateSelection-TemplateCell">
+                                    <td className="TemplateSelection-TemplateCell-Right">
                                         <div className="TemplateSelection-Templatediv ThirdRowTemplatediv2"><img src={image5} alt='image'className='TemplateSelection-image'/></div>
                                     </td>
                                 </tr>
