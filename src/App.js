@@ -6,6 +6,7 @@ import { auth, firestore } from './firebase';
 
 import Home from './pages/Home'
 import InterviewBank from './pages/interviewbank/InterviewBank'
+import InterviewDisplay from './pages/interviewbank/interviewDisplay'
 import Insightblog from "./pages/insightblog/insightBlog"
 import Login from "./pages/authentication/login"
 import Dashboard from "./pages/Dashboard"
@@ -33,6 +34,7 @@ function App() {
           <Route path="/startform" element={<Template />}/>
           <Route path="/home" element={<Home />}/>
           <Route path="/interviewbank" element={<InterviewBank />}/>
+          <Route path="/interviewDisplay" element={<InterviewDisplay />}/>
           <Route path="/insightblog" element={<Insightblog />}/>
           <Route path="/login" element={<Login />}/>
           <Route path="/dashboard" element={<Dashboard />}/>

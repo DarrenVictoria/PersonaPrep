@@ -55,7 +55,7 @@
     border-radius: 10px;
 }
 .interviewBank-transcriptCardDetails{
-    color: rgb(63, 63, 172);
+    /* color: rgb(63, 63, 172); */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -81,6 +81,9 @@
     font-size: 30px;
     font-weight: 700;
     padding-bottom: 5px;
+}
+.interviewBank-thumbnail{
+    margin-left: 10px;
 }
 .interviewBank-thumbnail img{
     width: 100%;
