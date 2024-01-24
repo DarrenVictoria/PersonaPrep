@@ -34,7 +34,7 @@
   }
   
   /* Media queries for smaller screens */
-  @media (max-width: 400px) {
+  @media (max-width: 540px) {
     .Certification1-Maindiv {
       flex-direction: column; /* Change back to column layout for smaller screens */
     }
