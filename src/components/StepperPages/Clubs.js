@@ -6,7 +6,8 @@ import EditableChoose from '../EditableSelectOption';
 import FormGroup from "@mui/material/FormGroup";//for the check box
 import FormControlLabel from "@mui/material/FormControlLabel";//for the check box
 import Checkbox from "@mui/material/Checkbox";//for the check box
-import CustomizedHook from '../TextfieldButtonDataDisplay';
+import {CustomizedHook, CustomizedHookLarge} from '../TextfieldButtonDataDisplay';
+
 const Clubs = () => {
     const[month,setMonth]= React.useState("");
     const[year,setYear]= React.useState("");
@@ -88,9 +89,9 @@ const Clubs = () => {
             </FormGroup>
             
           </Grid>
-          <Grid item xs={11}>
+          <Grid item xs={12}>
             
-            <CustomizedHook width={457} height={105} data={dataset} label='Roles Played'/>
+            <CustomizedHook data={dataset} label='Roles Played'/>
           
             
           </Grid>
@@ -105,7 +106,7 @@ const Clubs = () => {
 
  
     <div className='Clubs-RightColumn'>
-      <CustomizedHook width={457}  height={373} data={dataset} label='Roles Played'/>
+      <CustomizedHookLarge width={360}  height={373} data={dataset} label='Roles Played'/>
     </div>
 </div>  
 
