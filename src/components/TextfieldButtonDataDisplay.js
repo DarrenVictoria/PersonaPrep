@@ -80,12 +80,16 @@ const InputWrapperLarge = styled("div")(
   display: flex;
   flex-wrap: wrap;
 
-  @media (max-width: 360px) {
+  @media (max-width:376px){
     width: 200px;
   
   }
+  @media (max-width:528px) and (min-width: 377px) {
+    width: 250px;
+  
+  }
 
-  @media (max-width: 540px) and (min-width: 370px) {
+  @media (max-width: 540px) and (min-width: 529px) {
     width: 340px;
   
   }
@@ -220,7 +224,7 @@ const Listbox = styled("ul")(
   }
 `
 );
-
+//Code for the CustomizedHook already width set to 100% in this.
 function CustomizedHook({ maxWidth, height = 90, data = [], label = "" }) {
   const {
     getRootProps,
@@ -265,7 +269,7 @@ function CustomizedHook({ maxWidth, height = 90, data = [], label = "" }) {
     </Root>
   );
 }
-
+//Code for the CustomizedHookLarge takes input the width and height.
 function CustomizedHookLarge({ width, height = 90, data = [], label = "" }) {
   const {
     getRootProps,
