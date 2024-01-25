@@ -22,6 +22,8 @@ import Projects_2 from '../../components/StepperPages/Projects2.js';
 import Projects_3 from '../../components/StepperPages/Projects3.js';
 import Summary_1 from '../../components/StepperPages/Summary1.js';
 import Summary_2 from '../../components/StepperPages/Summary2.js';
+import SkillTrack_1 from '../../components/StepperPages/SkillTrack1.js';
+import SkillTrack_2 from '../../components/StepperPages/SkillTrack2.js';
 import Certification_1 from '../../components/StepperPages/Certification1.js';
 import Certification_2 from '../../components/StepperPages/Certification2.js';
 import Publications from '../../components/StepperPages/Publications.js';
@@ -96,49 +98,55 @@ const Template = () => {
                         (currentPageIndex === 5) && <p className="formtemp-variablename">Summary Data 2/2</p>
                     }
                     {
-                        (currentPageIndex === 6) && <p className="formtemp-variablename">School Education 1/2</p>
+                        (currentPageIndex === 6) && <p className="formtemp-variablename">SkillTrack_1</p>
                     }
                     {
-                        (currentPageIndex === 7) && <p className="formtemp-variablename">School Education 2/2</p>
+                        (currentPageIndex === 7) && <p className="formtemp-variablename">SkillTrack_2</p>
                     }
                     {
-                        (currentPageIndex === 8) && <p className="formtemp-variablename">University Education</p>
+                        (currentPageIndex === 8) && <p className="formtemp-variablename">School Education 1/2</p>
                     }
                     {
-                        (currentPageIndex === 9) && <p className="formtemp-variablename">Work Experience 1/3</p>
+                        (currentPageIndex === 9) && <p className="formtemp-variablename">School Education 2/2</p>
                     }
                     {
-                        (currentPageIndex === 10) && <p className="formtemp-variablename">Work Experience 2/3</p>
+                        (currentPageIndex === 10) && <p className="formtemp-variablename">University Education</p>
                     }
                     {
-                        (currentPageIndex === 11) && <p className="formtemp-variablename">Work Experience 3/3</p>
+                        (currentPageIndex === 11) && <p className="formtemp-variablename">Work Experience 1/3</p>
                     }
                     {
-                        (currentPageIndex === 12) && <p className="formtemp-variablename">Project Experience 1/3</p>
+                        (currentPageIndex === 12) && <p className="formtemp-variablename">Work Experience 2/3</p>
                     }
                     {
-                        (currentPageIndex === 13) && <p className="formtemp-variablename">Project Experience 2/3</p>
+                        (currentPageIndex === 13) && <p className="formtemp-variablename">Work Experience 3/3</p>
                     }
                     {
-                        (currentPageIndex === 14) && <p className="formtemp-variablename">Project Experience 3/3</p>
+                        (currentPageIndex === 14) && <p className="formtemp-variablename">Project Experience 1/3</p>
                     }
                     {
-                        (currentPageIndex === 15) && <p className="formtemp-variablename">Certification 1/2</p>
+                        (currentPageIndex === 15) && <p className="formtemp-variablename">Project Experience 2/3</p>
                     }
                     {
-                        (currentPageIndex === 16) && <p className="formtemp-variablename">Certification 2/2</p>
+                        (currentPageIndex === 16) && <p className="formtemp-variablename">Project Experience 3/3</p>
                     }
                     {
-                        (currentPageIndex === 17) && <p className="formtemp-variablename">Clubs and Societies</p>
+                        (currentPageIndex === 17) && <p className="formtemp-variablename">Certification 1/2</p>
                     }
                     {
-                        (currentPageIndex === 18) && <p className="formtemp-variablename">Publications</p>
+                        (currentPageIndex === 18) && <p className="formtemp-variablename">Certification 2/2</p>
                     }
                     {
-                        (currentPageIndex === 19) && <p className="formtemp-variablename">Extra Information</p>
+                        (currentPageIndex === 19) && <p className="formtemp-variablename">Clubs and Societies</p>
                     }
                     {
-                        (currentPageIndex === 20) && <p className="formtemp-variablename">Template Selection</p>
+                        (currentPageIndex === 20) && <p className="formtemp-variablename">Publications</p>
+                    }
+                    {
+                        (currentPageIndex === 21) && <p className="formtemp-variablename">Extra Information</p>
+                    }
+                    {
+                        (currentPageIndex === 22) && <p className="formtemp-variablename">Template Selection</p>
                     }
                     
                     
@@ -172,49 +180,55 @@ const Template = () => {
                                 (currentPageIndex === 5) && <Summary_2></Summary_2>
                             }
                             {
-                                (currentPageIndex === 6) && <Education_1></Education_1>
+                                (currentPageIndex === 6) && <SkillTrack_1></SkillTrack_1>
                             }
                             {
-                                (currentPageIndex === 7) && <Education_2></Education_2>
+                                (currentPageIndex === 7) && <SkillTrack_2></SkillTrack_2>
                             }
                             {
-                                (currentPageIndex === 8) && <UniversityEducation></UniversityEducation>
+                                (currentPageIndex === 8) && <Education_1></Education_1>
                             }
                             {
-                                (currentPageIndex === 9) && <WorkExperience_1></WorkExperience_1>
+                                (currentPageIndex === 9) && <Education_2></Education_2>
                             }
                             {
-                                (currentPageIndex === 10) && <WorkExperience_2></WorkExperience_2>
+                                (currentPageIndex === 10) && <UniversityEducation></UniversityEducation>
                             }
                             {
-                                (currentPageIndex === 11) && <WorkExperience_3></WorkExperience_3>
+                                (currentPageIndex === 11) && <WorkExperience_1></WorkExperience_1>
                             }
                             {
-                                (currentPageIndex === 12) && <Projects_1></Projects_1>
+                                (currentPageIndex === 12) && <WorkExperience_2></WorkExperience_2>
                             }
                             {
-                                (currentPageIndex === 13) && <Projects_2></Projects_2>
+                                (currentPageIndex === 13) && <WorkExperience_3></WorkExperience_3>
                             }
                             {
-                                (currentPageIndex === 14) && <Projects_3></Projects_3>
+                                (currentPageIndex === 14) && <Projects_1></Projects_1>
                             }
                             {
-                                (currentPageIndex === 15) && <Certification_1></Certification_1>
+                                (currentPageIndex === 15) && <Projects_2></Projects_2>
                             }
                             {
-                                (currentPageIndex === 16) && <Certification_2></Certification_2>
+                                (currentPageIndex === 16) && <Projects_3></Projects_3>
                             }
                             {
-                                (currentPageIndex === 17) && <Clubs></Clubs>
+                                (currentPageIndex === 17) && <Certification_1></Certification_1>
                             }
                             {
-                                (currentPageIndex === 18) && <Publications></Publications>
+                                (currentPageIndex === 18) && <Certification_2></Certification_2>
                             }
                             {
-                                (currentPageIndex === 19) && <ExtraInformation></ExtraInformation>
+                                (currentPageIndex === 19) && <Clubs></Clubs>
                             }
                             {
-                                (currentPageIndex === 20) && <TemplateSelection></TemplateSelection>
+                                (currentPageIndex === 20) && <Publications></Publications>
+                            }
+                            {
+                                (currentPageIndex === 21) && <ExtraInformation></ExtraInformation>
+                            }
+                            {
+                                (currentPageIndex === 22) && <TemplateSelection></TemplateSelection>
                             }
                             
                             
@@ -229,7 +243,7 @@ const Template = () => {
                             <Grid xs={6}>
                                 {
                                     // Change this if you are adding any more pages
-                                    (currentPageIndex < 20) && <Button style={next} onClick={() => {if(currentPageIndex<=14 && cvs_instance.current){cvs_instance.current.handleNext(); if (currentPageIndex < cvs_instance.current.getPageLength()){setCurrentPageIndex((prev)=>prev+1);}}else if(secondStepperRef.current){secondStepperRef.current.handleNext();setCurrentPageIndex((prev)=>prev+1);}}}>Next Step</Button>
+                                    (currentPageIndex < 22) && <Button style={next} onClick={() => {if(currentPageIndex<=14 && cvs_instance.current){cvs_instance.current.handleNext(); if (currentPageIndex < cvs_instance.current.getPageLength()){setCurrentPageIndex((prev)=>prev+1);}}else if(secondStepperRef.current){secondStepperRef.current.handleNext();setCurrentPageIndex((prev)=>prev+1);}}}>Next Step</Button>
                                 }
                                 
                             </Grid>
