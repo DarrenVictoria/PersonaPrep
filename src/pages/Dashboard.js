@@ -2,19 +2,23 @@ import React,{useState} from 'react';
 import NavBar from '../components/Navbar'
 import "./Dashboard.css"
 import Avatar from '@mui/material/Avatar';
+
 import Button from '@mui/material/Button';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
+import TextField from '@mui/material/TextField';
+
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import OutboxIcon from '@mui/icons-material/Outbox';
 import SlideshowIcon from '@mui/icons-material/Slideshow';
 import AddLinkIcon from '@mui/icons-material/AddLink';
 import ShareIcon from '@mui/icons-material/Share';
-import TextField from '@mui/material/TextField';
 import FileUpload from '../components/FileUpload';
 
-import {useForm} from 'react-hook-form';
+import {useForm, Controller} from 'react-hook-form';
+import { getFirestore, addDoc, collection,updateDoc, doc } from 'firebase/firestore';
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 
 
@@ -39,46 +43,57 @@ const UserProfileDiv = () => {
   );
 }
 
-const onSubmit = data => {
-  console.log(data);
-}
 
+const RecruitmentStatus = () => {
+  const { control, handleSubmit } = useForm();
 
-const RecruitementStatus = () => {
-  const { register, handleSubmit, reset} = useForm();
-    return (
-  <div>
-    <h2 style={{ fontFamily: 'Inter', fontWeight: 'bold', fontSize: '24px', margin: '10px 0',marginLeft:'2%' }}>Recruitement Status</h2>
-<div className="recruitment-status-container">
-  <h5 style={{ fontFamily: 'Inter', fontWeight: 'bold', fontSize: '24px', margin: '10px 0' }}>Please select your current recruitement status ?</h5>
-  
-  
-  
-  <form onSubmit={handleSubmit(onSubmit)}>
-      <FormControl style={{ width: '20%', marginTop: '1%' }}>
-        <Select defaultValue="Select Status" style={{ minWidth: '150px' }} >
-          <MenuItem value="" disabled>Select Status</MenuItem>
-          <MenuItem value="inProgress">Recruited</MenuItem>
-          <MenuItem value="completed">Recruitment Pending</MenuItem>
-          <MenuItem value="pending">Not Recruited</MenuItem>
-          <MenuItem value="pending">Offer Extended</MenuItem>
-          <MenuItem value="pending">On hold</MenuItem>
-        </Select>
+  const onSubmit = async (data) => {
+    try {
+      // Specify the name of your Firestore collection
+      const collectionRef = collection(getFirestore(), 'recruitmentStatus');
+      await addDoc(collectionRef, data);
+      console.log('Recruitment Status Data successfully added to Firestore');
+    } catch (error) {
+      console.error('Error adding Recruitment Status data to Firestore:', error);
+    }
+  };
 
-        <input type="text" name="FirstName" inputRef={register} />
-      </FormControl>
-      <br />
-      
+  return (
+    <div>
+      <h2 style={{ fontFamily: 'Inter', fontWeight: 'bold', fontSize: '24px', margin: '10px 0', marginLeft: '2%' }}>Recruitment Status</h2>
+      <div className="recruitment-status-container">
+        <h5 style={{ fontFamily: 'Inter', fontWeight: 'bold', fontSize: '24px', margin: '10px 0' }}>Please select your current recruitment status ?</h5>
 
-      <Button type="submit" variant="contained" style={{ backgroundColor: '#000', color: '#fff', marginTop: '1.5rem' }}>
-        Update status
-      </Button>
-    </form>
-</div>
-</div>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <FormControl style={{ width: '20%', marginTop: '1%' }}>
+            <Controller
+              name="Recruitment-Status"
+              control={control}
+              defaultValue=" "
+              render={({ field }) => (
+                <Select {...field} style={{ minWidth: '150px' }}>
+                  <MenuItem value=" " disabled>
+                    Select Status
+                  </MenuItem>
+                  <MenuItem value="recruited">Recruited</MenuItem>
+                  <MenuItem value="pending">Recruitment Pending</MenuItem>
+                  <MenuItem value="not-recruited">Not Recruited</MenuItem>
+                  <MenuItem value="offer-extended">Offer Extended</MenuItem>
+                  <MenuItem value="on-hold">On hold</MenuItem>
+                </Select>
+              )}
+            />
+          </FormControl>
+          <br />
 
-    );
-  }
+          <Button type="submit" variant="contained" style={{ backgroundColor: '#000', color: '#fff', marginTop: '1.5rem' }}>
+            Update status
+          </Button>
+        </form>
+      </div>
+    </div>
+  );
+};
 
   const CVGenerator = () => {
     return (
@@ -188,87 +203,139 @@ const RecruitementStatus = () => {
   }
 
   const Feedback = () => {
-      const [description, setDescription] = useState('');
+          const { control, handleSubmit } = useForm();
+        const firestore = getFirestore();
 
-      const handleDescriptionChange = (event) => {
-        setDescription(event.target.value);
-  };
+        const [uploadedFile, setUploadedFile] = useState([]);
 
+        const onSubmit = async (data) => {
+          try {
+            // If there is an uploaded file, get the file path from the state
+            const filePaths = uploadedFile.map((file) => file.downloadURL);
+
+            // Merge the file path with the rest of the form data
+            const formData = { ...data, files: filePaths };
+
+            const collectionRef = collection(firestore, 'feedback');
+            const docRef = await addDoc(collectionRef, formData);
+
+            console.log('Data successfully added to Firestore', formData);
+          } catch (error) {
+            console.error('Error adding data to Firestore:', error);
+          }
+        };
+
+        const handleFileUpload = (fileInfo) => {
+          // Handle the file information (e.g., store it in state or use it as needed)
+          setUploadedFile((prevFiles) => [...prevFiles, fileInfo]);
+        };
+  
     return (
       <div>
-        <h2 style={{ fontFamily: 'Inter', fontWeight: 'bold', fontSize: '24px', margin: '10px 0',marginLeft:'2%' }}>Feedback</h2>
-      
-      <div style={{ 
-        backgroundColor: '#D3D3D3', // Gray color
-        border: '2px solid #000', // Black border
-        padding: '20px',
-        textAlign: 'left', 
-        margin: '20px',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-start' 
-      }}>
-        
-        <h2>Which component did you spot the issue in ?</h2>
+        <h2 style={{ fontFamily: 'Inter', fontWeight: 'bold', fontSize: '24px', margin: '10px 0', marginLeft: '2%' }}>Feedback</h2>
+  
+        <div style={{
+          backgroundColor: '#D3D3D3',
+          border: '2px solid #000',
+          padding: '20px',
+          textAlign: 'left',
+          margin: '20px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-start'
+        }}>
+  
+          <h2>Which component did you spot the issue in ?</h2>
+  
+          <form onSubmit={handleSubmit(onSubmit)}>
+  
+            <FormControl style={{ width: '20%', marginTop: '1%' }}>
+              <Controller
+                name="place"
+                control={control}
+                defaultValue=" "
+                render={({ field }) => (
+                  <Select {...field} style={{ minWidth: '150px' }}>
+                    <MenuItem value=" " disabled>
+                      Place
+                    </MenuItem>
+                    <MenuItem value="cv-gen">CV Generator</MenuItem>
+                    <MenuItem value="mock-interview">Mock Interview Simulator</MenuItem>
+                    <MenuItem value="other-interface">Other interface</MenuItem>
+                  </Select>
+                )}
+              />
+            </FormControl>
+  
+            <h2>Description</h2>
+            <FormControl style={{ width: '100%', marginTop: '1%' }}>
+              <Controller
+                name="description"
+                control={control}
+                defaultValue=""
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    id="outlined-multiline-flexible"
+                    label="Description"
+                    multiline
+                    rows={4}
+                    variant="outlined"
+                    style={{
+                      width: '100%',
+                      '& .MuiOutlinedInput-notchedOutline': {
+                        borderColor: '#000000',
+                      },
+                      '&:hover .MuiOutlinedInput-notchedOutline': {
+                        borderColor: '#000000',
+                      },
+                    }}
+                  />
+                )}
+              />
+            </FormControl>
+  
+            <h2>Type</h2>
+  
+            <FormControl style={{ width: '20%', marginTop: '1%' }}>
+              <Controller
+                name="type"
+                control={control}
+                defaultValue=" "
+                render={({ field }) => (
+                  <Select {...field} style={{ minWidth: '150px' }}>
+                    <MenuItem value=" " disabled>Type</MenuItem>
+                    <MenuItem value="bug">Bug</MenuItem>
+                    <MenuItem value="benefit">Benefit</MenuItem>
+                    <MenuItem value="error">Error</MenuItem>
+                  </Select>
+                )}
+              />
+            </FormControl>
+  
+            <h2>Upload File</h2>
+  
+            <FormControl>
+              <Controller
+                name="file"
+                control={control}
+                defaultValue=""
+                render={({ field }) => <FileUpload {...field} onFileUpload={handleFileUpload} />}
+              />
+            </FormControl>
 
-        <Select defaultValue="Select Option" style={{ minWidth: '150px', margin: '10px 0', width:'20%' }}>
-          <MenuItem value="" disabled>Place</MenuItem>
-          <MenuItem value="option1">CV Generator</MenuItem>
-          <MenuItem value="option2">Mock Interview Simulator</MenuItem>
-          <MenuItem value="option3">Other interface</MenuItem>
-        </Select>
   
-        <h2>Description</h2>
-        {/* Textarea for Description */}
-        <TextField
-          id="outlined-multiline-flexible"
-          label="Description"
-          multiline
-          rows={4}
-          value={description}
-          onChange={handleDescriptionChange}
-          variant="outlined"
-          style={{
-            width: '100%',
-            '& .MuiOutlinedInput-notchedOutline': {
-              borderColor: '#000000', // Change this to the desired color
-            },
-            '&:hover .MuiOutlinedInput-notchedOutline': {
-              borderColor: '#000000', // Change this to the desired color on hover
-            },
-          }}
-        />
-      
+            <br />
   
-        {/* Title for Type */}
-        <h2>Type</h2>
-  
-        {/* Another React Select Box */}
-        <Select defaultValue="" style={{ minWidth: '150px', margin: '10px 0',width:'20%' }}>
-          <MenuItem value="">Type</MenuItem>
-          <MenuItem value="type1">Bug</MenuItem>
-          <MenuItem value="type2">Benefit</MenuItem>
-          <MenuItem value="type3">Error</MenuItem>
-        </Select>
-  
-        {/* Drop to Upload Box */}
-        <h2>Upload File</h2>
-
-        <FileUpload/>
-        
-        
-        
-  
-        {/* Submit Feedback Button */}
-        <Button variant="contained" style={{ backgroundColor: '#000', color: '#fff', marginTop: '1.5rem' }}>
-          Submit Feedback
-        </Button>
-      </div>
+            <Button type="submit" variant="contained" style={{ backgroundColor: '#000', color: '#fff', marginTop: '1.5rem' }}>
+              Submit Feedback
+            </Button>
+          </form>
+        </div>
       </div>
     );
-  }
+  };
   
-
 
 const Dashboard =() =>{
     return(
@@ -277,7 +344,7 @@ const Dashboard =() =>{
             <NavBar/>
             <p style={{marginBottom:'2rem'}}><span class="fancy">User Dashboard</span></p>
             <UserProfileDiv/>
-            <RecruitementStatus/>
+            <RecruitmentStatus/>
             <CVGenerator/>
             <AIInterview/>
             <Feedback/>

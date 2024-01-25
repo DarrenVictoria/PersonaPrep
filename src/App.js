@@ -12,6 +12,7 @@ import Login from "./pages/authentication/login"
 import Dashboard from "./pages/Dashboard"
 import NoPage from './pages/NoPage'
 import Template from "./pages/interviewforms/Template"
+import FormPage from "./pages/Formpage"
 
 
 import "@fontsource/inter"; // Defaults to weight 400
@@ -38,6 +39,7 @@ function App() {
           <Route path="/insightblog" element={<Insightblog />}/>
           <Route path="/login" element={<Login />}/>
           <Route path="/dashboard" element={<Dashboard />}/>
+          <Route path="/formpage" element={<FormPage />}/>
           <Route path="*" element={<NoPage />}/>
         </Routes>
     </BrowserRouter>

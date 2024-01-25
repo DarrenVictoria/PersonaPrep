@@ -14,7 +14,7 @@
     "@testing-library/user-event": "^13.5.0",
     "crypto-browserify": "^3.12.0",
     "dotenv": "^16.3.1",
-    "firebase": "^10.7.1",
+    "firebase": "^10.7.2",
     "flowbite-react": "^0.6.4",
     "mdb-react-ui-kit": "^7.0.0",
     "os-browserify": "^0.3.0",
@@ -32,7 +32,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "stop": "echo 'Stopping the application'"
+    "stop": "npm run stop:all",
+    "stop:all": "kill-port --port 3000 && kill-port --port 3001"
   },
   "eslintConfig": {
     "extends": [
@@ -53,6 +54,7 @@
     ]
   },
   "devDependencies": {
+    "kill-port": "^2.0.1",
     "react-scripts": "^5.0.1"
   }
 }
