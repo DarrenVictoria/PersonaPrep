@@ -39,7 +39,7 @@ export default function EditableChoose({ options, onSelect, disabledOptions }) {
   return (
     <div>
       {/* Set the width to 100% to make it flexible within the grid */}
-      <FormControl sx={{ m: 1, width: "100%", mt: 3 }}>
+      <FormControl sx={{ width: "100%", mt: 3 }}>
         <Select
           value={personName}
           onChange={handleChange}
