@@ -8,7 +8,7 @@ export default function CustomMultilineTextFields({ inputHeight }) {
       component="form"
       sx={{
         "& .MuiTextField-root": {
-          m: 1,
+          // m: 1,
           width: "100%",
           borderRadius: "25px",
           boxSizing: "border-box",
