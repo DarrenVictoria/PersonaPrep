@@ -98,10 +98,10 @@ const Template = () => {
                         (currentPageIndex === 5) && <p className="formtemp-variablename">Summary Data 2/2</p>
                     }
                     {
-                        (currentPageIndex === 6) && <p className="formtemp-variablename">SkillTrack_1</p>
+                        (currentPageIndex === 6) && <p className="formtemp-variablename">SkillTrack 1/2</p>
                     }
                     {
-                        (currentPageIndex === 7) && <p className="formtemp-variablename">SkillTrack_2</p>
+                        (currentPageIndex === 7) && <p className="formtemp-variablename">SkillTrack 2/2</p>
                     }
                     {
                         (currentPageIndex === 8) && <p className="formtemp-variablename">School Education 1/2</p>

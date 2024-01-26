@@ -26,7 +26,7 @@ function getStyles(name, personName, theme) {
   };
 }
 
-export default function Choose({options, onSelect, disabledOptions }) {
+export default function Choose({options, onSelect, disabledOptions, isRequired }) {
   const theme = useTheme();
   const [personName, setPersonName] = React.useState(options.length> 0?options[0]:'');
 
@@ -39,7 +39,9 @@ export default function Choose({options, onSelect, disabledOptions }) {
   return (
     <div>
        {/*The sx in the FormControl is to adjust the width of the selection box*/}
-      <FormControl sx={{ m: 1, width: 'auto', mt: 3,'@media(min-width:600px)':{width: 300},'@media(min-width:500px)':{width: 300},'@media(min-width:400px)':{width: 300},'@media(max-width:468px)':{width: 250}}}>
+      <FormControl
+        required={isRequired}
+        sx={{ m: 1, width: 'auto', mt: 3,'@media(min-width:600px)':{width: 300},'@media(min-width:500px)':{width: 300},'@media(min-width:400px)':{width: 300},'@media(max-width:468px)':{width: 250}}}>
         <Select
           value={personName}
           onChange={handleChange}

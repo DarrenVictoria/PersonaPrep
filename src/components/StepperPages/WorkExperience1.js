@@ -10,11 +10,13 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
-import cphone from '../../assets/images/iconcphone.svg';
 import EditableChoose from '../EditableSelectOption';
 import FormGroup from "@mui/material/FormGroup";//for the check box
 import FormControlLabel from "@mui/material/FormControlLabel";//for the check box
 import Checkbox from "@mui/material/Checkbox";//for the check box
+import ccheck_box from '../../assets/images/iconccheck_box.svg';
+import cacute from '../../assets/images/iconcacute.svg';
+import ccalander from '../../assets/images/iconccalander.svg';
 import { useState } from 'react';
 
 const WorkExperience = () => {
@@ -27,29 +29,30 @@ const WorkExperience = () => {
         <div className="WorkExperience1-LeftColumn">
             <Grid container>
                 <Grid item xs={12} mb={3}>
-                    <Typography mb={1}><span style={{color: 'red'}}>*</span>Job Title</Typography>
+                    <Typography mb={1}><span style={{color: 'red'}}>*</span> Job Title</Typography>
                     <TextField type="text" variant="outlined" fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Full Stack Developer'/>
                 </Grid>
                 <Grid item xs={12} mb={3}>
-                    <Typography mb={1}><span style={{color: 'red'}}>*</span>Company</Typography>
+                    <Typography mb={1}><span style={{color: 'red'}}>*</span> Company</Typography>
                     <TextField type="text" variant="outlined" fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Surge Global Pvt.'/>
                 </Grid>
                 <Grid item xs={6} mb={3} pr={1}>
-                    <Typography mb={1}><span style={{color: 'red'}}>*</span>City</Typography>
+                    <Typography mb={1}><span style={{color: 'red'}}>*</span> City</Typography>
                     <TextField type="text" variant="outlined" fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Colombo'/>
                 </Grid>
                 <Grid item xs={6} mb={3} pl={1}>
-                    <Typography mb={1}><span style={{color: 'red'}}>*</span>Country</Typography>
+                    <Typography mb={1}><span style={{color: 'red'}}>*</span> Postal code</Typography>
                     <TextField type="text" variant="outlined" fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='00300'/>
                 </Grid>
                 <Grid item xs={12} mb={-2}>
-                    <Typography><span style={{color: 'red'}}>*</span>Start Date</Typography>
+                    <Typography><span style={{color: 'red'}}>*</span> Start Date</Typography>
                 </Grid>
                 <Grid item xs={6} pr={1}>
                     <EditableChoose
                         options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
                         onSelect={setStartMonth}
                         disabledOptions={[]}
+                        isRequired={true}
                     />
                 </Grid>
                 <Grid item xs={6} mb={3} pl={1}>
@@ -57,26 +60,29 @@ const WorkExperience = () => {
                         options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
                         onSelect={setStartYear}
                         disabledOptions={["2024"]}
+                        isRequired={true}
                     />
                 </Grid>
                 <Grid item xs={12} mb={-2}>
-                    <Typography><span style={{color: 'red'}}>*</span>End Date</Typography>
+                    <Typography><span style={{color: 'red'}}>*</span> End Date</Typography>
                 </Grid>
                 <Grid item xs={6} pr={1}>
                     <EditableChoose
                         options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
                         onSelect={setEndMonth}
                         disabledOptions={[]}
+                        isRequired={true}
                     />
                 </Grid>
-                <Grid item xs={6} mb={3} pl={1}>
+                <Grid item xs={6} mb={2} pl={1}>
                     <EditableChoose
                         options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
                         onSelect={setEndYear}
                         disabledOptions={["2024"]}
+                        isRequired={true}
                     />
                 </Grid>
-                <Grid item xs={12} mb={3} pl={2}>
+                <Grid item xs={12} pl={2}>
                     <FormGroup>
                     <FormControlLabel control={<Checkbox />} label="Currently Work here" /> {/*if need to make this requires put required before control and if need to make it already checked put check inside the control next to the Checkbx*/}
                     </FormGroup>
@@ -86,14 +92,14 @@ const WorkExperience = () => {
         </div>
 
         <div className="WorkExperience1-RightColumn">
-            <Card variant="outlined" sx={{ height:'100%',maxHeight: '400px', width:'100%',maxWidth: '363px',borderRadius:'15px',overflowY:'auto',overflowX:'auto','@media (min-width:768px)':{overflowY:'hidden',},}}>
+            <Card variant="outlined" sx={{ height:'100%',maxHeight: '400px', width:'100%',maxWidth: '363px',borderRadius:'15px',overflowY:'auto',overflowX:'auto','@media (min-width:820px)':{overflowY:'hidden'},'@media (max-width:430px) and (min-width:412px)':{height:'350px',width:'290px'},'@media (min-width:360px) and (max-width:390px)':{height:'350px',width:'230px'}}}>
                 <CardContent >
                     <Typography variant="h5" component="div" sx={{ textAlign: 'center', fontWeight: 'bold' }}>Work Experience tips</Typography>
                     <List>
                         <ListItem >
                             <ListItemAvatar>
                                 <Avatar sx={{borderRadius: '12px'}}>
-                                    <img src={cphone} alt="Custom Icon" style={{ width: '27px', height: '31px' }}/>
+                                    <img src={cacute} alt="Custom Icon" style={{ width: 'var(--40,40px)', height: '35.666px' }}/>
                                 </Avatar>
                             </ListItemAvatar>
                             <ListItemText>
@@ -106,7 +112,7 @@ const WorkExperience = () => {
                             <ListItemAvatar>
                                 {/* <Avatar sx={{borderRadius: '12px', display: 'flex', justifyContent: 'center', alignItems: 'center'  }}> */}
                                 <Avatar sx={{borderRadius: '12px', padding: '5px'}}>
-                                    <img src={cphone} alt="Custom Icon" style={{ width: 'var(--40,40px)', height: '35.666px' }} />
+                                    <img src={ccheck_box} alt="Custom Icon" style={{ width: 'var(--40,40px)', height: '35.666px' }} />
                                 </Avatar>
                             </ListItemAvatar>
                             <ListItemText>
@@ -118,7 +124,7 @@ const WorkExperience = () => {
                         <ListItem >
                             <ListItemAvatar>
                                 <Avatar sx={{borderRadius: '12px', display: 'flex', justifyContent: 'center', alignItems: 'center'  }}>
-                                    <img src={cphone} alt="Custom Icon" style={{ width: '41px', height: '39px' ,}} />
+                                    <img src={ccalander} alt="Custom Icon" style={{ width: 'var(--40,40px)', height: '35.666px' }} />
                                 </Avatar>
                             </ListItemAvatar>
                             <ListItemText>

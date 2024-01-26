@@ -6,11 +6,11 @@ const SkillTrack_1 = () => {
     const dataset = [{data:"c#"},{data:"Java"}];
     return(
         <div>
-            <CustomizedHook height={100} data={dataset} label='Roles Played'/>
-            <Typography mb={1} mt={1}><span style={{color: 'red'}}>*</span>Have you led any projects or initiatives that had a notable impact?</Typography>
-            <CustomMultilineTextFields height='100px' />
-            <Typography mb={1} mt={1}><span style={{color: 'red'}}>*</span>Have you led any projects or initiatives that had a notable impact?</Typography>
-            <CustomMultilineTextFields height='100px' />
+            <CustomizedHook height={100} maxWidth={1300} data={dataset} label={<Typography mb={1}><span style={{color: 'red'}}>*</span> What would you say are your core competencies or key skills? Min 3 / Max 5</Typography>}/>
+            <Typography mb={1} mt={1}><span style={{color: 'red'}}>*</span> If applicable, how would you describe your leadership style?</Typography>
+            <CustomMultilineTextFields inputHeight={100} maxWidth={1300} isRequired={true}/>
+            <Typography mb={1} mt={1}><span style={{color: 'red'}}>*</span> If applicable can you share examples of how you've led teams or projects?</Typography>
+            <CustomMultilineTextFields inputHeight={100} maxWidth={1300} isRequired={true}/>
         </div>
     )
 

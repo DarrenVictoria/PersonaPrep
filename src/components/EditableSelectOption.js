@@ -26,7 +26,7 @@ function getStyles(name, personName, theme) {
   };
 }
 
-export default function EditableChoose({ options, onSelect, disabledOptions }) {
+export default function EditableChoose({ options, onSelect, disabledOptions, maxWidth, isRequired }) {
   const theme = useTheme();
   const [personName, setPersonName] = React.useState(options.length > 0 ? options[0] : '');
 
@@ -39,7 +39,9 @@ export default function EditableChoose({ options, onSelect, disabledOptions }) {
   return (
     <div>
       {/* Set the width to 100% to make it flexible within the grid */}
-      <FormControl sx={{ m: 1, width: "100%", mt: 3 }}>
+      <FormControl 
+        required={isRequired}
+        sx={{ width: "100%",maxWidth:maxWidth, mt: 3 }}>
         <Select
           value={personName}
           onChange={handleChange}
