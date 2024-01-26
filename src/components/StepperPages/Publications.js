@@ -30,18 +30,18 @@ const Publications = () => {
             <Grid container spacing={2} >
               <Grid item xs={12}>
                 
-                  <Typography>*Publication Title</Typography>
+              <Typography ><span style={{color: 'red'}}>*</span> Publication Title</Typography>
                   <TextField type="text" variant="outlined" fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}} />
                 
               </Grid>
               <Grid item xs={12}>
                 
-                  <Typography>*Publication / Publisher</Typography>
+              <Typography ><span style={{color: 'red'}}>*</span> Publication / Publisher</Typography>
                   <TextField type="text" variant="outlined" fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
                 
               </Grid>
               <Grid item xs={12} style={{ marginBottom: '-40px' }}>
-              <Typography>*Publication date</Typography>
+              <Typography ><span style={{color: 'red'}}>*</span> Publication date</Typography>
               </Grid>
               <Grid item xs={6}>
                 
@@ -49,6 +49,7 @@ const Publications = () => {
               options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
               onSelect={setMonth}
               disabledOptions={[]}
+              isRequired={true}
               //the below width did not work have to check
              
              />
@@ -59,6 +60,7 @@ const Publications = () => {
               options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
               onSelect={setYear}
               disabledOptions={["2024"]}
+              isRequired={true}
               //the below width did not work have to check
              
              />
@@ -66,13 +68,13 @@ const Publications = () => {
               </Grid>
               <Grid item xs={12}>
                 
-                  <Typography>*Publication URL</Typography>
+              <Typography ><span style={{color: 'red'}}>*</span> Publication URL</Typography>
                   <TextField type="text" variant="outlined" fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
                 
               </Grid>
               <Grid item xs={12}>
                 
-                  <Typography>*Project Description</Typography>
+              <Typography ><span style={{color: 'red'}}>*</span> Project Description</Typography>
                   <CustomMultilineTextFields  height="115px" required />
                 
               </Grid>

@@ -17,12 +17,12 @@ const Summary_2 = () => {
     return(
         <div className='summarymaindiv'>
             
-                <Typography mb={1}><span style={{color: 'red'}}>*</span>Are there specific milestones or promotions that stand out?</Typography>
-                <CustomMultilineTextFields height='100px' />
-                <Typography mb={1} mt={1}><span style={{color: 'red'}}>*</span>Where do you see your career heading in the next few years?</Typography>
-                <CustomMultilineTextFields height='100px' />
-                <Typography mb={1} mt={1}><span style={{color: 'red'}}>*</span>What sets you apart from others in your field?</Typography>
-                <CustomMultilineTextFields height='100px' />
+                <Typography mb={1}><span style={{color: 'red'}}>*</span> Are there specific milestones or promotions that stand out?</Typography>
+                <CustomMultilineTextFields inputHeight={100} maxWidth={1300} isRequired={true}/>
+                <Typography mb={1} mt={1}><span style={{color: 'red'}}>*</span> Where do you see your career heading in the next few years?</Typography>
+                <CustomMultilineTextFields inputHeight={100} maxWidth={1300} isRequired={true}/>
+                <Typography mb={1} mt={1}><span style={{color: 'red'}}>*</span> What sets you apart from others in your field?</Typography>
+                <CustomMultilineTextFields inputHeight={100} maxWidth={1300} isRequired={true}/>
             
                {/* <div className='summarysubdiv'>The career goals you seek to achieve ?</div>
                 <TextArea 

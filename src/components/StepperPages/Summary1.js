@@ -16,12 +16,12 @@ const Summary_1 = () => {
     // }
     return(
         <div className='summarymaindiv'>
-                <Typography mb={1}><span style={{color: 'red'}}>*</span>In which key industries have you worked in, and what were your key roles in each?</Typography>
-                <CustomMultilineTextFields height='100px' /> 
-                <Typography mb={1} mt={1}><span style={{color: 'red'}}>*</span>Have you led any projects or initiatives that had a notable impact ?</Typography>
-                <CustomMultilineTextFields height='100px' />
-                <Typography mb={1} mt={1}><span style={{color: 'red'}}>*</span>Any highlights in your career so far you would like to describe about ?</Typography>
-                <CustomMultilineTextFields height='100px' />
+                <Typography mb={1}><span style={{color: 'red'}}>*</span> In which key industries have you worked in, and what were your key roles in each?</Typography>
+                <CustomMultilineTextFields inputHeight={100} maxWidth={1300} isRequired={true}/> 
+                <Typography mb={1} mt={1}><span style={{color: 'red'}}>*</span> Have you led any projects or initiatives that had a notable impact?</Typography>
+                <CustomMultilineTextFields inputHeight={100} maxWidth={1300} isRequired={true}/>
+                <Typography mb={1} mt={1}><span style={{color: 'red'}}>*</span> Any highlights in your career so far you would like to describe about?</Typography>
+                <CustomMultilineTextFields inputHeight={100} maxWidth={1300} isRequired={true}/>
             
                {/* <div className='summarysubdiv'>I am currently working on (projects) ?</div>
                 <TextArea 

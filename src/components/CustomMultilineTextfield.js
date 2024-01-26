@@ -2,7 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 
-export default function CustomMultilineTextFields({ inputHeight }) {
+export default function CustomMultilineTextFields({ inputHeight, maxWidth, isRequired}) {
   return (
     <Box
       component="form"
@@ -10,6 +10,7 @@ export default function CustomMultilineTextFields({ inputHeight }) {
         "& .MuiTextField-root": {
           // m: 1,
           width: "100%",
+          maxWidth: maxWidth,
           borderRadius: "25px",
           boxSizing: "border-box",
           backgroundColor: "white",
@@ -27,7 +28,7 @@ export default function CustomMultilineTextFields({ inputHeight }) {
           
           multiline
           rows={4}
-          
+          required={isRequired}
           inputProps={{
             style: {
               height: inputHeight,
