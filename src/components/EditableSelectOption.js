@@ -39,9 +39,13 @@ export default function EditableChoose({ options, onSelect, disabledOptions, max
   return (
     <div>
       {/* Set the width to 100% to make it flexible within the grid */}
+
       <FormControl 
         required={isRequired}
         sx={{ width: "100%",maxWidth:maxWidth, mt: 3 }}>
+
+      
+
         <Select
           value={personName}
           onChange={handleChange}

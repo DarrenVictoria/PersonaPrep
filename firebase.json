@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "build",
+    "public": "public",
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -12,5 +12,24 @@
         "destination": "/index.html"
       }
     ]
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default",
+      "ignore": [
+        "venv",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log"
+      ]
+    }
+  ],
+  "storage": {
+    "rules": "storage.rules"
   }
 }
