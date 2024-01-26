@@ -16,6 +16,7 @@ import cphone from '../../assets/images/iconcphone.svg';
 
 const PersonalInfo = () => {
     const job_roles = [{data:"role1"}, {data:"role2"}, {data:"role3"}];
+    
     return(
         <div className="personalInfo-main">
             <div className="personalInfo-leftCol">

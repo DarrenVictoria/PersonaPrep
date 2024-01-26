@@ -3,17 +3,6 @@ import Grid from "@mui/material/Grid";
 import Typography from '@mui/material/Typography';
 import TextField from "@mui/material/TextField";
 import FileUpload from '../FileUpload';
-import TestAutoComplete from '../TestAutoComplete';
-import { CustomizedHook } from '../TextfieldButtonDataDisplay';
-import Card from '@mui/material/Card'; 
-import CardContent from '@mui/material/CardContent'; 
-import Avatar from '@mui/material/Avatar';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import cphone from '../../assets/images/iconcphone.svg';
-import CustomMultilineTextFields from '../CustomMultilineTextfield';
 import EditableChoose from '../EditableSelectOption';
 import { useState } from 'react';
 
@@ -24,6 +13,7 @@ const UniversityEducation = () => {
     const [startYear, setStartYear] = useState('');
     const [endMonth, setEndMonth] = useState('');
     const [endYear, setEndYear] = useState('');
+    
     return(
         <div className="personalInfo-main">
             <div className="personalInfo-leftCol">
