@@ -1,64 +1,109 @@
-import logo from '../assets/logo/Persona Prep Dark.png';
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Avatar from "@mui/material/Avatar";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Tooltip from "@mui/material/Tooltip";
-import PersonAdd from "@mui/icons-material/PersonAdd";
-import Settings from "@mui/icons-material/Settings";
-import Logout from "@mui/icons-material/Logout";
-import { Rowing } from "@mui/icons-material";
-import { autocompleteClasses } from "@mui/material";
+import React, { useState, useEffect } from 'react';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { auth } from '../firebase';
+import Avatar from '@mui/material/Avatar';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
+import LoginIcon from '@mui/icons-material/Login';
+import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
+import Logout from '@mui/icons-material/Logout';
+import Logo from "../assets/logo/Persona Prep Dark.png"
+import {useNavigate,Link} from 'react-router-dom';
 
-export default function NavBar() {
-    const logost = {
-      width: "90px",
-      marginRight: "auto",
-      padding:"0.3%",
-    };
+
+
+const redirectToLogin = () => {
+  window.location.href = '/login';
+};
+
+const redirectToDashboard = () => {
+  window.location.href = '/dashboard';
+};
+
+
+
+const NavBar = () => {
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
   
-    const navbarstyle = {
-      backgroundColor: 'lightgray',
-      boxShadow: '0px 4px 7px 2px rgba(0, 0, 0, 0.25)',
-    };
+    try {
+      await signOut(auth);
+      
+      // User is signed out.
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-    const tooltipStyle = {
-        paddingRight:"0.3rem",
-      };
 
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const open = Boolean(anchorEl);
-    const handleClick = (event) => {
-      setAnchorEl(event.currentTarget);
+
+
+  const [user, setUser] = useState(auth.currentUser);
+  const [profilePicture, setProfilePicture] = useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+      if (user) {
+        // Fetch the user's profile picture URL from the Microsoft account
+        // This assumes that the Microsoft provider is used during authentication
+        const microsoftProfilePicture = user.providerData.find((provider) => provider.providerId === 'microsoft.com')?.photoURL;
+        setProfilePicture(microsoftProfilePicture);
+      }
+    });
+
+    return () => {
+      // Cleanup the subscription when the component unmounts
+      unsubscribe();
     };
-    const handleClose = () => {
-      setAnchorEl(null);
-    };
-  
-    return (
-    <div style={navbarstyle} >
+  }, []);
+
+  const getInitials = (name) => {
+    return name.split(' ').map((part) => part[0]).join('').toUpperCase();
+  };
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  return (
+    <div style={{ backgroundColor: 'lightgray', boxShadow: '0px 4px 7px 2px rgba(0, 0, 0, 0.25)', padding: '10px', flex: '1' }}>
       <React.Fragment>
-        <Box  sx={{ display: "flex", alignItems: "center", justifyContent: 'flex-end', textAlign: "center",padding: '10px', flex:"1" }}>
-          <img src={logo} style={logost}></img>
-          <Tooltip title="Account settings" >
-            <IconButton style={tooltipStyle}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', textAlign: 'center', padding: '10px', flex: '1' }}>
+        <Link to="/home" style={{marginRight: 'auto', padding: '0.3%'}}> {/* Wrap the Logo inside Link */}
+            <img src={Logo} style={{ width: '90px'}} alt="Logo" />
+          </Link>
+          <Tooltip title="Account settings">
+            <IconButton
               onClick={handleClick}
               size="small"
               sx={{ ml: 2 }}
-              aria-controls={open ? "account-menu" : undefined}
+              aria-controls={open ? 'account-menu' : undefined}
               aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
+              aria-expanded={open ? 'true' : undefined}
             >
-              <Avatar  sx={{ width: 35, height: 35 }}>M</Avatar>
+              <Avatar sx={{ width: 35, height: 35 }}>
+                {profilePicture ? (
+                  <img src={profilePicture} alt="Profile" style={{ width: '100%', height: '100%', borderRadius: '50%' }} />
+                ) : (
+                  getInitials(user?.displayName || '')
+                )}
+              </Avatar>
             </IconButton>
           </Tooltip>
-        </Box>
-        <Menu 
+        </div>
+        <Menu
           anchorEl={anchorEl}
           id="account-menu"
           open={open}
@@ -67,39 +112,47 @@ export default function NavBar() {
           PaperProps={{
             elevation: 0,
             sx: {
-              overflow: "visible",
-              filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+              overflow: 'visible',
+              filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
               mt: 1.5,
-              "& .MuiAvatar-root": {
+              '& .MuiAvatar-root': {
                 width: 32,
                 height: 32,
                 ml: -0.5,
-                mr: 1
+                mr: 1,
               },
-              "&:before": {
+              '&:before': {
                 content: '""',
-                display: "block",
-                position: "absolute",
+                display: 'block',
+                position: 'absolute',
                 top: 0,
                 right: 14,
                 width: 10,
                 height: 10,
-                bgcolor: "background.paper",
-                transform: "translateY(-50%) rotate(45deg)",
-                zIndex: 0
-              }
-            }
+                bgcolor: 'background.paper',
+                transform: 'translateY(-50%) rotate(45deg)',
+                zIndex: 0,
+              },
+            },
           }}
-          transformOrigin={{ horizontal: "right", vertical: "top" }}
-          anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+          transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+          anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         >
-          <MenuItem onClick={handleClose}>
-            <Avatar /> Profile
+          <MenuItem onClick={redirectToLogin}>
+            <ListItemIcon>
+              <LoginIcon fontSize="small" />
+            </ListItemIcon>
+            Login
           </MenuItem>
-  
           <Divider />
-  
-          <MenuItem onClick={handleClose}>
+          <MenuItem onClick={redirectToDashboard}>
+            <ListItemIcon>
+              <DashboardCustomizeIcon fontSize="small" />
+            </ListItemIcon>
+            Dashboard
+          </MenuItem>
+          <Divider />
+          <MenuItem onClick={handleSignOut}>
             <ListItemIcon>
               <Logout fontSize="small" />
             </ListItemIcon>
@@ -108,6 +161,7 @@ export default function NavBar() {
         </Menu>
       </React.Fragment>
     </div>
-    );
-  }
-  
+  );
+};
+
+export default NavBar;

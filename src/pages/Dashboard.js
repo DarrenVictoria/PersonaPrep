@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useEffect,useState} from 'react';
 import NavBar from '../components/Navbar'
 import "./Dashboard.css"
 import Avatar from '@mui/material/Avatar';
@@ -18,21 +18,49 @@ import FileUpload from '../components/FileUpload';
 
 import {useForm, Controller} from 'react-hook-form';
 import { getFirestore, addDoc, collection,updateDoc, doc } from 'firebase/firestore';
+import { useAuth } from '../hooks/useAuth';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 
 
 const UserProfileDiv = () => {
+  const { currentUser } = useAuth();
+  const [userName, setUserName] = useState('');
+  const [userEmail, setUserEmail] = useState('');
+  const [profilePicture, setProfilePicture] = useState('');
+
+  useEffect(() => {
+    // Assuming that currentUser is an object with user information
+    if (currentUser) {
+      const microsoftProfile = currentUser.providerData.find((provider) => provider.providerId === 'microsoft.com');
+      if (microsoftProfile) {
+        setUserName(microsoftProfile.displayName || 'Username');
+        setUserEmail(microsoftProfile.email || 'studentname@students.nsbm.ac.lk');
+        setProfilePicture(microsoftProfile.photoURL || '');
+      }
+    }
+  }, [currentUser]);
+
+  const getInitials = (name) => {
+    return name.split(' ').map((part) => part[0]).join('').toUpperCase();
+  };
+
   return (
     <div  className="UserProfileDiv">
       <div   style={{ display: 'flex', alignItems: 'center' }}>
         <div  style={{ marginRight: '20px' }}>
           {/* Change the src attribute to the path of your avatar image */}
-          <Avatar alt="User Avatar" src="/path/to/avatar.jpg" sx={{ width: 120, height: 120 }} />
+          {profilePicture ? (
+            <Avatar alt="User Avatar" src={profilePicture} sx={{ width: 120, height: 120 }} />
+          ) : (
+            <Avatar alt="User Avatar" sx={{ width: 120, height: 120 }}>
+              {getInitials(userName)}
+            </Avatar>
+          )}
         </div>
         <div style={{ textAlign: 'left' }}>
-          <h1 style={{ fontFamily: 'Inter', fontWeight: 'bold', fontSize: '50px', margin: 0 }}>John Doe</h1>
-          <p style={{ fontFamily: 'Inter', fontSize: '20px', margin: '5% 0' }}>BSc.(Hons) in Software Engineering</p>
+          <h1 style={{ fontFamily: 'Inter', fontWeight: 'bold', fontSize: '50px', margin: 0 }}>{userName}</h1>
+          <p style={{ fontFamily: 'Inter', fontSize: '20px', margin: '5% 0' }}>{userEmail}</p>
           <p style={{ fontFamily: 'Inter', fontSize: '16px', margin: '8% 0' , }}>CV Status: <Button variant="contained" style={{ backgroundColor: '#00FF00', color: '#000', fontWeight: 'bold' }}>
             Created
           </Button></p>
@@ -338,6 +366,7 @@ const RecruitmentStatus = () => {
   
 
 const Dashboard =() =>{
+  const { currentUser } = useAuth();
     return(
 
         <div>
