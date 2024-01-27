@@ -22,6 +22,7 @@ export default function Insightblog(){
                     <img src={cvmistake} alt='blog' className='insightBlog-blogImg'/>
                 </div>
                 <p>Your CV is often the first impression a potential employer has of you, making it crucial to present yourself in the best light possible. However, certain common mistakes can hinder your chances of landing your dream job. In this post, we'll discuss the top five mistakes to avoid when crafting your CV, ensuring that you showcase your skills and experience effectively.</p>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod, eum?</p>
 
                 <div className='insightBlog-numberedList'>
                     <div className='insightBlog-list'>
