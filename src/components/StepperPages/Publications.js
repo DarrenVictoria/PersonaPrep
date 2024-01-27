@@ -50,7 +50,7 @@ const Publications = () => {
               onSelect={setMonth}
               disabledOptions={[]}
               isRequired={true}
-              //the below width did not work have to check
+              
              
              />
                 
@@ -61,7 +61,7 @@ const Publications = () => {
               onSelect={setYear}
               disabledOptions={["2024"]}
               isRequired={true}
-              //the below width did not work have to check
+              
              
              />
                 
