@@ -30,7 +30,7 @@ export default function Login(){
           setLoader(prevState => ({ ...prevState, microsoftLoading: true }));
           await signInWithPopup(auth, microsoftProvider);
           // User is signed in.
-          navigate('/dashboard');
+          navigate('/home');
         } catch (error) {
           console.error(error);
         }
@@ -77,7 +77,7 @@ export default function Login(){
                         </button>
                     </div>
                     <div className='login-msLogin'>
-                        <Button variant='outlined' style={msLoginBtn} onClick={handleSignInWithMicrosoft} ><img src={msLogo} alt='Microsoft' />Log in with Microsoft</Button>
+                        <Button variant='outlined' style={msLoginBtn} onClick={handleSignInWithMicrosoft} ><img src={msLogo} alt='Microsoft' /><b>Log in with Microsoft</b></Button>
                     </div>
                 </div>
             </div>

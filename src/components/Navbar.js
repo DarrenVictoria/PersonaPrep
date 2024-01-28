@@ -93,7 +93,7 @@ const NavBar = () => {
               aria-haspopup="true"
               aria-expanded={open ? 'true' : undefined}
             >
-              <Avatar sx={{ width: 35, height: 35 }}>
+              <Avatar sx={{ width: 48, height: 48 }}>
                 {profilePicture ? (
                   <img src={profilePicture} alt="Profile" style={{ width: '100%', height: '100%', borderRadius: '50%' }} />
                 ) : (
@@ -138,26 +138,32 @@ const NavBar = () => {
           transformOrigin={{ horizontal: 'right', vertical: 'top' }}
           anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         >
-          <MenuItem onClick={redirectToLogin}>
-            <ListItemIcon>
-              <LoginIcon fontSize="small" />
-            </ListItemIcon>
-            Login
-          </MenuItem>
-          <Divider />
-          <MenuItem onClick={redirectToDashboard}>
-            <ListItemIcon>
-              <DashboardCustomizeIcon fontSize="small" />
-            </ListItemIcon>
-            Dashboard
-          </MenuItem>
-          <Divider />
-          <MenuItem onClick={handleSignOut}>
-            <ListItemIcon>
-              <Logout fontSize="small" />
-            </ListItemIcon>
-            Logout
-          </MenuItem>
+          {!user && ( // Only show if the user is not logged in
+            <MenuItem onClick={redirectToLogin}>
+              <ListItemIcon>
+                <LoginIcon fontSize="small" />
+              </ListItemIcon>
+              Login
+            </MenuItem>
+          )}
+          {user && ( // Only show if the user is logged in
+            <>
+              
+              <MenuItem onClick={redirectToDashboard}>
+                <ListItemIcon>
+                  <DashboardCustomizeIcon fontSize="small" />
+                </ListItemIcon>
+                Dashboard
+              </MenuItem>
+              <Divider />
+              <MenuItem onClick={handleSignOut}>
+                <ListItemIcon>
+                  <Logout fontSize="small" />
+                </ListItemIcon>
+                Logout
+              </MenuItem>
+            </>
+          )}
         </Menu>
       </React.Fragment>
     </div>

@@ -16,8 +16,8 @@ import AddLinkIcon from '@mui/icons-material/AddLink';
 import ShareIcon from '@mui/icons-material/Share';
 import FileUpload from '../components/FileUpload';
 
-import {useForm, Controller} from 'react-hook-form';
-import { getFirestore, addDoc, collection,updateDoc, doc } from 'firebase/firestore';
+import {useForm, Controller, useWatch } from 'react-hook-form';
+import { getFirestore, addDoc, collection,updateDoc, doc, setDoc, getDoc } from 'firebase/firestore';
 import { useAuth } from '../hooks/useAuth';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
@@ -28,17 +28,44 @@ const UserProfileDiv = () => {
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [profilePicture, setProfilePicture] = useState('');
+   const [cvStatus, setCvStatus] = useState('');
 
-  useEffect(() => {
-    // Assuming that currentUser is an object with user information
-    if (currentUser) {
-      const microsoftProfile = currentUser.providerData.find((provider) => provider.providerId === 'microsoft.com');
-      if (microsoftProfile) {
-        setUserName(microsoftProfile.displayName || 'Username');
-        setUserEmail(microsoftProfile.email || 'studentname@students.nsbm.ac.lk');
-        setProfilePicture(microsoftProfile.photoURL || '');
+   useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        if (currentUser) {
+          const { displayName } = currentUser;
+          const username = displayName.toLowerCase().replace(/\s/g, '');
+
+          // Fetch user data from Firestore based on the username
+          const userCollectionRef = doc(getFirestore(), 'recruitmentStatus', username);
+          const userDocSnap = await getDoc(userCollectionRef);
+
+          if (userDocSnap.exists()) {
+            const userData = userDocSnap.data();
+            setCvStatus(userData['Cv-Status'] || '');
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching user data from Firestore:', error);
       }
-    }
+    };
+
+    const fetchProfileData = async () => {
+      try {
+        if (currentUser) {
+          const { displayName, email, photoURL } = currentUser;
+          setUserName(displayName || 'Username');
+          setUserEmail(email || 'studentname@students.nsbm.ac.lk');
+          setProfilePicture(photoURL || '');
+        }
+      } catch (error) {
+        console.error('Error fetching profile data:', error);
+      }
+    };
+
+    fetchUserData();
+    fetchProfileData();
   }, [currentUser]);
 
   const getInitials = (name) => {
@@ -61,10 +88,19 @@ const UserProfileDiv = () => {
         <div style={{ textAlign: 'left' }}>
           <h1 style={{ fontFamily: 'Inter', fontWeight: 'bold', fontSize: '50px', margin: 0 }}>{userName}</h1>
           <p style={{ fontFamily: 'Inter', fontSize: '20px', margin: '5% 0' }}>{userEmail}</p>
-          <p style={{ fontFamily: 'Inter', fontSize: '16px', margin: '8% 0' , }}>CV Status: <Button variant="contained" style={{ backgroundColor: '#00FF00', color: '#000', fontWeight: 'bold' }}>
-            Created
-          </Button></p>
-          
+          <p style={{ fontFamily: 'Inter', fontSize: '16px', margin: '8% 0' , }}>
+          CV Status:{' '}
+            <Button
+              variant="contained"
+              style={{
+                backgroundColor: cvStatus === 'created' ? '#00FF00' : 'red',
+                color: '#000',
+                fontWeight: 'bold',
+              }}
+            >
+              {cvStatus === 'created' ? 'Created' : 'Not Created'}
+            </Button>
+          </p>
         </div>
       </div>
     </div>
@@ -73,18 +109,59 @@ const UserProfileDiv = () => {
 
 
 const RecruitmentStatus = () => {
-  const { control, handleSubmit } = useForm();
+  const { control, handleSubmit, setValue } = useForm();
+  const { currentUser } = useAuth();
+  const selectedStatus = useWatch({ control, name: 'Recruitment-Status' });
 
   const onSubmit = async (data) => {
     try {
-      // Specify the name of your Firestore collection
-      const collectionRef = collection(getFirestore(), 'recruitmentStatus');
-      await addDoc(collectionRef, data);
-      console.log('Recruitment Status Data successfully added to Firestore');
+      if (currentUser) {
+        const { uid, displayName } = currentUser;
+        const username = displayName.toLowerCase().replace(/\s/g, ''); // Generate a username from the display name
+
+        // Specify the name of your Firestore collection and document
+        const collectionRef = collection(getFirestore(), 'recruitmentStatus');
+        const userDocRef = doc(collectionRef, username);
+
+        // Create or update the document with the UID as the document ID
+        await setDoc(userDocRef, { ...data, uid });
+        console.log('Recruitment Status Data successfully added to Firestore');
+      } else {
+        console.error('User not logged in.');
+      }
     } catch (error) {
       console.error('Error adding Recruitment Status data to Firestore:', error);
     }
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (currentUser) {
+          const { displayName } = currentUser;
+          const username = displayName.toLowerCase().replace(/\s/g, '');
+
+          const collectionRef = collection(getFirestore(), 'recruitmentStatus');
+          const userDocRef = doc(collectionRef, username);
+
+          const docSnap = await getDoc(userDocRef);
+
+          if (docSnap.exists()) {
+            const data = docSnap.data();
+            // Set the initial value for the 'Recruitment-Status' field in the form
+            setValue('Recruitment-Status', data['Recruitment-Status']);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching Recruitment Status data from Firestore:', error);
+      }
+    };
+
+    fetchData();
+  }, [currentUser, setValue]);
+
+  
+
 
   return (
     <div>
@@ -260,7 +337,7 @@ const RecruitmentStatus = () => {
   
     return (
       <div>
-        <h2 style={{ fontFamily: 'Inter', fontWeight: 'bold', fontSize: '24px', margin: '10px 0', marginLeft: '2%' }}>Feedback</h2>
+        <h2 style={{ fontFamily: 'Inter', fontWeight: 'bold', fontSize: '24px', margin: '10px 0', marginLeft: '2%' }}>Anonymous Feedback</h2>
   
         <div style={{
           backgroundColor: '#D3D3D3',
