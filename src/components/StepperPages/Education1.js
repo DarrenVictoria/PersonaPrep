@@ -19,6 +19,13 @@ const Education_1 = () => {
     const [startYear, setStartYear] = useState('');
     const [endMonth, setEndMonth] = useState('');
     const [endYear, setEndYear] = useState('');
+    const [schoolName, setSchoolName] = useState('');
+    const [schoolCity, setSchoolCity] = useState('');
+    const [schoolCountry, setSchoolCountry] = useState('');
+
+    const schoolNameChange = (event) => setSchoolName(event.target.value);
+    const schoolCityChange = (event) => setSchoolCity(event.target.value);
+    const schoolCountryChange = (event) => setSchoolCountry(event.target.value);
 
     return(
         <div className="personalInfo-main">
@@ -26,7 +33,7 @@ const Education_1 = () => {
                 <Grid container>
                     <Grid item xs={12} mb={3}>
                         <Typography mb={1}><span style={{color: 'red'}}>*</span>School Name</Typography>
-                        <TextField type="text" variant="outlined" fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='St. Thomas Catholic International'/>
+                        <TextField type="text" variant="outlined" value={schoolName} onChange={schoolNameChange} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='St. Thomas Catholic International'/>
                     </Grid>
                     <Grid item xs={12} mb={3}>
                         <Typography mb={1}><span style={{color: 'red'}}>*</span>School experience or description</Typography>
@@ -34,11 +41,11 @@ const Education_1 = () => {
                     </Grid>
                     <Grid item xs={12} mb={3}>
                         <Typography mb={1}><span style={{color: 'red'}}>*</span>City</Typography>
-                        <TextField type="text" variant="outlined" fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/>
+                        <TextField type="text" variant="outlined" value={schoolCity} onChange={schoolCityChange} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/>
                     </Grid>
                     <Grid item xs={12} mb={3}>
                         <Typography mb={1}><span style={{color: 'red'}}>*</span>Country</Typography>
-                        <TextField type="text" variant="outlined" fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/>
+                        <TextField type="text" variant="outlined" value={schoolCountry} onChange={schoolCountryChange} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/>
                     </Grid>
                     <Grid item xs={12} mb={-2}>
                         <Typography><span style={{color: 'red'}}>*</span>Start Date</Typography>

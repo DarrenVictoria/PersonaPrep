@@ -20,8 +20,13 @@ import FormLabel from '@mui/material/FormLabel';
 import { CustomizedHook } from '../TextfieldButtonDataDisplay';
 
 const Projects_1 = () => {
-    const [projType, setProjType] = useState('');
     const skills = [{data: 'c#',}, {data: 'react'}, {data: 'java'}];
+    const [projType, setProjType] = useState('');
+    const [projName, setProjName] = useState('');
+    const [projRole, setProjRole] = useState('');
+
+    const projNameChange = (event) => setProjName(event.target.value);
+    const projRoleChange = (event) => setProjRole(event.target.value);
 
     return(
         <div className="personalInfo-main">
@@ -29,7 +34,7 @@ const Projects_1 = () => {
                 <Grid container>
                     <Grid item xs={12} mb={3}>
                         <Typography mb={1}><span style={{color: 'red'}}>*</span>Project Name</Typography>
-                        <TextField type="text" variant="outlined" fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='CV Builder'/>
+                        <TextField type="text" variant="outlined" value={projName} onChange={projNameChange} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='CV Builder'/>
                     </Grid>
                     <Grid item xs={12} mb={-2}>
                         <Typography><span style={{color: 'red'}}>*</span>Was it an individual or a group project?</Typography>
@@ -43,7 +48,7 @@ const Projects_1 = () => {
                     </Grid>
                     <Grid item xs={12} mb={3}>
                         <Typography mb={1}><span style={{color: 'red'}}>*</span>What was your role in the project</Typography>
-                        <TextField type="text" variant="outlined" fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Full stack developer'/>
+                        <TextField type="text" variant="outlined" value={projRole} onChange={projRoleChange} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Full stack developer'/>
                     </Grid>
                     <Grid item xs={12} >
                         <Typography><span style={{color: 'red'}}>*</span>Are you still working on the project?</Typography>

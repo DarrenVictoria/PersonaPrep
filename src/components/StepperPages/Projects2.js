@@ -21,6 +21,9 @@ const Projects_2 = () => {
     const [endMonth, setEndMonth] = useState('');
     const [endYear, setEndYear] = useState('');
     const [projPlace, setProjPlace] = useState('');
+    const [projEvidence, setProjEvidence] = useState('');
+
+    const projEvidenceChange = (event) => setProjEvidence(event.target.value);
 
     return(
         <div className="personalInfo-main">
@@ -72,7 +75,7 @@ const Projects_2 = () => {
                     </Grid>
                     <Grid item xs={12} mb={3}>
                         <Typography mb={1}><span style={{color: 'red'}}>*</span>Project evidence</Typography>
-                        <TextField type="text" variant="outlined" fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='CV Builder'/>
+                        <TextField type="text" variant="outlined" value={projEvidence} onChange={projEvidenceChange} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='CV Builder'/>
                     </Grid>
                     <Grid item xs={12} mb={2} style={{display: 'flex', justifyContent: 'center'}}>
                         <Typography>-OR-</Typography>
