@@ -52,13 +52,25 @@
   .logo,
   .formtemp-variable {
     border-radius: 0;
-    text-align: left;
-    padding: 10px;
+    text-align: center;
+    /* padding: 10px; */
     margin: 0;
+    /* font-size:2px; */
+    
   }
 
   .formtemp-variable { 
-    text-align: left;
+    text-align: center;
+  }
+  .formtemp-variablename {
+    font-family: 'Inter', sans-serif;
+    font-size:9vw; /*reduces the font size in mobile view*/
+    color: rgb(255, 255, 255);
+    display: flex;
+  }
+  .formtemp-page {
+    margin-left: 5px;
+    margin-right: 5px;
   }
 
      /* .formtemp-page {
