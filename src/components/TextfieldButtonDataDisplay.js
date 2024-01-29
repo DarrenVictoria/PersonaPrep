@@ -22,14 +22,15 @@ const Label = styled(Typography)(
   line-height: 1.5;
   display: block;
   font-size: 16px;
-  font-weight:540;
-  
+  font-weight: 540;
 `
 );
 
 const InputWrapper = styled("div")(
-  ({ theme, width, height }) => `
-  width: ${width}px;
+  ({ theme, maxWidth, height }) => `
+  max-width: ${maxWidth}px;
+  width: 100%;
+  height: ${height}px;
   border: 1px solid ${theme.palette.mode === "dark" ? "#434343" : "#d9d9d9"};
   background-color: ${theme.palette.mode === "dark" ? "#141414" : "#fff"};
   border-radius: 25px;
@@ -53,7 +54,7 @@ const InputWrapper = styled("div")(
         ? "rgba(255,255,255,0.65)"
         : "rgba(0,0,0,.85)"
     };
-    height: ${height}px;
+    height: 100%;
     box-sizing: border-box;
     padding: 4px 6px;
     width: 0;
@@ -64,9 +65,63 @@ const InputWrapper = styled("div")(
     outline: 0;
     border-radius: 25px;
   }
-  @media (max-width: 600px) {
-    width: 100%;
+  
+`
+);
+
+const InputWrapperLarge = styled("div")(
+  ({ theme, width, height }) => `
+  width: ${width}px;
+  height: ${height}px;
+  border: 1px solid ${theme.palette.mode === "dark" ? "#434343" : "#d9d9d9"};
+  background-color: ${theme.palette.mode === "dark" ? "#141414" : "#fff"};
+  border-radius: 25px;
+  padding: 1px;
+  display: flex;
+  flex-wrap: wrap;
+
+  @media (max-width:376px){
+    width: 200px;
+  
   }
+  @media (max-width:528px) and (min-width: 377px) {
+    width: 250px;
+  
+  }
+
+  @media (max-width: 540px) and (min-width: 529px) {
+    width: 340px;
+  
+  }
+
+  &:hover {
+    border-color: ${theme.palette.mode === "dark" ? "#177ddc" : "#40a9ff"};
+  }
+
+  &.focused {
+    border-color: ${theme.palette.mode === "dark" ? "#177ddc" : "#40a9ff"};
+    box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+  }
+
+  & input {
+    background-color: ${theme.palette.mode === "dark" ? "#141414" : "#fff"};
+    color: ${
+      theme.palette.mode === "dark"
+        ? "rgba(255,255,255,0.65)"
+        : "rgba(0,0,0,.85)"
+    };
+    height: 100%;
+    box-sizing: border-box;
+    padding: 4px 6px;
+    width: 0;
+    min-width: 30px;
+    flex-grow: 1;
+    border: 0;
+    margin: 0;
+    outline: 0;
+    border-radius: 25px;
+  }
+  
 `
 );
 
@@ -101,8 +156,8 @@ const StyledTag = styled(Tag)(
   padding: 0 4px 0 10px;
   outline: 0;
   overflow: hidden;
-  background-color:black;
-  color:white;
+  background-color: black;
+  color: white;
 
   &:focus {
     border-color: ${theme.palette.mode === "dark" ? "#177ddc" : "#40a9ff"};
@@ -169,8 +224,8 @@ const Listbox = styled("ul")(
   }
 `
 );
-
-function CustomizedHook({ width = 300, height = 90, data = [] ,label = "" }) {
+//Code for the CustomizedHook already width set to 100% in this.
+function CustomizedHook({ maxWidth, height = 90, data = [], label = "" }) {
   const {
     getRootProps,
     getInputLabelProps,
@@ -194,7 +249,7 @@ function CustomizedHook({ width = 300, height = 90, data = [] ,label = "" }) {
     <Root>
       <div {...getRootProps()}>
         <Label {...getInputLabelProps()}>{label}</Label>
-        <InputWrapper ref={setAnchorEl} className={focused ? "focused" : ""} width={width} height={height}>
+        <InputWrapper ref={setAnchorEl} className={focused ? "focused" : ""} maxWidth={maxWidth} height={height}>
           {value.map((option, index) => (
             <StyledTag label={option.data} {...getTagProps({ index })} />
           ))}
@@ -214,12 +269,60 @@ function CustomizedHook({ width = 300, height = 90, data = [] ,label = "" }) {
     </Root>
   );
 }
+//Code for the CustomizedHookLarge takes input the width and height.
+function CustomizedHookLarge({ width, height = 90, data = [], label = "" }) {
+  const {
+    getRootProps,
+    getInputLabelProps,
+    getInputProps,
+    getTagProps,
+    getListboxProps,
+    getOptionProps,
+    groupedOptions,
+    value,
+    focused,
+    setAnchorEl,
+  } = useAutocomplete({
+    id: "customized-hook-demo",
+    defaultValue: [data[1]],
+    multiple: true,
+    options: data,
+    getOptionLabel: (option) => option.data,
+  });
+
+  return (
+    <Root>
+      <div {...getRootProps()}>
+        <Label {...getInputLabelProps()}>{label}</Label>
+        <InputWrapperLarge ref={setAnchorEl} className={focused ? "focused" : ""} width={width} height={height}>
+          {value.map((option, index) => (
+            <StyledTag label={option.data} {...getTagProps({ index })} />
+          ))}
+          <input {...getInputProps()} />
+        </InputWrapperLarge>
+      </div>
+      {groupedOptions.length > 0 ? (
+        <Listbox {...getListboxProps()}>
+          {groupedOptions.map((option, index) => (
+            <li {...getOptionProps({ option, index })}>
+              <span>{option.data}</span>
+              <CheckIcon fontSize="small" />
+            </li>
+          ))}
+        </Listbox>
+      ) : null}
+    </Root>
+  );
+}
 
 CustomizedHook.propTypes = {
-  width: PropTypes.number,
+  maxWidth: PropTypes.number,
   height: PropTypes.number,
   data: PropTypes.arrayOf(PropTypes.object),
   label: PropTypes.string,
 };
 
-export default CustomizedHook;
+export {
+  CustomizedHook,
+  CustomizedHookLarge
+};

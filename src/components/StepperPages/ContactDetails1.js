@@ -54,43 +54,43 @@ const ContactDetails_1 = () => {
             <Grid container spacing={2} >
               <Grid item xs={6}>
                 
-                  <Typography>*Phone</Typography>
+              <Typography ><span style={{color: 'red'}}>*</span> Phone</Typography>
                   <TextField type="text" variant="outlined" fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}} />
                 
               </Grid>
               <Grid item xs={6}>
                 
-                  <Typography>*Email</Typography>
+              <Typography ><span style={{color: 'red'}}>*</span> Email</Typography>
                   <TextField type="email" variant="outlined" fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
                 
               </Grid>
               <Grid item xs={6}>
                 
-                  <Typography>*District</Typography>
+              <Typography ><span style={{color: 'red'}}>*</span> District</Typography>
                   <TextField type="text" variant="outlined" fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
                 
               </Grid>
               <Grid item xs={6}>
                 
-                  <Typography>*City</Typography>
+              <Typography ><span style={{color: 'red'}}>*</span> City</Typography>
                   <TextField type="text" variant="outlined" fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
                 
               </Grid>
               <Grid item xs={6}>
                 
-                  <Typography>*Postalcode</Typography>
+              <Typography ><span style={{color: 'red'}}>*</span> Postalcode</Typography>
                   <TextField type="text" variant="outlined" fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
                 
               </Grid>
               <Grid item xs={6}>
                 
-                  <Typography>*Country</Typography>
+              <Typography ><span style={{color: 'red'}}>*</span> Country</Typography>
                   <TextField type="text" variant="outlined" fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
                 
               </Grid>
               <Grid item xs={12}>
                 
-                  <Typography>*Portfolio Website</Typography>
+              <Typography ><span style={{color: 'red'}}>*</span> Portfolio Website</Typography>
                   <TextField type="text" variant="outlined" fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
                 
               </Grid>
@@ -129,14 +129,14 @@ const ContactDetails_1 = () => {
       <div className='Contactdetails1-RightColumn'>
         <Card variant="outlined" sx={{ height:'100%',maxHeight: '450px', width:'100%',maxWidth: '363px',borderRadius:'15px',overflowY:'auto',overflowX:'auto','@media (min-width:768px)':{overflowY:'hidden',},}}className='Contactdetails1-RightColumnCard'>
           <CardContent >
-            <Typography variant="h5" component="div"sx={{ textAlign: 'center' }}>
+          <Typography variant="h5" component="div" sx={{ textAlign: 'center', fontWeight: 'bold' }}>
                 Contact Detail Tips
             </Typography>
             <List>
               <ListItem >
               <ListItemAvatar>
-                <Avatar sx={{ /*width: '38.732px', height: '39.022px',*/ borderRadius: '12px'/*, display: 'flex', justifyContent: 'center', alignItems: 'center'*/ }}>
-                <img src={cphone} alt="Custom Icon" style={{ width: '45.732px', height: '47.022px' }}/>
+              <Avatar sx={{paddingTop:'4px',borderRadius: '12px',display: 'flex', justifyContent: 'center', alignItems: 'center'  }}>
+                <img src={cphone} alt="Custom Icon" style={{ width: '45.3538px', height: '50.6667px' }}/>
                 </Avatar>
               </ListItemAvatar>
               <ListItemText>
@@ -147,8 +147,8 @@ const ContactDetails_1 = () => {
               </ListItem>
               <ListItem >
               <ListItemAvatar>
-                <Avatar sx={{ /*width: '38.732px', height: '39.022px',*/ borderRadius: '12px' ,display: 'flex', justifyContent: 'center', alignItems: 'center'  }}>
-              <img src={cmail} alt="Custom Icon" style={{ width: '45.732px', height: '47.022px' }} />
+              <Avatar sx={{paddingTop:'4px',borderRadius: '12px',display: 'flex', justifyContent: 'center', alignItems: 'center'  }}>
+              <img src={cmail} alt="Custom Icon" style={{ width: '45.3538px', height: '50.6667px' }} />
               </Avatar>
               </ListItemAvatar>
               <ListItemText>
@@ -159,8 +159,8 @@ const ContactDetails_1 = () => {
               </ListItem>
               <ListItem >
               <ListItemAvatar>
-                <Avatar sx={{/* width: '38.732px', height: '39.022px',*/ borderRadius: '12px',display: 'flex', justifyContent: 'center', alignItems: 'center'  }}>
-              <img src={cfolder} alt="Custom Icon" style={{ width: '45.732px', height: '47.022px' ,}} />
+              <Avatar sx={{paddingTop:'4px',borderRadius: '12px',display: 'flex', justifyContent: 'center', alignItems: 'center'  }}>
+              <img src={cfolder} alt="Custom Icon" style={{ width: '45.3538px', height: '50.6667px' }} />
               </Avatar>
               </ListItemAvatar>
               <ListItemText>

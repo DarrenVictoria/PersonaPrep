@@ -2,11 +2,11 @@ import React from 'react';
 import { useState } from 'react';
 import CustomRating from '../FaceIconRating';
 
+
 import './css/personalInfo.css';
 import Grid from "@mui/material/Grid";
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
-
 
 const CvFeedback = () => {
     const [item1Rating, setItem1Rating] = useState(5);
@@ -22,6 +22,7 @@ const CvFeedback = () => {
             
             {/* CustomRating component for item 3 */}
             <CustomRating value={item3Rating} onChange={setItem3Rating} /><br/>
+
 
             <div className="personalInfo-main">
                 <div className="personalInfo-leftCol">
@@ -86,7 +87,6 @@ const CvFeedback = () => {
                     </Grid>                    
                 </div>
             </div>
-
         </div>
     )
 

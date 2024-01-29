@@ -1,5 +1,5 @@
 .textareasubdiv{
-    margin-top: 95px;
+    /* margin-top: 95px; */
     display:block;  
     font-family: Inter;
     font-size: 20px;
@@ -10,8 +10,8 @@
   }
   
   .workexperience-container{
-      width: 797px;
-      max-width: 100%;
+      width: 100%;
+      /* max-width: 797px; */
       position: relative;
   }
   .workexperience-remaining-words{
@@ -35,6 +35,6 @@
       line-height: normal;
   }
   
-  .workexperiencemaindiv{
+  /* .workexperiencemaindiv{
       padding: 10px;
-  }
+  } */

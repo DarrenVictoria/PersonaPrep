@@ -1,7 +1,9 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import {BrowserRouter,Routes,Route, useNavigate } from 'react-router-dom'
-import { auth, firestore } from './firebase';
+import {BrowserRouter,Routes,Route, useNavigate, Navigate } from 'react-router-dom'
+
+import { AuthProvider,useAuth } from './hooks/useAuth';
+
 
 
 import Home from './pages/Home'
@@ -12,6 +14,7 @@ import Login from "./pages/authentication/login"
 import Dashboard from "./pages/Dashboard"
 import NoPage from './pages/NoPage'
 import Template from "./pages/interviewforms/Template"
+
 
 
 import "@fontsource/inter"; // Defaults to weight 400
@@ -27,7 +30,12 @@ import './App.css';
 
 function App() {
 
+  const { currentUser } = useAuth();
+  
+
+
   return (
+    <AuthProvider>
     <BrowserRouter>
         <Routes>
           <Route index element={<Home/>} />
@@ -37,10 +45,19 @@ function App() {
           <Route path="/interviewDisplay" element={<InterviewDisplay />}/>
           <Route path="/insightblog" element={<Insightblog />}/>
           <Route path="/login" element={<Login />}/>
-          <Route path="/dashboard" element={<Dashboard />}/>
+
+          <Route
+            path="/dashboard"
+            element={
+              currentUser ? <Dashboard /> : <Navigate to="/login" />
+            }
+          />
+
+
           <Route path="*" element={<NoPage />}/>
         </Routes>
     </BrowserRouter>
+    </AuthProvider>
   );
 }
 

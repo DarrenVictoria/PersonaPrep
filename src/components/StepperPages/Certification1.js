@@ -29,18 +29,18 @@ const Certification_1 = () => {
         <Grid container spacing={2} >
           <Grid item xs={12}>
             
-              <Typography>*Name of Certification</Typography>
+          <Typography ><span style={{color: 'red'}}>*</span> Name of Certification</Typography>
               <TextField type="text" variant="outlined" fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}} />
             
           </Grid>
           <Grid item xs={12}>
             
-              <Typography>*Issuing Organization</Typography>
+          <Typography ><span style={{color: 'red'}}>*</span> Issuing Organization</Typography>
               <TextField type="text" variant="outlined" fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
             
           </Grid>
           <Grid item xs={12} style={{ marginBottom: '-40px' }}>
-          <Typography>*Issue Date</Typography>
+          <Typography ><span style={{color: 'red'}}>*</span> Issue Date</Typography>
           </Grid>
           <Grid item xs={6}>
             
@@ -48,6 +48,7 @@ const Certification_1 = () => {
           options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
           onSelect={setMonth}
           disabledOptions={[]}
+          isRequired={true}
           //the below width did not work have to check
          
          />
@@ -58,39 +59,42 @@ const Certification_1 = () => {
           options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
           onSelect={setYear}
           disabledOptions={["2024"]}
+          isRequired={true}
           //the below width did not work have to check
          
          />
             
           </Grid>
           <Grid item xs={12} style={{ marginBottom: '-40px' }}>
-          <Typography>*Expiration Date</Typography>
+              <Typography ><span style={{color: 'red'}}>*</span> Expiration Date</Typography>
+              </Grid>
+              <Grid item xs={6}>
+                
+              <EditableChoose
+              options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
+              onSelect={setMonth}
+              disabledOptions={[]}
+              isRequired={true}
+              //the below width did not work have to check
+            
+            />
+            
           </Grid>
           <Grid item xs={6}>
+              <EditableChoose
+              options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
+              onSelect={setYear}
+              disabledOptions={["2024"]}
+              isRequired={true}
+              //the below width did not work have to check
             
-          <EditableChoose
-          options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-          onSelect={setMonth}
-          disabledOptions={[]}
-          //the below width did not work have to check
-         
-         />
-            
-          </Grid>
-          <Grid item xs={6}>
-          <EditableChoose
-          options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-          onSelect={setYear}
-          disabledOptions={["2024"]}
-          //the below width did not work have to check
-         
-         />
+            />
             
           </Grid>
          
           <Grid item xs={12}>
             
-              <Typography>*Certification ID</Typography>
+              <Typography ><span style={{color: 'red'}}>*</span> Certification ID</Typography>
               <TextField type="text" variant="outlined" fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
             
           </Grid>
@@ -105,7 +109,7 @@ const Certification_1 = () => {
 
  
   <div className='Certification1-RightColumn'>
-    <Card variant="outlined" sx={{ height:'100%',maxHeight: '450px', width:'100%',maxWidth: '363px',borderRadius:'15px',overflowY:'auto',overflowX:'auto','@media (min-width:768px)':{overflowY:'hidden',},}}className='Contactdetails2-RightColumnCard'>
+    <Card variant="outlined" sx={{ height:'100%',maxHeight: '450px', width:'100%',maxWidth: '363px',borderRadius:'15px',overflowY:'auto',overflowX:'auto','@media (min-width:820px)':{overflowY:'hidden'},'@media (max-width:430px) and (min-width:412px)':{height:'350px',width:'290px'},'@media (min-width:360px) and (max-width:390px)':{height:'350px',width:'230px'}}}className='Contactdetails2-RightColumnCard'>
       <CardContent >
         <Typography variant="h5" component="div"sx={{ textAlign: 'center' }}>
             Certification Tips
@@ -138,7 +142,7 @@ const Certification_1 = () => {
           <ListItem >
           <ListItemAvatar>
             {/*aligning the image did not work have to look into it*/ }
-            <Avatar sx={{/* width: '38.732px', height: '39.022px',*/ borderRadius: '12px',display: 'flex', justifyContent: 'center', alignItems: 'center'  }}>
+            <Avatar sx={{/* width: '38.732px', height: '39.022px',*/ paddingLeft:'7px', borderRadius: '12px',display: 'flex', justifyContent: 'center', alignItems: 'center'  }}>
           <img src={chat} alt="Custom Icon" style={{ width: '41px', height: '39px' ,}} />
           </Avatar>
           </ListItemAvatar>

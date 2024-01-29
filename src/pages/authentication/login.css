@@ -62,7 +62,8 @@
 } */
 .login-msLogin img{
     width: 20px;
-    margin-right: 25px;
+    margin: 10px 30px 10px 10px;
+    
 }
 
 @media (max-width: 700px){

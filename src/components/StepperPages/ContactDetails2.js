@@ -65,15 +65,16 @@ const ContactDetails_2 = () => {
             <ListItem key={value} disablePadding sx={{marginBottom: 4}}>
                 <ListItemButton>
                 <ListItemAvatar>
-                    <Avatar alt={`Avatar of ${sampleNames[value]}`} src={sampleImages[value]} sx={{width:'24px',height:'24px'}}/>
+                    <Avatar alt={`Avatar of ${sampleNames[value]}`} src={sampleImages[value]} sx={{width:'24px',height:'24px','@media(max-width:430px)':{marginLeft:-3},'@media(max-width:936px) and (min-width:400px)':{marginLeft:-3}}} />
                 </ListItemAvatar>
-                <ListItemText id={labelId} primary={sampleNames[value]} />
+                <ListItemText id={labelId} primary={sampleNames[value]} sx={{'@media(max-width:430px)':{marginLeft:-4},'@media(max-width:936px) and (min-width:400px)':{marginLeft:-4}}} />
                 </ListItemButton>
                 <Checkbox
                 edge="end"
                 onChange={handleToggle(value)}
                 checked={checked.indexOf(value) !== -1}
                 inputProps={{ 'aria-labelledby': labelId }}
+                sx={{'@media(max-width:430px)':{marginLeft:7},'@media(max-width:936px) and (min-width:400px)':{marginLeft:5}}}
                 />
                 <TextField
                 label="@profile"
@@ -99,15 +100,15 @@ const ContactDetails_2 = () => {
 
      
       <div className='Contactdetails2-RightColumn'>
-        <Card variant="outlined" sx={{ height:'100%',maxHeight: '450px', width:'100%',maxWidth: '363px',borderRadius:'15px',overflowY:'auto',overflowX:'auto','@media (min-width:768px)':{overflowY:'hidden',},'@media (max-width:430px)':{maxHeight:'350px'},}}className='Contactdetails2-RightColumnCard'>
+        <Card variant="outlined" sx={{ height:'100%',maxHeight: '450px', width:'100%',maxWidth: '363px',borderRadius:'15px',overflowY:'auto',overflowX:'auto','@media (min-width:820px)':{overflowY:'hidden'},'@media (max-width:430px) and (min-width:412px)':{height:'350px',width:'290px'},'@media (min-width:360px) and (max-width:390px)':{height:'350px',width:'230px'}}}className='Contactdetails2-RightColumnCard'>
           <CardContent >
-            <Typography variant="h5" component="div"sx={{ textAlign: 'center' }}>
+          <Typography variant="h5" component="div" sx={{ textAlign: 'center', fontWeight: 'bold' }}>
               Social Media tips
             </Typography>
             <List>
               <ListItem >
               <ListItemAvatar>
-                <Avatar sx={{ /*width: '38.732px', height: '39.022px',*/ borderRadius: '12px'/*, display: 'flex', justifyContent: 'center', alignItems: 'center'*/ }}>
+                <Avatar sx={{paddingTop:'4px',borderRadius: '12px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <img src={chand} alt="Custom Icon" style={{ width: '45.732px', height: '47.022px' }}/>
                 </Avatar>
               </ListItemAvatar>
@@ -119,7 +120,7 @@ const ContactDetails_2 = () => {
               </ListItem>
               <ListItem >
               <ListItemAvatar>
-                <Avatar sx={{ /*width: '38.732px', height: '39.022px',*/ borderRadius: '12px' ,display: 'flex', justifyContent: 'center', alignItems: 'center'  }}>
+                <Avatar sx={{paddingTop:'4px',borderRadius: '12px' ,display: 'flex', justifyContent: 'center', alignItems: 'center'  }}>
               <img src={clinkedin} alt="Custom Icon" style={{ width: '45.732px', height: '47.022px' }} />
               </Avatar>
               </ListItemAvatar>
@@ -131,7 +132,7 @@ const ContactDetails_2 = () => {
               </ListItem>
               <ListItem >
               <ListItemAvatar>
-                <Avatar sx={{/* width: '38.732px', height: '39.022px',*/ borderRadius: '12px',display: 'flex', justifyContent: 'center', alignItems: 'center'  }}>
+                <Avatar sx={{paddingTop:'4px',borderRadius: '12px',display: 'flex', justifyContent: 'center', alignItems: 'center'  }}>
               <img src={cgithub} alt="Custom Icon" style={{ width: '45.732px', height: '47.022px' ,}} />
               </Avatar>
               </ListItemAvatar>
