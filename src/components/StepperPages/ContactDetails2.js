@@ -100,7 +100,7 @@ const ContactDetails_2 = () => {
 
      
       <div className='Contactdetails2-RightColumn'>
-        <Card variant="outlined" sx={{ height:'100%',maxHeight: '450px', width:'100%',maxWidth: '363px',borderRadius:'15px',overflowY:'auto',overflowX:'auto','@media (min-width:820px)':{overflowY:'hidden'},'@media (max-width:430px) and (min-width:412px)':{height:'350px',width:'290px'},'@media (min-width:360px) and (max-width:390px)':{height:'350px',width:'230px'}}}className='Contactdetails2-RightColumnCard'>
+        <Card variant="outlined" sx={{ height:'100%',maxHeight: '450px', width:'100%',maxWidth: '363px',borderRadius:'15px',overflowY:'auto',overflowX:'auto','@media (min-width:769px)':{overflowY:'hidden'}}}className='Contactdetails2-RightColumnCard'>
           <CardContent >
           <Typography variant="h5" component="div" sx={{ textAlign: 'center', fontWeight: 'bold' }}>
               Social Media tips
@@ -133,7 +133,7 @@ const ContactDetails_2 = () => {
               <ListItem >
               <ListItemAvatar>
                 <Avatar sx={{paddingTop:'4px',borderRadius: '12px',display: 'flex', justifyContent: 'center', alignItems: 'center'  }}>
-              <img src={cgithub} alt="Custom Icon" style={{ width: '45.732px', height: '47.022px' ,}} />
+              <img src={cgithub} alt="Custom Icon" style={{ width: '45.732px', height: '47.022px' }} />
               </Avatar>
               </ListItemAvatar>
               <ListItemText>
