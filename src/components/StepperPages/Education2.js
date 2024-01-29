@@ -68,7 +68,9 @@ const Education_2 = () => {
     return(
         <div className="personalInfo-main">
             <Grid container pl={1}>
-                <Typography variant='h4' mb={2}>Educational Experience in School</Typography>
+                <Grid item xs={12}>
+                    <Typography variant='h4' mb={2}>Educational Experience in School</Typography>
+                </Grid>
                 <Grid item xs={12} md={8} mb={2} >
                     <CustomMultilineTextFields height='100px' />
                 </Grid>
