@@ -12,6 +12,7 @@ import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfi
 import Typography from '@mui/material/Typography';
 import CustomMultilineTextFields from '../CustomMultilineTextfield';
 import { theme } from 'flowbite-react';
+import RatingComp from '../RatingComp';
 
 
 const CvFeedback = () => {
@@ -20,29 +21,10 @@ const CvFeedback = () => {
     const [rating3, setRating3] = useState('');
     const [rating4, setRating4] = useState('');
 
-    const [emoji1_1Clr, setEmoji1_1Clr] = useState('');
-    const [emoji1_2Clr, setEmoji1_2Clr] = useState('');
-    const [emoji1_3Clr, setEmoji1_3Clr] = useState('');
-    const [emoji1_4Clr, setEmoji1_4Clr] = useState('');
-    const [emoji1_5Clr, setEmoji1_5Clr] = useState('');
-
-    const [emoji2_1Clr, setEmoji2_1Clr] = useState('');
-    const [emoji2_2Clr, setEmoji2_2Clr] = useState('');
-    const [emoji2_3Clr, setEmoji2_3Clr] = useState('');
-    const [emoji2_4Clr, setEmoji2_4Clr] = useState('');
-    const [emoji2_5Clr, setEmoji2_5Clr] = useState('');
-
-    const [emoji3_1Clr, setEmoji3_1Clr] = useState('');
-    const [emoji3_2Clr, setEmoji3_2Clr] = useState('');
-    const [emoji3_3Clr, setEmoji3_3Clr] = useState('');
-    const [emoji3_4Clr, setEmoji3_4Clr] = useState('');
-    const [emoji3_5Clr, setEmoji3_5Clr] = useState('');
-
-    const [emoji4_1Clr, setEmoji4_1Clr] = useState('');
-    const [emoji4_2Clr, setEmoji4_2Clr] = useState('');
-    const [emoji4_3Clr, setEmoji4_3Clr] = useState('');
-    const [emoji4_4Clr, setEmoji4_4Clr] = useState('');
-    const [emoji4_5Clr, setEmoji4_5Clr] = useState('');
+    const [emoji1Clr, setEmoji1Clr] = useState([''], [''], [''], [''], ['']);
+    const [emoji2Clr, setEmoji2Clr] = useState([''], [''], [''], [''], ['']);
+    const [emoji3Clr, setEmoji3Clr] = useState([''], [''], [''], [''], ['']);
+    const [emoji4Clr, setEmoji4Clr] = useState([''], [''], [''], [''], ['']);
 
     const emojisClr = ['', '', '', '', ''];
 
@@ -51,11 +33,13 @@ const CvFeedback = () => {
                                 (btnId === 3)? 'warning' :
                                 (btnId === 4 || btnId === 5)? 'success': '';
 
-        setEmoji1_1Clr(emojisClr[0]);
-        setEmoji1_2Clr(emojisClr[1]);
-        setEmoji1_3Clr(emojisClr[2]);
-        setEmoji1_4Clr(emojisClr[3]);
-        setEmoji1_5Clr(emojisClr[4]);
+        setEmoji1Clr([
+            emojisClr[0],
+            emojisClr[1],
+            emojisClr[2],
+            emojisClr[3],
+            emojisClr[4]
+        ]);
 
         setRating1(btnId);
         console.log(rating1);        
@@ -65,11 +49,13 @@ const CvFeedback = () => {
                                 (btnId === 3)? 'warning' :
                                 (btnId === 4 || btnId === 5)? 'success': '';
 
-        setEmoji2_1Clr(emojisClr[0]);
-        setEmoji2_2Clr(emojisClr[1]);
-        setEmoji2_3Clr(emojisClr[2]);
-        setEmoji2_4Clr(emojisClr[3]);
-        setEmoji2_5Clr(emojisClr[4]);
+        setEmoji2Clr([
+            emojisClr[0],
+            emojisClr[1],
+            emojisClr[2],
+            emojisClr[3],
+            emojisClr[4]
+        ]);
 
         setRating2(btnId);
     };
@@ -78,11 +64,13 @@ const CvFeedback = () => {
                                 (btnId === 3)? 'warning' :
                                 (btnId === 4 || btnId === 5)? 'success': '';
 
-        setEmoji3_1Clr(emojisClr[0]);
-        setEmoji3_2Clr(emojisClr[1]);
-        setEmoji3_3Clr(emojisClr[2]);
-        setEmoji3_4Clr(emojisClr[3]);
-        setEmoji3_5Clr(emojisClr[4]);
+        setEmoji3Clr([
+            emojisClr[0],
+            emojisClr[1],
+            emojisClr[2],
+            emojisClr[3],
+            emojisClr[4]
+        ]);
 
         setRating3(btnId);
     };
@@ -91,13 +79,16 @@ const CvFeedback = () => {
                                 (btnId === 3)? 'warning' :
                                 (btnId === 4 || btnId === 5)? 'success': '';
 
-        setEmoji4_1Clr(emojisClr[0]);
-        setEmoji4_2Clr(emojisClr[1]);
-        setEmoji4_3Clr(emojisClr[2]);
-        setEmoji4_4Clr(emojisClr[3]);
-        setEmoji4_5Clr(emojisClr[4]);
+        setEmoji4Clr([
+            emojisClr[0],
+            emojisClr[1],
+            emojisClr[2],
+            emojisClr[3],
+            emojisClr[4]
+        ]);
 
         setRating4(btnId);
+        console.log(rating4);
     };
 
     //doesnt work
@@ -112,6 +103,35 @@ const CvFeedback = () => {
         }),        
     }));
 
+    const icons1 = [
+        { onclick: () => rating1Click(1), color: emoji1Clr[0], icon: SentimentVeryDissatisfiedIcon },
+        { onclick: () => rating1Click(2), color: emoji1Clr[1], icon: SentimentDissatisfiedIcon },
+        { onclick: () => rating1Click(3), color: emoji1Clr[2], icon: SentimentSatisfiedIcon },
+        { onclick: () => rating1Click(4), color: emoji1Clr[3], icon: SentimentSatisfiedAltIcon },
+        { onclick: () => rating1Click(5), color: emoji1Clr[4], icon: SentimentVerySatisfiedIcon },
+    ];
+    const icons2 = [
+        { onclick: () => rating2Click(1), color: emoji2Clr[0], icon: SentimentVeryDissatisfiedIcon },
+        { onclick: () => rating2Click(2), color: emoji2Clr[1], icon: SentimentDissatisfiedIcon },
+        { onclick: () => rating2Click(3), color: emoji2Clr[2], icon: SentimentSatisfiedIcon },
+        { onclick: () => rating2Click(4), color: emoji2Clr[3], icon: SentimentSatisfiedAltIcon },
+        { onclick: () => rating2Click(5), color: emoji2Clr[4], icon: SentimentVerySatisfiedIcon },
+    ];
+    const icons3 = [
+        { onclick: () => rating3Click(1), color: emoji3Clr[0], icon: SentimentVeryDissatisfiedIcon },
+        { onclick: () => rating3Click(2), color: emoji3Clr[1], icon: SentimentDissatisfiedIcon },
+        { onclick: () => rating3Click(3), color: emoji3Clr[2], icon: SentimentSatisfiedIcon },
+        { onclick: () => rating3Click(4), color: emoji3Clr[3], icon: SentimentSatisfiedAltIcon },
+        { onclick: () => rating3Click(5), color: emoji3Clr[4], icon: SentimentVerySatisfiedIcon },
+    ];
+    const icons4 = [
+        { onclick: () => rating4Click(1), color: emoji4Clr[0], icon: SentimentVeryDissatisfiedIcon },
+        { onclick: () => rating4Click(2), color: emoji4Clr[1], icon: SentimentDissatisfiedIcon },
+        { onclick: () => rating4Click(3), color: emoji4Clr[2], icon: SentimentSatisfiedIcon },
+        { onclick: () => rating4Click(4), color: emoji4Clr[3], icon: SentimentSatisfiedAltIcon },
+        { onclick: () => rating4Click(5), color: emoji4Clr[4], icon: SentimentVerySatisfiedIcon },
+    ];
+
     return(
         <>
         <Grid item xs={12} mb={4}>
@@ -124,32 +144,10 @@ const CvFeedback = () => {
                         <Typography variant='h6' >Overrall Experience</Typography>
                         <Typography variant='caption'>How would you rate the overrall experience of use of the CV generator platform?</Typography>
                     </Grid>
-                    <Grid container justifyContent={'space-between'} sx={{backgroundColor: 'white', width: '375px', borderRadius: '25px'}} mb={3}py={2}>
-                        <Grid item xs={2}  px={2} >
-                            <IconButton onClick={() => rating1Click(1)} style={{ width:'22px', height:'22px'}}>
-                                <SentimentVeryDissatisfiedIcon color={emoji1_1Clr} className={useStyles(1).button}/>
-                            </IconButton>
-                        </Grid>
-                        <Grid item xs={2} px={2} >
-                            <IconButton onClick={() => rating1Click(2)} style={{ width:'22px', height:'22px'}}>
-                                <SentimentDissatisfiedIcon color={emoji1_2Clr} className={useStyles(1).button} />
-                            </IconButton>
-                        </Grid>
-                        <Grid item xs={2} px={2} >
-                            <IconButton onClick={() => rating1Click(3)}  style={{ width:'22px', height:'22px'}}>
-                                <SentimentSatisfiedIcon color={emoji1_3Clr} className={useStyles(2).button} />
-                            </IconButton>
-                        </Grid>
-                        <Grid item xs={2} px={2} >
-                            <IconButton onClick={() => rating1Click(4)} style={{ width:'22px', height:'22px'}}>
-                                <SentimentSatisfiedAltIcon color={emoji1_4Clr} className={useStyles(3).button} />
-                            </IconButton>
-                        </Grid>
-                        <Grid item xs={2}  px={2} >
-                            <IconButton onClick={() => rating1Click(5)} style={{ width:'22px', height:'22px'}}>
-                                <SentimentVerySatisfiedIcon color={emoji1_5Clr} className={useStyles(3).button} />
-                            </IconButton>
-                        </Grid>
+                    <Grid container justifyContent={'space-between'} sx={{backgroundColor: 'white', width: '375px', borderRadius: '25px'}} mb={3}py={2}>                        
+                        {icons1.map(({ onclick, color, icon }, index) => (
+                            <RatingComp key={index} onclick={onclick} color={color} icon={icon} />
+                        ))}
                     </Grid>
 
                     <Grid item xs={12} mb={1}>
@@ -157,31 +155,9 @@ const CvFeedback = () => {
                         <Typography variant='caption'>How satisfied are you with the quality and the relevance of the generatored CV?</Typography>
                     </Grid>
                     <Grid container justifyContent={'space-between'} sx={{backgroundColor: 'white', width: '375px', borderRadius: '25px'}} mb={3}py={2}>
-                        <Grid item xs={2}  px={2} >
-                            <IconButton onClick={() => rating2Click(1)} style={{ width:'22px', height:'22px'}}>
-                                <SentimentVeryDissatisfiedIcon color={emoji2_1Clr} className={useStyles(1).button}/>
-                            </IconButton>
-                        </Grid>
-                        <Grid item xs={2} px={2} >
-                            <IconButton onClick={() => rating2Click(2)} style={{ width:'22px', height:'22px'}}>
-                                <SentimentDissatisfiedIcon color={emoji2_2Clr} className={useStyles(1).button} />
-                            </IconButton>
-                        </Grid>
-                        <Grid item xs={2} px={2} >
-                            <IconButton onClick={() => rating2Click(3)}  style={{ width:'22px', height:'22px'}}>
-                                <SentimentSatisfiedIcon color={emoji2_3Clr} className={useStyles(2).button} />
-                            </IconButton>
-                        </Grid>
-                        <Grid item xs={2} px={2} >
-                            <IconButton onClick={() => rating2Click(4)} style={{ width:'22px', height:'22px'}}>
-                                <SentimentSatisfiedAltIcon color={emoji2_4Clr} className={useStyles(3).button} />
-                            </IconButton>
-                        </Grid>
-                        <Grid item xs={2}  px={2} >
-                            <IconButton onClick={() => rating2Click(5)} style={{ width:'22px', height:'22px'}}>
-                                <SentimentVerySatisfiedIcon color={emoji2_5Clr} className={useStyles(3).button} />
-                            </IconButton>
-                        </Grid>
+                        {icons2.map(({ onclick, color, icon }, index) => (
+                            <RatingComp key={index} onclick={onclick} color={color} icon={icon} />
+                        ))}
                     </Grid>
 
                     <Grid item xs={12} mb={1}>
@@ -189,31 +165,9 @@ const CvFeedback = () => {
                         <Typography variant='caption'>Do you think you were able to customize the CV to meet your preferences and needs?</Typography>
                     </Grid>
                     <Grid container justifyContent={'space-between'} sx={{backgroundColor: 'white', width: '375px', borderRadius: '25px'}} mb={3}py={2}>
-                        <Grid item xs={2}  px={2} >
-                            <IconButton onClick={() => rating3Click(1)} style={{ width:'22px', height:'22px'}}>
-                                <SentimentVeryDissatisfiedIcon color={emoji3_1Clr} className={useStyles(1).button}/>
-                            </IconButton>
-                        </Grid>
-                        <Grid item xs={2} px={2} >
-                            <IconButton onClick={() => rating3Click(2)} style={{ width:'22px', height:'22px'}}>
-                                <SentimentDissatisfiedIcon color={emoji3_2Clr} className={useStyles(1).button} />
-                            </IconButton>
-                        </Grid>
-                        <Grid item xs={2} px={2} >
-                            <IconButton onClick={() => rating3Click(3)}  style={{ width:'22px', height:'22px'}}>
-                                <SentimentSatisfiedIcon color={emoji3_3Clr} className={useStyles(2).button} />
-                            </IconButton>
-                        </Grid>
-                        <Grid item xs={2} px={2} >
-                            <IconButton onClick={() => rating3Click(4)} style={{ width:'22px', height:'22px'}}>
-                                <SentimentSatisfiedAltIcon color={emoji3_4Clr} className={useStyles(3).button} />
-                            </IconButton>
-                        </Grid>
-                        <Grid item xs={2}  px={2} >
-                            <IconButton onClick={() => rating3Click(5)} style={{ width:'22px', height:'22px'}}>
-                                <SentimentVerySatisfiedIcon color={emoji3_5Clr} className={useStyles(3).button} />
-                            </IconButton>
-                        </Grid>
+                        {icons3.map(({ onclick, color, icon }, index) => (
+                            <RatingComp key={index} onclick={onclick} color={color} icon={icon} />
+                        ))}
                     </Grid>
                 </Grid>                    
             </div>
@@ -225,31 +179,9 @@ const CvFeedback = () => {
                         <Typography variant='caption'>How accurately do you feel the generated CV represents your skills and experiences?</Typography>
                     </Grid>
                     <Grid container justifyContent={'space-between'} sx={{backgroundColor: 'white', width: '375px', borderRadius: '25px'}} mb={3}py={2}>
-                        <Grid item xs={2}  px={2} >
-                            <IconButton onClick={() => rating4Click(1)} style={{ width:'22px', height:'22px'}}>
-                                <SentimentVeryDissatisfiedIcon color={emoji4_1Clr} className={useStyles(1).button}/>
-                            </IconButton>
-                        </Grid>
-                        <Grid item xs={2} px={2} >
-                            <IconButton onClick={() => rating4Click(2)} style={{ width:'22px', height:'22px'}}>
-                                <SentimentDissatisfiedIcon color={emoji4_2Clr} className={useStyles(1).button} />
-                            </IconButton>
-                        </Grid>
-                        <Grid item xs={2} px={2} >
-                            <IconButton onClick={() => rating4Click(3)}  style={{ width:'22px', height:'22px'}}>
-                                <SentimentSatisfiedIcon color={emoji4_3Clr} className={useStyles(2).button} />
-                            </IconButton>
-                        </Grid>
-                        <Grid item xs={2} px={2} >
-                            <IconButton onClick={() => rating4Click(4)} style={{ width:'22px', height:'22px'}}>
-                                <SentimentSatisfiedAltIcon color={emoji4_4Clr} className={useStyles(3).button} />
-                            </IconButton>
-                        </Grid>
-                        <Grid item xs={2}  px={2} >
-                            <IconButton onClick={() => rating4Click(5)} style={{ width:'22px', height:'22px'}}>
-                                <SentimentVerySatisfiedIcon color={emoji4_5Clr} className={useStyles(3).button} />
-                            </IconButton>
-                        </Grid>
+                        {icons4.map(({ onclick, color, icon }, index) => (
+                            <RatingComp key={index} onclick={onclick} color={color} icon={icon} />
+                        ))}
                     </Grid>
 
                     <Grid item xs={12} mb={1}>
