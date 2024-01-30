@@ -68,7 +68,9 @@ const Projects_1 = () => {
             </div>
 
             <div className="personalInfo-rightCol">
-                <Card variant="outlined" sx={{ height:'100%',maxHeight: '350px', width:'100%',maxWidth: '363px',borderRadius:'15px',overflowY:'auto',overflowX:'auto','@media (min-width:768px)':{overflowY:'hidden',},}}>
+
+                <Card variant="outlined" sx={{ height:'100%',maxHeight: '350px', width:'100%',maxWidth: '363px',borderRadius:'15px',overflowY:'auto',overflowX:'auto','@media (min-width:769px)':{overflowY:'hidden',},}}>
+
                     <CardContent >
                         <Typography variant="h5" component="div" sx={{ textAlign: 'center', fontWeight: 'bold' }}>Project Experience Tips</Typography>
                         <List>
