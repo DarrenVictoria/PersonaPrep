@@ -177,6 +177,13 @@
 }
 
 
+.disabled {
+  opacity: 0.5; /* Example: Reduce opacity for a grayed-out effect */
+  pointer-events: none; /* Disable pointer events to prevent interactions */
+  /* Add any other styles for a disabled appearance */
+}
+
+
 
 
 

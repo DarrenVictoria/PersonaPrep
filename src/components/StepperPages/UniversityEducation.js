@@ -3,17 +3,6 @@ import Grid from "@mui/material/Grid";
 import Typography from '@mui/material/Typography';
 import TextField from "@mui/material/TextField";
 import FileUpload from '../FileUpload';
-import TestAutoComplete from '../TestAutoComplete';
-import { CustomizedHook } from '../TextfieldButtonDataDisplay';
-import Card from '@mui/material/Card'; 
-import CardContent from '@mui/material/CardContent'; 
-import Avatar from '@mui/material/Avatar';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import cphone from '../../assets/images/iconcphone.svg';
-import CustomMultilineTextFields from '../CustomMultilineTextfield';
 import EditableChoose from '../EditableSelectOption';
 import { useState } from 'react';
 
@@ -24,13 +13,21 @@ const UniversityEducation = () => {
     const [startYear, setStartYear] = useState('');
     const [endMonth, setEndMonth] = useState('');
     const [endYear, setEndYear] = useState('');
+    const [uniName, setUniName] = useState('');
+    const [uniCity, setUniCity] = useState('');
+    const [uniCountry, setUniCountry] = useState('');
+
+    const uniNameChange = (event) => setUniName(event.target.value);
+    const uniCityChange = (event) => setUniCity(event.target.value);
+    const uniCountryChange = (event) => setUniCountry(event.target.value);
+
     return(
         <div className="personalInfo-main">
             <div className="personalInfo-leftCol">
                 <Grid container>
                     <Grid item xs={12} mb={3}>
                         <Typography mb={1}><span style={{color: 'red'}}>*</span>University</Typography>
-                        <TextField type="text" variant="outlined" fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='NSBM Green University'/>
+                        <TextField type="text" variant="outlined" value={uniName} onChange={uniNameChange} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='NSBM Green University'/>
                     </Grid>
                     <Grid item xs={12} mb={-2}>
                         <Typography><span style={{color: 'red'}}>*</span>Degree</Typography>
@@ -44,11 +41,11 @@ const UniversityEducation = () => {
                     </Grid>
                     <Grid item xs={12} mb={3}>
                         <Typography mb={1}><span style={{color: 'red'}}>*</span>City</Typography>
-                        <TextField type="text" variant="outlined" fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Homagama'/>
+                        <TextField type="text" variant="outlined" value={uniCity} onChange={uniCityChange} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Homagama'/>
                     </Grid>
                     <Grid item xs={12} mb={3}>
                         <Typography mb={1}><span style={{color: 'red'}}>*</span>Country</Typography>
-                        <TextField type="text" variant="outlined" fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Sri lanka'/>
+                        <TextField type="text" variant="outlined" value={uniCountry} onChange={uniCountryChange} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Sri lanka'/>
                     </Grid>
                     <Grid item xs={12} mb={-2}>
                         <Typography><span style={{color: 'red'}}>*</span>Start Date</Typography>

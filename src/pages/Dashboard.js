@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useEffect,useState} from 'react';
 import NavBar from '../components/Navbar'
 import "./Dashboard.css"
 import Avatar from '@mui/material/Avatar';
@@ -16,27 +16,92 @@ import AddLinkIcon from '@mui/icons-material/AddLink';
 import ShareIcon from '@mui/icons-material/Share';
 import FileUpload from '../components/FileUpload';
 
-import {useForm, Controller} from 'react-hook-form';
-import { getFirestore, addDoc, collection,updateDoc, doc } from 'firebase/firestore';
+import {useForm, Controller, useWatch } from 'react-hook-form';
+import { getFirestore, addDoc, collection,updateDoc, doc, setDoc, getDoc, serverTimestamp  } from 'firebase/firestore';
+import { useAuth } from '../hooks/useAuth';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 
 
+
 const UserProfileDiv = () => {
+  const { currentUser } = useAuth();
+  const [userName, setUserName] = useState('');
+  const [userEmail, setUserEmail] = useState('');
+  const [profilePicture, setProfilePicture] = useState('');
+   const [cvStatus, setCvStatus] = useState('');
+
+   useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        if (currentUser) {
+          const { displayName } = currentUser;
+          const username = displayName.toLowerCase().replace(/\s/g, '');
+
+          // Fetch user data from Firestore based on the username
+          const userCollectionRef = doc(getFirestore(), 'recruitmentStatus', username);
+          const userDocSnap = await getDoc(userCollectionRef);
+
+          if (userDocSnap.exists()) {
+            const userData = userDocSnap.data();
+            setCvStatus(userData['Cv-Status'] || '');
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching user data from Firestore:', error);
+      }
+    };
+
+    const fetchProfileData = async () => {
+      try {
+        if (currentUser) {
+          const { displayName, email, photoURL } = currentUser;
+          setUserName(displayName || 'Username');
+          setUserEmail(email || 'studentname@students.nsbm.ac.lk');
+          setProfilePicture(photoURL || '');
+        }
+      } catch (error) {
+        console.error('Error fetching profile data:', error);
+      }
+    };
+
+    fetchUserData();
+    fetchProfileData();
+  }, [currentUser]);
+
+  const getInitials = (name) => {
+    return name.split(' ').map((part) => part[0]).join('').toUpperCase();
+  };
+
   return (
     <div  className="UserProfileDiv">
       <div   style={{ display: 'flex', alignItems: 'center' }}>
         <div  style={{ marginRight: '20px' }}>
           {/* Change the src attribute to the path of your avatar image */}
-          <Avatar alt="User Avatar" src="/path/to/avatar.jpg" sx={{ width: 120, height: 120 }} />
+          {profilePicture ? (
+            <Avatar alt="User Avatar" src={profilePicture} sx={{ width: 120, height: 120 }} />
+          ) : (
+            <Avatar alt="User Avatar" sx={{ width: 120, height: 120 }}>
+              {getInitials(userName)}
+            </Avatar>
+          )}
         </div>
         <div style={{ textAlign: 'left' }}>
-          <h1 style={{ fontFamily: 'Inter', fontWeight: 'bold', fontSize: '50px', margin: 0 }}>John Doe</h1>
-          <p style={{ fontFamily: 'Inter', fontSize: '20px', margin: '5% 0' }}>BSc.(Hons) in Software Engineering</p>
-          <p style={{ fontFamily: 'Inter', fontSize: '16px', margin: '8% 0' , }}>CV Status: <Button variant="contained" style={{ backgroundColor: '#00FF00', color: '#000', fontWeight: 'bold' }}>
-            Created
-          </Button></p>
-          
+          <h1 style={{ fontFamily: 'Inter', fontWeight: 'bold', fontSize: '50px', margin: 0 }}>{userName}</h1>
+          <p style={{ fontFamily: 'Inter', fontSize: '20px', margin: '5% 0' }}>{userEmail}</p>
+          <p style={{ fontFamily: 'Inter', fontSize: '16px', margin: '8% 0' , }}>
+          CV Status:{' '}
+            <Button
+              variant="contained"
+              style={{
+                backgroundColor: cvStatus === 'created' ? '#00FF00' : 'red',
+                color: '#000',
+                fontWeight: 'bold',
+              }}
+            >
+              {cvStatus === 'created' ? 'Created' : 'Not Created'}
+            </Button>
+          </p>
         </div>
       </div>
     </div>
@@ -45,18 +110,85 @@ const UserProfileDiv = () => {
 
 
 const RecruitmentStatus = () => {
-  const { control, handleSubmit } = useForm();
+  const { control, handleSubmit, setValue } = useForm();
+  const { currentUser } = useAuth();
+  const selectedStatus = useWatch({ control, name: 'Recruitment-Status' });
+
+  const updateUserRecruitmentStatus = async (email, data) => {
+    try {
+      const collectionRef = collection(getFirestore(), 'studentdetails');
+      const userDocRef = doc(collectionRef, email);
+
+      const docSnap = await getDoc(userDocRef);
+
+      if (docSnap.exists()) {
+        // Document exists, check if "Recruitment-Status" field is present
+        const userData = docSnap.data();
+
+        if ('Recruitment-Status' in userData) {
+          // "Recruitment-Status" field is present, update it
+          await updateDoc(userDocRef, {
+            'Recruitment-Status': data['Recruitment-Status'],
+            // You can add additional fields or update timestamp if needed
+            updatedAt: serverTimestamp(),
+          });
+        } else {
+          // "Recruitment-Status" field is not present, add it
+          await setDoc(userDocRef, {
+            'Recruitment-Status': data['Recruitment-Status'],
+            // You can add additional fields or set timestamp if needed
+            createdAt: serverTimestamp(),
+          }, { merge: true });
+        }
+        console.log('Recruitment Status Data successfully added/updated in Firestore');
+      } else {
+        console.error('User document not found in studentdetails collection.');
+      }
+    } catch (error) {
+      console.error('Error updating Recruitment Status data in Firestore:', error);
+    }
+  };
 
   const onSubmit = async (data) => {
     try {
-      // Specify the name of your Firestore collection
-      const collectionRef = collection(getFirestore(), 'recruitmentStatus');
-      await addDoc(collectionRef, data);
-      console.log('Recruitment Status Data successfully added to Firestore');
+      if (currentUser) {
+        const { email } = currentUser;
+        await updateUserRecruitmentStatus(email, data);
+      } else {
+        console.error('User not logged in.');
+      }
     } catch (error) {
-      console.error('Error adding Recruitment Status data to Firestore:', error);
+      console.error('Error adding/updating Recruitment Status data to Firestore:', error);
     }
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (currentUser) {
+          const { email } = currentUser;
+
+          const collectionRef = collection(getFirestore(), 'studentdetails');
+          const userDocRef = doc(collectionRef, email);
+
+          const docSnap = await getDoc(userDocRef);
+
+          if (docSnap.exists()) {
+            const userData = docSnap.data();
+            // Set the initial value for the 'Recruitment-Status' field in the form
+            setValue('Recruitment-Status', userData['Recruitment-Status'] || '');
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching Recruitment Status data from Firestore:', error);
+      }
+    };
+
+    fetchData();
+  }, [currentUser, setValue]);
+
+  
+
 
   return (
     <div>
@@ -203,23 +335,50 @@ const RecruitmentStatus = () => {
   }
 
   const Feedback = () => {
-          const { control, handleSubmit } = useForm();
+          const { control, handleSubmit, reset  } = useForm();
         const firestore = getFirestore();
 
-        const [uploadedFile, setUploadedFile] = useState([]);
+        const [uploadedFiles, setUploadedFiles] = useState([]);
+        const [fileUploadKey, setFileUploadKey] = useState(0);
+
+        const onResetFeedback = () => {
+          reset();
+          setFileUploadKey((prevKey) => prevKey + 1);
+          setUploadedFiles([]); // Clear uploaded files
+        };
+        const onFileUpload = (fileInfo) => {
+          setUploadedFiles((prevFiles) => [...prevFiles, fileInfo]);
+        };
 
         const onSubmit = async (data) => {
           try {
-            // If there is an uploaded file, get the file path from the state
-            const filePaths = uploadedFile.map((file) => file.downloadURL);
+            // If there are uploaded files, get their information
+              const filesData = uploadedFiles.map((fileInfo) => ({
+                downloadURL: fileInfo.downloadURL,
+                fileId: fileInfo.fileId,
+              }));
+
+              console.log('Form data:', data);
+              console.log('Files data:', filesData);
 
             // Merge the file path with the rest of the form data
-            const formData = { ...data, files: filePaths };
+            const formData = { ...data, files: filesData };
+
+            console.log('Final formData:', formData);
 
             const collectionRef = collection(firestore, 'feedback');
             const docRef = await addDoc(collectionRef, formData);
 
             console.log('Data successfully added to Firestore', formData);
+
+            reset();
+
+            // Increment the key to force a re-render of FileUpload component
+            setFileUploadKey((prevKey) => prevKey + 1);
+
+            // Reset the uploaded files state
+            setUploadedFiles([]);
+
           } catch (error) {
             console.error('Error adding data to Firestore:', error);
           }
@@ -227,12 +386,12 @@ const RecruitmentStatus = () => {
 
         const handleFileUpload = (fileInfo) => {
           // Handle the file information (e.g., store it in state or use it as needed)
-          setUploadedFile((prevFiles) => [...prevFiles, fileInfo]);
+          setUploadedFiles((prevFiles) => [...prevFiles, fileInfo]);
         };
   
     return (
       <div>
-        <h2 style={{ fontFamily: 'Inter', fontWeight: 'bold', fontSize: '24px', margin: '10px 0', marginLeft: '2%' }}>Feedback</h2>
+        <h2 style={{ fontFamily: 'Inter', fontWeight: 'bold', fontSize: '24px', margin: '10px 0', marginLeft: '2%' }}>Anonymous Feedback</h2>
   
         <div style={{
           backgroundColor: '#D3D3D3',
@@ -283,10 +442,10 @@ const RecruitmentStatus = () => {
                     variant="outlined"
                     style={{
                       width: '100%',
-                      '& .MuiOutlinedInput-notchedOutline': {
+                      '& .MuiOutlinedInputNotchedOutline': {
                         borderColor: '#000000',
                       },
-                      '&:hover .MuiOutlinedInput-notchedOutline': {
+                      '&:hover .MuiOutlinedInputNotchedOutline': {
                         borderColor: '#000000',
                       },
                     }}
@@ -320,7 +479,13 @@ const RecruitmentStatus = () => {
                 name="file"
                 control={control}
                 defaultValue=""
-                render={({ field }) => <FileUpload {...field} onFileUpload={handleFileUpload} />}
+                render={({ field }) => (
+                  <FileUpload
+                    key={fileUploadKey}
+                    onFileUpload={onFileUpload}
+                    onReset={onResetFeedback} // Pass the onReset function
+                  />
+                )}
               />
             </FormControl>
 
@@ -330,6 +495,12 @@ const RecruitmentStatus = () => {
             <Button type="submit" variant="contained" style={{ backgroundColor: '#000', color: '#fff', marginTop: '1.5rem' }}>
               Submit Feedback
             </Button>
+
+            <Button variant="contained" onClick={onResetFeedback} style={{ backgroundColor: '#FF0000', color: '#fff', marginTop: '1.5rem', marginLeft: '1.5rem' }}>
+              Reset
+            </Button>
+
+            
           </form>
         </div>
       </div>
@@ -338,11 +509,12 @@ const RecruitmentStatus = () => {
   
 
 const Dashboard =() =>{
+  const { currentUser } = useAuth();
     return(
 
         <div>
             <NavBar/>
-            <p style={{marginBottom:'2rem'}}><span class="fancy">User Dashboard</span></p>
+            <p style={{marginBottom:'2rem'}}><span className="fancy">User Dashboard</span></p>
             <UserProfileDiv/>
             <RecruitmentStatus/>
             <CVGenerator/>

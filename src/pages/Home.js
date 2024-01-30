@@ -17,6 +17,7 @@ import Footer from '../components/footer'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const GrayDiv = () => {
+  
   return (
     <div style={{ 
       backgroundColor: '#D3D3D3', // Gray color
@@ -208,6 +209,8 @@ const gridItems = [
 
 export default function SplitLayout() {
 
+  const isDisabled = true;
+
     const TotalIB = {
       paddingLeft: '5%',
       paddingRight: '5%',
@@ -223,8 +226,8 @@ export default function SplitLayout() {
         window.location.href = '/startform';
       };
     
-      const redirectToYoutube = () => {
-        window.location.href = 'https://www.youtube.com/';
+      const redirectToNSBM = () => {
+        window.location.href = 'https://www.nsbm.ac.lk/';
       };
 
       const redirectTo = (url) => {
@@ -232,6 +235,8 @@ export default function SplitLayout() {
       };
 
   return (
+
+    
 
     <div>
     <NavBar />
@@ -254,10 +259,11 @@ export default function SplitLayout() {
         </div>
       </div>
     </div>
-    <div className="bottom-right-box interview-box" onClick={redirectToYoutube}>
+    <div className={`bottom-right-box interview-box ${isDisabled ? 'disabled' : ''}`} onClick={isDisabled ? null : redirectToNSBM}>
       <div className="box-content">
         <div>
-          <h2 className="inter-top">Interview Simulator</h2>
+          <h2 className="inter-top">Interview Simulator (Coming Soon) </h2>
+          
           <p className="inter">
             Sharpen your interview skills and boost your confidence with our AI-driven Mock Interview experience
           </p>
