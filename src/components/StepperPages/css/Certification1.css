@@ -25,6 +25,7 @@
     max-width: 100%;
     padding: 0 20px; /* Adjusted padding for smaller screens */
     box-sizing: border-box;
+    overflow: auto;
   }
   
   .Certification1-Maindiv {
