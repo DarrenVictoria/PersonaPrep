@@ -80,7 +80,7 @@ const Template = () => {
                 <div className="logo"><img src={logo} alt="logo" style={{width:'120px'}}/></div>
                 <div className="formtemp-variable">
                     {
-                        (currentPageIndex == 0) && <p className="formtemp-variablename"></p>
+                        (currentPageIndex == 0) && <p className="formtemp-variablename">Degree Information</p>
                     }
                     {
                         (currentPageIndex == 1) && <p className="formtemp-variablename">Personal Information</p>
