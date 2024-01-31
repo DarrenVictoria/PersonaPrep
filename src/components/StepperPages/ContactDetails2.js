@@ -88,124 +88,15 @@ const ContactDetails_2 = () => {
                         <Typography mb={1}>Indicate the desired communication method</Typography>
                     </Grid>
 
-<<<<<<< Updated upstream
-    return(
-    <div className='Contactdetails2-Maindiv'>
-     
-        
-      <div className='Contactdetails2-LeftColumn'>
-        
-                {/* CheckboxListWithTextField component code */}
-          <h1 style={{marginBottom:'5px'}}>Social network accounts</h1> <p style={{marginTop:'2px'}}>Indicate the desired communication method</p> 
-              
-        <List dense style={{ width: '100%', maxWidth: 700, bgcolor: 'white', height: '375px' }}>
-              {[0, 1, 2, 3, 4].map((value, index) => {
-                  const labelId = `checkbox-list-secondary-label-${value}`;
-                  const sampleNames = ['GitHub', 'Linken In', 'Twitter', 'Stackoverflow','Medium'];
-                  const sampleImages = [github,linkedIn,twitter,stackoverflow,medium];
-
-            return (
-            <ListItem key={value} disablePadding sx={{marginBottom: 4}}>
-                <ListItemButton>
-                <ListItemAvatar>
-                    <Avatar alt={`Avatar of ${sampleNames[value]}`} src={sampleImages[value]} sx={{width:'24px',height:'24px','@media(max-width:430px)':{marginLeft:-3},'@media(max-width:936px) and (min-width:400px)':{marginLeft:-3}}} />
-                </ListItemAvatar>
-                <ListItemText id={labelId} primary={sampleNames[value]} sx={{'@media(max-width:430px)':{marginLeft:-4},'@media(max-width:936px) and (min-width:400px)':{marginLeft:-4}}} />
-                </ListItemButton>
-                <Checkbox
-                edge="end"
-                onChange={handleToggle(value)}
-                checked={checked.indexOf(value) !== -1}
-                inputProps={{ 'aria-labelledby': labelId }}
-                sx={{'@media(max-width:430px)':{marginLeft:7},'@media(max-width:936px) and (min-width:400px)':{marginLeft:5}}}
-                />
-                <TextField
-                label="@profile"
-                variant="outlined"
-                size="small"
-                /*below inputprops and the inputlabelprop is to add styling for the text box and the place holder*/ 
-                InputProps={{
-                style:{ marginLeft: '10px',borderRadius:"20px",backgroundColor:"white",color:"black",}}}
-                InputLabelProps={{
-                  style:{color:"#CBCBCB"}
-                }}
-                value={textValues[index]} // Controlled input value
-                onChange={handleTextFieldChange(index)} // Handle text field changes
-                />
-            </ListItem>
-            );
-          })}
-        </List>
-      </div>
-            
-
-      
-
-     
-      <div className='Contactdetails2-RightColumn'>
-        <Card variant="outlined" sx={{ height:'100%',maxHeight: '450px', width:'100%',maxWidth: '363px',borderRadius:'15px',overflowY:'auto',overflowX:'auto','@media (min-width:820px)':{overflowY:'hidden'},'@media (max-width:430px) and (min-width:412px)':{height:'350px',width:'290px'},'@media (min-width:360px) and (max-width:390px)':{height:'350px',width:'230px'}}}className='Contactdetails2-RightColumnCard'>
-          <CardContent >
-          <Typography variant="h5" component="div" sx={{ textAlign: 'center', fontWeight: 'bold' }}>
-              Social Media tips
-            </Typography>
-            <List>
-              <ListItem >
-              <ListItemAvatar>
-                <Avatar sx={{paddingTop:'4px',borderRadius: '12px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <img src={chand} alt="Custom Icon" style={{ width: '45.732px', height: '47.022px' }}/>
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText>
-                <Typography variant='body1' >
-                  Choose social media platforms that align with your professional goals.
-                </Typography>
-              </ListItemText>
-              </ListItem>
-              <ListItem >
-              <ListItemAvatar>
-                <Avatar sx={{paddingTop:'4px',borderRadius: '12px' ,display: 'flex', justifyContent: 'center', alignItems: 'center'  }}>
-              <img src={clinkedin} alt="Custom Icon" style={{ width: '45.732px', height: '47.022px' }} />
-              </Avatar>
-              </ListItemAvatar>
-              <ListItemText>
-              <Typography variant='body1'>
-              LinkedIn is ideal for showcasing skills, connecting with industry professionals, and highlighting educational background.
-              </Typography>
-              </ListItemText>
-              </ListItem>
-              <ListItem >
-              <ListItemAvatar>
-                <Avatar sx={{paddingTop:'4px',borderRadius: '12px',display: 'flex', justifyContent: 'center', alignItems: 'center'  }}>
-              <img src={cgithub} alt="Custom Icon" style={{ width: '45.732px', height: '47.022px' ,}} />
-              </Avatar>
-              </ListItemAvatar>
-              <ListItemText>
-              <Typography variant='body1'>
-              GitHub is useful to showcase technical skills and coding projects, collaborating with the coding community.
-              </Typography>
-              </ListItemText>
-              </ListItem>
-            </List>
-          </CardContent>
-        </Card>
-        
-      </div>
-        
-      
-    </div>
-    
-  )
-=======
                     <CheckBoxComp image={github} name='GitHub' value={gitTxt} setText={setGitTxt} checked={gitChecked} setCheck={setGitChecked}/>
                     <CheckBoxComp image={linkedIn} name='LinkedIn' value={linkedInTxt} setText={setLinkedInTxt} checked={linkedChecked} setCheck={setlinkedChecked}/>
                     <CheckBoxComp image={twitter} name='Twitter' value={twitterTxt} setText={setTwitterTxt} checked={twitterChecked} setCheck={setTwitterChecked}/>
                     <CheckBoxComp image={stackoverflow} name='StackOverflow' value={soTxt} setText={setSoTxt} checked={soChecked} setCheck={setSoChecked}/>
                     <CheckBoxComp image={medium} name='Medium' value={mediumTxt} setText={setMediumTxt} checked={mediumChecked} setCheck={setMediumChecked}/>
                     
-                    <button onClick={btn}>btn</button>
+                    {/* <button onClick={btn}>btn</button> */}
                 </Grid>
             </div>
->>>>>>> Stashed changes
 
             <div className="personalInfo-rightCol">
                 <Card variant="outlined" sx={{ height:'100%',maxHeight: '420px', width:'100%',maxWidth: '363px',borderRadius:'15px',overflowY:'auto',overflowX:'auto','@media (min-width:769px)':{overflowY:'hidden',},}}>

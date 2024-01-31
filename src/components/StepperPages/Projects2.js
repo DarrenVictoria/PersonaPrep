@@ -68,7 +68,7 @@ const Projects_2 = () => {
                     </Grid>
                     <Grid item xs={12} md={5} mb={3}>
                         <EditableChoose
-                            options={["University","University"]}
+                            options={["Place", "University","University"]}
                             onSelect={setProjPlace}
                             disabledOptions={[]}
                         />
