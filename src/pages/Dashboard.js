@@ -478,13 +478,11 @@ const RecruitmentStatus = () => {
   
             <br />
   
-            <Button type="submit" variant="contained" style={{ backgroundColor: '#000', color: '#fff', marginTop: '1.5rem' }}>
+            <Button type="submit" variant="contained" style={{ backgroundColor: '#000', color: '#fff', marginTop: '1.5rem',marginLeft:'1.5rem' }}>
               Submit Feedback
             </Button>
 
-            <Button variant="contained" onClick={onResetFeedback} style={{ backgroundColor: '#FF0000', color: '#fff', marginTop: '1.5rem', marginLeft: '1.5rem' }}>
-              Reset
-            </Button>
+            
 
             
           </form>
