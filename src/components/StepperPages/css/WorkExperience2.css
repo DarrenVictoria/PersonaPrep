@@ -19,7 +19,8 @@
 }
 
 .workexperience-remaining-words {
-    bottom: 8px;
+
+    bottom: -9px;
     right: 12px;
     position: absolute;
 }

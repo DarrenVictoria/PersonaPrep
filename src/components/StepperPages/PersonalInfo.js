@@ -16,7 +16,7 @@ import cphone from '../../assets/images/iconcphone.svg';
 import { useState } from 'react';
 
 const PersonalInfo = () => {
-    const job_roles = [{data:"role1"}, {data:"role2"}, {data:"role3"}];
+    const job_roles = [{data:"role1"}, {data:"role2"}, {data:"role3"},{data:"role4"},{data:"role5"},{data:"role6"},{data:"role7"},{data:"role8"}];
     const [phone, setPhone] = useState('');
 
     const phoneChange = (event) => setPhone(event.target.value);
@@ -40,8 +40,8 @@ const PersonalInfo = () => {
             </div>
 
             <div className="personalInfo-rightCol">
-                <Card variant="outlined" sx={{ height:'100%',maxHeight: '450px', width:'100%',maxWidth: '363px',borderRadius:'15px',overflowY:'auto',overflowX:'auto','@media (min-width:769px)':{overflowY:'hidden',},}}>
-                    <CardContent >
+                <div style={{padding: '8px 0px', backgroundColor: '#fff', borderRadius: '15px', maxWidth: '363px'}}>
+                    <Card variant="outlined" sx={{height:'100%',maxHeight: '450px', width:'100%',maxWidth: '363px',borderRadius:'15px', border: 'none', overflowY:'auto',overflowX:'auto','@media (max-width:769px)':{borderColor:'white'},'@media (min-width:769px)':{overflowY:'hidden'}}}>                    <CardContent >
                         <Typography variant="h5" component="div" sx={{ textAlign: 'center', fontWeight: 'bold' }}>Personal Info Tips</Typography>
                         <List>
                             <ListItem >
@@ -83,7 +83,8 @@ const PersonalInfo = () => {
                             </ListItem>
                         </List>
                     </CardContent>
-                </Card>
+                    </Card>
+                </div>
             </div>
         </div>
     )

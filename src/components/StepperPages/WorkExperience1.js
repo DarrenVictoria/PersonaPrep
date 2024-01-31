@@ -92,8 +92,8 @@ const WorkExperience = () => {
         </div>
 
         <div className="WorkExperience1-RightColumn">
-            <Card variant="outlined" sx={{ height:'100%',maxHeight: '450px', width:'100%',maxWidth: '363px',borderRadius:'15px',overflowY:'auto',overflowX:'auto','@media (min-width:769px)':{overflowY:'hidden',}}}>
-                <CardContent >
+            <div style={{padding: '8px 0px', backgroundColor: '#fff', borderRadius: '15px', maxWidth: '363px'}}>
+                <Card variant="outlined" sx={{height:'100%',maxHeight: '450px', width:'100%',maxWidth: '363px',borderRadius:'15px', border: 'none', overflowY:'auto',overflowX:'auto','@media (max-width:769px)':{borderColor:'white'},'@media (min-width:769px)':{overflowY:'hidden'}}}>                <CardContent >
                     <Typography variant="h5" component="div" sx={{ textAlign: 'center', fontWeight: 'bold' }}>Work Experience tips</Typography>
                     <List>
                         <ListItem >
@@ -135,7 +135,9 @@ const WorkExperience = () => {
                         </ListItem>
                     </List>
                 </CardContent>
-            </Card>
+                </Card>
+            </div>
+            
         </div>
     </div>
     )
