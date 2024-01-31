@@ -247,7 +247,7 @@ const RecruitmentStatus = () => {
           boxSizing: 'border-box',
         }}>
           {/* CV Generator Box Replica */}
-          <div className="cv-box" >
+          <div className="cv-box-new" >
             <div>
               <h1>Edit your CV</h1>
               <p>Make seamless adjustments, update information, and elevate your CV effortlessly.</p>

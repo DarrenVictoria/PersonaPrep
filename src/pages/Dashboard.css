@@ -42,7 +42,7 @@
     margin: 5% 0; /* Adjust margin as needed */
   }
   
-  .cv-box { 
+  .cv-box-new { 
     padding: 35px;
     text-align: left;
     background:  linear-gradient(0deg, #FFDFDF 0%, #FFDFDF 100%),
@@ -92,7 +92,7 @@
       flex-direction: column; /* Display in a column layout */
     }
   
-    .cv-box { 
+    .cv-box-new { 
       width: 100%;
       margin-top: 20px; /* Add some space between the components */
       padding:15.5vw;
@@ -146,7 +146,7 @@
   }
 
 
-  .cv-box:hover,
+  .cv-box-new:hover,
 .interview-box:hover {
   transform: scale(1.02);
   transition: transform 0.3s ease;
