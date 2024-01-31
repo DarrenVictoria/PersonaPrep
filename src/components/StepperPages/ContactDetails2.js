@@ -36,10 +36,9 @@ const ContactDetails_2 = () => {
     const [soTxt, setSoTxt] = useState('');
     const [mediumTxt, setMediumTxt] = useState('');
 
-
     const CheckBoxComp = ({image, name, value, setText, checked, setCheck}) => {
         const handleChange = (event) => {
-            if(!checked) setText('');
+            if (!checked) setText('');
             else setText(event.target.value);
         }
         
@@ -47,23 +46,23 @@ const ContactDetails_2 = () => {
             setCheck(event.target.checked);
         }
     
-        useEffect( () => {
-            if(!checked) setText('');
+        useEffect(() => {
+            if (!checked) setText('');
         }, [checked]);
     
         return (
             <Grid container mb={2} alignItems='center'>
                 <Grid item xs={1} md={1}>
-                    <img src={image} />
+                    <img src={image} alt={`${name} icon`} />
                 </Grid>
                 <Grid item xs={5} md={4} pl={1} pt={1}>
                     <Typography mb={1}>{name}</Typography>
                 </Grid>
                 <Grid item xs={1} md={1}>
-                    <FormControlLabel control={<Checkbox  checked={checked} onChange={handleCheck}/>}/>
+                    <FormControlLabel control={<Checkbox  checked={checked} onChange={handleCheck} />} />
                 </Grid>
                 <Grid item xs={5} md={6}>
-                    <TextField type="text" value={value} onChange={handleChange} disabled={!checked} variant="outlined" fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='@profile'/>
+                    <TextField type="text" value={value} onChange={handleChange} disabled={!checked} variant="outlined" fullWidth InputProps={{ style: { borderRadius: '25px', backgroundColor: 'white' }}} placeholder='@profile'/>
                 </Grid>
             </Grid>
         )
@@ -71,11 +70,11 @@ const ContactDetails_2 = () => {
 
     const btn = (event) => {
         event.preventDefault();
-        if(gitTxt === '') console.log('git null');
-        if(linkedInTxt === '') console.log('linked null');
-        if(twitterTxt === '') console.log('twitter null');
-        if(soTxt === '') console.log('so null');
-        if(mediumTxt === '') console.log('medium null');
+        if (gitTxt === '') console.log('git null');
+        if (linkedInTxt === '') console.log('linked null');
+        if (twitterTxt === '') console.log('twitter null');
+        if (soTxt === '') console.log('so null');
+        if (mediumTxt === '') console.log('medium null');
         console.log(`${gitTxt} ${linkedInTxt} ${twitterTxt} ${soTxt} ${mediumTxt}`);
     }
 
@@ -93,14 +92,12 @@ const ContactDetails_2 = () => {
                     <CheckBoxComp image={twitter} name='Twitter' value={twitterTxt} setText={setTwitterTxt} checked={twitterChecked} setCheck={setTwitterChecked}/>
                     <CheckBoxComp image={stackoverflow} name='StackOverflow' value={soTxt} setText={setSoTxt} checked={soChecked} setCheck={setSoChecked}/>
                     <CheckBoxComp image={medium} name='Medium' value={mediumTxt} setText={setMediumTxt} checked={mediumChecked} setCheck={setMediumChecked}/>
-                    
-                    {/* <button onClick={btn}>btn</button> */}
                 </Grid>
             </div>
 
             <div className="personalInfo-rightCol">
                 <Card variant="outlined" sx={{ height:'100%',maxHeight: '420px', width:'100%',maxWidth: '363px',borderRadius:'15px',overflowY:'auto',overflowX:'auto','@media (min-width:769px)':{overflowY:'hidden',},}}>
-                    <CardContent >
+                    <CardContent>
                         <Typography variant="h5" component="div" sx={{ textAlign: 'center', fontWeight: 'bold' }}>Social Media Tips</Typography>
                         <List>
                             <ListItem >
@@ -146,5 +143,5 @@ const ContactDetails_2 = () => {
         </div>
     );
 }
- 
+
 export default ContactDetails_2;

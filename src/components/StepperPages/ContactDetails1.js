@@ -127,7 +127,7 @@ const ContactDetails_1 = () => {
 
      
       <div className='Contactdetails1-RightColumn'>
-        <Card variant="outlined" sx={{ height:'100%',maxHeight: '450px', width:'100%',maxWidth: '363px',borderRadius:'15px',overflowY:'auto',overflowX:'auto','@media (min-width:768px)':{overflowY:'hidden',},}}className='Contactdetails1-RightColumnCard'>
+        <Card variant="outlined" sx={{ height:'100%',maxHeight: '450px', width:'100%',maxWidth: '363px',borderRadius:'15px',overflowY:'auto',overflowX:'auto','@media (min-width:769px)':{overflowY:'hidden'},}}className='Contactdetails1-RightColumnCard'>
           <CardContent >
           <Typography variant="h5" component="div" sx={{ textAlign: 'center', fontWeight: 'bold' }}>
                 Contact Detail Tips

@@ -17,9 +17,10 @@ import ShareIcon from '@mui/icons-material/Share';
 import FileUpload from '../components/FileUpload';
 
 import {useForm, Controller, useWatch } from 'react-hook-form';
-import { getFirestore, addDoc, collection,updateDoc, doc, setDoc, getDoc } from 'firebase/firestore';
+import { getFirestore, addDoc, collection,updateDoc, doc, setDoc, getDoc, serverTimestamp  } from 'firebase/firestore';
 import { useAuth } from '../hooks/useAuth';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+
 
 
 
@@ -113,24 +114,51 @@ const RecruitmentStatus = () => {
   const { currentUser } = useAuth();
   const selectedStatus = useWatch({ control, name: 'Recruitment-Status' });
 
+  const updateUserRecruitmentStatus = async (email, data) => {
+    try {
+      const collectionRef = collection(getFirestore(), 'studentdetails');
+      const userDocRef = doc(collectionRef, email);
+
+      const docSnap = await getDoc(userDocRef);
+
+      if (docSnap.exists()) {
+        // Document exists, check if "Recruitment-Status" field is present
+        const userData = docSnap.data();
+
+        if ('Recruitment-Status' in userData) {
+          // "Recruitment-Status" field is present, update it
+          await updateDoc(userDocRef, {
+            'Recruitment-Status': data['Recruitment-Status'],
+            // You can add additional fields or update timestamp if needed
+            updatedAt: serverTimestamp(),
+          });
+        } else {
+          // "Recruitment-Status" field is not present, add it
+          await setDoc(userDocRef, {
+            'Recruitment-Status': data['Recruitment-Status'],
+            // You can add additional fields or set timestamp if needed
+            createdAt: serverTimestamp(),
+          }, { merge: true });
+        }
+        console.log('Recruitment Status Data successfully added/updated in Firestore');
+      } else {
+        console.error('User document not found in studentdetails collection.');
+      }
+    } catch (error) {
+      console.error('Error updating Recruitment Status data in Firestore:', error);
+    }
+  };
+
   const onSubmit = async (data) => {
     try {
       if (currentUser) {
-        const { uid, displayName } = currentUser;
-        const username = displayName.toLowerCase().replace(/\s/g, ''); // Generate a username from the display name
-
-        // Specify the name of your Firestore collection and document
-        const collectionRef = collection(getFirestore(), 'recruitmentStatus');
-        const userDocRef = doc(collectionRef, username);
-
-        // Create or update the document with the UID as the document ID
-        await setDoc(userDocRef, { ...data, uid });
-        console.log('Recruitment Status Data successfully added to Firestore');
+        const { email } = currentUser;
+        await updateUserRecruitmentStatus(email, data);
       } else {
         console.error('User not logged in.');
       }
     } catch (error) {
-      console.error('Error adding Recruitment Status data to Firestore:', error);
+      console.error('Error adding/updating Recruitment Status data to Firestore:', error);
     }
   };
 
@@ -138,18 +166,17 @@ const RecruitmentStatus = () => {
     const fetchData = async () => {
       try {
         if (currentUser) {
-          const { displayName } = currentUser;
-          const username = displayName.toLowerCase().replace(/\s/g, '');
+          const { email } = currentUser;
 
-          const collectionRef = collection(getFirestore(), 'recruitmentStatus');
-          const userDocRef = doc(collectionRef, username);
+          const collectionRef = collection(getFirestore(), 'studentdetails');
+          const userDocRef = doc(collectionRef, email);
 
           const docSnap = await getDoc(userDocRef);
 
           if (docSnap.exists()) {
-            const data = docSnap.data();
+            const userData = docSnap.data();
             // Set the initial value for the 'Recruitment-Status' field in the form
-            setValue('Recruitment-Status', data['Recruitment-Status']);
+            setValue('Recruitment-Status', userData['Recruitment-Status'] || '');
           }
         }
       } catch (error) {
@@ -308,23 +335,50 @@ const RecruitmentStatus = () => {
   }
 
   const Feedback = () => {
-          const { control, handleSubmit } = useForm();
+          const { control, handleSubmit, reset  } = useForm();
         const firestore = getFirestore();
 
-        const [uploadedFile, setUploadedFile] = useState([]);
+        const [uploadedFiles, setUploadedFiles] = useState([]);
+        const [fileUploadKey, setFileUploadKey] = useState(0);
+
+        const onResetFeedback = () => {
+          reset();
+          setFileUploadKey((prevKey) => prevKey + 1);
+          setUploadedFiles([]); // Clear uploaded files
+        };
+        const onFileUpload = (fileInfo) => {
+          setUploadedFiles((prevFiles) => [...prevFiles, fileInfo]);
+        };
 
         const onSubmit = async (data) => {
           try {
-            // If there is an uploaded file, get the file path from the state
-            const filePaths = uploadedFile.map((file) => file.downloadURL);
+            // If there are uploaded files, get their information
+              const filesData = uploadedFiles.map((fileInfo) => ({
+                downloadURL: fileInfo.downloadURL,
+                fileId: fileInfo.fileId,
+              }));
+
+              console.log('Form data:', data);
+              console.log('Files data:', filesData);
 
             // Merge the file path with the rest of the form data
-            const formData = { ...data, files: filePaths };
+            const formData = { ...data, files: filesData };
+
+            console.log('Final formData:', formData);
 
             const collectionRef = collection(firestore, 'feedback');
             const docRef = await addDoc(collectionRef, formData);
 
             console.log('Data successfully added to Firestore', formData);
+
+            reset();
+
+            // Increment the key to force a re-render of FileUpload component
+            setFileUploadKey((prevKey) => prevKey + 1);
+
+            // Reset the uploaded files state
+            setUploadedFiles([]);
+
           } catch (error) {
             console.error('Error adding data to Firestore:', error);
           }
@@ -332,7 +386,7 @@ const RecruitmentStatus = () => {
 
         const handleFileUpload = (fileInfo) => {
           // Handle the file information (e.g., store it in state or use it as needed)
-          setUploadedFile((prevFiles) => [...prevFiles, fileInfo]);
+          setUploadedFiles((prevFiles) => [...prevFiles, fileInfo]);
         };
   
     return (
@@ -388,10 +442,10 @@ const RecruitmentStatus = () => {
                     variant="outlined"
                     style={{
                       width: '100%',
-                      '& .MuiOutlinedInput-notchedOutline': {
+                      '& .MuiOutlinedInputNotchedOutline': {
                         borderColor: '#000000',
                       },
-                      '&:hover .MuiOutlinedInput-notchedOutline': {
+                      '&:hover .MuiOutlinedInputNotchedOutline': {
                         borderColor: '#000000',
                       },
                     }}
@@ -425,7 +479,13 @@ const RecruitmentStatus = () => {
                 name="file"
                 control={control}
                 defaultValue=""
-                render={({ field }) => <FileUpload {...field} onFileUpload={handleFileUpload} />}
+                render={({ field }) => (
+                  <FileUpload
+                    key={fileUploadKey}
+                    onFileUpload={onFileUpload}
+                    onReset={onResetFeedback} // Pass the onReset function
+                  />
+                )}
               />
             </FormControl>
 
@@ -435,6 +495,12 @@ const RecruitmentStatus = () => {
             <Button type="submit" variant="contained" style={{ backgroundColor: '#000', color: '#fff', marginTop: '1.5rem' }}>
               Submit Feedback
             </Button>
+
+            <Button variant="contained" onClick={onResetFeedback} style={{ backgroundColor: '#FF0000', color: '#fff', marginTop: '1.5rem', marginLeft: '1.5rem' }}>
+              Reset
+            </Button>
+
+            
           </form>
         </div>
       </div>
@@ -448,7 +514,7 @@ const Dashboard =() =>{
 
         <div>
             <NavBar/>
-            <p style={{marginBottom:'2rem'}}><span class="fancy">User Dashboard</span></p>
+            <p style={{marginBottom:'2rem'}}><span className="fancy">User Dashboard</span></p>
             <UserProfileDiv/>
             <RecruitmentStatus/>
             <CVGenerator/>

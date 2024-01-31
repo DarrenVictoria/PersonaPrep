@@ -253,7 +253,7 @@ function CustomizedHook({ maxWidth, height = 90, data = [], label = "" }) {
           {value.map((option, index) => (
             <StyledTag label={option.data} {...getTagProps({ index })} />
           ))}
-          <input {...getInputProps()} />
+          <input style={{background: 'transparent'}} {...getInputProps()} />
         </InputWrapper>
       </div>
       {groupedOptions.length > 0 ? (
@@ -298,7 +298,7 @@ function CustomizedHookLarge({ width, height = 90, data = [], label = "" }) {
           {value.map((option, index) => (
             <StyledTag label={option.data} {...getTagProps({ index })} />
           ))}
-          <input {...getInputProps()} />
+          <input style={{background: 'transparent'}} {...getInputProps()} />
         </InputWrapperLarge>
       </div>
       {groupedOptions.length > 0 ? (

@@ -5,8 +5,9 @@ import loginBg from '../../assets/images/Login Background.svg'
 import { useState } from 'react';
 import { Button } from '@mui/material'
 import { signInWithPopup} from 'firebase/auth';
-import { auth, microsoftProvider } from '../../firebase';
+import { auth, firestore, microsoftProvider } from '../../firebase';
 import { Navigate, useNavigate } from 'react-router-dom';
+import { collection, addDoc,doc, getDoc, setDoc } from 'firebase/firestore';
 
 
 
@@ -28,7 +29,33 @@ export default function Login(){
     const handleSignInWithMicrosoft = async () => {
         try {
           setLoader(prevState => ({ ...prevState, microsoftLoading: true }));
-          await signInWithPopup(auth, microsoftProvider);
+          const result = await signInWithPopup(auth, microsoftProvider);
+            
+          // User is signed in.
+        const user = result.user;
+
+        // Check if the document already exists
+        const studentDetailsCollection = collection(firestore, 'studentdetails');
+        const userDocument = doc(studentDetailsCollection, user.email);
+
+        const existingDoc = await getDoc(userDocument);
+
+        if (!existingDoc.exists()) {
+            // Document doesn't exist, create it
+            await setDoc(userDocument, {
+                uid: user.uid,
+                username: user.displayName,
+                email: user.email,
+            });
+
+            console.log('Document written with ID: ', user.displayName);
+        } else {
+            console.log('Document with the same name already exists. Skipping creation/update.');
+        }
+          
+          
+
+         
           // User is signed in.
           navigate('/home');
         } catch (error) {

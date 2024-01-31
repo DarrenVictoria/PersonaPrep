@@ -108,8 +108,8 @@ const Certification_1 = () => {
   
 
  
-  <div className='Certification1-RightColumn'>
-    <Card variant="outlined" sx={{ height:'100%',maxHeight: '450px', width:'100%',maxWidth: '363px',borderRadius:'15px',overflowY:'auto',overflowX:'auto','@media (min-width:820px)':{overflowY:'hidden'},'@media (max-width:430px) and (min-width:412px)':{height:'350px',width:'290px'},'@media (min-width:360px) and (max-width:390px)':{height:'350px',width:'230px'}}}className='Contactdetails2-RightColumnCard'>
+   <div className='Certification1-RightColumn' style={{padding: '8px 0px', backgroundColor: '#fff', borderRadius: '15px'}}>{/*change done here to make the scroll bar responsive} */}
+    <Card variant="outlined" sx={{height:'100%',maxHeight: '450px', width:'100%',maxWidth: '363px',borderRadius:'15px',overflowY:'auto',overflowX:'auto','@media (max-width:769px)':{borderColor:'white'},'@media (min-width:769px)':{overflowY:'hidden'}}} className='Contactdetails2-RightColumnCard'>
       <CardContent >
         <Typography variant="h5" component="div"sx={{ textAlign: 'center' }}>
             Certification Tips
@@ -155,6 +155,7 @@ const Certification_1 = () => {
         </List>
       </CardContent>
     </Card>
+    
     
         </div>
 </div>
