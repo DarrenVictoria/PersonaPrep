@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject  } from 'firebase/storage';
+import Button from '@mui/material/Button';
 
 const FileUpload = ({ onFileUpload, onReset }) => {
   const [uploadedFile, setUploadedFile] = useState(null);
@@ -11,18 +12,27 @@ const FileUpload = ({ onFileUpload, onReset }) => {
   useEffect(() => {
     // Cleanup when component unmounts or when onReset is called
     return () => {
-      if (uploadedFile) {
+      if (uploadedFile && uploadedFile.toBeDeleted) {
         // Delete the uploaded file from Firebase storage
         const fileRef = ref(storage, `uploads/${uploadedFile.file.name}`);
-        deleteObject(fileRef).catch((error) => {
-          console.error('Error deleting file from storage:', error);
-        });
+        deleteObject(fileRef)
+          .then(() => {
+            console.log('File deleted successfully from storage');
+          })
+          .catch((error) => {
+            console.error('Error deleting file from storage:', error);
+          });
 
         // Notify the parent component that the file has been deleted
         onReset();
       }
     };
   }, [uploadedFile, storage, onReset]);
+
+  const handleReset = () => {
+    // Set a flag to mark the file for deletion in the cleanup
+    setUploadedFile((prevFile) => (prevFile ? { ...prevFile, toBeDeleted: true } : null));
+  };
 
   const { getRootProps, getInputProps, isDragActive  } = useDropzone({
     onDrop: async (acceptedFiles) => {
@@ -48,7 +58,7 @@ const FileUpload = ({ onFileUpload, onReset }) => {
         const downloadURL = await getDownloadURL(storageRef);
 
         // Update the state with the new file object
-        setUploadedFile({ file, downloadURL });
+        setUploadedFile({ file, downloadURL, toBeDeleted: false  });
         setError(null); // Clear any previous errors
 
         // Pass the file information to the parent component with a unique identifier
@@ -78,12 +88,24 @@ const FileUpload = ({ onFileUpload, onReset }) => {
           <p style={{ color: 'red' }}>Insert only one file at a time</p>
         </div>
         {uploadedFile && (
-          <ul>
-            <li>{uploadedFile.file.name}</li>
-          </ul>
+          <div>
+            <ul>
+              <li>{uploadedFile.file.name}</li>
+            </ul>
+            
+          </div>
         )}
       </div>
+      <Button
+              variant="contained"
+              onClick={handleReset}
+              style={{ backgroundColor: '#FF0000', color: '#fff', marginTop: '1.5rem', marginLeft: '1.5rem' }}
+            >
+              Reset File Uploads
+            </Button>
     </div>
+
+    
   );
 };
 
