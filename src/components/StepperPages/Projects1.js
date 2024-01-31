@@ -24,9 +24,11 @@ const Projects_1 = () => {
     const [projType, setProjType] = useState('');
     const [projName, setProjName] = useState('');
     const [projRole, setProjRole] = useState('');
+    const [projStatus, setProjStatus] = useState('');
 
     const projNameChange = (event) => setProjName(event.target.value);
     const projRoleChange = (event) => setProjRole(event.target.value);
+    const projStatusChange = (event) => setProjStatus(event.target.value);
 
     return(
         <div className="personalInfo-main">
@@ -41,7 +43,7 @@ const Projects_1 = () => {
                     </Grid>
                     <Grid item xs={12} md={5} mb={3}>
                         <EditableChoose
-                            options={["Group Project","Individual Project"]}
+                            options={["Project Type", "Group Project","Individual Project"]}
                             onSelect={setProjType}
                             disabledOptions={[]}
                         />
@@ -55,7 +57,7 @@ const Projects_1 = () => {
                     </Grid>
                     <Grid item xs={12} mb={2} pl={2}>
                         <FormControl>
-                            <RadioGroup row name="project-working-status">
+                            <RadioGroup row name="project-working-status" value={projStatus} onChange={projStatusChange}>
                                 <FormControlLabel value="yes" control={<Radio />} label="Yes" />
                                 <FormControlLabel value="no" control={<Radio />} label="No" />
                             </RadioGroup>
