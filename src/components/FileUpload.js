@@ -33,6 +33,14 @@ const FileUpload = ({ onFileUpload, onReset }) => {
         }
 
         const file = acceptedFiles[0];
+
+        const imageMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
+        if (!imageMimeTypes.includes(file.type)) {
+          setError('Please upload a valid image file.');
+          return;
+        }
+
+
         const storageRef = ref(storage, `uploads/${file.name}`);
         await uploadBytes(storageRef, file);
 
