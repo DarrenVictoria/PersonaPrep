@@ -24,12 +24,12 @@
   
   .UserProfileDiv .details-container {
     text-align: left; /* Left align the text */
-    max-width: 100%; /* Limit the width to 100% */
+    max-width: 40%; /* Limit the width to 100% */
     flex-grow: 1; /* Allow the details container to grow and take remaining space */
   }
 
   .UserProfileDiv h1 {
-    white-space: nowrap; /* Prevent line breaks */
+    
     overflow: hidden; /* Hide the overflow */
     text-overflow: ellipsis; /* Display an ellipsis (...) when text overflows */
     margin: 0; /* Remove default margin */
@@ -74,6 +74,17 @@
       margin-right: 0; /* Remove margin for centered avatar in mobile */
       margin-bottom: 20px; /* Move the margin to the bottom for spacing */
       
+    }
+
+    .user-email{
+
+      max-width: 300px; 
+      overflow-wrap: break-word;
+
+    }
+
+    .user-name{
+      text-wrap: wrap;
     }
 
 

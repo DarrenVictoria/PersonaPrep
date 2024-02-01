@@ -89,8 +89,8 @@ const UserProfileDiv = () => {
           
         </div>
         <div style={{ textAlign: 'left',marginTop:'1rem'}}>
-          <h1 style={{ fontFamily: 'Inter', fontWeight: 'bold', fontSize: '50px', margin: 0 }}>{userName}</h1>
-          <p style={{ fontFamily: 'Inter', fontSize: '20px', margin: '5% 0' }}>{userEmail}</p>
+          <h1 style={{ fontFamily: 'Inter', fontWeight: 'bold', fontSize: '50px'}} className="user-name">{userName}</h1>
+          <p style={{ fontFamily: 'Inter', fontSize: '20px', margin: '5% 0' }} className="user-email">{userEmail}</p>
           <p style={{ fontFamily: 'Inter', fontSize: '16px', margin: '8% 0' , }}>
           CV Status:{' '}
             <Button
