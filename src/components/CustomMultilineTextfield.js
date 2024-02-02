@@ -2,7 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 
-export default function CustomMultilineTextFields({ inputHeight, maxWidth, isRequired}) {
+export default function CustomMultilineTextFields({ inputHeight, maxWidth, isRequired, value, onChange}) {
   return (
     <Box
       component="form"
@@ -35,6 +35,8 @@ export default function CustomMultilineTextFields({ inputHeight, maxWidth, isReq
             },
           }}
           variant="outlined"
+          value={value}
+          onChange={onChange}
         />
       </div>
     </Box>

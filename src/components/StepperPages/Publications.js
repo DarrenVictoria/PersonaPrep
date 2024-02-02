@@ -17,12 +17,13 @@ import EditableChoose from '../EditableSelectOption';
 import CustomMultilineTextFields from '../CustomMultilineTextfield';
 import { useState } from 'react';
 const Publications = () => {
-    const[month,setMonth]= React.useState("");
-    const[year,setYear]= React.useState("");
-    const[currentProjects, setCurrentProjects]= useState("");//this is for the custom multiline text field and need to edit this according to the text field later
-    const currentprojInputchange = (value)=>{//this is for the custom multiline text field and need to edit this according to the text field later
-        setCurrentProjects(value);//this is for the custom multiline text field and need to edit this according to the text field later
-    }
+    const [PblTitle, setPblTitle] = useState('');
+    const [publisher, setPublisher] = useState('');
+    const [pblUrl, SetPblUrl] = useState('');
+    const [pblMonth, setPblMonth] = useState('');
+    const [pblYear, setPblYear] = useState('');
+    const [pblDesc, setPblDesc] = useState('');
+    
     return(
         <div className='Publications-Maindiv'>
             <div className='Publications-LeftColumn'>
@@ -31,13 +32,13 @@ const Publications = () => {
               <Grid item xs={12}>
                 
               <Typography ><span style={{color: 'red'}}>*</span> Publication Title</Typography>
-                  <TextField type="text" variant="outlined" fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}} />
+                  <TextField type="text" variant="outlined" value={PblTitle} onChange={(event) => setPblTitle(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}} />
                 
               </Grid>
               <Grid item xs={12}>
                 
               <Typography ><span style={{color: 'red'}}>*</span> Publication / Publisher</Typography>
-                  <TextField type="text" variant="outlined" fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
+                  <TextField type="text" variant="outlined" value={publisher} onChange={(event) => setPublisher(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
                 
               </Grid>
               <Grid item xs={12} style={{ marginBottom: '-40px' }}>
@@ -47,7 +48,7 @@ const Publications = () => {
                 
               <EditableChoose
               options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-              onSelect={setMonth}
+              onSelect={setPblMonth}
               disabledOptions={[]}
               isRequired={true}
               
@@ -58,7 +59,7 @@ const Publications = () => {
               <Grid item xs={6}>
               <EditableChoose
               options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-              onSelect={setYear}
+              onSelect={setPblYear}
               disabledOptions={["2024"]}
               isRequired={true}
               
@@ -69,13 +70,13 @@ const Publications = () => {
               <Grid item xs={12}>
                 
               <Typography ><span style={{color: 'red'}}>*</span> Publication URL</Typography>
-                  <TextField type="text" variant="outlined" fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
+                  <TextField type="text" variant="outlined" value={pblUrl} onChange={(event) => SetPblUrl(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
                 
               </Grid>
               <Grid item xs={12}>
                 
               <Typography ><span style={{color: 'red'}}>*</span> Project Description</Typography>
-                  <CustomMultilineTextFields  height="115px" required />
+                  <CustomMultilineTextFields  height="115px" value={pblDesc} onChange={(event) => setPblDesc(event.target.value)} required />
                 
               </Grid>
               

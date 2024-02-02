@@ -23,7 +23,7 @@ const WorkExperience_2 = () => {
             <h1>Work Experience</h1>
 
             <Grid container spacing={2}>
-                <Grid item xs={12} >
+                <Grid item xs={12} mb={1}>
                     <Typography><span style={{color: 'red'}}>*</span> List five significant tasks you did in your job role with the tools / software used? <small>Ex:- Developed and maintained responsive web applications using React, Angular, and Node.js.</small></Typography>
                 </Grid>
                 <Grid item xs={12} className='workexperience-border' style={{padding: '4px 0px', marginLeft: '18px', backgroundColor: '#fff', borderRadius: '15px', maxWidth: 1300}}>
