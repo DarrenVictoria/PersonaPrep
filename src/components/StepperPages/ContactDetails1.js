@@ -25,6 +25,14 @@ import { useState } from 'react';
 
 const predefinedButtonName = ['github','figma','behance','linkedin','facebook','whatsapp','instragram','twitter'];
 const ContactDetails_1 = () => {
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [district, setDistrict] = useState('');
+  const [city, setCity] = useState('');
+  const [postal, setPostal] = useState('');
+  const [country, setCountry] = useState('');
+  const [portfolioSite, setPortfolioSite] = useState('');
+
   //below usestate is to keep the user entered url
   const [inputUrl, setInputUrl] = useState(''); 
   //to keep array of already shown buttons
@@ -45,6 +53,7 @@ const ContactDetails_1 = () => {
   const removeButton = (buttonName) => {
     setShownButtons(prevButtons => prevButtons.filter(button => button !== buttonName));
   };
+
     return(
     <div className='Contactdetails1-Maindiv'>
      
@@ -55,43 +64,43 @@ const ContactDetails_1 = () => {
               <Grid item xs={6}>
                 
               <Typography ><span style={{color: 'red'}}>*</span> Phone</Typography>
-                  <TextField type="text" variant="outlined" fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}} />
+                  <TextField type="text" variant="outlined" value={phone} onChange={(event) => setPhone(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}} />
                 
               </Grid>
               <Grid item xs={6}>
                 
               <Typography ><span style={{color: 'red'}}>*</span> Email</Typography>
-                  <TextField type="email" variant="outlined" fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
+                  <TextField type="email" variant="outlined" value={email} onChange={(event) => setEmail(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
                 
               </Grid>
               <Grid item xs={6}>
                 
               <Typography ><span style={{color: 'red'}}>*</span> District</Typography>
-                  <TextField type="text" variant="outlined" fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
+                  <TextField type="text" variant="outlined" value={district} onChange={(event) => setDistrict(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
                 
               </Grid>
               <Grid item xs={6}>
                 
               <Typography ><span style={{color: 'red'}}>*</span> City</Typography>
-                  <TextField type="text" variant="outlined" fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
+                  <TextField type="text" variant="outlined" value={city} onChange={(event) => setCity(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
                 
               </Grid>
               <Grid item xs={6}>
                 
               <Typography ><span style={{color: 'red'}}>*</span> Postalcode</Typography>
-                  <TextField type="text" variant="outlined" fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
+                  <TextField type="text" variant="outlined" value={postal} onChange={(event) => setPostal(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
                 
               </Grid>
               <Grid item xs={6}>
                 
               <Typography ><span style={{color: 'red'}}>*</span> Country</Typography>
-                  <TextField type="text" variant="outlined" fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
+                  <TextField type="text" variant="outlined" value={country} onChange={(event) => setCountry(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
                 
               </Grid>
               <Grid item xs={12}>
                 
               <Typography ><span style={{color: 'red'}}>*</span> Portfolio Website</Typography>
-                  <TextField type="text" variant="outlined" fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
+                  <TextField type="text" variant="outlined" value={portfolioSite} onChange={(event) => setPortfolioSite(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
                 
               </Grid>
               <Grid item xs={12} style={{ marginBottom: '-15px' }}>
