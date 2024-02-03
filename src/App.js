@@ -15,6 +15,9 @@ import Dashboard from "./pages/Dashboard"
 import NoPage from './pages/NoPage'
 import Template from "./pages/interviewforms/Template"
 
+import TestFacultyDetails from "./components/StepperPages/TestFacultDetails";
+import PersonalInfo from "./components/StepperPages/PersonalInfo";
+
 
 
 import "@fontsource/inter"; // Defaults to weight 400
@@ -45,6 +48,9 @@ function App() {
           <Route path="/interviewDisplay" element={<InterviewDisplay />}/>
           <Route path="/insightblog" element={<Insightblog />}/>
           <Route path="/login" element={<Login />}/>
+
+          <Route path="/faculty" element={<TestFacultyDetails />}/>
+          <Route path="/personalInfo" element={<PersonalInfo />}/>
 
           <Route
             path="/dashboard"
