@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject  } from 'firebase/storage';
+import { getStorage, ref, uploadBytesResumable, getDownloadURL, deleteObject  } from 'firebase/storage';
 import Button from '@mui/material/Button';
+import LinearProgress from '@mui/material/LinearProgress';
 
 const FileUpload = ({ onFileUpload, onReset }) => {
   const [uploadedFile, setUploadedFile] = useState(null);
   const [error, setError] = useState(null);
+  const [uploadProgress, setUploadProgress] = useState(0);
   const storage = getStorage();
 
   useEffect(() => {
@@ -51,19 +53,33 @@ const FileUpload = ({ onFileUpload, onReset }) => {
         }
 
 
-        const storageRef = ref(storage, `uploads/${file.name}`);
-        await uploadBytes(storageRef, file);
+          const storageRef = ref(storage, `uploads/${file.name}`);
+          const uploadTask = uploadBytesResumable(storageRef, file);
 
-        // Get the download URL of the uploaded file
-        const downloadURL = await getDownloadURL(storageRef);
+          // Listen for state changes, errors, and completion of the upload.
+          uploadTask.on('state_changed',
+            (snapshot) => {
+              const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+              setUploadProgress(progress);
+            },
+            (error) => {
+              console.error('Error uploading file to storage:', error);
+              setError('Error uploading file to storage. Please try again.');
+            },
+            () => {
+              // Upload completed successfully, get download URL
+              getDownloadURL(storageRef).then((downloadURL) => {
+                // Update the state with the new file object
+                setUploadedFile({ file, downloadURL, toBeDeleted: false });
+                setUploadProgress(0); // Reset progress
+                setError(null); // Clear any previous errors
 
-        // Update the state with the new file object
-        setUploadedFile({ file, downloadURL, toBeDeleted: false  });
-        setError(null); // Clear any previous errors
-
-        // Pass the file information to the parent component with a unique identifier
-        const fileId = Date.now(); // Unique identifier based on timestamp
-        onFileUpload({ file, downloadURL, fileId });
+                // Pass the file information to the parent component with a unique identifier
+                const fileId = Date.now(); // Unique identifier based on timestamp
+                onFileUpload({ file, downloadURL, fileId });
+              });
+            }
+          );
         
       } catch (error) {
         console.error('Error uploading file to storage:', error);
@@ -82,11 +98,13 @@ const FileUpload = ({ onFileUpload, onReset }) => {
 
       <div {...getRootProps()} style={{ pointerEvents: uploadedFile ? 'none' : 'auto' }}>
         <input {...getInputProps()} />
+        
         <div style={{ border: `2px dashed ${isDragActive ? 'green' : '#000'}`, padding: '20px', width: '100%', borderRadius: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <CloudUploadIcon style={{ fontSize: '3rem', marginBottom: '10px' }} />
           <p>Drop your file here or click to upload</p>
           <p style={{ color: 'red' }}>Insert only one file at a time</p>
         </div>
+        
         {uploadedFile && (
           <div>
             <ul>
@@ -96,6 +114,11 @@ const FileUpload = ({ onFileUpload, onReset }) => {
           </div>
         )}
       </div>
+      {uploadProgress > 0 &&  (
+        <div style={{ marginTop: '10px' }}>
+          <LinearProgress variant="determinate" value={uploadProgress} />
+        </div>
+      )}
       <Button
               variant="contained"
               onClick={handleReset}
