@@ -1,23 +1,39 @@
 import React from 'react';
 import { useState } from 'react';
-import TextArea from '../TextArea';
+import CustomMultilineTextFieldslimited from '../MultilineMaxWordLimit';
 import EditableChoose from '../EditableSelectOption';
 import Grid from '@mui/material/Grid';
+// import { useEffect } from 'react';
 import {CustomizedHook, CustomizedHookLarge} from '../TextfieldButtonDataDisplay';
 import Typography from '@mui/material/Typography';
 import './css/WorkExperience2.css';
 
 const WorkExperience_2 = () => {
-    const SkillsAcquired = [{data:"c#"},{data:"Winforms"}];
-    // The below code is for the textarea
-    const [workexperience, setWorkExperience] = useState("");
-    const workexpdescription = (value) => {
-        setWorkExperience(value);
-    }
+    //the max words and WorkExp2Task is for CustomMultilineTextFieldslimited
+    const [WorkExp2Task, setWorkExp2Task] = useState("");
+    const maxWords = 100;
 
+    const SkillsAcquired = [{data:"c#"},{data:"Winforms"}];
+
+    //the handleChange is for CustomMultilineTextFieldslimited
+    const handleChange = (event) => {
+        //the below commented code is to test 
+        // console.log(`Work => ${event.target.value}`)
+        setWorkExp2Task(event.target.value);
+      };
+      
     // The below code is for the editablechoose
     const [Employmenttype, setEmploymentType] = React.useState("");
+    //below commented code is to test that the variable Employmenttype has stored the value for it to work uncomment the import of useEffect
+    // useEffect(() => {
+    //     console.log('Employmenttype:', Employmenttype);
+    // }, [Employmenttype]);
+    const [selectedValues, setSelectedValues] = useState([]);
 
+    const handle = (values) => {
+        setSelectedValues(values);
+        console.log("Selected values:", values);
+    };
     return (
         <div className='workexperiencemaindiv'>
             <h1>Work Experience</h1>
@@ -26,14 +42,15 @@ const WorkExperience_2 = () => {
                 <Grid item xs={12} >
                     <Typography><span style={{color: 'red'}}>*</span> List five significant tasks you did in your job role with the tools / software used? <small>Ex:- Developed and maintained responsive web applications using React, Angular, and Node.js.</small></Typography>
                 </Grid>
-                <Grid item xs={12} className='workexperience-border' style={{padding: '4px 0px', marginLeft: '18px', backgroundColor: '#fff', borderRadius: '15px', maxWidth: 1300,paddingBottom:'10px'}}>
-                    <TextArea
-                        maxWords={300}
-                        value={workexperience}
-                        onInputChange={workexpdescription}
-                        ClassName="workexperience"
-                        maxWidth={1300}
-                    />
+                <Grid item xs={12} className='workexperience-border' >
+                <CustomMultilineTextFieldslimited
+                    inputHeight="150px"
+                    maxWidth="1300px"
+                    isRequired={true}
+                    value={WorkExp2Task}
+                    onChange={handleChange}
+                    maxWords={maxWords} // Pass the maximum number of words as a prop
+                />
                 </Grid>
                 <Grid item xs={12} mb={-4}>
                     <Typography><span style={{color: 'red'}}>*</span> Employment type</Typography>
@@ -49,7 +66,7 @@ const WorkExperience_2 = () => {
                     />
                 </Grid>
                 <Grid item xs={12} >
-                    <CustomizedHook maxWidth={1300} data={SkillsAcquired} label={<Typography mb={1}><span style={{color: 'red'}}>*</span> Skills acquired from job ?</Typography>}/>
+                    <CustomizedHook maxWidth={1300} data={SkillsAcquired} value={selectedValues} onChange={handle} label={<Typography mb={1}><span style={{color: 'red'}}>*</span> Skills acquired from job ?</Typography>}/>
                 </Grid>
                 
             </Grid>
