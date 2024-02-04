@@ -16,14 +16,12 @@ import EditableChoose from '../EditableSelectOption';
 
 
 const Projects_2 = () => {
-    const [startMonth, setStartMonth] = useState('');
-    const [startYear, setStartYear] = useState('');
-    const [endMonth, setEndMonth] = useState('');
-    const [endYear, setEndYear] = useState('');
+    const [projStartMonth, setProjStartMonth] = useState('');
+    const [projStartYear, setProjStartYear] = useState('');
+    const [projEndMonth, setProjEndMonth] = useState('');
+    const [projEndYear, setProjEndYear] = useState('');
     const [projPlace, setProjPlace] = useState('');
     const [projEvidence, setProjEvidence] = useState('');
-
-    const projEvidenceChange = (event) => setProjEvidence(event.target.value);
 
     return(
         <div className="personalInfo-main">
@@ -35,14 +33,14 @@ const Projects_2 = () => {
                     <Grid item xs={6} pr={1}>
                         <EditableChoose
                             options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                            onSelect={setStartMonth}
+                            onSelect={setProjStartMonth}
                             disabledOptions={[]}
                         />
                     </Grid>
                     <Grid item xs={6} mb={3} pl={1}>
                         <EditableChoose
                             options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                            onSelect={setStartYear}
+                            onSelect={setProjStartYear}
                             disabledOptions={["2024"]}
                         />
                     </Grid>
@@ -52,14 +50,14 @@ const Projects_2 = () => {
                     <Grid item xs={6} pr={1}>
                         <EditableChoose
                             options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                            onSelect={setEndMonth}
+                            onSelect={setProjEndMonth}
                             disabledOptions={[]}
                         />
                     </Grid>
                     <Grid item xs={6} mb={3} pl={1}>
                         <EditableChoose
                             options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                            onSelect={setEndYear}
+                            onSelect={setProjEndYear}
                             disabledOptions={["2024"]}
                         />
                     </Grid>
@@ -75,7 +73,7 @@ const Projects_2 = () => {
                     </Grid>
                     <Grid item xs={12} mb={3}>
                         <Typography mb={1}><span style={{color: 'red'}}>*</span>Project evidence</Typography>
-                        <TextField type="text" variant="outlined" value={projEvidence} onChange={projEvidenceChange} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='CV Builder'/>
+                        <TextField type="text" variant="outlined" value={projEvidence} onChange={(event) => setProjEvidence(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='CV Builder'/>
                     </Grid>
                     <Grid item xs={12} mb={2} style={{display: 'flex', justifyContent: 'center'}}>
                         <Typography>-OR-</Typography>

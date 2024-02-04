@@ -1,9 +1,4 @@
-<<<<<<< Updated upstream
-import React from 'react';
-import {CustomizedHook, CustomizedHookLarge} from '../TextfieldButtonDataDisplay';
-import CustomMultilineTextFields from '../CustomMultilineTextfield';
-import Typography from '@mui/material/Typography';
-=======
+
 import React, { useState } from 'react';
 import '../../pages/interviewforms/Template.css';
 import InterviewFormFooter from '../InterviewFormFooter';
@@ -13,18 +8,14 @@ import CustomMultilineTextFields from '../CustomMultilineTextfield';
 import Typography from '@mui/material/Typography';
 import Grid from "@mui/material/Grid";
 
->>>>>>> Stashed changes
+
 const SkillTrack_1 = () => {
+    const [leadership, setLeadership] = useState('');
+    const [leadershipEx, setLeadershipEx] = useState('');
+    
     const dataset = [{data:"c#"},{data:"Java"}];
+
     return(
-<<<<<<< Updated upstream
-        <div>
-            <CustomizedHook height={100} maxWidth={1300} data={dataset} label={<Typography mb={1}><span style={{color: 'red'}}>*</span> What would you say are your core competencies or key skills? Min 3 / Max 5</Typography>}/>
-            <Typography mb={1} mt={1}><span style={{color: 'red'}}>*</span> If applicable, how would you describe your leadership style?</Typography>
-            <CustomMultilineTextFields inputHeight={100} maxWidth={1300} isRequired={true}/>
-            <Typography mb={1} mt={1}><span style={{color: 'red'}}>*</span> If applicable can you share examples of how you've led teams or projects?</Typography>
-            <CustomMultilineTextFields inputHeight={100} maxWidth={1300} isRequired={true}/>
-=======
         <div className="formtemp-page">
             <InterviewFormHeader title='Skill Track' />
             <div className="formtemp-bodyform">
@@ -45,7 +36,7 @@ const SkillTrack_1 = () => {
                     </form>
                 </Grid>
             </Grid>
->>>>>>> Stashed changes
+
         </div>
     </div>
     )

@@ -14,6 +14,7 @@
   
   .UserProfileDiv .avatar-container {
     margin-right: 20px; /* Move the margin to the right for spacing */
+    flex-shrink: 0; /* Prevent shrinking on small screens */
   }
   
   .UserProfileDiv .avatar-container img {
@@ -23,7 +24,40 @@
   
   .UserProfileDiv .details-container {
     text-align: left; /* Left align the text */
+    max-width: 40%; /* Limit the width to 100% */
+    flex-grow: 1; /* Allow the details container to grow and take remaining space */
   }
+
+  .UserProfileDiv h1 {
+    
+    overflow: hidden; /* Hide the overflow */
+    text-overflow: ellipsis; /* Display an ellipsis (...) when text overflows */
+    margin: 0; /* Remove default margin */
+  }
+  
+  .UserProfileDiv p {
+    white-space: nowrap; /* Prevent line breaks */
+    overflow: hidden; /* Hide the overflow */
+    text-overflow: ellipsis; /* Display an ellipsis (...) when text overflows */
+    margin: 5% 0; /* Adjust margin as needed */
+  }
+  
+  .cv-box-new { 
+    padding: 35px;
+    text-align: left;
+    background:  linear-gradient(0deg, #FFDFDF 0%, #FFDFDF 100%),
+    linear-gradient(0deg, #FFC5C5 0%, #FFC5C5 100%),
+    #FFC5C5;
+    border: 3px solid rgb(0, 0, 0);
+  }
+
+  .right-section{
+    width:40%;
+    display: flex;
+    flex-direction: column;
+    padding:15px;
+  }
+  
   
   /* Center horizontally when in mobile size */
   @media (max-width: 767px) {
@@ -32,25 +66,55 @@
       align-items: center;
       justify-content: center;
       text-align: center;
+      
+      
     }
   
     .UserProfileDiv .avatar-container {
       margin-right: 0; /* Remove margin for centered avatar in mobile */
       margin-bottom: 20px; /* Move the margin to the bottom for spacing */
+      
     }
+
+    .user-email{
+
+      max-width: 300px; 
+      overflow-wrap: break-word;
+
+    }
+
+    .user-name{
+      text-wrap: wrap;
+    }
+
+
+
+    
+
+
+
+
+
+
+
+
 
     .cv-container {
       flex-direction: column; /* Display in a column layout */
     }
   
-    .cv-box { 
+    .cv-box-new { 
       width: 100%;
       margin-top: 20px; /* Add some space between the components */
+      padding:15.5vw;
+      box-sizing:content-box;
     }
   
     .right-section {
       width: 100%; /* Set full width for mobile */
-      margin-top: 1rem; /* Add some space between the left and right sections */
+      margin-top: 0.2rem; /* Add some space between the left and right sections */
+      display: flex;
+     flex-direction: column; 
     }
   }
 
@@ -91,9 +155,9 @@
       background-position: 0em;
     }
   }
-  
 
-  .cv-box:hover,
+
+  .cv-box-new:hover,
 .interview-box:hover {
   transform: scale(1.02);
   transition: transform 0.3s ease;
@@ -102,8 +166,13 @@
 
 
 
+
 .cv-gen-butt:hover{
   transform: scale(1.02);
   transition: transform 0.3s ease;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
+
+
+
+

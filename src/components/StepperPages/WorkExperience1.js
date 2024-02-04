@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './css/WorkExperience1.css';
 import '../../pages/interviewforms/Template.css';
 import InterviewFormFooter from '../InterviewFormFooter';
@@ -23,74 +23,28 @@ import ccalander from '../../assets/images/iconccalander.svg';
 import { useState } from 'react';
 
 const WorkExperience = () => {
-    const [startMonth, setStartMonth] = useState('');
-    const [startYear, setStartYear] = useState('');
-    const [endMonth, setEndMonth] = useState('');
-    const [endYear, setEndYear] = useState('');
+    const [jobTitle, setJobTitle] = useState('');
+    const [company, setCompany] = useState('');
+    const [workCity, setWorkCity] = useState('');
+    const [workPostal, setWorkPostal] = useState('');
+    const [jobStartMonth, setJobStartMonth] = useState('');
+    const [jobStartYear, setJobStartYear] = useState('');
+    const [jobEndMonth, setJobEndMonth] = useState('');
+    const [jobEndYear, setJobEndYear] = useState('');
+    const [working, setWorking] = useState('no');
+    const [workChecked, setWorkChecked] = useState(false);
+    
+    const workChange = (event) => {
+        setWorkChecked(event.target.checked)
+    }
+
+    useEffect(() => {
+        if(!workChecked) setWorking('no');
+        else setWorking('yes');
+    }, [workChecked]);
+
+
     return(
-<<<<<<< Updated upstream
-        <div className="WorkExperience1-Maindiv">
-        <div className="WorkExperience1-LeftColumn">
-            <Grid container>
-                <Grid item xs={12} mb={3}>
-                    <Typography mb={1}><span style={{color: 'red'}}>*</span> Job Title</Typography>
-                    <TextField type="text" variant="outlined" fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Full Stack Developer'/>
-                </Grid>
-                <Grid item xs={12} mb={3}>
-                    <Typography mb={1}><span style={{color: 'red'}}>*</span> Company</Typography>
-                    <TextField type="text" variant="outlined" fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Surge Global Pvt.'/>
-                </Grid>
-                <Grid item xs={6} mb={3} pr={1}>
-                    <Typography mb={1}><span style={{color: 'red'}}>*</span> City</Typography>
-                    <TextField type="text" variant="outlined" fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Colombo'/>
-                </Grid>
-                <Grid item xs={6} mb={3} pl={1}>
-                    <Typography mb={1}><span style={{color: 'red'}}>*</span> Postal code</Typography>
-                    <TextField type="text" variant="outlined" fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='00300'/>
-                </Grid>
-                <Grid item xs={12} mb={-2}>
-                    <Typography><span style={{color: 'red'}}>*</span> Start Date</Typography>
-                </Grid>
-                <Grid item xs={6} pr={1}>
-                    <EditableChoose
-                        options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                        onSelect={setStartMonth}
-                        disabledOptions={[]}
-                        isRequired={true}
-                    />
-                </Grid>
-                <Grid item xs={6} mb={3} pl={1}>
-                    <EditableChoose
-                        options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                        onSelect={setStartYear}
-                        disabledOptions={["2024"]}
-                        isRequired={true}
-                    />
-                </Grid>
-                <Grid item xs={12} mb={-2}>
-                    <Typography><span style={{color: 'red'}}>*</span> End Date</Typography>
-                </Grid>
-                <Grid item xs={6} pr={1}>
-                    <EditableChoose
-                        options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                        onSelect={setEndMonth}
-                        disabledOptions={[]}
-                        isRequired={true}
-                    />
-                </Grid>
-                <Grid item xs={6} mb={2} pl={1}>
-                    <EditableChoose
-                        options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                        onSelect={setEndYear}
-                        disabledOptions={["2024"]}
-                        isRequired={true}
-                    />
-                </Grid>
-                <Grid item xs={12} pl={2}>
-                    <FormGroup>
-                    <FormControlLabel control={<Checkbox />} label="Currently Work here" /> {/*if need to make this requires put required before control and if need to make it already checked put check inside the control next to the Checkbx*/}
-                    </FormGroup>
-=======
         <div className="formtemp-page">
             <InterviewFormHeader title='Work Experience' />
             <div className="formtemp-bodyform">
@@ -213,9 +167,7 @@ const WorkExperience = () => {
                             </div>
                         <InterviewFormFooter nextForm='/project' prevForm='/university'/>
                     </form>
->>>>>>> Stashed changes
                 </Grid>
-                    
             </Grid>
         </div>
     </div>

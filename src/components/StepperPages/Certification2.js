@@ -10,9 +10,7 @@ import { useState } from 'react';
 const Certification_2 = () => {
     const skills = [{data: 'c#'}, {data: 'java'}, {data: 'react'}];
     const [certificationLInk, setCertificationLink] = useState('');
-
-    const certificationLInkChange = (event) => setCertificationLink(event.target.value);
-
+    
     return(
         <div className="personalInfo-main">
             <div className="personalInfo-leftCol">
@@ -22,7 +20,7 @@ const Certification_2 = () => {
                     </Grid>
                     <Grid item xs={12} mb={3}>
                         <Typography mb={1}><span style={{color: 'red'}}>*</span>Certification evidence link</Typography>
-                        <TextField type="text" variant="outlined" value={certificationLInk} onChange={certificationLInkChange} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='CV Builder'/>
+                        <TextField type="text" variant="outlined" value={certificationLInk} onChange={(event) => setCertificationLink(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='CV Builder'/>
                     </Grid>
                     <Grid item xs={12} mb={2} style={{display: 'flex', justifyContent: 'center'}}>
                         <Typography>-OR-</Typography>

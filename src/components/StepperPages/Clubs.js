@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './css/Clubs.css';
 import '../../pages/interviewforms/Template.css';
 import InterviewFormFooter from '../InterviewFormFooter';
@@ -13,10 +13,23 @@ import Checkbox from "@mui/material/Checkbox";//for the check box
 import {CustomizedHook, CustomizedHookLarge} from '../TextfieldButtonDataDisplay';
 
 const Clubs = () => {
-    const[month,setMonth]= React.useState("");
-    const[year,setYear]= React.useState("");
+    const [clubName, setClubName] = useState('');
+    const [clubStartMonth, setClubStartMonth] = useState('');
+    const [clubStartYear, setClubStartYear] = useState('');
+    const [clubEndMonth, setClubEndMonth] = useState('');
+    const [clubEndYear, setClubEndYear] = useState('');
+    const [volunteer, setvolunteer] = useState('no');
+    const [volunteerChecked, setvolunteerChecked] = useState(false);
+
     const RolesPlayed = [{data:"Volunteer"},{data:"Council Member"}];
     const SkillsEarned = [{data:"Leadership"},{data:"Teamwork"}];
+
+    useEffect(() => {
+      if(!volunteerChecked) setvolunteer('no');
+      else setvolunteer('yes');
+    }, [volunteerChecked]);
+    
+
     return(
 <<<<<<< Updated upstream
         <div className='Clubs-Maindiv'>
@@ -29,7 +42,7 @@ const Clubs = () => {
           <Grid item xs={12} mb={3}>
               <EditableChoose
                 options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                onSelect={setMonth}
+                onSelect={setClubName}
                 disabledOptions={[]}
                 isRequired={true}
                 //the below width did not work have to check
@@ -44,7 +57,7 @@ const Clubs = () => {
             
           <EditableChoose
           options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-          onSelect={setMonth}
+          onSelect={setClubStartMonth}
           disabledOptions={[]}
           isRequired={true}
           //the below width did not work have to check
@@ -55,7 +68,7 @@ const Clubs = () => {
           <Grid item xs={6} mb={3} pl={1}>
           <EditableChoose
           options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-          onSelect={setYear}
+          onSelect={setClubStartYear}
           disabledOptions={["2024"]}
           isRequired={true}
           //the below width did not work have to check
@@ -70,7 +83,7 @@ const Clubs = () => {
             
           <EditableChoose
           options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-          onSelect={setMonth}
+          onSelect={setClubEndMonth}
           disabledOptions={[]}
           isRequired={true}
           //the below width did not work have to check
@@ -81,7 +94,7 @@ const Clubs = () => {
           <Grid item xs={6} mb={3} pl={1}>
           <EditableChoose
           options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-          onSelect={setYear}
+          onSelect={setClubEndYear}
           disabledOptions={["2024"]}
           isRequired={true}
           //the below width did not work have to check
@@ -94,9 +107,7 @@ const Clubs = () => {
           </Grid>*/}
           <Grid item xs={12}  mb={3} pl={2} sx={{"@media (max-width: 376px)": {pl: 0}}}>
             
-            <FormGroup>
-            <FormControlLabel control={<Checkbox />} label="Currently Volunteering" /> {/*if need to make this requires put required before control and if need to make it already checked put check inside the control next to the Checkbx*/}
-            </FormGroup>
+            <FormControlLabel control={<Checkbox checked={volunteerChecked} onChange={(event) => setvolunteerChecked(event.target.checked)}/>} label="Currently Volunteering" /> {/*if need to make this requires put required before control and if need to make it already checked put check inside the control next to the Checkbx*/}
             
           </Grid>
           <Grid item xs={12}>

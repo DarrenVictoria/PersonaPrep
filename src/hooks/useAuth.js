@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
       <LoadingScreen
             loading={true}
             bgColor='#f1f1f1'
-            spinnerColor='#9ee5f8'
+            spinnerColor='#000000'
             textColor='#000000'
             logoSrc={Logo}
             text='Loading ...'
