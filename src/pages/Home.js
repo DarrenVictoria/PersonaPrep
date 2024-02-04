@@ -223,7 +223,7 @@ export default function SplitLayout() {
     };
 
     const redirectToStartForm = () => {
-        window.location.href = '/startform';
+        window.location.href = '/faculty';
       };
     
       const redirectToNSBM = () => {
