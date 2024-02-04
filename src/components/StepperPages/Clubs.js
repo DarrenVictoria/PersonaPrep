@@ -28,6 +28,7 @@ const Clubs = () => {
     
 
     return(
+<<<<<<< Updated upstream
         <div className='Clubs-Maindiv'>
         <div className='Clubs-LeftColumn'>
         {/*<Box sx={{ flexGrow: 1 }}>*/}
@@ -126,6 +127,119 @@ const Clubs = () => {
       <CustomizedHookLarge width={360}  height={373} data={SkillsEarned} label={<Typography>Skills Earned</Typography>}/>
     </div>
 </div>  
+=======
+      <div className="formtemp-page">
+            <InterviewFormHeader title='Clubs and Societies' />
+            <div className="formtemp-bodyform">
+                <Grid container spacing={2} style={{ height: '100%' }}>
+                    <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
+                        <form style={{ height: '100%', position: 'relative' }}>
+                            <div style={{ margin: '80px 25px 125px' }}>
+                                <div className='Clubs-Maindiv'>
+                                <div className='Clubs-LeftColumn'>
+                                {/*<Box sx={{ flexGrow: 1 }}>*/}
+                                <Grid container>
+                                <Grid item xs={12} mb={-2}>
+                                <Typography ><span style={{color: 'red'}}>*</span> Club / Society you were a part of ?</Typography>
+                                  </Grid>
+                                  <Grid item xs={12} mb={3}>
+                                      <EditableChoose
+                                        options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
+                                        onSelect={setClubName}
+                                        disabledOptions={[]}
+                                        isRequired={true}
+                                        //the below width did not work have to check
+                                        
+                                        />
+                                    
+                                  </Grid>
+                                  <Grid item xs={12} mb={-2}>
+                                  <Typography ><span style={{color: 'red'}}>*</span> Start Date</Typography>
+                                  </Grid>
+                                  <Grid item xs={6} mb={3} pr={1}>
+                                    
+                                  <EditableChoose
+                                  options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
+                                  onSelect={setClubStartMonth}
+                                  disabledOptions={[]}
+                                  isRequired={true}
+                                  //the below width did not work have to check
+                                
+                                />
+                                    
+                                  </Grid>
+                                  <Grid item xs={6} mb={3} pl={1}>
+                                  <EditableChoose
+                                  options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
+                                  onSelect={setClubStartYear}
+                                  disabledOptions={["2024"]}
+                                  isRequired={true}
+                                  //the below width did not work have to check
+                                
+                                />
+                                    
+                                  </Grid>
+                                  <Grid item xs={12} mb={-2}>
+                                  <Typography ><span style={{color: 'red'}}>*</span> End Date</Typography>
+                                  </Grid>
+                                  <Grid item xs={6} mb={3} pr={1}>
+                                    
+                                  <EditableChoose
+                                  options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
+                                  onSelect={setClubEndMonth}
+                                  disabledOptions={[]}
+                                  isRequired={true}
+                                  //the below width did not work have to check
+                                
+                                />
+                                    
+                                  </Grid>
+                                  <Grid item xs={6} mb={3} pl={1}>
+                                  <EditableChoose
+                                  options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
+                                  onSelect={setClubEndYear}
+                                  disabledOptions={["2024"]}
+                                  isRequired={true}
+                                  //the below width did not work have to check
+                                
+                                />
+                                    
+                                  </Grid>
+                                  {/* /*<Grid item xs={1}>
+                                    {this is a blank space just to take the correct position of the below check box }
+                                  </Grid>*/}
+                                  <Grid item xs={12} mb={3}>
+                                    
+                                    <CustomizedHook data={RolesPlayed} label={<Typography>Roles Played</Typography>}/>
+                                  
+                                    
+                                  </Grid>
+                                  <Grid item xs={12} mb={3}>                                    
+                                    <CustomizedHook data={SkillsEarned} label={<Typography>Skills Earned</Typography>}/>
+                                  </Grid>
+                                  <Grid item xs={12}  mb={3} pl={2} sx={{"@media (max-width: 376px)": {pl: 0}}}>
+                                    
+                                    <FormControlLabel control={<Checkbox checked={volunteerChecked} onChange={(event) => setvolunteerChecked(event.target.checked)}/>} label="Currently Volunteering" /> {/*if need to make this requires put required before control and if need to make it already checked put check inside the control next to the Checkbx*/}
+                                    
+                                  </Grid>
+                                  
+                                </Grid>
+                              {/*</Box>*/}
+                                  
+                          </div>
+                                
+                            <div className='Clubs-RightColumn'>
+                              {/* <CustomizedHookLarge width={360}  height={373} data={SkillsEarned} label={<Typography>Skills Earned</Typography>}/> */}
+                            </div>
+                        </div> 
+                        </div>
+                        <InterviewFormFooter nextForm='/publications' prevForm='/certification'/>
+                    </form>
+                </Grid>
+            </Grid>
+        </div>
+    </div> 
+>>>>>>> Stashed changes
 
     )
 

@@ -1,8 +1,7 @@
-import React from 'react';
 import { useState } from 'react';
+import '../../pages/interviewforms/Template.css';
 import './css/personalInfo.css';
 import Grid from "@mui/material/Grid";
-import IconButton from '@mui/material/IconButton';
 import { styled } from '@mui/material/styles';
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 import SentimentDissatisfiedIcon from '@mui/icons-material/SentimentDissatisfied';
@@ -10,9 +9,10 @@ import SentimentSatisfiedIcon from '@mui/icons-material/SentimentSatisfied';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAltOutlined';
 import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
 import Typography from '@mui/material/Typography';
-import CustomMultilineTextFields from '../CustomMultilineTextfield';
-import { theme } from 'flowbite-react';
 import RatingComp from '../RatingComp';
+import InterviewFormFooter from '../InterviewFormFooter';
+import InterviewFormHeader from '../InterviewFormHeader';
+import CustomMultilineTextFieldslimited from '../MultilineMaxWordLimit';
 
 
 const CvFeedback = () => {
@@ -135,71 +135,93 @@ const CvFeedback = () => {
         { onclick: () => rating4Click(5), color: emoji4Clr[4], icon: SentimentVerySatisfiedIcon },
     ];
 
-    const btn = (event) => {event.preventDefault(); console.log(feedback)};
+    // const btn = (event) => {event.preventDefault(); console.log(feedback)};
 
     return(
-        <>
-        <Grid item xs={12} mb={4}>
-            <Typography variant='h3' sx={{fontWeight: 'bold'}}>How was the CV generator?</Typography>
-        </Grid>
-        <div className="personalInfo-main">
-            <div className="personalInfo-leftCol">
-                <Grid container>
-                    <Grid item xs={12} mb={1}>
-                        <Typography variant='h6' >Overrall Experience</Typography>
-                        <Typography variant='caption'>How would you rate the overrall experience of use of the CV generator platform?</Typography>
-                    </Grid>
-                    <Grid container justifyContent={'space-between'} sx={{backgroundColor: 'white', width: '375px', borderRadius: '25px'}} mb={3}py={2}>                        
-                        {icons1.map(({ onclick, color, icon }, index) => (
-                            <RatingComp key={index} onclick={onclick} color={color} icon={icon} />
-                        ))}
-                    </Grid>
+        <div className="formtemp-page">
+            <InterviewFormHeader title='Feedback' />
+            <div className="formtemp-bodyform">
+                <Grid container spacing={2} style={{ height: '100%' }}>
+                    <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
+                        <form style={{ height: '100%', position: 'relative' }}>
+                            <div style={{ margin: '80px 25px 125px' }}>
 
-                    <Grid item xs={12} mb={1}>
-                        <Typography variant='h6' >Content Quality</Typography>
-                        <Typography variant='caption'>How satisfied are you with the quality and the relevance of the generatored CV?</Typography>
-                    </Grid>
-                    <Grid container justifyContent={'space-between'} sx={{backgroundColor: 'white', width: '375px', borderRadius: '25px'}} mb={3}py={2}>
-                        {icons2.map(({ onclick, color, icon }, index) => (
-                            <RatingComp key={index} onclick={onclick} color={color} icon={icon} />
-                        ))}
-                    </Grid>
+                                <Grid item xs={12} mb={4}>
+                                    <Typography variant='h3' sx={{fontWeight: 'bold'}}>How was the CV generator?</Typography>
+                                </Grid>
+                                <div className="personalInfo-main">
+                                    <div className="personalInfo-leftCol">
+                                        <Grid container>
+                                            <Grid item xs={12} mb={1}>
+                                                <Typography variant='h6' >Overrall Experience</Typography>
+                                                <Typography variant='caption'>How would you rate the overrall experience of use of the CV generator platform?</Typography>
+                                            </Grid>
+                                            <Grid container justifyContent={'space-between'} sx={{backgroundColor: 'white', width: '375px', borderRadius: '25px'}} mb={3}py={2}>                        
+                                                {icons1.map(({ onclick, color, icon }, index) => (
+                                                    <RatingComp key={index} onclick={onclick} color={color} icon={icon} />
+                                                ))}
+                                            </Grid>
 
-                    <Grid item xs={12} mb={1}>
-                        <Typography variant='h6' >Customization</Typography>
-                        <Typography variant='caption'>Do you think you were able to customize the CV to meet your preferences and needs?</Typography>
-                    </Grid>
-                    <Grid container justifyContent={'space-between'} sx={{backgroundColor: 'white', width: '375px', borderRadius: '25px'}} mb={3}py={2}>
-                        {icons3.map(({ onclick, color, icon }, index) => (
-                            <RatingComp key={index} onclick={onclick} color={color} icon={icon} />
-                        ))}
-                    </Grid>
-                </Grid>   
-                {/* <button onClick={btn}>btn</button> */}
-            </div>
+                                            <Grid item xs={12} mb={1}>
+                                                <Typography variant='h6' >Content Quality</Typography>
+                                                <Typography variant='caption'>How satisfied are you with the quality and the relevance of the generatored CV?</Typography>
+                                            </Grid>
+                                            <Grid container justifyContent={'space-between'} sx={{backgroundColor: 'white', width: '375px', borderRadius: '25px'}} mb={3}py={2}>
+                                                {icons2.map(({ onclick, color, icon }, index) => (
+                                                    <RatingComp key={index} onclick={onclick} color={color} icon={icon} />
+                                                ))}
+                                            </Grid>
 
-            <div className="feedback-rightCol">
-                <Grid container>
-                    <Grid item xs={12} mb={1}>
-                        <Typography variant='h6' >Accuracy</Typography>
-                        <Typography variant='caption'>How accurately do you feel the generated CV represents your skills and experiences?</Typography>
-                    </Grid>
-                    <Grid container justifyContent={'space-between'} sx={{backgroundColor: 'white', width: '375px', borderRadius: '25px'}} mb={3}py={2}>
-                        {icons4.map(({ onclick, color, icon }, index) => (
-                            <RatingComp key={index} onclick={onclick} color={color} icon={icon} />
-                        ))}
-                    </Grid>
+                                            <Grid item xs={12} mb={1}>
+                                                <Typography variant='h6' >Customization</Typography>
+                                                <Typography variant='caption'>Do you think you were able to customize the CV to meet your preferences and needs?</Typography>
+                                            </Grid>
+                                            <Grid container justifyContent={'space-between'} sx={{backgroundColor: 'white', width: '375px', borderRadius: '25px'}} mb={3}py={2}>
+                                                {icons3.map(({ onclick, color, icon }, index) => (
+                                                    <RatingComp key={index} onclick={onclick} color={color} icon={icon} />
+                                                ))}
+                                            </Grid>
+                                        </Grid>   
+                                        {/* <button onClick={btn}>btn</button> */}
+                                    </div>
 
-                    <Grid item xs={12} mb={1}>
-                        <Typography variant='h6' >Are there any specific areas or features you think the CV generator could improve upon?</Typography>
+                                    <div className="feedback-rightCol">
+                                        <Grid container>
+                                            <Grid item xs={12} mb={1}>
+                                                <Typography variant='h6' >Accuracy</Typography>
+                                                <Typography variant='caption'>How accurately do you feel the generated CV represents your skills and experiences?</Typography>
+                                            </Grid>
+                                            <Grid container justifyContent={'space-between'} sx={{backgroundColor: 'white', width: '375px', borderRadius: '25px'}} mb={3}py={2}>
+                                                {icons4.map(({ onclick, color, icon }, index) => (
+                                                    <RatingComp key={index} onclick={onclick} color={color} icon={icon} />
+                                                ))}
+                                            </Grid>
+
+                                            <Grid item xs={12} mb={1}>
+                                                <Typography variant='h6' >Are there any specific areas or features you think the CV generator could improve upon?</Typography>
+                                            </Grid>
+                                            <Grid item xs={12} mb={2} >
+                                            {/* <CustomMultilineTextFields height='100px' value={feedback} onChange={feedbackChange}/> */}
+                                            <CustomMultilineTextFieldslimited
+                                                inputHeight="150px"
+                                                maxWidth="1300px"
+                                                isRequired={true}
+                                                value={feedback}
+                                                onChange={feedbackChange}
+                                                maxWords={50} 
+                                            />
+                                        </Grid>
+                                        </Grid>                    
+                                    </div>
+                                </div>
+
+                            </div>
+                        {/* <InterviewFormFooter nextForm='/certification' prevForm='/work'/> */}
+                        </form>
                     </Grid>
-                    <Grid item xs={12} mb={2} >
-                    <CustomMultilineTextFields height='100px' value={feedback} onChange={feedbackChange}/>
                 </Grid>
-                </Grid>                    
             </div>
         </div>
-        </>
     )
 
 }
