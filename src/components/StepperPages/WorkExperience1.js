@@ -20,9 +20,13 @@ import Checkbox from "@mui/material/Checkbox";//for the check box
 import ccheck_box from '../../assets/images/iconccheck_box.svg';
 import cacute from '../../assets/images/iconcacute.svg';
 import ccalander from '../../assets/images/iconccalander.svg';
+import CustomMultilineTextFieldslimited from '../MultilineMaxWordLimit';
+import {CustomizedHook, CustomizedHookLarge} from '../TextfieldButtonDataDisplay';
 import { useState } from 'react';
 
 const WorkExperience = () => {
+    const SkillsAcquired = [{data:"c#"},{data:"Winforms"}];
+
     const [jobTitle, setJobTitle] = useState('');
     const [company, setCompany] = useState('');
     const [workCity, setWorkCity] = useState('');
@@ -33,10 +37,26 @@ const WorkExperience = () => {
     const [jobEndYear, setJobEndYear] = useState('');
     const [working, setWorking] = useState('no');
     const [workChecked, setWorkChecked] = useState(false);
-    
-    const workChange = (event) => {
+    const [TaskDnWithTools, setTaskDnWithTools] = useState("");
+    const [Employmenttype, setEmploymentType] = React.useState("");
+    // the below useState for custom hook does not work yet
+    const [selectedValues, setSelectedValues] = useState([]);
+
+    const handleWorkChecked = (event) => {
         setWorkChecked(event.target.checked)
     }
+    
+    const handleTaskDnWithTools = (event) => {
+        //the below commented code is to test 
+        // console.log(`Work => ${event.target.value}`)
+        setTaskDnWithTools(event.target.value);
+      };
+
+    // the below handle for custom hook does not work yet
+    const handleSelectedValues = (values) => {
+        setSelectedValues(values);
+        // console.log("Selected values:", values);
+    };
 
     useEffect(() => {
         if(!workChecked) setWorking('no');
@@ -101,7 +121,7 @@ const WorkExperience = () => {
                                                     isRequired={true}
                                                 />
                                             </Grid>
-                                            <Grid item xs={6} mb={2} pl={1}>
+                                            <Grid item xs={6} mb={3} pl={1}>
                                                 <EditableChoose
                                                     options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
                                                     onSelect={setJobEndYear}
@@ -109,8 +129,37 @@ const WorkExperience = () => {
                                                     isRequired={true}
                                                 />
                                             </Grid>
-                                            <Grid item xs={12} pl={2}>
-                                                <FormControlLabel control={<Checkbox checked={workChecked} onChange={workChange}/>} label="Currently Work here" /> {/*if need to make this requires put required before control and if need to make it already checked put check inside the control next to the Checkbx*/}
+                                            <Grid item xs={12} pl={2} mb={3}>
+                                                <FormControlLabel control={<Checkbox checked={workChecked} onChange={handleWorkChecked}/>} label="Currently Work here" /> {/*if need to make this requires put required before control and if need to make it already checked put check inside the control next to the Checkbx*/}
+                                            </Grid>
+                                            <Grid item xs={12} mb={1}>
+                                            <Typography><span style={{color: 'red'}}>*</span> List five significant tasks you did in your job role with the tools / software used? <small>Ex:- Developed and maintained responsive web applications using React, Angular, and Node.js.</small></Typography>
+                                            </Grid>
+                                            <Grid item xs={12} mb={3} className='workexperience-border' >
+                                                <CustomMultilineTextFieldslimited
+                                                    inputHeight="150px"
+                                                    maxWidth="1300px"
+                                                    isRequired={true}
+                                                    value={TaskDnWithTools}
+                                                    onChange={handleTaskDnWithTools}
+                                                    maxWords={100} // Pass the maximum number of words as a prop
+                                                />
+                                            </Grid>
+                                            <Grid item xs={12} mb={-2}>
+                                            <Typography><span style={{color: 'red'}}>*</span> Employment type</Typography>
+                                            </Grid>
+                                            <Grid item xs={12} mb={3}>
+                                                <EditableChoose
+                                                    options={["Full-Time", "Part-Time"]}
+                                                    onSelect={setEmploymentType}
+                                                    disabledOptions={[]}
+                                                    maxWidth={300}
+                                                    isRequired={true}
+
+                                                />
+                                            </Grid>
+                                            <Grid item xs={12} >
+                                                <CustomizedHook maxWidth={1300} data={SkillsAcquired} value={selectedValues} onChange={handleSelectedValues} label={<Typography mb={1}><span style={{color: 'red'}}>*</span> Skills acquired from job ?</Typography>}/>
                                             </Grid>
                                         </Grid>
                                     </div>
