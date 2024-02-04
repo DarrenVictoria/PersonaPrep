@@ -1,4 +1,7 @@
 import './css/personalInfo.css';
+import '../../pages/interviewforms/Template.css';
+import InterviewFormFooter from '../InterviewFormFooter';
+import InterviewFormHeader from '../InterviewFormHeader';
 import Grid from "@mui/material/Grid";
 import Typography from '@mui/material/Typography';
 import TextField from "@mui/material/TextField";
@@ -86,97 +89,111 @@ const Education_2 = () => {
     };
 
     return (
-        <div className="personalInfo-main">
-            <div>
-                <Grid container>
-                        <Typography variant='h4' mb={2}>Educational Experience in School</Typography>
-                        <Grid item xs={12} md={8} mb={5} >
-                            <CustomMultilineTextFields height='100px' />
-                        </Grid>
+        <div className="formtemp-page">
+            <InterviewFormHeader title='School Education 2/2' />
+            <div className="formtemp-bodyform">
+                <Grid container spacing={2} style={{ height: '100%' }}>
+                    <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
+                        <form style={{ height: '100%', position: 'relative' }}>
+                            <div style={{ margin: '80px 25px 125px' }}>
+                                <div className="personalInfo-main">
+                                    <div>
+                                        <Grid container>
+                                                <Typography variant='h4' mb={2}>Educational Experience in School</Typography>
+                                                <Grid item xs={12} md={8} mb={5} >
+                                                    <CustomMultilineTextFields height='100px' />
+                                                </Grid>
 
-                    <Grid item xs={12} mb={2} >
-                        <Typography variant='h4'>OL Examination Result</Typography>    
-                    </Grid>
-                    <Grid item xs={12} mb={-2}>
-                        <Typography><span style={{color: 'red'}}>*</span>In which year did you complete your OL exams?</Typography>
-                    </Grid>
-                    <Grid item xs={6} md={2}>
-                        <EditableChoose
-                            options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                            onSelect={setOlYear}
-                            disabledOptions={["2024"]}
-                        />
-                    </Grid>
-                    <Grid item xs={12} mt={3} >
-                        <Typography><span style={{color: 'red'}}>*</span>Subject Results</Typography>
-                    </Grid>
-                    <Grid item xs={12} md={8} style={{ padding: 0 }}>
-                        {olSubject.map((_, index) => (
-                            <OlSubjectComp key={index} index={index} />
-                        ))}
-                    </Grid>
-                    <Grid item xs={12} ml={4} mb={5} mt={2}>
-                        <Typography>
-                            <IconButton onClick={addOlSubject} color="primary" style={{ backgroundColor: 'black', borderRadius: '50%', width:'22px', height:'22px', marginRight: '15px' }} >
-                                <AddIcon style={{ color: 'white' }} />
-                            </IconButton>
-                            Add subjects
-                        </Typography>
-                    </Grid>
+                                            <Grid item xs={12} mb={2} >
+                                                <Typography variant='h4'>OL Examination Result</Typography>    
+                                            </Grid>
+                                            <Grid item xs={12} mb={-2}>
+                                                <Typography><span style={{color: 'red'}}>*</span>In which year did you complete your OL exams?</Typography>
+                                            </Grid>
+                                            <Grid item xs={6} md={2}>
+                                                <EditableChoose
+                                                    options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
+                                                    onSelect={setOlYear}
+                                                    disabledOptions={["2024"]}
+                                                />
+                                            </Grid>
+                                            <Grid item xs={12} mt={3} >
+                                                <Typography><span style={{color: 'red'}}>*</span>Subject Results</Typography>
+                                            </Grid>
+                                            <Grid item xs={12} md={8} style={{ padding: 0 }}>
+                                                {olSubject.map((_, index) => (
+                                                    <OlSubjectComp key={index} index={index} />
+                                                ))}
+                                            </Grid>
+                                            <Grid item xs={12} ml={4} mb={5} mt={2}>
+                                                <Typography>
+                                                    <IconButton onClick={addOlSubject} color="primary" style={{ backgroundColor: 'black', borderRadius: '50%', width:'22px', height:'22px', marginRight: '15px' }} >
+                                                        <AddIcon style={{ color: 'white' }} />
+                                                    </IconButton>
+                                                    Add subjects
+                                                </Typography>
+                                            </Grid>
 
-                        <Grid item xs={12} mb={2} mt={5}>
-                            <Typography variant='h4'>AL Examination Result</Typography>    
-                        </Grid>                    
-                        <Grid item xs={12} mb={-2}> 
-                            <Typography><span style={{color: 'red'}}>*</span>In which year did you complete your AL exams? (First/Final attempt)</Typography>
-                        </Grid>
-                        <Grid item xs={6} md={2}>
-                            <EditableChoose
-                                options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                                onSelect={setAlYear}
-                                disabledOptions={["2024"]}
-                            />
-                        </Grid>
-                        <Grid item xs={12} mt={3}>
-                            <Typography><span style={{color: 'red'}}>*</span>Subject Results</Typography>
-                        </Grid>
-                        <Grid item xs={7} md={2} pr={1}>
-                            <TextField type="text" variant="outlined" fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Subject'/>
-                        </Grid>
-                        <Grid item xs={5} md={2} pl={1}>
-                            <EditableChoose
-                                options={["Result","A","B","C","S","F"]}
-                                onSelect={setAlResult}
-                                disabledOptions={[]}
-                            />
-                        </Grid>
-                    
-                    <Grid item xs={6} md={2}>
-                        <EditableChoose
-                            options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                            onSelect={setAlYear}
-                            disabledOptions={["2024"]}
-                        />
-                    </Grid>
-                    <Grid item xs={12} mt={3}>
-                        <Typography><span style={{color: 'red'}}>*</span>Subject Results</Typography>
-                    </Grid>
-                    <Grid item xs={12} md={8} style={{ padding: 0 }}>
-                        {alSubject.map((_, index) => (
-                            <AlSubjectComp key={index} index={index} />
-                        ))}
-                    </Grid>
-                    <Grid item xs={12} ml={4} mb={5} mt={2}>
-                        <Typography>
-                            <IconButton onClick={addAlSubject} color="primary" style={{ backgroundColor: 'black', borderRadius: '50%', width:'22px', height:'22px', marginRight: '15px' }} >
-                                <AddIcon style={{ color: 'white' }} />
-                            </IconButton>
-                            Add subjects
-                        </Typography>
-                    </Grid>
+                                                <Grid item xs={12} mb={2} mt={5}>
+                                                    <Typography variant='h4'>AL Examination Result</Typography>    
+                                                </Grid>                    
+                                                <Grid item xs={12} mb={-2}> 
+                                                    <Typography><span style={{color: 'red'}}>*</span>In which year did you complete your AL exams? (First/Final attempt)</Typography>
+                                                </Grid>
+                                                <Grid item xs={6} md={2}>
+                                                    <EditableChoose
+                                                        options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
+                                                        onSelect={setAlYear}
+                                                        disabledOptions={["2024"]}
+                                                    />
+                                                </Grid>
+                                                <Grid item xs={12} mt={3}>
+                                                    <Typography><span style={{color: 'red'}}>*</span>Subject Results</Typography>
+                                                </Grid>
+                                                <Grid item xs={7} md={2} pr={1}>
+                                                    <TextField type="text" variant="outlined" fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Subject'/>
+                                                </Grid>
+                                                <Grid item xs={5} md={2} pl={1}>
+                                                    <EditableChoose
+                                                        options={["Result","A","B","C","S","F"]}
+                                                        onSelect={setAlResult}
+                                                        disabledOptions={[]}
+                                                    />
+                                                </Grid>
+                                            
+                                            <Grid item xs={6} md={2}>
+                                                <EditableChoose
+                                                    options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
+                                                    onSelect={setAlYear}
+                                                    disabledOptions={["2024"]}
+                                                />
+                                            </Grid>
+                                            <Grid item xs={12} mt={3}>
+                                                <Typography><span style={{color: 'red'}}>*</span>Subject Results</Typography>
+                                            </Grid>
+                                            <Grid item xs={12} md={8} style={{ padding: 0 }}>
+                                                {alSubject.map((_, index) => (
+                                                    <AlSubjectComp key={index} index={index} />
+                                                ))}
+                                            </Grid>
+                                            <Grid item xs={12} ml={4} mb={5} mt={2}>
+                                                <Typography>
+                                                    <IconButton onClick={addAlSubject} color="primary" style={{ backgroundColor: 'black', borderRadius: '50%', width:'22px', height:'22px', marginRight: '15px' }} >
+                                                        <AddIcon style={{ color: 'white' }} />
+                                                    </IconButton>
+                                                    Add subjects
+                                                </Typography>
+                                            </Grid>
+                                        </Grid>
+                                    </div>
+                                </div>
+                            </div>
+                        <InterviewFormFooter nextForm='/university' prevForm='/school'/>
+                    </form>
                 </Grid>
-            </div>
+            </Grid>
         </div>
+    </div>
      
     );
 };

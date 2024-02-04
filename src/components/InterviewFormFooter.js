@@ -7,9 +7,12 @@ import { Typography } from "@mui/material";
 
 const InterviewFormFooter = ({nextForm, prevForm, validation, onClick}) => {
     const nextPage = () => {
-        onClick();
-        if(validation) window.location.href = nextForm;
-        else console.log('failed');
+
+        // onClick();
+        // if(validation) window.location.href = nextForm;
+        // else console.log('failed');
+        window.location.href = nextForm;
+
     };
     const prevPage = () => window.location.href = prevForm;
 
