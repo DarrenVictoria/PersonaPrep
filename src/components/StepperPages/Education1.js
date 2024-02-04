@@ -35,63 +35,6 @@ const Education_1 = () => {
         setSchoolExperience(e.target.value)};
 
     return(
-<<<<<<< Updated upstream
-        <div className="personalInfo-main">
-            <div className="personalInfo-leftCol">
-                <Grid container>
-                    <Grid item xs={12} mb={3}>
-                        <Typography mb={1}><span style={{color: 'red'}}>*</span>School Name</Typography>
-                        <TextField type="text" variant="outlined" value={schoolName} onChange={schoolNameChange} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='St. Thomas Catholic International'/>
-                    </Grid>
-                    <Grid item xs={12} mb={3}>
-                        <Typography mb={1}><span style={{color: 'red'}}>*</span>School experience or description</Typography>
-                        <CustomMultilineTextFields height='100px' type="text" value={schoolExperience} onChange={schoolExperienceChange} />
-                    </Grid>
-                    <Grid item xs={12} mb={3}>
-                        <Typography mb={1}><span style={{color: 'red'}}>*</span>City</Typography>
-                        <TextField type="text" variant="outlined" value={schoolCity} onChange={schoolCityChange} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/>
-                    </Grid>
-                    <Grid item xs={12} mb={3}>
-                        <Typography mb={1}><span style={{color: 'red'}}>*</span>Country</Typography>
-                        <TextField type="text" variant="outlined" value={schoolCountry} onChange={schoolCountryChange} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/>
-                    </Grid>
-                    <Grid item xs={12} mb={-2}>
-                        <Typography><span style={{color: 'red'}}>*</span>Start Date</Typography>
-                    </Grid>
-                    <Grid item xs={6} pr={1}>
-                        <EditableChoose
-                            options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                            onSelect={setStartMonth}
-                            disabledOptions={[]}
-                        />
-                    </Grid>
-                    <Grid item xs={6} mb={3} pl={1}>
-                        <EditableChoose
-                            options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                            onSelect={setStartYear}
-                            disabledOptions={["2024"]}
-                        />
-                    </Grid>
-                    <Grid item xs={12} mb={-2}>
-                        <Typography><span style={{color: 'red'}}>*</span>End Date</Typography>
-                    </Grid>
-                    <Grid item xs={6} pr={1}>
-                        <EditableChoose
-                            options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                            onSelect={setEndMonth}
-                            disabledOptions={[]}
-                        />
-                    </Grid>
-                    <Grid item xs={6} mb={3} pl={1}>
-                        <EditableChoose
-                            options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                            onSelect={setEndYear}
-                            disabledOptions={["2024"]}
-                        />
-                    </Grid>
-                    
-                        
-=======
         <div className="formtemp-page">
             <InterviewFormHeader title='School Education 1/2' />
             <div className="formtemp-bodyform">
@@ -215,8 +158,8 @@ const Education_1 = () => {
                                 </div>
                             </div>
                         <InterviewFormFooter nextForm='/exams' prevForm='/contactDetSocial'/>
-                    </form>
->>>>>>> Stashed changes
+                        </form>
+                    </Grid>
                 </Grid>
             </div>
 

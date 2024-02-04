@@ -10,16 +10,16 @@ import './css/WorkExperience2.css';
 
 const WorkExperience_2 = () => {
     //the max words and WorkExp2Task is for CustomMultilineTextFieldslimited
-    const [WorkExp2Task, setWorkExp2Task] = useState("");
-    const maxWords = 100;
+    const [TaskDnWithTools, setTaskDnWithTools] = useState("");
+    
 
     const SkillsAcquired = [{data:"c#"},{data:"Winforms"}];
 
     //the handleChange is for CustomMultilineTextFieldslimited
-    const handleChange = (event) => {
+    const handleTaskDnWithTools = (event) => {
         //the below commented code is to test 
         // console.log(`Work => ${event.target.value}`)
-        setWorkExp2Task(event.target.value);
+        setTaskDnWithTools(event.target.value);
       };
       
     // The below code is for the editablechoose
@@ -47,9 +47,9 @@ const WorkExperience_2 = () => {
                     inputHeight="150px"
                     maxWidth="1300px"
                     isRequired={true}
-                    value={WorkExp2Task}
-                    onChange={handleChange}
-                    maxWords={maxWords} // Pass the maximum number of words as a prop
+                    value={TaskDnWithTools}
+                    onChange={handleTaskDnWithTools}
+                    maxWords={100} // Pass the maximum number of words as a prop
                 />
                 </Grid>
                 <Grid item xs={12} mb={-4}>
