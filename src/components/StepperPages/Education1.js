@@ -22,10 +22,22 @@ const Education_1 = () => {
     const [schoolName, setSchoolName] = useState('');
     const [schoolCity, setSchoolCity] = useState('');
     const [schoolCountry, setSchoolCountry] = useState('');
+    const [schoolExperience, setSchoolExperience] = useState('');
 
-    const schoolNameChange = (event) => setSchoolName(event.target.value);
-    const schoolCityChange = (event) => setSchoolCity(event.target.value);
-    const schoolCountryChange = (event) => setSchoolCountry(event.target.value);
+
+    const schoolNameChange = (e) =>{ 
+        console.log(`SchoolName => ${e.target.value}`)
+        setSchoolName(e.target.value);
+    }
+    const schoolCityChange = (e) =>{
+        console.log(`SchoolCity => ${e.target.value}`)
+        setSchoolCity(e.target.value)} ;
+    const schoolCountryChange = (e) => {
+        console.log(`SchoolCountry => ${e.target.value}`)
+        setSchoolCountry(e.target.value)};
+        const schoolExperienceChange = (e) => {
+            console.log(`SchoolExp => ${e.target.value}`)
+            setSchoolExperience(e.target.value)};
 
     return(
         <div className="personalInfo-main">
@@ -37,7 +49,7 @@ const Education_1 = () => {
                     </Grid>
                     <Grid item xs={12} mb={3}>
                         <Typography mb={1}><span style={{color: 'red'}}>*</span>School experience or description</Typography>
-                        <CustomMultilineTextFields height='100px' />
+                        <CustomMultilineTextFields height='100px' type="text" value={schoolExperience} onChange={schoolExperienceChange} />
                     </Grid>
                     <Grid item xs={12} mb={3}>
                         <Typography mb={1}><span style={{color: 'red'}}>*</span>City</Typography>
@@ -87,8 +99,8 @@ const Education_1 = () => {
             </div>
 
             <div className="personalInfo-rightCol">
-                <Card variant="outlined" sx={{ height:'100%',maxHeight: '400px', width:'100%',maxWidth: '363px',borderRadius:'15px',overflowY:'auto',overflowX:'auto','@media (min-width:769px)':{overflowY:'hidden',},}}>
-                    <CardContent >
+                <div style={{padding: '8px 0px', backgroundColor: '#fff', borderRadius: '15px', maxWidth: '363px'}}>
+                    <Card variant="outlined" sx={{height:'100%',maxHeight: '400px', width:'100%',maxWidth: '363px',borderRadius:'15px', border: 'none', overflowY:'auto',overflowX:'auto','@media (max-width:769px)':{borderColor:'white'},'@media (min-width:769px)':{overflowY:'hidden'}}}>                    <CardContent >
                         <Typography variant="h5" component="div" sx={{ textAlign: 'center', fontWeight: 'bold' }}>Educational Experience Tips</Typography>
                         <List>
                             <ListItem >
@@ -130,7 +142,9 @@ const Education_1 = () => {
                             </ListItem>
                         </List>
                     </CardContent>
-                </Card>
+                    </Card>
+                </div>
+
             </div>
         </div>
     )

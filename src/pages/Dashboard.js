@@ -75,20 +75,22 @@ const UserProfileDiv = () => {
 
   return (
     <div  className="UserProfileDiv">
-      <div   style={{ display: 'flex', alignItems: 'center' }}>
-        <div  style={{ marginRight: '20px' }}>
+      <div   style={{ alignItems: 'center' }}>
+      
+      <div className='AvatarImage'>
           {/* Change the src attribute to the path of your avatar image */}
           {profilePicture ? (
-            <Avatar alt="User Avatar" src={profilePicture} sx={{ width: 120, height: 120 }} />
+            <Avatar alt="User Avatar" src={profilePicture} sx={{ width: 100, height: 100 }} />
           ) : (
-            <Avatar alt="User Avatar" sx={{ width: 120, height: 120 }}>
+            <Avatar alt="User Avatar" sx={{ width: 100, height: 100 }}>
               {getInitials(userName)}
             </Avatar>
           )}
+          
         </div>
-        <div style={{ textAlign: 'left' }}>
-          <h1 style={{ fontFamily: 'Inter', fontWeight: 'bold', fontSize: '50px', margin: 0 }}>{userName}</h1>
-          <p style={{ fontFamily: 'Inter', fontSize: '20px', margin: '5% 0' }}>{userEmail}</p>
+        <div style={{ textAlign: 'left',marginTop:'1rem'}}>
+          <h1 style={{ fontFamily: 'Inter', fontWeight: 'bold', fontSize: '50px'}} className="user-name">{userName}</h1>
+          <p style={{ fontFamily: 'Inter', fontSize: '20px', margin: '5% 0' }} className="user-email">{userEmail}</p>
           <p style={{ fontFamily: 'Inter', fontSize: '16px', margin: '8% 0' , }}>
           CV Status:{' '}
             <Button
@@ -245,18 +247,7 @@ const RecruitmentStatus = () => {
           boxSizing: 'border-box',
         }}>
           {/* CV Generator Box Replica */}
-          <div className="cv-box" style={{ 
-            padding: '35px', 
-            textAlign: 'left',
-            background: `
-              linear-gradient(0deg, #FFDFDF 0%, #FFDFDF 100%),
-              linear-gradient(0deg, #FFC5C5 0%, #FFC5C5 100%),
-              #FFC5C5`,
-            border: '3px solid #000',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}>
+          <div className="cv-box-new" >
             <div>
               <h1>Edit your CV</h1>
               <p>Make seamless adjustments, update information, and elevate your CV effortlessly.</p>
@@ -266,12 +257,7 @@ const RecruitmentStatus = () => {
         </div>
   
         {/* Right Section (Four Buttons) */}
-        <div className="right-section" style={{ 
-          width: '40%', 
-          display: 'flex', 
-          flexDirection: 'column',
-          padding:'15px'
-        }}>
+        <div className="right-section" >
           <Button className='cv-gen-butt' style={{ flex: 1, margin: '1%', border: '3px solid #000', backgroundColor: '#ffffff',color:'#000000' }} >Export CV <OutboxIcon style={{marginLeft:'3%'}}/> </Button>
           <Button className='cv-gen-butt' style={{ flex: 1, margin: '1%', border: '3px solid #000', backgroundColor: '#ffffff',color:'#000000' }}>Quick View <SlideshowIcon style={{marginLeft:'3%'}}/></Button>
           <Button className='cv-gen-butt' style={{ flex: 1, margin: '1%', border: '3px solid #000', backgroundColor: '#ffffff',color:'#000000' }}>Export Link <AddLinkIcon style={{marginLeft:'3%'}}/></Button>
@@ -492,13 +478,11 @@ const RecruitmentStatus = () => {
   
             <br />
   
-            <Button type="submit" variant="contained" style={{ backgroundColor: '#000', color: '#fff', marginTop: '1.5rem' }}>
+            <Button type="submit" variant="contained" style={{ backgroundColor: '#000', color: '#fff', marginTop: '1.5rem',marginLeft:'1.5rem' }}>
               Submit Feedback
             </Button>
 
-            <Button variant="contained" onClick={onResetFeedback} style={{ backgroundColor: '#FF0000', color: '#fff', marginTop: '1.5rem', marginLeft: '1.5rem' }}>
-              Reset
-            </Button>
+            
 
             
           </form>
@@ -514,7 +498,8 @@ const Dashboard =() =>{
 
         <div>
             <NavBar/>
-            <p style={{marginBottom:'2rem'}}><span className="fancy">User Dashboard</span></p>
+            <h1 style={{marginLeft:'1rem'}}><b>User Dashboard</b></h1>
+            
             <UserProfileDiv/>
             <RecruitmentStatus/>
             <CVGenerator/>

@@ -35,6 +35,9 @@ const InputWrapper = styled("div")(
   background-color: ${theme.palette.mode === "dark" ? "#141414" : "#fff"};
   border-radius: 25px;
   padding: 1px;
+  padding-left:10px;
+  padding-top:10px;
+  
   display: flex;
   flex-wrap: wrap;
 
@@ -77,6 +80,8 @@ const InputWrapperLarge = styled("div")(
   background-color: ${theme.palette.mode === "dark" ? "#141414" : "#fff"};
   border-radius: 25px;
   padding: 1px;
+  padding-left:10px;
+  padding-top:10px;
   display: flex;
   flex-wrap: wrap;
 
@@ -186,8 +191,8 @@ const Listbox = styled("ul")(
   position: absolute;
   list-style: none;
   background-color: ${theme.palette.mode === "dark" ? "#141414" : "#fff"};
-  overflow: auto;
-  max-height: 250px;
+  overflow-y: auto;
+  max-height: 150px;
   border-radius: 4px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   z-index: 1;

@@ -262,7 +262,7 @@ export default function SplitLayout() {
     <div className={`bottom-right-box interview-box ${isDisabled ? 'disabled' : ''}`} onClick={isDisabled ? null : redirectToNSBM}>
       <div className="box-content">
         <div>
-          <h2 className="inter-top">Interview Simulator (Coming Soon) </h2>
+          <h2 className="inter-top">Interview Simulator</h2>
           
           <p className="inter">
             Sharpen your interview skills and boost your confidence with our AI-driven Mock Interview experience

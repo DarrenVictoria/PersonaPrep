@@ -111,53 +111,56 @@ const Certification_1 = () => {
   
 
  
-   <div className='Certification1-RightColumn' style={{padding: '8px 0px', backgroundColor: '#fff', borderRadius: '15px'}}>{/*change done here to make the scroll bar responsive} */}
-    <Card variant="outlined" sx={{height:'100%',maxHeight: '450px', width:'100%',maxWidth: '363px',borderRadius:'15px',overflowY:'auto',overflowX:'auto','@media (max-width:769px)':{borderColor:'white'},'@media (min-width:769px)':{overflowY:'hidden'}}} className='Contactdetails2-RightColumnCard'>
-      <CardContent >
-        <Typography variant="h5" component="div"sx={{ textAlign: 'center' }}>
-            Certification Tips
-        </Typography>
-        <List>
-          <ListItem >
-          <ListItemAvatar>
-            <Avatar sx={{ /*width: '38.732px', height: '39.022px',*/ borderRadius: '12px'/*, display: 'flex', justifyContent: 'center', alignItems: 'center'*/ }}>
-            <img src={cdiary} alt="Custom Icon" style={{ width: '27px', height: '31px' }}/>
+   <div className='Certification1-RightColumn'>{/*change done here to make the scroll bar responsive} */}
+    <div style={{padding: '8px 0px', backgroundColor: '#fff', borderRadius: '15px', maxWidth: '363px'}}>
+      <Card variant="outlined" sx={{height:'100%',maxHeight: '450px', width:'100%',maxWidth: '363px',borderRadius:'15px', border: 'none', overflowY:'auto',overflowX:'auto','@media (max-width:769px)':{borderColor:'white'},'@media (min-width:769px)':{overflowY:'hidden'}}}>
+        <CardContent >
+          <Typography variant="h5" component="div"sx={{ textAlign: 'center' }}>
+              Certification Tips
+          </Typography>
+          <List>
+            <ListItem >
+            <ListItemAvatar>
+              <Avatar sx={{ /*width: '38.732px', height: '39.022px',*/ borderRadius: '12px'/*, display: 'flex', justifyContent: 'center', alignItems: 'center'*/ }}>
+              <img src={cdiary} alt="Custom Icon" style={{ width: '27px', height: '31px' }}/>
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText>
+              <Typography variant='body1' >
+              Fill in all the information about your most recent Certification to fill in this section.
+              </Typography>
+            </ListItemText>
+            </ListItem>
+            <ListItem >
+            <ListItemAvatar>
+              <Avatar sx={{ /*width: '38.732px', height: '39.022px',*/ borderRadius: '12px' ,display: 'flex', justifyContent: 'center', alignItems: 'center'  }}>
+            <img src={ccalander} alt="Custom Icon" style={{ width: 'var(--40,40px)', height: '35.666px' }} />
             </Avatar>
-          </ListItemAvatar>
-          <ListItemText>
-            <Typography variant='body1' >
-            Fill in all the information about your most recent Certification to fill in this section.
+            </ListItemAvatar>
+            <ListItemText>
+            <Typography variant='body1'>
+            Ensure your certifications are up-to-date by double-checking their expiration dates.
             </Typography>
-          </ListItemText>
-          </ListItem>
-          <ListItem >
-          <ListItemAvatar>
-            <Avatar sx={{ /*width: '38.732px', height: '39.022px',*/ borderRadius: '12px' ,display: 'flex', justifyContent: 'center', alignItems: 'center'  }}>
-          <img src={ccalander} alt="Custom Icon" style={{ width: 'var(--40,40px)', height: '35.666px' }} />
-          </Avatar>
-          </ListItemAvatar>
-          <ListItemText>
-          <Typography variant='body1'>
-          Ensure your certifications are up-to-date by double-checking their expiration dates.
-          </Typography>
-          </ListItemText>
-          </ListItem>
-          <ListItem >
-          <ListItemAvatar>
-            {/*aligning the image did not work have to look into it*/ }
-            <Avatar sx={{/* width: '38.732px', height: '39.022px',*/ paddingLeft:'7px', borderRadius: '12px',display: 'flex', justifyContent: 'center', alignItems: 'center'  }}>
-          <img src={chat} alt="Custom Icon" style={{ width: '41px', height: '39px' ,}} />
-          </Avatar>
-          </ListItemAvatar>
-          <ListItemText>
-          <Typography variant='body1'>
-          Arrange your certifications logically according to the most relevant ones for the position you're applying for.
-          </Typography>
-          </ListItemText>
-          </ListItem>
-        </List>
-      </CardContent>
-    </Card>
+            </ListItemText>
+            </ListItem>
+            <ListItem >
+            <ListItemAvatar>
+              {/*aligning the image did not work have to look into it*/ }
+              <Avatar sx={{/* width: '38.732px', height: '39.022px',*/ paddingLeft:'7px', borderRadius: '12px',display: 'flex', justifyContent: 'center', alignItems: 'center'  }}>
+            <img src={chat} alt="Custom Icon" style={{ width: '41px', height: '39px' ,}} />
+            </Avatar>
+            </ListItemAvatar>
+            <ListItemText>
+            <Typography variant='body1'>
+            Arrange your certifications logically according to the most relevant ones for the position you're applying for.
+            </Typography>
+            </ListItemText>
+            </ListItem>
+          </List>
+        </CardContent>
+      </Card>
+    </div>
+    
     
     
         </div>

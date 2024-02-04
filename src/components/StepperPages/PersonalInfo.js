@@ -3,8 +3,8 @@ import Grid from "@mui/material/Grid";
 import Typography from '@mui/material/Typography';
 import TextField from "@mui/material/TextField";
 import FileUpload from '../FileUpload';
-import TestAutoComplete from '../TestAutoComplete';
-import { CustomizedHook } from '../TextfieldButtonDataDisplay';
+// import TestAutoComplete from '../TestAutoComplete';
+import {CustomizedHook, CustomizedHookLarge} from '../TextfieldButtonDataDisplay';
 import Card from '@mui/material/Card'; 
 import CardContent from '@mui/material/CardContent'; 
 import Avatar from '@mui/material/Avatar';
@@ -16,11 +16,19 @@ import cphone from '../../assets/images/iconcphone.svg';
 import { useState } from 'react';
 
 const PersonalInfo = () => {
-    const job_roles = [{data:"role1"}, {data:"role2"}, {data:"role3"}];
+    // const job_roles = [{data:"role1"},{data:"role2"},{data:"role3"},{data:"role4"},{data:"role5"},{data:"role6"},{data:"role7"},{data:"role8"}];
+    
     const [phone, setPhone] = useState('');
 
     const phoneChange = (event) => setPhone(event.target.value);
+
     
+    const [selectedValues, setSelectedValues] = useState([]);
+    
+    const handleValueChange = (newValue) => {
+        setSelectedValues(newValue);
+        console.log("Selected values:", newValue);
+    };
     return(
         <div className="personalInfo-main">
             <div className="personalInfo-leftCol">
@@ -34,14 +42,18 @@ const PersonalInfo = () => {
                         <FileUpload />
                     </Grid>
                     <Grid item xs={12} mb={3}>
-                        <CustomizedHook data={job_roles} label={<Typography mb={1}><span style={{color: 'red'}}>*</span>What job roles are you aspiring for? Min 1 / Max 3</Typography>}/>
+                        <CustomizedHook 
+                        data={[{data:'Option 1'},{data:'Option 2'},{ data: 'Option 3' }]}
+                        label={<Typography mb={1}><span style={{color: 'red'}}>*</span>What job roles are you aspiring for? Min 1 / Max 3</Typography>}/>
+                        value={selectedValues}
+                        onChange={handleValueChange}
                     </Grid>
                 </Grid>
             </div>
 
             <div className="personalInfo-rightCol">
-                <Card variant="outlined" sx={{ height:'100%',maxHeight: '450px', width:'100%',maxWidth: '363px',borderRadius:'15px',overflowY:'auto',overflowX:'auto','@media (min-width:769px)':{overflowY:'hidden',},}}>
-                    <CardContent >
+                <div style={{padding: '8px 0px', backgroundColor: '#fff', borderRadius: '15px', maxWidth: '363px'}}>
+                    <Card variant="outlined" sx={{height:'100%',maxHeight: '450px', width:'100%',maxWidth: '363px',borderRadius:'15px', border: 'none', overflowY:'auto',overflowX:'auto','@media (max-width:769px)':{borderColor:'white'},'@media (min-width:769px)':{overflowY:'hidden'}}}>                    <CardContent >
                         <Typography variant="h5" component="div" sx={{ textAlign: 'center', fontWeight: 'bold' }}>Personal Info Tips</Typography>
                         <List>
                             <ListItem >
@@ -83,7 +95,8 @@ const PersonalInfo = () => {
                             </ListItem>
                         </List>
                     </CardContent>
-                </Card>
+                    </Card>
+                </div>
             </div>
         </div>
     )
