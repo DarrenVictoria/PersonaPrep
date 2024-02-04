@@ -30,43 +30,6 @@ const Projects_1 = () => {
     const [projStatus, setProjStatus] = useState('');
     
     return(
-<<<<<<< Updated upstream
-        <div className="personalInfo-main">
-            <div className="personalInfo-leftCol">
-                <Grid container>
-                    <Grid item xs={12} mb={3}>
-                        <Typography mb={1}><span style={{color: 'red'}}>*</span>Project Name</Typography>
-                        <TextField type="text" variant="outlined" value={projName} onChange={(event) => setProjName(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='CV Builder'/>
-                    </Grid>
-                    <Grid item xs={12} mb={-2}>
-                        <Typography><span style={{color: 'red'}}>*</span>Was it an individual or a group project?</Typography>
-                    </Grid>
-                    <Grid item xs={12} md={6} mb={3}>
-                        <EditableChoose
-                            options={["Project Type", "Group Project","Individual Project"]}
-                            onSelect={setProjType}
-                            disabledOptions={[]}
-                        />
-                    </Grid>
-                    <Grid item xs={12} mb={3}>
-                        <Typography mb={1}><span style={{color: 'red'}}>*</span>What was your role in the project</Typography>
-                        <TextField type="text" variant="outlined" value={projRole} onChange={(event) => setProjRole(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Full stack developer'/>
-                    </Grid>
-                    <Grid item xs={12} >
-                        <Typography><span style={{color: 'red'}}>*</span>Are you still working on the project?</Typography>
-                    </Grid>
-                    <Grid item xs={12} mb={2} pl={2}>
-                        <FormControl>
-                            <RadioGroup row name="project-working-status" value={projStatus} onChange={(event) => setProjStatus(event.target.value)}>
-                                <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-                                <FormControlLabel value="no" control={<Radio />} label="No" />
-                            </RadioGroup>
-                        </FormControl>
-                    </Grid>
-                    <Grid item xs={12} >
-                        <CustomizedHook data={skills} label={<Typography mb={1}><span style={{color: 'red'}}>*</span>What are the skills gained from the project?</Typography>}/>
-                    </Grid>
-=======
         <div className="formtemp-page">
             <InterviewFormHeader title='Project Experience' />
             <div className="formtemp-bodyform">
@@ -166,7 +129,6 @@ const Projects_1 = () => {
                             </div>
                         <InterviewFormFooter nextForm='/certification' prevForm='/work'/>
                     </form>
->>>>>>> Stashed changes
                 </Grid>
             </Grid>
         </div>

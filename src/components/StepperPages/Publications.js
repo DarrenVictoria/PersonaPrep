@@ -28,63 +28,6 @@ const Publications = () => {
     const [pblDesc, setPblDesc] = useState('');
     
     return(
-<<<<<<< Updated upstream
-        <div className='Publications-Maindiv'>
-            <div className='Publications-LeftColumn'>
-            {/*<Box sx={{ flexGrow: 1 }}>*/}
-            <Grid container spacing={2} >
-              <Grid item xs={12}>
-                
-              <Typography ><span style={{color: 'red'}}>*</span> Publication Title</Typography>
-                  <TextField type="text" variant="outlined" value={PblTitle} onChange={(event) => setPblTitle(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}} />
-                
-              </Grid>
-              <Grid item xs={12}>
-                
-              <Typography ><span style={{color: 'red'}}>*</span> Publication / Publisher</Typography>
-                  <TextField type="text" variant="outlined" value={publisher} onChange={(event) => setPublisher(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
-                
-              </Grid>
-              <Grid item xs={12} style={{ marginBottom: '-40px' }}>
-              <Typography ><span style={{color: 'red'}}>*</span> Publication date</Typography>
-              </Grid>
-              <Grid item xs={6}>
-                
-              <EditableChoose
-              options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-              onSelect={setPblMonth}
-              disabledOptions={[]}
-              isRequired={true}
-              
-             
-             />
-                
-              </Grid>
-              <Grid item xs={6}>
-              <EditableChoose
-              options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-              onSelect={setPblYear}
-              disabledOptions={["2024"]}
-              isRequired={true}
-              
-             
-             />
-                
-              </Grid>
-              <Grid item xs={12}>
-                
-              <Typography ><span style={{color: 'red'}}>*</span> Publication URL</Typography>
-                  <TextField type="text" variant="outlined" value={pblUrl} onChange={(event) => SetPblUrl(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
-                
-              </Grid>
-              <Grid item xs={12}>
-                
-              <Typography ><span style={{color: 'red'}}>*</span> Project Description</Typography>
-                  <CustomMultilineTextFields  height="115px" value={pblDesc} onChange={(event) => setPblDesc(event.target.value)} required />
-                
-              </Grid>
-              
-=======
       <div className="formtemp-page">
             <InterviewFormHeader title='Publication' />
             <div className="formtemp-bodyform">
@@ -209,7 +152,6 @@ const Publications = () => {
                         <InterviewFormFooter nextForm='/skilltrack' prevForm='/clubsAndSocs'/>
                     </form>
                 </Grid>
->>>>>>> Stashed changes
             </Grid>
         </div>
     </div>

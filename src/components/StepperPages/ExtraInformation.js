@@ -21,52 +21,6 @@ const ExtraInformation = () => {
     const [lang, setLang] = useState('');
 
     return(
-<<<<<<< Updated upstream
-        <div className="personalInfo-main">
-            <Grid container pl={1}>
-                <Grid item xs={12} md={6} mb={3} pr={1}>
-                    <Typography mb={1}><span style={{color: 'red'}}>*</span>Reference Person</Typography>
-                    <TextField type="text" value={refName} onChange={(event) => setRefName(event.target.value)} variant="outlined" fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/>
-                </Grid>
-                <Grid item xs={12} md={4} mb={3}>
-                    <Typography mb={1}><span style={{color: 'red'}}>*</span>Reference Contact</Typography>
-                    <TextField type="text" value={refContact} onChange={(event) => setRefContact(event.target.value)} variant="outlined" fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/>
-                </Grid>
-                <Grid item xs={12} ml={4} mb={5}>
-                    <Typography>
-                        <IconButton color="primary" style={{ backgroundColor: 'black', borderRadius: '50%', width:'22px', height:'22px', marginRight: '15px' }} >
-                            <AddIcon style={{ color: 'white' }} />
-                        </IconButton>
-                        Add reference person
-                    </Typography>
-                </Grid>
-                <Grid item xs={12} md={6} mb={3}>
-                    <Typography mb={1}>Award Title</Typography>
-                    <TextField type="text" value={award} onChange={(event) => setAward(event.target.value)} variant="outlined" fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/>
-                </Grid>
-                <Grid item xs={12} ml={4} mb={5}>
-                    <Typography>
-                        <IconButton color="primary" style={{ backgroundColor: 'black', borderRadius: '50%', width:'22px', height:'22px', marginRight: '15px' }} >
-                            <AddIcon style={{ color: 'white' }} />
-                        </IconButton>
-                        Add award
-                    </Typography>
-                </Grid>
-                <Grid item xs={12} md={6} mb={3}>
-                    <Typography mb={1}>Fluent Languages</Typography>
-                    <TextField type="text" value={lang} onChange={(event) => setLang(event.target.value)} variant="outlined" fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/>
-                </Grid>
-                <Grid item xs={12} ml={4} mb={5}>
-                    <Typography>
-                        <IconButton color="primary" style={{ backgroundColor: 'black', borderRadius: '50%', width:'22px', height:'22px', marginRight: '15px' }} >
-                            <AddIcon style={{ color: 'white' }} />
-                        </IconButton>
-                        Add language
-                    </Typography>
-                </Grid>
-                <Grid item xs={12} md={6} mb={3}>
-                    <CustomizedHook data={Interests} label={<Typography mb={1}>Research Interests</Typography>}/>
-=======
         <div className="formtemp-page">
             <InterviewFormHeader title='Extra Information' />
             <div className="formtemp-bodyform">
@@ -124,7 +78,6 @@ const ExtraInformation = () => {
                             </div>
                         <InterviewFormFooter nextForm='/templates' prevForm='/summary'/>
                     </form>
->>>>>>> Stashed changes
                 </Grid>
             </Grid>
         </div>

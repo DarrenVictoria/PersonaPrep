@@ -58,84 +58,6 @@ const ContactDetails_1 = () => {
   };
 
     return(
-<<<<<<< Updated upstream
-    <div className='Contactdetails1-Maindiv'>
-     
-        
-      <div className='Contactdetails1-LeftColumn'>
-            {/*<Box sx={{ flexGrow: 1 }}>*/}
-            <Grid container spacing={2} >
-              <Grid item xs={6}>
-                
-              <Typography ><span style={{color: 'red'}}>*</span> Phone</Typography>
-                  <TextField type="text" variant="outlined" value={phone} onChange={(event) => setPhone(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}} />
-                
-              </Grid>
-              <Grid item xs={6}>
-                
-              <Typography ><span style={{color: 'red'}}>*</span> Email</Typography>
-                  <TextField type="email" variant="outlined" value={email} onChange={(event) => setEmail(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
-                
-              </Grid>
-              <Grid item xs={6}>
-                
-              <Typography ><span style={{color: 'red'}}>*</span> District</Typography>
-                  <TextField type="text" variant="outlined" value={district} onChange={(event) => setDistrict(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
-                
-              </Grid>
-              <Grid item xs={6}>
-                
-              <Typography ><span style={{color: 'red'}}>*</span> City</Typography>
-                  <TextField type="text" variant="outlined" value={city} onChange={(event) => setCity(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
-                
-              </Grid>
-              <Grid item xs={6}>
-                
-              <Typography ><span style={{color: 'red'}}>*</span> Postalcode</Typography>
-                  <TextField type="text" variant="outlined" value={postal} onChange={(event) => setPostal(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
-                
-              </Grid>
-              <Grid item xs={6}>
-                
-              <Typography ><span style={{color: 'red'}}>*</span> Country</Typography>
-                  <TextField type="text" variant="outlined" value={country} onChange={(event) => setCountry(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
-                
-              </Grid>
-              <Grid item xs={12}>
-                
-              <Typography ><span style={{color: 'red'}}>*</span> Portfolio Website</Typography>
-                  <TextField type="text" variant="outlined" value={portfolioSite} onChange={(event) => setPortfolioSite(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
-                
-              </Grid>
-              <Grid item xs={12} style={{ marginBottom: '-15px' }}>
-              <Typography>Other Portfolio links</Typography>
-              </Grid>
-              <Grid item xs={11}>
-                  <TextField type="text" variant="outlined" fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}} onChange={(e)=>setInputUrl(e.target.value)}/>
-              </Grid>
-              <Grid item xs={1} style={{ display: 'flex', alignItems: 'center' }}>
-                  <IconButton color="primary"style={{ backgroundColor: 'black', borderRadius: '50%',width:'22px',height:'22px' }} onClick={checkUrl}><AddIcon style={{ color: 'white' }} /></IconButton>
-                
-              </Grid>
-              <Grid item xs={12}>
-                
-              {shownbuttons.map((buttonName)=>(
-                <button key={buttonName} style={{backgroundColor: 'black', color:'white', borderRadius:'25px'}}>{buttonName}<IconButton color='primary' style={{backgroundColor: 'black', border: '1px solid white',borderRadius: '50%', marginLeft: '5px', width: '15px', height: '15px' }} onClick={()=>removeButton(buttonName)}><CloseIcon style={{color: 'white', fontSize: '12px'}}/></IconButton></button>
-              ))}
-              </Grid>
-              <Grid item xs={3}>
-                {predefinedButtonName.map((buttonName)=>(
-                  <button key={buttonName} style={{display:'none'}}>{buttonName}</button>
-                ))}
-                
-              
-              </Grid>
-            </Grid>
-          {/*</Box>*/}
-              
-      </div>
-            
-=======
       <div className="formtemp-page">
             <InterviewFormHeader title='Contact Details 1/2' />
             <div className="formtemp-bodyform">
@@ -219,7 +141,6 @@ const ContactDetails_1 = () => {
                                             
                                     </div>
                                           
->>>>>>> Stashed changes
 
                                     
 

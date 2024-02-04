@@ -29,89 +29,6 @@ const Certification_1 = () => {
     const [crtExpYear, setCrtExpYear] = useState('');
     
     return(
-<<<<<<< Updated upstream
-        <div className='Certification1-Maindiv'>
-        <div className='Certification1-LeftColumn'>
-        {/*<Box sx={{ flexGrow: 1 }}>*/}
-        <Grid container spacing={2} >
-          <Grid item xs={12}>
-            
-          <Typography ><span style={{color: 'red'}}>*</span> Name of Certification</Typography>
-              <TextField type="text" variant="outlined" value={certificateName} onChange={(event) => setCertificateName(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}} />
-            
-          </Grid>
-          <Grid item xs={12}>
-            
-          <Typography ><span style={{color: 'red'}}>*</span> Issuing Organization</Typography>
-              <TextField type="text" variant="outlined" value={issuedOrg} onChange={(event) => setIssuedOrg(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
-            
-          </Grid>
-          <Grid item xs={12} style={{ marginBottom: '-40px' }}>
-          <Typography ><span style={{color: 'red'}}>*</span> Issue Date</Typography>
-          </Grid>
-          <Grid item xs={6}>
-            
-          <EditableChoose
-          options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-          onSelect={setCertiIssuedMonth}
-          disabledOptions={[]}
-          isRequired={true}
-          //the below width did not work have to check
-         
-         />
-            
-          </Grid>
-          <Grid item xs={6}>
-          <EditableChoose
-          options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-          onSelect={setCertiIssuedYear}
-          disabledOptions={["2024"]}
-          isRequired={true}
-          //the below width did not work have to check
-         
-         />
-            
-          </Grid>
-          <Grid item xs={12} style={{ marginBottom: '-40px' }}>
-              <Typography ><span style={{color: 'red'}}>*</span> Expiration Date</Typography>
-              </Grid>
-              <Grid item xs={6}>
-                
-              <EditableChoose
-              options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-              onSelect={setCrtExpMonth}
-              disabledOptions={[]}
-              isRequired={true}
-              //the below width did not work have to check
-            
-            />
-            
-          </Grid>
-          <Grid item xs={6}>
-              <EditableChoose
-              options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-              onSelect={setCrtExpYear}
-              disabledOptions={["2024"]}
-              isRequired={true}
-              //the below width did not work have to check
-            
-            />
-            
-          </Grid>
-         
-          <Grid item xs={12}>
-            
-              <Typography ><span style={{color: 'red'}}>*</span> Certification ID</Typography>
-              <TextField type="text" variant="outlined" value={certificateId} onChange={(event) => setCertificateId(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
-            
-          </Grid>
-          
-        </Grid>
-      {/*</Box>*/}
-          
-  </div>
-        
-=======
       <div className="formtemp-page">
             <InterviewFormHeader title='Certification' />
             <div className="formtemp-bodyform">
@@ -200,7 +117,6 @@ const Certification_1 = () => {
                                   
                           </div>
                                 
->>>>>>> Stashed changes
 
                           
 
