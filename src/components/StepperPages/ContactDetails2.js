@@ -1,4 +1,7 @@
 import './css/personalInfo.css';
+import '../../pages/interviewforms/Template.css';
+import InterviewFormFooter from '../InterviewFormFooter';
+import InterviewFormHeader from '../InterviewFormHeader';
 import Grid from "@mui/material/Grid";
 import Card from '@mui/material/Card'; 
 import CardContent from '@mui/material/CardContent'; 
@@ -79,68 +82,82 @@ const ContactDetails_2 = () => {
     }
 
     return ( 
-        <div className="personalInfo-main">
-            <div className="personalInfo-leftCol">
-                <Grid container>
-                    <Grid item xs={12} mb={3}>
-                        <Typography variant='h4' mb={1} sx={{fontWeight:'bold'}}>Social network accounts</Typography>
-                        <Typography mb={1}>Indicate the desired communication method</Typography>
-                    </Grid>
+        <div className="formtemp-page">
+            <InterviewFormHeader title='Contact Details 2/2' />
+            <div className="formtemp-bodyform">
+                <Grid container spacing={2} style={{ height: '100%' }}>
+                    <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
+                        <form style={{ height: '100%', position: 'relative' }}>
+                            <div style={{ margin: '80px 25px 125px' }}>
+                                <div className="personalInfo-main">
+                                    <div className="personalInfo-leftCol">
+                                        <Grid container>
+                                            <Grid item xs={12} mb={3}>
+                                                <Typography variant='h4' mb={1} sx={{fontWeight:'bold'}}>Social network accounts</Typography>
+                                                <Typography mb={1}>Indicate the desired communication method</Typography>
+                                            </Grid>
 
-                    <CheckBoxComp image={github} name='GitHub' value={gitTxt} setText={setGitTxt} checked={gitChecked} setCheck={setGitChecked}/>
-                    <CheckBoxComp image={linkedIn} name='LinkedIn' value={linkedInTxt} setText={setLinkedInTxt} checked={linkedChecked} setCheck={setlinkedChecked}/>
-                    <CheckBoxComp image={twitter} name='Twitter' value={twitterTxt} setText={setTwitterTxt} checked={twitterChecked} setCheck={setTwitterChecked}/>
-                    <CheckBoxComp image={stackoverflow} name='StackOverflow' value={soTxt} setText={setSoTxt} checked={soChecked} setCheck={setSoChecked}/>
-                    <CheckBoxComp image={medium} name='Medium' value={mediumTxt} setText={setMediumTxt} checked={mediumChecked} setCheck={setMediumChecked}/>
+                                            <CheckBoxComp image={github} name='GitHub' value={gitTxt} setText={setGitTxt} checked={gitChecked} setCheck={setGitChecked}/>
+                                            <CheckBoxComp image={linkedIn} name='LinkedIn' value={linkedInTxt} setText={setLinkedInTxt} checked={linkedChecked} setCheck={setlinkedChecked}/>
+                                            <CheckBoxComp image={twitter} name='Twitter' value={twitterTxt} setText={setTwitterTxt} checked={twitterChecked} setCheck={setTwitterChecked}/>
+                                            <CheckBoxComp image={stackoverflow} name='StackOverflow' value={soTxt} setText={setSoTxt} checked={soChecked} setCheck={setSoChecked}/>
+                                            <CheckBoxComp image={medium} name='Medium' value={mediumTxt} setText={setMediumTxt} checked={mediumChecked} setCheck={setMediumChecked}/>
+                                        </Grid>
+                                    </div>
+
+                                    <div className="personalInfo-rightCol">
+                                        <Card variant="outlined" sx={{ height:'100%',maxHeight: '420px', width:'100%',maxWidth: '363px',borderRadius:'15px',overflowY:'auto',overflowX:'auto','@media (min-width:769px)':{overflowY:'hidden',},}}>
+                                            <CardContent>
+                                                <Typography variant="h5" component="div" sx={{ textAlign: 'center', fontWeight: 'bold' }}>Social Media Tips</Typography>
+                                                <List>
+                                                    <ListItem >
+                                                        <ListItemAvatar>
+                                                            <Avatar sx={{borderRadius: '12px'}}>
+                                                                <img src={chand} alt="Custom Icon" style={{ width: '27px', height: '31px' }}/>
+                                                            </Avatar>
+                                                        </ListItemAvatar>
+                                                        <ListItemText>
+                                                            <Typography variant='body1' >
+                                                                Choose social media platforms that match with your professional goals.
+                                                            </Typography>
+                                                        </ListItemText>
+                                                    </ListItem>
+                                                    <ListItem >
+                                                        <ListItemAvatar>
+                                                            <Avatar sx={{borderRadius: '12px', padding: '5px'}}>
+                                                                <img src={clinkedin} alt="Custom Icon" style={{ width: 'var(--40,40px)', height: '35.666px' }} />
+                                                            </Avatar>
+                                                        </ListItemAvatar>
+                                                        <ListItemText>
+                                                            <Typography variant='body1'>
+                                                                <span style={{fontWeight: 'bold'}}>LinkedIn</span> is ideal for showcasing skills, connecting with industry professionals, and highlighting educational background.
+                                                            </Typography>
+                                                        </ListItemText>
+                                                    </ListItem>
+                                                    <ListItem >
+                                                        <ListItemAvatar>
+                                                            <Avatar sx={{borderRadius: '12px', display: 'flex', justifyContent: 'center', alignItems: 'center'  }}>
+                                                                <img src={cgithub} alt="Custom Icon" style={{ width: '41px', height: '39px' ,}} />
+                                                            </Avatar>
+                                                        </ListItemAvatar>
+                                                        <ListItemText>
+                                                            <Typography variant='body1'>
+                                                                <span style={{fontWeight: 'bold'}}>Github</span> is useful to showcase technical skills and coding projects, collaborating with the coding community.
+                                                            </Typography>
+                                                        </ListItemText>
+                                                    </ListItem>
+                                                </List>
+                                            </CardContent>
+                                        </Card>
+                                    </div>
+                                </div>
+                            </div>
+                        <InterviewFormFooter nextForm='/school' prevForm='/contactDetMain'/>
+                    </form>
                 </Grid>
-            </div>
-
-            <div className="personalInfo-rightCol">
-                <Card variant="outlined" sx={{ height:'100%',maxHeight: '420px', width:'100%',maxWidth: '363px',borderRadius:'15px',overflowY:'auto',overflowX:'auto','@media (min-width:769px)':{overflowY:'hidden',},}}>
-                    <CardContent>
-                        <Typography variant="h5" component="div" sx={{ textAlign: 'center', fontWeight: 'bold' }}>Social Media Tips</Typography>
-                        <List>
-                            <ListItem >
-                                <ListItemAvatar>
-                                    <Avatar sx={{borderRadius: '12px'}}>
-                                        <img src={chand} alt="Custom Icon" style={{ width: '27px', height: '31px' }}/>
-                                    </Avatar>
-                                </ListItemAvatar>
-                                <ListItemText>
-                                    <Typography variant='body1' >
-                                        Choose social media platforms that match with your professional goals.
-                                    </Typography>
-                                </ListItemText>
-                            </ListItem>
-                            <ListItem >
-                                <ListItemAvatar>
-                                    <Avatar sx={{borderRadius: '12px', padding: '5px'}}>
-                                        <img src={clinkedin} alt="Custom Icon" style={{ width: 'var(--40,40px)', height: '35.666px' }} />
-                                    </Avatar>
-                                </ListItemAvatar>
-                                <ListItemText>
-                                    <Typography variant='body1'>
-                                        <span style={{fontWeight: 'bold'}}>LinkedIn</span> is ideal for showcasing skills, connecting with industry professionals, and highlighting educational background.
-                                    </Typography>
-                                </ListItemText>
-                            </ListItem>
-                            <ListItem >
-                                <ListItemAvatar>
-                                    <Avatar sx={{borderRadius: '12px', display: 'flex', justifyContent: 'center', alignItems: 'center'  }}>
-                                        <img src={cgithub} alt="Custom Icon" style={{ width: '41px', height: '39px' ,}} />
-                                    </Avatar>
-                                </ListItemAvatar>
-                                <ListItemText>
-                                    <Typography variant='body1'>
-                                        <span style={{fontWeight: 'bold'}}>Github</span> is useful to showcase technical skills and coding projects, collaborating with the coding community.
-                                    </Typography>
-                                </ListItemText>
-                            </ListItem>
-                        </List>
-                    </CardContent>
-                </Card>
-            </div>
+            </Grid>
         </div>
+    </div>
     );
 }
 

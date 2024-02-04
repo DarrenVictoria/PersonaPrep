@@ -20,11 +20,14 @@ const CvFeedback = () => {
     const [rating2, setRating2] = useState('');
     const [rating3, setRating3] = useState('');
     const [rating4, setRating4] = useState('');
+    const [feedback, setFeedback] = useState('');
 
     const [emoji1Clr, setEmoji1Clr] = useState([''], [''], [''], [''], ['']);
     const [emoji2Clr, setEmoji2Clr] = useState([''], [''], [''], [''], ['']);
     const [emoji3Clr, setEmoji3Clr] = useState([''], [''], [''], [''], ['']);
     const [emoji4Clr, setEmoji4Clr] = useState([''], [''], [''], [''], ['']);
+
+    const feedbackChange = (event) => setFeedback(event.target.value);
 
     const emojisClr = ['', '', '', '', ''];
 
@@ -132,6 +135,8 @@ const CvFeedback = () => {
         { onclick: () => rating4Click(5), color: emoji4Clr[4], icon: SentimentVerySatisfiedIcon },
     ];
 
+    const btn = (event) => {event.preventDefault(); console.log(feedback)};
+
     return(
         <>
         <Grid item xs={12} mb={4}>
@@ -169,7 +174,8 @@ const CvFeedback = () => {
                             <RatingComp key={index} onclick={onclick} color={color} icon={icon} />
                         ))}
                     </Grid>
-                </Grid>                    
+                </Grid>   
+                {/* <button onClick={btn}>btn</button> */}
             </div>
 
             <div className="feedback-rightCol">
@@ -188,7 +194,7 @@ const CvFeedback = () => {
                         <Typography variant='h6' >Are there any specific areas or features you think the CV generator could improve upon?</Typography>
                     </Grid>
                     <Grid item xs={12} mb={2} >
-                    <CustomMultilineTextFields height='100px' />
+                    <CustomMultilineTextFields height='100px' value={feedback} onChange={feedbackChange}/>
                 </Grid>
                 </Grid>                    
             </div>

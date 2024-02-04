@@ -18,14 +18,14 @@
     padding: 0 4px;
 }
 
-.workexperience-remaining-words {
+/* .workexperience-remaining-words {
 
     bottom: -9px;
-    right: 12px;
+    right: 0px;
     position: absolute;
-}
+} */
 
-.workexperience-text-area {
+/* .workexperience-text-area {
     width: 100%;
     box-sizing: border-box;
     padding: 10px;
@@ -35,23 +35,23 @@
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
-    line-height: normal;
+    line-height: normal; */
 
     /* Removed default textarea styles */
-    border: none;
+    /* border: none;
     border: none;
     outline: none;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
     resize: none;
-}
+} */
 
 /* Moved border styles to a completely different class */
-.workexperience-border {
+/* .workexperience-border {
     border: 1px solid black;
     border-radius: 25px;
-}
+} */
 
 /* .workexperiencemaindiv{
       padding: 10px;
