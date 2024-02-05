@@ -26,9 +26,12 @@ function getStyles(name, personName, theme) {
   };
 }
 
-export default function Choose({options, onSelect, disabledOptions, isRequired }) {
+export default function Choose({options, onSelect, disabledOptions, isRequired, defaultValue  }) {
   const theme = useTheme();
-  const [personName, setPersonName] = useState(options.length > 0 ? options[0] : '');
+  const [personName, setPersonName] = useState(defaultValue || (options.length > 0 ? options[0] : ''));
+
+
+  
 
   
 

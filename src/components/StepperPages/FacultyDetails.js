@@ -65,7 +65,7 @@ const FacultyDetails = () => {
                     setSelectedDegree(userData.degree || '');
 
                     
-
+                
                 }
             } catch (error) {
                 console.error('Error fetching user data: ', error);
@@ -78,6 +78,8 @@ const FacultyDetails = () => {
         // Call the function to fetch user data
         fetchUserData();
     }, [currentUser.email]);
+
+    
 
     const addDataToFirestore = async () => {
         try {
@@ -178,6 +180,7 @@ const FacultyDetails = () => {
                                             onSelect={setSelectedFaculty}
                                             disabledOptions={["Faculty","Faculty of Business","Faculty of Engineering", "Faculty of Science"]}
                                             isRequired={true}
+                                            defaultValue={selectedFaculty}
                                         />
 
                                     </div>
@@ -189,6 +192,7 @@ const FacultyDetails = () => {
                                             onSelect={setSelectedBatch}
                                             disabledOptions={["Batch"]}
                                             isRequired={true}
+                                            defaultValue={selectedBatch}
                                         />
 
                                     </div>
@@ -200,6 +204,7 @@ const FacultyDetails = () => {
                                             onSelect={setSelectedDegree}
                                             disabledOptions={["University"]}
                                             isRequired={true}
+                                            defaultValue={selectedDegree}
                                         />
                                     </div>
                                     {/* {(!parah) && <Typography color='error'>bla bla bla</Typography>}*/}
