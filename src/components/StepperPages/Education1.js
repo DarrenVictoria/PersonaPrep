@@ -13,6 +13,9 @@ import cphone from '../../assets/images/iconcphone.svg';
 import EditableChoose from '../EditableSelectOption';
 import { useState } from 'react';
 import CustomMultilineTextFieldslimited from '../MultilineMaxWordLimit';
+import InterviewFormFooter from '../InterviewFormFooter';
+import InterviewFormHeader from '../InterviewFormHeader';
+import '../../pages/interviewforms/Template.css';
 
 const Education_1 = () => {
     const [startMonth, setStartMonth] = useState('');

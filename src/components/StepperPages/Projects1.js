@@ -18,6 +18,9 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import { CustomizedHook } from '../TextfieldButtonDataDisplay';
 import FileUpload from '../FileUpload';
+import InterviewFormFooter from '../InterviewFormFooter';
+import InterviewFormHeader from '../InterviewFormHeader';
+import '../../pages/interviewforms/Template.css';
 
 const Projects_1 = () => {
     const skills = [{data: 'c#',}, {data: 'react'}, {data: 'java'}];

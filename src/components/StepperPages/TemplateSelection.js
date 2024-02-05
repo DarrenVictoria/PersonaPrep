@@ -1,6 +1,10 @@
 import React from 'react';
 import './css/TemplateSelection.css';
 import image5 from '../../assets/images/image5.png'
+import Grid from "@mui/material/Grid";
+import InterviewFormFooter from '../InterviewFormFooter';
+import InterviewFormHeader from '../InterviewFormHeader';
+// import '../../pages/interviewforms/Template.css';
 
 
 const TemplateSelection = () => {

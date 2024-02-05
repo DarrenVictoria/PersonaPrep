@@ -8,6 +8,9 @@ import FormGroup from "@mui/material/FormGroup";//for the check box
 import FormControlLabel from "@mui/material/FormControlLabel";//for the check box
 import Checkbox from "@mui/material/Checkbox";//for the check box
 import {CustomizedHook, CustomizedHookLarge} from '../TextfieldButtonDataDisplay';
+import InterviewFormFooter from '../InterviewFormFooter';
+import InterviewFormHeader from '../InterviewFormHeader';
+import '../../pages/interviewforms/Template.css';
 
 const Clubs = () => {
     const [clubName, setClubName] = useState('');
