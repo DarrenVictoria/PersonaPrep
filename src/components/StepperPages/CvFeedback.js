@@ -13,7 +13,11 @@ import RatingComp from '../RatingComp';
 import InterviewFormFooter from '../InterviewFormFooter';
 import InterviewFormHeader from '../InterviewFormHeader';
 import CustomMultilineTextFieldslimited from '../MultilineMaxWordLimit';
-
+import Button from "@mui/material/Button";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { back } from '../BackButton.js';
+import { next } from '../NextButton.js';
+import { useNavigate } from 'react-router-dom';
 
 const CvFeedback = () => {
     const [rating1, setRating1] = useState('');
@@ -137,13 +141,29 @@ const CvFeedback = () => {
 
     // const btn = (event) => {event.preventDefault(); console.log(feedback)};
 
+    const navigate = useNavigate();
+    const prevPage = () => navigate('/templates');
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // navigate('/contactDetMain')
+        // validate();
+
+        // Check if validation passed
+        // if (validation) {
+        //     // Call the function to add data to Firestore
+        //     addDataToFirestore();
+        // } else {
+        //     console.log('Validation failed');
+        // }
+    };
+
     return(
         <div className="formtemp-page">
             <InterviewFormHeader title='Feedback' />
             <div className="formtemp-bodyform">
                 <Grid container spacing={2} style={{ height: '100%' }}>
                     <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
-                        <form style={{ height: '100%', position: 'relative' }}>
+                        <form onSubmit={handleSubmit} style={{ height: '100%', position: 'relative' }}>
                             <div style={{ margin: '80px 25px 125px' }}>
 
                                 <Grid item xs={12} mb={4}>
@@ -216,7 +236,15 @@ const CvFeedback = () => {
                                 </div>
 
                             </div>
-                        {/* <InterviewFormFooter nextForm='/certification' prevForm='/work'/> */}
+                            <Grid container spacing={2} style={{position: 'absolute', bottom: 80}}>            
+                                <Grid xs={6} paddingLeft={'10px'}>
+                                    <Button startIcon={<ArrowBackIcon />} style={back} onClick={prevPage}>Go Back</Button>
+                                </Grid>
+                                    
+                                <Grid xs={6}>
+                                    <Button type='submit' style={next}>Send Feedback</Button>                                    
+                                </Grid>
+                            </Grid>
                         </form>
                     </Grid>
                 </Grid>

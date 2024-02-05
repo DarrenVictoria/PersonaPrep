@@ -17,16 +17,35 @@ import cphone from '../../assets/images/iconcphone.svg';
 import InterviewFormFooter from '../InterviewFormFooter';
 import InterviewFormHeader from '../InterviewFormHeader';
 import { useState } from 'react';
+import Button from "@mui/material/Button";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { back } from '../BackButton.js';
+import { next } from '../NextButton.js';
+import { useNavigate } from 'react-router-dom';
 
 const PersonalInfo = () => {
     // const job_roles = [{data:"role1"},{data:"role2"},{data:"role3"},{data:"role4"},{data:"role5"},{data:"role6"},{data:"role7"},{data:"role8"}];
     
     const [phone, setPhone] = useState('');
+    const [selectedValues, setSelectedValues] = useState([]);
 
     const phoneChange = (event) => setPhone(event.target.value);
 
-    
-    const [selectedValues, setSelectedValues] = useState([]);
+    const navigate = useNavigate();
+    const prevPage = () => navigate('/faculty');
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        navigate('/contactDetMain')
+        // validate();
+
+        // Check if validation passed
+        // if (validation) {
+        //     // Call the function to add data to Firestore
+        //     addDataToFirestore();
+        // } else {
+        //     console.log('Validation failed');
+        // }
+    };
     
     const handleValueChange = (newValue) => {
         setSelectedValues(newValue);
@@ -38,7 +57,7 @@ const PersonalInfo = () => {
             <div className="formtemp-bodyform">
                 <Grid container spacing={2} style={{ height: '100%' }}>
                     <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
-                        <form style={{ height: '100%', position: 'relative' }}>
+                        <form onSubmit={handleSubmit} style={{ height: '100%', position: 'relative' }}>
                             <div style={{ margin: '80px 25px 125px' }}>
                                 <div className="personalInfo-main">
                                     <div className="personalInfo-leftCol">
@@ -111,7 +130,15 @@ const PersonalInfo = () => {
                                     </div>
                                 </div>
                             </div>
-                        <InterviewFormFooter nextForm='/contactDetMain' prevForm='/faculty'/>
+                        <Grid container spacing={2} style={{position: 'absolute', bottom: 80}}>            
+                            <Grid xs={6} paddingLeft={'10px'}>
+                                <Button startIcon={<ArrowBackIcon />} style={back} onClick={prevPage}>Go Back</Button>
+                            </Grid>
+                                
+                            <Grid xs={6}>
+                                <Button type='submit' style={next}>Next Step</Button>                                    
+                            </Grid>
+                        </Grid>
                     </form>
                 </Grid>
             </Grid>
