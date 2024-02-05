@@ -16,6 +16,7 @@ const MenuProps = {
   }
 };
 
+//Code Check
 
 function getStyles(name, personName, theme) {
   return {

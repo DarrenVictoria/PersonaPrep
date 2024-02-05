@@ -17,6 +17,9 @@ import { useAuth } from '../../hooks/useAuth.js';
 import LoadingScreen from 'react-loading-screen';
 import Logo from "../../assets/logo/Persona Prep Dark.png"
 
+
+//Code check 
+
 const FacultyDetails = () => {
     const forceUpdate = useRef();
     const { currentUser } = useAuth();
