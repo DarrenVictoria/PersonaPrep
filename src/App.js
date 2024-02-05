@@ -66,7 +66,7 @@ function App() {
           <Route path="/login" element={<Login />}/>
 
           {/* <Route path="/testFaculty" element={<TestFacultyDetails />}/> */}
-          <Route path="/faculty" element={<FacultyDetails />}/>
+          
           <Route path="/personalInfo" element={<PersonalInfo />}/>
           <Route path="/contactDetMain" element={<ContactDetails_1 />}/>
           <Route path="/contactDetSocial" element={<ContactDetails_2 />}/>
@@ -89,6 +89,13 @@ function App() {
             path="/dashboard"
             element={
               currentUser ? <Dashboard /> : <Navigate to="/login" />
+            }
+          />
+
+          <Route
+            path="/faculty"
+            element={
+              currentUser ? <FacultyDetails /> : <Navigate to="/login" />
             }
           />
 
