@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import './css/Clubs.css';
-import '../../pages/interviewforms/Template.css';
-import InterviewFormFooter from '../InterviewFormFooter';
-import InterviewFormHeader from '../InterviewFormHeader';
 import Typography from '@mui/material/Typography'; //this is for the card in the right column
 import Grid from "@mui/material/Grid";
 import EditableChoose from '../EditableSelectOption';
@@ -111,15 +108,18 @@ const Clubs = () => {
                                   {/* /*<Grid item xs={1}>
                                     {this is a blank space just to take the correct position of the below check box }
                                   </Grid>*/}
-                                  <Grid item xs={12}  mb={3} pl={2} sx={{"@media (max-width: 376px)": {pl: 0}}}>
-                                    
-                                    <FormControlLabel control={<Checkbox checked={volunteerChecked} onChange={(event) => setvolunteerChecked(event.target.checked)}/>} label="Currently Volunteering" /> {/*if need to make this requires put required before control and if need to make it already checked put check inside the control next to the Checkbx*/}
-                                    
-                                  </Grid>
-                                  <Grid item xs={12}>
+                                  <Grid item xs={12} mb={3}>
                                     
                                     <CustomizedHook data={RolesPlayed} label={<Typography>Roles Played</Typography>}/>
                                   
+                                    
+                                  </Grid>
+                                  <Grid item xs={12} mb={3}>                                    
+                                    <CustomizedHook data={SkillsEarned} label={<Typography>Skills Earned</Typography>}/>
+                                  </Grid>
+                                  <Grid item xs={12}  mb={3} pl={2} sx={{"@media (max-width: 376px)": {pl: 0}}}>
+                                    
+                                    <FormControlLabel control={<Checkbox checked={volunteerChecked} onChange={(event) => setvolunteerChecked(event.target.checked)}/>} label="Currently Volunteering" /> {/*if need to make this requires put required before control and if need to make it already checked put check inside the control next to the Checkbx*/}
                                     
                                   </Grid>
                                   
@@ -129,7 +129,7 @@ const Clubs = () => {
                           </div>
                                 
                             <div className='Clubs-RightColumn'>
-                              <CustomizedHookLarge width={360}  height={373} data={SkillsEarned} label={<Typography>Skills Earned</Typography>}/>
+                              {/* <CustomizedHookLarge width={360}  height={373} data={SkillsEarned} label={<Typography>Skills Earned</Typography>}/> */}
                             </div>
                         </div> 
                         </div>

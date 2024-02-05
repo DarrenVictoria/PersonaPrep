@@ -1,8 +1,5 @@
 import React from 'react';
 import './css/Publication.css';
-import '../../pages/interviewforms/Template.css';
-import InterviewFormFooter from '../InterviewFormFooter';
-import InterviewFormHeader from '../InterviewFormHeader';
 import Card from '@mui/material/Card'; //this is for the card in the right column
 import CardContent from '@mui/material/CardContent'; //this is for the card in the right column
 import Typography from '@mui/material/Typography'; //this is for the card in the right column
@@ -19,6 +16,8 @@ import cbatch from '../../assets/images/iconcbatch.svg';
 import EditableChoose from '../EditableSelectOption';
 import CustomMultilineTextFields from '../CustomMultilineTextfield';
 import { useState } from 'react';
+import CustomMultilineTextFieldslimited from '../MultilineMaxWordLimit';
+
 const Publications = () => {
     const [PblTitle, setPblTitle] = useState('');
     const [publisher, setPublisher] = useState('');
@@ -85,9 +84,16 @@ const Publications = () => {
                                       </Grid>
                                       <Grid item xs={12}>
                                         
-                                      <Typography ><span style={{color: 'red'}}>*</span> Project Description</Typography>
-                                          <CustomMultilineTextFields  height="115px" value={pblDesc} onChange={(event) => setPblDesc(event.target.value)} required />
-                                        
+                                        <Typography ><span style={{color: 'red'}}>*</span> Project Description</Typography>
+                                        {/* <CustomMultilineTextFields  height="115px" value={pblDesc} onChange={(event) => setPblDesc(event.target.value)} required /> */}
+                                        <CustomMultilineTextFieldslimited
+                                            inputHeight="150px"
+                                            maxWidth="1300px"
+                                            isRequired={true}
+                                            value={pblDesc}
+                                            onChange={(event) => setPblDesc(event.target.value)}
+                                            maxWords={50} 
+                                        />
                                       </Grid>
                                       
                                     </Grid>
@@ -153,7 +159,62 @@ const Publications = () => {
                     </form>
                 </Grid>
             </Grid>
-        </div>
+          {/*</Box>*/}
+              
+      </div>
+            
+
+      
+
+     
+      <div className='Publications-RightColumn'>
+        <Card variant="outlined" sx={{ height:'100%',maxHeight: '450px', width:'100%',maxWidth: '363px',borderRadius:'15px',overflowY:'auto',overflowX:'auto','@media (min-width:769px)':{overflowY:'hidden',}}}className='Contactdetails2-RightColumnCard'>
+          <CardContent >
+            <Typography variant="h5" component="div"sx={{ textAlign: 'center' }}>
+            Publication tips
+            </Typography>
+            <List>
+              <ListItem >
+              <ListItemAvatar>
+                <Avatar sx={{ /*width: '38.732px', height: '39.022px',*/ borderRadius: '12px'/*, display: 'flex', justifyContent: 'center', alignItems: 'center'*/ }}>
+                <img src={cstat} alt="Custom Icon" style={{ width: '45.732px', height: '47.022px' }}/>
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText>
+                <Typography variant='body1' >
+                Fill in all the information about your most recent job to fill in this section.
+                </Typography>
+              </ListItemText>
+              </ListItem>
+              <ListItem >
+              <ListItemAvatar>
+                <Avatar sx={{ /*width: '38.732px', height: '39.022px',*/ borderRadius: '12px' ,display: 'flex', justifyContent: 'center', alignItems: 'center'  }}>
+              <img src={ckey} alt="Custom Icon" style={{ width: '45.732px', height: '47.022px' }} />
+              </Avatar>
+              </ListItemAvatar>
+              <ListItemText>
+              <Typography variant='body1'>
+              Use keywords when mentioning your skills to showcase your unique abilities.
+              </Typography>
+              </ListItemText>
+              </ListItem>
+              <ListItem >
+              <ListItemAvatar>
+                <Avatar sx={{/* width: '38.732px', height: '39.022px',*/ borderRadius: '12px',display: 'flex', justifyContent: 'center', alignItems: 'center'  }}>
+              <img src={cbatch} alt="Custom Icon" style={{ width: '45.732px', height: '47.022px' ,}} />
+              </Avatar>
+              </ListItemAvatar>
+              <ListItemText>
+              <Typography variant='body1'>
+              Emphasize your accomplishments and impact in each role for engaging description.
+              </Typography>
+              </ListItemText>
+              </ListItem>
+            </List>
+          </CardContent>
+        </Card>
+        
+            </div>
     </div>
     )
 

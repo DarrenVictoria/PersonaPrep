@@ -25,13 +25,14 @@ import Education_2 from "./components/StepperPages/Education2";
 import UniversityEducation from "./components/StepperPages/UniversityEducation";
 import WorkExperience from "./components/StepperPages/WorkExperience1";
 import Projects_1 from "./components/StepperPages/Projects1";
-import Certification_1 from "./components/StepperPages/Certification1";
+import Certification from "./components/StepperPages/Certification1";
 import Clubs from "./components/StepperPages/Clubs";
 import Publications from "./components/StepperPages/Publications";
 import SkillTrack_1 from "./components/StepperPages/SkillTrack1";
 import Summary_1 from "./components/StepperPages/Summary1";
 import ExtraInformation from "./components/StepperPages/ExtraInformation";
 import TemplateSelection from "./components/StepperPages/TemplateSelection";
+import CvFeedback from "./components/StepperPages/CvFeedback";
 
 
 
@@ -74,13 +75,14 @@ function App() {
           <Route path="/university" element={<UniversityEducation />}/>
           <Route path="/work" element={<WorkExperience />}/>
           <Route path="/project" element={<Projects_1 />}/>
-          <Route path="/certification" element={<Certification_1 />}/>
+          <Route path="/certification" element={<Certification />}/>
           <Route path="/clubsAndSocs" element={<Clubs />}/>
           <Route path="/publications" element={<Publications />}/>
           <Route path="/skilltrack" element={<SkillTrack_1 />}/>
           <Route path="/summary" element={<Summary_1 />}/>
           <Route path="/extraInfo" element={<ExtraInformation />}/>
           <Route path="/templates" element={<TemplateSelection />}/>
+          <Route path="/feedback" element={<CvFeedback />}/>
 
 
           <Route

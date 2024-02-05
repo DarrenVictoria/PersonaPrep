@@ -18,11 +18,11 @@ const FacultyDetails = () => {
         if (!(selectedFaculty === '' && selectedBatch === '' && selectedDegree === '')) setValidation(true);
     }
 
-    useEffect(() => {
-        console.log('selectedFaculty:', selectedFaculty);
-        console.log('selectedBatch:', selectedBatch);
-        console.log('selectedDegree:', selectedDegree);
-    }, [selectedFaculty, selectedBatch, selectedDegree]);
+    // useEffect(() => {
+    //     console.log('selectedFaculty:', selectedFaculty);
+    //     console.log('selectedBatch:', selectedBatch);
+    //     console.log('selectedDegree:', selectedDegree);
+    // }, [selectedFaculty, selectedBatch, selectedDegree]);
 
     return (
         <div className="formtemp-page">

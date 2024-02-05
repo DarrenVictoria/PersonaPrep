@@ -1,7 +1,4 @@
 import './css/personalInfo.css';
-import '../../pages/interviewforms/Template.css';
-import InterviewFormFooter from '../InterviewFormFooter';
-import InterviewFormHeader from '../InterviewFormHeader';
 import Grid from "@mui/material/Grid";
 import Typography from '@mui/material/Typography';
 import TextField from "@mui/material/TextField";
@@ -13,9 +10,9 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import cphone from '../../assets/images/iconcphone.svg';
-import CustomMultilineTextFields from '../CustomMultilineTextfield';
 import EditableChoose from '../EditableSelectOption';
 import { useState } from 'react';
+import CustomMultilineTextFieldslimited from '../MultilineMaxWordLimit';
 
 const Education_1 = () => {
     const [startMonth, setStartMonth] = useState('');
@@ -29,18 +26,13 @@ const Education_1 = () => {
 
 
     const schoolNameChange = (e) =>{ 
-        console.log(`SchoolName => ${e.target.value}`)
-        setSchoolName(e.target.value);
-    }
+        setSchoolName(e.target.value);}
     const schoolCityChange = (e) =>{
-        console.log(`SchoolCity => ${e.target.value}`)
         setSchoolCity(e.target.value)} ;
     const schoolCountryChange = (e) => {
-        console.log(`SchoolCountry => ${e.target.value}`)
         setSchoolCountry(e.target.value)};
-        const schoolExperienceChange = (e) => {
-            console.log(`SchoolExp => ${e.target.value}`)
-            setSchoolExperience(e.target.value)};
+    const schoolExperienceChange = (e) => {
+        setSchoolExperience(e.target.value)};
 
     return(
         <div className="formtemp-page">
@@ -59,7 +51,14 @@ const Education_1 = () => {
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>School experience or description</Typography>
-                                                <CustomMultilineTextFields height='100px' type="text" value={schoolExperience} onChange={schoolExperienceChange} />
+                                                <CustomMultilineTextFieldslimited
+                                                    inputHeight="150px"
+                                                    maxWidth="1300px"
+                                                    isRequired={true}
+                                                    value={schoolExperience}
+                                                    onChange={schoolExperienceChange}
+                                                    maxWords={50} 
+                                                />
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>City</Typography>
@@ -159,11 +158,60 @@ const Education_1 = () => {
                                 </div>
                             </div>
                         <InterviewFormFooter nextForm='/exams' prevForm='/contactDetSocial'/>
-                    </form>
+                        </form>
+                    </Grid>
                 </Grid>
-            </Grid>
+            </div>
+
+            <div className="personalInfo-rightCol">
+                <div style={{padding: '8px 0px', backgroundColor: '#fff', borderRadius: '15px', maxWidth: '363px'}}>
+                    <Card variant="outlined" sx={{height:'100%',maxHeight: '400px', width:'100%',maxWidth: '363px',borderRadius:'15px', border: 'none', overflowY:'auto',overflowX:'auto','@media (max-width:769px)':{borderColor:'white'},'@media (min-width:769px)':{overflowY:'hidden'}}}>                    <CardContent >
+                        <Typography variant="h5" component="div" sx={{ textAlign: 'center', fontWeight: 'bold' }}>Educational Experience Tips</Typography>
+                        <List>
+                            <ListItem >
+                                <ListItemAvatar>
+                                    <Avatar sx={{borderRadius: '12px'}}>
+                                        <img src={cphone} alt="Custom Icon" style={{ width: '27px', height: '31px' }}/>
+                                    </Avatar>
+                                </ListItemAvatar>
+                                <ListItemText>
+                                    <Typography variant='body1' >
+                                        Start with your most recent educational institution.
+                                    </Typography>
+                                </ListItemText>
+                            </ListItem>
+                            <ListItem >
+                                <ListItemAvatar>
+                                    {/* <Avatar sx={{borderRadius: '12px', display: 'flex', justifyContent: 'center', alignItems: 'center'  }}> */}
+                                    <Avatar sx={{borderRadius: '12px', padding: '5px'}}>
+                                        <img src={cphone} alt="Custom Icon" style={{ width: 'var(--40,40px)', height: '35.666px' }} />
+                                    </Avatar>
+                                </ListItemAvatar>
+                                <ListItemText>
+                                    <Typography variant='body1'>
+                                        Mention any outstanding grades or awards / qualifications you may have.
+                                    </Typography>
+                                </ListItemText>
+                            </ListItem>
+                            <ListItem >
+                                <ListItemAvatar>
+                                    <Avatar sx={{borderRadius: '12px', display: 'flex', justifyContent: 'center', alignItems: 'center'  }}>
+                                        <img src={cphone} alt="Custom Icon" style={{ width: '41px', height: '39px' ,}} />
+                                    </Avatar>
+                                </ListItemAvatar>
+                                <ListItemText>
+                                    <Typography variant='body1'>
+                                        Provide links for your digital certificates and be prepared to upload any physical certificates when required.
+                                    </Typography>
+                                </ListItemText>
+                            </ListItem>
+                        </List>
+                    </CardContent>
+                    </Card>
+                </div>
+
+            </div>
         </div>
-    </div>
     )
 
 }

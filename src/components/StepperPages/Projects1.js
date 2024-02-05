@@ -1,7 +1,4 @@
 import './css/personalInfo.css';
-import '../../pages/interviewforms/Template.css';
-import InterviewFormFooter from '../InterviewFormFooter';
-import InterviewFormHeader from '../InterviewFormHeader';
 import Grid from "@mui/material/Grid";
 import Typography from '@mui/material/Typography';
 import TextField from "@mui/material/TextField";
@@ -19,8 +16,8 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
 import { CustomizedHook } from '../TextfieldButtonDataDisplay';
+import FileUpload from '../FileUpload';
 
 const Projects_1 = () => {
     const skills = [{data: 'c#',}, {data: 'react'}, {data: 'java'}];
@@ -28,6 +25,15 @@ const Projects_1 = () => {
     const [projName, setProjName] = useState('');
     const [projRole, setProjRole] = useState('');
     const [projStatus, setProjStatus] = useState('');
+
+    const [projStartMonth, setProjStartMonth] = useState('');
+    const [projStartYear, setProjStartYear] = useState('');
+    const [projEndMonth, setProjEndMonth] = useState('');
+    const [projEndYear, setProjEndYear] = useState('');
+    const [projPlace, setProjPlace] = useState('');
+    const [projEvidence, setProjEvidence] = useState('');
+
+    
     
     return(
         <div className="formtemp-page">
@@ -37,6 +43,7 @@ const Projects_1 = () => {
                     <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
                         <form style={{ height: '100%', position: 'relative' }}>
                             <div style={{ margin: '80px 25px 125px' }}>
+
                                 <div className="personalInfo-main">
                                     <div className="personalInfo-leftCol">
                                         <Grid container>
@@ -69,14 +76,67 @@ const Projects_1 = () => {
                                                     </RadioGroup>
                                                 </FormControl>
                                             </Grid>
-                                            <Grid item xs={12} >
+                                            <Grid item xs={12} mb={3}>
                                                 <CustomizedHook data={skills} label={<Typography mb={1}><span style={{color: 'red'}}>*</span>What are the skills gained from the project?</Typography>}/>
+                                            </Grid>
+                                            <Grid item xs={12} mb={-2}>
+                                                <Typography><span style={{color: 'red'}}>*</span>Project Start Date</Typography>
+                                            </Grid>
+                                            <Grid item xs={6} pr={1}>
+                                                <EditableChoose
+                                                    options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
+                                                    onSelect={setProjStartMonth}
+                                                    disabledOptions={[]}
+                                                />
+                                            </Grid>
+                                            <Grid item xs={6} mb={3} pl={1}>
+                                                <EditableChoose
+                                                    options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
+                                                    onSelect={setProjStartYear}
+                                                    disabledOptions={["2024"]}
+                                                />
+                                            </Grid>
+                                            <Grid item xs={12} mb={-2}>
+                                                <Typography><span style={{color: 'red'}}>*</span>Project End Date</Typography>
+                                            </Grid>
+                                            <Grid item xs={6} pr={1}>
+                                                <EditableChoose
+                                                    options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
+                                                    onSelect={setProjEndMonth}
+                                                    disabledOptions={[]}
+                                                />
+                                            </Grid>
+                                            <Grid item xs={6} mb={3} pl={1}>
+                                                <EditableChoose
+                                                    options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
+                                                    onSelect={setProjEndYear}
+                                                    disabledOptions={["2024"]}
+                                                />
+                                            </Grid>
+                                            <Grid item xs={12} mb={-2}>
+                                                <Typography>Where this project took place (optional)</Typography>
+                                            </Grid>
+                                            <Grid item xs={12} md={5} mb={3}>
+                                                <EditableChoose
+                                                    options={["Place", "University","University"]}
+                                                    onSelect={setProjPlace}
+                                                    disabledOptions={[]}
+                                                />
+                                            </Grid>
+                                            <Grid item xs={12} mb={3}>
+                                                <Typography mb={1}><span style={{color: 'red'}}>*</span>Project evidence</Typography>
+                                                <TextField type="text" variant="outlined" value={projEvidence} onChange={(event) => setProjEvidence(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='CV Builder'/>
+                                            </Grid>
+                                            <Grid item xs={12} mb={2} style={{display: 'flex', justifyContent: 'center'}}>
+                                                <Typography>-OR-</Typography>
+                                            </Grid>
+                                            <Grid item xs={12} mb={3}>
+                                                <FileUpload />
                                             </Grid>
                                         </Grid>
                                     </div>
 
-                                    <div className="personalInfo-rightCol">
-
+                                    <div className="certificate">
                                         <div style={{padding: '8px 0px', backgroundColor: '#fff', borderRadius: '15px', maxWidth: '363px'}}>
                                             <Card variant="outlined" sx={{height:'100%',maxHeight: '350px', width:'100%',maxWidth: '363px',borderRadius:'15px', border: 'none', overflowY:'auto',overflowX:'auto','@media (max-width:769px)':{borderColor:'white'},'@media (min-width:769px)':{overflowY:'hidden'}}}>
                                             <CardContent >
@@ -123,16 +183,16 @@ const Projects_1 = () => {
                                             </CardContent>
                                             </Card>
                                         </div>
-
-                                    </div>
+                                    </div>                                    
                                 </div>
+                                
                             </div>
                         <InterviewFormFooter nextForm='/certification' prevForm='/work'/>
-                    </form>
+                        </form>
+                    </Grid>
                 </Grid>
-            </Grid>
+            </div>
         </div>
-    </div>
     )
 
 }

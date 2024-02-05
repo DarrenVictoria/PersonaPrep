@@ -1,7 +1,4 @@
 import './css/personalInfo.css';
-import '../../pages/interviewforms/Template.css';
-import InterviewFormFooter from '../InterviewFormFooter';
-import InterviewFormHeader from '../InterviewFormHeader';
 import Grid from "@mui/material/Grid";
 import Typography from '@mui/material/Typography';
 import TextField from "@mui/material/TextField";
@@ -40,7 +37,7 @@ const UniversityEducation = () => {
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <EditableChoose
-                                                    options={["BSc. (Hons) in Software Engineering","BSc. (Hons) in Computer Science","BSc. (Hons) in Cyber Security"]}
+                                                    options={["Degree Name", "BSc. (Hons) in Software Engineering","BSc. (Hons) in Computer Science","BSc. (Hons) in Cyber Security"]}
                                                     onSelect={setDegree}
                                                     disabledOptions={[]}
                                                 />
@@ -75,7 +72,7 @@ const UniversityEducation = () => {
                                             </Grid>
                                             <Grid item xs={6} mb={3}>
                                                 <EditableChoose
-                                                    options={["Year 1","Year 2","Year 3","Year 4"]}
+                                                    options={["year", "Year 1","Year 2","Year 3","Year 4"]}
                                                     onSelect={setCurUniYear}
                                                     disabledOptions={[]}
                                                 />
@@ -106,11 +103,15 @@ const UniversityEducation = () => {
                                 </div>
                             </div>
                         <InterviewFormFooter nextForm='/work' prevForm='/exams'/>
-                    </form>
+                        </form>
+                    </Grid>
                 </Grid>
-            </Grid>
+            </div>
+            <div className="personalInfo-rightCol university-fileUpload">
+                <Typography mb={2}>Graduation Transcript Upload</Typography>
+                <FileUpload />
+            </div>
         </div>
-    </div>
     )
 
 }
