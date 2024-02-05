@@ -7,16 +7,32 @@ import Grid from "@mui/material/Grid";
 import Typography from '@mui/material/Typography';
 import { useState, useEffect } from 'react';
 import { useForm } from "react-hook-form";
+import Button from "@mui/material/Button";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { back } from '../BackButton.js';
+import { next } from '../NextButton.js';
+import { useNavigate } from 'react-router-dom';
 
 const FacultyDetails = () => {
     const [selectedFaculty, setSelectedFaculty] = useState('');
     const [selectedBatch, setSelectedBatch] = useState('');
     const [selectedDegree, setSelectedDegree] = useState('');
     const [validation, setValidation] = useState(false);
+    
+    const navigate = useNavigate();
 
     const validate = () => {
         if (!(selectedFaculty === '' && selectedBatch === '' && selectedDegree === '')) setValidation(true);
     }
+
+    const nextPage = (event) => {
+        // if(validation) window.location.href = nextForm;
+        // else console.log('failed');
+        // window.location.href = '/personalInfo';
+        event.preventDefault();
+        navigate('/personalInfo');
+    };
+    const prevPage = () => window.location.href = '/home';
 
     // useEffect(() => {
     //     console.log('selectedFaculty:', selectedFaculty);
@@ -30,7 +46,7 @@ const FacultyDetails = () => {
             <div className="formtemp-bodyform">
                 <Grid container spacing={2} style={{ height: '100%' }}>
                     <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
-                        <form style={{ height: '100%', position: 'relative' }}>
+                        <form onSubmit={nextPage} style={{ height: '100%', position: 'relative' }}>
                             <div style={{ margin: '80px 25px 125px' }}>
                                 <div className='Facultymaindiv'>
                                     <div>
@@ -72,7 +88,16 @@ const FacultyDetails = () => {
                                 </div>
 
                             </div>
-                            <InterviewFormFooter nextForm='/personalInfo' prevForm='/home' onClick={validate} validation={validation} />
+                            {/* <InterviewFormFooter nextForm='/personalInfo' prevForm='/home' onClick={validate} validation={validation} /> */}
+                            <Grid container spacing={2} style={{position: 'absolute', bottom: 80}}>            
+                                <Grid xs={6} paddingLeft={'10px'}>
+                                    <Button startIcon={<ArrowBackIcon />} style={back} onClick={prevPage}>Go Back</Button>
+                                </Grid>
+                                    
+                                <Grid xs={6}>
+                                    <Button type='submit' style={next}>Next Step</Button>                                    
+                                </Grid>
+                            </Grid>
                         </form>
                     </Grid>
                 </Grid>

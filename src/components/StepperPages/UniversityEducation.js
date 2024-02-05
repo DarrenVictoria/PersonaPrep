@@ -5,6 +5,9 @@ import TextField from "@mui/material/TextField";
 import FileUpload from '../FileUpload';
 import EditableChoose from '../EditableSelectOption';
 import { useState } from 'react';
+import InterviewFormFooter from '../InterviewFormFooter';
+import InterviewFormHeader from '../InterviewFormHeader';
+import '../../pages/interviewforms/Template.css';
 
 const UniversityEducation = () => {
     const [degree, setDegree] = useState('');
@@ -106,10 +109,6 @@ const UniversityEducation = () => {
                         </form>
                     </Grid>
                 </Grid>
-            </div>
-            <div className="personalInfo-rightCol university-fileUpload">
-                <Typography mb={2}>Graduation Transcript Upload</Typography>
-                <FileUpload />
             </div>
         </div>
     )
