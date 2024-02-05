@@ -124,14 +124,20 @@ const FacultyDetails = () => {
     
 
     
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         validate();
 
         // Check if validation passed
         if (validation) {
-            // Call the function to add data to Firestore
-            addDataToFirestore();
+            try {
+                // Call the function to fetch user data
+                await fetchUserData();
+                // Call the function to add data to Firestore
+                await addDataToFirestore();
+            } catch (error) {
+                console.error('Error handling submit: ', error);
+            }
         } else {
             console.log('Validation failed');
         }
