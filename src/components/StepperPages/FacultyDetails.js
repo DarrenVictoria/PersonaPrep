@@ -49,35 +49,35 @@ const FacultyDetails = () => {
 
       useForceUpdate();
 
-    useEffect(() => {
-        // Fetch user data when the component mounts
-        const fetchUserData = async () => {
-            try {
-                const db = getFirestore();
-                const studentDetailsCollection = collection(db, 'studentdetails');
+      // Fetch user data when the component mounts
+      const fetchUserData = async () => {
+        try {
+            const db = getFirestore();
+            const studentDetailsCollection = collection(db, 'studentdetails');
 
-                // Check if a document with the user's email already exists
-                const querySnapshot = await getDocs(query(studentDetailsCollection, where('email', '==', currentUser.email)));
-                const existingDoc = querySnapshot.docs[0];
+            // Check if a document with the user's email already exists
+            const querySnapshot = await getDocs(query(studentDetailsCollection, where('email', '==', currentUser.email)));
+            const existingDoc = querySnapshot.docs[0];
 
-                if (existingDoc) {
-                    const userData = existingDoc.data();
-                    // Set the state variables based on the fetched data
-                    setSelectedFaculty(userData.faculty || '');
-                    setSelectedBatch(userData.batch || '');
-                    setSelectedDegree(userData.degree || '');
+            if (existingDoc) {
+                const userData = existingDoc.data();
+                // Set the state variables based on the fetched data
+                setSelectedFaculty(userData.faculty || '');
+                setSelectedBatch(userData.batch || '');
+                setSelectedDegree(userData.degree || '');
 
-                    
                 
-                }
-            } catch (error) {
-                console.error('Error fetching user data: ', error);
+            
             }
-            finally {
-                setLoading(false); // Set loading to false regardless of success or failure
-            }
-        };
+        } catch (error) {
+            console.error('Error fetching user data: ', error);
+        }
+        finally {
+            setLoading(false); // Set loading to false regardless of success or failure
+        }
+    };
 
+    useEffect(() => {
         // Call the function to fetch user data
         fetchUserData();
     }, [currentUser.email]);
