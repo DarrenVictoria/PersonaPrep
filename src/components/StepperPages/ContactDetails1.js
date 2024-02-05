@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { collection, addDoc, getFirestore, query, where, getDocs, doc, updateDoc } from 'firebase/firestore';
 import InterviewFormFooter from '../InterviewFormFooter';
 import InterviewFormHeader from '../InterviewFormHeader';
 import '../../pages/interviewforms/Template.css';
@@ -24,17 +25,18 @@ import TextField from "@mui/material/TextField";
 import cphone from '../../assets/images/iconcphone.svg';
 import cmail from '../../assets/images/iconcmail.svg';
 import cfolder from '../../assets/images/iconcfolder.svg';
-import { useState } from 'react';
 import Button from "@mui/material/Button";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { back } from '../BackButton.js';
 import { next } from '../NextButton.js';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../hooks/useAuth.js'; 
 
 const predefinedButtonName = ['github','figma','behance','linkedin','facebook','whatsapp','instragram','twitter'];
 const ContactDetails_1 = () => {
+  const { currentUser } = useAuth();
   const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
+  const [pemail, setEmail] = useState('');
   const [district, setDistrict] = useState('');
   const [city, setCity] = useState('');
   const [postal, setPostal] = useState('');
@@ -62,21 +64,93 @@ const ContactDetails_1 = () => {
     setShownButtons(prevButtons => prevButtons.filter(button => button !== buttonName));
   };
 
-    const navigate = useNavigate();
-    const prevPage = () => navigate('/personalInfo');
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        navigate('/contactDetSocial')
-        // validate();
+  useEffect(() => {
+    // Fetch user data when the component mounts
+    const fetchUserData = async () => {
+        try {
+            const db = getFirestore();
+            const studentDetailsCollection = collection(db, 'studentdetails');
 
-        // Check if validation passed
-        // if (validation) {
-        //     // Call the function to add data to Firestore
-        //     addDataToFirestore();
-        // } else {
-        //     console.log('Validation failed');
-        // }
+            // Check if a document with the user's email already exists
+            const querySnapshot = await getDocs(query(studentDetailsCollection, where('email', '==', currentUser.email)));
+            const existingDoc = querySnapshot.docs[0];
+
+            if (existingDoc) {
+                const userData = existingDoc.data();
+                // Set the state variables based on the fetched data
+                setPhone(userData.phone || '');
+                setEmail(userData.pemail || '');
+                setDistrict(userData.district || '');
+                setCity(userData.city || '');
+                setPostal(userData.postal || '');
+                setCountry(userData.country || '');
+                setPortfolioSite(userData.portfolioSite || '');
+                // ... (Add more state variables as needed)
+            }
+        } catch (error) {
+            console.error('Error fetching user data: ', error);
+        }
     };
+
+    // Call the function to fetch user data
+    fetchUserData();
+}, [currentUser.email]);
+
+const navigate = useNavigate();
+const prevPage = () => navigate('/personalInfo');
+
+const addDataToFirestore = async () => {
+    try {
+        const db = getFirestore();
+        const studentDetailsCollection = collection(db, 'studentdetails');
+
+        // Check if a document with the user's email already exists
+        const querySnapshot = await getDocs(query(studentDetailsCollection, where('email', '==', currentUser.email)));
+        const existingDoc = querySnapshot.docs[0];
+
+        if (existingDoc) {
+            // Update the existing document
+            const existingDocRef = doc(db, 'studentdetails', existingDoc.id);
+            await updateDoc(existingDocRef, {
+                phone,
+                pemail,
+                district,
+                city,
+                postal,
+                country,
+                portfolioSite,
+                // ... (Add more fields as needed)
+            });
+
+            console.log('Document updated with ID: ', existingDoc.id);
+        } else {
+            // Create a new document
+            const newDocRef = await addDoc(studentDetailsCollection, {
+                phone,
+                pemail,
+                district,
+                city,
+                postal,
+                country,
+                portfolioSite,
+                // ... (Add more fields as needed)
+            });
+
+            console.log('Document written with ID: ', newDocRef.id);
+        }
+
+        // Navigate to the next page
+        navigate('/contactDetSocial');
+    } catch (error) {
+        console.error('Error adding/updating document: ', error);
+    }
+};
+
+const handleSubmit = (e) => {
+    e.preventDefault();
+    // Call the function to add data to Firestore
+    addDataToFirestore();
+};
 
     return(
       <div className="formtemp-page">
@@ -101,7 +175,7 @@ const ContactDetails_1 = () => {
                                             <Grid item xs={6}>
                                               
                                             <Typography ><span style={{color: 'red'}}>*</span> Email</Typography>
-                                                <TextField type="email" variant="outlined" value={email} onChange={(event) => setEmail(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
+                                                <TextField type="email" variant="outlined" value={pemail} onChange={(event) => setEmail(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
                                               
                                             </Grid>
                                             <Grid item xs={6}>
