@@ -23,11 +23,50 @@ import FormLabel from '@mui/material/FormLabel';
 import { CustomizedHook } from '../TextfieldButtonDataDisplay';
 
 const Projects_1 = () => {
-    const skills = [{data: 'c#',}, {data: 'react'}, {data: 'java'}];
+    const Proj_Skills = [{data: 'c#',}, {data: 'react'}, {data: 'java'}];
     const [projType, setProjType] = useState('');
     const [projName, setProjName] = useState('');
     const [projRole, setProjRole] = useState('');
     const [projStatus, setProjStatus] = useState('');
+<<<<<<< Updated upstream
+=======
+    const [ProjSkills, setProjSkills] = useState([]);
+
+    const [projStartMonth, setProjStartMonth] = useState('');
+    const [projStartYear, setProjStartYear] = useState('');
+    const [projEndMonth, setProjEndMonth] = useState('');
+    const [projEndYear, setProjEndYear] = useState('');
+    const [projPlace, setProjPlace] = useState('');
+    const [projEvidence, setProjEvidence] = useState('');
+
+    const handleProjSkills = function (ev, val, reason, details) {
+        if (ev.target.classList.contains('MuiSvgIcon-root')){
+            // Removing Value
+            const value = ev.target.parentElement.querySelector('span').innerHTML;
+            setProjSkills(ProjSkills.filter(item => item !== value));
+        } else {
+            const value = ev.target.innerHTML;
+            ProjSkills.push(value);
+        }
+        console.log(ProjSkills);
+    }
+
+    const navigate = useNavigate();
+    const prevPage = () => navigate('/work');
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        navigate('/certification')
+        // validate();
+
+        // Check if validation passed
+        // if (validation) {
+        //     // Call the function to add data to Firestore
+        //     addDataToFirestore();
+        // } else {
+        //     console.log('Validation failed');
+        // }
+    };
+>>>>>>> Stashed changes
     
     return(
         <div className="formtemp-page">
@@ -69,8 +108,13 @@ const Projects_1 = () => {
                                                     </RadioGroup>
                                                 </FormControl>
                                             </Grid>
+<<<<<<< Updated upstream
                                             <Grid item xs={12} >
                                                 <CustomizedHook data={skills} label={<Typography mb={1}><span style={{color: 'red'}}>*</span>What are the skills gained from the project?</Typography>}/>
+=======
+                                            <Grid item xs={12} mb={3}>
+                                                <CustomizedHook onChange={handleProjSkills} data={Proj_Skills} label={<Typography mb={1}><span style={{color: 'red'}}>*</span>What are the skills gained from the project?</Typography>}/>
+>>>>>>> Stashed changes
                                             </Grid>
                                         </Grid>
                                     </div>

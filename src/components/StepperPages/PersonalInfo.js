@@ -19,19 +19,31 @@ import InterviewFormHeader from '../InterviewFormHeader';
 import { useState } from 'react';
 
 const PersonalInfo = () => {
-    // const job_roles = [{data:"role1"},{data:"role2"},{data:"role3"},{data:"role4"},{data:"role5"},{data:"role6"},{data:"role7"},{data:"role8"}];
-    
+   
+    const job_roles = [{data:"Software Engineer"}, {data:"Systems Analyst"}, {data:"Network Administrator"}, {data:"Data Scientist"}];
+
     const [phone, setPhone] = useState('');
+<<<<<<< Updated upstream
+=======
+    const [PJobRoles, setPJobRoles] = useState([]);
+>>>>>>> Stashed changes
 
     const phoneChange = (event) => setPhone(event.target.value);
 
     
     const [selectedValues, setSelectedValues] = useState([]);
     
-    const handleValueChange = (newValue) => {
-        setSelectedValues(newValue);
-        console.log("Selected values:", newValue);
-    };
+    const handlePJobRoles = function (ev, val, reason, details) {
+        if (ev.target.classList.contains('MuiSvgIcon-root')){
+            // Removing Value
+            const value = ev.target.parentElement.querySelector('span').innerHTML;
+            setPJobRoles(PJobRoles.filter(item => item !== value));
+        } else {
+            const value = ev.target.innerHTML;
+            PJobRoles.push(value);
+        }
+        console.log(PJobRoles);
+    }
     return(
         <div className="formtemp-page">
             <InterviewFormHeader title='Personal Information' />
@@ -53,10 +65,9 @@ const PersonalInfo = () => {
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <CustomizedHook 
-                                                data={[{data:'Option 1'},{data:'Option 2'},{ data: 'Option 3' }]}
+                                                onChange={handlePJobRoles}
+                                                data={job_roles}
                                                 label={<Typography mb={1}><span style={{color: 'red'}}>*</span>What job roles are you aspiring for? Min 1 / Max 3</Typography>}
-                                                value={selectedValues}
-                                                onChange={handleValueChange}
                                                 />
                                             </Grid>
                                         </Grid>

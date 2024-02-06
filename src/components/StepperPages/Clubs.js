@@ -20,9 +20,36 @@ const Clubs = () => {
     const [clubEndYear, setClubEndYear] = useState('');
     const [volunteer, setvolunteer] = useState('no');
     const [volunteerChecked, setvolunteerChecked] = useState(false);
+    const [ClbsRolesPlayed, setClbsRolesPlayed] = useState([]);
+    const [ClbsSkillsEarned, setClbsSkillsEarned] = useState([]);
 
-    const RolesPlayed = [{data:"Volunteer"},{data:"Council Member"}];
-    const SkillsEarned = [{data:"Leadership"},{data:"Teamwork"}];
+    const Clbs_RolesPlayed = [{data:"Volunteer"},{data:"Council Member"}];
+    const Clbs_SkillsEarned = [{data:"Leadership"},{data:"Teamwork"}];
+
+
+    const handleClbsRolesPlayed = function (ev, val, reason, details) {
+      if (ev.target.classList.contains('MuiSvgIcon-root')){
+          // Removing Value
+          const value = ev.target.parentElement.querySelector('span').innerHTML;
+          setClbsRolesPlayed(ClbsRolesPlayed.filter(item => item !== value));
+      } else {
+          const value = ev.target.innerHTML;
+          ClbsRolesPlayed.push(value);
+      }
+      console.log(ClbsRolesPlayed);
+    }
+
+    const handleClbsSkillsEarned = function (ev, val, reason, details) {
+      if (ev.target.classList.contains('MuiSvgIcon-root')){
+          // Removing Value
+          const value = ev.target.parentElement.querySelector('span').innerHTML;
+          setClbsSkillsEarned(ClbsSkillsEarned.filter(item => item !== value));
+      } else {
+          const value = ev.target.innerHTML;
+          ClbsSkillsEarned.push(value);
+      }
+      console.log(ClbsSkillsEarned);
+  }
 
     useEffect(() => {
       if(!volunteerChecked) setvolunteer('no');
@@ -111,6 +138,18 @@ const Clubs = () => {
                                   {/* /*<Grid item xs={1}>
                                     {this is a blank space just to take the correct position of the below check box }
                                   </Grid>*/}
+<<<<<<< Updated upstream
+=======
+                                  <Grid item xs={12} mb={3}>
+                                    
+                                    <CustomizedHook onChange={handleClbsRolesPlayed} data={Clbs_RolesPlayed} label={<Typography>Roles Played</Typography>}/>
+                                  
+                                    
+                                  </Grid>
+                                  <Grid item xs={12} mb={3}>                                    
+                                    <CustomizedHook onChange={handleClbsSkillsEarned} data={Clbs_SkillsEarned} label={<Typography>Skills Earned</Typography>}/>
+                                  </Grid>
+>>>>>>> Stashed changes
                                   <Grid item xs={12}  mb={3} pl={2} sx={{"@media (max-width: 376px)": {pl: 0}}}>
                                     
                                     <FormControlLabel control={<Checkbox checked={volunteerChecked} onChange={(event) => setvolunteerChecked(event.target.checked)}/>} label="Currently Volunteering" /> {/*if need to make this requires put required before control and if need to make it already checked put check inside the control next to the Checkbx*/}

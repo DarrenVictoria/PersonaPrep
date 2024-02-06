@@ -25,7 +25,7 @@ import {CustomizedHook, CustomizedHookLarge} from '../TextfieldButtonDataDisplay
 import { useState } from 'react';
 
 const WorkExperience = () => {
-    const SkillsAcquired = [{data:"c#"},{data:"Winforms"}];
+    const Jb_SkillsAcquired = [{data:"c#"},{data:"Winforms"}];
 
     const [jobTitle, setJobTitle] = useState('');
     const [company, setCompany] = useState('');
@@ -40,7 +40,7 @@ const WorkExperience = () => {
     const [TaskDnWithTools, setTaskDnWithTools] = useState("");
     const [Employmenttype, setEmploymentType] = React.useState("");
     // the below useState for custom hook does not work yet
-    const [selectedValues, setSelectedValues] = useState([]);
+    const [JbSkillAcquired, setJbSkillAcquired] = useState([]);
 
     const handleWorkChecked = (event) => {
         setWorkChecked(event.target.checked)
@@ -53,10 +53,17 @@ const WorkExperience = () => {
       };
 
     // the below handle for custom hook does not work yet
-    const handleSelectedValues = (values) => {
-        setSelectedValues(values);
-        // console.log("Selected values:", values);
-    };
+    const handleJbSkillAcquired = function (ev, val, reason, details) {
+        if (ev.target.classList.contains('MuiSvgIcon-root')){
+            // Removing Value
+            const value = ev.target.parentElement.querySelector('span').innerHTML;
+            setJbSkillAcquired(JbSkillAcquired.filter(item => item !== value));
+        } else {
+            const value = ev.target.innerHTML;
+            JbSkillAcquired.push(value);
+        }
+        console.log(JbSkillAcquired);
+    }
 
     useEffect(() => {
         if(!workChecked) setWorking('no');
@@ -159,7 +166,7 @@ const WorkExperience = () => {
                                                 />
                                             </Grid>
                                             <Grid item xs={12} >
-                                                <CustomizedHook maxWidth={1300} data={SkillsAcquired} value={selectedValues} onChange={handleSelectedValues} label={<Typography mb={1}><span style={{color: 'red'}}>*</span> Skills acquired from job ?</Typography>}/>
+                                                <CustomizedHook onChange={handleJbSkillAcquired} maxWidth={1300} data={Jb_SkillsAcquired}  label={<Typography mb={1}><span style={{color: 'red'}}>*</span> Skills acquired from job ?</Typography>}/>
                                             </Grid>
                                         </Grid>
                                     </div>

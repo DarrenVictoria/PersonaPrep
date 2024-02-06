@@ -163,7 +163,11 @@ const Education_1 = () => {
                 </Grid>
             </Grid>
         </div>
+<<<<<<< Updated upstream
     </div>
+=======
+
+>>>>>>> Stashed changes
     )
 
 }
