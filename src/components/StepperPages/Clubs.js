@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import './css/Clubs.css';
-import '../../pages/interviewforms/Template.css';
-import InterviewFormFooter from '../InterviewFormFooter';
-import InterviewFormHeader from '../InterviewFormHeader';
 import Typography from '@mui/material/Typography'; //this is for the card in the right column
 import Grid from "@mui/material/Grid";
 import EditableChoose from '../EditableSelectOption';
@@ -11,6 +8,14 @@ import FormGroup from "@mui/material/FormGroup";//for the check box
 import FormControlLabel from "@mui/material/FormControlLabel";//for the check box
 import Checkbox from "@mui/material/Checkbox";//for the check box
 import {CustomizedHook, CustomizedHookLarge} from '../TextfieldButtonDataDisplay';
+import InterviewFormFooter from '../InterviewFormFooter';
+import InterviewFormHeader from '../InterviewFormHeader';
+import '../../pages/interviewforms/Template.css';
+import Button from "@mui/material/Button";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { back } from '../BackButton.js';
+import { next } from '../NextButton.js';
+import { useNavigate } from 'react-router-dom';
 
 const Clubs = () => {
     const [clubName, setClubName] = useState('');
@@ -55,6 +60,22 @@ const Clubs = () => {
       if(!volunteerChecked) setvolunteer('no');
       else setvolunteer('yes');
     }, [volunteerChecked]);
+
+    const navigate = useNavigate();
+    const prevPage = () => navigate('/certification');
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        navigate('/publications')
+        // validate();
+
+        // Check if validation passed
+        // if (validation) {
+        //     // Call the function to add data to Firestore
+        //     addDataToFirestore();
+        // } else {
+        //     console.log('Validation failed');
+        // }
+    };
     
 
     return(
@@ -63,7 +84,7 @@ const Clubs = () => {
             <div className="formtemp-bodyform">
                 <Grid container spacing={2} style={{ height: '100%' }}>
                     <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
-                        <form style={{ height: '100%', position: 'relative' }}>
+                        <form onSubmit={handleSubmit} style={{ height: '100%', position: 'relative' }}>
                             <div style={{ margin: '80px 25px 125px' }}>
                                 <div className='Clubs-Maindiv'>
                                 <div className='Clubs-LeftColumn'>
@@ -138,8 +159,9 @@ const Clubs = () => {
                                   {/* /*<Grid item xs={1}>
                                     {this is a blank space just to take the correct position of the below check box }
                                   </Grid>*/}
-<<<<<<< Updated upstream
-=======
+
+
+
                                   <Grid item xs={12} mb={3}>
                                     
                                     <CustomizedHook onChange={handleClbsRolesPlayed} data={Clbs_RolesPlayed} label={<Typography>Roles Played</Typography>}/>
@@ -149,16 +171,10 @@ const Clubs = () => {
                                   <Grid item xs={12} mb={3}>                                    
                                     <CustomizedHook onChange={handleClbsSkillsEarned} data={Clbs_SkillsEarned} label={<Typography>Skills Earned</Typography>}/>
                                   </Grid>
->>>>>>> Stashed changes
+
                                   <Grid item xs={12}  mb={3} pl={2} sx={{"@media (max-width: 376px)": {pl: 0}}}>
                                     
                                     <FormControlLabel control={<Checkbox checked={volunteerChecked} onChange={(event) => setvolunteerChecked(event.target.checked)}/>} label="Currently Volunteering" /> {/*if need to make this requires put required before control and if need to make it already checked put check inside the control next to the Checkbx*/}
-                                    
-                                  </Grid>
-                                  <Grid item xs={12}>
-                                    
-                                    <CustomizedHook data={RolesPlayed} label={<Typography>Roles Played</Typography>}/>
-                                  
                                     
                                   </Grid>
                                   
@@ -168,11 +184,19 @@ const Clubs = () => {
                           </div>
                                 
                             <div className='Clubs-RightColumn'>
-                              <CustomizedHookLarge width={360}  height={373} data={SkillsEarned} label={<Typography>Skills Earned</Typography>}/>
+                              {/* <CustomizedHookLarge width={360}  height={373} data={SkillsEarned} label={<Typography>Skills Earned</Typography>}/> */}
                             </div>
                         </div> 
                         </div>
-                        <InterviewFormFooter nextForm='/publications' prevForm='/certification'/>
+                        <Grid container spacing={2} style={{position: 'absolute', bottom: 80}}>            
+                            <Grid xs={6} paddingLeft={'10px'}>
+                                <Button startIcon={<ArrowBackIcon />} style={back} onClick={prevPage}>Go Back</Button>
+                            </Grid>
+                                
+                            <Grid xs={6}>
+                                <Button type='submit' style={next}>Next Step</Button>                                    
+                            </Grid>
+                        </Grid>
                     </form>
                 </Grid>
             </Grid>

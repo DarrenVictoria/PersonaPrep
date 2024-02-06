@@ -1,7 +1,4 @@
 import './css/personalInfo.css';
-import '../../pages/interviewforms/Template.css';
-import InterviewFormFooter from '../InterviewFormFooter';
-import InterviewFormHeader from '../InterviewFormHeader';
 import Grid from "@mui/material/Grid";
 import Typography from '@mui/material/Typography';
 import TextField from "@mui/material/TextField";
@@ -13,9 +10,17 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import cphone from '../../assets/images/iconcphone.svg';
-import CustomMultilineTextFields from '../CustomMultilineTextfield';
 import EditableChoose from '../EditableSelectOption';
 import { useState } from 'react';
+import CustomMultilineTextFieldslimited from '../MultilineMaxWordLimit';
+import InterviewFormFooter from '../InterviewFormFooter';
+import InterviewFormHeader from '../InterviewFormHeader';
+import '../../pages/interviewforms/Template.css';
+import Button from "@mui/material/Button";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { back } from '../BackButton.js';
+import { next } from '../NextButton.js';
+import { useNavigate } from 'react-router-dom';
 
 const Education_1 = () => {
     const [startMonth, setStartMonth] = useState('');
@@ -28,19 +33,26 @@ const Education_1 = () => {
     const [schoolExperience, setSchoolExperience] = useState('');
 
 
-    const schoolNameChange = (e) =>{ 
-        console.log(`SchoolName => ${e.target.value}`)
-        setSchoolName(e.target.value);
-    }
-    const schoolCityChange = (e) =>{
-        console.log(`SchoolCity => ${e.target.value}`)
-        setSchoolCity(e.target.value)} ;
-    const schoolCountryChange = (e) => {
-        console.log(`SchoolCountry => ${e.target.value}`)
-        setSchoolCountry(e.target.value)};
-        const schoolExperienceChange = (e) => {
-            console.log(`SchoolExp => ${e.target.value}`)
-            setSchoolExperience(e.target.value)};
+    const schoolNameChange = (e) => setSchoolName(e.target.value);
+    const schoolCityChange = (e) => setSchoolCity(e.target.value);
+    const schoolCountryChange = (e) => setSchoolCountry(e.target.value);
+    const schoolExperienceChange = (e) => setSchoolExperience(e.target.value);
+
+    const navigate = useNavigate();
+    const prevPage = () => navigate('/contactDetSocial');
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        navigate('/exams')
+        // validate();
+
+        // Check if validation passed
+        // if (validation) {
+        //     // Call the function to add data to Firestore
+        //     addDataToFirestore();
+        // } else {
+        //     console.log('Validation failed');
+        // }
+    };
 
     return(
         <div className="formtemp-page">
@@ -48,7 +60,7 @@ const Education_1 = () => {
             <div className="formtemp-bodyform">
                 <Grid container spacing={2} style={{ height: '100%' }}>
                     <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
-                        <form style={{ height: '100%', position: 'relative' }}>
+                        <form onSubmit={handleSubmit} style={{ height: '100%', position: 'relative' }}>
                             <div style={{ margin: '80px 25px 125px' }}>
                                 <div className="personalInfo-main">
                                     <div className="personalInfo-leftCol">
@@ -59,7 +71,14 @@ const Education_1 = () => {
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>School experience or description</Typography>
-                                                <CustomMultilineTextFields height='100px' type="text" value={schoolExperience} onChange={schoolExperienceChange} />
+                                                <CustomMultilineTextFieldslimited
+                                                    inputHeight="150px"
+                                                    maxWidth="1300px"
+                                                    isRequired={true}
+                                                    value={schoolExperience}
+                                                    onChange={schoolExperienceChange}
+                                                    maxWords={50} 
+                                                />
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>City</Typography>
@@ -158,16 +177,25 @@ const Education_1 = () => {
                                     </div>
                                 </div>
                             </div>
-                        <InterviewFormFooter nextForm='/exams' prevForm='/contactDetSocial'/>
-                    </form>
+                            <Grid container spacing={2} style={{position: 'absolute', bottom: 80}}>            
+                                <Grid xs={6} paddingLeft={'10px'}>
+                                    <Button startIcon={<ArrowBackIcon />} style={back} onClick={prevPage}>Go Back</Button>
+                                </Grid>
+                                    
+                                <Grid xs={6}>
+                                    <Button type='submit' style={next}>Next Step</Button>                                    
+                                </Grid>
+                            </Grid>
+                        </form>
+                    </Grid>
                 </Grid>
-            </Grid>
-        </div>
-<<<<<<< Updated upstream
-    </div>
-=======
+            </div>
 
->>>>>>> Stashed changes
+            
+        </div>
+
+    </div>
+
     )
 
 }

@@ -11,7 +11,11 @@ import { useState } from 'react';
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
 import { CustomizedHook } from '../TextfieldButtonDataDisplay';
-
+import Button from "@mui/material/Button";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { back } from '../BackButton.js';
+import { next } from '../NextButton.js';
+import { useNavigate } from 'react-router-dom';
 
 const ExtraInformation = () => {
     const ExtraInfo_Interests = [{data:"role1"}, {data:"role2"}, {data:"role3"}];
@@ -33,13 +37,29 @@ const ExtraInformation = () => {
         console.log(ExtraInfoInterests);
     }
 
+    const navigate = useNavigate();
+    const prevPage = () => navigate('/summary');
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        navigate('/templates')
+        // validate();
+
+        // Check if validation passed
+        // if (validation) {
+        //     // Call the function to add data to Firestore
+        //     addDataToFirestore();
+        // } else {
+        //     console.log('Validation failed');
+        // }
+    };
+
     return(
         <div className="formtemp-page">
             <InterviewFormHeader title='Extra Information' />
             <div className="formtemp-bodyform">
                 <Grid container spacing={2} style={{ height: '100%' }}>
                     <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
-                        <form style={{ height: '100%', position: 'relative' }}>
+                        <form onSubmit={handleSubmit} style={{ height: '100%', position: 'relative' }}>
                             <div style={{ margin: '80px 25px 125px' }}>
                                 <div className="personalInfo-main">
                                     <Grid container pl={1}>
@@ -61,7 +81,7 @@ const ExtraInformation = () => {
                                         </Grid>
                                         <Grid item xs={12} md={6} mb={3}>
                                             <Typography mb={1}>Award Title</Typography>
-                                            <TextField type="text" value={award} onChange={(event) => setAward(event.target.value)} variant="outlined" fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/>
+                                            <TextField type="text" value={award} onChange={(event) => setAward(event.target.value)} variant="outlined" fullWidth  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/>
                                         </Grid>
                                         <Grid item xs={12} ml={4} mb={5}>
                                             <Typography>
@@ -73,7 +93,7 @@ const ExtraInformation = () => {
                                         </Grid>
                                         <Grid item xs={12} md={6} mb={3}>
                                             <Typography mb={1}>Fluent Languages</Typography>
-                                            <TextField type="text" value={lang} onChange={(event) => setLang(event.target.value)} variant="outlined" fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/>
+                                            <TextField type="text" value={lang} onChange={(event) => setLang(event.target.value)} variant="outlined" fullWidth  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/>
                                         </Grid>
                                         <Grid item xs={12} ml={4} mb={5}>
                                             <Typography>
@@ -89,12 +109,20 @@ const ExtraInformation = () => {
                                     </Grid>
                                 </div>
                             </div>
-                        <InterviewFormFooter nextForm='/templates' prevForm='/summary'/>
-                    </form>
+                            <Grid container spacing={2} style={{position: 'absolute', bottom: 80}}>            
+                                <Grid xs={6} paddingLeft={'10px'}>
+                                    <Button startIcon={<ArrowBackIcon />} style={back} onClick={prevPage}>Go Back</Button>
+                                </Grid>
+                                    
+                                <Grid xs={6}>
+                                    <Button type='submit' style={next}>Next Step</Button>                                    
+                                </Grid>
+                            </Grid>
+                        </form>
+                    </Grid>
                 </Grid>
-            </Grid>
+            </div>
         </div>
-    </div>
     )
 
 }

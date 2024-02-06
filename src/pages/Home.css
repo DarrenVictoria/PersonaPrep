@@ -66,6 +66,7 @@
 }
 
 .split-container {
+  margin-top:1rem;
   display: flex;
   flex-wrap: wrap;
   padding: 10px;

@@ -1,13 +1,18 @@
 import './css/personalInfo.css';
-import '../../pages/interviewforms/Template.css';
-import InterviewFormFooter from '../InterviewFormFooter';
-import InterviewFormHeader from '../InterviewFormHeader';
 import Grid from "@mui/material/Grid";
 import Typography from '@mui/material/Typography';
 import TextField from "@mui/material/TextField";
 import FileUpload from '../FileUpload';
 import EditableChoose from '../EditableSelectOption';
 import { useState } from 'react';
+import InterviewFormFooter from '../InterviewFormFooter';
+import InterviewFormHeader from '../InterviewFormHeader';
+import '../../pages/interviewforms/Template.css';
+import Button from "@mui/material/Button";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { back } from '../BackButton.js';
+import { next } from '../NextButton.js';
+import { useNavigate } from 'react-router-dom';
 
 const UniversityEducation = () => {
     const [degree, setDegree] = useState('');
@@ -20,13 +25,29 @@ const UniversityEducation = () => {
     const [uniCity, setUniCity] = useState('');
     const [uniCountry, setUniCountry] = useState('');
 
+    const navigate = useNavigate();
+    const prevPage = () => navigate('/exams');
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        navigate('/work')
+        // validate();
+
+        // Check if validation passed
+        // if (validation) {
+        //     // Call the function to add data to Firestore
+        //     addDataToFirestore();
+        // } else {
+        //     console.log('Validation failed');
+        // }
+    };
+
     return(
         <div className="formtemp-page">
             <InterviewFormHeader title='University Education' />
             <div className="formtemp-bodyform">
                 <Grid container spacing={2} style={{ height: '100%' }}>
                     <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
-                        <form style={{ height: '100%', position: 'relative' }}>
+                        <form onSubmit={handleSubmit} style={{ height: '100%', position: 'relative' }}>
                             <div style={{ margin: '80px 25px 125px' }}>
                                 <div className="personalInfo-main">
                                     <div className="personalInfo-leftCol">
@@ -40,7 +61,7 @@ const UniversityEducation = () => {
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <EditableChoose
-                                                    options={["BSc. (Hons) in Software Engineering","BSc. (Hons) in Computer Science","BSc. (Hons) in Cyber Security"]}
+                                                    options={["Degree Name", "BSc. (Hons) in Software Engineering","BSc. (Hons) in Computer Science","BSc. (Hons) in Cyber Security"]}
                                                     onSelect={setDegree}
                                                     disabledOptions={[]}
                                                 />
@@ -75,7 +96,7 @@ const UniversityEducation = () => {
                                             </Grid>
                                             <Grid item xs={6} mb={3}>
                                                 <EditableChoose
-                                                    options={["Year 1","Year 2","Year 3","Year 4"]}
+                                                    options={["year", "Year 1","Year 2","Year 3","Year 4"]}
                                                     onSelect={setCurUniYear}
                                                     disabledOptions={[]}
                                                 />
@@ -105,12 +126,20 @@ const UniversityEducation = () => {
                                     </div>
                                 </div>
                             </div>
-                        <InterviewFormFooter nextForm='/work' prevForm='/exams'/>
-                    </form>
+                            <Grid container spacing={2} style={{position: 'absolute', bottom: 80}}>            
+                                <Grid xs={6} paddingLeft={'10px'}>
+                                    <Button startIcon={<ArrowBackIcon />} style={back} onClick={prevPage}>Go Back</Button>
+                                </Grid>
+                                    
+                                <Grid xs={6}>
+                                    <Button type='submit' style={next}>Next Step</Button>                                    
+                                </Grid>
+                            </Grid>
+                        </form>
+                    </Grid>
                 </Grid>
-            </Grid>
+            </div>
         </div>
-    </div>
     )
 
 }

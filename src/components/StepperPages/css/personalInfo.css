@@ -36,6 +36,16 @@
     /* box-sizing: border-box; */
     padding: 10px; 
 }
+.certificate {
+    flex: 1;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+    padding: 10px;
+    overflow: hidden; 
+}
 
 @media (max-width: 700px){
     .personalInfo-main{
@@ -45,7 +55,7 @@
     .personalInfo-rightCol {
         align-items: center;
     }
-    .personalInfo-rightCol{
+    .personalInfo-rightCol, .certificate{
         order: -1;
         /* overflow: scroll;   */
     }

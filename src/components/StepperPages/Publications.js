@@ -1,8 +1,5 @@
 import React from 'react';
 import './css/Publication.css';
-import '../../pages/interviewforms/Template.css';
-import InterviewFormFooter from '../InterviewFormFooter';
-import InterviewFormHeader from '../InterviewFormHeader';
 import Card from '@mui/material/Card'; //this is for the card in the right column
 import CardContent from '@mui/material/CardContent'; //this is for the card in the right column
 import Typography from '@mui/material/Typography'; //this is for the card in the right column
@@ -19,6 +16,16 @@ import cbatch from '../../assets/images/iconcbatch.svg';
 import EditableChoose from '../EditableSelectOption';
 import CustomMultilineTextFields from '../CustomMultilineTextfield';
 import { useState } from 'react';
+import CustomMultilineTextFieldslimited from '../MultilineMaxWordLimit';
+import InterviewFormFooter from '../InterviewFormFooter';
+import InterviewFormHeader from '../InterviewFormHeader';
+import '../../pages/interviewforms/Template.css';
+import Button from "@mui/material/Button";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { back } from '../BackButton.js';
+import { next } from '../NextButton.js';
+import { useNavigate } from 'react-router-dom';
+
 const Publications = () => {
     const [PblTitle, setPblTitle] = useState('');
     const [publisher, setPublisher] = useState('');
@@ -26,6 +33,22 @@ const Publications = () => {
     const [pblMonth, setPblMonth] = useState('');
     const [pblYear, setPblYear] = useState('');
     const [pblDesc, setPblDesc] = useState('');
+
+    const navigate = useNavigate();
+    const prevPage = () => navigate('/clubsAndSocs');
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        navigate('/skilltrack')
+        // validate();
+
+        // Check if validation passed
+        // if (validation) {
+        //     // Call the function to add data to Firestore
+        //     addDataToFirestore();
+        // } else {
+        //     console.log('Validation failed');
+        // }
+    };
     
     return(
       <div className="formtemp-page">
@@ -33,7 +56,7 @@ const Publications = () => {
             <div className="formtemp-bodyform">
                 <Grid container spacing={2} style={{ height: '100%' }}>
                     <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
-                        <form style={{ height: '100%', position: 'relative' }}>
+                        <form onSubmit={handleSubmit} style={{ height: '100%', position: 'relative' }}>
                             <div style={{ margin: '80px 25px 125px' }}>
                                 <div className='Publications-Maindiv'>
                                     <div className='Publications-LeftColumn'>
@@ -85,9 +108,16 @@ const Publications = () => {
                                       </Grid>
                                       <Grid item xs={12}>
                                         
-                                      <Typography ><span style={{color: 'red'}}>*</span> Project Description</Typography>
-                                          <CustomMultilineTextFields  height="115px" value={pblDesc} onChange={(event) => setPblDesc(event.target.value)} required />
-                                        
+                                        <Typography ><span style={{color: 'red'}}>*</span> Project Description</Typography>
+                                        {/* <CustomMultilineTextFields  height="115px" value={pblDesc} onChange={(event) => setPblDesc(event.target.value)} required /> */}
+                                        <CustomMultilineTextFieldslimited
+                                            inputHeight="150px"
+                                            maxWidth="1300px"
+                                            isRequired={true}
+                                            value={pblDesc}
+                                            onChange={(event) => setPblDesc(event.target.value)}
+                                            maxWords={50} 
+                                        />
                                       </Grid>
                                       
                                     </Grid>
@@ -149,11 +179,27 @@ const Publications = () => {
                                     </div>
                             </div>
                           </div>
-                        <InterviewFormFooter nextForm='/skilltrack' prevForm='/clubsAndSocs'/>
+                          <Grid container spacing={2} style={{position: 'absolute', bottom: 80}}>            
+                              <Grid xs={6} paddingLeft={'10px'}>
+                                  <Button startIcon={<ArrowBackIcon />} style={back} onClick={prevPage}>Go Back</Button>
+                              </Grid>
+                                  
+                              <Grid xs={6}>
+                                  <Button type='submit' style={next}>Next Step</Button>                                    
+                              </Grid>
+                          </Grid>
                     </form>
                 </Grid>
             </Grid>
-        </div>
+          {/*</Box>*/}
+              
+      </div>
+            
+
+      
+
+     
+      
     </div>
     )
 

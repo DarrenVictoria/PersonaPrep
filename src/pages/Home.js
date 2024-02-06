@@ -15,6 +15,7 @@ import NForceLogo from '../assets/images/NForceLogo.svg';
 import Marquee from "react-fast-marquee";
 import Footer from '../components/footer'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import Button from '@mui/material/Button';
 
 const GrayDiv = () => {
   
@@ -53,22 +54,7 @@ const GrayDiv = () => {
         <p style={{ fontFamily: 'Inter', marginBottom: '20px',paddingLeft:'8%',paddingRight:'8%' }}>
           NFORCE – NSBM for Career and Entrepreneurship is the Unit belonging to NSBM Green University which prepares the students for the world of work. For the first time in Sri Lanka, NSBM Green University, positioned the university career guidance as a corporate entity NFORCE, to give the exposure of corporates to the students from the beginning itself. NFORCE is responsible for making the graduates’ future ready to win the corporate world as well as to promote entrepreneurship among students.
         </p>
-              <button
-        style={{
-          borderRadius: '10px',
-          background: '#000',
-          padding: '12px',
-          color: '#FFFFFF',
-          fontFamily: 'Inter',
-          transition: 'box-shadow 0.3s ease', // Add a smooth transition for a better visual effect
-          boxShadow: '0 0 10px rgba(0, 0, 0, 0)', // Initial box shadow (transparent)
-          ':hover': {
-            boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)', // Drop shadow on hover
-          },
-        }}
-      >
-        Meet the devs
-      </button>
+        <Button style={{backgroundColor:'black', color:'white', padding:'0.7rem',fontFamily:'inter'}}>Meet the devs</Button>
       </div>
     </div>
   );
@@ -395,27 +381,27 @@ export default function SplitLayout() {
 
     <h1 style={{textAlign:'center'}}>Get in Touch</h1>
 
-          <Grid style={{ margin: '1%' }} container rowSpacing={1} columnSpacing={{ xs: 0, sm: 0, md: 0 }}>
+          <Grid style={{ marginLeft: '2%' , marginRight:'2%' }} container rowSpacing={1} columnSpacing={{ xs: 0, sm: 0, md: 0 }}>
         <Grid item xs={4}>
-          <Item style={{ border: '5px solid #000', background: '#D9D9D9', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', borderRadius: 0 }}>
-            Phone: +9438472948<br />
-            Fax: +94873738787<br />
-            into@hgmlegal.com
+          <Item style={{ border: '2px solid #000', background: '#D9D9D9', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', borderRadius: 0 }}>
+            Phone: +94713456484<br />
+            Email: personaprepnforce@gmail.com<br/>
+            Web : https://www.nsbm.ac.lk/
+
           </Item>
         </Grid>
         <Grid item xs={4}>
-          <Item style={{ border: '5px solid #000', background: '#D9D9D9', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', borderRadius: 0 }}>
-            PO Box 105-900<br />
-            Auckland City<br />
-            Auckland 1143 New
+          <Item style={{ border: '2px solid #000', background: '#D9D9D9', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', borderRadius: 0 }}>
+            NSBM Green University<br />
+            Pitipana - Thalagala Rd<br />
+            Homagama , Sri Lanka
           </Item>
         </Grid>
         <Grid item xs={4}>
-          <Item style={{ border: '5px solid #000', background: '#D9D9D9', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', borderRadius: 0 }}>
-            Physical<br />
-            Level 16<br />
-            45 Queen Street<br />
-            Auckland 1010
+          <Item style={{ border: '2px solid #000', background: '#D9D9D9', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', borderRadius: 0 }}>
+            Product of<br />
+            NSBM Green University<br />
+            Undergraduates<br />
           </Item>
         </Grid>
       </Grid>

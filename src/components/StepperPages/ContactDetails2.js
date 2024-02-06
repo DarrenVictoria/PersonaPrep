@@ -25,6 +25,11 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { useEffect, useState } from 'react';
+import Button from "@mui/material/Button";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { back } from '../BackButton.js';
+import { next } from '../NextButton.js';
+import { useNavigate } from 'react-router-dom';
 
 const ContactDetails_2 = () => {
     const [gitChecked, setGitChecked] = useState(false);
@@ -38,6 +43,22 @@ const ContactDetails_2 = () => {
     const [twitterTxt, setTwitterTxt] = useState('');
     const [soTxt, setSoTxt] = useState('');
     const [mediumTxt, setMediumTxt] = useState('');
+
+    const navigate = useNavigate();
+    const prevPage = () => navigate('/contactDetMain');
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        navigate('/school')
+        // validate();
+
+        // Check if validation passed
+        // if (validation) {
+        //     // Call the function to add data to Firestore
+        //     addDataToFirestore();
+        // } else {
+        //     console.log('Validation failed');
+        // }
+    };
 
     const CheckBoxComp = ({image, name, value, setText, checked, setCheck}) => {
         const handleChange = (event) => {
@@ -87,7 +108,7 @@ const ContactDetails_2 = () => {
             <div className="formtemp-bodyform">
                 <Grid container spacing={2} style={{ height: '100%' }}>
                     <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
-                        <form style={{ height: '100%', position: 'relative' }}>
+                        <form onSubmit={handleSubmit} style={{ height: '100%', position: 'relative' }}>
                             <div style={{ margin: '80px 25px 125px' }}>
                                 <div className="personalInfo-main">
                                     <div className="personalInfo-leftCol">
@@ -152,7 +173,15 @@ const ContactDetails_2 = () => {
                                     </div>
                                 </div>
                             </div>
-                        <InterviewFormFooter nextForm='/school' prevForm='/contactDetMain'/>
+                        <Grid container spacing={2} style={{position: 'absolute', bottom: 80}}>            
+                            <Grid xs={6} paddingLeft={'10px'}>
+                                <Button startIcon={<ArrowBackIcon />} style={back} onClick={prevPage}>Go Back</Button>
+                            </Grid>
+                                
+                            <Grid xs={6}>
+                                <Button type='submit' style={next}>Next Step</Button>                                    
+                            </Grid>
+                        </Grid>
                     </form>
                 </Grid>
             </Grid>
