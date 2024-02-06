@@ -16,39 +16,77 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import cphone from '../../assets/images/iconcphone.svg';
 import InterviewFormFooter from '../InterviewFormFooter';
 import InterviewFormHeader from '../InterviewFormHeader';
-import { useState } from 'react';
+import React,{ useState, useEffect } from 'react';
 import Button from "@mui/material/Button";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { back } from '../BackButton.js';
 import { next } from '../NextButton.js';
 import { useNavigate } from 'react-router-dom';
+import { collection, addDoc,doc , getDoc, setDoc, getFirestore, query, where, getDocs } from 'firebase/firestore';
+import { useAuth } from '../../hooks/useAuth.js';
 
 const PersonalInfo = () => {
+    const { currentUser } = useAuth();
+    const [profilePictureUrl, setProfilePictureUrl] = useState('');
    
     const job_roles = [{data:"Software Engineer"}, {data:"Systems Analyst"}, {data:"Network Administrator"}, {data:"Data Scientist"}];
 
-    const [phone, setPhone] = useState('');
-
+    const [Proname, setProname] = useState('');
     const [PJobRoles, setPJobRoles] = useState([]);
+    
+    const handleFileUploadSuccess = (url) => {
+        setProfilePictureUrl(url);
+      };
 
-
-    const phoneChange = (event) => setPhone(event.target.value);
+    const phoneChange = (event) => setProname(event.target.value);
 
     const navigate = useNavigate();
-    const prevPage = () => navigate('/faculty');
-    const handleSubmit = (e) => {
+    
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        navigate('/contactDetMain')
-        // validate();
-
-        // Check if validation passed
-        // if (validation) {
-        //     // Call the function to add data to Firestore
-        //     addDataToFirestore();
-        // } else {
-        //     console.log('Validation failed');
-        // }
+        
+        try {
+            const db = getFirestore();
+            const studentDetailsCollection = collection(db, 'studentdetails');
+            const userDocument = doc(studentDetailsCollection, currentUser.email); // Use the email as document ID
+    
+            await setDoc(userDocument, {
+                Proname,
+                PJobRoles,
+                profilePictureUrl: profilePictureUrl.downloadURL,
+                userId: currentUser.uid // assuming you have a user ID to associate with the data
+            }, { merge: true }); // Merge with existing document if it exists
+            
+            navigate('/contactDetMain');
+        } catch (error) {
+            console.error('Error adding personal info to Firestore: ', error);
+        }
     };
+    
+    useEffect(() => {
+        // Load data from Firestore when the page loads
+        const fetchPersonalInfo = async () => {
+            try {
+                const db = getFirestore();
+                const studentDetailsCollection = collection(db, 'studentdetails');
+                const userDocument = doc(studentDetailsCollection, currentUser.email); // Use the email as document ID
+    
+                const docSnapshot = await getDoc(userDocument);
+                if (docSnapshot.exists()) {
+                    const docData = docSnapshot.data();
+                    setProname(docData.Proname || '');
+                    setPJobRoles(docData.PJobRoles || []);
+                    setProfilePictureUrl(docData.profilePictureUrl || null);
+                }
+            } catch (error) {
+                console.error('Error fetching personal info from Firestore: ', error);
+            }
+        };
+        fetchPersonalInfo();
+    }, [currentUser.email]); // Use currentUser.email instead of currentUser.uid
+    
+
+    const prevPage = () => navigate('/faculty');
     
     const handlePJobRoles = function (ev, val, reason, details) {
         if (ev.target.classList.contains('MuiSvgIcon-root')){
@@ -74,11 +112,11 @@ const PersonalInfo = () => {
                                         <Grid container>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography><span style={{color: 'red'}}>*</span> Full Name</Typography>
-                                                <TextField type="text" variant="outlined" value={phone} onChange={phoneChange} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} />
+                                                <TextField type="text" variant="outlined" value={Proname} onChange={phoneChange} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} />
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span> Profile Picture</Typography>
-                                                <FileUpload />
+                                                <FileUpload onFileUpload={handleFileUploadSuccess} />
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <CustomizedHook 

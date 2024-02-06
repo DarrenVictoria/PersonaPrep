@@ -5,7 +5,7 @@ import { getStorage, ref, uploadBytesResumable, getDownloadURL, deleteObject  } 
 import Button from '@mui/material/Button';
 import LinearProgress from '@mui/material/LinearProgress';
 
-const FileUpload = ({ onFileUpload, onReset }) => {
+const FileUpload = ({ onFileUpload, onReset, onUploadSuccess  }) => {
   const [uploadedFile, setUploadedFile] = useState(null);
   const [error, setError] = useState(null);
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -17,6 +17,7 @@ const FileUpload = ({ onFileUpload, onReset }) => {
       if (uploadedFile && uploadedFile.toBeDeleted) {
         // Delete the uploaded file from Firebase storage
         const fileRef = ref(storage, `uploads/${uploadedFile.file.name}`);
+        onUploadSuccess(uploadedFile.downloadURL);
         deleteObject(fileRef)
           .then(() => {
             console.log('File deleted successfully from storage');
@@ -29,7 +30,7 @@ const FileUpload = ({ onFileUpload, onReset }) => {
         onReset();
       }
     };
-  }, [uploadedFile, storage, onReset]);
+  }, [uploadedFile, storage, onReset, onUploadSuccess]);
 
   const handleReset = () => {
     // Set a flag to mark the file for deletion in the cleanup
