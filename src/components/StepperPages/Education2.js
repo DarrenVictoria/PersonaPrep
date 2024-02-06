@@ -55,11 +55,11 @@ const Education_2 = () => {
                     />
                 </Grid>
                 <Grid item xs={12} md={2} mt={3}>
-                    {index > 0 && (
+                    
                         <IconButton onClick={() => removeOlSubject(index)} color="primary" style={{ backgroundColor: 'black', borderRadius: '50%', width:'22px', height:'22px', marginRight: '15px' }}>
                             <RemoveIcon style={{ color: 'white' }}/>
                         </IconButton>
-                    )}
+                    
                 </Grid>
             </Grid>
         );
@@ -79,11 +79,11 @@ const Education_2 = () => {
                     />
                 </Grid>
                 <Grid item xs={12} md={2} mt={3}>
-                    {index > 0 && (
+                    
                         <IconButton onClick={() => removeAlSubject(index)} color="primary"style={{ backgroundColor: 'black', borderRadius: '50%', width:'22px', height:'22px', marginRight: '15px' }}>
                             <RemoveIcon style={{ color: 'white' }}/>
                         </IconButton>
-                    )}
+                    
                 </Grid>
             </Grid>
         );
@@ -137,6 +137,16 @@ const Education_2 = () => {
                                             <Grid item xs={12} mt={3} >
                                                 <Typography><span style={{color: 'red'}}>*</span>Subject Results</Typography>
                                             </Grid>
+                                            <Grid item xs={7} md={4} pt={3} pr={1}>
+                                                <TextField type="text" variant="outlined" fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Subject'/>
+                                            </Grid>
+                                            <Grid item xs={5} md={3} pl={1}>
+                                                <EditableChoose
+                                                    options={["Result","A","B","C","S","F"]}
+                                                    onSelect={setOlResult}
+                                                    disabledOptions={[]}
+                                                />
+                                            </Grid>
                                             <Grid item xs={12} md={8} style={{ padding: 0 }}>
                                                 {olSubject.map((_, index) => (
                                                     <OlSubjectComp key={index} index={index} />
@@ -164,29 +174,19 @@ const Education_2 = () => {
                                                         disabledOptions={["2024"]}
                                                     />
                                                 </Grid>
-                                                <Grid item xs={12} mt={3}>
-                                                    <Typography><span style={{color: 'red'}}>*</span>Subject Results</Typography>
-                                                </Grid>
-                                                <Grid item xs={7} md={2} pr={1}>
-                                                    <TextField type="text" variant="outlined" fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Subject'/>
-                                                </Grid>
-                                                <Grid item xs={5} md={2} pl={1}>
-                                                    <EditableChoose
-                                                        options={["Result","A","B","C","S","F"]}
-                                                        onSelect={setAlResult}
-                                                        disabledOptions={[]}
-                                                    />
-                                                </Grid>
-                                            
-                                            <Grid item xs={6} md={2}>
-                                                <EditableChoose
-                                                    options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                                                    onSelect={setAlYear}
-                                                    disabledOptions={["2024"]}
-                                                />
-                                            </Grid>
+                                                
                                             <Grid item xs={12} mt={3}>
                                                 <Typography><span style={{color: 'red'}}>*</span>Subject Results</Typography>
+                                            </Grid>
+                                            <Grid item xs={7} md={4} pr={1} pt={3} >
+                                                <TextField type="text" variant="outlined" fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Subject'/>
+                                            </Grid>
+                                            <Grid item xs={5} md={3} pl={1}>
+                                                <EditableChoose
+                                                    options={["Result","A","B","C","S","F"]}
+                                                    onSelect={setAlResult}
+                                                    disabledOptions={[]}
+                                                />
                                             </Grid>
                                             <Grid item xs={12} md={8} style={{ padding: 0 }}>
                                                 {alSubject.map((_, index) => (

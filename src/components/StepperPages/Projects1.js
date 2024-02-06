@@ -28,11 +28,14 @@ import { next } from '../NextButton.js';
 import { useNavigate } from 'react-router-dom';
 
 const Projects_1 = () => {
-    const skills = [{data: 'c#',}, {data: 'react'}, {data: 'java'}];
+    const Proj_Skills = [{data: 'c#',}, {data: 'react'}, {data: 'java'}];
     const [projType, setProjType] = useState('');
     const [projName, setProjName] = useState('');
     const [projRole, setProjRole] = useState('');
     const [projStatus, setProjStatus] = useState('');
+
+    const [ProjSkills, setProjSkills] = useState([]);
+
 
     const [projStartMonth, setProjStartMonth] = useState('');
     const [projStartYear, setProjStartYear] = useState('');
@@ -40,6 +43,20 @@ const Projects_1 = () => {
     const [projEndYear, setProjEndYear] = useState('');
     const [projPlace, setProjPlace] = useState('');
     const [projEvidence, setProjEvidence] = useState('');
+
+
+    const handleProjSkills = function (ev, val, reason, details) {
+        if (ev.target.classList.contains('MuiSvgIcon-root')){
+            // Removing Value
+            const value = ev.target.parentElement.querySelector('span').innerHTML;
+            setProjSkills(ProjSkills.filter(item => item !== value));
+        } else {
+            const value = ev.target.innerHTML;
+            ProjSkills.push(value);
+        }
+        console.log(ProjSkills);
+    }
+
 
     const navigate = useNavigate();
     const prevPage = () => navigate('/work');
@@ -56,6 +73,7 @@ const Projects_1 = () => {
         //     console.log('Validation failed');
         // }
     };
+
     
     return(
         <div className="formtemp-page">
@@ -98,8 +116,10 @@ const Projects_1 = () => {
                                                     </RadioGroup>
                                                 </FormControl>
                                             </Grid>
+
                                             <Grid item xs={12} mb={3}>
-                                                <CustomizedHook data={skills} label={<Typography mb={1}><span style={{color: 'red'}}>*</span>What are the skills gained from the project?</Typography>}/>
+                                                <CustomizedHook onChange={handleProjSkills} data={Proj_Skills} label={<Typography mb={1}><span style={{color: 'red'}}>*</span>What are the skills gained from the project?</Typography>}/>
+
                                             </Grid>
                                             <Grid item xs={12} mb={-2}>
                                                 <Typography><span style={{color: 'red'}}>*</span>Project Start Date</Typography>

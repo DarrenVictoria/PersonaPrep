@@ -193,6 +193,9 @@ const Education_1 = () => {
 
             
         </div>
+
+    
+
     )
 
 }

@@ -30,7 +30,7 @@ const WorkExperience_2 = () => {
     // }, [Employmenttype]);
     const [selectedValues, setSelectedValues] = useState([]);
 
-    const handle = (values) => {
+    const handleSelectedValues = (values) => {
         setSelectedValues(values);
         console.log("Selected values:", values);
     };
@@ -66,7 +66,7 @@ const WorkExperience_2 = () => {
                     />
                 </Grid>
                 <Grid item xs={12} >
-                    <CustomizedHook maxWidth={1300} data={SkillsAcquired} value={selectedValues} onChange={handle} label={<Typography mb={1}><span style={{color: 'red'}}>*</span> Skills acquired from job ?</Typography>}/>
+                    <CustomizedHook maxWidth={1300} data={SkillsAcquired} value={selectedValues} onChange={handleSelectedValues} label={<Typography mb={1}><span style={{color: 'red'}}>*</span> Skills acquired from job ?</Typography>}/>
                 </Grid>
                 
             </Grid>

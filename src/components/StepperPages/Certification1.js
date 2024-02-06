@@ -26,23 +26,47 @@ import { next } from '../NextButton.js';
 import { useNavigate } from 'react-router-dom';
 
 const Certification = () => {
+
+
+    const CProj_Skills = [{data: 'c#'}, {data: 'java'}, {data: 'react'}];
+
+
     const [certificateName, setCertificateName] = useState('');
     const [issuedOrg, setIssuedOrg] = useState('');
     const [certificateId, setCertificateId] = useState('');
-
+    const [CProjSkills, setCProjSkills] = useState([]); //this is for CustomizedHook
     const [crtiIssuedmonth,setCertiIssuedMonth] = useState("");
     const [crtiIssuedyear,setCertiIssuedYear] = useState("");
     const [crtExpMonth, setCrtExpMonth] = useState('');
     const [crtExpYear, setCrtExpYear] = useState('');
+
     const [certificationLInk, setCertificationLink] = useState('');
 
-    const skills = [{data: 'c#'}, {data: 'java'}, {data: 'react'}];
+
+    
+
 
     const [validation, setValidation] = useState(false);
 
     const validate = () => {
         // if (!(selectedFaculty === '' && selectedBatch === '' && selectedDegree === '')) setValidation(true);
     }
+
+
+    //below handle function is for CustomizedHook
+    const handleCProjSkills = function (ev, val, reason, details) {
+        if (ev.target.classList.contains('MuiSvgIcon-root')){
+            // Removing Value
+            const value = ev.target.parentElement.querySelector('span').innerHTML;
+            setCProjSkills(CProjSkills.filter(item => item !== value));
+        } else {
+            const value = ev.target.innerHTML;
+            CProjSkills.push(value);
+        }
+        console.log(CProjSkills);
+    }
+
+
 
     const navigate = useNavigate();
     const prevPage = () => navigate('/project');
@@ -62,6 +86,7 @@ const Certification = () => {
 
     return ( 
         <div className="formtemp-page">
+
             <InterviewFormHeader title='Certification' />
             <div className="formtemp-bodyform">
                 <Grid container spacing={2} style={{ height: '100%' }}>
@@ -69,8 +94,8 @@ const Certification = () => {
                         <form onSubmit={handleSubmit} style={{ height: '100%', position: 'relative' }}>
                             <div style={{ margin: '80px 25px 125px' }}>
 
-                                <div className="personalInfo-main">
-                                    <div className="personalInfo-leftCol">
+                                <div className="Certification1-Maindiv">
+                                    <div className="Certification1-LeftColumn">
                                         <Grid container>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography ><span style={{color: 'red'}}>*</span> Name of Certification</Typography>
@@ -119,7 +144,7 @@ const Certification = () => {
                                                 <TextField type="text" variant="outlined" value={certificateId} onChange={(event) => setCertificateId(event.target.value)} fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}}/>
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
-                                                <CustomizedHook data={skills} label={<Typography mb={1}><span style={{color: 'red'}}>*</span>Skills acquired from the project?</Typography>}/>
+                                                <CustomizedHook data={CProj_Skills} label={<Typography mb={1}><span style={{color: 'red'}}>*</span>Skills acquired from the project?</Typography>}/>
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>Certification evidence link</Typography>
@@ -183,8 +208,8 @@ const Certification = () => {
                                         </div>
                                     </div>
                                 </div>
-                                
                             </div>
+                        
                             <Grid container spacing={2} style={{position: 'absolute', bottom: 80}}>            
                                 <Grid xs={6} paddingLeft={'10px'}>
                                     <Button startIcon={<ArrowBackIcon />} style={back} onClick={prevPage}>Go Back</Button>
