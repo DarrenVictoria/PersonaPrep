@@ -96,7 +96,7 @@ const SkillTrack_1 = () => {
                                     <CustomMultilineTextFieldslimited inputHeight={100} maxWidth={1300} value={leadership} onChange={handleLeadership} maxWords={20} isRequired={true}/>
                                     <Typography mb={1} mt={3}><span style={{color: 'red'}}>*</span> If applicable can you share examples of how you've led teams or projects?</Typography>
                                     <CustomMultilineTextFieldslimited inputHeight={100} maxWidth={1300} value={leadershipEx} onChange={handleLeadershipEx} maxWords={20} isRequired={true}/>
-                                    <CustomizedHook onChange={handleSoftSkills} height={100} maxWidth={1300} data={SoftSkilldataset} label={<Typography mb={1} mt={3}><span style={{color: 'red'}}>*</span> What soft skills do you believe are your strengths? Min 3 / Max 5</Typography>}/>
+                                    <CustomizedHook onChange={handleSoftSkills} minHeight={100} maxWidth={1300} data={SoftSkilldataset} label={<Typography mb={1} mt={3}><span style={{color: 'red'}}>*</span> What soft skills do you believe are your strengths? Min 3 / Max 5</Typography>}/>
                                     <Typography mb={1} mt={3}><span style={{color: 'red'}}>*</span> How do these skills contribute to your overall effectiveness in the workplace?</Typography>
                                     <CustomMultilineTextFieldslimited inputHeight={100} maxWidth={1300} value={skillContrib} onChange={handleSkillContrib} maxWords={20} isRequired={true} mb={10}/>
                                 </div>

@@ -28,7 +28,7 @@ const Clubs = () => {
     const [ClbsRolesPlayed, setClbsRolesPlayed] = useState([]);
     const [ClbsSkillsEarned, setClbsSkillsEarned] = useState([]);
 
-    const Clbs_RolesPlayed = [{data:"Volunteer"},{data:"Council Member"}];
+    const Clbs_RolesPlayed = [{data:"Volunteer"},{data:"Council Member"},{data:"Council Members"},{data:"Council Memberv"},{data:"Council Membere"},{data:"Council Memberw"}];
     const Clbs_SkillsEarned = [{data:"Leadership"},{data:"Teamwork"}];
 
 
