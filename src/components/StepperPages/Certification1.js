@@ -92,7 +92,7 @@ const Certification = () => {
                 <Grid container spacing={2} style={{ height: '100%' }}>
                     <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
                         <form onSubmit={handleSubmit} style={{ height: '100%', position: 'relative' }}>
-                            <div style={{ margin: '80px 25px 125px' }}
+                            <div style={{ margin: '80px 25px 125px' }}>
 
                                 <div className="Certification1-Maindiv">
                                     <div className="Certification1-LeftColumn">
@@ -208,8 +208,8 @@ const Certification = () => {
                                         </div>
                                     </div>
                                 </div>
-                                
                             </div>
+                        
                             <Grid container spacing={2} style={{position: 'absolute', bottom: 80}}>            
                                 <Grid xs={6} paddingLeft={'10px'}>
                                     <Button startIcon={<ArrowBackIcon />} style={back} onClick={prevPage}>Go Back</Button>
