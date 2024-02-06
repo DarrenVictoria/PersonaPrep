@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useTheme } from "@mui/material/styles";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import MenuItem from "@mui/material/MenuItem";
@@ -16,6 +16,7 @@ const MenuProps = {
   }
 };
 
+//Code Check
 
 function getStyles(name, personName, theme) {
   return {
@@ -26,9 +27,14 @@ function getStyles(name, personName, theme) {
   };
 }
 
-export default function Choose({options, onSelect, disabledOptions, isRequired }) {
+export default function Choose({options, onSelect, disabledOptions, isRequired, defaultValue  }) {
   const theme = useTheme();
-  const [personName, setPersonName] = React.useState(options.length> 0?options[0]:'');
+  const [personName, setPersonName] = useState(defaultValue || (options.length > 0 ? options[0] : ''));
+
+
+  
+
+  
 
   const handleChange = (event) => {
     const selectedValue = event.target.value;
@@ -53,7 +59,7 @@ export default function Choose({options, onSelect, disabledOptions, isRequired }
           MenuProps={MenuProps}
           inputProps={{ "aria-label": "Without label" }}
           IconComponent={(props)=><ArrowDropDownCircleOutlinedIcon {...props} style={{color:'black'}}/>}//this is to import the arrow icon and to change its color to black
-          
+          key={options.join('-')} // Add a key to force re-render when options change
         >
           
           {options.map((option) => (

@@ -3,5 +3,8 @@ export const next={
     color:'white',
     borderRadius:'25px',
     margin: '25px',
-    float: 'right'
+    float: 'right',
+    fontFamily: 'Inter , sans-serif',
+    fontWeight: 'bold'
+    
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{useEffect} from "react";
 import { useTheme } from "@mui/material/styles";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import MenuItem from "@mui/material/MenuItem";
@@ -26,9 +26,21 @@ function getStyles(name, personName, theme) {
   };
 }
 
-export default function EditableChoose({ options, onSelect, disabledOptions, maxWidth, isRequired }) {
+export default function EditableChoose({ options, onSelect, disabledOptions, maxWidth, isRequired, defaultValue  }) {
   const theme = useTheme();
-  const [personName, setPersonName] = React.useState(options.length > 0 ? options[0] : '');
+
+  const [personName, setPersonName] = React.useState('');
+
+  useEffect(() => {
+    // Set the default value only if defaultValue exists
+    if (defaultValue) {
+      setPersonName(defaultValue);
+    } else if (options.length > 0) {
+      setPersonName(options[0]); // Set the first option as default if defaultValue is not provided
+    }
+  }, [defaultValue, options]);
+
+  
 
   const handleChange = (event) => {
     const selectedValue = event.target.value;

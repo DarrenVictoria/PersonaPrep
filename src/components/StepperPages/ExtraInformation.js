@@ -18,11 +18,24 @@ import { next } from '../NextButton.js';
 import { useNavigate } from 'react-router-dom';
 
 const ExtraInformation = () => {
-    const Interests = [{data:"role1"}, {data:"role2"}, {data:"role3"}];
+    const ExtraInfo_Interests = [{data:"role1"}, {data:"role2"}, {data:"role3"}];
     const [refName, setRefName] = useState('');
     const [refContact, setRefContact] = useState('');
     const [award, setAward] = useState('');
     const [lang, setLang] = useState('');
+    const [ExtraInfoInterests, setExtraInfoInterests] = useState([]);
+
+    const handleExtraInfoInterests = function (ev, val, reason, details) {
+        if (ev.target.classList.contains('MuiSvgIcon-root')){
+            // Removing Value
+            const value = ev.target.parentElement.querySelector('span').innerHTML;
+            setExtraInfoInterests(ExtraInfoInterests.filter(item => item !== value));
+        } else {
+            const value = ev.target.innerHTML;
+            ExtraInfoInterests.push(value);
+        }
+        console.log(ExtraInfoInterests);
+    }
 
     const navigate = useNavigate();
     const prevPage = () => navigate('/summary');
@@ -91,7 +104,7 @@ const ExtraInformation = () => {
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={12} md={6} mb={3}>
-                                            <CustomizedHook data={Interests} label={<Typography mb={1}>Research Interests</Typography>}/>
+                                            <CustomizedHook onChange={handleExtraInfoInterests} data={ExtraInfo_Interests} label={<Typography mb={1}>Research Interests</Typography>}/>
                                         </Grid>
                                     </Grid>
                                 </div>

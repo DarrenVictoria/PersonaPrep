@@ -11,7 +11,6 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import cphone from '../../assets/images/iconcphone.svg';
 import EditableChoose from '../EditableSelectOption';
-import { useState } from 'react';
 import CustomMultilineTextFieldslimited from '../MultilineMaxWordLimit';
 import InterviewFormFooter from '../InterviewFormFooter';
 import InterviewFormHeader from '../InterviewFormHeader';
@@ -21,8 +20,12 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { back } from '../BackButton.js';
 import { next } from '../NextButton.js';
 import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { collection, addDoc, getFirestore, query, where, getDocs, doc, updateDoc } from 'firebase/firestore';
+import { useAuth } from '../../hooks/useAuth.js';
 
 const Education_1 = () => {
+    const { currentUser } = useAuth();
     const [startMonth, setStartMonth] = useState('');
     const [startYear, setStartYear] = useState('');
     const [endMonth, setEndMonth] = useState('');
@@ -39,20 +42,71 @@ const Education_1 = () => {
     const schoolExperienceChange = (e) => setSchoolExperience(e.target.value);
 
     const navigate = useNavigate();
-    const prevPage = () => navigate('/contactDetSocial');
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        navigate('/exams')
-        // validate();
+      const prevPage = () => navigate('/contactDetSocial');
 
-        // Check if validation passed
-        // if (validation) {
-        //     // Call the function to add data to Firestore
-        //     addDataToFirestore();
-        // } else {
-        //     console.log('Validation failed');
-        // }
+      const fetchUserData = async () => {
+        try {
+            const db = getFirestore();
+            const studentDetailsCollection = collection(db, 'studentdetails');
+            const querySnapshot = await getDocs(query(studentDetailsCollection, where('email', '==', currentUser.email)));
+            const existingDoc = querySnapshot.docs[0];
+
+            if (existingDoc) {
+                const userData = existingDoc.data();
+                // Populate the form fields with fetched data
+                setSchoolName(userData.schoolName || '');
+                setSchoolCity(userData.schoolCity || '');
+                setSchoolCountry(userData.schoolCountry || '');
+                setSchoolExperience(userData.schoolExperience || '');
+                setStartMonth(userData.startMonth || '');
+                setStartYear(userData.startYear || '');
+                setEndMonth(userData.endMonth || '');
+                setEndYear(userData.endYear || '');
+            }
+        } catch (error) {
+            console.error('Error fetching user data: ', error);
+        }
     };
+
+    useEffect(() => {
+    
+        fetchUserData();
+    }, [currentUser.email]);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        
+        // Prepare the data to append to Firestore document
+        const dataToUpdate = {
+            schoolName,
+            schoolCity,
+            schoolCountry,
+            schoolExperience,
+            startMonth,
+            startYear,
+            endMonth,
+            endYear,
+        };
+
+        try {
+            const db = getFirestore();
+            const studentDetailsCollection = collection(db, 'studentdetails');
+            const querySnapshot = await getDocs(query(studentDetailsCollection, where('email', '==', currentUser.email)));
+            const existingDoc = querySnapshot.docs[0];
+
+            if (existingDoc) {
+                const existingDocRef = doc(db, 'studentdetails', existingDoc.id);
+                await updateDoc(existingDocRef, dataToUpdate);
+                console.log('Document updated with ID: ', existingDoc.id);
+                navigate('/exams');
+            } else {
+                console.error('Document does not exist for the current user.');
+            }
+        } catch (error) {
+            console.error('Error updating document: ', error);
+        }
+    };
+  
 
     return(
         <div className="formtemp-page">
@@ -95,14 +149,16 @@ const Education_1 = () => {
                                                 <EditableChoose
                                                     options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
                                                     onSelect={setStartMonth}
-                                                    disabledOptions={[]}
+                                                    disabledOptions={["Month"]}
+                                                    defaultValue={startMonth}
                                                 />
                                             </Grid>
                                             <Grid item xs={6} mb={3} pl={1}>
                                                 <EditableChoose
                                                     options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
                                                     onSelect={setStartYear}
-                                                    disabledOptions={["2024"]}
+                                                    disabledOptions={["Year"]}
+                                                    defaultValue={startYear}
                                                 />
                                             </Grid>
                                             <Grid item xs={12} mb={-2}>
@@ -112,14 +168,16 @@ const Education_1 = () => {
                                                 <EditableChoose
                                                     options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
                                                     onSelect={setEndMonth}
-                                                    disabledOptions={[]}
+                                                    disabledOptions={["Month"]}
+                                                    defaultValue={endMonth}
                                                 />
                                             </Grid>
                                             <Grid item xs={6} mb={3} pl={1}>
                                                 <EditableChoose
                                                     options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
                                                     onSelect={setEndYear}
-                                                    disabledOptions={["2024"]}
+                                                    disabledOptions={["Year"]}
+                                                    defaultValue={endYear}
                                                 />
                                             </Grid>
                                             
@@ -193,6 +251,9 @@ const Education_1 = () => {
 
             
         </div>
+
+    
+
     )
 
 }
