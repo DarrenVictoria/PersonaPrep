@@ -38,7 +38,7 @@ export default function EditableChoose({ options, onSelect, disabledOptions, max
     } else if (options.length > 0) {
       setPersonName(options[0]); // Set the first option as default if defaultValue is not provided
     }
-  }, [defaultValue, options]);
+  }, [defaultValue]);
 
   
 
