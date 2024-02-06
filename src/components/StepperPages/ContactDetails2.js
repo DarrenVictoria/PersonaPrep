@@ -32,11 +32,11 @@ import { useAuth } from '../../hooks/useAuth.js';
 
 const ContactDetails_2 = () => {
     const { currentUser } = useAuth();
-    const [gitTxt, setGitTxt] = useState('');
-    const [linkedInTxt, setLinkedInTxt] = useState('');
-    const [twitterTxt, setTwitterTxt] = useState('');
-    const [soTxt, setSoTxt] = useState('');
-    const [mediumTxt, setMediumTxt] = useState('');
+    const [GitHubUN, setGitTxt] = useState('');
+    const [LinkedInUN, setLinkedInTxt] = useState('');
+    const [TwitterUN, setTwitterTxt] = useState('');
+    const [StackOverUN, setSoTxt] = useState('');
+    const [MediumUN, setMediumTxt] = useState('');
 
     const navigate = useNavigate();
     const prevPage = () => navigate('/contactDetMain');
@@ -46,11 +46,11 @@ const ContactDetails_2 = () => {
         
         // Check if text fields have values before sending to the database
         const dataToUpdate = {};
-        if (gitTxt.trim() !== '') dataToUpdate.gitTxt = gitTxt;
-        if (linkedInTxt.trim() !== '') dataToUpdate.linkedInTxt = linkedInTxt;
-        if (twitterTxt.trim() !== '') dataToUpdate.twitterTxt = twitterTxt;
-        if (soTxt.trim() !== '') dataToUpdate.soTxt = soTxt;
-        if (mediumTxt.trim() !== '') dataToUpdate.mediumTxt = mediumTxt;
+        if (GitHubUN.trim() !== '') dataToUpdate.GitHubUN = GitHubUN;
+        if (LinkedInUN.trim() !== '') dataToUpdate.LinkedInUN = LinkedInUN;
+        if (TwitterUN.trim() !== '') dataToUpdate.TwitterUN = TwitterUN;
+        if (StackOverUN.trim() !== '') dataToUpdate.StackOverUN = StackOverUN;
+        if (MediumUN.trim() !== '') dataToUpdate.MediumUN = MediumUN;
     
         // Update Firestore document with filtered data
         try {
@@ -87,11 +87,11 @@ const ContactDetails_2 = () => {
                 if (existingDoc) {
                     const userData = existingDoc.data();
                     // Set the state variables based on the fetched data
-                    setGitTxt(userData.gitTxt || '');
-                    setLinkedInTxt(userData.linkedInTxt || '');
-                    setTwitterTxt(userData.twitterTxt || '');
-                    setSoTxt(userData.soTxt || '');
-                    setMediumTxt(userData.mediumTxt || '');
+                    setGitTxt(userData.GitHubUN || '');
+                    setLinkedInTxt(userData.LinkedInUN || '');
+                    setTwitterTxt(userData.TwitterUN || '');
+                    setSoTxt(userData.StackOverUN || '');
+                    setMediumTxt(userData.MediumUN || '');
                 }
             } catch (error) {
                 console.error('Error fetching user data: ', error);
@@ -104,12 +104,12 @@ const ContactDetails_2 = () => {
 
     const btn = (event) => {
         event.preventDefault();
-        if (gitTxt === '') console.log('git null');
-        if (linkedInTxt === '') console.log('linked null');
-        if (twitterTxt === '') console.log('twitter null');
-        if (soTxt === '') console.log('so null');
-        if (mediumTxt === '') console.log('medium null');
-        console.log(`${gitTxt} ${linkedInTxt} ${twitterTxt} ${soTxt} ${mediumTxt}`);
+        if (GitHubUN === '') console.log('git null');
+        if (LinkedInUN === '') console.log('linked null');
+        if (TwitterUN === '') console.log('twitter null');
+        if (StackOverUN === '') console.log('so null');
+        if (MediumUN === '') console.log('medium null');
+        console.log(`${GitHubUN} ${LinkedInUN} ${TwitterUN} ${StackOverUN} ${MediumUN}`);
     }
 
     return ( 
@@ -133,7 +133,7 @@ const ContactDetails_2 = () => {
                                                     <Avatar sx={{ width: 40, height: 40 }} alt="GitHub" src={github} />
                                                 </Grid>
                                                 <Grid item xs={11}>
-                                                    <TextField value={gitTxt} onChange={(e) => setGitTxt(e.target.value)} variant="outlined" fullWidth InputProps={{ style: { borderRadius: '25px', backgroundColor: 'white' }}} placeholder='GitHub Username'/>
+                                                    <TextField value={GitHubUN} onChange={(e) => setGitTxt(e.target.value)} variant="outlined" fullWidth InputProps={{ style: { borderRadius: '25px', backgroundColor: 'white' }}} placeholder='GitHub Username'/>
                                                 </Grid>
                                             </Grid>
 
@@ -142,7 +142,7 @@ const ContactDetails_2 = () => {
                                                     <Avatar sx={{ width: 40, height: 40 }} alt="LinkedIn" src={linkedIn} />
                                                 </Grid>
                                                 <Grid item xs={11}>
-                                                    <TextField value={linkedInTxt} onChange={(e) => setLinkedInTxt(e.target.value)} variant="outlined" fullWidth InputProps={{ style: { borderRadius: '25px', backgroundColor: 'white' }}} placeholder='LinkedIn Username'/>
+                                                    <TextField value={LinkedInUN} onChange={(e) => setLinkedInTxt(e.target.value)} variant="outlined" fullWidth InputProps={{ style: { borderRadius: '25px', backgroundColor: 'white' }}} placeholder='LinkedIn Username'/>
                                                 </Grid>
                                             </Grid>
 
@@ -151,7 +151,7 @@ const ContactDetails_2 = () => {
                                                     <Avatar sx={{ width: 40, height: 40 }} alt="Twitter" src={twitter} />
                                                 </Grid>
                                                 <Grid item xs={11}>
-                                                    <TextField value={twitterTxt} onChange={(e) => setTwitterTxt(e.target.value)} variant="outlined" fullWidth InputProps={{ style: { borderRadius: '25px', backgroundColor: 'white' }}} placeholder='Twitter Username'/>
+                                                    <TextField value={TwitterUN} onChange={(e) => setTwitterTxt(e.target.value)} variant="outlined" fullWidth InputProps={{ style: { borderRadius: '25px', backgroundColor: 'white' }}} placeholder='Twitter Username'/>
                                                 </Grid>
                                             </Grid>
 
@@ -160,7 +160,7 @@ const ContactDetails_2 = () => {
                                                     <Avatar sx={{ width: 40, height: 40 }} alt="StackOverflow" src={stackoverflow} />
                                                 </Grid>
                                                 <Grid item xs={11}>
-                                                    <TextField value={soTxt} onChange={(e) => setSoTxt(e.target.value)} variant="outlined" fullWidth InputProps={{ style: { borderRadius: '25px', backgroundColor: 'white' }}} placeholder='StackOverflow Username'/>
+                                                    <TextField value={StackOverUN} onChange={(e) => setSoTxt(e.target.value)} variant="outlined" fullWidth InputProps={{ style: { borderRadius: '25px', backgroundColor: 'white' }}} placeholder='StackOverflow Username'/>
                                                 </Grid>
                                             </Grid>
 
@@ -169,7 +169,7 @@ const ContactDetails_2 = () => {
                                                     <Avatar sx={{ width: 40, height: 40 }} alt="Medium" src={medium} />
                                                 </Grid>
                                                 <Grid item xs={11}>
-                                                    <TextField value={mediumTxt} onChange={(e) => setMediumTxt(e.target.value)} variant="outlined" fullWidth InputProps={{ style: { borderRadius: '25px', backgroundColor: 'white' }}} placeholder='Medium Username'/>
+                                                    <TextField value={MediumUN} onChange={(e) => setMediumTxt(e.target.value)} variant="outlined" fullWidth InputProps={{ style: { borderRadius: '25px', backgroundColor: 'white' }}} placeholder='Medium Username'/>
                                                 </Grid>
                                             </Grid>
                                         </Grid>
