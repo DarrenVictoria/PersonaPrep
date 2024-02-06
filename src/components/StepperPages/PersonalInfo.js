@@ -73,11 +73,11 @@ const PersonalInfo = () => {
                                     <div className="personalInfo-leftCol">
                                         <Grid container>
                                             <Grid item xs={12} mb={3}>
-                                                <Typography><span style={{color: 'red'}}>*</span>Phone</Typography>
+                                                <Typography><span style={{color: 'red'}}>*</span> Full Name</Typography>
                                                 <TextField type="text" variant="outlined" value={phone} onChange={phoneChange} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} />
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
-                                                <Typography mb={1}><span style={{color: 'red'}}>*</span>Profile Picture</Typography>
+                                                <Typography mb={1}><span style={{color: 'red'}}>*</span> Profile Picture</Typography>
                                                 <FileUpload />
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
