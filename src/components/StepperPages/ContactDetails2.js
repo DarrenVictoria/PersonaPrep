@@ -129,46 +129,46 @@ const ContactDetails_2 = () => {
                                             </Grid>
 
                                             <Grid container spacing={2} alignItems="center" mb={2}>
-                                                <Grid item xs={1}>
+                                                <Grid item xs={2}>
                                                     <Avatar sx={{ width: 40, height: 40 }} alt="GitHub" src={github} />
                                                 </Grid>
-                                                <Grid item xs={11}>
+                                                <Grid item xs={10} ml={-1}>
                                                     <TextField value={GitHubUN} onChange={(e) => setGitTxt(e.target.value)} variant="outlined" fullWidth InputProps={{ style: { borderRadius: '25px', backgroundColor: 'white' }}} placeholder='GitHub Username'/>
                                                 </Grid>
                                             </Grid>
 
                                             <Grid container spacing={2} alignItems="center" mb={2}>
-                                                <Grid item xs={1}>
+                                                <Grid item xs={2}>
                                                     <Avatar sx={{ width: 40, height: 40 }} alt="LinkedIn" src={linkedIn} />
                                                 </Grid>
-                                                <Grid item xs={11}>
+                                                <Grid item xs={10} ml={-1}>
                                                     <TextField value={LinkedInUN} onChange={(e) => setLinkedInTxt(e.target.value)} variant="outlined" fullWidth InputProps={{ style: { borderRadius: '25px', backgroundColor: 'white' }}} placeholder='LinkedIn Username'/>
                                                 </Grid>
                                             </Grid>
 
                                             <Grid container spacing={2} alignItems="center" mb={2}>
-                                                <Grid item xs={1}>
+                                                <Grid item xs={2}>
                                                     <Avatar sx={{ width: 40, height: 40 }} alt="Twitter" src={twitter} />
                                                 </Grid>
-                                                <Grid item xs={11}>
+                                                <Grid item xs={10} ml={-1}>
                                                     <TextField value={TwitterUN} onChange={(e) => setTwitterTxt(e.target.value)} variant="outlined" fullWidth InputProps={{ style: { borderRadius: '25px', backgroundColor: 'white' }}} placeholder='Twitter Username'/>
                                                 </Grid>
                                             </Grid>
 
                                             <Grid container spacing={2} alignItems="center" mb={2}>
-                                                <Grid item xs={1}>
+                                                <Grid item xs={2}>
                                                     <Avatar sx={{ width: 40, height: 40 }} alt="StackOverflow" src={stackoverflow} />
                                                 </Grid>
-                                                <Grid item xs={11}>
+                                                <Grid item xs={10} ml={-1}>
                                                     <TextField value={StackOverUN} onChange={(e) => setSoTxt(e.target.value)} variant="outlined" fullWidth InputProps={{ style: { borderRadius: '25px', backgroundColor: 'white' }}} placeholder='StackOverflow Username'/>
                                                 </Grid>
                                             </Grid>
 
                                             <Grid container spacing={2} alignItems="center" mb={2}>
-                                                <Grid item xs={1}>
+                                                <Grid item xs={2}>
                                                     <Avatar sx={{ width: 40, height: 40 }} alt="Medium" src={medium} />
                                                 </Grid>
-                                                <Grid item xs={11}>
+                                                <Grid item xs={10} ml={-1}>
                                                     <TextField value={MediumUN} onChange={(e) => setMediumTxt(e.target.value)} variant="outlined" fullWidth InputProps={{ style: { borderRadius: '25px', backgroundColor: 'white' }}} placeholder='Medium Username'/>
                                                 </Grid>
                                             </Grid>
