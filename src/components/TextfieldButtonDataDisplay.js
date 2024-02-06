@@ -27,10 +27,11 @@ const Label = styled(Typography)(
 );
 
 const InputWrapper = styled("div")(
-  ({ theme, maxWidth, height }) => `
+  ({ theme, maxWidth, minHeight }) => `
   max-width: ${maxWidth}px;
   width: 100%;
-  height: ${height}px;
+  height: 100%;
+  min-height: ${minHeight}px;
   border: 1px solid ${theme.palette.mode === "dark" ? "#434343" : "#d9d9d9"};
   background-color: ${theme.palette.mode === "dark" ? "#141414" : "#fff"};
   border-radius: 25px;
@@ -230,7 +231,7 @@ const Listbox = styled("ul")(
 `
 );
 //Code for the CustomizedHook already width set to 100% in this.
-function CustomizedHook({ maxWidth, height = 90, data = [], label = "", onChange=function(ev, val, reason, details){return false} }) {
+function CustomizedHook({ maxWidth, minHeight = 90, data = [], label = "", onChange=function(ev, val, reason, details){return false} }) {
   const {
     getRootProps,
     getInputLabelProps,
@@ -254,7 +255,7 @@ function CustomizedHook({ maxWidth, height = 90, data = [], label = "", onChange
     <Root>
       <div {...getRootProps()}>
         <Label {...getInputLabelProps()}>{label}</Label>
-        <InputWrapper ref={setAnchorEl} className={focused ? "focused" : ""} maxWidth={maxWidth} height={height}>
+        <InputWrapper ref={setAnchorEl} className={focused ? "focused" : ""} maxWidth={maxWidth} minHeight={minHeight}>
           {value.map((option, index) => (
             <StyledTag onClick={onChange} label={option.data} {...getTagProps({ index })} />
           ))}
@@ -322,7 +323,7 @@ function CustomizedHook({ maxWidth, height = 90, data = [], label = "", onChange
 
 CustomizedHook.propTypes = {
   maxWidth: PropTypes.number,
-  height: PropTypes.number,
+  minHeight: PropTypes.number,
   data: PropTypes.arrayOf(PropTypes.object),
   label: PropTypes.string,
 };
