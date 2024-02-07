@@ -21,85 +21,95 @@ import medium from '../../assets/images/iconmedium.svg';
 import chand from '../../assets/images/iconchand.svg';
 import clinkedin from '../../assets/images/iconclinkedin.svg';
 import cgithub from '../../assets/images/iconcgithub.svg';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from "@mui/material/Button";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { back } from '../BackButton.js';
 import { next } from '../NextButton.js';
 import { useNavigate } from 'react-router-dom';
+import { collection, addDoc, getFirestore, query, where, getDocs, doc, updateDoc } from 'firebase/firestore';
+import { useAuth } from '../../hooks/useAuth.js'; 
 
 const ContactDetails_2 = () => {
-    const [gitChecked, setGitChecked] = useState(false);
-    const [linkedChecked, setlinkedChecked] = useState(false);
-    const [twitterChecked, setTwitterChecked] = useState(false);
-    const [soChecked, setSoChecked] = useState(false);
-    const [mediumChecked, setMediumChecked] = useState(false);
-
-    const [gitTxt, setGitTxt] = useState('');
-    const [linkedInTxt, setLinkedInTxt] = useState('');
-    const [twitterTxt, setTwitterTxt] = useState('');
-    const [soTxt, setSoTxt] = useState('');
-    const [mediumTxt, setMediumTxt] = useState('');
+    const { currentUser } = useAuth();
+    const [GitHubUN, setGitTxt] = useState('');
+    const [LinkedInUN, setLinkedInTxt] = useState('');
+    const [TwitterUN, setTwitterTxt] = useState('');
+    const [StackOverUN, setSoTxt] = useState('');
+    const [MediumUN, setMediumTxt] = useState('');
 
     const navigate = useNavigate();
     const prevPage = () => navigate('/contactDetMain');
-    const handleSubmit = (e) => {
+    
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        navigate('/school')
-        // validate();
-
-        // Check if validation passed
-        // if (validation) {
-        //     // Call the function to add data to Firestore
-        //     addDataToFirestore();
-        // } else {
-        //     console.log('Validation failed');
-        // }
+        
+        // Check if text fields have values before sending to the database
+        const dataToUpdate = {};
+        if (GitHubUN.trim() !== '') dataToUpdate.GitHubUN = GitHubUN;
+        if (LinkedInUN.trim() !== '') dataToUpdate.LinkedInUN = LinkedInUN;
+        if (TwitterUN.trim() !== '') dataToUpdate.TwitterUN = TwitterUN;
+        if (StackOverUN.trim() !== '') dataToUpdate.StackOverUN = StackOverUN;
+        if (MediumUN.trim() !== '') dataToUpdate.MediumUN = MediumUN;
+    
+        // Update Firestore document with filtered data
+        try {
+            const db = getFirestore();
+            const studentDetailsCollection = collection(db, 'studentdetails');
+            const querySnapshot = await getDocs(query(studentDetailsCollection, where('email', '==', currentUser.email)));
+            const existingDoc = querySnapshot.docs[0];
+    
+            if (existingDoc) {
+                const existingDocRef = doc(db, 'studentdetails', existingDoc.id);
+                await updateDoc(existingDocRef, dataToUpdate);
+    
+                console.log('Document updated with ID: ', existingDoc.id);
+                navigate('/school');
+            } else {
+                console.error('Document does not exist for the current user.');
+            }
+        } catch (error) {
+            console.error('Error updating document: ', error);
+        }
     };
 
-    const CheckBoxComp = ({image, name, value, setText, checked, setCheck}) => {
-        const handleChange = (event) => {
-            if (!checked) setText('');
-            else setText(event.target.value);
-        }
-        
-        const handleCheck = (event) => {
-            setCheck(event.target.checked);
-        }
-    
-        useEffect(() => {
-            if (!checked) setText('');
-        }, [checked]);
-    
-        return (
-            <Grid container mb={2} alignItems='center'>
-                <Grid item xs={1} md={1}>
-                    <img src={image} alt={`${name} icon`} />
-                </Grid>
-                <Grid item xs={5} md={4} pl={1} pt={1}>
-                    <Typography mb={1}>{name}</Typography>
-                </Grid>
-                <Grid item xs={1} md={1}>
-                    <FormControlLabel control={<Checkbox  checked={checked} onChange={handleCheck} />} />
-                </Grid>
-                <Grid item xs={5} md={6}>
-                    <TextField type="text" value={value} onChange={handleChange} disabled={!checked} variant="outlined" fullWidth InputProps={{ style: { borderRadius: '25px', backgroundColor: 'white' }}} placeholder='@profile'/>
-                </Grid>
-            </Grid>
-        )
-    }
+    useEffect(() => {
+        // Fetch user data when the component mounts
+        const fetchUserData = async () => {
+            try {
+                const db = getFirestore();
+                const studentDetailsCollection = collection(db, 'studentdetails');
+
+                // Check if a document with the user's email already exists
+                const querySnapshot = await getDocs(query(studentDetailsCollection, where('email', '==', currentUser.email)));
+                const existingDoc = querySnapshot.docs[0];
+
+                if (existingDoc) {
+                    const userData = existingDoc.data();
+                    // Set the state variables based on the fetched data
+                    setGitTxt(userData.GitHubUN || '');
+                    setLinkedInTxt(userData.LinkedInUN || '');
+                    setTwitterTxt(userData.TwitterUN || '');
+                    setSoTxt(userData.StackOverUN || '');
+                    setMediumTxt(userData.MediumUN || '');
+                }
+            } catch (error) {
+                console.error('Error fetching user data: ', error);
+            }
+        };
+
+        // Call the function to fetch user data
+        fetchUserData();
+    }, [currentUser.email]);
 
     const btn = (event) => {
         event.preventDefault();
-        if (gitTxt === '') console.log('git null');
-        if (linkedInTxt === '') console.log('linked null');
-        if (twitterTxt === '') console.log('twitter null');
-        if (soTxt === '') console.log('so null');
-        if (mediumTxt === '') console.log('medium null');
-        console.log(`${gitTxt} ${linkedInTxt} ${twitterTxt} ${soTxt} ${mediumTxt}`);
+        if (GitHubUN === '') console.log('git null');
+        if (LinkedInUN === '') console.log('linked null');
+        if (TwitterUN === '') console.log('twitter null');
+        if (StackOverUN === '') console.log('so null');
+        if (MediumUN === '') console.log('medium null');
+        console.log(`${GitHubUN} ${LinkedInUN} ${TwitterUN} ${StackOverUN} ${MediumUN}`);
     }
 
     return ( 
@@ -118,11 +128,50 @@ const ContactDetails_2 = () => {
                                                 <Typography mb={1}>Indicate the desired communication method</Typography>
                                             </Grid>
 
-                                            <CheckBoxComp image={github} name='GitHub' value={gitTxt} setText={setGitTxt} checked={gitChecked} setCheck={setGitChecked}/>
-                                            <CheckBoxComp image={linkedIn} name='LinkedIn' value={linkedInTxt} setText={setLinkedInTxt} checked={linkedChecked} setCheck={setlinkedChecked}/>
-                                            <CheckBoxComp image={twitter} name='Twitter' value={twitterTxt} setText={setTwitterTxt} checked={twitterChecked} setCheck={setTwitterChecked}/>
-                                            <CheckBoxComp image={stackoverflow} name='StackOverflow' value={soTxt} setText={setSoTxt} checked={soChecked} setCheck={setSoChecked}/>
-                                            <CheckBoxComp image={medium} name='Medium' value={mediumTxt} setText={setMediumTxt} checked={mediumChecked} setCheck={setMediumChecked}/>
+                                            <Grid container spacing={2} alignItems="center" mb={2}>
+                                                <Grid item xs={2}>
+                                                    <Avatar sx={{ width: 40, height: 40 }} alt="GitHub" src={github} />
+                                                </Grid>
+                                                <Grid item xs={10} ml={-1}>
+                                                    <TextField value={GitHubUN} onChange={(e) => setGitTxt(e.target.value)} variant="outlined" fullWidth InputProps={{ style: { borderRadius: '25px', backgroundColor: 'white' }}} placeholder='GitHub Username'/>
+                                                </Grid>
+                                            </Grid>
+
+                                            <Grid container spacing={2} alignItems="center" mb={2}>
+                                                <Grid item xs={2}>
+                                                    <Avatar sx={{ width: 40, height: 40 }} alt="LinkedIn" src={linkedIn} />
+                                                </Grid>
+                                                <Grid item xs={10} ml={-1}>
+                                                    <TextField value={LinkedInUN} onChange={(e) => setLinkedInTxt(e.target.value)} variant="outlined" fullWidth InputProps={{ style: { borderRadius: '25px', backgroundColor: 'white' }}} placeholder='LinkedIn Username'/>
+                                                </Grid>
+                                            </Grid>
+
+                                            <Grid container spacing={2} alignItems="center" mb={2}>
+                                                <Grid item xs={2}>
+                                                    <Avatar sx={{ width: 40, height: 40 }} alt="Twitter" src={twitter} />
+                                                </Grid>
+                                                <Grid item xs={10} ml={-1}>
+                                                    <TextField value={TwitterUN} onChange={(e) => setTwitterTxt(e.target.value)} variant="outlined" fullWidth InputProps={{ style: { borderRadius: '25px', backgroundColor: 'white' }}} placeholder='Twitter Username'/>
+                                                </Grid>
+                                            </Grid>
+
+                                            <Grid container spacing={2} alignItems="center" mb={2}>
+                                                <Grid item xs={2}>
+                                                    <Avatar sx={{ width: 40, height: 40 }} alt="StackOverflow" src={stackoverflow} />
+                                                </Grid>
+                                                <Grid item xs={10} ml={-1}>
+                                                    <TextField value={StackOverUN} onChange={(e) => setSoTxt(e.target.value)} variant="outlined" fullWidth InputProps={{ style: { borderRadius: '25px', backgroundColor: 'white' }}} placeholder='StackOverflow Username'/>
+                                                </Grid>
+                                            </Grid>
+
+                                            <Grid container spacing={2} alignItems="center" mb={2}>
+                                                <Grid item xs={2}>
+                                                    <Avatar sx={{ width: 40, height: 40 }} alt="Medium" src={medium} />
+                                                </Grid>
+                                                <Grid item xs={10} ml={-1}>
+                                                    <TextField value={MediumUN} onChange={(e) => setMediumTxt(e.target.value)} variant="outlined" fullWidth InputProps={{ style: { borderRadius: '25px', backgroundColor: 'white' }}} placeholder='Medium Username'/>
+                                                </Grid>
+                                            </Grid>
                                         </Grid>
                                     </div>
 
@@ -173,20 +222,20 @@ const ContactDetails_2 = () => {
                                     </div>
                                 </div>
                             </div>
-                        <Grid container spacing={2} style={{position: 'absolute', bottom: 80}}>            
-                            <Grid xs={6} paddingLeft={'10px'}>
-                                <Button startIcon={<ArrowBackIcon />} style={back} onClick={prevPage}>Go Back</Button>
+                            <Grid container spacing={2} style={{position: 'absolute', bottom: 80}}>            
+                                <Grid xs={6} paddingLeft={'10px'}>
+                                    <Button startIcon={<ArrowBackIcon />} style={back} onClick={prevPage}>Go Back</Button>
+                                </Grid>
+                                    
+                                <Grid xs={6}>
+                                    <Button type='submit' style={next}>Next Step</Button>                                    
+                                </Grid>
                             </Grid>
-                                
-                            <Grid xs={6}>
-                                <Button type='submit' style={next}>Next Step</Button>                                    
-                            </Grid>
-                        </Grid>
-                    </form>
+                        </form>
+                    </Grid>
                 </Grid>
-            </Grid>
+            </div>
         </div>
-    </div>
     );
 }
 

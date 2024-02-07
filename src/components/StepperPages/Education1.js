@@ -24,12 +24,15 @@ import { useState, useEffect } from 'react';
 import { collection, addDoc, getFirestore, query, where, getDocs, doc, updateDoc } from 'firebase/firestore';
 import { useAuth } from '../../hooks/useAuth.js';
 
+
 const School1 = () => {
+
     const option = ["Year"];
             for (let year = 2024; year >= 1990; year--) {
             option.push(String(year));
             }
     const { currentUser } = useAuth();
+
     const [School1StartMonth, setSchool1StartMonth] = useState('');
     const [School1StartYear, setSchool1StartYear] = useState('');
     const [School1EndMonth, setSchool1EndMonth] = useState('');
@@ -38,6 +41,7 @@ const School1 = () => {
     const [School1City, setSchool1City] = useState('');
     const [School1Country, setSchool1Country] = useState('');
     const [School1Experience, setSchool1Experience] = useState('');
+
 
 
     const School1NameChange = (e) => setSchool1Name(e.target.value);
@@ -58,6 +62,7 @@ const School1 = () => {
             if (existingDoc) {
                 const userData = existingDoc.data();
                 // Populate the form fields with fetched data
+
                 setSchool1Name(userData.School1Name || '');
                 setSchool1City(userData.School1City || '');
                 setSchool1Country(userData.School1Country || '');
@@ -66,6 +71,7 @@ const School1 = () => {
                 setSchool1StartYear(userData.School1StartYear || '');
                 setSchool1EndMonth(userData.School1EndMonth || '');
                 setSchool1EndYear(userData.School1EndYear || '');
+
             }
         } catch (error) {
             console.error('Error fetching user data: ', error);
@@ -82,6 +88,7 @@ const School1 = () => {
         
         // Prepare the data to append to Firestore document
         const dataToUpdate = {
+
             School1Name,
             School1City,
             School1Country,
@@ -90,6 +97,7 @@ const School1 = () => {
             School1StartYear,
             School1EndMonth,
             School1EndYear,
+
         };
 
         try {
@@ -102,7 +110,9 @@ const School1 = () => {
                 const existingDocRef = doc(db, 'studentdetails', existingDoc.id);
                 await updateDoc(existingDocRef, dataToUpdate);
                 console.log('Document updated with ID: ', existingDoc.id);
+
                 navigate('/secondSchool');
+
             } else {
                 console.error('Document does not exist for the current user.');
             }
@@ -110,6 +120,7 @@ const School1 = () => {
             console.error('Error updating document: ', error);
         }
     };
+  
 
     return(
         <div className="formtemp-page">
@@ -151,17 +162,21 @@ const School1 = () => {
                                             <Grid item xs={6} pr={1}>
                                                 <EditableChoose
                                                     options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
+
                                                     onSelect={setSchool1StartMonth}
                                                     disabledOptions={["Month"]}
                                                     defaultValue={School1StartMonth}
+
                                                 />
                                             </Grid>
                                             <Grid item xs={6} mb={3} pl={1}>
                                                 <EditableChoose
                                                     options={option}
+
                                                     onSelect={setSchool1StartYear}
                                                     disabledOptions={["Year"]}
                                                     defaultValue={School1StartYear}
+
                                                 />
                                             </Grid>
                                             <Grid item xs={12} mb={-2}>
@@ -170,17 +185,21 @@ const School1 = () => {
                                             <Grid item xs={6} pr={1}>
                                                 <EditableChoose
                                                     options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
+
                                                     onSelect={setSchool1EndMonth}
                                                     disabledOptions={["Month"]}
                                                     defaultValue={School1EndMonth}
+
                                                 />
                                             </Grid>
                                             <Grid item xs={6} mb={3} pl={1}>
                                                 <EditableChoose
                                                     options={option}
+
                                                     onSelect={setSchool1EndYear}
                                                     disabledOptions={["Year"]}
                                                     defaultValue={School1EndYear}
+
                                                 />
                                             </Grid>
                                             

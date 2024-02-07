@@ -245,11 +245,12 @@ function CustomizedHook({ maxWidth, minHeight = 90, data = [], label = "", onCha
     setAnchorEl,
   } = useAutocomplete({
     id: "customized-hook-demo",
-    defaultValue: [data[1]],
+    defaultValue: [],
     multiple: true,
     options: data,
     getOptionLabel: (option) => option.data,
   });
+  
 
   return (
     <Root>
