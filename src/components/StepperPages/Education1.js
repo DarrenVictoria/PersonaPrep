@@ -25,6 +25,10 @@ import { collection, addDoc, getFirestore, query, where, getDocs, doc, updateDoc
 import { useAuth } from '../../hooks/useAuth.js';
 
 const Education_1 = () => {
+    const option = ["Year"];
+            for (let year = 2024; year >= 1990; year--) {
+            option.push(String(year));
+            }
     const { currentUser } = useAuth();
     const [startMonth, setStartMonth] = useState('');
     const [startYear, setStartYear] = useState('');
@@ -155,7 +159,7 @@ const Education_1 = () => {
                                             </Grid>
                                             <Grid item xs={6} mb={3} pl={1}>
                                                 <EditableChoose
-                                                    options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
+                                                    options={option}
                                                     onSelect={setStartYear}
                                                     disabledOptions={["Year"]}
                                                     defaultValue={startYear}
@@ -174,7 +178,7 @@ const Education_1 = () => {
                                             </Grid>
                                             <Grid item xs={6} mb={3} pl={1}>
                                                 <EditableChoose
-                                                    options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
+                                                    options={option}
                                                     onSelect={setEndYear}
                                                     disabledOptions={["Year"]}
                                                     defaultValue={endYear}
