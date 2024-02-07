@@ -31,17 +31,18 @@ import { back } from '../BackButton.js';
 import { next } from '../NextButton.js';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth.js'; 
+import { useForm } from "react-hook-form";
 
 const predefinedButtonName = ['github','figma','behance','linkedin','facebook','whatsapp','instragram','twitter'];
 const ContactDetails_1 = () => {
   const { currentUser } = useAuth();
-  const [phone, setPhone] = useState('');
-  const [pemail, setEmail] = useState('');
-  const [district, setDistrict] = useState('');
-  const [city, setCity] = useState('');
-  const [postal, setPostal] = useState('');
-  const [country, setCountry] = useState('');
-  const [portfolioSite, setPortfolioSite] = useState('');
+  // const [phone, setPhone] = useState('');
+  // const [pemail, setEmail] = useState('');
+  // const [district, setDistrict] = useState('');
+  // const [city, setCity] = useState('');
+  // const [postal, setPostal] = useState('');
+  // const [country, setCountry] = useState('');
+  // const [portfolioSite, setPortfolioSite] = useState('');
 
   //below usestate is to keep the user entered url
   const [inputUrl, setInputUrl] = useState(''); 
@@ -64,6 +65,23 @@ const ContactDetails_1 = () => {
     setShownButtons(prevButtons => prevButtons.filter(button => button !== buttonName));
   };
 
+  //react hook form stuff
+  const { register, handleSubmit, watch, formState: { errors }, getValues, setValue } = useForm();
+
+  const phone = watch('phone');
+  const pemail = watch('pemail');
+  const district = watch('district');
+  const city = watch('city');
+  const postal = watch('postal');
+  const country = watch('country');
+  const portfolioSite = watch('portfolioSite');
+
+  // const onSubmit = (e) => {
+  //     // e.preventDefault();
+  //     // Call the function to add data to Firestore
+  //     addDataToFirestore();
+  // };
+
   useEffect(() => {
     // Fetch user data when the component mounts
     const fetchUserData = async () => {
@@ -77,15 +95,14 @@ const ContactDetails_1 = () => {
 
             if (existingDoc) {
                 const userData = existingDoc.data();
-                // Set the state variables based on the fetched data
-                setPhone(userData.phone || '');
-                setEmail(userData.pemail || '');
-                setDistrict(userData.district || '');
-                setCity(userData.city || '');
-                setPostal(userData.postal || '');
-                setCountry(userData.country || '');
-                setPortfolioSite(userData.portfolioSite || '');
-                // ... (Add more state variables as needed)
+                console.log(userData)
+                setValue('phone', userData.phone || ''); 
+                setValue('pemail', userData.pemail || ''); 
+                setValue('district', userData.district || ''); 
+                setValue('city', userData.city || ''); 
+                setValue('postal', userData.postal || ''); 
+                setValue('country', userData.country || ''); 
+                setValue('portfolioSite', userData.portfolioSite || '');
             }
         } catch (error) {
             console.error('Error fetching user data: ', error);
@@ -94,12 +111,12 @@ const ContactDetails_1 = () => {
 
     // Call the function to fetch user data
     fetchUserData();
-}, [currentUser.email]);
+}, [currentUser.email, setValue]);
 
 const navigate = useNavigate();
 const prevPage = () => navigate('/personalInfo');
 
-const addDataToFirestore = async () => {
+const onSubmit = async (formData) => {
     try {
         const db = getFirestore();
         const studentDetailsCollection = collection(db, 'studentdetails');
@@ -112,13 +129,13 @@ const addDataToFirestore = async () => {
             // Update the existing document
             const existingDocRef = doc(db, 'studentdetails', existingDoc.id);
             await updateDoc(existingDocRef, {
-                phone,
-                pemail,
-                district,
-                city,
-                postal,
-                country,
-                portfolioSite,
+                phone: formData.phone,
+                pemail: formData.pemail,
+                district: formData.district,
+                city: formData.city,
+                postal: formData.postal,
+                country: formData.country,
+                portfolioSite: formData.portfolioSite,
                 // ... (Add more fields as needed)
             });
 
@@ -126,13 +143,13 @@ const addDataToFirestore = async () => {
         } else {
             // Create a new document
             const newDocRef = await addDoc(studentDetailsCollection, {
-                phone,
-                pemail,
-                district,
-                city,
-                postal,
-                country,
-                portfolioSite,
+                phone: formData.phone,
+                pemail: formData.pemail,
+                district: formData.district,
+                city: formData.city,
+                postal: formData.postal,
+                country: formData.country,
+                portfolioSite: formData.portfolioSite,
                 // ... (Add more fields as needed)
             });
 
@@ -146,11 +163,7 @@ const addDataToFirestore = async () => {
     }
 };
 
-const handleSubmit = (e) => {
-    e.preventDefault();
-    // Call the function to add data to Firestore
-    addDataToFirestore();
-};
+const btn = (event) => {event.preventDefault(); console.log(phone)};
 
     return(
       <div className="formtemp-page">
@@ -158,7 +171,7 @@ const handleSubmit = (e) => {
             <div className="formtemp-bodyform">
                 <Grid container spacing={2} style={{ height: '100%' }}>
                     <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
-                        <form onSubmit={handleSubmit} style={{ height: '100%', position: 'relative' }}>
+                        <form onSubmit={handleSubmit(onSubmit)} style={{ height: '100%', position: 'relative' }}>
                             <div style={{ margin: '80px 25px 125px' }}>
                                   <div className='Contactdetails1-Maindiv'>
                                   
@@ -168,48 +181,97 @@ const handleSubmit = (e) => {
                                           <Grid container spacing={2} >
                                             <Grid item xs={6}>
                                               
-                                            <Typography ><span style={{color: 'red'}}>*</span> Phone</Typography>
-                                                <TextField type="text" variant="outlined" value={phone} onChange={(event) => setPhone(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}} />
-                                              
+                                              <Typography ><span style={{color: 'red'}}>*</span> Phone</Typography>
+                                              {/* <TextField type="text" variant="outlined" value={phone} onChange={(event) => setPhone(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}} /> */}
+                                              <TextField type="text" variant="outlined" 
+                                                // value={jobTitle} onChange={(event) => setJobTitle(event.target.value)} 
+                                                value={phone}
+                                                fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                                placeholder='Full Stack Developer'
+                                                {...register("phone", { required: true, maxLength: 10, pattern: /^[0-9]+$/  })}
+                                                />
+                                                {errors.phone && errors.phone.type === "required" ? "This field is required" : errors.phone && "Please enter only numbers"}
                                             </Grid>
                                             <Grid item xs={6}>
                                               
                                             <Typography ><span style={{color: 'red'}}>*</span> Email</Typography>
-                                                <TextField type="email" variant="outlined" value={pemail} onChange={(event) => setEmail(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
-                                              
+                                                {/* <TextField type="email" variant="outlined" value={pemail} onChange={(event) => setEmail(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/> */}
+                                                <TextField type="email" variant="outlined" 
+                                                // value={jobTitle} onChange={(event) => setJobTitle(event.target.value)} 
+                                                value={pemail}
+                                                fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                                // placeholder='Full Stack Developer'
+                                                {...register("pemail", { required: true })}
+                                                />
+                                                {errors.pemail && "This field is required"}
                                             </Grid>
                                             <Grid item xs={6}>
                                               
                                             <Typography ><span style={{color: 'red'}}>*</span> District</Typography>
-                                                <TextField type="text" variant="outlined" value={district} onChange={(event) => setDistrict(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
-                                              
+                                                {/* <TextField type="text" variant="outlined" value={district} onChange={(event) => setDistrict(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/> */}
+                                                <TextField type="text" variant="outlined" 
+                                                // value={jobTitle} onChange={(event) => setJobTitle(event.target.value)} 
+                                                value={district}
+                                                fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                                // placeholder='Full Stack Developer'
+                                                {...register("district", { required: true, maxLength: 10, pattern: /^[a-zA-Z\s]+$/})}
+                                                />
+                                                {errors.district && errors.district.type === "required" ? "This field is required" : errors.district && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={6}>
                                               
                                             <Typography ><span style={{color: 'red'}}>*</span> City</Typography>
-                                                <TextField type="text" variant="outlined" value={city} onChange={(event) => setCity(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
-                                              
+                                                {/* <TextField type="text" variant="outlined" value={city} onChange={(event) => setCity(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/> */}
+                                                <TextField type="text" variant="outlined" 
+                                                // value={jobTitle} onChange={(event) => setJobTitle(event.target.value)} 
+                                                value={city}
+                                                fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                                // placeholder='Full Stack Developer'
+                                                {...register("city", { required: true, maxLength: 10, pattern: /^[a-zA-Z\s]+$/  })}
+                                                />
+                                                {errors.city && errors.city.type === "required" ? "This field is required" : errors.city && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={6}>
                                               
                                             <Typography ><span style={{color: 'red'}}>*</span> Postalcode</Typography>
-                                                <TextField type="text" variant="outlined" value={postal} onChange={(event) => setPostal(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
-                                              
+                                                {/* <TextField type="text" variant="outlined" value={postal} onChange={(event) => setPostal(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/> */}
+                                                <TextField type="text" variant="outlined" 
+                                                // value={jobTitle} onChange={(event) => setJobTitle(event.target.value)} 
+                                                value={postal}
+                                                fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                                // placeholder='Full Stack Developer'
+                                                {...register("postal", { required: true, maxLength: 10, pattern: /^[0-9]+$/  })}
+                                                />
+                                                {errors.postal && errors.postal.type === "required" ? "This field is required" : errors.postal && "Please enter only numbers"}
                                             </Grid>
                                             <Grid item xs={6}>
                                               
                                             <Typography ><span style={{color: 'red'}}>*</span> Country</Typography>
-                                                <TextField type="text" variant="outlined" value={country} onChange={(event) => setCountry(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
-                                              
+                                                {/* <TextField type="text" variant="outlined" value={country} onChange={(event) => setCountry(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/> */}
+                                                <TextField type="text" variant="outlined" 
+                                                // value={jobTitle} onChange={(event) => setJobTitle(event.target.value)} 
+                                                value={country}
+                                                fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                                // placeholder='Full Stack Developer'
+                                                {...register("country", { required: true, maxLength: 10  })}
+                                                />
+                                                {errors.country && errors.country.type === "required" ? "This field is required" : errors.country && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12}>
                                               
                                             <Typography ><span style={{color: 'red'}}>*</span> Portfolio Website</Typography>
-                                                <TextField type="text" variant="outlined" value={portfolioSite} onChange={(event) => setPortfolioSite(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
-                                              
+                                                {/* <TextField type="text" variant="outlined" value={portfolioSite} onChange={(event) => setPortfolioSite(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/> */}
+                                                <TextField type="text" variant="outlined" 
+                                                // value={jobTitle} onChange={(event) => setJobTitle(event.target.value)} 
+                                                value={portfolioSite}
+                                                fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                                // placeholder='Full Stack Developer'
+                                                {...register("portfolioSite", { required: true, maxLength: 10, pattern: /^[a-zA-Z\s]+$/  })}
+                                                />
+                                                {errors.portfolioSite && errors.portfolioSite.type === "required" ? "This field is required" : errors.portfolioSite && "Please enter only letters"}
                                             </Grid>
                                             
-                                          </Grid>
+                                          </Grid><button onClick={btn}>btn</button>
                                         {/*</Box>*/}
                                             
                                     </div>
