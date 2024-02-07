@@ -1,4 +1,4 @@
-import './css/personalInfo.css';
+import './css/Certification1.css';
 import Grid from "@mui/material/Grid";
 import Typography from '@mui/material/Typography';
 import TextField from "@mui/material/TextField";
@@ -25,22 +25,22 @@ import { back } from '../BackButton.js';
 import { next } from '../NextButton.js';
 import { useNavigate } from 'react-router-dom';
 
-const Certification = () => {
+const Certification1 = () => {
 
 
     const CProj_Skills = [{data: 'c#'}, {data: 'java'}, {data: 'react'}];
 
 
-    const [certificateName, setCertificateName] = useState('');
-    const [issuedOrg, setIssuedOrg] = useState('');
-    const [certificateId, setCertificateId] = useState('');
-    const [CProjSkills, setCProjSkills] = useState([]); //this is for CustomizedHook
-    const [crtiIssuedmonth,setCertiIssuedMonth] = useState("");
-    const [crtiIssuedyear,setCertiIssuedYear] = useState("");
-    const [crtExpMonth, setCrtExpMonth] = useState('');
-    const [crtExpYear, setCrtExpYear] = useState('');
+    const [Certificate1Name, setCertificate1Name] = useState('');
+    const [Certificate1issuedOrg, setCertificate1issuedOrg] = useState('');
+    const [Certificate1Id, setCertificate1Id] = useState('');
+    const [Certificate1ProjSkills, setCertificate1ProjSkills] = useState([]); //this is for CustomizedHook
+    const [Certificate1IssueMonth,setCertificate1IssueMonth] = useState("");
+    const [Certificate1IssueYear,setCertificate1IssueYear] = useState("");
+    const [Certificate1ExpMonth, setCertificate1ExpMonth] = useState('');
+    const [Certificate1ExpYear, setCertificate1ExpYear] = useState('');
 
-    const [certificationLInk, setCertificationLink] = useState('');
+    const [Certificate1LInk, setCertificate1LInk] = useState('');
 
 
     
@@ -54,16 +54,16 @@ const Certification = () => {
 
 
     //below handle function is for CustomizedHook
-    const handleCProjSkills = function (ev, val, reason, details) {
+    const handleCertificate1ProjSkills = function (ev, val, reason, details) {
         if (ev.target.classList.contains('MuiSvgIcon-root')){
             // Removing Value
             const value = ev.target.parentElement.querySelector('span').innerHTML;
-            setCProjSkills(CProjSkills.filter(item => item !== value));
+            setCertificate1ProjSkills(Certificate1ProjSkills.filter(item => item !== value));
         } else {
             const value = ev.target.innerHTML;
-            CProjSkills.push(value);
+            Certificate1ProjSkills.push(value);
         }
-        console.log(CProjSkills);
+        console.log(Certificate1ProjSkills);
     }
 
 
@@ -72,7 +72,7 @@ const Certification = () => {
     const prevPage = () => navigate('/project');
     const handleSubmit = (e) => {
         e.preventDefault();
-        navigate('/clubsAndSocs')
+        navigate('/secondCertification')
         // validate();
 
         // Check if validation passed
@@ -99,11 +99,11 @@ const Certification = () => {
                                         <Grid container>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography ><span style={{color: 'red'}}>*</span> Name of Certification</Typography>
-                                                <TextField type="text" variant="outlined" value={certificateName} onChange={(event) => setCertificateName(event.target.value)} fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}} />
+                                                <TextField type="text" variant="outlined" value={Certificate1Name} onChange={(event) => setCertificate1Name(event.target.value)} fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}} />
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography ><span style={{color: 'red'}}>*</span> Issuing Organization</Typography>
-                                                <TextField type="text" variant="outlined" value={issuedOrg} onChange={(event) => setIssuedOrg(event.target.value)} fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}}/>
+                                                <TextField type="text" variant="outlined" value={Certificate1issuedOrg} onChange={(event) => setCertificate1issuedOrg(event.target.value)} fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}}/>
                                             </Grid>
                                             <Grid item xs={12} mb={-2}>
                                                 <Typography><span style={{color: 'red'}}>*</span>Issue Date</Typography>
@@ -111,14 +111,14 @@ const Certification = () => {
                                             <Grid item xs={6} pr={1}>
                                                 <EditableChoose
                                                     options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                                                    onSelect={setCertiIssuedMonth}
+                                                    onSelect={setCertificate1IssueMonth}
                                                     disabledOptions={[]}
                                                 />
                                             </Grid>
                                             <Grid item xs={6} mb={3} pl={1}>
                                                 <EditableChoose
                                                     options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                                                    onSelect={setCertiIssuedYear}
+                                                    onSelect={setCertificate1IssueYear}
                                                     disabledOptions={["2024"]}
                                                 />
                                             </Grid>
@@ -128,27 +128,27 @@ const Certification = () => {
                                             <Grid item xs={6} pr={1}>
                                                 <EditableChoose
                                                     options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                                                    onSelect={setCrtExpMonth}
+                                                    onSelect={setCertificate1ExpMonth}
                                                     disabledOptions={[]}
                                                 />
                                             </Grid>
                                             <Grid item xs={6} mb={3} pl={1}>
                                                 <EditableChoose
                                                     options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                                                    onSelect={setCrtExpYear}
+                                                    onSelect={setCertificate1ExpYear}
                                                     disabledOptions={["2024"]}
                                                 />
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography ><span style={{color: 'red'}}>*</span>Certification ID</Typography>
-                                                <TextField type="text" variant="outlined" value={certificateId} onChange={(event) => setCertificateId(event.target.value)} fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}}/>
+                                                <TextField type="text" variant="outlined" value={Certificate1Id} onChange={(event) => setCertificate1Id(event.target.value)} fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}}/>
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <CustomizedHook data={CProj_Skills} label={<Typography mb={1}><span style={{color: 'red'}}>*</span>Skills acquired from the project?</Typography>}/>
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>Certification evidence link</Typography>
-                                                <TextField type="text" variant="outlined" value={certificationLInk} onChange={(event) => setCertificationLink(event.target.value)} fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='CV Builder'/>
+                                                <TextField type="text" variant="outlined" value={Certificate1LInk} onChange={(event) => setCertificate1LInk(event.target.value)} fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='CV Builder'/>
                                             </Grid>
                                             <Grid item xs={12} mb={2} style={{display: 'flex', justifyContent: 'center'}}>
                                                 <Typography>-OR-</Typography>
@@ -159,7 +159,7 @@ const Certification = () => {
                                         </Grid>
                                     </div>
 
-                                    <div className="certificate">
+                                    <div className="Certification1-RightColumn">
                                         <div style={{padding: '8px 0px', backgroundColor: '#fff', borderRadius: '15px', maxWidth: '363px'}}>
                                             <Card variant="outlined" sx={{height:'100%',maxHeight: '400px', width:'100%',maxWidth: '363px',borderRadius:'15px', border: 'none', overflowY:'auto',overflowX:'auto','@media (max-width:769px)':{borderColor:'white'},'@media (min-width:769px)':{overflowY:'hidden'}}}>
                                             <CardContent >
@@ -227,4 +227,4 @@ const Certification = () => {
      );
 }
  
-export default Certification;
+export default Certification1;

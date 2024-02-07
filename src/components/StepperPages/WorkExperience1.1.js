@@ -29,57 +29,57 @@ import { back } from '../BackButton.js';
 import { next } from '../NextButton.js';
 import { useNavigate } from 'react-router-dom';
 
-const WorkExperience1 = () => {
+const WorkExperience2 = () => {
     const Jb_SkillsAcquired = [{data:"c#"},{data:"Winforms"}];
 
-    const [WorkExp1JobTitle, setWorkExp1JobTitle] = useState('');
-    const [WorkExp1Company, setWorkExp1Company] = useState('');
-    const [WorkExp1City, setWorkExp1City] = useState('');
-    const [WorkExp1Postal, setWorkExp1Postal] = useState('');
-    const [WorkExp1StartMonth, setWorkExp1StartMonth] = useState('');
-    const [WorkExp1StartYear, setWorkExp1StartYear] = useState('');
-    const [WorkExp1EndMonth, setWorkExp1EndMonth] = useState('');
-    const [WorkExp1EndYear, setWorkExp1EndYear] = useState('');
-    const [WorkExp1Working, setWorkExp1Working] = useState('no');
-    const [WorkExp1WorkChecked, setWorkExp1WorkChecked] = useState(false);
-    const [WorkExp1TaskDnWithTools, setWorkExp1TaskDnWithTools] = useState("");
-    const [WorkExp1EmploymentType, setWorkExp1EmploymentType] = React.useState("");
+    const [WorkExp2JobTitle, setWorkExp2JobTitle] = useState('');
+    const [WorkExp2Company, setWorkExp2Company] = useState('');
+    const [WorkExp2City, setWorkExp2City] = useState('');
+    const [WorkExp2Postal, setWorkExp2Postal] = useState('');
+    const [WorkExp2StartMonth, setWorkExp2StartMonth] = useState('');
+    const [WorkExp2StartYear, setWorkExp2StartYear] = useState('');
+    const [WorkExp2EndMonth, setWorkExp2EndMonth] = useState('');
+    const [WorkExp2EndYear, setWorkExp2EndYear] = useState('');
+    const [WorkExp2Working, setWorkExp2Working] = useState('no');
+    const [WorkExp2WorkChecked, setWorkExp2WorkChecked] = useState(false);
+    const [WorkExp2TaskDnWithTools, setWorkExp2TaskDnWithTools] = useState("");
+    const [WorkExp2EmploymentType, setWorkExp2EmploymentType] = React.useState("");
     // the below useState for custom hook does not work yet
-    const [WorkExp1JbSkillAcquired, setWorkExp1JbSkillAcquired] = useState([]);
+    const [WorkExp2JbSkillAcquired, setWorkExp2JbSkillAcquired] = useState([]);
 
-    const handleWorkExp1WorkChecked = (event) => {
-        setWorkExp1WorkChecked(event.target.checked)
+    const handleWorkExp2WorkChecked = (event) => {
+        setWorkExp2WorkChecked(event.target.checked)
     }
     
-    const handleWorkExp1TaskDnWithTools = (event) => {
+    const handleWorkExp2TaskDnWithTools = (event) => {
         //the below commented code is to test 
         // console.log(`Work => ${event.target.value}`)
-        setWorkExp1TaskDnWithTools(event.target.value);
+        setWorkExp2TaskDnWithTools(event.target.value);
       };
 
     // the below handle for custom hook does not work yet
-    const handleWorkExp1JbSkillAcquired = function (ev, val, reason, details) {
+    const handleWorkExp2JbSkillAcquired = function (ev, val, reason, details) {
         if (ev.target.classList.contains('MuiSvgIcon-root')){
             // Removing Value
             const value = ev.target.parentElement.querySelector('span').innerHTML;
-            setWorkExp1JbSkillAcquired(WorkExp1JbSkillAcquired.filter(item => item !== value));
+            setWorkExp2JbSkillAcquired(WorkExp2JbSkillAcquired.filter(item => item !== value));
         } else {
             const value = ev.target.innerHTML;
-            WorkExp1JbSkillAcquired.push(value);
+            WorkExp2JbSkillAcquired.push(value);
         }
-        console.log(WorkExp1JbSkillAcquired);
+        console.log(WorkExp2JbSkillAcquired);
     }
 
     useEffect(() => {
-        if(!WorkExp1WorkChecked) setWorkExp1Working('no');
-        else setWorkExp1Working('yes');
-    }, [WorkExp1WorkChecked]);
+        if(!WorkExp2WorkChecked) setWorkExp2Working('no');
+        else setWorkExp2Working('yes');
+    }, [WorkExp2WorkChecked]);
 
     const navigate = useNavigate();
-    const prevPage = () => navigate('/university');
+    const prevPage = () => navigate('/work');
     const handleSubmit = (e) => {
         e.preventDefault();
-        navigate('/secondWork')
+        navigate('/project')
         // validate();
 
         // Check if validation passed
@@ -94,7 +94,7 @@ const WorkExperience1 = () => {
 
     return(
         <div className="formtemp-page">
-            <InterviewFormHeader title='Work Experience' />
+            <InterviewFormHeader title='Second Work Experience' />
             <div className="formtemp-bodyform">
                 <Grid container spacing={2} style={{ height: '100%' }}>
                     <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
@@ -105,19 +105,19 @@ const WorkExperience1 = () => {
                                         <Grid container>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span> Job Title</Typography>
-                                                <TextField type="text" variant="outlined" value={WorkExp1JobTitle} onChange={(event) => setWorkExp1JobTitle(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Full Stack Developer'/>
+                                                <TextField type="text" variant="outlined" value={WorkExp2JobTitle} onChange={(event) => setWorkExp2JobTitle(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Full Stack Developer'/>
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span> Company</Typography>
-                                                <TextField type="text" variant="outlined" value={WorkExp1Company} onChange={(event) => setWorkExp1Company(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Surge Global Pvt.'/>
+                                                <TextField type="text" variant="outlined" value={WorkExp2Company} onChange={(event) => setWorkExp2Company(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Surge Global Pvt.'/>
                                             </Grid>
                                             <Grid item xs={6} mb={3} pr={1}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span> City</Typography>
-                                                <TextField type="text" variant="outlined" value={WorkExp1City} onChange={(event) => setWorkExp1City(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Colombo'/>
+                                                <TextField type="text" variant="outlined" value={WorkExp2City} onChange={(event) => setWorkExp2City(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Colombo'/>
                                             </Grid>
                                             <Grid item xs={6} mb={3} pl={1}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span> Postal code</Typography>
-                                                <TextField type="text" variant="outlined" value={WorkExp1Postal} onChange={(event) => setWorkExp1Postal(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='00300'/>
+                                                <TextField type="text" variant="outlined" value={WorkExp2Postal} onChange={(event) => setWorkExp2Postal(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='00300'/>
                                             </Grid>
                                             <Grid item xs={12} mb={-2}>
                                                 <Typography><span style={{color: 'red'}}>*</span> Start Date</Typography>
@@ -125,7 +125,7 @@ const WorkExperience1 = () => {
                                             <Grid item xs={6} pr={1}>
                                                 <EditableChoose
                                                     options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                                                    onSelect={setWorkExp1StartMonth}
+                                                    onSelect={setWorkExp2StartMonth}
                                                     disabledOptions={[]}
                                                     isRequired={true}
                                                 />
@@ -133,7 +133,7 @@ const WorkExperience1 = () => {
                                             <Grid item xs={6} mb={3} pl={1}>
                                                 <EditableChoose
                                                     options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                                                    onSelect={setWorkExp1StartYear}
+                                                    onSelect={setWorkExp2StartYear}
                                                     disabledOptions={["2024"]}
                                                     isRequired={true}
                                                 />
@@ -144,7 +144,7 @@ const WorkExperience1 = () => {
                                             <Grid item xs={6} pr={1}>
                                                 <EditableChoose
                                                     options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                                                    onSelect={setWorkExp1EndMonth}
+                                                    onSelect={setWorkExp2EndMonth}
                                                     disabledOptions={[]}
                                                     isRequired={true}
                                                 />
@@ -152,13 +152,13 @@ const WorkExperience1 = () => {
                                             <Grid item xs={6} mb={3} pl={1}>
                                                 <EditableChoose
                                                     options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                                                    onSelect={setWorkExp1EndYear}
+                                                    onSelect={setWorkExp2EndYear}
                                                     disabledOptions={["2024"]}
                                                     isRequired={true}
                                                 />
                                             </Grid>
                                             <Grid item xs={12} pl={2} mb={3}>
-                                                <FormControlLabel control={<Checkbox checked={WorkExp1WorkChecked} onChange={handleWorkExp1WorkChecked}/>} label="Currently Work here" /> {/*if need to make this requires put required before control and if need to make it already checked put check inside the control next to the Checkbx*/}
+                                                <FormControlLabel control={<Checkbox checked={WorkExp2WorkChecked} onChange={handleWorkExp2WorkChecked}/>} label="Currently Work here" /> {/*if need to make this requires put required before control and if need to make it already checked put check inside the control next to the Checkbx*/}
                                             </Grid>
                                             <Grid item xs={12} mb={1}>
                                             <Typography><span style={{color: 'red'}}>*</span> List five significant tasks you did in your job role with the tools / software used? <small>Ex:- Developed and maintained responsive web applications using React, Angular, and Node.js.</small></Typography>
@@ -168,8 +168,8 @@ const WorkExperience1 = () => {
                                                     inputHeight="150px"
                                                     maxWidth="1300px"
                                                     isRequired={true}
-                                                    value={WorkExp1TaskDnWithTools}
-                                                    onChange={handleWorkExp1TaskDnWithTools}
+                                                    value={WorkExp2TaskDnWithTools}
+                                                    onChange={handleWorkExp2TaskDnWithTools}
                                                     maxWords={100} // Pass the maximum number of words as a prop
                                                 />
                                             </Grid>
@@ -179,7 +179,7 @@ const WorkExperience1 = () => {
                                             <Grid item xs={12} mb={3}>
                                                 <EditableChoose
                                                     options={["Full-Time", "Part-Time"]}
-                                                    onSelect={setWorkExp1EmploymentType}
+                                                    onSelect={setWorkExp2EmploymentType}
                                                     disabledOptions={[]}
                                                     maxWidth={300}
                                                     isRequired={true}
@@ -187,7 +187,7 @@ const WorkExperience1 = () => {
                                                 />
                                             </Grid>
                                             <Grid item xs={12} >
-                                                <CustomizedHook onChange={handleWorkExp1JbSkillAcquired} maxWidth={1300} data={Jb_SkillsAcquired}  label={<Typography mb={1}><span style={{color: 'red'}}>*</span> Skills acquired from job ?</Typography>}/>
+                                                <CustomizedHook onChange={handleWorkExp2JbSkillAcquired} maxWidth={1300} data={Jb_SkillsAcquired}  label={<Typography mb={1}><span style={{color: 'red'}}>*</span> Skills acquired from job ?</Typography>}/>
                                             </Grid>
                                         </Grid>
                                     </div>
@@ -259,4 +259,4 @@ const WorkExperience1 = () => {
     )
 
 }
-export default WorkExperience1
+export default WorkExperience2

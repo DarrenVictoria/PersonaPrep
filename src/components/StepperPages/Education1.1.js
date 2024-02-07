@@ -24,29 +24,29 @@ import { useState, useEffect } from 'react';
 import { collection, addDoc, getFirestore, query, where, getDocs, doc, updateDoc } from 'firebase/firestore';
 import { useAuth } from '../../hooks/useAuth.js';
 
-const School1 = () => {
+const School2 = () => {
     const option = ["Year"];
             for (let year = 2024; year >= 1990; year--) {
             option.push(String(year));
             }
     const { currentUser } = useAuth();
-    const [School1StartMonth, setSchool1StartMonth] = useState('');
-    const [School1StartYear, setSchool1StartYear] = useState('');
-    const [School1EndMonth, setSchool1EndMonth] = useState('');
-    const [School1EndYear, setSchool1EndYear] = useState('');
-    const [School1Name, setSchool1Name] = useState('');
-    const [School1City, setSchool1City] = useState('');
-    const [School1Country, setSchool1Country] = useState('');
-    const [School1Experience, setSchool1Experience] = useState('');
+    const [School2StartMonth, setSchool2StartMonth] = useState('');
+    const [School2StartYear, setSchool2StartYear] = useState('');
+    const [School2EndMonth, setSchool2EndMonth] = useState('');
+    const [School2EndYear, setSchool2EndYear] = useState('');
+    const [School2Name, setSchool2Name] = useState('');
+    const [School2City, setSchool2City] = useState('');
+    const [School2Country, setSchool2Country] = useState('');
+    const [School2Experience, setSchool2Experience] = useState('');
 
 
-    const School1NameChange = (e) => setSchool1Name(e.target.value);
-    const School1CityChange = (e) => setSchool1City(e.target.value);
-    const School1CountryChange = (e) => setSchool1Country(e.target.value);
-    const School1ExperienceChange = (e) => setSchool1Experience(e.target.value);
+    const School2NameChange = (e) => setSchool2Name(e.target.value);
+    const School2CityChange = (e) => setSchool2City(e.target.value);
+    const School2CountryChange = (e) => setSchool2Country(e.target.value);
+    const School2ExperienceChange = (e) => setSchool2Experience(e.target.value);
 
     const navigate = useNavigate();
-      const prevPage = () => navigate('/contactDetSocial');
+      const prevPage = () => navigate('/school');
 
       const fetchUserData = async () => {
         try {
@@ -58,14 +58,14 @@ const School1 = () => {
             if (existingDoc) {
                 const userData = existingDoc.data();
                 // Populate the form fields with fetched data
-                setSchool1Name(userData.School1Name || '');
-                setSchool1City(userData.School1City || '');
-                setSchool1Country(userData.School1Country || '');
-                setSchool1Experience(userData.School1Experience || '');
-                setSchool1StartMonth(userData.School1StartMonth || '');
-                setSchool1StartYear(userData.School1StartYear || '');
-                setSchool1EndMonth(userData.School1EndMonth || '');
-                setSchool1EndYear(userData.School1EndYear || '');
+                setSchool2Name(userData.School2Name || '');
+                setSchool2City(userData.School2City || '');
+                setSchool2Country(userData.School2Country || '');
+                setSchool2Experience(userData.School2Experience || '');
+                setSchool2StartMonth(userData.School2StartMonth || '');
+                setSchool2StartYear(userData.School2StartYear || '');
+                setSchool2EndMonth(userData.School2EndMonth || '');
+                setSchool2EndYear(userData.School2EndYear || '');
             }
         } catch (error) {
             console.error('Error fetching user data: ', error);
@@ -82,14 +82,14 @@ const School1 = () => {
         
         // Prepare the data to append to Firestore document
         const dataToUpdate = {
-            School1Name,
-            School1City,
-            School1Country,
-            School1Experience,
-            School1StartMonth,
-            School1StartYear,
-            School1EndMonth,
-            School1EndYear,
+            School2Name,
+            School2City,
+            School2Country,
+            School2Experience,
+            School2StartMonth,
+            School2StartYear,
+            School2EndMonth,
+            School2EndYear,
         };
 
         try {
@@ -102,7 +102,7 @@ const School1 = () => {
                 const existingDocRef = doc(db, 'studentdetails', existingDoc.id);
                 await updateDoc(existingDocRef, dataToUpdate);
                 console.log('Document updated with ID: ', existingDoc.id);
-                navigate('/secondSchool');
+                navigate('/exams');
             } else {
                 console.error('Document does not exist for the current user.');
             }
@@ -110,10 +110,11 @@ const School1 = () => {
             console.error('Error updating document: ', error);
         }
     };
+  
 
     return(
         <div className="formtemp-page">
-            <InterviewFormHeader title='School' />
+            <InterviewFormHeader title='Second School' />
             <div className="formtemp-bodyform">
                 <Grid container spacing={2} style={{ height: '100%' }}>
                     <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
@@ -124,7 +125,7 @@ const School1 = () => {
                                         <Grid container>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>School Name</Typography>
-                                                <TextField type="text" variant="outlined" value={School1Name} onChange={School1NameChange} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='St. Thomas Catholic International'/>
+                                                <TextField type="text" variant="outlined" value={School2Name} onChange={School2NameChange} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='St. Thomas Catholic International'/>
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>School experience or description</Typography>
@@ -132,18 +133,18 @@ const School1 = () => {
                                                     inputHeight="150px"
                                                     maxWidth="1300px"
                                                     isRequired={true}
-                                                    value={School1Experience}
-                                                    onChange={School1ExperienceChange}
+                                                    value={School2Experience}
+                                                    onChange={School2ExperienceChange}
                                                     maxWords={50} 
                                                 />
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>City</Typography>
-                                                <TextField type="text" variant="outlined" value={School1City} onChange={School1CityChange} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/>
+                                                <TextField type="text" variant="outlined" value={School2City} onChange={School2CityChange} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/>
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>Country</Typography>
-                                                <TextField type="text" variant="outlined" value={School1Country} onChange={School1CountryChange} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/>
+                                                <TextField type="text" variant="outlined" value={School2Country} onChange={School2CountryChange} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/>
                                             </Grid>
                                             <Grid item xs={12} mb={-2}>
                                                 <Typography><span style={{color: 'red'}}>*</span>Start Date</Typography>
@@ -151,17 +152,17 @@ const School1 = () => {
                                             <Grid item xs={6} pr={1}>
                                                 <EditableChoose
                                                     options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                                                    onSelect={setSchool1StartMonth}
+                                                    onSelect={setSchool2StartMonth}
                                                     disabledOptions={["Month"]}
-                                                    defaultValue={School1StartMonth}
+                                                    defaultValue={School2StartMonth}
                                                 />
                                             </Grid>
                                             <Grid item xs={6} mb={3} pl={1}>
                                                 <EditableChoose
                                                     options={option}
-                                                    onSelect={setSchool1StartYear}
+                                                    onSelect={setSchool2StartYear}
                                                     disabledOptions={["Year"]}
-                                                    defaultValue={School1StartYear}
+                                                    defaultValue={School2StartYear}
                                                 />
                                             </Grid>
                                             <Grid item xs={12} mb={-2}>
@@ -170,17 +171,17 @@ const School1 = () => {
                                             <Grid item xs={6} pr={1}>
                                                 <EditableChoose
                                                     options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                                                    onSelect={setSchool1EndMonth}
+                                                    onSelect={setSchool2EndMonth}
                                                     disabledOptions={["Month"]}
-                                                    defaultValue={School1EndMonth}
+                                                    defaultValue={School2EndMonth}
                                                 />
                                             </Grid>
                                             <Grid item xs={6} mb={3} pl={1}>
                                                 <EditableChoose
                                                     options={option}
-                                                    onSelect={setSchool1EndYear}
+                                                    onSelect={setSchool2EndYear}
                                                     disabledOptions={["Year"]}
-                                                    defaultValue={School1EndYear}
+                                                    defaultValue={School2EndYear}
                                                 />
                                             </Grid>
                                             
@@ -260,4 +261,4 @@ const School1 = () => {
     )
 
 }
-export default School1
+export default School2
