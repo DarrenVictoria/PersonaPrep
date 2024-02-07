@@ -163,7 +163,6 @@ const onSubmit = async (formData) => {
     }
 };
 
-const btn = (event) => {event.preventDefault(); console.log(phone)};
 
     return(
       <div className="formtemp-page">
@@ -271,7 +270,7 @@ const btn = (event) => {event.preventDefault(); console.log(phone)};
                                                 {errors.portfolioSite && errors.portfolioSite.type === "required" ? "This field is required" : errors.portfolioSite && "Please enter only letters"}
                                             </Grid>
                                             
-                                          </Grid><button onClick={btn}>btn</button>
+                                          </Grid>
                                         {/*</Box>*/}
                                             
                                     </div>
