@@ -20,13 +20,24 @@ import FacultyDetails from "./components/StepperPages/FacultyDetails";
 import PersonalInfo from "./components/StepperPages/PersonalInfo";
 import ContactDetails_1 from "./components/StepperPages/ContactDetails1";
 import ContactDetails_2 from "./components/StepperPages/ContactDetails2";
-import Education_1 from "./components/StepperPages/Education1";
+import School1 from "./components/StepperPages/Education1";
+import School2 from "./components/StepperPages/Education1.1";
 import Education_2 from "./components/StepperPages/Education2";
-import UniversityEducation from "./components/StepperPages/UniversityEducation";
-import WorkExperience from "./components/StepperPages/WorkExperience1";
-import Projects_1 from "./components/StepperPages/Projects1";
-import Certification from "./components/StepperPages/Certification1";
-import Clubs from "./components/StepperPages/Clubs";
+import UniversityEducation1 from "./components/StepperPages/UniversityEducation";
+import UniversityEducation2 from "./components/StepperPages/UniversityEducation1.1";
+
+import WorkExperience1 from "./components/StepperPages/WorkExperience1";
+import WorkExperience2 from "./components/StepperPages/WorkExperience1.1";
+
+import Projects1 from "./components/StepperPages/Projects1";
+import Projects2 from "./components/StepperPages/Projects1.1";
+import Projects3 from "./components/StepperPages/Projects1.2";
+
+import Certification1 from "./components/StepperPages/Certification1";
+import Certification2 from "./components/StepperPages/Certification1.1";
+
+import Club1 from "./components/StepperPages/Clubs";
+import Club2 from "./components/StepperPages/Clubs1.1";
 import Publications from "./components/StepperPages/Publications";
 import SkillTrack_1 from "./components/StepperPages/SkillTrack1";
 import Summary_1 from "./components/StepperPages/Summary1";
@@ -70,13 +81,20 @@ function App() {
           <Route path="/personalInfo" element={<PersonalInfo />}/>
           <Route path="/contactDetMain" element={<ContactDetails_1 />}/>
           <Route path="/contactDetSocial" element={<ContactDetails_2 />}/>
-          <Route path="/school" element={<Education_1 />}/>
+          <Route path="/school" element={<School1 />}/>
+          <Route path="/secondSchool" element={<School2 />}/>
           <Route path="/exams" element={<Education_2 />}/>
-          <Route path="/university" element={<UniversityEducation />}/>
-          <Route path="/work" element={<WorkExperience />}/>
-          <Route path="/project" element={<Projects_1 />}/>
-          <Route path="/certification" element={<Certification />}/>
-          <Route path="/clubsAndSocs" element={<Clubs />}/>
+          <Route path="/university" element={<UniversityEducation1 />}/>
+          <Route path="/secondUniversity" element={<UniversityEducation2 />}/>
+          <Route path="/work" element={<WorkExperience1 />}/>
+          <Route path="/secondWork" element={<WorkExperience2 />}/>
+          <Route path="/project" element={<Projects1 />}/>
+          <Route path="/secondProject" element={<Projects2 />}/>
+          <Route path="/thirdProject" element={<Projects3 />}/>
+          <Route path="/certification" element={<Certification1 />}/>
+          <Route path="/secondCertification" element={<Certification2 />}/>
+          <Route path="/clubsAndSocs" element={<Club1 />}/>
+          <Route path="/Secondclub" element={<Club2 />}/>
           <Route path="/publications" element={<Publications />}/>
           <Route path="/skilltrack" element={<SkillTrack_1 />}/>
           <Route path="/summary" element={<Summary_1 />}/>

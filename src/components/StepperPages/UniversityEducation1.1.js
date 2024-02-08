@@ -14,22 +14,22 @@ import { back } from '../BackButton.js';
 import { next } from '../NextButton.js';
 import { useNavigate } from 'react-router-dom';
 
-const UniversityEducation1 = () => {
-    const [Uni1Degree, setUni1Degree] = useState('');
-    const [Uni1CurrentYear, setUni1CurrentYear] = useState('');
-    const [Uni1StartMonth, setUni1StartMonth] = useState('');
-    const [Uni1StartYear, setUni1StartYear] = useState('');
-    const [Uni1EndMonth, setUni1EndMonth] = useState('');
-    const [Uni1EndYear, setUni1EndYear] = useState('');
-    const [Uni1Name, setUni1Name] = useState('');
-    const [Uni1City, setUni1City] = useState('');
-    const [Uni1Country, setUni1Country] = useState('');
+const UniversityEducation2 = () => {
+    const [Uni2Degree, setUni2Degree] = useState('');
+    const [Uni2CurrentYear, setUni2CurrentYear] = useState('');
+    const [Uni2StartMonth, setUni2StartMonth] = useState('');
+    const [Uni2StartYear, setUni2StartYear] = useState('');
+    const [Uni2EndMonth, setUni2EndMonth] = useState('');
+    const [Uni2EndYear, setUni2EndYear] = useState('');
+    const [Uni2Name, setUni2Name] = useState('');
+    const [Uni2City, setUni2City] = useState('');
+    const [Uni2Country, setUni2Country] = useState('');
 
     const navigate = useNavigate();
-    const prevPage = () => navigate('/exams');
+    const prevPage = () => navigate('/university');
     const handleSubmit = (e) => {
         e.preventDefault();
-        navigate('/secondUniversity')
+        navigate('/work')
         // validate();
 
         // Check if validation passed
@@ -43,7 +43,7 @@ const UniversityEducation1 = () => {
 
     return(
         <div className="formtemp-page">
-            <InterviewFormHeader title='University' />
+            <InterviewFormHeader title='Second University' />
             <div className="formtemp-bodyform">
                 <Grid container spacing={2} style={{ height: '100%' }}>
                     <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
@@ -54,7 +54,7 @@ const UniversityEducation1 = () => {
                                         <Grid container>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>University</Typography>
-                                                <TextField type="text" variant="outlined" value={Uni1Name} onChange={(event) => setUni1Name(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='NSBM Green University'/>
+                                                <TextField type="text" variant="outlined" value={Uni2Name} onChange={(event) => setUni2Name(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='NSBM Green University'/>
                                             </Grid>
                                             <Grid item xs={12} mb={-2}>
                                                 <Typography><span style={{color: 'red'}}>*</span>Degree</Typography>
@@ -62,17 +62,17 @@ const UniversityEducation1 = () => {
                                             <Grid item xs={12} mb={3}>
                                                 <EditableChoose
                                                     options={["Degree Name", "BSc. (Hons) in Software Engineering","BSc. (Hons) in Computer Science","BSc. (Hons) in Cyber Security"]}
-                                                    onSelect={setUni1Degree}
+                                                    onSelect={setUni2Degree}
                                                     disabledOptions={[]}
                                                 />
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>City</Typography>
-                                                <TextField type="text" variant="outlined" value={Uni1City} onChange={(event) => setUni1City(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Homagama'/>
+                                                <TextField type="text" variant="outlined" value={Uni2City} onChange={(event) => setUni2City(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Homagama'/>
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>Country</Typography>
-                                                <TextField type="text" variant="outlined" value={Uni1Country} onChange={(event) => setUni1Country(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Sri lanka'/>
+                                                <TextField type="text" variant="outlined" value={Uni2Country} onChange={(event) => setUni2Country(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Sri lanka'/>
                                             </Grid>
                                             <Grid item xs={12} mb={-2}>
                                                 <Typography><span style={{color: 'red'}}>*</span>Start Date</Typography>
@@ -80,14 +80,14 @@ const UniversityEducation1 = () => {
                                             <Grid item xs={6} pr={1}>
                                                 <EditableChoose
                                                     options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                                                    onSelect={setUni1StartMonth}
+                                                    onSelect={setUni2StartMonth}
                                                     disabledOptions={[]}
                                                 />
                                             </Grid>
                                             <Grid item xs={6} mb={3} pl={1}>
                                                 <EditableChoose
                                                     options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                                                    onSelect={setUni1StartYear}
+                                                    onSelect={setUni2StartYear}
                                                     disabledOptions={["2024"]}
                                                 />
                                             </Grid>
@@ -97,7 +97,7 @@ const UniversityEducation1 = () => {
                                             <Grid item xs={6} mb={3}>
                                                 <EditableChoose
                                                     options={["year", "Year 1","Year 2","Year 3","Year 4"]}
-                                                    onSelect={setUni1CurrentYear}
+                                                    onSelect={setUni2CurrentYear}
                                                     disabledOptions={[]}
                                                 />
                                             </Grid>
@@ -107,14 +107,14 @@ const UniversityEducation1 = () => {
                                             <Grid item xs={6} pr={1}>
                                                 <EditableChoose
                                                     options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                                                    onSelect={setUni1EndMonth}
+                                                    onSelect={setUni2EndMonth}
                                                     disabledOptions={[]}
                                                 />
                                             </Grid>
                                             <Grid item xs={6} mb={3} pl={1}>
                                                 <EditableChoose
                                                     options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                                                    onSelect={setUni1EndYear}
+                                                    onSelect={setUni2EndYear}
                                                     disabledOptions={["2024"]}
                                                 />
                                             </Grid>
@@ -143,4 +143,4 @@ const UniversityEducation1 = () => {
     )
 
 }
-export default UniversityEducation1
+export default UniversityEducation2

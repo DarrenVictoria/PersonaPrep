@@ -17,55 +17,55 @@ import { back } from '../BackButton.js';
 import { next } from '../NextButton.js';
 import { useNavigate } from 'react-router-dom';
 
-const Club1 = () => {
-    const [Club1Name, setClub1Name] = useState('');
-    const [Club1StartMonth, setClub1StartMonth] = useState('');
-    const [Club1StartYear, setClub1StartYear] = useState('');
-    const [Club1EndMonth, setClub1EndMonth] = useState('');
-    const [Club1EndYear, setClub1EndYear] = useState('');
-    const [Club1Volunteer, setClub1Volunteer] = useState('no');
-    const [Club1VolunteerChecked, setClub1VolunteerChecked] = useState(false);
-    const [Club1RolesPlayed, setClub1RolesPlayed] = useState([]);
-    const [Club1SkillsEarned, setClub1SkillsEarned] = useState([]);
+const Club2 = () => {
+    const [Club2Name, setClub2Name] = useState('');
+    const [Club2StartMonth, setClub2StartMonth] = useState('');
+    const [Club2StartYear, setClub2StartYear] = useState('');
+    const [Club2EndMonth, setClub2EndMonth] = useState('');
+    const [Club2EndYear, setClub2EndYear] = useState('');
+    const [Club2Volunteer, setClub2Volunteer] = useState('no');
+    const [Club2VolunteerChecked, setClub2VolunteerChecked] = useState(false);
+    const [Club2RolesPlayed, setClub2RolesPlayed] = useState([]);
+    const [Club2SkillsEarned, setClub2SkillsEarned] = useState([]);
 
     const Clbs_RolesPlayed = [{data:"Volunteer"},{data:"Council Member"},{data:"Council Members"},{data:"Council Memberv"},{data:"Council Membere"},{data:"Council Memberw"}];
     const Clbs_SkillsEarned = [{data:"Leadership"},{data:"Teamwork"}];
 
 
-    const handleClub1RolesPlayed = function (ev, val, reason, details) {
+    const handleClub2RolesPlayed = function (ev, val, reason, details) {
       if (ev.target.classList.contains('MuiSvgIcon-root')){
           // Removing Value
           const value = ev.target.parentElement.querySelector('span').innerHTML;
-          setClub1RolesPlayed(Club1RolesPlayed.filter(item => item !== value));
+          setClub2RolesPlayed(Club2RolesPlayed.filter(item => item !== value));
       } else {
           const value = ev.target.innerHTML;
-          Club1RolesPlayed.push(value);
+          Club2RolesPlayed.push(value);
       }
-      console.log(Club1RolesPlayed);
+      console.log(Club2RolesPlayed);
     }
 
-    const handleClub1SkillsEarned = function (ev, val, reason, details) {
+    const handleClub2SkillsEarned = function (ev, val, reason, details) {
       if (ev.target.classList.contains('MuiSvgIcon-root')){
           // Removing Value
           const value = ev.target.parentElement.querySelector('span').innerHTML;
-          setClub1SkillsEarned(Club1SkillsEarned.filter(item => item !== value));
+          setClub2SkillsEarned(Club2SkillsEarned.filter(item => item !== value));
       } else {
           const value = ev.target.innerHTML;
-          Club1SkillsEarned.push(value);
+          Club2SkillsEarned.push(value);
       }
-      console.log(Club1SkillsEarned);
+      console.log(Club2SkillsEarned);
   }
 
     useEffect(() => {
-      if(!Club1VolunteerChecked) setClub1Volunteer('no');
-      else setClub1Volunteer('yes');
-    }, [Club1VolunteerChecked]);
+      if(!Club2VolunteerChecked) setClub2Volunteer('no');
+      else setClub2Volunteer('yes');
+    }, [Club2VolunteerChecked]);
 
     const navigate = useNavigate();
-    const prevPage = () => navigate('/certification');
+    const prevPage = () => navigate('/clubsAndSocs');
     const handleSubmit = (e) => {
         e.preventDefault();
-        navigate('/Secondclub')
+        navigate('/publications')
         // validate();
 
         // Check if validation passed
@@ -80,7 +80,7 @@ const Club1 = () => {
 
     return(
       <div className="formtemp-page">
-            <InterviewFormHeader title='Clubs and Societies' />
+            <InterviewFormHeader title='Second Club' />
             <div className="formtemp-bodyform">
                 <Grid container spacing={2} style={{ height: '100%' }}>
                     <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
@@ -96,7 +96,7 @@ const Club1 = () => {
                                   <Grid item xs={12} mb={3}>
                                       <EditableChoose
                                         options={["Clubs","Club1", "Club2", "Club3"]}
-                                        onSelect={setClub1Name}
+                                        onSelect={setClub2Name}
                                         disabledOptions={["Clubs"]}
                                         isRequired={true}
                                         //the below width did not work have to check
@@ -111,7 +111,7 @@ const Club1 = () => {
                                     
                                   <EditableChoose
                                   options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                                  onSelect={setClub1StartMonth}
+                                  onSelect={setClub2StartMonth}
                                   disabledOptions={[]}
                                   isRequired={true}
                                   //the below width did not work have to check
@@ -122,7 +122,7 @@ const Club1 = () => {
                                   <Grid item xs={6} mb={3} pl={1}>
                                   <EditableChoose
                                   options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                                  onSelect={setClub1StartYear}
+                                  onSelect={setClub2StartYear}
                                   disabledOptions={["2024"]}
                                   isRequired={true}
                                   //the below width did not work have to check
@@ -137,7 +137,7 @@ const Club1 = () => {
                                     
                                   <EditableChoose
                                   options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                                  onSelect={setClub1EndMonth}
+                                  onSelect={setClub2EndMonth}
                                   disabledOptions={[]}
                                   isRequired={true}
                                   //the below width did not work have to check
@@ -148,7 +148,7 @@ const Club1 = () => {
                                   <Grid item xs={6} mb={3} pl={1}>
                                   <EditableChoose
                                   options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                                  onSelect={setClub1EndYear}
+                                  onSelect={setClub2EndYear}
                                   disabledOptions={["2024"]}
                                   isRequired={true}
                                   //the below width did not work have to check
@@ -164,17 +164,17 @@ const Club1 = () => {
 
                                   <Grid item xs={12} mb={3}>
                                     
-                                    <CustomizedHook onChange={handleClub1RolesPlayed} data={Clbs_RolesPlayed} label={<Typography>Roles Played</Typography>}/>
+                                    <CustomizedHook onChange={handleClub2RolesPlayed} data={Clbs_RolesPlayed} label={<Typography>Roles Played</Typography>}/>
                                   
                                     
                                   </Grid>
                                   <Grid item xs={12} mb={3}>                                    
-                                    <CustomizedHook onChange={handleClub1SkillsEarned} data={Clbs_SkillsEarned} label={<Typography>Skills Earned</Typography>}/>
+                                    <CustomizedHook onChange={handleClub2SkillsEarned} data={Clbs_SkillsEarned} label={<Typography>Skills Earned</Typography>}/>
                                   </Grid>
 
                                   <Grid item xs={12}  mb={3} pl={2} sx={{"@media (max-width: 376px)": {pl: 0}}}>
                                     
-                                    <FormControlLabel control={<Checkbox checked={Club1VolunteerChecked} onChange={(event) => setClub1VolunteerChecked(event.target.checked)}/>} label="Currently Volunteering" /> {/*if need to make this requires put required before control and if need to make it already checked put check inside the control next to the Checkbx*/}
+                                    <FormControlLabel control={<Checkbox checked={Club2VolunteerChecked} onChange={(event) => setClub2VolunteerChecked(event.target.checked)}/>} label="Currently Volunteering" /> {/*if need to make this requires put required before control and if need to make it already checked put check inside the control next to the Checkbx*/}
                                     
                                   </Grid>
                                   
@@ -206,4 +206,4 @@ const Club1 = () => {
     )
 
 }
-export default Club1;
+export default Club2;
