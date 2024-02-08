@@ -22,7 +22,7 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCircleOutlined';
 
 
-const Education_2 = () => {
+const EducationTest = () => {
     const [olYear, setOlYear] = useState('');
     const [alYear, setAlYear] = useState('');  
 
@@ -82,7 +82,7 @@ const Education_2 = () => {
     const btn = (event) => {event.preventDefault(); console.log(alExamResults); console.log(olExamResults)};
     return (
         <div className="formtemp-page">
-            <InterviewFormHeader title='Exam' />
+            <InterviewFormHeader title='School Education 2/2' />
             <div className="formtemp-bodyform">
                 <Grid container spacing={2} style={{ height: '100%' }}>
                     <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
@@ -248,4 +248,4 @@ const Education_2 = () => {
     );
 };
 
-export default Education_2;
+export default EducationTest;
