@@ -27,42 +27,42 @@ import { back } from '../BackButton.js';
 import { next } from '../NextButton.js';
 import { useNavigate } from 'react-router-dom';
 
-const Projects1 = () => {
+const Projects2 = () => {
     const Proj_Skills = [{data: 'c#',}, {data: 'react'}, {data: 'java'}];
-    const [Proj1Type, setProj1Type] = useState('');
-    const [Proj1Name, setProj1Name] = useState('');
-    const [Proj1Role, setProj1Role] = useState('');
-    const [Proj1Status, setProj1Status] = useState('');
+    const [Proj2Type, setProj2Type] = useState('');
+    const [Proj2Name, setProj2Name] = useState('');
+    const [Proj2Role, setProj2Role] = useState('');
+    const [Proj2Status, setProj2Status] = useState('');
 
-    const [Proj1Skills, setProj1Skills] = useState([]);
-
-
-    const [Proj1StartMonth, setProj1StartMonth] = useState('');
-    const [Proj1StartYear, setProj1StartYear] = useState('');
-    const [Proj1EndMonth, setProj1EndMonth] = useState('');
-    const [Proj1EndYear, setProj1EndYear] = useState('');
-    const [Proj1Place, setProj1Place] = useState('');
-    const [Proj1Evidence, setProj1Evidence] = useState('');
+    const [Proj2Skills, setProj2Skills] = useState([]);
 
 
-    const handleProj1Skills = function (ev, val, reason, details) {
+    const [Proj2StartMonth, setProj2StartMonth] = useState('');
+    const [Proj2StartYear, setProj2StartYear] = useState('');
+    const [Proj2EndMonth, setProj2EndMonth] = useState('');
+    const [Proj2EndYear, setProj2EndYear] = useState('');
+    const [Proj2Place, setProj2Place] = useState('');
+    const [Proj2Evidence, setProj2Evidence] = useState('');
+
+
+    const handleProj2Skills = function (ev, val, reason, details) {
         if (ev.target.classList.contains('MuiSvgIcon-root')){
             // Removing Value
             const value = ev.target.parentElement.querySelector('span').innerHTML;
-            setProj1Skills(Proj1Skills.filter(item => item !== value));
+            setProj2Skills(Proj2Skills.filter(item => item !== value));
         } else {
             const value = ev.target.innerHTML;
-            Proj1Skills.push(value);
+            Proj2Skills.push(value);
         }
-        console.log(Proj1Skills);
+        console.log(Proj2Skills);
     }
 
 
     const navigate = useNavigate();
-    const prevPage = () => navigate('/work');
+    const prevPage = () => navigate('/project');
     const handleSubmit = (e) => {
         e.preventDefault();
-        navigate('/secondProject')
+        navigate('/thirdProject')
         // validate();
 
         // Check if validation passed
@@ -77,7 +77,7 @@ const Projects1 = () => {
     
     return(
         <div className="formtemp-page">
-            <InterviewFormHeader title='Project' />
+            <InterviewFormHeader title='Second Project' />
             <div className="formtemp-bodyform">
                 <Grid container spacing={2} style={{ height: '100%' }}>
                     <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
@@ -89,7 +89,7 @@ const Projects1 = () => {
                                         <Grid container>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>Project Name</Typography>
-                                                <TextField type="text" variant="outlined" value={Proj1Name} onChange={(event) => setProj1Name(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='CV Builder'/>
+                                                <TextField type="text" variant="outlined" value={Proj2Name} onChange={(event) => setProj2Name(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='CV Builder'/>
                                             </Grid>
                                             <Grid item xs={12} mb={-2}>
                                                 <Typography><span style={{color: 'red'}}>*</span>Was it an individual or a group project?</Typography>
@@ -97,20 +97,20 @@ const Projects1 = () => {
                                             <Grid item xs={12} md={6} mb={3}>
                                                 <EditableChoose
                                                     options={["Project Type", "Group Project","Individual Project"]}
-                                                    onSelect={setProj1Type}
+                                                    onSelect={setProj2Type}
                                                     disabledOptions={[]}
                                                 />
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>What was your role in the project</Typography>
-                                                <TextField type="text" variant="outlined" value={Proj1Role} onChange={(event) => setProj1Role(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Full stack developer'/>
+                                                <TextField type="text" variant="outlined" value={Proj2Role} onChange={(event) => setProj2Role(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Full stack developer'/>
                                             </Grid>
                                             <Grid item xs={12} >
                                                 <Typography><span style={{color: 'red'}}>*</span>Are you still working on the project?</Typography>
                                             </Grid>
                                             <Grid item xs={12} mb={2} pl={2}>
                                                 <FormControl>
-                                                    <RadioGroup row name="project-working-status" value={Proj1Status} onChange={(event) => setProj1Status(event.target.value)}>
+                                                    <RadioGroup row name="project-working-status" value={Proj2Status} onChange={(event) => setProj2Status(event.target.value)}>
                                                         <FormControlLabel value="yes" control={<Radio />} label="Yes" />
                                                         <FormControlLabel value="no" control={<Radio />} label="No" />
                                                     </RadioGroup>
@@ -118,7 +118,7 @@ const Projects1 = () => {
                                             </Grid>
 
                                             <Grid item xs={12} mb={3}>
-                                                <CustomizedHook onChange={handleProj1Skills} data={Proj_Skills} label={<Typography mb={1}><span style={{color: 'red'}}>*</span>What are the skills gained from the project?</Typography>}/>
+                                                <CustomizedHook onChange={handleProj2Skills} data={Proj_Skills} label={<Typography mb={1}><span style={{color: 'red'}}>*</span>What are the skills gained from the project?</Typography>}/>
 
                                             </Grid>
                                             <Grid item xs={12} mb={-2}>
@@ -127,14 +127,14 @@ const Projects1 = () => {
                                             <Grid item xs={6} pr={1}>
                                                 <EditableChoose
                                                     options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                                                    onSelect={setProj1StartMonth}
+                                                    onSelect={setProj2StartMonth}
                                                     disabledOptions={[]}
                                                 />
                                             </Grid>
                                             <Grid item xs={6} mb={3} pl={1}>
                                                 <EditableChoose
                                                     options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                                                    onSelect={setProj1StartYear}
+                                                    onSelect={setProj2StartYear}
                                                     disabledOptions={["2024"]}
                                                 />
                                             </Grid>
@@ -144,14 +144,14 @@ const Projects1 = () => {
                                             <Grid item xs={6} pr={1}>
                                                 <EditableChoose
                                                     options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                                                    onSelect={setProj1EndMonth}
+                                                    onSelect={setProj2EndMonth}
                                                     disabledOptions={[]}
                                                 />
                                             </Grid>
                                             <Grid item xs={6} mb={3} pl={1}>
                                                 <EditableChoose
                                                     options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                                                    onSelect={setProj1EndYear}
+                                                    onSelect={setProj2EndYear}
                                                     disabledOptions={["2024"]}
                                                 />
                                             </Grid>
@@ -161,13 +161,13 @@ const Projects1 = () => {
                                             <Grid item xs={12} md={5} mb={3}>
                                                 <EditableChoose
                                                     options={["Place", "University","University"]}
-                                                    onSelect={setProj1Place}
+                                                    onSelect={setProj2Place}
                                                     disabledOptions={[]}
                                                 />
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>Project evidence</Typography>
-                                                <TextField type="text" variant="outlined" value={Proj1Evidence} onChange={(event) => setProj1Evidence(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='CV Builder'/>
+                                                <TextField type="text" variant="outlined" value={Proj2Evidence} onChange={(event) => setProj2Evidence(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='CV Builder'/>
                                             </Grid>
                                             <Grid item xs={12} mb={2} style={{display: 'flex', justifyContent: 'center'}}>
                                                 <Typography>-OR-</Typography>
@@ -246,4 +246,4 @@ const Projects1 = () => {
     )
 
 }
-export default Projects1
+export default Projects2
