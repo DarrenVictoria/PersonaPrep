@@ -22,7 +22,7 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCircleOutlined';
 
 
-const Education_2 = () => {
+const EducationTest = () => {
     const [olYear, setOlYear] = useState('');
     const [alYear, setAlYear] = useState('');  
 
@@ -248,4 +248,4 @@ const Education_2 = () => {
     );
 };
 
-export default Education_2;
+export default EducationTest;
