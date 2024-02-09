@@ -32,6 +32,9 @@ import { next } from '../NextButton.js';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth.js'; 
 import { useForm } from "react-hook-form";
+import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined';
+import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
+import FolderCopyOutlinedIcon from '@mui/icons-material/FolderCopyOutlined';
 
 const predefinedButtonName = ['github','figma','behance','linkedin','facebook','whatsapp','instragram','twitter'];
 const ContactDetails_1 = () => {
@@ -288,8 +291,8 @@ const onSubmit = async (formData) => {
                                           <List>
                                             <ListItem >
                                             <ListItemAvatar>
-                                            <Avatar sx={{paddingTop:'4px',borderRadius: '12px',display: 'flex', justifyContent: 'center', alignItems: 'center'  }}>
-                                              <img src={cphone} alt="Custom Icon" style={{ width: '45.3538px', height: '50.6667px' }}/>
+                                              <Avatar sx={{borderRadius: '12px'}}>
+                                               <LocalPhoneOutlinedIcon sx={{color:'black'}}/>
                                               </Avatar>
                                             </ListItemAvatar>
                                             <ListItemText>
@@ -300,9 +303,9 @@ const onSubmit = async (formData) => {
                                             </ListItem>
                                             <ListItem >
                                             <ListItemAvatar>
-                                            <Avatar sx={{paddingTop:'4px',borderRadius: '12px',display: 'flex', justifyContent: 'center', alignItems: 'center'  }}>
-                                            <img src={cmail} alt="Custom Icon" style={{ width: '45.3538px', height: '50.6667px' }} />
-                                            </Avatar>
+                                              <Avatar sx={{borderRadius: '12px'}}>
+                                                <EmailOutlinedIcon sx={{color:'black'}}/>
+                                              </Avatar>
                                             </ListItemAvatar>
                                             <ListItemText>
                                             <Typography variant='body1'>
@@ -312,13 +315,13 @@ const onSubmit = async (formData) => {
                                             </ListItem>
                                             <ListItem >
                                             <ListItemAvatar>
-                                            <Avatar sx={{paddingTop:'4px',borderRadius: '12px',display: 'flex', justifyContent: 'center', alignItems: 'center'  }}>
-                                            <img src={cfolder} alt="Custom Icon" style={{ width: '45.3538px', height: '50.6667px' }} />
-                                            </Avatar>
+                                              <Avatar sx={{borderRadius: '12px'}}>
+                                              <FolderCopyOutlinedIcon sx={{color:'black'}}/>
+                                              </Avatar>
                                             </ListItemAvatar>
                                             <ListItemText>
                                             <Typography variant='body1'>
-                                              Include a link to your portfolio website or profiles like LinkedIn to showcase your work, qualifications and skills.
+                                              Include a link to your portfolio website or profiles like <b>LinkedIn</b> to showcase your work, qualifications and skills.
                                             </Typography>
                                             </ListItemText>
                                             </ListItem>
