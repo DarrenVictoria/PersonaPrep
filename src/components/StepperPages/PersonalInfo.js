@@ -28,6 +28,7 @@ import { useAuth } from '../../hooks/useAuth.js';
 const PersonalInfo = () => {
     const { currentUser } = useAuth();
     const [profilePictureUrl, setProfilePictureUrl] = useState('');
+    const [profilePictureFetchUrl, setProfilePictureFetchUrl] = useState('');
    
     const job_roles = [{data:"Software Engineer"}, {data:"Systems Analyst"}, {data:"Network Administrator"}, {data:"Data Scientist"}];
 
@@ -89,7 +90,7 @@ const PersonalInfo = () => {
                     const docData = docSnapshot.data();
                     setProname(docData.Proname || '');
                     setPJobRoles(docData.PJobRoles || []);
-                    setProfilePictureUrl(docData.profilePictureUrl || null);
+                    setProfilePictureFetchUrl(docData.profilePictureUrl || null);
                     console.log(profilePictureUrl);
                    
                 }
@@ -107,13 +108,15 @@ const PersonalInfo = () => {
         if (ev.target.classList.contains('MuiSvgIcon-root')){
             // Removing Value
             const value = ev.target.parentElement.querySelector('span').innerHTML;
-            setPJobRoles(PJobRoles.filter(item => item !== value));
         } else {
             const value = ev.target.innerHTML;
             PJobRoles.push(value);
+            console.log(PJobRoles);
         }
-        console.log(PJobRoles);
-    }
+    };
+    
+
+
     return(
         <div className="formtemp-page">
             <InterviewFormHeader title='Personal Information' />
@@ -131,9 +134,9 @@ const PersonalInfo = () => {
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span> Profile Picture</Typography>
-                                                <FileUpload onFileUpload={handleFileUploadSuccess} onUploadSuccess={handleFileUploadSuccess} onReset={handleReset}    />
-                                                {profilePictureUrl && profilePictureUrl !== ' ' &&  <p style={{marginTop:'1rem',marginLeft:'1rem'}}>Your current profile picture</p>}
-                                                {profilePictureUrl && profilePictureUrl !== ' ' && <img src={profilePictureUrl} alt="Profile Picture"  style={{ width: '100px', height: '100px', objectFit: 'cover',marginLeft:'1rem',border: '1px solid black' }}  />}
+                                                <FileUpload onFileUpload={handleFileUploadSuccess} onUploadSuccess={handleFileUploadSuccess} onReset={() => {}}    />
+                                                {profilePictureFetchUrl && profilePictureFetchUrl !== ' ' &&  <p style={{marginTop:'1rem',marginLeft:'1rem'}}>Your current profile picture</p>}
+                                                {profilePictureFetchUrl && profilePictureFetchUrl !== ' ' && <img src={profilePictureFetchUrl} alt="Profile Picture"  style={{ width: '100px', height: '100px', objectFit: 'cover',marginLeft:'1rem',border: '1px solid black' }}  />}
                                                 
                                             </Grid>
                                             <Grid item xs={12} mb={3}>

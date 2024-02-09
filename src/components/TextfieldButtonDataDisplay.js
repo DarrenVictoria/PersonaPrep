@@ -249,6 +249,7 @@ function CustomizedHook({ maxWidth, minHeight = 90, data = [], label = "", onCha
     multiple: true,
     options: data,
     getOptionLabel: (option) => option.data,
+    
   });
   
 
