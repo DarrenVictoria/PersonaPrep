@@ -33,9 +33,16 @@ const PersonalInfo = () => {
 
     const [Proname, setProname] = useState('');
     const [PJobRoles, setPJobRoles] = useState([]);
+    const [jobRolesData, setJobRolesData] = useState([]);
     
     const handleFileUploadSuccess = (url) => {
-        setProfilePictureUrl(url);
+        setProfilePictureUrl(url.downloadURL);
+        console.log(url);
+      };
+
+      const handleReset = () => {
+        // Your reset logic here
+        console.log('Reset button clicked');
       };
 
     const phoneChange = (event) => setProname(event.target.value);
@@ -46,14 +53,20 @@ const PersonalInfo = () => {
         e.preventDefault();
         
         try {
+            console.log("Profile Picture URL:", profilePictureUrl); // Log profilePictureUrl before calling setDoc
+        console.log("Proname:", Proname);
+        console.log("PJobRoles:", PJobRoles);
+
             const db = getFirestore();
             const studentDetailsCollection = collection(db, 'studentdetails');
             const userDocument = doc(studentDetailsCollection, currentUser.email); // Use the email as document ID
+
+            const profilePictureDownloadURL = profilePictureUrl ? profilePictureUrl : null;
     
             await setDoc(userDocument, {
                 Proname,
                 PJobRoles,
-                profilePictureUrl: profilePictureUrl.downloadURL,
+                profilePictureUrl,
                 userId: currentUser.uid // assuming you have a user ID to associate with the data
             }, { merge: true }); // Merge with existing document if it exists
             
@@ -77,6 +90,8 @@ const PersonalInfo = () => {
                     setProname(docData.Proname || '');
                     setPJobRoles(docData.PJobRoles || []);
                     setProfilePictureUrl(docData.profilePictureUrl || null);
+                    console.log(profilePictureUrl);
+                   
                 }
             } catch (error) {
                 console.error('Error fetching personal info from Firestore: ', error);
@@ -116,7 +131,10 @@ const PersonalInfo = () => {
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span> Profile Picture</Typography>
-                                                <FileUpload onFileUpload={handleFileUploadSuccess} />
+                                                <FileUpload onFileUpload={handleFileUploadSuccess} onUploadSuccess={handleFileUploadSuccess} onReset={handleReset}    />
+                                                {profilePictureUrl && profilePictureUrl !== ' ' &&  <p style={{marginTop:'1rem',marginLeft:'1rem'}}>Your current profile picture</p>}
+                                                {profilePictureUrl && profilePictureUrl !== ' ' && <img src={profilePictureUrl} alt="Profile Picture"  style={{ width: '100px', height: '100px', objectFit: 'cover',marginLeft:'1rem',border: '1px solid black' }}  />}
+                                                
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <CustomizedHook 
