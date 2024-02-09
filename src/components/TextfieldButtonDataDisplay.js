@@ -58,7 +58,6 @@ const InputWrapper = styled("div")(
         ? "rgba(255,255,255,0.65)"
         : "rgba(0,0,0,.85)"
     };
-    height: 100%;
     box-sizing: border-box;
     padding: 4px 6px;
     width: 0;

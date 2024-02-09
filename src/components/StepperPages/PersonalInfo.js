@@ -24,6 +24,9 @@ import { next } from '../NextButton.js';
 import { useNavigate } from 'react-router-dom';
 import { collection, addDoc,doc , getDoc, setDoc, getFirestore, query, where, getDocs } from 'firebase/firestore';
 import { useAuth } from '../../hooks/useAuth.js';
+import EditIcon from '@mui/icons-material/Edit';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 
 const PersonalInfo = () => {
     const { currentUser } = useAuth();
@@ -154,7 +157,7 @@ const PersonalInfo = () => {
                                                     <ListItem >
                                                         <ListItemAvatar>
                                                             <Avatar sx={{borderRadius: '12px'}}>
-                                                                <img src={cphone} alt="Custom Icon" style={{ width: '27px', height: '31px' }}/>
+                                                                <EditIcon sx={{color:'black'}}/>
                                                             </Avatar>
                                                         </ListItemAvatar>
                                                         <ListItemText>
@@ -165,9 +168,8 @@ const PersonalInfo = () => {
                                                     </ListItem>
                                                     <ListItem >
                                                         <ListItemAvatar>
-                                                            {/* <Avatar sx={{borderRadius: '12px', display: 'flex', justifyContent: 'center', alignItems: 'center'  }}> */}
-                                                            <Avatar sx={{borderRadius: '12px', padding: '5px'}}>
-                                                                <img src={cphone} alt="Custom Icon" style={{ width: 'var(--40,40px)', height: '35.666px' }} />
+                                                            <Avatar sx={{borderRadius: '12px'}}>
+                                                                <AccountCircleIcon sx={{color:'black'}}/>
                                                             </Avatar>
                                                         </ListItemAvatar>
                                                         <ListItemText>
@@ -178,8 +180,8 @@ const PersonalInfo = () => {
                                                     </ListItem>
                                                     <ListItem >
                                                         <ListItemAvatar>
-                                                            <Avatar sx={{borderRadius: '12px', display: 'flex', justifyContent: 'center', alignItems: 'center'  }}>
-                                                                <img src={cphone} alt="Custom Icon" style={{ width: '41px', height: '39px' ,}} />
+                                                            <Avatar sx={{borderRadius: '12px'}}>
+                                                                <LocalPhoneIcon sx={{color:'black'}}/>
                                                             </Avatar>
                                                         </ListItemAvatar>
                                                         <ListItemText>
