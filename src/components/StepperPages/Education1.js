@@ -88,15 +88,18 @@ const School1 = () => {
         
         // Prepare the data to append to Firestore document
         const dataToUpdate = {
-
-            School1Name,
-            School1City,
-            School1Country,
-            School1Experience,
-            School1StartMonth,
-            School1StartYear,
-            School1EndMonth,
-            School1EndYear,
+            schools: [
+                {
+                    SchoolName: School1Name,
+                    SchoolCity: School1City,
+                    SchoolCountry: School1Country,
+                    SchoolExperience: School1Experience,
+                    SchoolStartMonth: School1StartMonth,
+                    SchoolStartYear: School1StartYear,
+                    SchoolEndMonth: School1EndMonth,
+                    SchoolEndYear: School1EndYear
+                }
+            ]
 
         };
 

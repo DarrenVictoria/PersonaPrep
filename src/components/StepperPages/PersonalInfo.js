@@ -62,12 +62,12 @@ const PersonalInfo = () => {
             const studentDetailsCollection = collection(db, 'studentdetails');
             const userDocument = doc(studentDetailsCollection, currentUser.email); // Use the email as document ID
 
-            const profilePictureDownloadURL = profilePictureUrl ? profilePictureUrl : null;
+            const finalProfilePictureUrl = profilePictureUrl || profilePictureFetchUrl;
     
             await setDoc(userDocument, {
                 Proname,
                 PJobRoles,
-                profilePictureUrl,
+                profilePictureUrl: finalProfilePictureUrl,
                 userId: currentUser.uid // assuming you have a user ID to associate with the data
             }, { merge: true }); // Merge with existing document if it exists
             
@@ -114,6 +114,8 @@ const PersonalInfo = () => {
             console.log(PJobRoles);
         }
     };
+
+   
     
 
 
@@ -134,7 +136,7 @@ const PersonalInfo = () => {
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span> Profile Picture</Typography>
-                                                <FileUpload onFileUpload={handleFileUploadSuccess} onUploadSuccess={handleFileUploadSuccess} onReset={() => {}}    />
+                                                <FileUpload onFileUpload={handleFileUploadSuccess} onUploadSuccess={handleFileUploadSuccess} onReset={handleReset}    />
                                                 {profilePictureFetchUrl && profilePictureFetchUrl !== ' ' &&  <p style={{marginTop:'1rem',marginLeft:'1rem'}}>Your current profile picture</p>}
                                                 {profilePictureFetchUrl && profilePictureFetchUrl !== ' ' && <img src={profilePictureFetchUrl} alt="Profile Picture"  style={{ width: '100px', height: '100px', objectFit: 'cover',marginLeft:'1rem',border: '1px solid black' }}  />}
                                                 
