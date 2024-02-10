@@ -61,14 +61,19 @@ const School2 = () => {
             if (existingDoc) {
                 const userData = existingDoc.data();
                 // Populate the form fields with fetched data
-                setSchool2Name(userData.School2Name || '');
-                setSchool2City(userData.School2City || '');
-                setSchool2Country(userData.School2Country || '');
-                setSchool2Experience(userData.School2Experience || '');
-                setSchool2StartMonth(userData.School2StartMonth || '');
-                setSchool2StartYear(userData.School2StartYear || '');
-                setSchool2EndMonth(userData.School2EndMonth || '');
-                setSchool2EndYear(userData.School2EndYear || '');
+                if (userData.schools && userData.schools.length >= 2) {
+                    // Retrieve the second school details from the array
+                    const secondSchool = userData.schools[1];
+                    // Populate the form fields with fetched data
+                    setSchool2Name(secondSchool.SchoolName || '');
+                    setSchool2City(secondSchool.SchoolCity || '');
+                    setSchool2Country(secondSchool.SchoolCountry || '');
+                    setSchool2Experience(secondSchool.SchoolExperience || '');
+                    setSchool2StartMonth(secondSchool.SchoolStartMonth || '');
+                    setSchool2StartYear(secondSchool.SchoolStartYear || '');
+                    setSchool2EndMonth(secondSchool.SchoolEndMonth || '');
+                    setSchool2EndYear(secondSchool.SchoolEndYear || '');
+                }
             }
         } catch (error) {
             console.error('Error fetching user data: ', error);
@@ -82,28 +87,51 @@ const School2 = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
-        // Prepare the data to append to Firestore document
-        const dataToUpdate = {
-            School2Name,
-            School2City,
-            School2Country,
-            School2Experience,
-            School2StartMonth,
-            School2StartYear,
-            School2EndMonth,
-            School2EndYear,
-        };
-
+    
         try {
             const db = getFirestore();
             const studentDetailsCollection = collection(db, 'studentdetails');
             const querySnapshot = await getDocs(query(studentDetailsCollection, where('email', '==', currentUser.email)));
             const existingDoc = querySnapshot.docs[0];
-
+    
             if (existingDoc) {
                 const existingDocRef = doc(db, 'studentdetails', existingDoc.id);
-                await updateDoc(existingDocRef, dataToUpdate);
+                const userData = existingDoc.data();
+                
+                // Preserve the existing schools array or create a new one if it doesn't exist
+                const updatedSchools = userData.schools ? [...userData.schools] : [];
+                
+                // Check if the second school data already exists
+                const secondSchoolExists = updatedSchools.length >= 2;
+    
+                if (secondSchoolExists) {
+                    // Update the existing second school data
+                    updatedSchools[1] = {
+                        SchoolName: School2Name,
+                        SchoolCity: School2City,
+                        SchoolCountry: School2Country,
+                        SchoolExperience: School2Experience,
+                        SchoolStartMonth: School2StartMonth,
+                        SchoolStartYear: School2StartYear,
+                        SchoolEndMonth: School2EndMonth,
+                        SchoolEndYear: School2EndYear
+                    };
+                } else {
+                    // Create a new entry for the second school data
+                    updatedSchools.push({
+                        SchoolName: School2Name,
+                        SchoolCity: School2City,
+                        SchoolCountry: School2Country,
+                        SchoolExperience: School2Experience,
+                        SchoolStartMonth: School2StartMonth,
+                        SchoolStartYear: School2StartYear,
+                        SchoolEndMonth: School2EndMonth,
+                        SchoolEndYear: School2EndYear
+                    });
+                }
+    
+                // Update the document with the updated schools array
+                await updateDoc(existingDocRef, { schools: updatedSchools });
                 console.log('Document updated with ID: ', existingDoc.id);
                 navigate('/exams');
             } else {
@@ -113,11 +141,12 @@ const School2 = () => {
             console.error('Error updating document: ', error);
         }
     };
+    
   
 
     return(
         <div className="formtemp-page">
-            <InterviewFormHeader title='Last School' />
+            <InterviewFormHeader title='Second to last school' />
             <div className="formtemp-bodyform">
                 <Grid container spacing={2} style={{ height: '100%' }}>
                     <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>

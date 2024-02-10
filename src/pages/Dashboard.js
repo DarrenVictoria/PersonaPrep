@@ -14,7 +14,7 @@ import OutboxIcon from '@mui/icons-material/Outbox';
 import SlideshowIcon from '@mui/icons-material/Slideshow';
 import AddLinkIcon from '@mui/icons-material/AddLink';
 import ShareIcon from '@mui/icons-material/Share';
-import FileUpload from '../components/FileUpload';
+import FileUpload from '../components/File Upload/FeebackUpload';
 
 import {useForm, Controller, useWatch } from 'react-hook-form';
 import { getFirestore, addDoc, collection,updateDoc, doc, setDoc, getDoc, serverTimestamp  } from 'firebase/firestore';
