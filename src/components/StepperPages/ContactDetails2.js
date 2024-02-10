@@ -29,6 +29,10 @@ import { next } from '../NextButton.js';
 import { useNavigate } from 'react-router-dom';
 import { collection, addDoc, getFirestore, query, where, getDocs, doc, updateDoc } from 'firebase/firestore';
 import { useAuth } from '../../hooks/useAuth.js'; 
+import PanToolAltIcon from '@mui/icons-material/PanToolAlt';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import GitHubIcon from '@mui/icons-material/GitHub';
+
 
 const ContactDetails_2 = () => {
     const { currentUser } = useAuth();
@@ -183,7 +187,7 @@ const ContactDetails_2 = () => {
                                                     <ListItem >
                                                         <ListItemAvatar>
                                                             <Avatar sx={{borderRadius: '12px'}}>
-                                                                <img src={chand} alt="Custom Icon" style={{ width: '27px', height: '31px' }}/>
+                                                                <PanToolAltIcon sx={{color:'black'}}/>
                                                             </Avatar>
                                                         </ListItemAvatar>
                                                         <ListItemText>
@@ -194,8 +198,8 @@ const ContactDetails_2 = () => {
                                                     </ListItem>
                                                     <ListItem >
                                                         <ListItemAvatar>
-                                                            <Avatar sx={{borderRadius: '12px', padding: '5px'}}>
-                                                                <img src={clinkedin} alt="Custom Icon" style={{ width: 'var(--40,40px)', height: '35.666px' }} />
+                                                            <Avatar sx={{borderRadius: '12px'}}>
+                                                                <LinkedInIcon sx={{color:'black'}}/>
                                                             </Avatar>
                                                         </ListItemAvatar>
                                                         <ListItemText>
@@ -206,8 +210,8 @@ const ContactDetails_2 = () => {
                                                     </ListItem>
                                                     <ListItem >
                                                         <ListItemAvatar>
-                                                            <Avatar sx={{borderRadius: '12px', display: 'flex', justifyContent: 'center', alignItems: 'center'  }}>
-                                                                <img src={cgithub} alt="Custom Icon" style={{ width: '41px', height: '39px' ,}} />
+                                                            <Avatar sx={{borderRadius: '12px'}}>
+                                                                <GitHubIcon sx={{color:'black'}}/>
                                                             </Avatar>
                                                         </ListItemAvatar>
                                                         <ListItemText>

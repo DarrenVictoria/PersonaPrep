@@ -1,4 +1,4 @@
-import './css/personalInfo.css';
+import './css/Education.css';
 import Grid from "@mui/material/Grid";
 import Typography from '@mui/material/Typography';
 import TextField from "@mui/material/TextField";
@@ -23,8 +23,9 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { collection, addDoc, getFirestore, query, where, getDocs, doc, updateDoc } from 'firebase/firestore';
 import { useAuth } from '../../hooks/useAuth.js';
-
-
+import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 const School1 = () => {
 
     const option = ["Year"];
@@ -63,14 +64,19 @@ const School1 = () => {
                 const userData = existingDoc.data();
                 // Populate the form fields with fetched data
 
-                setSchool1Name(userData.School1Name || '');
-                setSchool1City(userData.School1City || '');
-                setSchool1Country(userData.School1Country || '');
-                setSchool1Experience(userData.School1Experience || '');
-                setSchool1StartMonth(userData.School1StartMonth || '');
-                setSchool1StartYear(userData.School1StartYear || '');
-                setSchool1EndMonth(userData.School1EndMonth || '');
-                setSchool1EndYear(userData.School1EndYear || '');
+                if (userData.schools && userData.schools.length > 0) {
+                    // Retrieve the first school details from the array
+                    const firstSchool = userData.schools[0];
+                    // Populate the form fields with fetched data
+                    setSchool1Name(firstSchool.SchoolName || '');
+                    setSchool1City(firstSchool.SchoolCity || '');
+                    setSchool1Country(firstSchool.SchoolCountry || '');
+                    setSchool1Experience(firstSchool.SchoolExperience || '');
+                    setSchool1StartMonth(firstSchool.SchoolStartMonth || '');
+                    setSchool1StartYear(firstSchool.SchoolStartYear || '');
+                    setSchool1EndMonth(firstSchool.SchoolEndMonth || '');
+                    setSchool1EndYear(firstSchool.SchoolEndYear || '');
+                }
 
             }
         } catch (error) {
@@ -85,34 +91,50 @@ const School1 = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
-        // Prepare the data to append to Firestore document
-        const dataToUpdate = {
-
-            School1Name,
-            School1City,
-            School1Country,
-            School1Experience,
-            School1StartMonth,
-            School1StartYear,
-            School1EndMonth,
-            School1EndYear,
-
-        };
-
+    
         try {
             const db = getFirestore();
             const studentDetailsCollection = collection(db, 'studentdetails');
             const querySnapshot = await getDocs(query(studentDetailsCollection, where('email', '==', currentUser.email)));
             const existingDoc = querySnapshot.docs[0];
-
+    
             if (existingDoc) {
+                const existingData = existingDoc.data();
+                const existingSchools = existingData.schools || [];
+    
+                // Check if index 0 exists in the schools array
+                const firstSchoolExists = existingSchools.length > 0;
+    
+                // If index 0 exists, update its fields with the new values
+                if (firstSchoolExists) {
+                    existingSchools[0].SchoolName = School1Name;
+                    existingSchools[0].SchoolCity = School1City;
+                    existingSchools[0].SchoolCountry = School1Country;
+                    existingSchools[0].SchoolExperience = School1Experience;
+                    existingSchools[0].SchoolStartMonth = School1StartMonth;
+                    existingSchools[0].SchoolStartYear = School1StartYear;
+                    existingSchools[0].SchoolEndMonth = School1EndMonth;
+                    existingSchools[0].SchoolEndYear = School1EndYear;
+                } else {
+                    // If index 0 does not exist, create a new entry for School 1
+                    existingSchools.push({
+                        SchoolName: School1Name,
+                        SchoolCity: School1City,
+                        SchoolCountry: School1Country,
+                        SchoolExperience: School1Experience,
+                        SchoolStartMonth: School1StartMonth,
+                        SchoolStartYear: School1StartYear,
+                        SchoolEndMonth: School1EndMonth,
+                        SchoolEndYear: School1EndYear
+                    });
+                }
+    
+                // Update the document with the modified schools array
                 const existingDocRef = doc(db, 'studentdetails', existingDoc.id);
-                await updateDoc(existingDocRef, dataToUpdate);
+                await updateDoc(existingDocRef, { schools: existingSchools });
+    
                 console.log('Document updated with ID: ', existingDoc.id);
-
                 navigate('/secondSchool');
-
             } else {
                 console.error('Document does not exist for the current user.');
             }
@@ -120,18 +142,19 @@ const School1 = () => {
             console.error('Error updating document: ', error);
         }
     };
+    
   
 
     return(
         <div className="formtemp-page">
-            <InterviewFormHeader title='School' />
+            <InterviewFormHeader title='Latest School' />
             <div className="formtemp-bodyform">
                 <Grid container spacing={2} style={{ height: '100%' }}>
                     <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
                         <form onSubmit={handleSubmit} style={{ height: '100%', position: 'relative' }}>
                             <div style={{ margin: '80px 25px 125px' }}>
-                                <div className="personalInfo-main">
-                                    <div className="personalInfo-leftCol">
+                                <div className="Education-main">
+                                    <div className="Education-leftCol">
                                         <Grid container>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>School Name</Typography>
@@ -207,7 +230,7 @@ const School1 = () => {
                                         </Grid>
                                     </div>
 
-                                    <div className="personalInfo-rightCol">
+                                    <div className="Education-rightCol">
                                         <div style={{padding: '8px 0px', backgroundColor: '#fff', borderRadius: '15px', maxWidth: '363px'}}>
                                             <Card variant="outlined" sx={{height:'100%',maxHeight: '400px', width:'100%',maxWidth: '363px',borderRadius:'15px', border: 'none', overflowY:'auto',overflowX:'auto','@media (max-width:769px)':{borderColor:'white'},'@media (min-width:769px)':{overflowY:'hidden'}}}>                    <CardContent >
                                                 <Typography variant="h5" component="div" sx={{ textAlign: 'center', fontWeight: 'bold' }}>Educational Experience Tips</Typography>
@@ -215,7 +238,7 @@ const School1 = () => {
                                                     <ListItem >
                                                         <ListItemAvatar>
                                                             <Avatar sx={{borderRadius: '12px'}}>
-                                                                <img src={cphone} alt="Custom Icon" style={{ width: '27px', height: '31px' }}/>
+                                                                <AccessTimeFilledIcon sx={{color:'black'}}/>
                                                             </Avatar>
                                                         </ListItemAvatar>
                                                         <ListItemText>
@@ -227,8 +250,8 @@ const School1 = () => {
                                                     <ListItem >
                                                         <ListItemAvatar>
                                                             {/* <Avatar sx={{borderRadius: '12px', display: 'flex', justifyContent: 'center', alignItems: 'center'  }}> */}
-                                                            <Avatar sx={{borderRadius: '12px', padding: '5px'}}>
-                                                                <img src={cphone} alt="Custom Icon" style={{ width: 'var(--40,40px)', height: '35.666px' }} />
+                                                            <Avatar sx={{borderRadius: '12px'}}>
+                                                                <EmojiEventsIcon sx={{color:'black'}}/>
                                                             </Avatar>
                                                         </ListItemAvatar>
                                                         <ListItemText>
@@ -239,8 +262,8 @@ const School1 = () => {
                                                     </ListItem>
                                                     <ListItem >
                                                         <ListItemAvatar>
-                                                            <Avatar sx={{borderRadius: '12px', display: 'flex', justifyContent: 'center', alignItems: 'center'  }}>
-                                                                <img src={cphone} alt="Custom Icon" style={{ width: '41px', height: '39px' ,}} />
+                                                            <Avatar sx={{borderRadius: '12px'}}>
+                                                                <WorkspacePremiumIcon sx={{color:'black'}}/>
                                                             </Avatar>
                                                         </ListItemAvatar>
                                                         <ListItemText>
