@@ -1,3 +1,4 @@
+import * as React from "react";
 import './css/Education.css';
 import Grid from "@mui/material/Grid";
 import Typography from '@mui/material/Typography';
@@ -26,6 +27,14 @@ import { useAuth } from '../../hooks/useAuth.js';
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
+import Dialog from "@mui/material/Dialog";//dialog
+import DialogActions from "@mui/material/DialogActions";//dialog
+import DialogContent from "@mui/material/DialogContent";//dialog
+import DialogContentText from "@mui/material/DialogContentText";//dialog
+import DialogTitle from "@mui/material/DialogTitle";//dialog
+import useMediaQuery from "@mui/material/useMediaQuery";//dialog
+import { useTheme } from "@mui/material/styles";//dialog
+
 const School1 = () => {
 
     const option = ["Year"];
@@ -134,7 +143,7 @@ const School1 = () => {
                 await updateDoc(existingDocRef, { schools: existingSchools });
     
                 console.log('Document updated with ID: ', existingDoc.id);
-                navigate('/secondSchool');
+                // navigate('/secondSchool');
             } else {
                 console.error('Document does not exist for the current user.');
             }
@@ -143,7 +152,28 @@ const School1 = () => {
         }
     };
     
-  
+    //below code for dialog
+    const [open, setOpen] = React.useState(false);
+    const theme = useTheme();
+    const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+    const handleYes = () => {
+        
+        navigate('/secondSchool');
+        
+    };
+    const handleNo = () => {
+        
+        navigate('/exams')
+    
+    };
 
     return(
         <div className="formtemp-page">
@@ -286,7 +316,31 @@ const School1 = () => {
                                 </Grid>
                                     
                                 <Grid xs={6}>
-                                    <Button type='submit' style={next}>Next Step</Button>                                    
+                                    <Button type='submit'onClick={handleClickOpen} style={next}>Next Step</Button> 
+                                    <Dialog
+                                        fullScreen={fullScreen}
+                                        open={open}
+                                        onClose={handleClose}
+                                        aria-labelledby="responsive-dialog-title"
+                                        sx={{backdropFilter: "blur(5px)"}}
+                                    >
+                                        <DialogTitle id="responsive-dialog-title">
+                                        {"Do you have another school ?"}
+                                        </DialogTitle>
+                                        <DialogContent>
+                                        <DialogContentText>
+                                          If you wish to add another school please click on Yes.If you wish to skip to next page click on No  
+                                        </DialogContentText>
+                                        </DialogContent>
+                                        <DialogActions>
+                                        <Button autoFocus onClick={handleNo} >
+                                            No
+                                        </Button>
+                                        <Button onClick={handleYes} autoFocus >
+                                            Yes
+                                        </Button>
+                                        </DialogActions>
+                                    </Dialog>                                              
                                 </Grid>
                             </Grid>
                         </form>
