@@ -25,6 +25,9 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { back } from '../BackButton.js';
 import { next } from '../NextButton.js';
 import { useNavigate } from 'react-router-dom';
+import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+import KeyboardIcon from '@mui/icons-material/Keyboard';
+import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 
 const Publications = () => {
     const [PblTitle, setPblTitle] = useState('');
@@ -138,8 +141,8 @@ const Publications = () => {
                                     <List>
                                       <ListItem >
                                       <ListItemAvatar>
-                                        <Avatar sx={{ /*width: '38.732px', height: '39.022px',*/ borderRadius: '12px'/*, display: 'flex', justifyContent: 'center', alignItems: 'center'*/ }}>
-                                        <img src={cstat} alt="Custom Icon" style={{ width: '45.732px', height: '47.022px' }}/>
+                                        <Avatar sx={{borderRadius: '12px'}}>
+                                        <TrendingUpIcon sx={{color:'black'}}/>
                                         </Avatar>
                                       </ListItemAvatar>
                                       <ListItemText>
@@ -150,8 +153,8 @@ const Publications = () => {
                                       </ListItem>
                                       <ListItem >
                                       <ListItemAvatar>
-                                        <Avatar sx={{ /*width: '38.732px', height: '39.022px',*/ borderRadius: '12px' ,display: 'flex', justifyContent: 'center', alignItems: 'center'  }}>
-                                      <img src={ckey} alt="Custom Icon" style={{ width: '45.732px', height: '47.022px' }} />
+                                        <Avatar sx={{borderRadius: '12px'}}>
+                                      <KeyboardIcon sx={{color:'black'}}/>
                                       </Avatar>
                                       </ListItemAvatar>
                                       <ListItemText>
@@ -162,8 +165,8 @@ const Publications = () => {
                                       </ListItem>
                                       <ListItem >
                                       <ListItemAvatar>
-                                        <Avatar sx={{/* width: '38.732px', height: '39.022px',*/ borderRadius: '12px',display: 'flex', justifyContent: 'center', alignItems: 'center'  }}>
-                                      <img src={cbatch} alt="Custom Icon" style={{ width: '45.732px', height: '47.022px' ,}} />
+                                        <Avatar sx={{borderRadius: '12px'}}>
+                                      <WorkspacePremiumIcon sx={{color:'black'}}/>
                                       </Avatar>
                                       </ListItemAvatar>
                                       <ListItemText>

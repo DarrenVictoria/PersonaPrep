@@ -20,7 +20,7 @@
     height: auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     max-width: 100%;
     padding: 0 20px; /* Adjusted padding for smaller screens */

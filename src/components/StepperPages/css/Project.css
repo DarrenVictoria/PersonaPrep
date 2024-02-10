@@ -1,8 +1,8 @@
-.WorkExperience1-Maindiv{
+.Project-main{
     display: flex;
     flex-direction: row;
 }
-.WorkExperience1-LeftColumn{
+.Project-leftCol{
     flex: 1;
     height: auto;
     display: flex;
@@ -10,36 +10,34 @@
     justify-content: center;
     align-items: flex-start;
     max-width: 100%;
-    box-sizing: border-box; 
+    /* box-sizing: border-box; */
     padding: 10px; 
 }
-.WorkExperience1-RightColumn{
+.Project-rightCol{
     flex: 1;
     height: auto;
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
     max-width: 100%;
-    box-sizing: border-box; 
+    /* box-sizing: border-box; */
     padding: 10px;
     overflow: hidden;  
 }
 
+
+
 @media (max-width: 700px){
-    .WorkExperience1-Maindiv{
+    .Project-main{
         flex-direction: column;
     }
-    .WorkExperience1-LeftColumn,
-    .WorkExperience1-rightCol {
+    .Project-leftCol,
+    .Project-rightCol {
         align-items: center;
     }
-    .WorkExperience1-RightColumn{
+    .Project-rightCol{
         order: -1;
         /* overflow: scroll;   */
     }
-    /* .WorkExperience1-LeftColumn{
-        margin-top: 20px;
-    } */
     
 }
