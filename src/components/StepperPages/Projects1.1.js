@@ -1,3 +1,4 @@
+import * as React from "react";
 import './css/Project.css';
 import Grid from "@mui/material/Grid";
 import Typography from '@mui/material/Typography';
@@ -32,6 +33,13 @@ import KeyboardIcon from '@mui/icons-material/Keyboard';
 import EventIcon from '@mui/icons-material/Event';
 import ZoomInMapIcon from '@mui/icons-material/ZoomInMap';
 import ScreenshotMonitorIcon from '@mui/icons-material/ScreenshotMonitor';
+import Dialog from "@mui/material/Dialog";//dialog
+import DialogActions from "@mui/material/DialogActions";//dialog
+import DialogContent from "@mui/material/DialogContent";//dialog
+import DialogContentText from "@mui/material/DialogContentText";//dialog
+import DialogTitle from "@mui/material/DialogTitle";//dialog
+import useMediaQuery from "@mui/material/useMediaQuery";//dialog
+import { useTheme } from "@mui/material/styles";//dialog
 
 const Projects2 = () => {
     const Proj_Skills = [{data: 'c#',}, {data: 'react'}, {data: 'java'}];
@@ -80,7 +88,29 @@ const Projects2 = () => {
         // }
     };
 
+    //below code for dialog
+    const [open, setOpen] = React.useState(false);
+    const theme = useTheme();
+    const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+    const handleYes = () => {
+        
+            navigate('/thirdProject')
+        
+    };
+    const handleNo = () => {
+        
+        navigate('/certification')
     
+    }; 
+
     return(
         <div className="formtemp-page">
             <InterviewFormHeader title='Second Project' />
@@ -278,7 +308,31 @@ const Projects2 = () => {
                                 </Grid>
                                     
                                 <Grid xs={6}>
-                                    <Button type='submit' style={next}>Next Step</Button>                                    
+                                    <Button type='submit' onClick={handleClickOpen} style={next}>Next Step</Button>
+                                    <Dialog
+                                        fullScreen={fullScreen}
+                                        open={open}
+                                        onClose={handleClose}
+                                        aria-labelledby="responsive-dialog-title"
+                                        sx={{backdropFilter: "blur(5px)"}}
+                                    >
+                                        <DialogTitle id="responsive-dialog-title">
+                                        {"Do you have more projects?"}
+                                        </DialogTitle>
+                                        <DialogContent>
+                                        <DialogContentText>
+                                          If you wish to add more projects please click on Yes.If you wish to skip to next page click on No  
+                                        </DialogContentText>
+                                        </DialogContent>
+                                        <DialogActions>
+                                        <Button autoFocus onClick={handleNo} >
+                                            No
+                                        </Button>
+                                        <Button onClick={handleYes} autoFocus >
+                                            Yes
+                                        </Button>
+                                        </DialogActions>
+                                    </Dialog>                                         
                                 </Grid>
                             </Grid>
                         </form>
