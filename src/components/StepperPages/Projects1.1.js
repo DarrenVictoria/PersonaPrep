@@ -16,7 +16,6 @@ import { useState } from 'react';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
 import { CustomizedHook } from '../TextfieldButtonDataDisplay';
 import FileUpload from '../FileUpload';
 import InterviewFormFooter from '../InterviewFormFooter';
@@ -40,8 +39,31 @@ import DialogContentText from "@mui/material/DialogContentText";//dialog
 import DialogTitle from "@mui/material/DialogTitle";//dialog
 import useMediaQuery from "@mui/material/useMediaQuery";//dialog
 import { useTheme } from "@mui/material/styles";//dialog
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import OutlinedInput from "@mui/material/OutlinedInput";
+import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCircleOutlined';
 
 const Projects2 = () => {
+    const monthOption = [
+        {value: 'January', label: 'January'},
+        {value: 'February', label: 'February'},
+        {value: 'March', label: 'March'},
+        {value: 'April', label: 'April'},
+        {value: 'May', label: 'May'},
+        {value: 'June', label: 'June'},
+        {value: 'July', label: 'July'},
+        {value: 'August', label: 'August'},
+        {value: 'September', label: 'September'},
+        {value: 'October', label: 'October'},
+        {value: 'November', label: 'November'},
+        {value: 'December', label: 'December'}
+    ];
+    const yearOption = ["2024"];
+        for (let year = 2023; year >= 1990; year--) {
+        yearOption.push(String(year));
+        }
     const Proj_Skills = [{data: 'c#',}, {data: 'react'}, {data: 'java'}];
     const [Proj2Type, setProj2Type] = useState('');
     const [Proj2Name, setProj2Name] = useState('');
@@ -127,15 +149,31 @@ const Projects2 = () => {
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>Project Name</Typography>
                                                 <TextField type="text" variant="outlined" value={Proj2Name} onChange={(event) => setProj2Name(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='CV Builder'/>
                                             </Grid>
-                                            <Grid item xs={12} mb={-2}>
+                                            <Grid item xs={12} mb={1}>
                                                 <Typography><span style={{color: 'red'}}>*</span>Was it an individual or a group project?</Typography>
                                             </Grid>
                                             <Grid item xs={12} md={6} mb={3}>
-                                                <EditableChoose
+                                                {/* <EditableChoose
                                                     options={["Project Type", "Group Project","Individual Project"]}
                                                     onSelect={setProj2Type}
                                                     disabledOptions={[]}
-                                                />
+                                                /> */}
+                                                <FormControl variant="outlined" fullWidth>
+                                                    <Select
+                                                        value={Proj2Type}
+                                                        onChange={(event) => setProj2Type(event.target.value)}
+                                                        displayEmpty
+                                                        input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD'}} />}
+                                                        IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
+                                                        required
+                                                        
+                                                    >
+                                                        <MenuItem disabled value="">Project Type</MenuItem>
+                                                        <MenuItem value="Group Project">Group Project</MenuItem>
+                                                        <MenuItem value="Individual Project">Individual Project</MenuItem>
+                                                        
+                                                    </Select>
+                                                </FormControl>
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>What was your role in the project</Typography>
@@ -157,49 +195,125 @@ const Projects2 = () => {
                                                 <CustomizedHook onChange={handleProj2Skills} data={Proj_Skills} label={<Typography mb={1}><span style={{color: 'red'}}>*</span>What are the skills gained from the project?</Typography>}/>
 
                                             </Grid>
-                                            <Grid item xs={12} mb={-2}>
+                                            <Grid item xs={12} mb={1}>
                                                 <Typography><span style={{color: 'red'}}>*</span>Project Start Date</Typography>
                                             </Grid>
                                             <Grid item xs={6} pr={1}>
-                                                <EditableChoose
+                                                {/* <EditableChoose
                                                     options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
                                                     onSelect={setProj2StartMonth}
                                                     disabledOptions={[]}
-                                                />
+                                                /> */}
+                                                <FormControl variant="outlined" fullWidth>
+                                                    <Select
+                                                        value={Proj2StartMonth}
+                                                        onChange={(event) => setProj2StartMonth(event.target.value)}
+                                                        displayEmpty
+                                                        input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
+                                                        IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
+                                                        required
+                                                    >
+                                                        <MenuItem disabled value="">Month</MenuItem>
+                                                        {monthOption.map (option => (
+                                                            <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
+                                                        ))}
+                                                    </Select>
+                                                </FormControl>
                                             </Grid>
                                             <Grid item xs={6} mb={3} pl={1}>
-                                                <EditableChoose
+                                                {/* <EditableChoose
                                                     options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
                                                     onSelect={setProj2StartYear}
                                                     disabledOptions={["2024"]}
-                                                />
+                                                /> */}
+                                                <FormControl variant="outlined" fullWidth>
+                                                    <Select
+                                                        value={Proj2StartYear}
+                                                        onChange={(event) => setProj2StartYear(event.target.value)}
+                                                        displayEmpty
+                                                        input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
+                                                        IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
+                                                        required
+                                                    >
+                                                        <MenuItem disabled value="">Year</MenuItem>
+                                                        {yearOption.map(year => (
+                                                            <MenuItem key={year} value={year}>{year}</MenuItem>
+                                                        ))}
+                                                    </Select>
+                                                </FormControl>
                                             </Grid>
-                                            <Grid item xs={12} mb={-2}>
+                                            <Grid item xs={12} mb={1}>
                                                 <Typography><span style={{color: 'red'}}>*</span>Project End Date</Typography>
                                             </Grid>
                                             <Grid item xs={6} pr={1}>
-                                                <EditableChoose
+                                                {/* <EditableChoose
                                                     options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
                                                     onSelect={setProj2EndMonth}
                                                     disabledOptions={[]}
-                                                />
+                                                /> */}
+                                                <FormControl variant="outlined" fullWidth>
+                                                    <Select
+                                                        value={Proj2EndMonth}
+                                                        onChange={(event) => setProj2EndMonth(event.target.value)}
+                                                        displayEmpty
+                                                        input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
+                                                        IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
+                                                        required
+                                                    >
+                                                        <MenuItem disabled value="">Month</MenuItem>
+                                                        {monthOption.map (option => (
+                                                            <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
+                                                        ))}
+                                                    </Select>
+                                                </FormControl>
                                             </Grid>
                                             <Grid item xs={6} mb={3} pl={1}>
-                                                <EditableChoose
+                                                {/* <EditableChoose
                                                     options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
                                                     onSelect={setProj2EndYear}
                                                     disabledOptions={["2024"]}
-                                                />
+                                                /> */}
+                                                <FormControl variant="outlined" fullWidth>
+                                                    <Select
+                                                        value={Proj2EndYear}
+                                                        onChange={(event) => setProj2EndYear(event.target.value)}
+                                                        displayEmpty
+                                                        input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
+                                                        IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
+                                                        required
+                                                    >
+                                                        <MenuItem disabled value="">Year</MenuItem>
+                                                        {yearOption.map(year => (
+                                                            <MenuItem key={year} value={year}>{year}</MenuItem>
+                                                        ))}
+                                                    </Select>
+                                                </FormControl>
                                             </Grid>
-                                            <Grid item xs={12} mb={-2}>
+                                            <Grid item xs={12} mb={1}>
                                                 <Typography>Where this project took place (optional)</Typography>
                                             </Grid>
                                             <Grid item xs={12} md={5} mb={3}>
-                                                <EditableChoose
+                                                {/* <EditableChoose
                                                     options={["Place", "University","University"]}
                                                     onSelect={setProj2Place}
                                                     disabledOptions={[]}
-                                                />
+                                                /> */}
+                                                <FormControl variant="outlined" fullWidth>
+                                                    <Select
+                                                        value={Proj2Place}
+                                                        onChange={(event) => setProj2Place(event.target.value)}
+                                                        displayEmpty
+                                                        input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD'}} />}
+                                                        IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
+                                                        required
+                                                        
+                                                    >
+                                                        <MenuItem disabled value="">Place</MenuItem>
+                                                        <MenuItem value="University">University</MenuItem>
+                                                        <MenuItem value="School">School</MenuItem>
+                                                        
+                                                    </Select>
+                                                </FormControl>
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>Project evidence</Typography>

@@ -16,8 +16,32 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { back } from '../BackButton.js';
 import { next } from '../NextButton.js';
 import { useNavigate } from 'react-router-dom';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import OutlinedInput from "@mui/material/OutlinedInput";
+import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCircleOutlined';
 
 const Club2 = () => {
+
+  const monthOption = [
+    {value: 'January', label: 'January'},
+    {value: 'February', label: 'February'},
+    {value: 'March', label: 'March'},
+    {value: 'April', label: 'April'},
+    {value: 'May', label: 'May'},
+    {value: 'June', label: 'June'},
+    {value: 'July', label: 'July'},
+    {value: 'August', label: 'August'},
+    {value: 'September', label: 'September'},
+    {value: 'October', label: 'October'},
+    {value: 'November', label: 'November'},
+    {value: 'December', label: 'December'}
+];
+const yearOption = ["2024"];
+    for (let year = 2023; year >= 1990; year--) {
+    yearOption.push(String(year));
+    }
     const [Club2Name, setClub2Name] = useState('');
     const [Club2StartMonth, setClub2StartMonth] = useState('');
     const [Club2StartYear, setClub2StartYear] = useState('');
@@ -90,70 +114,147 @@ const Club2 = () => {
                                 <div className='Clubs-LeftColumn'>
                                 {/*<Box sx={{ flexGrow: 1 }}>*/}
                                 <Grid container>
-                                <Grid item xs={12} mb={-2}>
+                                <Grid item xs={12} mb={1}>
                                 <Typography ><span style={{color: 'red'}}>*</span> Club / Society you were a part of ?</Typography>
                                   </Grid>
                                   <Grid item xs={12} mb={3}>
-                                      <EditableChoose
+                                      {/* <EditableChoose
                                         options={["Clubs","Club1", "Club2", "Club3"]}
                                         onSelect={setClub2Name}
                                         disabledOptions={["Clubs"]}
                                         isRequired={true}
                                         //the below width did not work have to check
                                         
-                                        />
+                                        /> */}
+                                        <FormControl variant="outlined" fullWidth>
+                                          <Select
+                                              value={Club2Name}
+                                              onChange={(event) => setClub2Name(event.target.value)}
+                                              displayEmpty
+                                              input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD'}} />}
+                                              IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
+                                              required
+                                              
+                                          >
+                                              <MenuItem disabled value="">Clubs</MenuItem>
+                                              <MenuItem value="Club1">Club1</MenuItem>
+                                              <MenuItem value="Club2">Club2</MenuItem>
+                                              <MenuItem value="Club3">Club3</MenuItem>
+                                              
+                                          </Select>
+                                        </FormControl>
                                     
                                   </Grid>
-                                  <Grid item xs={12} mb={-2}>
+                                  <Grid item xs={12} mb={1}>
                                   <Typography ><span style={{color: 'red'}}>*</span> Start Date</Typography>
                                   </Grid>
                                   <Grid item xs={6} mb={3} pr={1}>
                                     
-                                  <EditableChoose
+                                  {/* <EditableChoose
                                   options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
                                   onSelect={setClub2StartMonth}
                                   disabledOptions={[]}
                                   isRequired={true}
                                   //the below width did not work have to check
                                 
-                                />
+                                /> */}
+                                <FormControl variant="outlined" fullWidth>
+                                    <Select
+                                        value={Club2StartMonth}
+                                        onChange={(event) => setClub2StartMonth(event.target.value)}
+                                        displayEmpty
+                                        input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
+                                        IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
+                                        required
+                                    >
+                                        <MenuItem disabled value="">Month</MenuItem>
+                                        {monthOption.map (option => (
+                                            <MenuItem  key={option.value} value={option.value}>{option.label}</MenuItem>
+                                        ))}
+                                    </Select>
+                                  </FormControl>
                                     
                                   </Grid>
                                   <Grid item xs={6} mb={3} pl={1}>
-                                  <EditableChoose
+                                  {/* <EditableChoose
                                   options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
                                   onSelect={setClub2StartYear}
                                   disabledOptions={["2024"]}
                                   isRequired={true}
                                   //the below width did not work have to check
                                 
-                                />
+                                /> */}
+                                <FormControl variant="outlined" fullWidth>
+                                      <Select
+                                          value={Club2StartYear}
+                                          onChange={(event) => setClub2StartYear(event.target.value)}
+                                          displayEmpty
+                                          input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
+                                          IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
+                                          required
+                                      >
+                                          <MenuItem disabled value="">Year</MenuItem>
+                                          {yearOption.map(year => (
+                                              <MenuItem key={year} value={year}>{year}</MenuItem>
+                                          ))}
+                                      </Select>
+                                  </FormControl>
                                     
                                   </Grid>
-                                  <Grid item xs={12} mb={-2}>
+                                  <Grid item xs={12} mb={1}>
                                   <Typography ><span style={{color: 'red'}}>*</span> End Date</Typography>
                                   </Grid>
                                   <Grid item xs={6} mb={3} pr={1}>
                                     
-                                  <EditableChoose
+                                  {/* <EditableChoose
                                   options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
                                   onSelect={setClub2EndMonth}
                                   disabledOptions={[]}
                                   isRequired={true}
                                   //the below width did not work have to check
                                 
-                                />
+                                /> */}
+                                <FormControl variant="outlined" fullWidth>
+                                      <Select
+                                          value={Club2EndMonth}
+                                          onChange={(event) => setClub2EndMonth(event.target.value)}
+                                          displayEmpty
+                                          input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
+                                          IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
+                                          required
+                                      >
+                                          <MenuItem disabled value="">Month</MenuItem>
+                                          {monthOption.map (option => (
+                                              <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
+                                          ))}
+                                      </Select>
+                                    </FormControl>
                                     
                                   </Grid>
                                   <Grid item xs={6} mb={3} pl={1}>
-                                  <EditableChoose
+                                  {/* <EditableChoose
                                   options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
                                   onSelect={setClub2EndYear}
                                   disabledOptions={["2024"]}
                                   isRequired={true}
                                   //the below width did not work have to check
                                 
-                                />
+                                /> */}
+                                <FormControl variant="outlined" fullWidth>
+                                      <Select
+                                          value={Club2EndYear}
+                                          onChange={(event) => setClub2EndYear(event.target.value)}
+                                          displayEmpty
+                                          input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
+                                          IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
+                                          required
+                                      >
+                                          <MenuItem disabled value="">Year</MenuItem>
+                                          {yearOption.map(year => (
+                                              <MenuItem key={year} value={year}>{year}</MenuItem>
+                                          ))}
+                                      </Select>
+                                    </FormControl>
                                     
                                   </Grid>
                                   {/* /*<Grid item xs={1}>
