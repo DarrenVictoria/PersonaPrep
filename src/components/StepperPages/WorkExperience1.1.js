@@ -28,6 +28,9 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { back } from '../BackButton.js';
 import { next } from '../NextButton.js';
 import { useNavigate } from 'react-router-dom';
+import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 const WorkExperience2 = () => {
     const Jb_SkillsAcquired = [{data:"c#"},{data:"Winforms"}];
@@ -200,7 +203,7 @@ const WorkExperience2 = () => {
                                                     <ListItem >
                                                         <ListItemAvatar>
                                                             <Avatar sx={{borderRadius: '12px'}}>
-                                                                <img src={cacute} alt="Custom Icon" style={{ width: 'var(--40,40px)', height: '35.666px' }}/>
+                                                                <AccessTimeFilledIcon sx={{color:'black'}}/>
                                                             </Avatar>
                                                         </ListItemAvatar>
                                                         <ListItemText>
@@ -211,9 +214,9 @@ const WorkExperience2 = () => {
                                                     </ListItem>
                                                     <ListItem >
                                                         <ListItemAvatar>
-                                                            {/* <Avatar sx={{borderRadius: '12px', display: 'flex', justifyContent: 'center', alignItems: 'center'  }}> */}
-                                                            <Avatar sx={{borderRadius: '12px', padding: '5px'}}>
-                                                                <img src={ccheck_box} alt="Custom Icon" style={{ width: 'var(--40,40px)', height: '35.666px' }} />
+                                                            
+                                                            <Avatar sx={{borderRadius: '12px'}}>
+                                                                <CheckBoxIcon sx={{color:'black'}}/>
                                                             </Avatar>
                                                         </ListItemAvatar>
                                                         <ListItemText>
@@ -224,8 +227,8 @@ const WorkExperience2 = () => {
                                                     </ListItem>
                                                     <ListItem >
                                                         <ListItemAvatar>
-                                                            <Avatar sx={{borderRadius: '12px', display: 'flex', justifyContent: 'center', alignItems: 'center'  }}>
-                                                                <img src={ccalander} alt="Custom Icon" style={{ width: 'var(--40,40px)', height: '35.666px' }} />
+                                                            <Avatar sx={{borderRadius: '12px'}}>
+                                                               <CalendarMonthIcon sx={{color:'black'}}/>
                                                             </Avatar>
                                                         </ListItemAvatar>
                                                         <ListItemText>
