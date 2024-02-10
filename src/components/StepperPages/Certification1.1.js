@@ -27,8 +27,30 @@ import { useNavigate } from 'react-router-dom';
 import BookIcon from '@mui/icons-material/Book';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import LayersIcon from '@mui/icons-material/Layers';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import OutlinedInput from "@mui/material/OutlinedInput";
+import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCircleOutlined';
 const Certification2 = () => {
-
+    const monthOption = [
+        {value: 'January', label: 'January'},
+        {value: 'February', label: 'February'},
+        {value: 'March', label: 'March'},
+        {value: 'April', label: 'April'},
+        {value: 'May', label: 'May'},
+        {value: 'June', label: 'June'},
+        {value: 'July', label: 'July'},
+        {value: 'August', label: 'August'},
+        {value: 'September', label: 'September'},
+        {value: 'October', label: 'October'},
+        {value: 'November', label: 'November'},
+        {value: 'December', label: 'December'}
+    ];
+    const yearOption = ["2024"];
+        for (let year = 2023; year >= 1990; year--) {
+        yearOption.push(String(year));
+        }
 
     const CProj_Skills = [{data: 'c#'}, {data: 'java'}, {data: 'react'}];
 
@@ -107,39 +129,99 @@ const Certification2 = () => {
                                                 <Typography ><span style={{color: 'red'}}>*</span> Issuing Organization</Typography>
                                                 <TextField type="text" variant="outlined" value={Certificate2issuedOrg} onChange={(event) => setCertificate2issuedOrg(event.target.value)} fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}}/>
                                             </Grid>
-                                            <Grid item xs={12} mb={-2}>
+                                            <Grid item xs={12} mb={1}>
                                                 <Typography><span style={{color: 'red'}}>*</span>Issue Date</Typography>
                                             </Grid>
                                             <Grid item xs={6} pr={1}>
-                                                <EditableChoose
+                                                {/* <EditableChoose
                                                     options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
                                                     onSelect={setCertificate2IssueMonth}
                                                     disabledOptions={[]}
-                                                />
+                                                /> */}
+                                                <FormControl variant="outlined" fullWidth>
+                                                    <Select
+                                                        value={Certificate2IssueMonth}
+                                                        onChange={(event) => setCertificate2IssueMonth(event.target.value)}
+                                                        displayEmpty
+                                                        input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
+                                                        IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
+                                                        required
+                                                    >
+                                                        <MenuItem disabled value="">Month</MenuItem>
+                                                        {monthOption.map (option => (
+                                                            <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
+                                                        ))}
+                                                    </Select>
+                                                </FormControl>
                                             </Grid>
                                             <Grid item xs={6} mb={3} pl={1}>
-                                                <EditableChoose
+                                                {/* <EditableChoose
                                                     options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
                                                     onSelect={setCertificate2IssueYear}
                                                     disabledOptions={["2024"]}
-                                                />
+                                                /> */}
+                                                <FormControl variant="outlined" fullWidth>
+                                                    <Select
+                                                        value={Certificate2IssueYear}
+                                                        onChange={(event) => setCertificate2IssueYear(event.target.value)}
+                                                        displayEmpty
+                                                        input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
+                                                        IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
+                                                        required
+                                                    >
+                                                        <MenuItem disabled value="">Year</MenuItem>
+                                                        {yearOption.map(year => (
+                                                            <MenuItem key={year} value={year}>{year}</MenuItem>
+                                                        ))}
+                                                    </Select>
+                                                </FormControl>
                                             </Grid>
-                                            <Grid item xs={12} mb={-2}>
+                                            <Grid item xs={12} mb={1}>
                                                 <Typography><span style={{color: 'red'}}>*</span>Expiration Date</Typography>
                                             </Grid>
                                             <Grid item xs={6} pr={1}>
-                                                <EditableChoose
+                                                {/* <EditableChoose
                                                     options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
                                                     onSelect={setCertificate2ExpMonth}
                                                     disabledOptions={[]}
-                                                />
+                                                /> */}
+                                                <FormControl variant="outlined" fullWidth>
+                                                    <Select
+                                                        value={Certificate2ExpMonth}
+                                                        onChange={(event) => setCertificate2ExpMonth(event.target.value)}
+                                                        displayEmpty
+                                                        input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
+                                                        IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
+                                                        required
+                                                    >
+                                                        <MenuItem disabled value="">Month</MenuItem>
+                                                        {monthOption.map (option => (
+                                                            <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
+                                                        ))}
+                                                    </Select>
+                                                </FormControl>
                                             </Grid>
                                             <Grid item xs={6} mb={3} pl={1}>
-                                                <EditableChoose
+                                                {/* <EditableChoose
                                                     options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
                                                     onSelect={setCertificate2ExpYear}
                                                     disabledOptions={["2024"]}
-                                                />
+                                                /> */}
+                                                <FormControl variant="outlined" fullWidth>
+                                                    <Select
+                                                        value={Certificate2ExpYear}
+                                                        onChange={(event) => setCertificate2ExpYear(event.target.value)}
+                                                        displayEmpty
+                                                        input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
+                                                        IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
+                                                        required
+                                                    >
+                                                        <MenuItem disabled value="">Year</MenuItem>
+                                                        {yearOption.map(year => (
+                                                            <MenuItem key={year} value={year}>{year}</MenuItem>
+                                                        ))}
+                                                    </Select>
+                                                </FormControl>
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography ><span style={{color: 'red'}}>*</span>Certification ID</Typography>

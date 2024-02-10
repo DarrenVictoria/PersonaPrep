@@ -23,6 +23,11 @@ import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCi
 
 
 const Education_2 = () => {
+    const yearOption = ["2024"];
+        for (let year = 2023; year >= 1990; year--) {
+        yearOption.push(String(year));
+        }
+    
     const [olYear, setOlYear] = useState('');
     const [alYear, setAlYear] = useState('');  
 
@@ -94,15 +99,30 @@ const Education_2 = () => {
                                             <Grid item xs={12} mb={2} >
                                                 <Typography variant='h4'>OL Examination Result</Typography>    
                                             </Grid>
-                                            <Grid item xs={12} mb={-2}>
+                                            <Grid item xs={12} mb={1}>
                                                 <Typography><span style={{color: 'red'}}>*</span>In which year did you complete your OL exams?</Typography>
                                             </Grid>
                                             <Grid item xs={6} md={2}>
-                                                <EditableChoose
+                                                {/* <EditableChoose
                                                     options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
                                                     onSelect={setOlYear}
                                                     disabledOptions={["2024"]}
-                                                />
+                                                /> */}
+                                                 <FormControl variant="outlined" fullWidth>
+                                                    <Select
+                                                        value={olYear}
+                                                        onChange={(event) => setOlYear(event.target.value)}
+                                                        displayEmpty
+                                                        input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
+                                                        IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
+                                                        required
+                                                    >
+                                                        <MenuItem disabled value="">Year</MenuItem>
+                                                        {yearOption.map(year => (
+                                                            <MenuItem key={year} value={year}>{year}</MenuItem>
+                                                        ))}
+                                                    </Select>
+                                                </FormControl>
                                             </Grid>
                                             <Grid item xs={12} mt={3} >
                                                 <Typography><span style={{color: 'red'}}>*</span>Subject Results</Typography>
@@ -131,7 +151,7 @@ const Education_2 = () => {
                                                                 IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
                                                                 required = {(index === 0)? true: false}
                                                             >
-                                                                <MenuItem value="">Result</MenuItem>
+                                                                <MenuItem  disabled value="">Result</MenuItem>
                                                                 <MenuItem value="A">A</MenuItem>
                                                                 <MenuItem value="B">B</MenuItem>
                                                                 <MenuItem value="C">C</MenuItem>
@@ -162,15 +182,30 @@ const Education_2 = () => {
                                             <Grid item xs={12} mb={2} mt={5}>
                                                 <Typography variant='h4'>AL Examination Result</Typography>    
                                             </Grid>                    
-                                            <Grid item xs={12} mb={-2}> 
+                                            <Grid item xs={12} mb={1}> 
                                                 <Typography>In which year did you complete your AL exams? (First/Final attempt)</Typography>
                                             </Grid>
                                             <Grid item xs={6} md={2}>
-                                                <EditableChoose
+                                                {/* <EditableChoose
                                                     options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
                                                     onSelect={setAlYear}
                                                     disabledOptions={["2024"]}
-                                                />
+                                                /> */}
+                                                <FormControl variant="outlined" fullWidth>
+                                                    <Select
+                                                        value={alYear}
+                                                        onChange={(event) => setAlYear(event.target.value)}
+                                                        displayEmpty
+                                                        input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
+                                                        IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
+                                                        required
+                                                    >
+                                                        <MenuItem disabled value="">Year</MenuItem>
+                                                        {yearOption.map(year => (
+                                                            <MenuItem key={year} value={year}>{year}</MenuItem>
+                                                        ))}
+                                                    </Select>
+                                                </FormControl>
                                             </Grid>                                         
                                             <Grid item xs={12} mt={3}>
                                                 <Typography>Subject Results</Typography>
@@ -199,7 +234,7 @@ const Education_2 = () => {
                                                                 IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
                                                                 // required = {(index === 0)? true: false}
                                                             >
-                                                                <MenuItem value="">Result</MenuItem>
+                                                                <MenuItem disabled value="">Result</MenuItem>
                                                                 <MenuItem value="A">A</MenuItem>
                                                                 <MenuItem value="B">B</MenuItem>
                                                                 <MenuItem value="C">C</MenuItem>
