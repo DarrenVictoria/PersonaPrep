@@ -16,6 +16,11 @@ import { getAuth } from 'firebase/auth';
 import { useAuth } from '../../hooks/useAuth.js'; 
 import LoadingScreen from 'react-loading-screen';
 import Logo from "../../assets/logo/Persona Prep Dark.png"
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import OutlinedInput from "@mui/material/OutlinedInput";
+import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCircleOutlined';
 
 
 //Code check 
@@ -147,11 +152,11 @@ const FacultyDetails = () => {
 
     const prevPage = () => navigate('/home');
 
-    useEffect(() => {
-        console.log('selectedFaculty:', selectedFaculty);
-        console.log('selectedBatch:', selectedBatch);
-        console.log('selectedDegree:', selectedDegree);
-    }, [selectedFaculty, selectedBatch, selectedDegree]);
+    // useEffect(() => {
+    //     console.log('selectedFaculty:', selectedFaculty);
+    //     console.log('selectedBatch:', selectedBatch);
+    //     console.log('selectedDegree:', selectedDegree);
+    // }, [selectedFaculty, selectedBatch, selectedDegree]);
 
     if (loading) {
         return <div>
@@ -183,40 +188,92 @@ const FacultyDetails = () => {
                                     </div>
                                     <br />
                                     <div>
-                                        <Typography mb={-2}><span style={{ color: 'red' }}>*</span> Please specify your faculty</Typography>
-                                        <Choose
+                                        <Typography><span style={{ color: 'red' }}>*</span> Please specify your faculty</Typography>
+                                        {/* <Choose
                                             options={["Faculty","Faculty of Computing", "Faculty of Business", "Faculty of Engineering", "Faculty of Science"]}
                                             onSelect={setSelectedFaculty}
                                             disabledOptions={["Faculty","Faculty of Business","Faculty of Engineering", "Faculty of Science"]}
                                             isRequired={true}
                                             defaultValue={selectedFaculty}
-                                        />
+                                        /> */}
+                                        <FormControl variant="outlined" fullWidth>
+                                            <Select
+                                                value={selectedFaculty}
+                                                onChange={(event) => setSelectedFaculty(event.target.value)}
+                                                displayEmpty
+                                                input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD', width: '300px' }} />}
+                                                IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
+                                                required 
+                                                fullWidth                                                
+                                            >
+                                                <MenuItem value="">Faculty</MenuItem>
+                                                <MenuItem value="Faculty of Computing">Faculty of Computing</MenuItem>
+                                                <MenuItem value="Faculty of Business" disabled>Faculty of Business</MenuItem>
+                                                <MenuItem value="Faculty of Engineering" disabled>Faculty of Engineering</MenuItem>
+                                                <MenuItem value="Faculty of Science" disabled>Faculty of Science</MenuItem>
+                                            </Select>
+                                        </FormControl>
 
                                     </div>
                                     <br />
                                     <div>
-                                        <Typography mb={-2}><span style={{ color: 'red' }}>*</span> Please specify your batch</Typography>
-                                        <Choose
+                                        <Typography><span style={{ color: 'red' }}>*</span> Please specify your batch</Typography>
+                                        {/* <Choose
                                             options={["Batch","23.2","23.1","22.2", "22.1", "21.2", "21.1", "20.2", "20.3"]}
                                             onSelect={setSelectedBatch}
                                             disabledOptions={["Batch"]}
                                             isRequired={true}
                                             defaultValue={selectedBatch}
-                                        />
-
+                                        /> */}
+                                        <FormControl variant="outlined" fullWidth>
+                                            <Select
+                                                value={selectedBatch}
+                                                onChange={(event) => setSelectedBatch(event.target.value)}
+                                                displayEmpty
+                                                input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD', width: '300px' }} />}
+                                                IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
+                                                required
+                                                fullWidth
+                                            >
+                                                <MenuItem value="">Batch</MenuItem>
+                                                <MenuItem value="23.2">23.2</MenuItem>
+                                                <MenuItem value="23.1">23.1</MenuItem>
+                                                <MenuItem value="22.2">22.2</MenuItem>
+                                                <MenuItem value="22.1">22.1</MenuItem>
+                                                <MenuItem value="21.2">21.2</MenuItem>
+                                                <MenuItem value="21.1">21.1</MenuItem>
+                                                <MenuItem value="20.3">20.3</MenuItem>
+                                                <MenuItem value="20.2">20.2</MenuItem>
+                                            </Select>
+                                        </FormControl>
                                     </div>
                                     <br />
                                     <div>
-                                        <Typography mb={-2}><span style={{ color: 'red' }}>*</span> Degree affiliation</Typography>
-                                        <Choose
+                                        <Typography><span style={{ color: 'red' }}>*</span> Degree affiliation</Typography>
+                                        {/* <Choose
                                             options={["University","Plymouth University", "Victoria University", "NSBM Green University"]}
                                             onSelect={setSelectedDegree}
                                             disabledOptions={["University"]}
                                             isRequired={true}
                                             defaultValue={selectedDegree}
-                                        />
+                                        /> */}
+                                        <FormControl variant="outlined" fullWidth>
+                                            <Select
+                                                value={selectedDegree}
+                                                onChange={(event) => setSelectedDegree(event.target.value)}
+                                                displayEmpty
+                                                input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD', width: '300px' }} />}
+                                                IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
+                                                required
+                                                fullWidth
+                                            >
+                                                <MenuItem value="">University</MenuItem>
+                                                <MenuItem value="Plymouth University">Plymouth University</MenuItem>
+                                                <MenuItem value="Victoria University">Victoria University</MenuItem>
+                                                <MenuItem value="NSBM Green University">NSBM Green University</MenuItem>
+                                            </Select>
+                                        </FormControl>
                                     </div>
-                                    {/* {(!parah) && <Typography color='error'>bla bla bla</Typography>}*/}
                                 </div>
 
                             </div>
