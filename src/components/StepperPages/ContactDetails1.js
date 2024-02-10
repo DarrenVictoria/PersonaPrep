@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { collection, addDoc, getFirestore, query, where, getDocs, doc, updateDoc } from 'firebase/firestore';
-import InterviewFormFooter from '../InterviewFormFooter';
 import InterviewFormHeader from '../InterviewFormHeader';
 import '../../pages/interviewforms/Template.css';
 import './css/ContactDetails1.css';
@@ -22,9 +21,6 @@ import CloseIcon from '@mui/icons-material/Close';
 //import Button from '@mui/material/Button';
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
-import cphone from '../../assets/images/iconcphone.svg';
-import cmail from '../../assets/images/iconcmail.svg';
-import cfolder from '../../assets/images/iconcfolder.svg';
 import Button from "@mui/material/Button";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { back } from '../BackButton.js';
@@ -98,7 +94,7 @@ const ContactDetails_1 = () => {
 
             if (existingDoc) {
                 const userData = existingDoc.data();
-                console.log(userData)
+                // console.log(userData)
                 setValue('phone', userData.phone || ''); 
                 setValue('pemail', userData.pemail || ''); 
                 setValue('district', userData.district || ''); 
@@ -190,7 +186,7 @@ const onSubmit = async (formData) => {
                                                 value={phone}
                                                 fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder='Full Stack Developer'
-                                                {...register("phone", { required: true, maxLength: 10, pattern: /^[0-9]+$/  })}
+                                                {...register("phone", { required: true, maxLength: 30, pattern: /^[0-9]+$/  })}
                                                 />
                                                 {errors.phone && errors.phone.type === "required" ? "This field is required" : errors.phone && "Please enter only numbers"}
                                             </Grid>
@@ -216,7 +212,7 @@ const onSubmit = async (formData) => {
                                                 value={district}
                                                 fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 // placeholder='Full Stack Developer'
-                                                {...register("district", { required: true, maxLength: 10, pattern: /^[a-zA-Z\s]+$/})}
+                                                {...register("district", { required: true, maxLength: 30, pattern: /^[a-zA-Z\s]+$/})}
                                                 />
                                                 {errors.district && errors.district.type === "required" ? "This field is required" : errors.district && "Please enter only letters"}
                                             </Grid>
@@ -229,7 +225,7 @@ const onSubmit = async (formData) => {
                                                 value={city}
                                                 fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 // placeholder='Full Stack Developer'
-                                                {...register("city", { required: true, maxLength: 10, pattern: /^[a-zA-Z\s]+$/  })}
+                                                {...register("city", { required: true, maxLength: 30, pattern: /^[a-zA-Z\s]+$/  })}
                                                 />
                                                 {errors.city && errors.city.type === "required" ? "This field is required" : errors.city && "Please enter only letters"}
                                             </Grid>
@@ -242,7 +238,7 @@ const onSubmit = async (formData) => {
                                                 value={postal}
                                                 fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 // placeholder='Full Stack Developer'
-                                                {...register("postal", { required: true, maxLength: 10, pattern: /^[0-9]+$/  })}
+                                                {...register("postal", { required: true, maxLength: 30, pattern: /^[0-9]+$/  })}
                                                 />
                                                 {errors.postal && errors.postal.type === "required" ? "This field is required" : errors.postal && "Please enter only numbers"}
                                             </Grid>
@@ -255,7 +251,7 @@ const onSubmit = async (formData) => {
                                                 value={country}
                                                 fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 // placeholder='Full Stack Developer'
-                                                {...register("country", { required: true, maxLength: 10  })}
+                                                {...register("country", { required: true, maxLength: 30  })}
                                                 />
                                                 {errors.country && errors.country.type === "required" ? "This field is required" : errors.country && "Please enter only letters"}
                                             </Grid>
@@ -268,9 +264,10 @@ const onSubmit = async (formData) => {
                                                 value={portfolioSite}
                                                 fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 // placeholder='Full Stack Developer'
-                                                {...register("portfolioSite", { required: true, maxLength: 10, pattern: /^[a-zA-Z\s]+$/  })}
+                                                {...register("portfolioSite", { required: true, maxLength: 30 })}
                                                 />
-                                                {errors.portfolioSite && errors.portfolioSite.type === "required" ? "This field is required" : errors.portfolioSite && "Please enter only letters"}
+                                                {/* {errors.portfolioSite && errors.portfolioSite.type === "required" ? "This field is required" : errors.portfolioSite && "Please enter only letters"} */}
+                                                {errors.portfolioSite && "This field is required"}
                                             </Grid>
                                             
                                           </Grid>
