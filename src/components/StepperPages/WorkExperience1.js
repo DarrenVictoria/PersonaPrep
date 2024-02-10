@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import * as React from "react";
+import { useEffect } from 'react';
 import './css/WorkExperience1.css';
 import '../../pages/interviewforms/Template.css';
 import InterviewFormFooter from '../InterviewFormFooter';
@@ -28,6 +29,16 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { back } from '../BackButton.js';
 import { next } from '../NextButton.js';
 import { useNavigate } from 'react-router-dom';
+import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import Dialog from "@mui/material/Dialog";//dialog
+import DialogActions from "@mui/material/DialogActions";//dialog
+import DialogContent from "@mui/material/DialogContent";//dialog
+import DialogContentText from "@mui/material/DialogContentText";//dialog
+import DialogTitle from "@mui/material/DialogTitle";//dialog
+import useMediaQuery from "@mui/material/useMediaQuery";//dialog
+import { useTheme } from "@mui/material/styles";//dialog
 
 const WorkExperience1 = () => {
     const Jb_SkillsAcquired = [{data:"c#"},{data:"Winforms"}];
@@ -79,7 +90,7 @@ const WorkExperience1 = () => {
     const prevPage = () => navigate('/university');
     const handleSubmit = (e) => {
         e.preventDefault();
-        navigate('/secondWork')
+        // navigate('/secondWork')
         // validate();
 
         // Check if validation passed
@@ -90,6 +101,29 @@ const WorkExperience1 = () => {
         //     console.log('Validation failed');
         // }
     };
+
+    //below code for dialog
+    const [open, setOpen] = React.useState(false);
+    const theme = useTheme();
+    const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+    const handleYes = () => {
+        
+            navigate('/secondWork')
+        
+    };
+    const handleNo = () => {
+        
+        navigate('/project')
+    
+    }; 
 
 
     return(
@@ -200,7 +234,7 @@ const WorkExperience1 = () => {
                                                     <ListItem >
                                                         <ListItemAvatar>
                                                             <Avatar sx={{borderRadius: '12px'}}>
-                                                                <img src={cacute} alt="Custom Icon" style={{ width: 'var(--40,40px)', height: '35.666px' }}/>
+                                                                <AccessTimeFilledIcon sx={{color:'black'}}/>
                                                             </Avatar>
                                                         </ListItemAvatar>
                                                         <ListItemText>
@@ -211,9 +245,9 @@ const WorkExperience1 = () => {
                                                     </ListItem>
                                                     <ListItem >
                                                         <ListItemAvatar>
-                                                            {/* <Avatar sx={{borderRadius: '12px', display: 'flex', justifyContent: 'center', alignItems: 'center'  }}> */}
-                                                            <Avatar sx={{borderRadius: '12px', padding: '5px'}}>
-                                                                <img src={ccheck_box} alt="Custom Icon" style={{ width: 'var(--40,40px)', height: '35.666px' }} />
+                                                            
+                                                            <Avatar sx={{borderRadius: '12px'}}>
+                                                                <CheckBoxIcon sx={{color:'black'}}/>
                                                             </Avatar>
                                                         </ListItemAvatar>
                                                         <ListItemText>
@@ -224,8 +258,8 @@ const WorkExperience1 = () => {
                                                     </ListItem>
                                                     <ListItem >
                                                         <ListItemAvatar>
-                                                            <Avatar sx={{borderRadius: '12px', display: 'flex', justifyContent: 'center', alignItems: 'center'  }}>
-                                                                <img src={ccalander} alt="Custom Icon" style={{ width: 'var(--40,40px)', height: '35.666px' }} />
+                                                            <Avatar sx={{borderRadius: '12px'}}>
+                                                               <CalendarMonthIcon sx={{color:'black'}}/>
                                                             </Avatar>
                                                         </ListItemAvatar>
                                                         <ListItemText>
@@ -248,7 +282,31 @@ const WorkExperience1 = () => {
                                 </Grid>
                                     
                                 <Grid xs={6}>
-                                    <Button type='submit' style={next}>Next Step</Button>                                    
+                                    <Button type='submit' onClick={handleClickOpen} style={next}>Next Step</Button>     
+                                    <Dialog
+                                        fullScreen={fullScreen}
+                                        open={open}
+                                        onClose={handleClose}
+                                        aria-labelledby="responsive-dialog-title"
+                                        sx={{backdropFilter: "blur(5px)"}}
+                                    >
+                                        <DialogTitle id="responsive-dialog-title">
+                                        {"Do you have more work experience?"}
+                                        </DialogTitle>
+                                        <DialogContent>
+                                        <DialogContentText>
+                                          If you wish to add more work experience please click on Yes.If you wish to skip to next page click on No  
+                                        </DialogContentText>
+                                        </DialogContent>
+                                        <DialogActions>
+                                        <Button autoFocus onClick={handleNo} >
+                                            No
+                                        </Button>
+                                        <Button onClick={handleYes} autoFocus >
+                                            Yes
+                                        </Button>
+                                        </DialogActions>
+                                    </Dialog>                                    
                                 </Grid>
                             </Grid>
                         </form>

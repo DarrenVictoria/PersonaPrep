@@ -28,9 +28,9 @@ import { next } from '../NextButton.js';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth.js'; 
 import { useForm } from "react-hook-form";
-import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined';
-import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
-import FolderCopyOutlinedIcon from '@mui/icons-material/FolderCopyOutlined';
+import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
+import EmailIcon from '@mui/icons-material/Email';
+import FolderCopyIcon from '@mui/icons-material/FolderCopy';
 
 const predefinedButtonName = ['github','figma','behance','linkedin','facebook','whatsapp','instragram','twitter'];
 const ContactDetails_1 = () => {
@@ -289,7 +289,7 @@ const onSubmit = async (formData) => {
                                             <ListItem >
                                             <ListItemAvatar>
                                               <Avatar sx={{borderRadius: '12px'}}>
-                                               <LocalPhoneOutlinedIcon sx={{color:'black'}}/>
+                                               <LocalPhoneIcon sx={{color:'black'}}/>
                                               </Avatar>
                                             </ListItemAvatar>
                                             <ListItemText>
@@ -301,7 +301,7 @@ const onSubmit = async (formData) => {
                                             <ListItem >
                                             <ListItemAvatar>
                                               <Avatar sx={{borderRadius: '12px'}}>
-                                                <EmailOutlinedIcon sx={{color:'black'}}/>
+                                                <EmailIcon sx={{color:'black'}}/>
                                               </Avatar>
                                             </ListItemAvatar>
                                             <ListItemText>
@@ -313,7 +313,7 @@ const onSubmit = async (formData) => {
                                             <ListItem >
                                             <ListItemAvatar>
                                               <Avatar sx={{borderRadius: '12px'}}>
-                                              <FolderCopyOutlinedIcon sx={{color:'black'}}/>
+                                              <FolderCopyIcon sx={{color:'black'}}/>
                                               </Avatar>
                                             </ListItemAvatar>
                                             <ListItemText>

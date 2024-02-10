@@ -1,4 +1,5 @@
-import './css/personalInfo.css';
+import * as React from "react";
+import './css/Project.css';
 import Grid from "@mui/material/Grid";
 import Typography from '@mui/material/Typography';
 import TextField from "@mui/material/TextField";
@@ -26,6 +27,19 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { back } from '../BackButton.js';
 import { next } from '../NextButton.js';
 import { useNavigate } from 'react-router-dom';
+import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+import PersonIcon from '@mui/icons-material/Person';
+import KeyboardIcon from '@mui/icons-material/Keyboard';
+import EventIcon from '@mui/icons-material/Event';
+import ZoomInMapIcon from '@mui/icons-material/ZoomInMap';
+import ScreenshotMonitorIcon from '@mui/icons-material/ScreenshotMonitor';
+import Dialog from "@mui/material/Dialog";//dialog
+import DialogActions from "@mui/material/DialogActions";//dialog
+import DialogContent from "@mui/material/DialogContent";//dialog
+import DialogContentText from "@mui/material/DialogContentText";//dialog
+import DialogTitle from "@mui/material/DialogTitle";//dialog
+import useMediaQuery from "@mui/material/useMediaQuery";//dialog
+import { useTheme } from "@mui/material/styles";//dialog
 
 const Projects2 = () => {
     const Proj_Skills = [{data: 'c#',}, {data: 'react'}, {data: 'java'}];
@@ -74,7 +88,29 @@ const Projects2 = () => {
         // }
     };
 
+    //below code for dialog
+    const [open, setOpen] = React.useState(false);
+    const theme = useTheme();
+    const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+    const handleYes = () => {
+        
+            navigate('/thirdProject')
+        
+    };
+    const handleNo = () => {
+        
+        navigate('/certification')
     
+    }; 
+
     return(
         <div className="formtemp-page">
             <InterviewFormHeader title='Second Project' />
@@ -84,8 +120,8 @@ const Projects2 = () => {
                         <form onSubmit={handleSubmit} style={{ height: '100%', position: 'relative' }}>
                             <div style={{ margin: '80px 25px 125px' }}>
 
-                                <div className="personalInfo-main">
-                                    <div className="personalInfo-leftCol">
+                                <div className="Project-main">
+                                    <div className="Project-leftCol">
                                         <Grid container>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>Project Name</Typography>
@@ -178,16 +214,16 @@ const Projects2 = () => {
                                         </Grid>
                                     </div>
 
-                                    <div className="personalInfo-rightCol">
+                                    <div className="Project-rightCol">
                                         <div style={{padding: '8px 0px', backgroundColor: '#fff', borderRadius: '15px', maxWidth: '363px'}}>
-                                            <Card variant="outlined" sx={{height:'100%',maxHeight: '350px', width:'100%',maxWidth: '363px',borderRadius:'15px', border: 'none', overflowY:'auto',overflowX:'auto','@media (max-width:769px)':{borderColor:'white'},'@media (min-width:769px)':{overflowY:'hidden'}}}>
+                                            <Card variant="outlined" sx={{height:'100%',maxHeight: '650px', width:'100%',maxWidth: '363px',borderRadius:'15px', border: 'none', overflowY:'auto',overflowX:'auto','@media (max-width:769px)':{borderColor:'white'},'@media (min-width:769px)':{overflowY:'hidden'}}}>
                                             <CardContent >
                                                 <Typography variant="h5" component="div" sx={{ textAlign: 'center', fontWeight: 'bold' }}>Project Experience Tips</Typography>
                                                 <List>
                                                     <ListItem >
                                                         <ListItemAvatar>
                                                             <Avatar sx={{borderRadius: '12px'}}>
-                                                                <img src={cphone} alt="Custom Icon" style={{ width: '27px', height: '31px' }}/>
+                                                                <TrendingUpIcon sx={{color:'black'}}/>
                                                             </Avatar>
                                                         </ListItemAvatar>
                                                         <ListItemText>
@@ -199,8 +235,8 @@ const Projects2 = () => {
                                                     <ListItem >
                                                         <ListItemAvatar>
                                                             {/* <Avatar sx={{borderRadius: '12px', display: 'flex', justifyContent: 'center', alignItems: 'center'  }}> */}
-                                                            <Avatar sx={{borderRadius: '12px', padding: '5px'}}>
-                                                                <img src={cphone} alt="Custom Icon" style={{ width: 'var(--40,40px)', height: '35.666px' }} />
+                                                            <Avatar sx={{borderRadius: '12px'}}>
+                                                                <PersonIcon sx={{color:'black'}}/>
                                                             </Avatar>
                                                         </ListItemAvatar>
                                                         <ListItemText>
@@ -211,13 +247,50 @@ const Projects2 = () => {
                                                     </ListItem>
                                                     <ListItem >
                                                         <ListItemAvatar>
-                                                            <Avatar sx={{borderRadius: '12px', display: 'flex', justifyContent: 'center', alignItems: 'center'  }}>
-                                                                <img src={cphone} alt="Custom Icon" style={{ width: '41px', height: '39px' ,}} />
+                                                            <Avatar sx={{borderRadius: '12px'}}>
+                                                                <KeyboardIcon sx={{color:'black'}}/>
                                                             </Avatar>
                                                         </ListItemAvatar>
                                                         <ListItemText>
                                                             <Typography variant='body1'>
                                                                 Choose keywords from the preset list when adding your skills gained from the project.
+                                                            </Typography>
+                                                        </ListItemText>
+                                                    </ListItem>
+                                                    <ListItem >
+                                                        <ListItemAvatar>
+                                                            <Avatar sx={{borderRadius: '12px'}}>
+                                                                <EventIcon sx={{color:'black'}}/>
+                                                            </Avatar>
+                                                        </ListItemAvatar>
+                                                        <ListItemText>
+                                                            <Typography variant='body1' >
+                                                                Provide accurate project start and end dates for a clear timeline.
+                                                            </Typography>
+                                                        </ListItemText>
+                                                    </ListItem>
+                                                    <ListItem >
+                                                        <ListItemAvatar>
+                                                            
+                                                            <Avatar sx={{borderRadius: '12px'}}>
+                                                                <ZoomInMapIcon sx={{color:'black'}} />
+                                                            </Avatar>
+                                                        </ListItemAvatar>
+                                                        <ListItemText>
+                                                            <Typography variant='body1'>
+                                                                Be specific about what the project is associated with for better understanding.
+                                                            </Typography>
+                                                        </ListItemText>
+                                                    </ListItem>
+                                                    <ListItem >
+                                                        <ListItemAvatar>
+                                                            <Avatar sx={{borderRadius: '12px'}}>
+                                                                <ScreenshotMonitorIcon sx={{color:'black'}}/>
+                                                            </Avatar>
+                                                        </ListItemAvatar>
+                                                        <ListItemText>
+                                                            <Typography variant='body1'>
+                                                                Add clear and relevant screenshots to show your project evidence effectively.
                                                             </Typography>
                                                         </ListItemText>
                                                     </ListItem>
@@ -235,7 +308,31 @@ const Projects2 = () => {
                                 </Grid>
                                     
                                 <Grid xs={6}>
-                                    <Button type='submit' style={next}>Next Step</Button>                                    
+                                    <Button type='submit' onClick={handleClickOpen} style={next}>Next Step</Button>
+                                    <Dialog
+                                        fullScreen={fullScreen}
+                                        open={open}
+                                        onClose={handleClose}
+                                        aria-labelledby="responsive-dialog-title"
+                                        sx={{backdropFilter: "blur(5px)"}}
+                                    >
+                                        <DialogTitle id="responsive-dialog-title">
+                                        {"Do you have more projects?"}
+                                        </DialogTitle>
+                                        <DialogContent>
+                                        <DialogContentText>
+                                          If you wish to add more projects please click on Yes.If you wish to skip to next page click on No  
+                                        </DialogContentText>
+                                        </DialogContent>
+                                        <DialogActions>
+                                        <Button autoFocus onClick={handleNo} >
+                                            No
+                                        </Button>
+                                        <Button onClick={handleYes} autoFocus >
+                                            Yes
+                                        </Button>
+                                        </DialogActions>
+                                    </Dialog>                                         
                                 </Grid>
                             </Grid>
                         </form>

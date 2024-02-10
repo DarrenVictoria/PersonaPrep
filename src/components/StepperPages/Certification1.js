@@ -1,3 +1,4 @@
+import * as React from "react";
 import './css/Certification1.css';
 import Grid from "@mui/material/Grid";
 import Typography from '@mui/material/Typography';
@@ -24,6 +25,17 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { back } from '../BackButton.js';
 import { next } from '../NextButton.js';
 import { useNavigate } from 'react-router-dom';
+import BookIcon from '@mui/icons-material/Book';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import LayersIcon from '@mui/icons-material/Layers';
+import Dialog from "@mui/material/Dialog";//dialog
+import DialogActions from "@mui/material/DialogActions";//dialog
+import DialogContent from "@mui/material/DialogContent";//dialog
+import DialogContentText from "@mui/material/DialogContentText";//dialog
+import DialogTitle from "@mui/material/DialogTitle";//dialog
+import useMediaQuery from "@mui/material/useMediaQuery";//dialog
+import { useTheme } from "@mui/material/styles";//dialog
+
 
 const Certification1 = () => {
 
@@ -72,7 +84,7 @@ const Certification1 = () => {
     const prevPage = () => navigate('/project');
     const handleSubmit = (e) => {
         e.preventDefault();
-        navigate('/secondCertification')
+        // navigate('/secondCertification')
         // validate();
 
         // Check if validation passed
@@ -83,6 +95,28 @@ const Certification1 = () => {
         //     console.log('Validation failed');
         // }
     };
+//below code for dialog
+    const [open, setOpen] = React.useState(false);
+    const theme = useTheme();
+    const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+    const handleYes = () => {
+        
+            navigate('/secondCertification')
+        
+    };
+    const handleNo = () => {
+        
+        navigate('/clubsAndSocs')
+    
+};
 
     return ( 
         <div className="formtemp-page">
@@ -168,7 +202,7 @@ const Certification1 = () => {
                                                     <ListItem >
                                                         <ListItemAvatar>
                                                             <Avatar sx={{borderRadius: '12px'}}>
-                                                                <img src={cdiary} alt="Custom Icon" style={{ width: '27px', height: '31px' }}/>
+                                                                <BookIcon sx={{color:'black'}}/>
                                                             </Avatar>
                                                         </ListItemAvatar>
                                                         <ListItemText>
@@ -180,8 +214,8 @@ const Certification1 = () => {
                                                     <ListItem >
                                                         <ListItemAvatar>
                                                             {/* <Avatar sx={{borderRadius: '12px', display: 'flex', justifyContent: 'center', alignItems: 'center'  }}> */}
-                                                            <Avatar sx={{borderRadius: '12px', padding: '5px'}}>
-                                                                <img src={ccalander} alt="Custom Icon" style={{ width: 'var(--40,40px)', height: '35.666px' }} />
+                                                            <Avatar sx={{borderRadius: '12px'}}>
+                                                                <CalendarMonthIcon sx={{color:'black'}}/>
                                                             </Avatar>
                                                         </ListItemAvatar>
                                                         <ListItemText>
@@ -192,8 +226,8 @@ const Certification1 = () => {
                                                     </ListItem>
                                                     <ListItem >
                                                         <ListItemAvatar>
-                                                            <Avatar sx={{borderRadius: '12px', display: 'flex', justifyContent: 'center', alignItems: 'center'  }}>
-                                                                <img src={chat} alt="Custom Icon" style={{ width: '41px', height: '39px' ,}} />
+                                                            <Avatar sx={{borderRadius: '12px'}}>
+                                                                <LayersIcon sx={{color:'black'}}/>
                                                             </Avatar>
                                                         </ListItemAvatar>
                                                         <ListItemText>
@@ -216,7 +250,31 @@ const Certification1 = () => {
                                 </Grid>
                                     
                                 <Grid xs={6}>
-                                    <Button type='submit' style={next}>Next Step</Button>                                    
+                                    <Button type='submit' onClick={handleClickOpen} style={next}>Next Step</Button>    
+                                    <Dialog
+                                        fullScreen={fullScreen}
+                                        open={open}
+                                        onClose={handleClose}
+                                        aria-labelledby="responsive-dialog-title"
+                                        sx={{backdropFilter: "blur(5px)"}}
+                                    >
+                                        <DialogTitle id="responsive-dialog-title">
+                                        {"Do you have more certificates?"}
+                                        </DialogTitle>
+                                        <DialogContent>
+                                        <DialogContentText>
+                                          If you wish to add more certificates please click on Yes.If you wish to skip to next page click on No  
+                                        </DialogContentText>
+                                        </DialogContent>
+                                        <DialogActions>
+                                        <Button autoFocus onClick={handleNo} >
+                                            No
+                                        </Button>
+                                        <Button onClick={handleYes} autoFocus >
+                                            Yes
+                                        </Button>
+                                        </DialogActions>
+                                    </Dialog>                                
                                 </Grid>
                             </Grid>
                         </form>
