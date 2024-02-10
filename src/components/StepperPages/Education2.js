@@ -261,7 +261,7 @@ const Education_2 = () => {
                                                 </Typography>
                                             </Grid>
                                             
-                                        </Grid><button onClick={btn}>btn</button>
+                                        </Grid>
                                     </div>
                                 </div>
                             </div>
