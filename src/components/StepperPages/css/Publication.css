@@ -44,7 +44,7 @@
     }
   
     .Publications-RightColumn {
-      order: 1; /* Move right column to the top on smaller screens */
-      margin-top: 20px; /* Add margin to separate the columns */
+      order: -1; /* Move right column to the top on smaller screens */
+      margin-bottom: 20px; /* Add margin to separate the columns */
     }
   }

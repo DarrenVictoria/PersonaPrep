@@ -28,14 +28,37 @@ import { useNavigate } from 'react-router-dom';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import KeyboardIcon from '@mui/icons-material/Keyboard';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import OutlinedInput from "@mui/material/OutlinedInput";
+import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCircleOutlined';
 
 const Publications = () => {
+  const monthOption = [
+    {value: 'January', label: 'January'},
+    {value: 'February', label: 'February'},
+    {value: 'March', label: 'March'},
+    {value: 'April', label: 'April'},
+    {value: 'May', label: 'May'},
+    {value: 'June', label: 'June'},
+    {value: 'July', label: 'July'},
+    {value: 'August', label: 'August'},
+    {value: 'September', label: 'September'},
+    {value: 'October', label: 'October'},
+    {value: 'November', label: 'November'},
+    {value: 'December', label: 'December'}
+];
+const yearOption = ["2024"];
+    for (let year = 2023; year >= 1990; year--) {
+    yearOption.push(String(year));
+    }
     const [PblTitle, setPblTitle] = useState('');
-    const [publisher, setPublisher] = useState('');
-    const [pblUrl, SetPblUrl] = useState('');
-    const [pblMonth, setPblMonth] = useState('');
-    const [pblYear, setPblYear] = useState('');
-    const [pblDesc, setPblDesc] = useState('');
+    const [Publisher, setPublisher] = useState('');
+    const [PblUrl, SetPblUrl] = useState('');
+    const [PblMonth, setPblMonth] = useState('');
+    const [PblYear, setPblYear] = useState('');
+    const [PblDesc, setPblDesc] = useState('');
 
     const navigate = useNavigate();
     const prevPage = () => navigate('/clubsAndSocs');
@@ -74,50 +97,81 @@ const Publications = () => {
                                       <Grid item xs={12}>
                                         
                                       <Typography ><span style={{color: 'red'}}>*</span> Publication / Publisher</Typography>
-                                          <TextField type="text" variant="outlined" value={publisher} onChange={(event) => setPublisher(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
+                                          <TextField type="text" variant="outlined" value={Publisher} onChange={(event) => setPublisher(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
                                         
                                       </Grid>
-                                      <Grid item xs={12} style={{ marginBottom: '-40px' }}>
+                                      <Grid item xs={12} mb={1}>
                                       <Typography ><span style={{color: 'red'}}>*</span> Publication date</Typography>
                                       </Grid>
                                       <Grid item xs={6}>
                                         
-                                      <EditableChoose
+                                      {/* <EditableChoose
                                       options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
                                       onSelect={setPblMonth}
                                       disabledOptions={[]}
                                       isRequired={true}
                                       
                                     
-                                    />
+                                    /> */}
+                                     <FormControl variant="outlined" fullWidth>
+                                        <Select
+                                            value={PblMonth}
+                                            onChange={(event) => setPblMonth(event.target.value)}
+                                            displayEmpty
+                                            input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
+                                            IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
+                                            required
+                                        >
+                                            <MenuItem disabled value="">Month</MenuItem>
+                                            {monthOption.map (option => (
+                                                <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
+                                            ))}
+                                        </Select>
+                                      </FormControl>
                                         
                                       </Grid>
                                       <Grid item xs={6}>
-                                      <EditableChoose
+                                      {/* <EditableChoose
                                       options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
                                       onSelect={setPblYear}
                                       disabledOptions={["2024"]}
                                       isRequired={true}
                                       
                                     
-                                    />
+                                    /> */}
+                                    <FormControl variant="outlined" fullWidth>
+                                      <Select
+                                          value={PblYear}
+                                          onChange={(event) => setPblYear(event.target.value)}
+                                          displayEmpty
+                                          input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
+                                          IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
+                                          required
+                                      >
+                                          <MenuItem disabled value="">Year</MenuItem>
+                                          {yearOption.map(year => (
+                                              <MenuItem key={year} value={year}>{year}</MenuItem>
+                                          ))}
+                                      </Select>
+                                    </FormControl>
+
                                         
                                       </Grid>
                                       <Grid item xs={12}>
                                         
                                       <Typography ><span style={{color: 'red'}}>*</span> Publication URL</Typography>
-                                          <TextField type="text" variant="outlined" value={pblUrl} onChange={(event) => SetPblUrl(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
+                                          <TextField type="text" variant="outlined" value={PblUrl} onChange={(event) => SetPblUrl(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
                                         
                                       </Grid>
                                       <Grid item xs={12}>
                                         
                                         <Typography ><span style={{color: 'red'}}>*</span> Project Description</Typography>
-                                        {/* <CustomMultilineTextFields  height="115px" value={pblDesc} onChange={(event) => setPblDesc(event.target.value)} required /> */}
+                                        {/* <CustomMultilineTextFields  height="115px" value={PblDesc} onChange={(event) => setPblDesc(event.target.value)} required /> */}
                                         <CustomMultilineTextFieldslimited
                                             inputHeight="150px"
                                             maxWidth="1300px"
                                             isRequired={true}
-                                            value={pblDesc}
+                                            value={PblDesc}
                                             onChange={(event) => setPblDesc(event.target.value)}
                                             maxWords={50} 
                                         />
