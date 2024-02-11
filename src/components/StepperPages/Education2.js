@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import TextField from "@mui/material/TextField";
 import CustomMultilineTextFields from '../CustomMultilineTextfield';
 import EditableChoose from '../EditableSelectOption';
-import { useState } from 'react';
+import React,{ useState, useEffect } from 'react';
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
@@ -20,9 +20,13 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import OutlinedInput from "@mui/material/OutlinedInput";
 import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCircleOutlined';
+import { collection, addDoc, getFirestore, query, where, getDocs, doc, updateDoc } from 'firebase/firestore';
+import { useAuth } from '../../hooks/useAuth.js';
 
 
 const Education_2 = () => {
+    const { currentUser } = useAuth();
+
     const yearOption = ["2024"];
         for (let year = 2023; year >= 1990; year--) {
         yearOption.push(String(year));
@@ -30,16 +34,75 @@ const Education_2 = () => {
     
     const [olYear, setOlYear] = useState('');
     const [alYear, setAlYear] = useState('');  
+    const [olExamResults, setOlExamResults] = useState([{ subject: '', result: '' }]);
+    const [alExamResults, setAlExamResults] = useState([{ subject: '', result: '' }]);
+    
 
     const navigate = useNavigate();
     const prevPage = () => navigate('/school');
-    const handleSubmit = (e) => {
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const db = getFirestore();
+                const studentDetailsCollection = collection(db, 'studentdetails');
+                const querySnapshot = await getDocs(query(studentDetailsCollection, where('email', '==', currentUser.email)));
+                const existingDoc = querySnapshot.docs[0];
+
+                if (existingDoc) {
+                    const userData = existingDoc.data();
+                    setOlYear(userData.olYear || '');
+                    setAlYear(userData.alYear || '');
+                    setOlExamResults(userData.olExamResults || []);
+                    setAlExamResults(userData.alExamResults || []);
+                }
+            } catch (error) {
+                console.error('Error fetching user data: ', error);
+            }
+        };
+
+        fetchUserData();
+    }, [currentUser.email]);
+   
+    
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        navigate('/university')
+
+        try {
+            const db = getFirestore();
+            const studentDetailsCollection = collection(db, 'studentdetails');
+            const querySnapshot = await getDocs(query(studentDetailsCollection, where('email', '==', currentUser.email)));
+            const existingDoc = querySnapshot.docs[0];
+
+            if (existingDoc) {
+                const existingDocRef = doc(db, 'studentdetails', existingDoc.id);
+                await updateDoc(existingDocRef, {
+                    olYear: olYear,
+                    alYear: alYear,
+                    olExamResults: olExamResults,
+                    alExamResults: alExamResults,
+                });
+
+                console.log('Document updated with ID: ', existingDoc.id);
+            } else {
+                const newDocRef = await addDoc(studentDetailsCollection, {
+                    email: currentUser.email,
+                    olYear: olYear,
+                    alYear: alYear,
+                    olExamResults: olExamResults,
+                    alExamResults: alExamResults,
+                });
+
+                console.log('Document written with ID: ', newDocRef.id);
+            }
+
+            navigate('/university');
+        } catch (error) {
+            console.error('Error updating document: ', error);
+        }
     };
 
-    const [olExamResults, setOlExamResults] = useState([{ subject: '', result: '' }]);
-    const [alExamResults, setAlExamResults] = useState([{ subject: '', result: '' }]);
+   
 
     //ol section. didnt work when if statement is used to check the exam type and run the code
     const handleOlSubjectChange = (index, event) => {
