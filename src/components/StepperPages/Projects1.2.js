@@ -36,6 +36,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import OutlinedInput from "@mui/material/OutlinedInput";
 import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCircleOutlined';
+import { useForm } from "react-hook-form";
 
 const Projects3 = () => {
     const monthOption = [
@@ -58,8 +59,6 @@ const Projects3 = () => {
         }
     const Proj_Skills = [{data: 'c#',}, {data: 'react'}, {data: 'java'}];
     const [Proj3Type, setProj3Type] = useState('');
-    const [Proj3Name, setProj3Name] = useState('');
-    const [Proj3Role, setProj3Role] = useState('');
     const [Proj3Status, setProj3Status] = useState('');
 
     const [Proj3Skills, setProj3Skills] = useState([]);
@@ -70,8 +69,12 @@ const Projects3 = () => {
     const [Proj3EndMonth, setProj3EndMonth] = useState('');
     const [Proj3EndYear, setProj3EndYear] = useState('');
     const [Proj3Place, setProj3Place] = useState('');
-    const [Proj3Evidence, setProj3Evidence] = useState('');
 
+    const { register, handleSubmit, watch, formState: { errors }, getValues, setValue } = useForm();
+
+    const Proj3Name = watch('Proj3Name');
+    const Proj3Role = watch('Proj3Role');
+    const Proj3Evidence = watch('Proj3Evidence');
 
     const handleProj3Skills = function (ev, val, reason, details) {
         if (ev.target.classList.contains('MuiSvgIcon-root')){
@@ -88,18 +91,9 @@ const Projects3 = () => {
 
     const navigate = useNavigate();
     const prevPage = () => navigate('/secondProject');
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        navigate('/certification')
-        // validate();
-
-        // Check if validation passed
-        // if (validation) {
-        //     // Call the function to add data to Firestore
-        //     addDataToFirestore();
-        // } else {
-        //     console.log('Validation failed');
-        // }
+    const onSubmit = (e) => {
+        // e.preventDefault();
+        navigate('/certification');
     };
 
     
@@ -109,7 +103,7 @@ const Projects3 = () => {
             <div className="formtemp-bodyform">
                 <Grid container spacing={2} style={{ height: '100%' }}>
                     <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
-                        <form onSubmit={handleSubmit} style={{ height: '100%', position: 'relative' }}>
+                        <form onSubmit={handleSubmit(onSubmit)} style={{ height: '100%', position: 'relative' }}>
                             <div style={{ margin: '80px 25px 125px' }}>
 
                                 <div className="Project-main">
@@ -117,7 +111,14 @@ const Projects3 = () => {
                                         <Grid container>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>Project Name</Typography>
-                                                <TextField type="text" variant="outlined" value={Proj3Name} onChange={(event) => setProj3Name(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='CV Builder'/>
+                                                {/* <TextField type="text" variant="outlined" value={Proj3Name} onChange={(event) => setProj3Name(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='CV Builder'/> */}
+                                                <TextField type="text" variant="outlined" fullWidth required  
+                                                value={Proj3Name}
+                                                InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                                placeholder='CV Builder'
+                                                {...register("Proj3Name", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                />
+                                                {errors.Proj3Name &&  "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={1}>
                                                 <Typography><span style={{color: 'red'}}>*</span>Was it an individual or a group project?</Typography>
@@ -147,7 +148,14 @@ const Projects3 = () => {
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>What was your role in the project</Typography>
-                                                <TextField type="text" variant="outlined" value={Proj3Role} onChange={(event) => setProj3Role(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Full stack developer'/>
+                                                {/* <TextField type="text" variant="outlined" value={Proj3Role} onChange={(event) => setProj3Role(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Full stack developer'/> */}
+                                                <TextField type="text" variant="outlined" fullWidth required  
+                                                value={Proj3Role}
+                                                InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                                placeholder='Full stack developer'
+                                                {...register("Proj3Role", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                />
+                                                {errors.Proj3Role &&  "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} >
                                                 <Typography><span style={{color: 'red'}}>*</span>Are you still working on the project?</Typography>
@@ -155,7 +163,7 @@ const Projects3 = () => {
                                             <Grid item xs={12} mb={2} pl={2}>
                                                 <FormControl>
                                                     <RadioGroup row name="project-working-status" value={Proj3Status} onChange={(event) => setProj3Status(event.target.value)}>
-                                                        <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+                                                        <FormControlLabel value="yes" control={<Radio />} label="Yes" required/>
                                                         <FormControlLabel value="no" control={<Radio />} label="No" />
                                                     </RadioGroup>
                                                 </FormControl>
@@ -275,7 +283,7 @@ const Projects3 = () => {
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD'}} />}
                                                         IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
-                                                        required
+                                                        // required
                                                         
                                                     >
                                                         <MenuItem disabled value="">Place</MenuItem>
@@ -287,7 +295,14 @@ const Projects3 = () => {
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>Project evidence</Typography>
-                                                <TextField type="text" variant="outlined" value={Proj3Evidence} onChange={(event) => setProj3Evidence(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='CV Builder'/>
+                                                {/* <TextField type="text" variant="outlined" value={Proj3Evidence} onChange={(event) => setProj3Evidence(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='CV Builder'/> */}
+                                                <TextField type="text" variant="outlined" fullWidth required  
+                                                value={Proj3Evidence}
+                                                InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                                placeholder=''
+                                                {...register("Proj3Evidence", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                />
+                                                {errors.Proj3Evidence &&  "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={2} style={{display: 'flex', justifyContent: 'center'}}>
                                                 <Typography>-OR-</Typography>
