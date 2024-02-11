@@ -95,39 +95,18 @@ const yearOption = ["2024"];
     const prevPage = () => navigate('/certification');
     const handleSubmit = (e) => {
         e.preventDefault();
-        // navigate('/Secondclub')
-        // validate();
-
-        // Check if validation passed
-        // if (validation) {
-        //     // Call the function to add data to Firestore
-        //     addDataToFirestore();
-        // } else {
-        //     console.log('Validation failed');
-        // }
+        // navigate('/Secondclub');
+        handleClickOpen();
     };
     //below code for dialog
     const [open, setOpen] = React.useState(false);
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
-    const handleYes = () => {
-        
-      navigate('/Secondclub')
-        
-    };
-    const handleNo = () => {
-        
-      navigate('/publications')
-    
-};
+    const handleClickOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+    const handleYes = () => navigate('/Secondclub');
+    const handleNo = () => navigate('/publications');
 
     return(
       <div className="formtemp-page">
@@ -323,7 +302,7 @@ const yearOption = ["2024"];
                             </Grid>
                                 
                             <Grid xs={6}>
-                                <Button type='submit' onClick={handleClickOpen} style={next}>Next Step</Button>         
+                                <Button type='submit' style={next}>Next Step</Button>         
                                 <Dialog
                                         fullScreen={fullScreen}
                                         open={open}

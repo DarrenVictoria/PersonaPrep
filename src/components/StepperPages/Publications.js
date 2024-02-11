@@ -33,6 +33,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import OutlinedInput from "@mui/material/OutlinedInput";
 import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCircleOutlined';
+import { useForm } from "react-hook-form";
 
 const Publications = () => {
   const monthOption = [
@@ -53,17 +54,21 @@ const yearOption = ["2024"];
     for (let year = 2023; year >= 1990; year--) {
     yearOption.push(String(year));
     }
-    const [PblTitle, setPblTitle] = useState('');
-    const [Publisher, setPublisher] = useState('');
-    const [PblUrl, SetPblUrl] = useState('');
+
     const [PblMonth, setPblMonth] = useState('');
     const [PblYear, setPblYear] = useState('');
     const [PblDesc, setPblDesc] = useState('');
 
+    const { register, handleSubmit, watch, formState: { errors }, getValues, setValue } = useForm();
+
+    const PblTitle = watch('PblTitle');
+    const Publisher = watch('Publisher');
+    const PblUrl = watch('PblUrl');
+
     const navigate = useNavigate();
     const prevPage = () => navigate('/clubsAndSocs');
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const onSubmit = (e) => {
+        // e.preventDefault();
         navigate('/skilltrack')
         // validate();
 
@@ -82,7 +87,7 @@ const yearOption = ["2024"];
             <div className="formtemp-bodyform">
                 <Grid container spacing={2} style={{ height: '100%' }}>
                     <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
-                        <form onSubmit={handleSubmit} style={{ height: '100%', position: 'relative' }}>
+                        <form onSubmit={handleSubmit(onSubmit)} style={{ height: '100%', position: 'relative' }}>
                             <div style={{ margin: '80px 25px 125px' }}>
                                 <div className='Publications-Maindiv'>
                                     <div className='Publications-LeftColumn'>
@@ -91,14 +96,26 @@ const yearOption = ["2024"];
                                       <Grid item xs={12}>
                                         
                                       <Typography ><span style={{color: 'red'}}>*</span> Publication Title</Typography>
-                                          <TextField type="text" variant="outlined" value={PblTitle} onChange={(event) => setPblTitle(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}} />
-                                        
+                                          {/* <TextField type="text" variant="outlined" value={PblTitle} onChange={(event) => setPblTitle(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}} /> */}
+                                          <TextField type="text" variant="outlined" fullWidth required  
+                                          value={PblTitle}
+                                          InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                          placeholder=''
+                                          {...register("PblTitle", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                          />
+                                          {errors.PblTitle &&  "Please enter only letters"}
                                       </Grid>
                                       <Grid item xs={12}>
                                         
                                       <Typography ><span style={{color: 'red'}}>*</span> Publication / Publisher</Typography>
-                                          <TextField type="text" variant="outlined" value={Publisher} onChange={(event) => setPublisher(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
-                                        
+                                          {/* <TextField type="text" variant="outlined" value={Publisher} onChange={(event) => setPublisher(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/> */}
+                                          <TextField type="text" variant="outlined" fullWidth required  
+                                          value={Publisher}
+                                          InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                          placeholder=''
+                                          {...register("Publisher", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                          />
+                                          {errors.Publisher &&  "Please enter only letters"}
                                       </Grid>
                                       <Grid item xs={12} mb={1}>
                                       <Typography ><span style={{color: 'red'}}>*</span> Publication date</Typography>
@@ -160,8 +177,14 @@ const yearOption = ["2024"];
                                       <Grid item xs={12}>
                                         
                                       <Typography ><span style={{color: 'red'}}>*</span> Publication URL</Typography>
-                                          <TextField type="text" variant="outlined" value={PblUrl} onChange={(event) => SetPblUrl(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
-                                        
+                                          {/* <TextField type="text" variant="outlined" value={PblUrl} onChange={(event) => SetPblUrl(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/> */}
+                                          <TextField type="text" variant="outlined" fullWidth required  
+                                            value={PblUrl}
+                                            InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                            placeholder=''
+                                            {...register("PblUrl", { maxLength: 30 })}
+                                            />
+                                            {/* {errors.PblUrl &&  "Please enter only letters"} */}
                                       </Grid>
                                       <Grid item xs={12}>
                                         

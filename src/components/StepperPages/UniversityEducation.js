@@ -26,7 +26,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import OutlinedInput from "@mui/material/OutlinedInput";
 import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCircleOutlined';
-
+import { useForm } from "react-hook-form";
 
 const UniversityEducation1 = () => {
     const monthOption = [
@@ -54,24 +54,18 @@ const UniversityEducation1 = () => {
     const [Uni1StartYear, setUni1StartYear] = useState('');
     const [Uni1EndMonth, setUni1EndMonth] = useState('');
     const [Uni1EndYear, setUni1EndYear] = useState('');
-    const [Uni1Name, setUni1Name] = useState('');
-    const [Uni1City, setUni1City] = useState('');
-    const [Uni1Country, setUni1Country] = useState('');
+
+    const { register, handleSubmit, watch, formState: { errors }, getValues, setValue } = useForm();
+
+    const Uni1Name = watch('Uni1Name');
+    const Uni1City = watch('Uni1City');
+    const Uni1Country = watch('Uni1Country');
 
     const navigate = useNavigate();
     const prevPage = () => navigate('/exams');
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // navigate('/secondUniversity')
-        // validate();
-
-        // Check if validation passed
-        // if (validation) {
-        //     // Call the function to add data to Firestore
-        //     addDataToFirestore();
-        // } else {
-        //     console.log('Validation failed');
-        // }
+    const onSubmit = (e) => {
+        // e.preventDefault();
+        handleClickOpen();
     };
 
     //below code for dialog
@@ -79,23 +73,10 @@ const UniversityEducation1 = () => {
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
-    const handleYes = () => {
-        
-            navigate('/secondUniversity')
-        
-    };
-    const handleNo = () => {
-        
-        navigate('/work')
-    
-    }; 
+    const handleClickOpen = () => setOpen(true); 
+    const handleClose = () => setOpen(false);
+    const handleYes = () => navigate('/secondUniversity');
+    const handleNo = () => navigate('/work');
 
     return(
         <div className="formtemp-page">
@@ -103,14 +84,21 @@ const UniversityEducation1 = () => {
             <div className="formtemp-bodyform">
                 <Grid container spacing={2} style={{ height: '100%' }}>
                     <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
-                        <form onSubmit={handleSubmit} style={{ height: '100%', position: 'relative' }}>
+                        <form onSubmit={handleSubmit(onSubmit)} style={{ height: '100%', position: 'relative' }}>
                             <div style={{ margin: '80px 25px 125px' }}>
                                 <div className="personalInfo-main">
                                     <div className="personalInfo-leftCol">
                                         <Grid container>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>University</Typography>
-                                                <TextField type="text" variant="outlined" value={Uni1Name} onChange={(event) => setUni1Name(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='NSBM Green University'/>
+                                                {/* <TextField type="text" variant="outlined" value={Uni1Name} onChange={(event) => setUni1Name(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='NSBM Green University'/> */}
+                                                <TextField type="text" variant="outlined" fullWidth required  
+                                                value={Uni1Name}
+                                                InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                                placeholder='NSBM Green University'
+                                                {...register("Uni1Name", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                />
+                                                {errors.Uni1Name &&  "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={1}>
                                                 <Typography><span style={{color: 'red'}}>*</span>Degree</Typography>
@@ -141,11 +129,25 @@ const UniversityEducation1 = () => {
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>City</Typography>
-                                                <TextField type="text" variant="outlined" value={Uni1City} onChange={(event) => setUni1City(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Homagama'/>
+                                                {/* <TextField type="text" variant="outlined" value={Uni1City} onChange={(event) => setUni1City(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Homagama'/> */}
+                                                <TextField type="text" variant="outlined" fullWidth required  
+                                                value={Uni1City}
+                                                InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                                placeholder='Homagama'
+                                                {...register("Uni1City", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                />
+                                                {errors.Uni1City &&  "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>Country</Typography>
-                                                <TextField type="text" variant="outlined" value={Uni1Country} onChange={(event) => setUni1Country(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Sri lanka'/>
+                                                {/* <TextField type="text" variant="outlined" value={Uni1Country} onChange={(event) => setUni1Country(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Sri lanka'/> */}
+                                                <TextField type="text" variant="outlined" fullWidth required  
+                                                value={Uni1Country}
+                                                InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                                placeholder='Sri Lanka'
+                                                {...register("Uni1Country", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                />
+                                                {errors.Uni1Country &&  "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={1}>
                                                 <Typography><span style={{color: 'red'}}>*</span>Start Date</Typography>
@@ -211,7 +213,7 @@ const UniversityEducation1 = () => {
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD'}} />}
                                                         IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
-                                                        required
+                                                        // required
                                                         
                                                     >
                                                         <MenuItem disabled value="">Year</MenuItem>
@@ -238,7 +240,7 @@ const UniversityEducation1 = () => {
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
                                                         IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
-                                                        required
+                                                        // required
                                                     >
                                                         <MenuItem disabled value="">Month</MenuItem>
                                                         {monthOption.map (option => (
@@ -260,7 +262,7 @@ const UniversityEducation1 = () => {
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
                                                         IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
-                                                        required
+                                                        // required
                                                     >
                                                         <MenuItem disabled value="">Year</MenuItem>
                                                         {yearOption.map(year => (
@@ -283,7 +285,7 @@ const UniversityEducation1 = () => {
                                 </Grid>
                                     
                                 <Grid xs={6}>
-                                    <Button type='submit' onClick={handleClickOpen} style={next}>Next Step</Button>  
+                                    <Button type='submit' style={next}>Next Step</Button>  
                                     <Dialog
                                         fullScreen={fullScreen}
                                         open={open}

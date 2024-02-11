@@ -40,7 +40,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import OutlinedInput from "@mui/material/OutlinedInput";
 import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCircleOutlined';
-
+import { useForm } from "react-hook-form";
 
 const Certification1 = () => {
 
@@ -65,27 +65,18 @@ const Certification1 = () => {
 
     const CProj_Skills = [{data: 'c#'}, {data: 'java'}, {data: 'react'}];
 
-
-    const [Certificate1Name, setCertificate1Name] = useState('');
-    const [Certificate1issuedOrg, setCertificate1issuedOrg] = useState('');
-    const [Certificate1Id, setCertificate1Id] = useState('');
     const [Certificate1ProjSkills, setCertificate1ProjSkills] = useState([]); //this is for CustomizedHook
     const [Certificate1IssueMonth,setCertificate1IssueMonth] = useState("");
     const [Certificate1IssueYear,setCertificate1IssueYear] = useState("");
     const [Certificate1ExpMonth, setCertificate1ExpMonth] = useState('');
     const [Certificate1ExpYear, setCertificate1ExpYear] = useState('');
 
-    const [Certificate1LInk, setCertificate1LInk] = useState('');
+    const { register, handleSubmit, watch, formState: { errors }, getValues, setValue } = useForm();
 
-
-    
-
-
-    const [validation, setValidation] = useState(false);
-
-    const validate = () => {
-        // if (!(selectedFaculty === '' && selectedBatch === '' && selectedDegree === '')) setValidation(true);
-    }
+    const Certificate1Name = watch('Certificate1Name');
+    const Certificate1issuedOrg = watch('Certificate1issuedOrg');
+    const Certificate1Id = watch('Certificate1Id');
+    const Certificate1LInk = watch('Certificate1LInk');
 
 
     //below handle function is for CustomizedHook
@@ -105,41 +96,19 @@ const Certification1 = () => {
 
     const navigate = useNavigate();
     const prevPage = () => navigate('/project');
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // navigate('/secondCertification')
-        // validate();
-
-        // Check if validation passed
-        // if (validation) {
-        //     // Call the function to add data to Firestore
-        //     addDataToFirestore();
-        // } else {
-        //     console.log('Validation failed');
-        // }
+    const onSubmit = (e) => {
+        // e.preventDefault();
+        handleClickOpen();
     };
 //below code for dialog
     const [open, setOpen] = React.useState(false);
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
-    const handleYes = () => {
-        
-            navigate('/secondCertification')
-        
-    };
-    const handleNo = () => {
-        
-        navigate('/clubsAndSocs')
-    
-};
+    const handleClickOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+    const handleYes = () => navigate('/secondCertification');
+    const handleNo = () => navigate('/clubsAndSocs');
 
     return ( 
         <div className="formtemp-page">
@@ -148,7 +117,7 @@ const Certification1 = () => {
             <div className="formtemp-bodyform">
                 <Grid container spacing={2} style={{ height: '100%' }}>
                     <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
-                        <form onSubmit={handleSubmit} style={{ height: '100%', position: 'relative' }}>
+                        <form onSubmit={handleSubmit(onSubmit)} style={{ height: '100%', position: 'relative' }}>
                             <div style={{ margin: '80px 25px 125px' }}>
 
                                 <div className="Certification1-Maindiv">
@@ -156,11 +125,25 @@ const Certification1 = () => {
                                         <Grid container>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography ><span style={{color: 'red'}}>*</span> Name of Certification</Typography>
-                                                <TextField type="text" variant="outlined" value={Certificate1Name} onChange={(event) => setCertificate1Name(event.target.value)} fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}} />
+                                                {/* <TextField type="text" variant="outlined" value={Certificate1Name} onChange={(event) => setCertificate1Name(event.target.value)} fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}} /> */}
+                                                <TextField type="text" variant="outlined" fullWidth required  
+                                                value={Certificate1Name}
+                                                InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                                placeholder=''
+                                                {...register("Certificate1Name", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                />
+                                                {errors.Certificate1Name &&  "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography ><span style={{color: 'red'}}>*</span> Issuing Organization</Typography>
-                                                <TextField type="text" variant="outlined" value={Certificate1issuedOrg} onChange={(event) => setCertificate1issuedOrg(event.target.value)} fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}}/>
+                                                {/* <TextField type="text" variant="outlined" value={Certificate1issuedOrg} onChange={(event) => setCertificate1issuedOrg(event.target.value)} fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}}/> */}
+                                                <TextField type="text" variant="outlined" fullWidth required  
+                                                value={Certificate1issuedOrg}
+                                                InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                                placeholder=''
+                                                {...register("Certificate1issuedOrg", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                />
+                                                {errors.Certificate1issuedOrg &&  "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={1}>
                                                 <Typography><span style={{color: 'red'}}>*</span>Issue Date</Typography>
@@ -258,14 +241,26 @@ const Certification1 = () => {
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography ><span style={{color: 'red'}}>*</span>Certification ID</Typography>
-                                                <TextField type="text" variant="outlined" value={Certificate1Id} onChange={(event) => setCertificate1Id(event.target.value)} fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}}/>
+                                                {/* <TextField type="text" variant="outlined" value={Certificate1Id} onChange={(event) => setCertificate1Id(event.target.value)} fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}}/> */}
+                                                <TextField type="text" variant="outlined" fullWidth required  
+                                                value={Certificate1Id}
+                                                InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                                placeholder=''
+                                                {...register("Certificate1Id", { maxLength: 30})}
+                                                />
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <CustomizedHook data={CProj_Skills} label={<Typography mb={1}><span style={{color: 'red'}}>*</span>Skills acquired from the project?</Typography>}/>
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>Certification evidence link</Typography>
-                                                <TextField type="text" variant="outlined" value={Certificate1LInk} onChange={(event) => setCertificate1LInk(event.target.value)} fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='CV Builder'/>
+                                                {/* <TextField type="text" variant="outlined" value={Certificate1LInk} onChange={(event) => setCertificate1LInk(event.target.value)} fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='CV Builder'/> */}
+                                                <TextField type="text" variant="outlined" fullWidth required  
+                                                value={Certificate1LInk}
+                                                InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                                placeholder=''
+                                                {...register("Certificate1LInk", { maxLength: 30})}
+                                                />
                                             </Grid>
                                             <Grid item xs={12} mb={2} style={{display: 'flex', justifyContent: 'center'}}>
                                                 <Typography>-OR-</Typography>
@@ -333,7 +328,7 @@ const Certification1 = () => {
                                 </Grid>
                                     
                                 <Grid xs={6}>
-                                    <Button type='submit' onClick={handleClickOpen} style={next}>Next Step</Button>    
+                                    <Button type='submit' style={next}>Next Step</Button>    
                                     <Dialog
                                         fullScreen={fullScreen}
                                         open={open}

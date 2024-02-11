@@ -27,6 +27,7 @@ import { useAuth } from '../../hooks/useAuth.js';
 import EditIcon from '@mui/icons-material/Edit';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
+import { useForm } from "react-hook-form";
 
 const PersonalInfo = () => {
     const { currentUser } = useAuth();
@@ -35,9 +36,12 @@ const PersonalInfo = () => {
    
     const job_roles = [{data:"Software Engineer"}, {data:"Systems Analyst"}, {data:"Network Administrator"}, {data:"Data Scientist"}];
 
-    const [Proname, setProname] = useState('');
+    // const [Proname, setProname] = useState('');
     const [PJobRoles, setPJobRoles] = useState([]);
     const [jobRolesData, setJobRolesData] = useState([]);
+
+    const { register, handleSubmit, watch, formState: { errors }, getValues, setValue } = useForm();
+    const Proname = watch('Proname');
     
     const handleFileUploadSuccess = (url) => {
         setProfilePictureUrl(url.downloadURL);
@@ -49,12 +53,12 @@ const PersonalInfo = () => {
         console.log('Reset button clicked');
       };
 
-    const phoneChange = (event) => setProname(event.target.value);
+    // const phoneChange = (event) => setProname(event.target.value);
 
     const navigate = useNavigate();
     
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const onSubmit = async (e) => {
+        // e.preventDefault();
         
         try {
             console.log("Profile Picture URL:", profilePictureUrl); // Log profilePictureUrl before calling setDoc
@@ -91,7 +95,8 @@ const PersonalInfo = () => {
                 const docSnapshot = await getDoc(userDocument);
                 if (docSnapshot.exists()) {
                     const docData = docSnapshot.data();
-                    setProname(docData.Proname || '');
+                    // setProname(docData.Proname || '');
+                    setValue('Proname', docData.Proname || '');
                     setPJobRoles(docData.PJobRoles || []);
                     setProfilePictureFetchUrl(docData.profilePictureUrl || null);
                     console.log(profilePictureUrl);
@@ -102,7 +107,7 @@ const PersonalInfo = () => {
             }
         };
         fetchPersonalInfo();
-    }, [currentUser.email]); // Use currentUser.email instead of currentUser.uid
+    }, [currentUser.email, setValue]); // Use currentUser.email instead of currentUser.uid
     
 
     const prevPage = () => navigate('/faculty');
@@ -128,14 +133,18 @@ const PersonalInfo = () => {
             <div className="formtemp-bodyform">
                 <Grid container spacing={2} style={{ height: '100%' }}>
                     <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
-                        <form onSubmit={handleSubmit} style={{ height: '100%', position: 'relative' }}>
+                        <form onSubmit={handleSubmit(onSubmit)} style={{ height: '100%', position: 'relative' }}>
                             <div style={{ margin: '80px 25px 125px' }}>
                                 <div className="personalInfo-main">
                                     <div className="personalInfo-leftCol">
                                         <Grid container>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography><span style={{color: 'red'}}>*</span> Full Name</Typography>
-                                                <TextField type="text" variant="outlined" value={Proname} onChange={phoneChange} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} />
+                                                <TextField type="text" variant="outlined" value={Proname} fullWidth required  
+                                                InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                                {...register("Proname", {maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                />
+                                                {errors.Proname && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span> Profile Picture</Typography>

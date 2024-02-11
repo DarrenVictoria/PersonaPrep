@@ -44,6 +44,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import OutlinedInput from "@mui/material/OutlinedInput";
 import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCircleOutlined';
+import { useForm } from "react-hook-form";
 
 const Projects2 = () => {
     const monthOption = [
@@ -66,8 +67,6 @@ const Projects2 = () => {
         }
     const Proj_Skills = [{data: 'c#',}, {data: 'react'}, {data: 'java'}];
     const [Proj2Type, setProj2Type] = useState('');
-    const [Proj2Name, setProj2Name] = useState('');
-    const [Proj2Role, setProj2Role] = useState('');
     const [Proj2Status, setProj2Status] = useState('');
 
     const [Proj2Skills, setProj2Skills] = useState([]);
@@ -78,7 +77,12 @@ const Projects2 = () => {
     const [Proj2EndMonth, setProj2EndMonth] = useState('');
     const [Proj2EndYear, setProj2EndYear] = useState('');
     const [Proj2Place, setProj2Place] = useState('');
-    const [Proj2Evidence, setProj2Evidence] = useState('');
+
+    const { register, handleSubmit, watch, formState: { errors }, getValues, setValue } = useForm();
+
+    const Proj2Name = watch('Proj2Name');
+    const Proj2Role = watch('Proj2Role');
+    const Proj2Evidence = watch('Proj2Evidence');
 
 
     const handleProj2Skills = function (ev, val, reason, details) {
@@ -96,18 +100,9 @@ const Projects2 = () => {
 
     const navigate = useNavigate();
     const prevPage = () => navigate('/project');
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        navigate('/thirdProject')
-        // validate();
-
-        // Check if validation passed
-        // if (validation) {
-        //     // Call the function to add data to Firestore
-        //     addDataToFirestore();
-        // } else {
-        //     console.log('Validation failed');
-        // }
+    const onSubmit = (e) => {
+        // e.preventDefault();
+        handleClickOpen();
     };
 
     //below code for dialog
@@ -115,23 +110,10 @@ const Projects2 = () => {
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
-    const handleYes = () => {
-        
-            navigate('/thirdProject')
-        
-    };
-    const handleNo = () => {
-        
-        navigate('/certification')
-    
-    }; 
+    const handleClickOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+    const handleYes = () => navigate('/thirdProject');
+    const handleNo = () => navigate('/certification');
 
     return(
         <div className="formtemp-page">
@@ -139,7 +121,7 @@ const Projects2 = () => {
             <div className="formtemp-bodyform">
                 <Grid container spacing={2} style={{ height: '100%' }}>
                     <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
-                        <form onSubmit={handleSubmit} style={{ height: '100%', position: 'relative' }}>
+                        <form onSubmit={handleSubmit(onSubmit)} style={{ height: '100%', position: 'relative' }}>
                             <div style={{ margin: '80px 25px 125px' }}>
 
                                 <div className="Project-main">
@@ -147,7 +129,14 @@ const Projects2 = () => {
                                         <Grid container>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>Project Name</Typography>
-                                                <TextField type="text" variant="outlined" value={Proj2Name} onChange={(event) => setProj2Name(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='CV Builder'/>
+                                                {/* <TextField type="text" variant="outlined" value={Proj2Name} onChange={(event) => setProj2Name(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='CV Builder'/> */}
+                                                <TextField type="text" variant="outlined" fullWidth required  
+                                                value={Proj2Name}
+                                                InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                                placeholder='CV Builder'
+                                                {...register("Proj2Name", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                />
+                                                {errors.Proj2Name &&  "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={1}>
                                                 <Typography><span style={{color: 'red'}}>*</span>Was it an individual or a group project?</Typography>
@@ -177,7 +166,14 @@ const Projects2 = () => {
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>What was your role in the project</Typography>
-                                                <TextField type="text" variant="outlined" value={Proj2Role} onChange={(event) => setProj2Role(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Full stack developer'/>
+                                                {/* <TextField type="text" variant="outlined" value={Proj2Role} onChange={(event) => setProj2Role(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Full stack developer'/> */}
+                                                <TextField type="text" variant="outlined" fullWidth required  
+                                                value={Proj2Role}
+                                                InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                                placeholder='Full stack developer'
+                                                {...register("Proj2Role", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                />
+                                                {errors.Proj2Role &&  "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} >
                                                 <Typography><span style={{color: 'red'}}>*</span>Are you still working on the project?</Typography>
@@ -185,7 +181,7 @@ const Projects2 = () => {
                                             <Grid item xs={12} mb={2} pl={2}>
                                                 <FormControl>
                                                     <RadioGroup row name="project-working-status" value={Proj2Status} onChange={(event) => setProj2Status(event.target.value)}>
-                                                        <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+                                                        <FormControlLabel value="yes" control={<Radio />} label="Yes" required/>
                                                         <FormControlLabel value="no" control={<Radio />} label="No" />
                                                     </RadioGroup>
                                                 </FormControl>
@@ -305,7 +301,7 @@ const Projects2 = () => {
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD'}} />}
                                                         IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
-                                                        required
+                                                        // required
                                                         
                                                     >
                                                         <MenuItem disabled value="">Place</MenuItem>
@@ -317,7 +313,14 @@ const Projects2 = () => {
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>Project evidence</Typography>
-                                                <TextField type="text" variant="outlined" value={Proj2Evidence} onChange={(event) => setProj2Evidence(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='CV Builder'/>
+                                                {/* <TextField type="text" variant="outlined" value={Proj2Evidence} onChange={(event) => setProj2Evidence(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='CV Builder'/> */}
+                                                <TextField type="text" variant="outlined" fullWidth required  
+                                                value={Proj2Evidence}
+                                                InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                                placeholder=''
+                                                {...register("Proj2Evidence", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                />
+                                                {errors.Proj2Evidence &&  "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={2} style={{display: 'flex', justifyContent: 'center'}}>
                                                 <Typography>-OR-</Typography>
@@ -422,7 +425,7 @@ const Projects2 = () => {
                                 </Grid>
                                     
                                 <Grid xs={6}>
-                                    <Button type='submit' onClick={handleClickOpen} style={next}>Next Step</Button>
+                                    <Button type='submit' style={next}>Next Step</Button>
                                     <Dialog
                                         fullScreen={fullScreen}
                                         open={open}

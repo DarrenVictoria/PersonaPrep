@@ -197,8 +197,7 @@ const Education_2 = () => {
                                                         onChange={(event) => setAlYear(event.target.value)}
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
-                                                        IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
-                                                        required
+                                                        IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}                                                        
                                                     >
                                                         <MenuItem disabled value="">Year</MenuItem>
                                                         {yearOption.map(year => (
