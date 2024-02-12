@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useState } from 'react';
 import '../../pages/interviewforms/Template.css';
 import InterviewFormFooter from '../InterviewFormFooter';
@@ -12,6 +12,8 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { back } from '../BackButton.js';
 import { next } from '../NextButton.js';
 import { useNavigate } from 'react-router-dom';
+import { collection, doc, getFirestore, setDoc, getDoc } from 'firebase/firestore';
+import { useAuth } from '../../hooks/useAuth.js';
 
 const Summary_1 = () => {
     const [industryExperience, setIndustryExperience] = useState("");
@@ -53,19 +55,83 @@ const Summary_1 = () => {
 
     const navigate = useNavigate();
     const prevPage = () => navigate('/skilltrack');
-    const handleSubmit = (e) => {
+   
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        navigate('/extraInfo')
-        // validate();
-
-        // Check if validation passed
-        // if (validation) {
-        //     // Call the function to add data to Firestore
-        //     addDataToFirestore();
-        // } else {
-        //     console.log('Validation failed');
-        // }
+        try {
+            const formData = {
+                industryExperience,
+                notableProjects,
+                careerHighlights,
+                promotions,
+                futureCareer,
+                uniqueSkills
+            };
+            
+            await sendSummaryDataToFirestore(formData);
+            navigate('/extraInfo');
+        } catch (error) {
+            console.error('Error submitting summary data:', error);
+        }
     };
+
+    const { currentUser } = useAuth();
+
+    const sendSummaryDataToFirestore = async (formData) => {
+        try {
+            const db = getFirestore();
+            const userDocumentRef = doc(db, 'studentdetails', currentUser.email);
+
+            const docSnapshot = await getDoc(userDocumentRef);
+            if (docSnapshot.exists()) {
+                const docData = docSnapshot.data();
+                const summaries = docData.summaries || [];
+
+                if (summaries.length >= 1) {
+                    summaries[0] = formData;
+                } else {
+                    summaries.push(formData);
+                }
+
+                await setDoc(userDocumentRef, { summaries }, { merge: true });
+            } else {
+                console.error('Document does not exist for the current user.');
+            }
+        } catch (error) {
+            console.error('Error adding summary info to Firestore:', error);
+        }
+    };
+
+    useEffect(() => {
+        const fetchSummaryData = async () => {
+            try {
+                const db = getFirestore();
+                const userDocumentRef = doc(db, 'studentdetails', currentUser.email);
+
+                const docSnapshot = await getDoc(userDocumentRef);
+                if (docSnapshot.exists()) {
+                    const docData = docSnapshot.data();
+                    const summaries = docData.summaries || [];
+
+                    if (summaries.length >= 1) {
+                        const summaryData = summaries[0];
+                        setIndustryExperience(summaryData.industryExperience || '');
+                        setNotableProjects(summaryData.notableProjects || '');
+                        setCareerHighlights(summaryData.careerHighlights || '');
+                        setPromotions(summaryData.promotions || '');
+                        setFutureCareer(summaryData.futureCareer || '');
+                        setUniqueSkills(summaryData.uniqueSkills || '');
+                    }
+                }
+            } catch (error) {
+                console.error('Error fetching summary info from Firestore:', error);
+            }
+        };
+
+        fetchSummaryData();
+    }, [currentUser.email]);
+
+
 
    
     return(
