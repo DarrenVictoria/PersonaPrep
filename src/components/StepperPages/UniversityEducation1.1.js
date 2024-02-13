@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import TextField from "@mui/material/TextField";
 import FileUpload from '../FileUpload';
 import EditableChoose from '../EditableSelectOption';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import InterviewFormFooter from '../InterviewFormFooter';
 import InterviewFormHeader from '../InterviewFormHeader';
 import '../../pages/interviewforms/Template.css';
@@ -19,8 +19,11 @@ import Select from '@mui/material/Select';
 import OutlinedInput from "@mui/material/OutlinedInput";
 import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCircleOutlined';
 import { useForm } from "react-hook-form";
+import { collection, doc, getFirestore, setDoc, getDoc } from 'firebase/firestore';
+import { useAuth } from '../../hooks/useAuth.js';
 
 const UniversityEducation2 = () => {
+    const { currentUser } = useAuth();
     const monthOption = [
         {value: 'January', label: 'January'},
         {value: 'February', label: 'February'},
@@ -52,12 +55,105 @@ const UniversityEducation2 = () => {
     const Uni2City = watch('Uni2City');
     const Uni2Country = watch('Uni2Country');
 
+    const [graduationTransUrl, setGraduationTransUrl] = useState('');
+    const [graduationTransFetchUrl, setGraduationTransFetchUrl] = useState('');
+
+    const handleFileUploadSuccess = (url) => {
+        setGraduationTransUrl(url.downloadURL);
+        console.log(url);
+    };
+
+    const handleReset = () => {
+        // Reset logic here
+    };
+
     const navigate = useNavigate();
     const prevPage = () => navigate('/university');
-    const onSubmit = (e) => {
-        // e.preventDefault();
-        navigate('/work')
+    
+
+    const onSubmit = async (data) => {
+        const formData = {
+            ...data,
+            Uni2Degree: Uni2Degree,
+            Uni2StartMonth: Uni2StartMonth,
+            Uni2StartYear: Uni2StartYear,
+            Uni2EndMonth: Uni2EndMonth,
+            Uni2EndYear: Uni2EndYear,
+            Uni2CurrentYear: Uni2CurrentYear,
+            graduationTransUrl: graduationTransUrl || graduationTransFetchUrl,
+        };
+
+        await sendUniversityDataToFirestore(formData);
+        navigate('/work');
     };
+
+    const sendUniversityDataToFirestore = async (data) => {
+        try {
+            const db = getFirestore();
+            const studentDetailsCollection = collection(db, 'studentdetails');
+            const userDocument = doc(studentDetailsCollection, currentUser.email);
+
+            const docSnapshot = await getDoc(userDocument);
+            if (docSnapshot.exists()) {
+                const docData = docSnapshot.data();
+                let universities = docData.universityData || [];
+
+                if (universities.length >= 2) {
+                    universities[1] = {
+                        ...universities[1],
+                        ...data
+                    };
+                } else {
+                    universities.push(data);
+                }
+
+                await setDoc(userDocument, { universityData: universities }, { merge: true });
+            } else {
+                console.error('Document does not exist for the current user.');
+            }
+        } catch (error) {
+            console.error('Error adding university info to Firestore: ', error);
+        }
+    };
+
+    useEffect(() => {
+        const fetchUniversityData = async () => {
+            try {
+                const db = getFirestore();
+                const studentDetailsCollection = collection(db, 'studentdetails');
+                const userDocument = doc(studentDetailsCollection, currentUser.email);
+
+                const docSnapshot = await getDoc(userDocument);
+                if (docSnapshot.exists()) {
+                    const docData = docSnapshot.data();
+                    if (docData.universityData && docData.universityData.length >= 2) {
+                        const universityData = docData.universityData[1];
+                        setValue('Uni2Name', universityData.Uni2Name || '');
+                        setValue('Uni2City', universityData.Uni2City || '');
+                        setValue('Uni2Country', universityData.Uni2Country || '');
+                        setValue('Uni2Degree', universityData.Uni2Degree || '');
+                        setValue('Uni2StartMonth', universityData.Uni2StartMonth || '');
+                        setValue('Uni2StartYear', universityData.Uni2StartYear || '');
+                        setValue('Uni2EndMonth', universityData.Uni2EndMonth || '');
+                        setValue('Uni2EndYear', universityData.Uni2EndYear || '');
+                        setValue('Uni2CurrentYear', universityData.Uni2CurrentYear || '');
+                        setUni2Degree(universityData.Uni2Degree || '');
+                        setUni2StartMonth(universityData.Uni2StartMonth || '');
+                        setUni2StartYear(universityData.Uni2StartYear || '');
+                        setUni2EndMonth(universityData.Uni2EndMonth || '');
+                        setUni2EndYear(universityData.Uni2EndYear || '');
+                        setUni2CurrentYear(universityData.Uni2CurrentYear || '');
+                        setGraduationTransFetchUrl(universityData.graduationTransUrl || '');
+                    }
+                }
+            } catch (error) {
+                console.error('Error fetching university info from Firestore: ', error);
+            }
+        };
+        fetchUniversityData();
+    }, [currentUser.email, setValue]);
+
+
 
     return(
         <div className="formtemp-page">
@@ -255,7 +351,9 @@ const UniversityEducation2 = () => {
                                     </div>
                                     <div className="personalInfo-rightCol university-fileUpload">
                                         <Typography mb={2}>Graduation Transcript Upload</Typography>
-                                        <FileUpload />
+                                        <FileUpload onFileUpload={handleFileUploadSuccess} onUploadSuccess={handleFileUploadSuccess} onReset={handleReset} />
+                                         {graduationTransFetchUrl && graduationTransFetchUrl !== ' ' && <p style={{ marginTop: '1rem', marginLeft: '1rem' }}>Your current Graduation Transcript</p>}
+                                         {graduationTransFetchUrl && graduationTransFetchUrl !== ' ' && <img src={graduationTransFetchUrl} alt="Graduation Transcript" style={{ width: '300px', height: '400px', objectFit: 'cover', marginLeft: '1rem', border: '1px solid black' }} />}
                                     </div>
                                 </div>
                             </div>

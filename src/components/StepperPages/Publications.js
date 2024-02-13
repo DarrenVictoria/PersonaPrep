@@ -15,7 +15,7 @@ import ckey from '../../assets/images/iconckeyboard.svg';
 import cbatch from '../../assets/images/iconcbatch.svg';
 import EditableChoose from '../EditableSelectOption';
 import CustomMultilineTextFields from '../CustomMultilineTextfield';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import CustomMultilineTextFieldslimited from '../MultilineMaxWordLimit';
 import InterviewFormFooter from '../InterviewFormFooter';
 import InterviewFormHeader from '../InterviewFormHeader';
@@ -34,8 +34,12 @@ import Select from '@mui/material/Select';
 import OutlinedInput from "@mui/material/OutlinedInput";
 import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCircleOutlined';
 import { useForm } from "react-hook-form";
+import { getFirestore, collection, doc, getDoc, setDoc } from 'firebase/firestore';
+import { useAuth } from '../../hooks/useAuth.js';
+
 
 const Publications = () => {
+  const { currentUser } = useAuth();
   const monthOption = [
     {value: 'January', label: 'January'},
     {value: 'February', label: 'February'},
@@ -67,19 +71,68 @@ const yearOption = ["2024"];
 
     const navigate = useNavigate();
     const prevPage = () => navigate('/clubsAndSocs');
-    const onSubmit = (e) => {
-        // e.preventDefault();
-        navigate('/skilltrack')
-        // validate();
+    const onSubmit = async (data) => {
+      try {
+          await sendPublicationDataToFirestore(data); // Send form data to Firestore
+          navigate('/skilltrack'); // Navigate to the next page after data is sent
+      } catch (error) {
+          console.error('Error submitting publication data:', error);
+      }
+  };
 
-        // Check if validation passed
-        // if (validation) {
-        //     // Call the function to add data to Firestore
-        //     addDataToFirestore();
-        // } else {
-        //     console.log('Validation failed');
-        // }
+  const sendPublicationDataToFirestore = async (data) => {
+    try {
+        const db = getFirestore();
+        const userDocumentRef = doc(db, 'studentdetails', currentUser.email); // Assuming 'studentdetails' is your collection
+
+        const docSnapshot = await getDoc(userDocumentRef);
+        if (docSnapshot.exists()) {
+            const docData = docSnapshot.data();
+            let publications = docData.publications || [];
+
+            if (publications.length >= 1) {
+                publications[0] = { ...data, PblMonth, PblYear, PblDesc }; // Update existing publication data at index 0
+            } else {
+              publications.push({ ...data, PblMonth, PblYear, PblDesc }); // Add new publication data
+            }
+
+            await setDoc(userDocumentRef, { publications }, { merge: true }); // Set updated document
+        } else {
+            console.error('Document does not exist for the current user.');
+        }
+    } catch (error) {
+        console.error('Error adding publication info to Firestore:', error);
+        throw error; // Propagate the error back to the caller (onSubmit)
+    }
+};
+
+useEffect(() => {
+    const fetchPublicationData = async () => {
+        try {
+            const db = getFirestore();
+            const userDocumentRef = doc(db, 'studentdetails', currentUser.email);
+
+            const docSnapshot = await getDoc(userDocumentRef);
+            if (docSnapshot.exists()) {
+                const docData = docSnapshot.data();
+                if (docData.publications && docData.publications.length >= 1) {
+                    const publicationData = docData.publications[0]; // Assuming you're retrieving data at index 0
+                    // Populate form fields with publicationData
+                    setValue('PblTitle', publicationData.PblTitle || '');
+                    setValue('Publisher', publicationData.Publisher || '');
+                    setValue('PblUrl', publicationData.PblUrl || '');
+                    setPblMonth(publicationData.PblMonth || ''); // Set publication month
+                    setPblYear(publicationData.PblYear || ''); // Set publication year
+                    setPblDesc(publicationData.PblDesc || ''); // Set publication description
+                    // Populate other fields similarly...
+                }
+            }
+        } catch (error) {
+            console.error('Error fetching publication info from Firestore:', error);
+        }
     };
+    fetchPublicationData();
+}, [currentUser.email, setValue]);
     
     return(
       <div className="formtemp-page">

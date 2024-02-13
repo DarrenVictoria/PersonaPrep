@@ -22,7 +22,7 @@ import cacute from '../../assets/images/iconcacute.svg';
 import ccalander from '../../assets/images/iconccalander.svg';
 import CustomMultilineTextFieldslimited from '../MultilineMaxWordLimit';
 import {CustomizedHook, CustomizedHookLarge} from '../TextfieldButtonDataDisplay';
-import { useState } from 'react';
+import {useState } from 'react';
 import Button from "@mui/material/Button";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { back } from '../BackButton.js';
@@ -36,8 +36,14 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import OutlinedInput from "@mui/material/OutlinedInput";
 import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCircleOutlined';
+import { collection, doc, getFirestore, setDoc, getDoc } from 'firebase/firestore';
+import { useAuth } from '../../hooks/useAuth.js';
+import Autocomplete from "@mui/material/Autocomplete";
+import Stack from "@mui/material/Stack";
+
 
 const WorkExperience2 = () => {
+    const { currentUser } = useAuth();
     const monthOption = [
         {value: 'January', label: 'January'},
         {value: 'February', label: 'February'},
@@ -56,7 +62,7 @@ const WorkExperience2 = () => {
         for (let year = 2023; year >= 1990; year--) {
         yearOption.push(String(year));
         }
-    const Jb_SkillsAcquired = [{data:"c#"},{data:"Winforms"}];
+    
 
     const [WorkExp2JobTitle, setWorkExp2JobTitle] = useState('');
     const [WorkExp2Company, setWorkExp2Company] = useState('');
@@ -70,9 +76,20 @@ const WorkExperience2 = () => {
     const [WorkExp2WorkChecked, setWorkExp2WorkChecked] = useState(false);
     const [WorkExp2TaskDnWithTools, setWorkExp2TaskDnWithTools] = useState("");
     const [WorkExp2EmploymentType, setWorkExp2EmploymentType] = React.useState("");
-    // the below useState for custom hook does not work yet
-    const [WorkExp2JbSkillAcquired, setWorkExp2JbSkillAcquired] = useState([]);
 
+    const Jb_SkillsAcquired = ["c#","Winforms"];//dataset for autocomplete
+    const [WorkExp2JbSkillAcquired, setWorkExp2JbSkillAcquired] = useState([]);//usestate for autocomplete
+    const maxSelections = 3;//max value for the autocomplete
+    const handleWorkExp2JbSkillAcquired = (event, newSkill) => {
+        if (newSkill.length <= maxSelections) {
+            setWorkExp2JbSkillAcquired(newSkill);
+        }
+    };
+    const isOptionDisabled = (option) => {
+        return WorkExp2JbSkillAcquired.length >= maxSelections && !WorkExp2JbSkillAcquired.includes(option);
+    };
+    
+    console.log(WorkExp2JbSkillAcquired);
     const handleWorkExp2WorkChecked = (event) => {
         setWorkExp2WorkChecked(event.target.checked)
     }
@@ -84,17 +101,7 @@ const WorkExperience2 = () => {
       };
 
     // the below handle for custom hook does not work yet
-    const handleWorkExp2JbSkillAcquired = function (ev, val, reason, details) {
-        if (ev.target.classList.contains('MuiSvgIcon-root')){
-            // Removing Value
-            const value = ev.target.parentElement.querySelector('span').innerHTML;
-            setWorkExp2JbSkillAcquired(WorkExp2JbSkillAcquired.filter(item => item !== value));
-        } else {
-            const value = ev.target.innerHTML;
-            WorkExp2JbSkillAcquired.push(value);
-        }
-        console.log(WorkExp2JbSkillAcquired);
-    }
+    
 
     useEffect(() => {
         if(!WorkExp2WorkChecked) setWorkExp2Working('no');
@@ -103,19 +110,100 @@ const WorkExperience2 = () => {
 
     const navigate = useNavigate();
     const prevPage = () => navigate('/work');
-    const handleSubmit = (e) => {
+    
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        navigate('/project')
-        // validate();
+        const formData = {
+            WorkExp2JobTitle,
+            WorkExp2Company,
+            WorkExp2City,
+            WorkExp2Postal,
+            WorkExp2StartMonth,
+            WorkExp2StartYear,
+            WorkExp2EndMonth,
+            WorkExp2EndYear,
+            WorkExp2Working,
+            WorkExp2TaskDnWithTools,
+            WorkExp2EmploymentType,
+            WorkExp2JbSkillAcquired
+        };
 
-        // Check if validation passed
-        // if (validation) {
-        //     // Call the function to add data to Firestore
-        //     addDataToFirestore();
-        // } else {
-        //     console.log('Validation failed');
-        // }
+        // Send data to Firestore
+        await sendWorkDataToFirestore(formData);
+
+        // Navigate to the next page
+        navigate('/project');
     };
+
+    const sendWorkDataToFirestore = async (data) => {
+        try {
+            const db = getFirestore();
+            const studentDetailsCollection = collection(db, 'studentdetails');
+            const userDocument = doc(studentDetailsCollection, currentUser.email); // Use the email as document ID
+
+            const docSnapshot = await getDoc(userDocument);
+            if (docSnapshot.exists()) {
+                const docData = docSnapshot.data();
+                let work = docData.work || []; // Retrieve the work data array or initialize an empty array
+
+                // Check if index 0 exists in the work data array
+                if (work.length > 1) {
+                    // Update fields of Work Experience 2 at index 0
+                    work[1] = {
+                        ...work[1],
+                        ...data
+                    };
+                } else {
+                    // Create a new entry for Work Experience 2
+                    work.push(data);
+                }
+
+                // Update the document with the modified work data array
+                await setDoc(userDocument, { work }, { merge: true });
+            } else {
+                console.error('Document does not exist for the current user.');
+            }
+        } catch (error) {
+            console.error('Error adding work info to Firestore: ', error);
+        }
+    };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const db = getFirestore();
+                const userDocument = doc(collection(db, 'studentdetails'), currentUser.email);
+
+                const docSnapshot = await getDoc(userDocument);
+                if (docSnapshot.exists()) {
+                    const userData = docSnapshot.data();
+                    const workData = userData.work && userData.work.length > 1 ? userData.work[1] : null;
+
+                    if (workData) {
+                        setWorkExp2JobTitle(workData.WorkExp2JobTitle || '');
+                        setWorkExp2Company(workData.WorkExp2Company || '');
+                        setWorkExp2City(workData.WorkExp2City || '');
+                        setWorkExp2Postal(workData.WorkExp2Postal || '');
+                        setWorkExp2StartMonth(workData.WorkExp2StartMonth || '');
+                        setWorkExp2StartYear(workData.WorkExp2StartYear || '');
+                        setWorkExp2EndMonth(workData.WorkExp2EndMonth || '');
+                        setWorkExp2EndYear(workData.WorkExp2EndYear || '');
+                        setWorkExp2Working(workData.WorkExp2Working === 'yes');
+                        setWorkExp2TaskDnWithTools(workData.WorkExp2TaskDnWithTools || '');
+                        setWorkExp2EmploymentType(workData.WorkExp2EmploymentType || '');
+                        setWorkExp2JbSkillAcquired(workData.WorkExp2JbSkillAcquired || []);
+                    }
+                } else {
+                    console.error('Document does not exist for the current user.');
+                }
+            } catch (error) {
+                console.error('Error fetching data from Firestore: ', error);
+            }
+        };
+
+        fetchData();
+    }, [currentUser]);
+
 
 
     return(
@@ -289,7 +377,42 @@ const WorkExperience2 = () => {
                                                 </FormControl>
                                             </Grid>
                                             <Grid item xs={12} >
-                                                <CustomizedHook onChange={handleWorkExp2JbSkillAcquired} maxWidth={1300} data={Jb_SkillsAcquired}  label={<Typography mb={1}><span style={{color: 'red'}}>*</span> Skills acquired from job ?</Typography>}/>
+                                                    <Typography mb={1} mt={3}><span style={{color: 'red'}}>*</span>Skills acquired from job ?</Typography>
+                                                    <Stack spacing={3}>
+                                                            <Autocomplete
+                                                                multiple
+                                                                id="tags-outlined"
+                                                                options={Jb_SkillsAcquired}
+                                                                value={WorkExp2JbSkillAcquired} 
+                                                                onChange={handleWorkExp2JbSkillAcquired}
+                                                                filterSelectedOptions
+                                                                disableCloseOnSelect
+                                                                getOptionDisabled={isOptionDisabled}
+                                                                renderInput={(params) => (
+                                                                <TextField
+                                                                    {...params}
+                                                                    
+                                                                    placeholder="Pick your job roles"
+                                                                    sx={{
+                                                                        "& .MuiOutlinedInput-root": {
+                                                                            borderRadius: "25px", 
+                                                                            backgroundColor:'white',
+                                                                            minHeight:"100px"
+                                                                        },
+                                                                        "& .MuiChip-label": {
+                                                                            color: "white",
+                                                                        },
+                                                                        "& .MuiChip-deleteIcon": {
+                                                                            color:"white !important",
+                                                                        },
+                                                                        "& .MuiChip-root": {
+                                                                            backgroundColor:"black",
+                                                                        },
+                                                                    }}
+                                                                />
+                                                                )}
+                                                            />
+                                                    </Stack>                                           
                                             </Grid>
                                         </Grid>
                                     </div>

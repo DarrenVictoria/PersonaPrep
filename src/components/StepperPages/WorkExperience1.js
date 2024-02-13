@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useEffect } from 'react';
+import { useEffect,useState } from 'react';
 import './css/WorkExperience1.css';
 import '../../pages/interviewforms/Template.css';
 import InterviewFormFooter from '../InterviewFormFooter';
@@ -23,7 +23,6 @@ import cacute from '../../assets/images/iconcacute.svg';
 import ccalander from '../../assets/images/iconccalander.svg';
 import CustomMultilineTextFieldslimited from '../MultilineMaxWordLimit';
 import {CustomizedHook, CustomizedHookLarge} from '../TextfieldButtonDataDisplay';
-import { useState } from 'react';
 import Button from "@mui/material/Button";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { back } from '../BackButton.js';
@@ -44,8 +43,14 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import OutlinedInput from "@mui/material/OutlinedInput";
 import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCircleOutlined';
+import { collection, doc, getFirestore, setDoc, getDoc } from 'firebase/firestore';
+import { useAuth } from '../../hooks/useAuth.js';
+import Autocomplete from "@mui/material/Autocomplete";
+import Stack from "@mui/material/Stack";
+
 
 const WorkExperience1 = () => {
+    const { currentUser } = useAuth();
 
     const monthOption = [
         {value: 'January', label: 'January'},
@@ -65,7 +70,7 @@ const WorkExperience1 = () => {
         for (let year = 2023; year >= 1990; year--) {
         yearOption.push(String(year));
         }
-    const Jb_SkillsAcquired = [{data:"c#"},{data:"Winforms"}];
+    const Jb_SkillsAcquired = ["c#","Winforms"];
 
     const [WorkExp1JobTitle, setWorkExp1JobTitle] = useState('');
     const [WorkExp1Company, setWorkExp1Company] = useState('');
@@ -79,11 +84,24 @@ const WorkExperience1 = () => {
     const [WorkExp1WorkChecked, setWorkExp1WorkChecked] = useState(false);
     const [WorkExp1TaskDnWithTools, setWorkExp1TaskDnWithTools] = useState("");
     const [WorkExp1EmploymentType, setWorkExp1EmploymentType] = React.useState("");
+
+
     // the below useState for custom hook does not work yet
     const [WorkExp1JbSkillAcquired, setWorkExp1JbSkillAcquired] = useState([]);
+    const maxSelections = 3;//max value for the autocomplete
+    const handleWorkExp1JbSkillAcquired = (event, newSkill) => {
+        if (newSkill.length <= maxSelections) {
+            setWorkExp1JbSkillAcquired(newSkill);
+        }
+    };
+    const isOptionDisabled = (option) => {
+        return WorkExp1JbSkillAcquired.length >= maxSelections && !WorkExp1JbSkillAcquired.includes(option);
+    };
+    
+    console.log(WorkExp1JbSkillAcquired);
 
     const handleWorkExp1WorkChecked = (event) => {
-        setWorkExp1WorkChecked(event.target.checked)
+        setWorkExp1Working(event.target.checked ? 'yes' : 'no');
     }
     
     const handleWorkExp1TaskDnWithTools = (event) => {
@@ -93,38 +111,115 @@ const WorkExperience1 = () => {
       };
 
     // the below handle for custom hook does not work yet
-    const handleWorkExp1JbSkillAcquired = function (ev, val, reason, details) {
-        if (ev.target.classList.contains('MuiSvgIcon-root')){
-            // Removing Value
-            const value = ev.target.parentElement.querySelector('span').innerHTML;
-            setWorkExp1JbSkillAcquired(WorkExp1JbSkillAcquired.filter(item => item !== value));
-        } else {
-            const value = ev.target.innerHTML;
-            WorkExp1JbSkillAcquired.push(value);
-        }
-        console.log(WorkExp1JbSkillAcquired);
-    }
 
     useEffect(() => {
-        if(!WorkExp1WorkChecked) setWorkExp1Working('no');
+        console.log('WorkExp1WorkChecked:', WorkExp1WorkChecked);
+        console.log('WorkExp1Working:', WorkExp1Working);
+        if (!WorkExp1WorkChecked) setWorkExp1Working('no');
         else setWorkExp1Working('yes');
     }, [WorkExp1WorkChecked]);
+    
+    
+    useEffect(() => {
+        // Update the checkbox state based on the value fetched from Firestore
+        setWorkExp1WorkChecked(WorkExp1Working === 'yes');
+    }, [WorkExp1Working]);
+    
 
     const navigate = useNavigate();
     const prevPage = () => navigate('/university');
-    const handleSubmit = (e) => {
+    
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // navigate('/secondWork')
-        // validate();
+        const formData = {
+            WorkExp1JobTitle,
+            WorkExp1Company,
+            WorkExp1City,
+            WorkExp1Postal,
+            WorkExp1StartMonth,
+            WorkExp1StartYear,
+            WorkExp1EndMonth,
+            WorkExp1EndYear,
+            WorkExp1Working,
+            WorkExp1TaskDnWithTools,
+            WorkExp1EmploymentType,
+            WorkExp1JbSkillAcquired
+        };
 
-        // Check if validation passed
-        // if (validation) {
-        //     // Call the function to add data to Firestore
-        //     addDataToFirestore();
-        // } else {
-        //     console.log('Validation failed');
-        // }
+        // Send data to Firestore
+        await sendWorkDataToFirestore(formData);
+
+        
     };
+
+    const sendWorkDataToFirestore = async (data) => {
+        try {
+            const db = getFirestore();
+            const studentDetailsCollection = collection(db, 'studentdetails');
+            const userDocument = doc(studentDetailsCollection, currentUser.email); // Use the email as document ID
+
+            const docSnapshot = await getDoc(userDocument);
+            if (docSnapshot.exists()) {
+                const docData = docSnapshot.data();
+                let work = docData.work || []; // Retrieve the work data array or initialize an empty array
+
+                // Check if index 0 exists in the work data array
+                if (work.length > 0) {
+                    // Update fields of Work Experience 1 at index 0
+                    work[0] = {
+                        ...work[0],
+                        ...data
+                    };
+                } else {
+                    // Create a new entry for Work Experience 1
+                    work.push(data);
+                }
+
+                // Update the document with the modified work data array
+                await setDoc(userDocument, { work }, { merge: true });
+            } else {
+                console.error('Document does not exist for the current user.');
+            }
+        } catch (error) {
+            console.error('Error adding work info to Firestore: ', error);
+        }
+    };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const db = getFirestore();
+                const userDocument = doc(collection(db, 'studentdetails'), currentUser.email);
+
+                const docSnapshot = await getDoc(userDocument);
+                if (docSnapshot.exists()) {
+                    const userData = docSnapshot.data();
+                    const workData = userData.work && userData.work.length > 1 ? userData.work[0] : null;
+
+                    if (workData) {
+                        setWorkExp1JobTitle(workData.WorkExp1JobTitle || '');
+                        setWorkExp1Company(workData.WorkExp1Company || '');
+                        setWorkExp1City(workData.WorkExp1City || '');
+                        setWorkExp1Postal(workData.WorkExp1Postal || '');
+                        setWorkExp1StartMonth(workData.WorkExp1StartMonth || '');
+                        setWorkExp1StartYear(workData.WorkExp1StartYear || '');
+                        setWorkExp1EndMonth(workData.WorkExp1EndMonth || '');
+                        setWorkExp1EndYear(workData.WorkExp1EndYear || '');
+                        setWorkExp1Working(workData.WorkExp1Working === 'yes');
+                        setWorkExp1TaskDnWithTools(workData.WorkExp1TaskDnWithTools || '');
+                        setWorkExp1EmploymentType(workData.WorkExp1EmploymentType || '');
+                        setWorkExp1JbSkillAcquired(workData.WorkExp1JbSkillAcquired || []);
+                    }
+                } else {
+                    console.error('Document does not exist for the current user.');
+                }
+            } catch (error) {
+                console.error('Error fetching data from Firestore: ', error);
+            }
+        };
+
+        fetchData();
+    }, [currentUser]);
 
     //below code for dialog
     const [open, setOpen] = React.useState(false);
@@ -321,9 +416,45 @@ const WorkExperience1 = () => {
                                                 </FormControl>
                                             </Grid>
                                             <Grid item xs={12} >
-                                                <CustomizedHook onChange={handleWorkExp1JbSkillAcquired} maxWidth={1300} data={Jb_SkillsAcquired}  label={<Typography mb={1}><span style={{color: 'red'}}>*</span> Skills acquired from job ?</Typography>}/>
+                                                    <Typography mb={1} mt={3}><span style={{color: 'red'}}>*</span>Skills acquired from job ?</Typography>
+                                                    <Stack spacing={3}>
+                                                            <Autocomplete
+                                                                multiple
+                                                                id="tags-outlined"
+                                                                options={Jb_SkillsAcquired}
+                                                                value={WorkExp1JbSkillAcquired} 
+                                                                onChange={handleWorkExp1JbSkillAcquired}
+                                                                filterSelectedOptions
+                                                                disableCloseOnSelect
+                                                                getOptionDisabled={isOptionDisabled}
+                                                                renderInput={(params) => (
+                                                                <TextField
+                                                                    {...params}
+                                                                    
+                                                                    placeholder="Pick your job roles"
+                                                                    sx={{
+                                                                        "& .MuiOutlinedInput-root": {
+                                                                            borderRadius: "25px", 
+                                                                            backgroundColor:'white',
+                                                                            minHeight:"100px"
+                                                                        },
+                                                                        "& .MuiChip-label": {
+                                                                            color: "white",
+                                                                        },
+                                                                        "& .MuiChip-deleteIcon": {
+                                                                            color:"white !important",
+                                                                        },
+                                                                        "& .MuiChip-root": {
+                                                                            backgroundColor:"black",
+                                                                        },
+                                                                    }}
+                                                                />
+                                                                )}
+                                                            />
+                                                    </Stack>
                                             </Grid>
                                         </Grid>
+
                                     </div>
 
                                     <div className="WorkExperience1-RightColumn">

@@ -16,26 +16,31 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { back } from '../BackButton.js';
 import { next } from '../NextButton.js';
 import { useNavigate } from 'react-router-dom';
+import Autocomplete from "@mui/material/Autocomplete";
+import Stack from "@mui/material/Stack";
 
 const ExtraInformation = () => {
-    const ExtraInfo_Interests = [{data:"role1"}, {data:"role2"}, {data:"role3"}];
+    
     const [refName, setRefName] = useState('');
     const [refContact, setRefContact] = useState('');
     const [award, setAward] = useState('');
     const [lang, setLang] = useState('');
-    const [ExtraInfoInterests, setExtraInfoInterests] = useState([]);
+    
 
-    const handleExtraInfoInterests = function (ev, val, reason, details) {
-        if (ev.target.classList.contains('MuiSvgIcon-root')){
-            // Removing Value
-            const value = ev.target.parentElement.querySelector('span').innerHTML;
-            setExtraInfoInterests(ExtraInfoInterests.filter(item => item !== value));
-        } else {
-            const value = ev.target.innerHTML;
-            ExtraInfoInterests.push(value);
+    //below handle function is for CustomizedHook
+    const ExtraInfo_Intrest = ['role1','role2','role3'];
+    const [ExtraInfoInterests, setExtraInfoInterests] = useState([]);//usestate for autocomplete ExtraInfoInterests
+    const maxSelections = 3;//max value for the autocomplete
+    const handleExtraInfoInterests = (event, newSkill) => {
+        if (newSkill.length <= maxSelections) {
+            setExtraInfoInterests(newSkill);
         }
-        console.log(ExtraInfoInterests);
-    }
+    };
+    const isOptionDisabled = (option) => {
+        return ExtraInfoInterests.length >= maxSelections && !ExtraInfoInterests.includes(option);
+    };
+    
+    console.log(ExtraInfoInterests);
 
     const navigate = useNavigate();
     const prevPage = () => navigate('/summary');
@@ -104,7 +109,43 @@ const ExtraInformation = () => {
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={12} md={6} mb={3}>
-                                            <CustomizedHook onChange={handleExtraInfoInterests} data={ExtraInfo_Interests} label={<Typography mb={1}>Research Interests</Typography>}/>
+                                            <Typography mb={1} mt={3}>Research Interests</Typography>
+                                                    <Stack spacing={3}>
+                                                            <Autocomplete
+                                                                multiple
+                                                                id="tags-outlined"
+                                                                options={ExtraInfo_Intrest}
+                                                                value={ExtraInfoInterests} 
+                                                                onChange={handleExtraInfoInterests}
+                                                                filterSelectedOptions
+                                                                disableCloseOnSelect
+                                                                getOptionDisabled={isOptionDisabled}
+                                                                renderInput={(params) => (
+                                                                <TextField
+                                                                    {...params}
+                                                                    
+                                                                    placeholder="Pick your job roles"
+                                                                    sx={{
+                                                                        "& .MuiOutlinedInput-root": {
+                                                                            borderRadius: "25px", 
+                                                                            backgroundColor:'white',
+                                                                            minHeight:"100px"
+                                                                        },
+                                                                        "& .MuiChip-label": {
+                                                                            color: "white",
+                                                                        },
+                                                                        "& .MuiChip-deleteIcon": {
+                                                                            color:"white !important",
+                                                                        },
+                                                                        "& .MuiChip-root": {
+                                                                            backgroundColor:"black",
+                                                                        },
+                                                                    }}
+                                                                />
+                                                                )}
+                                                            />
+                                                    </Stack> 
+                                            
                                         </Grid>
                                     </Grid>
                                 </div>
