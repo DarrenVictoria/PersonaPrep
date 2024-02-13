@@ -45,6 +45,9 @@ import Select from '@mui/material/Select';
 import OutlinedInput from "@mui/material/OutlinedInput";
 import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCircleOutlined';
 import { useForm } from "react-hook-form";
+import Autocomplete from "@mui/material/Autocomplete";
+import Stack from "@mui/material/Stack";
+
 
 const Projects2 = () => {
     const monthOption = [
@@ -65,11 +68,11 @@ const Projects2 = () => {
         for (let year = 2023; year >= 1990; year--) {
         yearOption.push(String(year));
         }
-    const Proj_Skills = [{data: 'c#',}, {data: 'react'}, {data: 'java'}];
+    
     const [Proj2Type, setProj2Type] = useState('');
     const [Proj2Status, setProj2Status] = useState('');
 
-    const [Proj2Skills, setProj2Skills] = useState([]);
+    
 
 
     const [Proj2StartMonth, setProj2StartMonth] = useState('');
@@ -83,19 +86,22 @@ const Projects2 = () => {
     const Proj2Name = watch('Proj2Name');
     const Proj2Role = watch('Proj2Role');
     const Proj2Evidence = watch('Proj2Evidence');
-
-
-    const handleProj2Skills = function (ev, val, reason, details) {
-        if (ev.target.classList.contains('MuiSvgIcon-root')){
-            // Removing Value
-            const value = ev.target.parentElement.querySelector('span').innerHTML;
-            setProj2Skills(Proj2Skills.filter(item => item !== value));
-        } else {
-            const value = ev.target.innerHTML;
-            Proj2Skills.push(value);
+    
+    const Proj_Skills = ['c#','react','java'];
+    const [Proj2Skills, setProj2Skills] = useState([]);//usestate for autocomplete
+    const maxSelections = 3;//max value for the autocomplete
+    const handleProj2Skills = (event, newSkill) => {
+        if (newSkill.length <= maxSelections) {
+            setProj2Skills(newSkill);
         }
-        console.log(Proj2Skills);
-    }
+    };
+    const isOptionDisabled = (option) => {
+        return Proj2Skills.length >= maxSelections && !Proj2Skills.includes(option);
+    };
+    
+    console.log(Proj2Skills);
+
+   
 
 
     const navigate = useNavigate();
@@ -188,8 +194,42 @@ const Projects2 = () => {
                                             </Grid>
 
                                             <Grid item xs={12} mb={3}>
-                                                <CustomizedHook onChange={handleProj2Skills} data={Proj_Skills} label={<Typography mb={1}><span style={{color: 'red'}}>*</span>What are the skills gained from the project?</Typography>}/>
-
+                                                <Typography mb={1} mt={3}><span style={{color: 'red'}}>*</span>Skills acquired from job ?</Typography>
+                                                    <Stack spacing={3}>
+                                                            <Autocomplete
+                                                                multiple
+                                                                id="tags-outlined"
+                                                                options={Proj_Skills}
+                                                                value={Proj2Skills} 
+                                                                onChange={handleProj2Skills}
+                                                                filterSelectedOptions
+                                                                disableCloseOnSelect
+                                                                getOptionDisabled={isOptionDisabled}
+                                                                renderInput={(params) => (
+                                                                <TextField
+                                                                    {...params}
+                                                                    
+                                                                    placeholder="Pick your job roles"
+                                                                    sx={{
+                                                                        "& .MuiOutlinedInput-root": {
+                                                                            borderRadius: "25px", 
+                                                                            backgroundColor:'white',
+                                                                            minHeight:"100px"
+                                                                        },
+                                                                        "& .MuiChip-label": {
+                                                                            color: "white",
+                                                                        },
+                                                                        "& .MuiChip-deleteIcon": {
+                                                                            color:"white !important",
+                                                                        },
+                                                                        "& .MuiChip-root": {
+                                                                            backgroundColor:"black",
+                                                                        },
+                                                                    }}
+                                                                />
+                                                                )}
+                                                            />
+                                                    </Stack>
                                             </Grid>
                                             <Grid item xs={12} mb={1}>
                                                 <Typography><span style={{color: 'red'}}>*</span>Project Start Date</Typography>

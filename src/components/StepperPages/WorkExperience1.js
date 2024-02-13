@@ -45,6 +45,9 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCircleOutlined';
 import { collection, doc, getFirestore, setDoc, getDoc } from 'firebase/firestore';
 import { useAuth } from '../../hooks/useAuth.js';
+import Autocomplete from "@mui/material/Autocomplete";
+import Stack from "@mui/material/Stack";
+
 
 const WorkExperience1 = () => {
     const { currentUser } = useAuth();
@@ -67,7 +70,7 @@ const WorkExperience1 = () => {
         for (let year = 2023; year >= 1990; year--) {
         yearOption.push(String(year));
         }
-    const Jb_SkillsAcquired = [{data:"c#"},{data:"Winforms"}];
+    const Jb_SkillsAcquired = ["c#","Winforms"];
 
     const [WorkExp1JobTitle, setWorkExp1JobTitle] = useState('');
     const [WorkExp1Company, setWorkExp1Company] = useState('');
@@ -81,8 +84,21 @@ const WorkExperience1 = () => {
     const [WorkExp1WorkChecked, setWorkExp1WorkChecked] = useState(false);
     const [WorkExp1TaskDnWithTools, setWorkExp1TaskDnWithTools] = useState("");
     const [WorkExp1EmploymentType, setWorkExp1EmploymentType] = React.useState("");
+
+
     // the below useState for custom hook does not work yet
     const [WorkExp1JbSkillAcquired, setWorkExp1JbSkillAcquired] = useState([]);
+    const maxSelections = 3;//max value for the autocomplete
+    const handleWorkExp1JbSkillAcquired = (event, newSkill) => {
+        if (newSkill.length <= maxSelections) {
+            setWorkExp1JbSkillAcquired(newSkill);
+        }
+    };
+    const isOptionDisabled = (option) => {
+        return WorkExp1JbSkillAcquired.length >= maxSelections && !WorkExp1JbSkillAcquired.includes(option);
+    };
+    
+    console.log(WorkExp1JbSkillAcquired);
 
     const handleWorkExp1WorkChecked = (event) => {
         setWorkExp1Working(event.target.checked ? 'yes' : 'no');
@@ -95,17 +111,6 @@ const WorkExperience1 = () => {
       };
 
     // the below handle for custom hook does not work yet
-    const handleWorkExp1JbSkillAcquired = function (ev, val, reason, details) {
-        if (ev.target.classList.contains('MuiSvgIcon-root')){
-            // Removing Value
-            const value = ev.target.parentElement.querySelector('span').innerHTML;
-            setWorkExp1JbSkillAcquired(WorkExp1JbSkillAcquired.filter(item => item !== value));
-        } else {
-            const value = ev.target.innerHTML;
-            WorkExp1JbSkillAcquired.push(value);
-        }
-        console.log(WorkExp1JbSkillAcquired);
-    }
 
     useEffect(() => {
         console.log('WorkExp1WorkChecked:', WorkExp1WorkChecked);
@@ -411,9 +416,45 @@ const WorkExperience1 = () => {
                                                 </FormControl>
                                             </Grid>
                                             <Grid item xs={12} >
-                                                <CustomizedHook onChange={handleWorkExp1JbSkillAcquired} maxWidth={1300} data={Jb_SkillsAcquired}  label={<Typography mb={1}><span style={{color: 'red'}}>*</span> Skills acquired from job ?</Typography>}/>
+                                                    <Typography mb={1} mt={3}><span style={{color: 'red'}}>*</span>Skills acquired from job ?</Typography>
+                                                    <Stack spacing={3}>
+                                                            <Autocomplete
+                                                                multiple
+                                                                id="tags-outlined"
+                                                                options={Jb_SkillsAcquired}
+                                                                value={WorkExp1JbSkillAcquired} 
+                                                                onChange={handleWorkExp1JbSkillAcquired}
+                                                                filterSelectedOptions
+                                                                disableCloseOnSelect
+                                                                getOptionDisabled={isOptionDisabled}
+                                                                renderInput={(params) => (
+                                                                <TextField
+                                                                    {...params}
+                                                                    
+                                                                    placeholder="Pick your job roles"
+                                                                    sx={{
+                                                                        "& .MuiOutlinedInput-root": {
+                                                                            borderRadius: "25px", 
+                                                                            backgroundColor:'white',
+                                                                            minHeight:"100px"
+                                                                        },
+                                                                        "& .MuiChip-label": {
+                                                                            color: "white",
+                                                                        },
+                                                                        "& .MuiChip-deleteIcon": {
+                                                                            color:"white !important",
+                                                                        },
+                                                                        "& .MuiChip-root": {
+                                                                            backgroundColor:"black",
+                                                                        },
+                                                                    }}
+                                                                />
+                                                                )}
+                                                            />
+                                                    </Stack>
                                             </Grid>
                                         </Grid>
+
                                     </div>
 
                                     <div className="WorkExperience1-RightColumn">

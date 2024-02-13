@@ -12,17 +12,18 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { back } from '../BackButton.js';
 import { next } from '../NextButton.js';
 import { useNavigate } from 'react-router-dom';
+import Autocomplete from "@mui/material/Autocomplete";
+import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
 
 
 const SkillTrack_1 = () => {
-    const Skilldataset = [{data:"c#"},{data:"Java"},{data:"c"},{data:"python"}];
-    const SoftSkilldataset = [{data:"team"},{data:"confid"}];
-
+    
     const [leadership, setLeadership] = useState('');
     const [leadershipEx, setLeadershipEx] = useState('');
     const [skillContrib, setSkillContrib] = useState('');
-    const [keySkills, setKeySkills] = useState([]);
-    const [SoftSkills, setSoftSkills] = useState([]);
+    
+    
     
     const handleLeadership = (e) => {
         console.log(`LS => ${e.target.value}`)
@@ -40,29 +41,36 @@ const SkillTrack_1 = () => {
     };
 
 
-    const handleKeySkills = function (ev, val, reason, details) {
-        if (ev.target.classList.contains('MuiSvgIcon-root')){
-            // Removing Value
-            const value = ev.target.parentElement.querySelector('span').innerHTML;
-            setKeySkills(keySkills.filter(item => item !== value));
-        } else {
-            const value = ev.target.innerHTML;
-            keySkills.push(value);
+    //Use state for auto complete component for keySkills
+    const  Skilldataset = ['c#','Java','c python'];
+    const [keySkills, setkeySkills] = useState([]);//usestate for autocomplete keySkills
+    const maxSelectionskeySkills = 3;//max value for the autocomplete
+    const handlekeySkills = (event, newSkill) => {
+        if (newSkill.length <= maxSelectionskeySkills) {
+            setkeySkills(newSkill);
         }
-        console.log(keySkills);
-    }
+    };
+    const isOptionDisabledRolesPlayed = (option) => {
+        return keySkills.length >= maxSelectionskeySkills && !keySkills.includes(option);
+    };
+    
+    console.log(keySkills);
+    
 
-    const handleSoftSkills = function (ev, val, reason, details) {
-        if (ev.target.classList.contains('MuiSvgIcon-root')){
-            // Removing Value
-            const value = ev.target.parentElement.querySelector('span').innerHTML;
-            setSoftSkills(SoftSkills.filter(item => item !== value));
-        } else {
-            const value = ev.target.innerHTML;
-            SoftSkills.push(value);
+//Use state for auto complete component for SoftSkills
+    const SoftSkilldataset = ['team','confid'];
+    const [SoftSkills, setSoftSkills] = useState([]);//usestate for autocomplete SoftSkills 
+    const maxSelectionsSoftSkills = 3;//max value for the autocomplete
+    const handleSoftSkills = (event, newSkill) => {
+        if (newSkill.length <= maxSelectionsSoftSkills) {
+            setSoftSkills(newSkill);
         }
-        console.log(SoftSkills);
-    }
+    };
+    const isOptionDisabled = (option) => {
+        return SoftSkills.length >= maxSelectionsSoftSkills && !SoftSkills.includes(option);
+    };
+    
+    console.log(SoftSkills);
 
 
     const navigate = useNavigate();
@@ -91,12 +99,83 @@ const SkillTrack_1 = () => {
                         <form onSubmit={handleSubmit} style={{ height: '100%', position: 'relative' }}>
                             <div style={{ margin: '80px 25px 125px' }}>
                                 <div>
-                                    <CustomizedHook onChange={handleKeySkills} height={100} maxWidth={1300} data={Skilldataset} label={<Typography mb={1}><span style={{color: 'red'}}>*</span> What would you say are your core competencies or key skills? Min 3 / Max 5</Typography>}/>
+                                    <Typography mb={1} mt={3}><span style={{color: 'red'}}>*</span> What would you say are your core competencies or key skills?,<b>Min 3</b>/ Max 5</Typography>
+                                        <Stack spacing={3} maxWidth={1300}>
+                                                <Autocomplete
+                                                    multiple
+                                                    id="tags-outlined"
+                                                    options={Skilldataset}
+                                                    value={keySkills} 
+                                                    onChange={handlekeySkills}
+                                                    filterSelectedOptions
+                                                    disableCloseOnSelect
+                                                    getOptionDisabled={isOptionDisabledRolesPlayed}
+                                                    renderInput={(params) => (
+                                                    <TextField
+                                                        {...params}
+                                                        
+                                                        placeholder="Pick your job roles"
+                                                        sx={{
+                                                            "& .MuiOutlinedInput-root": {
+                                                                borderRadius: "25px", 
+                                                                backgroundColor:'white',
+                                                                minHeight:"100px"
+                                                            },
+                                                            "& .MuiChip-label": {
+                                                                color: "white",
+                                                            },
+                                                            "& .MuiChip-deleteIcon": {
+                                                                color:"white !important",
+                                                            },
+                                                            "& .MuiChip-root": {
+                                                                backgroundColor:"black",
+                                                            },
+                                                        }}
+                                                    />
+                                                    )}
+                                                />
+                                        </Stack> 
+                                    
                                     <Typography mb={1} mt={3}><span style={{color: 'red'}}>*</span> If applicable, how would you describe your leadership style?</Typography>
                                     <CustomMultilineTextFieldslimited inputHeight={100} maxWidth={1300} value={leadership} onChange={handleLeadership} maxWords={20} isRequired={true}/>
                                     <Typography mb={1} mt={3}><span style={{color: 'red'}}>*</span> If applicable can you share examples of how you've led teams or projects?</Typography>
                                     <CustomMultilineTextFieldslimited inputHeight={100} maxWidth={1300} value={leadershipEx} onChange={handleLeadershipEx} maxWords={20} isRequired={true}/>
-                                    <CustomizedHook onChange={handleSoftSkills} minHeight={100} maxWidth={1300} data={SoftSkilldataset} label={<Typography mb={1} mt={3}><span style={{color: 'red'}}>*</span> What soft skills do you believe are your strengths? Min 3 / Max 5</Typography>}/>
+                                    <Typography mb={1} mt={3}><span style={{color: 'red'}}>*</span> What soft skills do you believe are your strengths?<b>Min 3</b>/ Max 5</Typography>
+                                        <Stack spacing={3} maxWidth={1300}>
+                                                <Autocomplete
+                                                    multiple
+                                                    id="tags-outlined"
+                                                    options={SoftSkilldataset}
+                                                    value={SoftSkills} 
+                                                    onChange={handleSoftSkills}
+                                                    filterSelectedOptions
+                                                    disableCloseOnSelect
+                                                    getOptionDisabled={isOptionDisabled}
+                                                    renderInput={(params) => (
+                                                    <TextField
+                                                        {...params}
+                                                        
+                                                        placeholder="Pick your job roles"
+                                                        sx={{
+                                                            "& .MuiOutlinedInput-root": {
+                                                                borderRadius: "25px", 
+                                                                backgroundColor:'white',
+                                                                minHeight:"100px"
+                                                            },
+                                                            "& .MuiChip-label": {
+                                                                color: "white",
+                                                            },
+                                                            "& .MuiChip-deleteIcon": {
+                                                                color:"white !important",
+                                                            },
+                                                            "& .MuiChip-root": {
+                                                                backgroundColor:"black",
+                                                            },
+                                                        }}
+                                                    />
+                                                    )}
+                                                />
+                                          </Stack>                 
                                     <Typography mb={1} mt={3}><span style={{color: 'red'}}>*</span> How do these skills contribute to your overall effectiveness in the workplace?</Typography>
                                     <CustomMultilineTextFieldslimited inputHeight={100} maxWidth={1300} value={skillContrib} onChange={handleSkillContrib} maxWords={20} isRequired={true} mb={10}/>
                                 </div>

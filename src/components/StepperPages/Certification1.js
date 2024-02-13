@@ -41,6 +41,9 @@ import Select from '@mui/material/Select';
 import OutlinedInput from "@mui/material/OutlinedInput";
 import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCircleOutlined';
 import { useForm } from "react-hook-form";
+import Autocomplete from "@mui/material/Autocomplete";
+import Stack from "@mui/material/Stack";
+
 
 const Certification1 = () => {
 
@@ -63,9 +66,9 @@ const Certification1 = () => {
         yearOption.push(String(year));
         }
 
-    const CProj_Skills = [{data: 'c#'}, {data: 'java'}, {data: 'react'}];
+    
 
-    const [Certificate1ProjSkills, setCertificate1ProjSkills] = useState([]); //this is for CustomizedHook
+    
     const [Certificate1IssueMonth,setCertificate1IssueMonth] = useState("");
     const [Certificate1IssueYear,setCertificate1IssueYear] = useState("");
     const [Certificate1ExpMonth, setCertificate1ExpMonth] = useState('');
@@ -80,17 +83,19 @@ const Certification1 = () => {
 
 
     //below handle function is for CustomizedHook
-    const handleCertificate1ProjSkills = function (ev, val, reason, details) {
-        if (ev.target.classList.contains('MuiSvgIcon-root')){
-            // Removing Value
-            const value = ev.target.parentElement.querySelector('span').innerHTML;
-            setCertificate1ProjSkills(Certificate1ProjSkills.filter(item => item !== value));
-        } else {
-            const value = ev.target.innerHTML;
-            Certificate1ProjSkills.push(value);
+    const CProj_Skills = ['c#','react','java'];
+    const [Certificate1ProjSkills, setCertificate1ProjSkills] = useState([]);//usestate for autocomplete
+    const maxSelections = 3;//max value for the autocomplete
+    const handleCertificate1ProjSkills = (event, newSkill) => {
+        if (newSkill.length <= maxSelections) {
+            setCertificate1ProjSkills(newSkill);
         }
-        console.log(Certificate1ProjSkills);
-    }
+    };
+    const isOptionDisabled = (option) => {
+        return Certificate1ProjSkills.length >= maxSelections && !Certificate1ProjSkills.includes(option);
+    };
+    
+    console.log(Certificate1ProjSkills);
 
 
 
@@ -250,8 +255,42 @@ const Certification1 = () => {
                                                 />
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
-                                                <CustomizedHook data={CProj_Skills} label={<Typography mb={1}><span style={{color: 'red'}}>*</span>Skills acquired from the project?</Typography>}/>
-                                            </Grid>
+                                                <Typography mb={1} mt={3}><span style={{color: 'red'}}>*</span>Skills acquired from the project ?</Typography>
+                                                    <Stack spacing={3}>
+                                                            <Autocomplete
+                                                                multiple
+                                                                id="tags-outlined"
+                                                                options={CProj_Skills}
+                                                                value={Certificate1ProjSkills} 
+                                                                onChange={handleCertificate1ProjSkills}
+                                                                filterSelectedOptions
+                                                                disableCloseOnSelect
+                                                                getOptionDisabled={isOptionDisabled}
+                                                                renderInput={(params) => (
+                                                                <TextField
+                                                                    {...params}
+                                                                    
+                                                                    placeholder="Pick your job roles"
+                                                                    sx={{
+                                                                        "& .MuiOutlinedInput-root": {
+                                                                            borderRadius: "25px", 
+                                                                            backgroundColor:'white',
+                                                                            minHeight:"100px"
+                                                                        },
+                                                                        "& .MuiChip-label": {
+                                                                            color: "white",
+                                                                        },
+                                                                        "& .MuiChip-deleteIcon": {
+                                                                            color:"white !important",
+                                                                        },
+                                                                        "& .MuiChip-root": {
+                                                                            backgroundColor:"black",
+                                                                        },
+                                                                    }}
+                                                                />
+                                                                )}
+                                                            />
+                                                    </Stack>                                            </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>Certification evidence link</Typography>
                                                 {/* <TextField type="text" variant="outlined" value={Certificate1LInk} onChange={(event) => setCertificate1LInk(event.target.value)} fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='CV Builder'/> */}
