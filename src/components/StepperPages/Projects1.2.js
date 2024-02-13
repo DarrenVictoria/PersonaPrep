@@ -91,7 +91,7 @@ const Projects3 = () => {
         return Proj3Skills.length >= maxSelections && !Proj3Skills.includes(option);
     };
     
-    console.log(Proj3Skills);
+    // console.log(Proj3Skills);
 
 
     const navigate = useNavigate();
@@ -339,9 +339,9 @@ const Projects3 = () => {
                                                 value={Proj3Evidence}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder=''
-                                                {...register("Proj3Evidence", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                {...register("Proj3Evidence", { maxLength: 30, pattern: /^[a-zA-Z\s0-9.,@]+$/ })}
                                                 />
-                                                {errors.Proj3Evidence &&  "Please enter only letters"}
+                                                {errors.Proj3Evidence &&  "Only accepts letters, numbers and (. , @)"}
                                             </Grid>
                                             <Grid item xs={12} mb={2} style={{display: 'flex', justifyContent: 'center'}}>
                                                 <Typography>-OR-</Typography>
