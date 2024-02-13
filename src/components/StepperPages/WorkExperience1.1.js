@@ -40,6 +40,7 @@ import { collection, doc, getFirestore, setDoc, getDoc } from 'firebase/firestor
 import { useAuth } from '../../hooks/useAuth.js';
 import Autocomplete from "@mui/material/Autocomplete";
 import Stack from "@mui/material/Stack";
+import { useForm } from "react-hook-form";
 
 
 const WorkExperience2 = () => {
@@ -64,10 +65,10 @@ const WorkExperience2 = () => {
         }
     
 
-    const [WorkExp2JobTitle, setWorkExp2JobTitle] = useState('');
-    const [WorkExp2Company, setWorkExp2Company] = useState('');
-    const [WorkExp2City, setWorkExp2City] = useState('');
-    const [WorkExp2Postal, setWorkExp2Postal] = useState('');
+    // const [WorkExp2JobTitle, setWorkExp2JobTitle] = useState('');
+    // const [WorkExp2Company, setWorkExp2Company] = useState('');
+    // const [WorkExp2City, setWorkExp2City] = useState('');
+    // const [WorkExp2Postal, setWorkExp2Postal] = useState('');
     const [WorkExp2StartMonth, setWorkExp2StartMonth] = useState('');
     const [WorkExp2StartYear, setWorkExp2StartYear] = useState('');
     const [WorkExp2EndMonth, setWorkExp2EndMonth] = useState('');
@@ -76,6 +77,13 @@ const WorkExperience2 = () => {
     const [WorkExp2WorkChecked, setWorkExp2WorkChecked] = useState(false);
     const [WorkExp2TaskDnWithTools, setWorkExp2TaskDnWithTools] = useState("");
     const [WorkExp2EmploymentType, setWorkExp2EmploymentType] = React.useState("");
+
+    const { register, handleSubmit, watch, formState: { errors }, getValues, setValue } = useForm();
+
+    const WorkExp2JobTitle = watch('WorkExp2JobTitle');
+    const WorkExp2Company = watch('WorkExp2Company');
+    const WorkExp2City = watch('WorkExp2City');
+    const WorkExp2Postal = watch('WorkExp2Postal');
 
     const Jb_SkillsAcquired = ["c#","Winforms"];//dataset for autocomplete
     const [WorkExp2JbSkillAcquired, setWorkExp2JbSkillAcquired] = useState([]);//usestate for autocomplete
@@ -111,8 +119,8 @@ const WorkExperience2 = () => {
     const navigate = useNavigate();
     const prevPage = () => navigate('/work');
     
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const onSubmit = async (e) => {
+        // e.preventDefault();
         const formData = {
             WorkExp2JobTitle,
             WorkExp2Company,
@@ -180,10 +188,10 @@ const WorkExperience2 = () => {
                     const workData = userData.work && userData.work.length > 1 ? userData.work[1] : null;
 
                     if (workData) {
-                        setWorkExp2JobTitle(workData.WorkExp2JobTitle || '');
-                        setWorkExp2Company(workData.WorkExp2Company || '');
-                        setWorkExp2City(workData.WorkExp2City || '');
-                        setWorkExp2Postal(workData.WorkExp2Postal || '');
+                        setValue('WorkExp2JobTitle', workData.WorkExp2JobTitle || '');
+                        setValue('WorkExp2Company', workData.WorkExp2Company || '');
+                        setValue('WorkExp2City', workData.WorkExp2City || '');
+                        setValue('WorkExp2Postal', workData.WorkExp2Postal || '');
                         setWorkExp2StartMonth(workData.WorkExp2StartMonth || '');
                         setWorkExp2StartYear(workData.WorkExp2StartYear || '');
                         setWorkExp2EndMonth(workData.WorkExp2EndMonth || '');
@@ -202,7 +210,7 @@ const WorkExperience2 = () => {
         };
 
         fetchData();
-    }, [currentUser]);
+    }, [currentUser, setValue]);
 
 
 
@@ -212,29 +220,57 @@ const WorkExperience2 = () => {
             <div className="formtemp-bodyform">
                 <Grid container spacing={2} style={{ height: '100%' }}>
                     <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
-                        <form onSubmit={handleSubmit} style={{ height: '100%', position: 'relative' }}>
+                        <form onSubmit={handleSubmit(onSubmit)} style={{ height: '100%', position: 'relative' }}>
                             <div style={{ margin: '80px 25px 125px' }}>
                                     <div className="WorkExperience1-Maindiv">
                                     <div className="WorkExperience1-LeftColumn">
                                         <Grid container>
                                             <Grid item xs={12} mb={3}>
-                                                <Typography mb={1}><span style={{color: 'red'}}>*</span> Job Title</Typography>
-                                                <TextField type="text" variant="outlined" value={WorkExp2JobTitle} onChange={(event) => setWorkExp2JobTitle(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Full Stack Developer'/>
+                                                <Typography mb={1}>Job Title</Typography>
+                                                {/* <TextField type="text" variant="outlined" value={WorkExp2JobTitle} onChange={(event) => setWorkExp2JobTitle(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Full Stack Developer'/> */}
+                                                <TextField type="text" variant="outlined" fullWidth   
+                                                value={WorkExp2JobTitle}
+                                                InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                                placeholder='Full Stack Developer'
+                                                {...register("WorkExp2JobTitle", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                />
+                                                {errors.WorkExp2JobTitle &&  "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
-                                                <Typography mb={1}><span style={{color: 'red'}}>*</span> Company</Typography>
-                                                <TextField type="text" variant="outlined" value={WorkExp2Company} onChange={(event) => setWorkExp2Company(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Surge Global Pvt.'/>
+                                                <Typography mb={1}>Company</Typography>
+                                                {/* <TextField type="text" variant="outlined" value={WorkExp2Company} onChange={(event) => setWorkExp2Company(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Surge Global Pvt.'/> */}
+                                                <TextField type="text" variant="outlined" fullWidth   
+                                                value={WorkExp2Company}
+                                                InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                                placeholder='Surge Global Pvt.'
+                                                {...register("WorkExp2Company", { maxLength: 30, pattern: /^[a-zA-Z\s.,@]+$/ })}
+                                                />
+                                                {errors.WorkExp2Company &&  "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={6} mb={3} pr={1}>
-                                                <Typography mb={1}><span style={{color: 'red'}}>*</span> City</Typography>
-                                                <TextField type="text" variant="outlined" value={WorkExp2City} onChange={(event) => setWorkExp2City(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Colombo'/>
+                                                <Typography mb={1}>City</Typography>
+                                                {/* <TextField type="text" variant="outlined" value={WorkExp2City} onChange={(event) => setWorkExp2City(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Colombo'/> */}
+                                                <TextField type="text" variant="outlined" fullWidth   
+                                                value={WorkExp2City}
+                                                InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                                placeholder='Colombo'
+                                                {...register("WorkExp2City", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                />
+                                                {errors.WorkExp2City &&  "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={6} mb={3} pl={1}>
-                                                <Typography mb={1}><span style={{color: 'red'}}>*</span> Postal code</Typography>
-                                                <TextField type="text" variant="outlined" value={WorkExp2Postal} onChange={(event) => setWorkExp2Postal(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='00300'/>
+                                                <Typography mb={1}>Postal code</Typography>
+                                                {/* <TextField type="text" variant="outlined" value={WorkExp2Postal} onChange={(event) => setWorkExp2Postal(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='00300'/> */}
+                                                <TextField type="text" variant="outlined" fullWidth   
+                                                value={WorkExp2Postal}
+                                                InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                                placeholder='10300'
+                                                {...register("WorkExp2Postal", { maxLength: 30, pattern: /^[0-9]+$/ })}
+                                                />
+                                                {errors.WorkExp2Postal &&  "Please enter only numbers"}
                                             </Grid>
                                             <Grid item xs={12} mb={1}>
-                                                <Typography><span style={{color: 'red'}}>*</span> Start Date</Typography>
+                                                <Typography>Start Date</Typography>
                                             </Grid>
                                             <Grid item xs={6} pr={1}>
                                                 {/* <EditableChoose
@@ -250,7 +286,7 @@ const WorkExperience2 = () => {
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
                                                         IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
-                                                        required
+                                                        // required
                                                     >
                                                         <MenuItem disabled value="">Month</MenuItem>
                                                         {monthOption.map (option => (
@@ -273,7 +309,7 @@ const WorkExperience2 = () => {
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
                                                         IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
-                                                        required
+                                                        // required
                                                     >
                                                         <MenuItem disabled value="">Year</MenuItem>
                                                         {yearOption.map(year => (
@@ -283,7 +319,7 @@ const WorkExperience2 = () => {
                                                 </FormControl>
                                             </Grid>
                                             <Grid item xs={12} mb={1}>
-                                                <Typography><span style={{color: 'red'}}>*</span> End Date</Typography>
+                                                <Typography>End Date</Typography>
                                             </Grid>
                                             <Grid item xs={6} pr={1}>
                                                 {/* <EditableChoose
@@ -299,7 +335,7 @@ const WorkExperience2 = () => {
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
                                                         IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
-                                                        required
+                                                        // required
                                                     >
                                                         <MenuItem disabled value="">Month</MenuItem>
                                                         {monthOption.map (option => (
@@ -322,7 +358,7 @@ const WorkExperience2 = () => {
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
                                                         IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
-                                                        required
+                                                        // required
                                                     >
                                                         <MenuItem disabled value="">Year</MenuItem>
                                                         {yearOption.map(year => (
@@ -335,7 +371,7 @@ const WorkExperience2 = () => {
                                                 <FormControlLabel control={<Checkbox checked={WorkExp2WorkChecked} onChange={handleWorkExp2WorkChecked}/>} label="Currently Work here" /> {/*if need to make this requires put required before control and if need to make it already checked put check inside the control next to the Checkbx*/}
                                             </Grid>
                                             <Grid item xs={12} mb={1}>
-                                            <Typography><span style={{color: 'red'}}>*</span> List five significant tasks you did in your job role with the tools / software used? <small>Ex:- Developed and maintained responsive web applications using React, Angular, and Node.js.</small></Typography>
+                                            <Typography>List five significant tasks you did in your job role with the tools / software used? <small>Ex:- Developed and maintained responsive web applications using React, Angular, and Node.js.</small></Typography>
                                             </Grid>
                                             <Grid item xs={12} mb={3} className='workexperience-border' >
                                                 <CustomMultilineTextFieldslimited
@@ -348,7 +384,7 @@ const WorkExperience2 = () => {
                                                 />
                                             </Grid>
                                             <Grid item xs={12} mb={1}>
-                                            <Typography><span style={{color: 'red'}}>*</span> Employment type</Typography>
+                                            <Typography>Employment type</Typography>
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 {/* <EditableChoose
@@ -366,7 +402,7 @@ const WorkExperience2 = () => {
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD',maxWidth:300}} />}
                                                         IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
-                                                        required
+                                                        // required
                                                         
                                                     >
                                                         <MenuItem disabled value="">Type</MenuItem>
@@ -377,7 +413,7 @@ const WorkExperience2 = () => {
                                                 </FormControl>
                                             </Grid>
                                             <Grid item xs={12} >
-                                                    <Typography mb={1} mt={3}><span style={{color: 'red'}}>*</span>Skills acquired from job ?</Typography>
+                                                    <Typography mb={1} mt={3}>Skills acquired from job ?</Typography>
                                                     <Stack spacing={3}>
                                                             <Autocomplete
                                                                 multiple

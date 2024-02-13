@@ -18,14 +18,14 @@ import { next } from '../NextButton.js';
 import { useNavigate } from 'react-router-dom';
 import Autocomplete from "@mui/material/Autocomplete";
 import Stack from "@mui/material/Stack";
+import { setRef } from '@mui/material';
+import RemoveIcon from '@mui/icons-material/Remove';
 
-const ExtraInformation = () => {
-    
-    const [refName, setRefName] = useState('');
-    const [refContact, setRefContact] = useState('');
-    const [award, setAward] = useState('');
-    const [lang, setLang] = useState('');
-    
+
+const ExtraInformation = () => {        
+    const [refPerson, setRefPerson] = useState([{ name: '', phone: '' }]);
+    const [award, setAward] = useState(['']);
+    const [lang, setLang] = useState(['']);
 
     //below handle function is for CustomizedHook
     const ExtraInfo_Intrest = ['role1','role2','role3'];
@@ -40,22 +40,50 @@ const ExtraInformation = () => {
         return ExtraInfoInterests.length >= maxSelections && !ExtraInfoInterests.includes(option);
     };
     
-    console.log(ExtraInfoInterests);
+    // console.log(ExtraInfoInterests);
 
     const navigate = useNavigate();
     const prevPage = () => navigate('/summary');
     const handleSubmit = (e) => {
         e.preventDefault();
         navigate('/templates')
-        // validate();
+    };
 
-        // Check if validation passed
-        // if (validation) {
-        //     // Call the function to add data to Firestore
-        //     addDataToFirestore();
-        // } else {
-        //     console.log('Validation failed');
-        // }
+    //ref person
+    const handleRedNmChange = (index, event) => {
+        const newResults = [...refPerson];
+        newResults[index].name = event.target.value;
+        setRefPerson(newResults);
+    };
+    const handleRefPhChange = (index, event) => {
+        const newResults = [...refPerson];
+        newResults[index].phone = event.target.value;
+        setRefPerson(newResults);
+    };
+    const handleRefAddRow = (event) => {
+        event.preventDefault();
+        setRefPerson([...refPerson, { name: '', phone: '' }]);
+    };
+    const handleRefRemoveRow = (index) => {
+        const newResults = [...refPerson];
+        newResults.splice(index, 1);
+        setRefPerson(newResults);
+    };
+
+    //award and lang
+    const handleChange = (index, event, field, setField) => {
+        const newResults = [...field];
+        newResults[index] = event.target.value;
+        setField(newResults);
+    };
+    const handleRemoveRow = (index, field, setField) => {
+        const newResults = [...field];
+        newResults.splice(index, 1);
+        setField(newResults);
+    };
+    const handleAddRow = ( field, setField) => {
+        // event.preventDefault();
+        setField([...field, '']);
     };
 
     return(
@@ -68,46 +96,89 @@ const ExtraInformation = () => {
                             <div style={{ margin: '80px 25px 125px' }}>
                                 <div className="personalInfo-main">
                                     <Grid container pl={1}>
-                                        <Grid item xs={12} md={6} mb={3} pr={1}>
-                                            <Typography mb={1}><span style={{color: 'red'}}>*</span>Reference Person</Typography>
-                                            <TextField type="text" value={refName} onChange={(event) => setRefName(event.target.value)} variant="outlined" fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/>
-                                        </Grid>
-                                        <Grid item xs={12} md={4} mb={3}>
-                                            <Typography mb={1}><span style={{color: 'red'}}>*</span>Reference Contact</Typography>
-                                            <TextField type="text" value={refContact} onChange={(event) => setRefContact(event.target.value)} variant="outlined" fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/>
-                                        </Grid>
-                                        <Grid item xs={12} ml={4} mb={5}>
+                                        
+                                        {refPerson.map((result, index) => (
+                                            <Grid container item spacing={2} key={index}>
+                                                <Grid item xs={6} md={4} mb={3} pr={1}>
+                                                    <Typography mb={1}>
+                                                        {(index === 0) && <span style={{color: 'red'}}>*</span>}
+                                                        Reference Person</Typography>
+                                                    <TextField type="text" value={result.name} onChange={(event) => handleRedNmChange(index, event)} variant="outlined" fullWidth 
+                                                    required = {(index === 0)? true: false}
+                                                    InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/>
+                                                </Grid>
+                                                <Grid item xs={5} md={3} mb={3}>
+                                                    <Typography mb={1}>
+                                                        {(index === 0) && <span style={{color: 'red'}}>*</span>}
+                                                        Contact</Typography>
+                                                    <TextField type="text" value={result.phone} onChange={(event) => handleRefPhChange(index, event)} variant="outlined" fullWidth 
+                                                    required = {(index === 0)? true: false}
+                                                    InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/>
+                                                </Grid>
+                                                {index !== 0 && (
+                                                    <Grid item xs={1} md={2}  mt={3}>
+                                                        <IconButton onClick={() => handleRefRemoveRow(index)} color="primary" style={{ backgroundColor: 'black', borderRadius: '50%', width:'22px', height:'22px', marginRight: '15px' }}>
+                                                            <RemoveIcon style={{ color: 'white' }}/>
+                                                        </IconButton>
+                                                    </Grid>
+                                                )}
+                                            </Grid>
+                                        ))}
+                                        <Grid item xs={12} mt={1} mb={3}>
                                             <Typography>
-                                                <IconButton color="primary" style={{ backgroundColor: 'black', borderRadius: '50%', width:'22px', height:'22px', marginRight: '15px' }} >
+                                                <IconButton onClick={handleRefAddRow} color="primary" style={{ backgroundColor: 'black', borderRadius: '50%', width:'22px', height:'22px', marginRight: '15px' }} >
                                                     <AddIcon style={{ color: 'white' }} />
                                                 </IconButton>
                                                 Add reference person
                                             </Typography>
                                         </Grid>
-                                        <Grid item xs={12} md={6} mb={3}>
-                                            <Typography mb={1}>Award Title</Typography>
-                                            <TextField type="text" value={award} onChange={(event) => setAward(event.target.value)} variant="outlined" fullWidth  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/>
-                                        </Grid>
-                                        <Grid item xs={12} ml={4} mb={5}>
+
+                                        {award.map((result, index) => (
+                                            <Grid container item spacing={2} key={index}>
+                                                <Grid item xs={11} md={6} mb={3} mt={3}>
+                                                    <Typography mb={1}>Award Title</Typography>
+                                                    <TextField type="text" value={result.award} onChange={(event) => handleChange(index, event, award, setAward)} variant="outlined" fullWidth  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/>
+                                                </Grid>{index !== 0 && (
+                                                    <Grid item xs={1} md={2}  mt={3}>
+                                                        <IconButton onClick={() => handleRemoveRow(index, award, setAward)} color="primary" style={{ backgroundColor: 'black', borderRadius: '50%', width:'22px', height:'22px', marginRight: '15px' }}>
+                                                            <RemoveIcon style={{ color: 'white' }}/>
+                                                        </IconButton>
+                                                    </Grid>
+                                                )}
+                                            </Grid>
+                                        ))}
+                                        <Grid item xs={12} mt={1} mb={3}>
                                             <Typography>
-                                                <IconButton color="primary" style={{ backgroundColor: 'black', borderRadius: '50%', width:'22px', height:'22px', marginRight: '15px' }} >
+                                                <IconButton onClick={() => handleAddRow(award, setAward)} color="primary" style={{ backgroundColor: 'black', borderRadius: '50%', width:'22px', height:'22px', marginRight: '15px' }} >
                                                     <AddIcon style={{ color: 'white' }} />
                                                 </IconButton>
                                                 Add award
                                             </Typography>
                                         </Grid>
-                                        <Grid item xs={12} md={6} mb={3}>
-                                            <Typography mb={1}>Fluent Languages</Typography>
-                                            <TextField type="text" value={lang} onChange={(event) => setLang(event.target.value)} variant="outlined" fullWidth  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/>
-                                        </Grid>
-                                        <Grid item xs={12} ml={4} mb={5}>
+
+                                        {lang.map((result, index) => (
+                                            <Grid container item spacing={2} key={index}>
+                                                <Grid item xs={11} md={6} mb={3} mt={3}>
+                                                    <Typography mb={1}>Fluent Languages</Typography>
+                                                    <TextField type="text" value={result.lang} onChange={(event) => handleChange(index, event, lang, setLang)} variant="outlined" fullWidth  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/>
+                                                </Grid>{index !== 0 && (
+                                                    <Grid item xs={1} md={2}  mt={3}>
+                                                        <IconButton onClick={() => handleRemoveRow(index, lang, setLang)} color="primary" style={{ backgroundColor: 'black', borderRadius: '50%', width:'22px', height:'22px', marginRight: '15px' }}>
+                                                            <RemoveIcon style={{ color: 'white' }}/>
+                                                        </IconButton>
+                                                    </Grid>
+                                                )}
+                                            </Grid>
+                                        ))}
+                                        <Grid item xs={12} mt={1} mb={3}>
                                             <Typography>
-                                                <IconButton color="primary" style={{ backgroundColor: 'black', borderRadius: '50%', width:'22px', height:'22px', marginRight: '15px' }} >
+                                                <IconButton onClick={() => handleAddRow(lang, setLang)} color="primary" style={{ backgroundColor: 'black', borderRadius: '50%', width:'22px', height:'22px', marginRight: '15px' }} >
                                                     <AddIcon style={{ color: 'white' }} />
                                                 </IconButton>
                                                 Add language
                                             </Typography>
                                         </Grid>
+
                                         <Grid item xs={12} md={6} mb={3}>
                                             <Typography mb={1} mt={3}>Research Interests</Typography>
                                                     <Stack spacing={3}>
@@ -148,6 +219,7 @@ const ExtraInformation = () => {
                                             
                                         </Grid>
                                     </Grid>
+                                    {/* <button onClick={(event) => {event.preventDefault(); console.log(award)}}>btn</button> */}
                                 </div>
                             </div>
                             <Grid container spacing={2} style={{position: 'absolute', bottom: 80}}>            

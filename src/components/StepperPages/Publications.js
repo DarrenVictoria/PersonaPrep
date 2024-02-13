@@ -154,7 +154,7 @@ useEffect(() => {
                                           value={PblTitle}
                                           InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                           placeholder=''
-                                          {...register("PblTitle", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                          {...register("PblTitle", { maxLength: 30, pattern: /^[a-zA-Z\s0-9]+$/ })}
                                           />
                                           {errors.PblTitle &&  "Please enter only letters"}
                                       </Grid>
