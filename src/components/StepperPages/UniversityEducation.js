@@ -154,7 +154,7 @@ const UniversityEducation1 = () => {
                     const docData = docSnapshot.data();
                     if (docData.universityData && docData.universityData.length > 0) {
                         const universityData = docData.universityData[0]; // Assuming you only want data from the first university in the array
-                        console.log("University Data:", universityData);
+                        
                         setValue('Uni1Name', universityData.Uni1Name || '');
                         setValue('Uni1City', universityData.Uni1City || '');
                         setValue('Uni1Country', universityData.Uni1Country || '');
