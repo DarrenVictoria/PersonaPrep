@@ -25,17 +25,13 @@ import School2 from "./components/StepperPages/Education1.1";
 import Education_2 from "./components/StepperPages/Education2";
 import UniversityEducation1 from "./components/StepperPages/UniversityEducation";
 import UniversityEducation2 from "./components/StepperPages/UniversityEducation1.1";
-
 import WorkExperience1 from "./components/StepperPages/WorkExperience1";
 import WorkExperience2 from "./components/StepperPages/WorkExperience1.1";
-
 import Projects1 from "./components/StepperPages/Projects1";
 import Projects2 from "./components/StepperPages/Projects1.1";
 import Projects3 from "./components/StepperPages/Projects1.2";
-
 import Certification1 from "./components/StepperPages/Certification1";
 import Certification2 from "./components/StepperPages/Certification1.1";
-
 import Club1 from "./components/StepperPages/Clubs";
 import Club2 from "./components/StepperPages/Clubs1.1";
 import Publications from "./components/StepperPages/Publications";
