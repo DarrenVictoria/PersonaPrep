@@ -28,17 +28,29 @@ import EditIcon from '@mui/icons-material/Edit';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import { useForm } from "react-hook-form";
+import Autocomplete from "@mui/material/Autocomplete";
+import Stack from "@mui/material/Stack";
 
 const PersonalInfo = () => {
     const { currentUser } = useAuth();
     const [profilePictureUrl, setProfilePictureUrl] = useState('');
     const [profilePictureFetchUrl, setProfilePictureFetchUrl] = useState('');
    
-    const job_roles = [{data:"Software Engineer"}, {data:"Systems Analyst"}, {data:"Network Administrator"}, {data:"Data Scientist"}];
+    const job_roles = ["Software Engineer","Systems Analyst","Network Administrator","Data Scientist","Quality assurance"];
 
     // const [Proname, setProname] = useState('');
     const [PJobRoles, setPJobRoles] = useState([]);
-    const [jobRolesData, setJobRolesData] = useState([]);
+    const maxSelections = 3;//max value for the autocomplete
+    const handleOnChange = (event, newRole) => {
+        if (newRole.length <= maxSelections) {
+            setPJobRoles(newRole);
+        }
+    };
+    const isOptionDisabled = (option) => {
+        return PJobRoles.length >= maxSelections && !PJobRoles.includes(option);
+    };
+    
+    console.log(PJobRoles);
 
     const { register, handleSubmit, watch, formState: { errors }, getValues, setValue } = useForm();
     const Proname = watch('Proname');
@@ -154,11 +166,42 @@ const PersonalInfo = () => {
                                                 
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
-                                                <CustomizedHook 
-                                                onChange={handlePJobRoles}
-                                                data={job_roles}
-                                                label={<Typography mb={1}><span style={{color: 'red'}}>*</span>What job roles are you aspiring for? Min 1 / Max 3</Typography>}
-                                                />
+                                                <Typography mb={1} mt={3}><span style={{color: 'red'}}>*</span> If applicable can you share examples of how you've led teams or projects?</Typography>
+                                                <Stack spacing={3}>
+                                                    <Autocomplete
+                                                        multiple
+                                                        id="tags-outlined"
+                                                        options={job_roles}
+                                                        value={PJobRoles} 
+                                                        onChange={handleOnChange}
+                                                        filterSelectedOptions
+                                                        disableCloseOnSelect
+                                                        getOptionDisabled={isOptionDisabled}
+                                                        renderInput={(params) => (
+                                                        <TextField
+                                                            {...params}
+                                                            
+                                                            placeholder="Pick your job roles"
+                                                            sx={{
+                                                                "& .MuiOutlinedInput-root": {
+                                                                    borderRadius: "25px", 
+                                                                    backgroundColor:'white',
+                                                                    minHeight:"100px"
+                                                                },
+                                                                "& .MuiChip-label": {
+                                                                    color: "white",
+                                                                },
+                                                                "& .MuiChip-deleteIcon": {
+                                                                    color:"white !important",
+                                                                },
+                                                                "& .MuiChip-root": {
+                                                                    backgroundColor:"black",
+                                                                },
+                                                            }}
+                                                        />
+                                                        )}
+                                                    />
+                                                </Stack>
                                             </Grid>
                                         </Grid>
                                     </div>
