@@ -28,6 +28,10 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import OutlinedInput from "@mui/material/OutlinedInput";
 import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCircleOutlined';
+import Autocomplete from "@mui/material/Autocomplete";
+import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
+
 
 const Club1 = () => {
   const monthOption = [
@@ -55,36 +59,42 @@ const yearOption = ["2024"];
     const [Club1EndYear, setClub1EndYear] = useState('');
     const [Club1Volunteer, setClub1Volunteer] = useState('no');
     const [Club1VolunteerChecked, setClub1VolunteerChecked] = useState(false);
-    const [Club1RolesPlayed, setClub1RolesPlayed] = useState([]);
-    const [Club1SkillsEarned, setClub1SkillsEarned] = useState([]);
+    
 
-    const Clbs_RolesPlayed = [{data:"Volunteer"},{data:"Council Member"},{data:"Council Members"},{data:"Council Memberv"},{data:"Council Membere"},{data:"Council Memberw"}];
-    const Clbs_SkillsEarned = [{data:"Leadership"},{data:"Teamwork"}];
+    
+    
+//Use state for auto complete component for RolesPlayed
+    const  Clbs_RolesPlayed = ['Volunteer','Member','Council Members'];
+    const [Club1RolesPlayed, setClub1RolesPlayed] = useState([]);//usestate for autocomplete RolesPlayed
+    const maxSelectionsRolesPlayed = 3;//max value for the autocomplete
+    const handleClub1RolesPlayed = (event, newSkill) => {
+        if (newSkill.length <= maxSelectionsRolesPlayed) {
+            setClub1RolesPlayed(newSkill);
+        }
+    };
+    const isOptionDisabledRolesPlayed = (option) => {
+        return Club1RolesPlayed.length >= maxSelectionsRolesPlayed && !Club1RolesPlayed.includes(option);
+    };
+    
+    console.log(Club1RolesPlayed);
+    
 
+//Use state for auto complete component for SkillsEarned
+    const Clbs_SkillsEarned = ['Leadership#','Teamwork'];
+    const [Club1SkillsEarned, setClub1SkillsEarned] = useState([]);//usestate for autocomplete skills earned
+    const maxSelectionsSkillsEarned = 3;//max value for the autocomplete
+    const handleClub1SkillsEarned = (event, newSkill) => {
+        if (newSkill.length <= maxSelectionsSkillsEarned) {
+            setClub1SkillsEarned(newSkill);
+        }
+    };
+    const isOptionDisabled = (option) => {
+        return Club1SkillsEarned.length >= maxSelectionsSkillsEarned && !Club1SkillsEarned.includes(option);
+    };
+    
+    console.log(Club1SkillsEarned);
 
-    const handleClub1RolesPlayed = function (ev, val, reason, details) {
-      if (ev.target.classList.contains('MuiSvgIcon-root')){
-          // Removing Value
-          const value = ev.target.parentElement.querySelector('span').innerHTML;
-          setClub1RolesPlayed(Club1RolesPlayed.filter(item => item !== value));
-      } else {
-          const value = ev.target.innerHTML;
-          Club1RolesPlayed.push(value);
-      }
-      console.log(Club1RolesPlayed);
-    }
-
-    const handleClub1SkillsEarned = function (ev, val, reason, details) {
-      if (ev.target.classList.contains('MuiSvgIcon-root')){
-          // Removing Value
-          const value = ev.target.parentElement.querySelector('span').innerHTML;
-          setClub1SkillsEarned(Club1SkillsEarned.filter(item => item !== value));
-      } else {
-          const value = ev.target.innerHTML;
-          Club1SkillsEarned.push(value);
-      }
-      console.log(Club1SkillsEarned);
-  }
+    
 
     useEffect(() => {
       if(!Club1VolunteerChecked) setClub1Volunteer('no');
@@ -238,14 +248,14 @@ const yearOption = ["2024"];
                                     
                                   </Grid>
                                   <Grid item xs={6} mb={3} pl={1}>
-                                  {/* <EditableChoose
-                                  options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                                  onSelect={setClub1EndYear}
-                                  disabledOptions={["2024"]}
-                                  isRequired={true}
-                                  //the below width did not work have to check
-                                
-                                /> */}
+                                    {/* <EditableChoose
+                                    options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
+                                    onSelect={setClub1EndYear}
+                                    disabledOptions={["2024"]}
+                                    isRequired={true}
+                                    //the below width did not work have to check
+                                  
+                                    /> */}
                                     <FormControl variant="outlined" fullWidth>
                                       <Select
                                           value={Club1EndYear}
@@ -271,13 +281,81 @@ const yearOption = ["2024"];
 
 
                                   <Grid item xs={12} mb={3}>
-                                    
-                                    <CustomizedHook onChange={handleClub1RolesPlayed} data={Clbs_RolesPlayed} label={<Typography>Roles Played</Typography>}/>
-                                  
-                                    
+                                    <Typography mb={1} mt={3}>Roles Played</Typography>
+                                        <Stack spacing={3}>
+                                                <Autocomplete
+                                                    multiple
+                                                    id="tags-outlined"
+                                                    options={Clbs_RolesPlayed}
+                                                    value={Club1RolesPlayed} 
+                                                    onChange={handleClub1RolesPlayed}
+                                                    filterSelectedOptions
+                                                    disableCloseOnSelect
+                                                    getOptionDisabled={isOptionDisabledRolesPlayed}
+                                                    renderInput={(params) => (
+                                                    <TextField
+                                                        {...params}
+                                                        
+                                                        placeholder="Pick your job roles"
+                                                        sx={{
+                                                            "& .MuiOutlinedInput-root": {
+                                                                borderRadius: "25px", 
+                                                                backgroundColor:'white',
+                                                                minHeight:"100px"
+                                                            },
+                                                            "& .MuiChip-label": {
+                                                                color: "white",
+                                                            },
+                                                            "& .MuiChip-deleteIcon": {
+                                                                color:"white !important",
+                                                            },
+                                                            "& .MuiChip-root": {
+                                                                backgroundColor:"black",
+                                                            },
+                                                        }}
+                                                    />
+                                                    )}
+                                                />
+                                        </Stack> 
                                   </Grid>
-                                  <Grid item xs={12} mb={3}>                                    
-                                    <CustomizedHook onChange={handleClub1SkillsEarned} data={Clbs_SkillsEarned} label={<Typography>Skills Earned</Typography>}/>
+                                  <Grid item xs={12} mb={3}>  
+                                    <Typography mb={1} mt={3}>Skills Earned</Typography>
+                                        <Stack spacing={3}>
+                                                <Autocomplete
+                                                    multiple
+                                                    id="tags-outlined"
+                                                    options={Clbs_SkillsEarned}
+                                                    value={Club1SkillsEarned} 
+                                                    onChange={handleClub1SkillsEarned}
+                                                    filterSelectedOptions
+                                                    disableCloseOnSelect
+                                                    getOptionDisabled={isOptionDisabled}
+                                                    renderInput={(params) => (
+                                                    <TextField
+                                                        {...params}
+                                                        
+                                                        placeholder="Pick your job roles"
+                                                        sx={{
+                                                            "& .MuiOutlinedInput-root": {
+                                                                borderRadius: "25px", 
+                                                                backgroundColor:'white',
+                                                                minHeight:"100px"
+                                                            },
+                                                            "& .MuiChip-label": {
+                                                                color: "white",
+                                                            },
+                                                            "& .MuiChip-deleteIcon": {
+                                                                color:"white !important",
+                                                            },
+                                                            "& .MuiChip-root": {
+                                                                backgroundColor:"black",
+                                                            },
+                                                        }}
+                                                    />
+                                                    )}
+                                                />
+                                          </Stack>                                   
+                                    
                                   </Grid>
 
                                   <Grid item xs={12}  mb={3} pl={2} sx={{"@media (max-width: 376px)": {pl: 0}}}>

@@ -21,6 +21,9 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import OutlinedInput from "@mui/material/OutlinedInput";
 import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCircleOutlined';
+import Autocomplete from "@mui/material/Autocomplete";
+import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
 
 const Club2 = () => {
 
@@ -49,36 +52,41 @@ const yearOption = ["2024"];
     const [Club2EndYear, setClub2EndYear] = useState('');
     const [Club2Volunteer, setClub2Volunteer] = useState('no');
     const [Club2VolunteerChecked, setClub2VolunteerChecked] = useState(false);
-    const [Club2RolesPlayed, setClub2RolesPlayed] = useState([]);
-    const [Club2SkillsEarned, setClub2SkillsEarned] = useState([]);
+   
 
-    const Clbs_RolesPlayed = [{data:"Volunteer"},{data:"Council Member"},{data:"Council Members"},{data:"Council Memberv"},{data:"Council Membere"},{data:"Council Memberw"}];
-    const Clbs_SkillsEarned = [{data:"Leadership"},{data:"Teamwork"}];
+    
 
 
-    const handleClub2RolesPlayed = function (ev, val, reason, details) {
-      if (ev.target.classList.contains('MuiSvgIcon-root')){
-          // Removing Value
-          const value = ev.target.parentElement.querySelector('span').innerHTML;
-          setClub2RolesPlayed(Club2RolesPlayed.filter(item => item !== value));
-      } else {
-          const value = ev.target.innerHTML;
-          Club2RolesPlayed.push(value);
-      }
-      console.log(Club2RolesPlayed);
-    }
+    //Use state for auto complete component for RolesPlayed
+    const  Clbs_RolesPlayed = ['Volunteer','Member','Council Members'];
+    const [Club2RolesPlayed, setClub2RolesPlayed] = useState([]);//usestate for autocomplete Roles played
+    const maxSelectionsRolesPlayed = 3;//max value for the autocomplete
+    const handleClub2RolesPlayed = (event, newSkill) => {
+        if (newSkill.length <= maxSelectionsRolesPlayed) {
+            setClub2RolesPlayed(newSkill);
+        }
+    };
+    const isOptionDisabledRolesPlayed = (option) => {
+        return Club2RolesPlayed.length >= maxSelectionsRolesPlayed && !Club2RolesPlayed.includes(option);
+    };
+    
+    console.log(Club2RolesPlayed);
+    
 
-    const handleClub2SkillsEarned = function (ev, val, reason, details) {
-      if (ev.target.classList.contains('MuiSvgIcon-root')){
-          // Removing Value
-          const value = ev.target.parentElement.querySelector('span').innerHTML;
-          setClub2SkillsEarned(Club2SkillsEarned.filter(item => item !== value));
-      } else {
-          const value = ev.target.innerHTML;
-          Club2SkillsEarned.push(value);
-      }
-      console.log(Club2SkillsEarned);
-  }
+//Use state for auto complete component for SkillsEarned
+    const Clbs_SkillsEarned = ['Leadership#','Teamwork'];
+    const [Club2SkillsEarned, setClub2SkillsEarned] = useState([]);//usestate for autocomplete skills earned
+    const maxSelectionsSkillsEarned = 3;//max value for the autocomplete
+    const handleClub2SkillsEarned = (event, newSkill) => {
+        if (newSkill.length <= maxSelectionsSkillsEarned) {
+            setClub2SkillsEarned(newSkill);
+        }
+    };
+    const isOptionDisabled = (option) => {
+        return Club2SkillsEarned.length >= maxSelectionsSkillsEarned && !Club2SkillsEarned.includes(option);
+    };
+    
+    console.log(Club2SkillsEarned);
 
     useEffect(() => {
       if(!Club2VolunteerChecked) setClub2Volunteer('no');
@@ -119,7 +127,7 @@ const yearOption = ["2024"];
                                   </Grid>
                                   <Grid item xs={12} mb={3}>
                                       {/* <EditableChoose
-                                        options={["Clubs","Club1", "Club2", "Club3"]}
+                                        options={["Clubs","Club2", "Club2", "Club3"]}
                                         onSelect={setClub2Name}
                                         disabledOptions={["Clubs"]}
                                         isRequired={true}
@@ -137,7 +145,7 @@ const yearOption = ["2024"];
                                               
                                           >
                                               <MenuItem disabled value="">Clubs</MenuItem>
-                                              <MenuItem value="Club1">Club1</MenuItem>
+                                              <MenuItem value="Club2">Club2</MenuItem>
                                               <MenuItem value="Club2">Club2</MenuItem>
                                               <MenuItem value="Club3">Club3</MenuItem>
                                               
@@ -265,12 +273,81 @@ const yearOption = ["2024"];
 
                                   <Grid item xs={12} mb={3}>
                                     
-                                    <CustomizedHook onChange={handleClub2RolesPlayed} data={Clbs_RolesPlayed} label={<Typography>Roles Played</Typography>}/>
-                                  
+                                    <Typography mb={1} mt={3}>Roles Played</Typography>
+                                      <Stack spacing={3}>
+                                              <Autocomplete
+                                                  multiple
+                                                  id="tags-outlined"
+                                                  options={Clbs_RolesPlayed}
+                                                  value={Club2RolesPlayed} 
+                                                  onChange={handleClub2RolesPlayed}
+                                                  filterSelectedOptions
+                                                  disableCloseOnSelect
+                                                  getOptionDisabled={isOptionDisabledRolesPlayed}
+                                                  renderInput={(params) => (
+                                                  <TextField
+                                                      {...params}
+                                                      
+                                                      placeholder="Pick your job roles"
+                                                      sx={{
+                                                          "& .MuiOutlinedInput-root": {
+                                                              borderRadius: "25px", 
+                                                              backgroundColor:'white',
+                                                              minHeight:"100px"
+                                                          },
+                                                          "& .MuiChip-label": {
+                                                              color: "white",
+                                                          },
+                                                          "& .MuiChip-deleteIcon": {
+                                                              color:"white !important",
+                                                          },
+                                                          "& .MuiChip-root": {
+                                                              backgroundColor:"black",
+                                                          },
+                                                      }}
+                                                  />
+                                                  )}
+                                              />
+                                      </Stack>                                   
                                     
                                   </Grid>
                                   <Grid item xs={12} mb={3}>                                    
-                                    <CustomizedHook onChange={handleClub2SkillsEarned} data={Clbs_SkillsEarned} label={<Typography>Skills Earned</Typography>}/>
+                                  <Typography mb={1} mt={3}>Skills Earned</Typography>
+                                        <Stack spacing={3}>
+                                                <Autocomplete
+                                                    multiple
+                                                    id="tags-outlined"
+                                                    options={Clbs_SkillsEarned}
+                                                    value={Club2SkillsEarned} 
+                                                    onChange={handleClub2SkillsEarned}
+                                                    filterSelectedOptions
+                                                    disableCloseOnSelect
+                                                    getOptionDisabled={isOptionDisabled}
+                                                    renderInput={(params) => (
+                                                    <TextField
+                                                        {...params}
+                                                        
+                                                        placeholder="Pick your job roles"
+                                                        sx={{
+                                                            "& .MuiOutlinedInput-root": {
+                                                                borderRadius: "25px", 
+                                                                backgroundColor:'white',
+                                                                minHeight:"100px"
+                                                            },
+                                                            "& .MuiChip-label": {
+                                                                color: "white",
+                                                            },
+                                                            "& .MuiChip-deleteIcon": {
+                                                                color:"white !important",
+                                                            },
+                                                            "& .MuiChip-root": {
+                                                                backgroundColor:"black",
+                                                            },
+                                                        }}
+                                                    />
+                                                    )}
+                                                />
+                                          </Stack>                              
                                   </Grid>
 
                                   <Grid item xs={12}  mb={3} pl={2} sx={{"@media (max-width: 376px)": {pl: 0}}}>

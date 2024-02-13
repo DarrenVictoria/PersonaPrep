@@ -166,7 +166,7 @@ const PersonalInfo = () => {
                                                 
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
-                                                <Typography mb={1} mt={3}><span style={{color: 'red'}}>*</span> If applicable can you share examples of how you've led teams or projects?</Typography>
+                                                <Typography mb={1} mt={3}><span style={{color: 'red'}}>*</span> What job roles are you aspiring for? <b>Min1</b>/Max3</Typography>
                                                 <Stack spacing={3}>
                                                     <Autocomplete
                                                         multiple
