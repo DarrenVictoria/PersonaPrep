@@ -12,7 +12,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import cphone from '../../assets/images/iconcphone.svg';
 import EditableChoose from '../EditableSelectOption';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -47,9 +47,11 @@ import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCi
 import { useForm } from "react-hook-form";
 import Autocomplete from "@mui/material/Autocomplete";
 import Stack from "@mui/material/Stack";
-
+import { collection, doc, setDoc, getFirestore,getDoc } from 'firebase/firestore';
+import { useAuth } from '../../hooks/useAuth.js';
 
 const Projects2 = () => {
+    const { currentUser } = useAuth();
     const monthOption = [
         {value: 'January', label: 'January'},
         {value: 'February', label: 'February'},
@@ -89,6 +91,9 @@ const Projects2 = () => {
     
     const Proj_Skills = ['c#','react','java'];
     const [Proj2Skills, setProj2Skills] = useState([]);//usestate for autocomplete
+    const [ProjectEvdUrl, setProjectEvdUrl] = useState('');
+    const [ProjectEvdFetchUrl, setProjectEvdFetchUrl] = useState('');
+
     const maxSelections = 3;//max value for the autocomplete
     const handleProj2Skills = (event, newSkill) => {
         if (newSkill.length <= maxSelections) {
@@ -99,17 +104,121 @@ const Projects2 = () => {
         return Proj2Skills.length >= maxSelections && !Proj2Skills.includes(option);
     };
     
-    console.log(Proj2Skills);
+    
 
+    const handleFileUploadSuccess = (url) => {
+        setProjectEvdUrl(url.downloadURL);
+        console.log(url);
+      };
+
+      const handleReset = () => {
+        // Your reset logic here
+        console.log('Reset button clicked');
+      };
    
 
 
     const navigate = useNavigate();
     const prevPage = () => navigate('/project');
-    const onSubmit = (e) => {
-        // e.preventDefault();
-        handleClickOpen();
+    
+    const onSubmit = async () => {
+        try {
+            const finalProjectEvd = ProjectEvdUrl || ProjectEvdFetchUrl;
+
+            const formData = {
+                Proj2Name,
+                Proj2Type,
+                Proj2Status,
+                Proj2Role,
+                Proj2StartMonth,
+                Proj2StartYear,
+                Proj2EndMonth,
+                Proj2EndYear,
+                Proj2Place,
+                Proj2Evidence,
+                Proj2Skills,
+                ProjectEvdUrl: finalProjectEvd,
+            };
+
+            await sendProjectDataToFirestore(formData);
+
+            
+        } catch (error) {
+            console.error('Error adding project to Firestore: ', error);
+        }
     };
+
+    const sendProjectDataToFirestore = async (data) => {
+        try {
+            const db = getFirestore();
+            const studentDetailsCollection = collection(db, 'studentdetails');
+            const userDocument = doc(studentDetailsCollection, currentUser.email); // Use the email as document ID
+
+            const docSnapshot = await getDoc(userDocument);
+            if (docSnapshot.exists()) {
+                const docData = docSnapshot.data();
+                let projects = docData.projects || []; // Retrieve the projects array or initialize an empty array
+
+                // Check if index 0 exists in the projects array
+                if (projects.length > 1) {
+                    // Update fields of Project 1 at index 0
+                    projects[1] = {
+                        ...projects[1],
+                        ...data
+                    };
+                } else {
+                    // Create a new entry for Project 1
+                    projects.push(data);
+                }
+
+                // Update the document with the modified projects array
+                await setDoc(userDocument, { projects }, { merge: true });
+            } else {
+                console.error('Document does not exist for the current user.');
+            }
+        } catch (error) {
+            console.error('Error adding project info to Firestore: ', error);
+        }
+    };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const db = getFirestore();
+                const userDocument = doc(collection(db, 'studentdetails'), currentUser.email);
+                const docSnapshot = await getDoc(userDocument);
+
+                if (docSnapshot.exists()) {
+                    const projectData = docSnapshot.data().projects && docSnapshot.data().projects.length > 1 ? docSnapshot.data().projects[1] : null;
+
+                    if (projectData) {
+                        
+
+                        setValue('Proj2Name', projectData.Proj2Name || '');
+                        setValue('Proj2Evidence', projectData.Proj2Evidence || '');
+                        setValue('Proj2Role', projectData.Proj2Role || '');
+
+                        setProj2Type(projectData.Proj2Type || '');
+                        setProj2Status(projectData.Proj2Status || '');
+                        setProj2StartMonth(projectData.Proj2StartMonth || '');
+                        setProj2StartYear(projectData.Proj2StartYear || '');
+                        setProj2EndMonth(projectData.Proj2EndMonth || '');
+                        setProj2EndYear(projectData.Proj2EndYear || '');
+                        setProj2Place(projectData.Proj2Place || '');
+                        setProj2Skills(projectData.Proj2Skills || []);
+                        setProjectEvdFetchUrl(projectData.ProjectEvdUrl|| null);
+                    }
+                } else {
+                    console.error('Document does not exist for the current user.');
+                }
+            } catch (error) {
+                console.error('Error fetching data from Firestore: ', error);
+            }
+        };
+
+        fetchData();
+    }, [currentUser]);
+
 
     //below code for dialog
     const [open, setOpen] = React.useState(false);
@@ -200,7 +309,7 @@ const Projects2 = () => {
                                                                 multiple
                                                                 id="tags-outlined"
                                                                 options={Proj_Skills}
-                                                                value={Proj2Skills} 
+                                                                  value={Proj2Skills} 
                                                                 onChange={handleProj2Skills}
                                                                 filterSelectedOptions
                                                                 disableCloseOnSelect
@@ -366,7 +475,9 @@ const Projects2 = () => {
                                                 <Typography>-OR-</Typography>
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
-                                                <FileUpload />
+                                            <FileUpload onFileUpload={handleFileUploadSuccess} onUploadSuccess={handleFileUploadSuccess} onReset={handleReset}    />
+                                                {ProjectEvdFetchUrl && ProjectEvdFetchUrl !== ' ' &&  <p style={{marginTop:'1rem',marginLeft:'1rem'}}>Your Project Evidence</p>}
+                                                {ProjectEvdFetchUrl && ProjectEvdFetchUrl !== ' ' && <img src={ProjectEvdFetchUrl} alt="Profile Picture"  style={{ width: '15rem', height: '10rem', objectFit: 'cover',marginLeft:'1rem',border: '1px solid black' }}  />}
                                             </Grid>
                                         </Grid>
                                     </div>
@@ -465,7 +576,7 @@ const Projects2 = () => {
                                 </Grid>
                                     
                                 <Grid xs={6}>
-                                    <Button type='submit' style={next}>Next Step</Button>
+                                    <Button type='submit' style={next} onClick={handleClickOpen}>Next Step</Button>
                                     <Dialog
                                         fullScreen={fullScreen}
                                         open={open}

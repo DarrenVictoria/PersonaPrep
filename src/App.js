@@ -92,6 +92,7 @@ function App() {
           <Route path="/clubsAndSocs" element={<Club1 />}/>
           <Route path="/Secondclub" element={<Club2 />}/>
           <Route path="/publications" element={<Publications />}/>
+          
           <Route path="/skilltrack" element={<SkillTrack_1 />}/>
           <Route path="/summary" element={<Summary_1 />}/>
           <Route path="/extraInfo" element={<ExtraInformation />}/>
