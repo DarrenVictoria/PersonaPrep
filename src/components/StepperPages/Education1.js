@@ -27,6 +27,7 @@ import { useAuth } from '../../hooks/useAuth.js';
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
+import { useForm } from "react-hook-form";
 
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -69,59 +70,54 @@ const School1 = () => {
     const [School1StartYear, setSchool1StartYear] = useState('');
     const [School1EndMonth, setSchool1EndMonth] = useState('');
     const [School1EndYear, setSchool1EndYear] = useState('');
-    const [School1Name, setSchool1Name] = useState('');
-    const [School1City, setSchool1City] = useState('');
-    const [School1Country, setSchool1Country] = useState('');
-    const [School1Experience, setSchool1Experience] = useState('');
 
+    const { register, handleSubmit, watch, formState: { errors }, getValues, setValue } = useForm();
 
-
-    const School1NameChange = (e) => setSchool1Name(e.target.value);
-    const School1CityChange = (e) => setSchool1City(e.target.value);
-    const School1CountryChange = (e) => setSchool1Country(e.target.value);
-    const School1ExperienceChange = (e) => setSchool1Experience(e.target.value);
+    const School1Name = watch('School1Name');
+    const School1Experience = watch('School1Experience');
+    const School1City = watch('School1City');
+    const School1Country = watch('School1Country');
 
     const navigate = useNavigate();
-      const prevPage = () => navigate('/contactDetSocial');
+    const prevPage = () => navigate('/contactDetSocial');
 
-      const fetchUserData = async () => {
-        try {
-            const db = getFirestore();
-            const studentDetailsCollection = collection(db, 'studentdetails');
-            const querySnapshot = await getDocs(query(studentDetailsCollection, where('email', '==', currentUser.email)));
-            const existingDoc = querySnapshot.docs[0];
+    const fetchUserData = async () => {
+    try {
+        const db = getFirestore();
+        const studentDetailsCollection = collection(db, 'studentdetails');
+        const querySnapshot = await getDocs(query(studentDetailsCollection, where('email', '==', currentUser.email)));
+        const existingDoc = querySnapshot.docs[0];
 
-            if (existingDoc) {
-                const userData = existingDoc.data();
+        if (existingDoc) {
+            const userData = existingDoc.data();
+            // Populate the form fields with fetched data
+
+            if (userData.schools && userData.schools.length > 0) {
+                // Retrieve the first school details from the array
+                const firstSchool = userData.schools[0];
                 // Populate the form fields with fetched data
-
-                if (userData.schools && userData.schools.length > 0) {
-                    // Retrieve the first school details from the array
-                    const firstSchool = userData.schools[0];
-                    // Populate the form fields with fetched data
-                    setSchool1Name(firstSchool.SchoolName || '');
-                    setSchool1City(firstSchool.SchoolCity || '');
-                    setSchool1Country(firstSchool.SchoolCountry || '');
-                    setSchool1Experience(firstSchool.SchoolExperience || '');
-                    setSchool1StartMonth(firstSchool.SchoolStartMonth || '');
-                    setSchool1StartYear(firstSchool.SchoolStartYear || '');
-                    setSchool1EndMonth(firstSchool.SchoolEndMonth || '');
-                    setSchool1EndYear(firstSchool.SchoolEndYear || '');
-                }
-
+                setValue('School1Name', firstSchool.SchoolName || '');
+                setValue('School1City', firstSchool.SchoolCity || '');
+                setValue('School1Country', firstSchool.SchoolCountry || '');
+                setValue('School1Experience', firstSchool.SchoolExperience || '');
+                setSchool1StartMonth(firstSchool.SchoolStartMonth || '');
+                setSchool1StartYear(firstSchool.SchoolStartYear || '');
+                setSchool1EndMonth(firstSchool.SchoolEndMonth || '');
+                setSchool1EndYear(firstSchool.SchoolEndYear || '');
             }
-        } catch (error) {
-            console.error('Error fetching user data: ', error);
+
         }
+    } catch (error) {
+        console.error('Error fetching user data: ', error);
+    }
     };
 
-    useEffect(() => {
-    
+    useEffect(() => {    
         fetchUserData();
-    }, [currentUser.email]);
+    }, [currentUser.email, setValue]);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const onSubmit = async (e) => {
+        // e.preventDefault();
     
         try {
             const db = getFirestore();
@@ -166,6 +162,7 @@ const School1 = () => {
     
                 console.log('Document updated with ID: ', existingDoc.id);
                 // navigate('/secondSchool');
+                handleClickOpen();
             } else {
                 console.error('Document does not exist for the current user.');
             }
@@ -179,23 +176,10 @@ const School1 = () => {
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
-    const handleYes = () => {
-        
-        navigate('/secondSchool');
-        
-    };
-    const handleNo = () => {
-        
-        navigate('/exams')
-    
-    };
+    const handleClickOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+    const handleYes = () => navigate('/secondSchool');        
+    const handleNo = () => navigate('/exams');
 
     return(
         <div className="formtemp-page">
@@ -203,33 +187,61 @@ const School1 = () => {
             <div className="formtemp-bodyform">
                 <Grid container spacing={2} style={{ height: '100%' }}>
                     <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
-                        <form onSubmit={handleSubmit} style={{ height: '100%', position: 'relative' }}>
+                        <form onSubmit={handleSubmit(onSubmit)} style={{ height: '100%', position: 'relative' }}>
                             <div style={{ margin: '80px 25px 125px' }}>
                                 <div className="Education-main">
                                     <div className="Education-leftCol">
                                         <Grid container>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>School Name</Typography>
-                                                <TextField type="text" variant="outlined" value={School1Name} onChange={School1NameChange} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='St. Thomas Catholic International'/>
+                                                <TextField type="text" variant="outlined" fullWidth required  
+                                                value={School1Name}
+                                                InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white', pattern: "^[a-zA-Z]+$"}}} 
+                                                placeholder='St. Thomas Catholic International'
+                                                {...register("School1Name", { required: true, maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                />
+                                                {errors.School1Name && errors.School1Name.type === "required" ? "This field is required" : errors.School1Name && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>School experience or description</Typography>
-                                                <CustomMultilineTextFieldslimited
+                                                {/* <CustomMultilineTextFieldslimited
                                                     inputHeight="150px"
                                                     maxWidth="1300px"
                                                     isRequired={true}
                                                     value={School1Experience}
                                                     onChange={School1ExperienceChange}
                                                     maxWords={50} 
+                                                /> */}
+                                                <TextField
+                                                    multiline
+                                                    rows={4}
+                                                    fullWidth
+                                                    value={School1Experience}
+                                                    InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}}
+                                                    required
+                                                    {...register("School1Experience", { required: true, maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
                                                 />
+                                                {errors.School1Experience && errors.School1Experience.type === "required" ? "This field is required" : errors.School1Experience && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>City</Typography>
-                                                <TextField type="text" variant="outlined" value={School1City} onChange={School1CityChange} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/>
+                                                <TextField type="text" variant="outlined" fullWidth required  
+                                                value={School1City}
+                                                InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                                placeholder=''
+                                                {...register("School1City", { required: true, maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                />
+                                                {errors.School1City && errors.School1City.type === "required" ? "This field is required" : errors.School1City && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>Country</Typography>
-                                                <TextField type="text" variant="outlined" value={School1Country} onChange={School1CountryChange} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/>
+                                                <TextField type="text" variant="outlined" fullWidth required  
+                                                value={School1Country}
+                                                InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                                placeholder=''                                                
+                                                {...register("School1Country", { required: true, maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                />
+                                                {errors.School1Country && errors.School1Country.type === "required" ? "This field is required" : errors.School1Country && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={1}>
                                                 <Typography><span style={{color: 'red'}}>*</span>Start Date</Typography>
@@ -332,7 +344,6 @@ const School1 = () => {
                                             
                                                 
                                         </Grid>
-                                        {/* <button onClick={(e) => {e.preventDefault(); console.log(School1StartYear)}}>btn</button> */}
                                     </div>
 
                                     <div className="Education-rightCol">
@@ -391,7 +402,7 @@ const School1 = () => {
                                 </Grid>
                                     
                                 <Grid xs={6}>
-                                    <Button type='submit'onClick={handleClickOpen} style={next}>Next Step</Button> 
+                                    <Button type='submit' style={next}>Next Step</Button> 
                                     <Dialog
                                         fullScreen={fullScreen}
                                         open={open}
@@ -404,7 +415,7 @@ const School1 = () => {
                                         </DialogTitle>
                                         <DialogContent>
                                         <DialogContentText>
-                                          If you wish to add another school please click on Yes.If you wish to skip to next page click on No  
+                                          If you wish to add another school please click on Yes. <br />If you wish to skip to the next page please click on No.  
                                         </DialogContentText>
                                         </DialogContent>
                                         <DialogActions>

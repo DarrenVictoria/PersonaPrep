@@ -22,7 +22,7 @@ import cacute from '../../assets/images/iconcacute.svg';
 import ccalander from '../../assets/images/iconccalander.svg';
 import CustomMultilineTextFieldslimited from '../MultilineMaxWordLimit';
 import {CustomizedHook, CustomizedHookLarge} from '../TextfieldButtonDataDisplay';
-import { useState } from 'react';
+import {useState } from 'react';
 import Button from "@mui/material/Button";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { back } from '../BackButton.js';
@@ -36,8 +36,12 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import OutlinedInput from "@mui/material/OutlinedInput";
 import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCircleOutlined';
+import { collection, doc, getFirestore, setDoc, getDoc } from 'firebase/firestore';
+import { useAuth } from '../../hooks/useAuth.js';
+
 
 const WorkExperience2 = () => {
+    const { currentUser } = useAuth();
     const monthOption = [
         {value: 'January', label: 'January'},
         {value: 'February', label: 'February'},
@@ -103,19 +107,100 @@ const WorkExperience2 = () => {
 
     const navigate = useNavigate();
     const prevPage = () => navigate('/work');
-    const handleSubmit = (e) => {
+    
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        navigate('/project')
-        // validate();
+        const formData = {
+            WorkExp2JobTitle,
+            WorkExp2Company,
+            WorkExp2City,
+            WorkExp2Postal,
+            WorkExp2StartMonth,
+            WorkExp2StartYear,
+            WorkExp2EndMonth,
+            WorkExp2EndYear,
+            WorkExp2Working,
+            WorkExp2TaskDnWithTools,
+            WorkExp2EmploymentType,
+            WorkExp2JbSkillAcquired
+        };
 
-        // Check if validation passed
-        // if (validation) {
-        //     // Call the function to add data to Firestore
-        //     addDataToFirestore();
-        // } else {
-        //     console.log('Validation failed');
-        // }
+        // Send data to Firestore
+        await sendWorkDataToFirestore(formData);
+
+        // Navigate to the next page
+        navigate('/project');
     };
+
+    const sendWorkDataToFirestore = async (data) => {
+        try {
+            const db = getFirestore();
+            const studentDetailsCollection = collection(db, 'studentdetails');
+            const userDocument = doc(studentDetailsCollection, currentUser.email); // Use the email as document ID
+
+            const docSnapshot = await getDoc(userDocument);
+            if (docSnapshot.exists()) {
+                const docData = docSnapshot.data();
+                let work = docData.work || []; // Retrieve the work data array or initialize an empty array
+
+                // Check if index 0 exists in the work data array
+                if (work.length > 1) {
+                    // Update fields of Work Experience 2 at index 0
+                    work[1] = {
+                        ...work[1],
+                        ...data
+                    };
+                } else {
+                    // Create a new entry for Work Experience 2
+                    work.push(data);
+                }
+
+                // Update the document with the modified work data array
+                await setDoc(userDocument, { work }, { merge: true });
+            } else {
+                console.error('Document does not exist for the current user.');
+            }
+        } catch (error) {
+            console.error('Error adding work info to Firestore: ', error);
+        }
+    };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const db = getFirestore();
+                const userDocument = doc(collection(db, 'studentdetails'), currentUser.email);
+
+                const docSnapshot = await getDoc(userDocument);
+                if (docSnapshot.exists()) {
+                    const userData = docSnapshot.data();
+                    const workData = userData.work && userData.work.length > 1 ? userData.work[1] : null;
+
+                    if (workData) {
+                        setWorkExp2JobTitle(workData.WorkExp2JobTitle || '');
+                        setWorkExp2Company(workData.WorkExp2Company || '');
+                        setWorkExp2City(workData.WorkExp2City || '');
+                        setWorkExp2Postal(workData.WorkExp2Postal || '');
+                        setWorkExp2StartMonth(workData.WorkExp2StartMonth || '');
+                        setWorkExp2StartYear(workData.WorkExp2StartYear || '');
+                        setWorkExp2EndMonth(workData.WorkExp2EndMonth || '');
+                        setWorkExp2EndYear(workData.WorkExp2EndYear || '');
+                        setWorkExp2Working(workData.WorkExp2Working === 'yes');
+                        setWorkExp2TaskDnWithTools(workData.WorkExp2TaskDnWithTools || '');
+                        setWorkExp2EmploymentType(workData.WorkExp2EmploymentType || '');
+                        setWorkExp2JbSkillAcquired(workData.WorkExp2JbSkillAcquired || []);
+                    }
+                } else {
+                    console.error('Document does not exist for the current user.');
+                }
+            } catch (error) {
+                console.error('Error fetching data from Firestore: ', error);
+            }
+        };
+
+        fetchData();
+    }, [currentUser]);
+
 
 
     return(

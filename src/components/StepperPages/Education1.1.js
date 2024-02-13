@@ -31,6 +31,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import OutlinedInput from "@mui/material/OutlinedInput";
 import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCircleOutlined';
+import { useForm } from "react-hook-form";
 
 const School2 = () => {
     const monthOption = [
@@ -56,17 +57,24 @@ const School2 = () => {
     const [School2StartYear, setSchool2StartYear] = useState('');
     const [School2EndMonth, setSchool2EndMonth] = useState('');
     const [School2EndYear, setSchool2EndYear] = useState('');
-    const [School2Name, setSchool2Name] = useState('');
-    const [School2City, setSchool2City] = useState('');
-    const [School2Country, setSchool2Country] = useState('');
-    const [School2Experience, setSchool2Experience] = useState('');
+    // const [School2Name, setSchool2Name] = useState('');
+    // const [School2City, setSchool2City] = useState('');
+    // const [School2Country, setSchool2Country] = useState('');
+    // const [School2Experience, setSchool2Experience] = useState('');
 
 
-    const School2NameChange = (e) => setSchool2Name(e.target.value);
-    const School2CityChange = (e) => setSchool2City(e.target.value);
-    const School2CountryChange = (e) => setSchool2Country(e.target.value);
-    const School2ExperienceChange = (e) => setSchool2Experience(e.target.value);
+    // const School2NameChange = (e) => setSchool2Name(e.target.value);
+    // const School2CityChange = (e) => setSchool2City(e.target.value);
+    // const School2CountryChange = (e) => setSchool2Country(e.target.value);
+    // const School2ExperienceChange = (e) => setSchool2Experience(e.target.value);
 
+    const { register, handleSubmit, watch, formState: { errors }, getValues, setValue } = useForm();
+
+    const School2Name = watch('School2Name');
+    const School2Experience = watch('School2Experience');
+    const School2City = watch('School2City');
+    const School2Country = watch('School2Country');
+    
     const navigate = useNavigate();
       const prevPage = () => navigate('/school');
 
@@ -84,10 +92,10 @@ const School2 = () => {
                     // Retrieve the second school details from the array
                     const secondSchool = userData.schools[1];
                     // Populate the form fields with fetched data
-                    setSchool2Name(secondSchool.SchoolName || '');
-                    setSchool2City(secondSchool.SchoolCity || '');
-                    setSchool2Country(secondSchool.SchoolCountry || '');
-                    setSchool2Experience(secondSchool.SchoolExperience || '');
+                    setValue('School2Name', secondSchool.SchoolName || '');
+                    setValue('School2City', secondSchool.SchoolCity || '');
+                    setValue('School2Country', secondSchool.SchoolCountry || '');
+                    setValue('School2Experience', secondSchool.SchoolExperience || '');
                     setSchool2StartMonth(secondSchool.SchoolStartMonth || '');
                     setSchool2StartYear(secondSchool.SchoolStartYear || '');
                     setSchool2EndMonth(secondSchool.SchoolEndMonth || '');
@@ -102,10 +110,10 @@ const School2 = () => {
     useEffect(() => {
     
         fetchUserData();
-    }, [currentUser.email]);
+    }, [currentUser.email, setValue]);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const onSubmit = async (e) => {
+        // e.preventDefault();
     
         try {
             const db = getFirestore();
@@ -169,33 +177,64 @@ const School2 = () => {
             <div className="formtemp-bodyform">
                 <Grid container spacing={2} style={{ height: '100%' }}>
                     <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
-                        <form onSubmit={handleSubmit} style={{ height: '100%', position: 'relative' }}>
+                        <form onSubmit={handleSubmit(onSubmit)} style={{ height: '100%', position: 'relative' }}>
                             <div style={{ margin: '80px 25px 125px' }}>
                                 <div className="Education-main">
                                     <div className="Education-leftCol">
                                         <Grid container>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>School Name</Typography>
-                                                <TextField type="text" variant="outlined" value={School2Name} onChange={School2NameChange} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='St. Thomas Catholic International'/>
+                                                {/* <TextField type="text" variant="outlined" value={School2Name} onChange={School2NameChange} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='St. Thomas Catholic International'/> */}
+                                                <TextField type="text" variant="outlined" fullWidth required  
+                                                value={School2Name}
+                                                InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white', pattern: "^[a-zA-Z]+$"}}} 
+                                                placeholder='St. Thomas Catholic International'
+                                                {...register("School2Name", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                />
+                                                {errors.School2Name && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>School experience or description</Typography>
-                                                <CustomMultilineTextFieldslimited
+                                                {/* <CustomMultilineTextFieldslimited
                                                     inputHeight="150px"
                                                     maxWidth="1300px"
                                                     isRequired={true}
                                                     value={School2Experience}
                                                     onChange={School2ExperienceChange}
                                                     maxWords={50} 
+                                                /> */}
+                                                <TextField
+                                                    multiline
+                                                    rows={4}
+                                                    fullWidth
+                                                    value={School2Experience}
+                                                    InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}}
+                                                    required
+                                                    {...register("School2Experience", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
                                                 />
+                                                {errors.School2Experience &&  "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>City</Typography>
-                                                <TextField type="text" variant="outlined" value={School2City} onChange={School2CityChange} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/>
+                                                {/* <TextField type="text" variant="outlined" value={School2City} onChange={School2CityChange} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/> */}
+                                                <TextField type="text" variant="outlined" fullWidth required  
+                                                value={School2City}
+                                                InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white', pattern: "^[a-zA-Z]+$"}}} 
+                                                placeholder=''
+                                                {...register("School2City", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                />
+                                                {errors.School2City && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>Country</Typography>
-                                                <TextField type="text" variant="outlined" value={School2Country} onChange={School2CountryChange} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/>
+                                                {/* <TextField type="text" variant="outlined" value={School2Country} onChange={School2CountryChange} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/> */}
+                                                <TextField type="text" variant="outlined" fullWidth required  
+                                                value={School2Country}
+                                                InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white', pattern: "^[a-zA-Z]+$"}}} 
+                                                placeholder=''
+                                                {...register("School2Country", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                />
+                                                {errors.School2Country && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={1}>
                                                 <Typography><span style={{color: 'red'}}>*</span>Start Date</Typography>

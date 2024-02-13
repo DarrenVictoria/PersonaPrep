@@ -15,7 +15,7 @@ import ckey from '../../assets/images/iconckeyboard.svg';
 import cbatch from '../../assets/images/iconcbatch.svg';
 import EditableChoose from '../EditableSelectOption';
 import CustomMultilineTextFields from '../CustomMultilineTextfield';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import CustomMultilineTextFieldslimited from '../MultilineMaxWordLimit';
 import InterviewFormFooter from '../InterviewFormFooter';
 import InterviewFormHeader from '../InterviewFormHeader';
@@ -33,8 +33,13 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import OutlinedInput from "@mui/material/OutlinedInput";
 import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCircleOutlined';
+import { useForm } from "react-hook-form";
+import { getFirestore, collection, doc, getDoc, setDoc } from 'firebase/firestore';
+import { useAuth } from '../../hooks/useAuth.js';
+
 
 const Publications = () => {
+  const { currentUser } = useAuth();
   const monthOption = [
     {value: 'January', label: 'January'},
     {value: 'February', label: 'February'},
@@ -53,28 +58,81 @@ const yearOption = ["2024"];
     for (let year = 2023; year >= 1990; year--) {
     yearOption.push(String(year));
     }
-    const [PblTitle, setPblTitle] = useState('');
-    const [Publisher, setPublisher] = useState('');
-    const [PblUrl, SetPblUrl] = useState('');
+
     const [PblMonth, setPblMonth] = useState('');
     const [PblYear, setPblYear] = useState('');
     const [PblDesc, setPblDesc] = useState('');
 
+    const { register, handleSubmit, watch, formState: { errors }, getValues, setValue } = useForm();
+
+    const PblTitle = watch('PblTitle');
+    const Publisher = watch('Publisher');
+    const PblUrl = watch('PblUrl');
+
     const navigate = useNavigate();
     const prevPage = () => navigate('/clubsAndSocs');
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        navigate('/skilltrack')
-        // validate();
+    const onSubmit = async (data) => {
+      try {
+          await sendPublicationDataToFirestore(data); // Send form data to Firestore
+          navigate('/skilltrack'); // Navigate to the next page after data is sent
+      } catch (error) {
+          console.error('Error submitting publication data:', error);
+      }
+  };
 
-        // Check if validation passed
-        // if (validation) {
-        //     // Call the function to add data to Firestore
-        //     addDataToFirestore();
-        // } else {
-        //     console.log('Validation failed');
-        // }
+  const sendPublicationDataToFirestore = async (data) => {
+    try {
+        const db = getFirestore();
+        const userDocumentRef = doc(db, 'studentdetails', currentUser.email); // Assuming 'studentdetails' is your collection
+
+        const docSnapshot = await getDoc(userDocumentRef);
+        if (docSnapshot.exists()) {
+            const docData = docSnapshot.data();
+            let publications = docData.publications || [];
+
+            if (publications.length >= 1) {
+                publications[0] = { ...data, PblMonth, PblYear, PblDesc }; // Update existing publication data at index 0
+            } else {
+              publications.push({ ...data, PblMonth, PblYear, PblDesc }); // Add new publication data
+            }
+
+            await setDoc(userDocumentRef, { publications }, { merge: true }); // Set updated document
+        } else {
+            console.error('Document does not exist for the current user.');
+        }
+    } catch (error) {
+        console.error('Error adding publication info to Firestore:', error);
+        throw error; // Propagate the error back to the caller (onSubmit)
+    }
+};
+
+useEffect(() => {
+    const fetchPublicationData = async () => {
+        try {
+            const db = getFirestore();
+            const userDocumentRef = doc(db, 'studentdetails', currentUser.email);
+
+            const docSnapshot = await getDoc(userDocumentRef);
+            if (docSnapshot.exists()) {
+                const docData = docSnapshot.data();
+                if (docData.publications && docData.publications.length >= 1) {
+                    const publicationData = docData.publications[0]; // Assuming you're retrieving data at index 0
+                    // Populate form fields with publicationData
+                    setValue('PblTitle', publicationData.PblTitle || '');
+                    setValue('Publisher', publicationData.Publisher || '');
+                    setValue('PblUrl', publicationData.PblUrl || '');
+                    setPblMonth(publicationData.PblMonth || ''); // Set publication month
+                    setPblYear(publicationData.PblYear || ''); // Set publication year
+                    setPblDesc(publicationData.PblDesc || ''); // Set publication description
+                    // Populate other fields similarly...
+                }
+            }
+        } catch (error) {
+            console.error('Error fetching publication info from Firestore:', error);
+        }
     };
+    fetchPublicationData();
+}, [currentUser.email, setValue]);
     
     return(
       <div className="formtemp-page">
@@ -82,7 +140,7 @@ const yearOption = ["2024"];
             <div className="formtemp-bodyform">
                 <Grid container spacing={2} style={{ height: '100%' }}>
                     <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
-                        <form onSubmit={handleSubmit} style={{ height: '100%', position: 'relative' }}>
+                        <form onSubmit={handleSubmit(onSubmit)} style={{ height: '100%', position: 'relative' }}>
                             <div style={{ margin: '80px 25px 125px' }}>
                                 <div className='Publications-Maindiv'>
                                     <div className='Publications-LeftColumn'>
@@ -91,14 +149,26 @@ const yearOption = ["2024"];
                                       <Grid item xs={12}>
                                         
                                       <Typography ><span style={{color: 'red'}}>*</span> Publication Title</Typography>
-                                          <TextField type="text" variant="outlined" value={PblTitle} onChange={(event) => setPblTitle(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}} />
-                                        
+                                          {/* <TextField type="text" variant="outlined" value={PblTitle} onChange={(event) => setPblTitle(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}} /> */}
+                                          <TextField type="text" variant="outlined" fullWidth required  
+                                          value={PblTitle}
+                                          InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                          placeholder=''
+                                          {...register("PblTitle", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                          />
+                                          {errors.PblTitle &&  "Please enter only letters"}
                                       </Grid>
                                       <Grid item xs={12}>
                                         
                                       <Typography ><span style={{color: 'red'}}>*</span> Publication / Publisher</Typography>
-                                          <TextField type="text" variant="outlined" value={Publisher} onChange={(event) => setPublisher(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
-                                        
+                                          {/* <TextField type="text" variant="outlined" value={Publisher} onChange={(event) => setPublisher(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/> */}
+                                          <TextField type="text" variant="outlined" fullWidth required  
+                                          value={Publisher}
+                                          InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                          placeholder=''
+                                          {...register("Publisher", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                          />
+                                          {errors.Publisher &&  "Please enter only letters"}
                                       </Grid>
                                       <Grid item xs={12} mb={1}>
                                       <Typography ><span style={{color: 'red'}}>*</span> Publication date</Typography>
@@ -160,8 +230,14 @@ const yearOption = ["2024"];
                                       <Grid item xs={12}>
                                         
                                       <Typography ><span style={{color: 'red'}}>*</span> Publication URL</Typography>
-                                          <TextField type="text" variant="outlined" value={PblUrl} onChange={(event) => SetPblUrl(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/>
-                                        
+                                          {/* <TextField type="text" variant="outlined" value={PblUrl} onChange={(event) => SetPblUrl(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/> */}
+                                          <TextField type="text" variant="outlined" fullWidth required  
+                                            value={PblUrl}
+                                            InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                            placeholder=''
+                                            {...register("PblUrl", { maxLength: 30 })}
+                                            />
+                                            {/* {errors.PblUrl &&  "Please enter only letters"} */}
                                       </Grid>
                                       <Grid item xs={12}>
                                         
