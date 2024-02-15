@@ -14,6 +14,7 @@ import Login from "./pages/authentication/login"
 import Dashboard from "./pages/Dashboard"
 import NoPage from './pages/NoPage'
 import Template from "./pages/interviewforms/Template"
+import AdminDash from "./pages/dashboard/adminDashboard";
 
 import TestFacultyDetails from "./components/StepperPages/TestFacultDetails";
 import FacultyDetails from "./components/StepperPages/FacultyDetails";
@@ -71,6 +72,7 @@ function App() {
           <Route path="/interviewDisplay" element={<InterviewDisplay />}/>
           <Route path="/insightblog" element={<Insightblog />}/>
           <Route path="/login" element={<Login />}/>
+          <Route path="/admindash" element={<AdminDash />}/>
 
           {/* <Route path="/testFaculty" element={<TestFacultyDetails />}/> */}
           
