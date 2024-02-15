@@ -24,8 +24,12 @@ import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCi
 import Autocomplete from "@mui/material/Autocomplete";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
+import { collection, doc, getFirestore, setDoc, getDoc } from 'firebase/firestore';
+import { useAuth } from '../../hooks/useAuth.js';
+
 
 const Club2 = () => {
+    const { currentUser } = useAuth();
 
   const monthOption = [
     {value: 'January', label: 'January'},
@@ -95,19 +99,100 @@ const yearOption = ["2024"];
 
     const navigate = useNavigate();
     const prevPage = () => navigate('/clubsAndSocs');
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        navigate('/publications')
-        // validate();
 
-        // Check if validation passed
-        // if (validation) {
-        //     // Call the function to add data to Firestore
-        //     addDataToFirestore();
-        // } else {
-        //     console.log('Validation failed');
-        // }
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const formData = {
+            Club2Name,
+            Club2StartMonth,
+            Club2StartYear,
+            Club2EndMonth,
+            Club2EndYear,
+            Club2Volunteer,
+            Club2RolesPlayed,
+            Club2SkillsEarned,
+            Club2VolunteerChecked
+        };
+    
+        // Send data to Firestore
+        await sendClubDataToFirestore(formData);
+    
+        // Navigate to the next page
+       
     };
+    
+    const sendClubDataToFirestore = async (data) => {
+        try {
+            const db = getFirestore();
+            const userDocument = doc(collection(db, 'studentdetails'), currentUser.email);
+    
+            const docSnapshot = await getDoc(userDocument);
+            if (docSnapshot.exists()) {
+                const userData = docSnapshot.data();
+                let clubs = userData.clubs || []; // Retrieve the clubs data array or initialize an empty array
+    
+                // Check if index 0 exists in the clubs data array
+                if (clubs.length > 0) {
+                    // Update fields of Club 1 at index 0
+                    clubs[0] = {
+                        ...clubs[0],
+                        ...data
+                    };
+                } else {
+                    // Create a new entry for Club 1
+                    clubs.push(data);
+                }
+    
+                // Update the document with the modified clubs data array
+                await setDoc(userDocument, { clubs }, { merge: true });
+                navigate('/publications')
+            } else {
+                console.error('Document does not exist for the current user.');
+            }
+        } catch (error) {
+            console.error('Error adding club info to Firestore: ', error);
+        }
+    };
+    
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const db = getFirestore();
+                const userDocument = doc(collection(db, 'studentdetails'), currentUser.email);
+    
+                const docSnapshot = await getDoc(userDocument);
+                if (docSnapshot.exists()) {
+                    const userData = docSnapshot.data();
+                    const clubData = userData.clubs && userData.clubs.length > 0 ? userData.clubs[0] : null;
+    
+                    if (clubData) {
+                        setClub2Name(clubData.Club2Name || '');
+                        setClub2StartMonth(clubData.Club2StartMonth || '');
+                        setClub2StartYear(clubData.Club2StartYear || '');
+                        setClub2EndMonth(clubData.Club2EndMonth || '');
+                        setClub2EndYear(clubData.Club2EndYear || '');
+                        setClub2Volunteer(clubData.Club2Volunteer || 'no');
+                        setClub2RolesPlayed(clubData.Club2RolesPlayed || []);
+                        setClub2SkillsEarned(clubData.Club2SkillsEarned || []);
+                        setClub2VolunteerChecked(clubData.Club2VolunteerChecked || false);
+                    }
+                } else {
+                    console.error('Document does not exist for the current user.');
+                }
+            } catch (error) {
+                console.error('Error fetching data from Firestore: ', error);
+            }
+        };
+    
+        fetchData();
+    }, [currentUser]);
+
+
+
+
+
+
+    
     
 
     return(

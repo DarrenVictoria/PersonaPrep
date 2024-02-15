@@ -1,3 +1,4 @@
+import * as React from "react";
 import './css/Certification1.css';
 import Grid from "@mui/material/Grid";
 import Typography from '@mui/material/Typography';
@@ -10,7 +11,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import EditableChoose from '../EditableSelectOption';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { CustomizedHook } from '../TextfieldButtonDataDisplay';
 import cdiary from '../../assets/images/iconcdiary.svg';
 import ccalander from '../../assets/images/iconccalander.svg';
@@ -27,14 +28,27 @@ import { useNavigate } from 'react-router-dom';
 import BookIcon from '@mui/icons-material/Book';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import LayersIcon from '@mui/icons-material/Layers';
+import Dialog from "@mui/material/Dialog";//dialog
+import DialogActions from "@mui/material/DialogActions";//dialog
+import DialogContent from "@mui/material/DialogContent";//dialog
+import DialogContentText from "@mui/material/DialogContentText";//dialog
+import DialogTitle from "@mui/material/DialogTitle";//dialog
+import useMediaQuery from "@mui/material/useMediaQuery";//dialog
+import { useTheme } from "@mui/material/styles";//dialog
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import OutlinedInput from "@mui/material/OutlinedInput";
 import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCircleOutlined';
 import { useForm } from "react-hook-form";
+import Autocomplete from "@mui/material/Autocomplete";
+import Stack from "@mui/material/Stack";
+import { collection, doc, setDoc, getFirestore,getDoc } from 'firebase/firestore';
+import { useAuth } from '../../hooks/useAuth.js';
 
 const Certification2 = () => {
+    const { currentUser } = useAuth();
+
     const monthOption = [
         {value: 'January', label: 'January'},
         {value: 'February', label: 'February'},
@@ -54,47 +68,170 @@ const Certification2 = () => {
         yearOption.push(String(year));
         }
 
-    const CProj_Skills = [{data: 'c#'}, {data: 'java'}, {data: 'react'}];
+    
 
-    const [Certificate2ProjSkills, setCertificate2ProjSkills] = useState([]); //this is for CustomizedHook
-    const [Certificate2IssueMonth,setCertificate2IssueMonth] = useState("");
-    const [Certificate2IssueYear,setCertificate2IssueYear] = useState("");
-    const [Certificate2ExpMonth, setCertificate2ExpMonth] = useState('');
-    const [Certificate2ExpYear, setCertificate2ExpYear] = useState('');
+    
+    const [Certificate1IssueMonth,setCertificate1IssueMonth] = useState("");
+    const [Certificate1IssueYear,setCertificate1IssueYear] = useState("");
+    const [Certificate1ExpMonth, setCertificate1ExpMonth] = useState('');
+    const [Certificate1ExpYear, setCertificate1ExpYear] = useState('');
 
     const { register, handleSubmit, watch, formState: { errors }, getValues, setValue } = useForm();
 
-    const Certificate2Name = watch('Certificate2Name');
-    const Certificate2issuedOrg = watch('Certificate2issuedOrg');
-    const Certificate2Id = watch('Certificate2Id');
-    const Certificate2LInk = watch('Certificate2LInk');
+    const Certificate1Name = watch('Certificate1Name');
+    const Certificate1issuedOrg = watch('Certificate1issuedOrg');
+    const Certificate1Id = watch('Certificate1Id');
+    const Certificate1LInk = watch('Certificate1LInk');
+    const [CertUrl, setCertUrl] = useState('');
+    const [CertFetchUrl, setCertFetchUrl] = useState('');
+
 
     //below handle function is for CustomizedHook
-    const handleCertificate2ProjSkills = function (ev, val, reason, details) {
-        if (ev.target.classList.contains('MuiSvgIcon-root')){
-            // Removing Value
-            const value = ev.target.parentElement.querySelector('span').innerHTML;
-            setCertificate2ProjSkills(Certificate2ProjSkills.filter(item => item !== value));
-        } else {
-            const value = ev.target.innerHTML;
-            Certificate2ProjSkills.push(value);
+    const CCert_Skills = ['c#','react','java'];
+    const [Certificate1ProjSkills, setCertificate1ProjSkills] = useState([]);//usestate for autocomplete
+    const maxSelections = 3;//max value for the autocomplete
+    const handleCertificate1ProjSkills = (event, newSkill) => {
+        if (newSkill.length <= maxSelections) {
+            setCertificate1ProjSkills(newSkill);
         }
-        console.log(Certificate2ProjSkills);
-    }
+    };
+    const isOptionDisabled = (option) => {
+        return Certificate1ProjSkills.length >= maxSelections && !Certificate1ProjSkills.includes(option);
+    };
+    
+    console.log(Certificate1ProjSkills);
+
+    const handleFileUploadSuccess = (url) => {
+        setCertUrl(url.downloadURL);
+        console.log(url);
+      };
+
+      const handleReset = () => {
+        // Your reset logic here
+        console.log('Reset button clicked');
+      };
+   
 
 
 
     const navigate = useNavigate();
     const prevPage = () => navigate('/certification');
-    const onSubmit = (e) => {
-        // e.preventDefault();
-        navigate('/clubsAndSocs');
+  
+        
+    const finalProjectEvd = CertUrl || CertFetchUrl;
+        
+    
+
+    const sendCertificationDataToFirestore = async (data) => {
+        try {
+            const db = getFirestore();
+            const studentDetailsCollection = collection(db, 'studentdetails');
+            const userDocument = doc(studentDetailsCollection, currentUser.email); // Use the email as document ID
+            
+
+            
+            const docSnapshot = await getDoc(userDocument);
+            if (docSnapshot.exists()) {
+                const docData = docSnapshot.data();
+                let certifications = docData.certifications || []; // Retrieve the certifications array or initialize an empty array
+
+                // Check if index 0 exists in the certifications array
+                if (certifications.length > 1) {
+                    // Update fields of Certification 1 at index 0
+                    certifications[1] = {
+                        ...certifications[1],
+                        ...data
+                    };
+                } else {
+                    // Create a new entry for Certification 1
+                    certifications.push(data);
+                }
+
+                // Update the document with the modified certifications array
+                await setDoc(userDocument, { certifications }, { merge: true });
+                
+            } else {
+                console.error('Document does not exist for the current user.');
+            }
+        } catch (error) {
+            console.error('Error adding certification info to Firestore: ', error);
+        }
     };
+
+    // Function to handle form submission
+    const onSubmit = async () => {
+        try {
+            
+            // Construct formData object with all form fields
+            const formData = {
+                Certificate1IssueMonth,
+                Certificate1IssueYear,
+                Certificate1ExpMonth,
+                Certificate1ExpYear,
+                Certificate1Name,
+                Certificate1issuedOrg,
+                Certificate1Id,
+                Certificate1LInk,
+                Certificate1ProjSkills,
+                CertUrl: finalProjectEvd
+                // Add other form fields here...
+            };
+
+            // Send data to Firestore
+            await sendCertificationDataToFirestore(formData);
+
+            // Navigate to the next page
+            navigate('/clubsAndSocs');
+        } catch (error) {
+            console.error('Error submitting certification data: ', error);
+        }
+    };
+
+    // useEffect to fetch certification data from Firestore upon component mount
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const db = getFirestore();
+                const userDocument = doc(collection(db, 'studentdetails'), currentUser.email);
+                const docSnapshot = await getDoc(userDocument);
+
+                if (docSnapshot.exists()) {
+                    const certificationData = docSnapshot.data().certifications && docSnapshot.data().certifications.length > 1 ? docSnapshot.data().certifications[1] : null;
+
+                    if (certificationData) {
+                        // Update state variables with fetched data
+                        setValue('Certificate1Name', certificationData.Certificate1Name || '');
+                        setValue('Certificate1issuedOrg', certificationData.Certificate1issuedOrg || '');
+                        setValue('Certificate1Id', certificationData.Certificate1Id || '');
+                         
+                        setValue('Certificate1LInk', certificationData.Certificate1LInk || ''); 
+                        setCertificate1IssueMonth(certificationData.Certificate1IssueMonth || '');
+                        setCertificate1IssueYear(certificationData.Certificate1IssueYear || '');
+                        setCertificate1ExpMonth(certificationData.Certificate1ExpMonth || '');
+                        setCertificate1ExpYear(certificationData.Certificate1ExpYear || '');
+                        setCertFetchUrl(certificationData.CertUrl || null);
+                        setCertificate1ProjSkills(certificationData.Certificate1ProjSkills || '');
+
+                        console.log("Cet det :",CertFetchUrl);
+
+                        // Update other state variables...
+                    }
+                } else {
+                    console.error('Document does not exist for the current user.');
+                }
+            } catch (error) {
+                console.error('Error fetching certification data from Firestore: ', error);
+            }
+        };
+
+        fetchData();
+    }, [currentUser]);
+
 
     return ( 
         <div className="formtemp-page">
 
-            <InterviewFormHeader title='Second Certification' />
+            <InterviewFormHeader title='2nd Certification' />
             <div className="formtemp-bodyform">
                 <Grid container spacing={2} style={{ height: '100%' }}>
                     <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
@@ -106,25 +243,25 @@ const Certification2 = () => {
                                         <Grid container>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography ><span style={{color: 'red'}}>*</span> Name of Certification</Typography>
-                                                {/* <TextField type="text" variant="outlined" value={Certificate2Name} onChange={(event) => setCertificate2Name(event.target.value)} fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}} /> */}
+                                                {/* <TextField type="text" variant="outlined" value={Certificate1Name} onChange={(event) => setCertificate1Name(event.target.value)} fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}} /> */}
                                                 <TextField type="text" variant="outlined" fullWidth required  
-                                                value={Certificate2Name}
+                                                value={Certificate1Name}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder=''
-                                                {...register("Certificate2Name", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                {...register("Certificate1Name", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
                                                 />
-                                                {errors.Certificate2Name &&  "Please enter only letters"}
+                                                {errors.Certificate1Name &&  "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography ><span style={{color: 'red'}}>*</span> Issuing Organization</Typography>
-                                                {/* <TextField type="text" variant="outlined" value={Certificate2issuedOrg} onChange={(event) => setCertificate2issuedOrg(event.target.value)} fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}}/> */}
+                                                {/* <TextField type="text" variant="outlined" value={Certificate1issuedOrg} onChange={(event) => setCertificate1issuedOrg(event.target.value)} fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}}/> */}
                                                 <TextField type="text" variant="outlined" fullWidth required  
-                                                value={Certificate2issuedOrg}
+                                                value={Certificate1issuedOrg}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder=''
-                                                {...register("Certificate2issuedOrg", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                {...register("Certificate1issuedOrg", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
                                                 />
-                                                {errors.Certificate2issuedOrg &&  "Please enter only letters"}
+                                                {errors.Certificate1issuedOrg &&  "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={1}>
                                                 <Typography><span style={{color: 'red'}}>*</span>Issue Date</Typography>
@@ -132,13 +269,13 @@ const Certification2 = () => {
                                             <Grid item xs={6} pr={1}>
                                                 {/* <EditableChoose
                                                     options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                                                    onSelect={setCertificate2IssueMonth}
+                                                    onSelect={setCertificate1IssueMonth}
                                                     disabledOptions={[]}
                                                 /> */}
-                                                <FormControl variant="outlined" fullWidth>
+                                                 <FormControl variant="outlined" fullWidth>
                                                     <Select
-                                                        value={Certificate2IssueMonth}
-                                                        onChange={(event) => setCertificate2IssueMonth(event.target.value)}
+                                                        value={Certificate1IssueMonth}
+                                                        onChange={(event) => setCertificate1IssueMonth(event.target.value)}
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
                                                         IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
@@ -146,7 +283,7 @@ const Certification2 = () => {
                                                     >
                                                         <MenuItem disabled value="">Month</MenuItem>
                                                         {monthOption.map (option => (
-                                                            <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
+                                                            <MenuItem  key={option.value} value={option.value}>{option.label}</MenuItem>
                                                         ))}
                                                     </Select>
                                                 </FormControl>
@@ -154,13 +291,13 @@ const Certification2 = () => {
                                             <Grid item xs={6} mb={3} pl={1}>
                                                 {/* <EditableChoose
                                                     options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                                                    onSelect={setCertificate2IssueYear}
+                                                    onSelect={setCertificate1IssueYear}
                                                     disabledOptions={["2024"]}
                                                 /> */}
                                                 <FormControl variant="outlined" fullWidth>
                                                     <Select
-                                                        value={Certificate2IssueYear}
-                                                        onChange={(event) => setCertificate2IssueYear(event.target.value)}
+                                                        value={Certificate1IssueYear}
+                                                        onChange={(event) => setCertificate1IssueYear(event.target.value)}
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
                                                         IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
@@ -179,13 +316,13 @@ const Certification2 = () => {
                                             <Grid item xs={6} pr={1}>
                                                 {/* <EditableChoose
                                                     options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                                                    onSelect={setCertificate2ExpMonth}
+                                                    onSelect={setCertificate1ExpMonth}
                                                     disabledOptions={[]}
                                                 /> */}
                                                 <FormControl variant="outlined" fullWidth>
                                                     <Select
-                                                        value={Certificate2ExpMonth}
-                                                        onChange={(event) => setCertificate2ExpMonth(event.target.value)}
+                                                        value={Certificate1ExpMonth}
+                                                        onChange={(event) => setCertificate1ExpMonth(event.target.value)}
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
                                                         IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
@@ -201,13 +338,13 @@ const Certification2 = () => {
                                             <Grid item xs={6} mb={3} pl={1}>
                                                 {/* <EditableChoose
                                                     options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                                                    onSelect={setCertificate2ExpYear}
+                                                    onSelect={setCertificate1ExpYear}
                                                     disabledOptions={["2024"]}
                                                 /> */}
                                                 <FormControl variant="outlined" fullWidth>
                                                     <Select
-                                                        value={Certificate2ExpYear}
-                                                        onChange={(event) => setCertificate2ExpYear(event.target.value)}
+                                                        value={Certificate1ExpYear}
+                                                        onChange={(event) => setCertificate1ExpYear(event.target.value)}
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
                                                         IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
@@ -222,32 +359,68 @@ const Certification2 = () => {
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography ><span style={{color: 'red'}}>*</span>Certification ID</Typography>
-                                                {/* <TextField type="text" variant="outlined" value={Certificate2Id} onChange={(event) => setCertificate2Id(event.target.value)} fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}}/> */}
+                                                {/* <TextField type="text" variant="outlined" value={Certificate1Id} onChange={(event) => setCertificate1Id(event.target.value)} fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}}/> */}
                                                 <TextField type="text" variant="outlined" fullWidth required  
-                                                value={Certificate2Id}
+                                                value={Certificate1Id}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder=''
-                                                {...register("Certificate2Id", { maxLength: 30})}
+                                                {...register("Certificate1Id", { maxLength: 30})}
                                                 />
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
-                                                <CustomizedHook data={CProj_Skills} label={<Typography mb={1}><span style={{color: 'red'}}>*</span>Skills acquired from the project?</Typography>}/>
-                                            </Grid>
+                                                <Typography mb={1} mt={3}><span style={{color: 'red'}}>*</span>Skills acquired from the project ?</Typography>
+                                                    <Stack spacing={3}>
+                                                            <Autocomplete
+                                                                multiple
+                                                                id="tags-outlined"
+                                                                options={CCert_Skills}
+                                                                value={Certificate1ProjSkills}  
+                                                                onChange={handleCertificate1ProjSkills}
+                                                                filterSelectedOptions
+                                                                disableCloseOnSelect
+                                                                getOptionDisabled={isOptionDisabled}
+                                                                renderInput={(params) => (
+                                                                <TextField
+                                                                    {...params}
+                                                                    
+                                                                    placeholder="Pick your job roles"
+                                                                    sx={{
+                                                                        "& .MuiOutlinedInput-root": {
+                                                                            borderRadius: "25px", 
+                                                                            backgroundColor:'white',
+                                                                            minHeight:"100px"
+                                                                        },
+                                                                        "& .MuiChip-label": {
+                                                                            color: "white",
+                                                                        },
+                                                                        "& .MuiChip-deleteIcon": {
+                                                                            color:"white !important",
+                                                                        },
+                                                                        "& .MuiChip-root": {
+                                                                            backgroundColor:"black",
+                                                                        },
+                                                                    }}
+                                                                />
+                                                                )}
+                                                            />
+                                                    </Stack>                                            </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>Certification evidence link</Typography>
-                                                {/* <TextField type="text" variant="outlined" value={Certificate2LInk} onChange={(event) => setCertificate2LInk(event.target.value)} fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='CV Builder'/> */}
+                                                {/* <TextField type="text" variant="outlined" value={Certificate1LInk} onChange={(event) => setCertificate1LInk(event.target.value)} fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='CV Builder'/> */}
                                                 <TextField type="text" variant="outlined" fullWidth required  
-                                                value={Certificate2LInk}
+                                                value={Certificate1LInk}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder=''
-                                                {...register("Certificate2LInk", { maxLength: 30})}
+                                                {...register("Certificate1LInk", { maxLength: 30})}
                                                 />
                                             </Grid>
                                             <Grid item xs={12} mb={2} style={{display: 'flex', justifyContent: 'center'}}>
                                                 <Typography>-OR-</Typography>
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
-                                                <FileUpload />
+                                            <FileUpload onFileUpload={handleFileUploadSuccess} onUploadSuccess={handleFileUploadSuccess} onReset={handleReset}    />
+                                                {CertFetchUrl && CertFetchUrl !== ' ' &&  <p style={{marginTop:'1rem',marginLeft:'1rem'}}>Your Certification Proof</p>}
+                                                {CertFetchUrl && CertFetchUrl !== ' ' && <img src={CertFetchUrl} alt="Profile Picture"  style={{ width: '15rem', height: '10rem', objectFit: 'cover',marginLeft:'1rem',border: '1px solid black' }}  />}
                                             </Grid>
                                         </Grid>
                                     </div>

@@ -31,9 +31,12 @@ import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCi
 import Autocomplete from "@mui/material/Autocomplete";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
+import { collection, doc, getFirestore, setDoc, getDoc } from 'firebase/firestore';
+import { useAuth } from '../../hooks/useAuth.js';
 
 
 const Club1 = () => {
+  const { currentUser } = useAuth();
   const monthOption = [
     {value: 'January', label: 'January'},
     {value: 'February', label: 'February'},
@@ -103,11 +106,94 @@ const yearOption = ["2024"];
 
     const navigate = useNavigate();
     const prevPage = () => navigate('/certification');
-    const handleSubmit = (e) => {
+    
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // navigate('/Secondclub');
-        handleClickOpen();
+        const formData = {
+            Club1Name,
+            Club1StartMonth,
+            Club1StartYear,
+            Club1EndMonth,
+            Club1EndYear,
+            Club1Volunteer,
+            Club1RolesPlayed,
+            Club1SkillsEarned,
+            Club1VolunteerChecked
+        };
+    
+        // Send data to Firestore
+        await sendClubDataToFirestore(formData);
+    
+        // Navigate to the next page
+       
     };
+    
+    const sendClubDataToFirestore = async (data) => {
+        try {
+            const db = getFirestore();
+            const userDocument = doc(collection(db, 'studentdetails'), currentUser.email);
+    
+            const docSnapshot = await getDoc(userDocument);
+            if (docSnapshot.exists()) {
+                const userData = docSnapshot.data();
+                let clubs = userData.clubs || []; // Retrieve the clubs data array or initialize an empty array
+    
+                // Check if index 0 exists in the clubs data array
+                if (clubs.length > 0) {
+                    // Update fields of Club 1 at index 0
+                    clubs[0] = {
+                        ...clubs[0],
+                        ...data
+                    };
+                } else {
+                    // Create a new entry for Club 1
+                    clubs.push(data);
+                }
+    
+                // Update the document with the modified clubs data array
+                await setDoc(userDocument, { clubs }, { merge: true });
+                handleClickOpen();
+            } else {
+                console.error('Document does not exist for the current user.');
+            }
+        } catch (error) {
+            console.error('Error adding club info to Firestore: ', error);
+        }
+    };
+    
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const db = getFirestore();
+                const userDocument = doc(collection(db, 'studentdetails'), currentUser.email);
+    
+                const docSnapshot = await getDoc(userDocument);
+                if (docSnapshot.exists()) {
+                    const userData = docSnapshot.data();
+                    const clubData = userData.clubs && userData.clubs.length > 0 ? userData.clubs[0] : null;
+    
+                    if (clubData) {
+                        setClub1Name(clubData.Club1Name || '');
+                        setClub1StartMonth(clubData.Club1StartMonth || '');
+                        setClub1StartYear(clubData.Club1StartYear || '');
+                        setClub1EndMonth(clubData.Club1EndMonth || '');
+                        setClub1EndYear(clubData.Club1EndYear || '');
+                        setClub1Volunteer(clubData.Club1Volunteer || 'no');
+                        setClub1RolesPlayed(clubData.Club1RolesPlayed || []);
+                        setClub1SkillsEarned(clubData.Club1SkillsEarned || []);
+                        setClub1VolunteerChecked(clubData.Club1VolunteerChecked || false);
+                    }
+                } else {
+                    console.error('Document does not exist for the current user.');
+                }
+            } catch (error) {
+                console.error('Error fetching data from Firestore: ', error);
+            }
+        };
+    
+        fetchData();
+    }, [currentUser]);
+
     //below code for dialog
     const [open, setOpen] = React.useState(false);
     const theme = useTheme();
