@@ -3,12 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@emotion/react": "^11.11.1",
-    "@emotion/styled": "^11.11.0",
     "@fontsource/inter": "^5.0.15",
     "@mdbootstrap/react-testimonial-slider": "^1.0.0",
     "@mui/icons-material": "^5.14.18",
-    "@mui/material": "^5.14.17",
+    "@mui/x-data-grid": "^6.19.4",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -26,6 +24,7 @@
     "react-hook-form": "^7.49.3",
     "react-loading-screen": "^0.0.17",
     "react-router-dom": "^6.18.0",
+    "recharts": "^2.12.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
