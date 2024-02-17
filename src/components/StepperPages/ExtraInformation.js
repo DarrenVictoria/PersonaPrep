@@ -59,7 +59,7 @@ const ExtraInformation = () => {
                 ExtraInfoInterests,
             };
             await sendExtraInfoToFirestore(formData);
-            navigate('/templates');
+            navigate('/finalisesummary');
         } catch (error) {
             console.error('Error submitting extra information: ', error);
         }

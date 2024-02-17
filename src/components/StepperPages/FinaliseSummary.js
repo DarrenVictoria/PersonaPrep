@@ -14,6 +14,7 @@ import { next } from '../NextButton.js';
 import { useNavigate } from 'react-router-dom';
 import { collection, doc, getFirestore, setDoc, getDoc } from 'firebase/firestore';
 import { useAuth } from '../../hooks/useAuth.js';
+import axios from 'axios';
 
 const Summary_1 = () => {
     const { currentUser } = useAuth();
@@ -70,75 +71,86 @@ const Summary_1 = () => {
         fetchSummaryData();
     }, [currentUser.email]);
 
-    useEffect(() => {
-        const generateSummary = async () => {
-          if (finalSummary.trim() === '') {
+    const generateSummary = async (finalSummary, setFinalSummary) => {
+        if (finalSummary.trim() === '') {
             try {
-              // Prompt ChatGPT/OpenAI API to generate summary
-              const generatedSummary = await promptChatGPT();
-      
-              // Improve summary quality (optional)
-              const improvedSummary = enhanceSummary(generatedSummary);
-      
-              setFinalSummary(improvedSummary);
+                const generatedSummary = await promptChatGPT();
+                setFinalSummary(generatedSummary);
             } catch (error) {
-              console.error('Error generating summary:', error);
+                console.error('Error generating summary:', error);
             }
-          }
-        };
-      
-        generateSummary();
-      }, [finalSummary]);
-      
-      const promptChatGPT = async () => {
-        const prompt = `
-          Hey There !!
-        `;
-      
-        // Replace with your OpenAI API details
+        }
+    };
+    
+    const promptChatGPT = async () => {
         const apiKey = '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';
         const apiUrl = 'https://api.openai.com/v1/chat/completions';
+        const model = 'gpt-3.5-turbo';
+        const userMessage = `
+        Using all that info generate for me a 50 words COMPLETE and precise on the dot length but all information included summary for my curriculum vitae:
+        Industry Experience: ${industryExperience}
+        Notable Projects: ${notableProjects}
+        Career Highlights: ${careerHighlights}
+        Promotions: ${promotions}
+        Future Career: ${futureCareer}
+        Unique Skills: ${uniqueSkills}
+
+
+          Use above data and build the summary you can use this format "With a rich background in [Industry Experience], I've spearheaded [Notable Projects], achieving [Career Highlights] and earning recognition with [Promotions]. Excited to pursue [Future Career] leveraging my [Unique Skills]."
+
+          Remove any extra words or incomplete sentences 
+
         
-      
+    `;
+
+    
         try {
-          const response = await fetch(apiUrl, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${apiKey}`,
-            },
-            body: JSON.stringify({
-              model:'gpt-3.5-turbo',
-              prompt,
-              max_tokens: 100, // Adjust based on desired length
-              temperature: 0.7, // Adjust for creativity vs accuracy
-            }),
-          });
-      
-          if (!response.ok) {
-            throw new Error('Failed to generate summary');
-          }
-      
-          const data = await response.json();
-          const generatedSummary = data.choices[0].text.trim().slice(0, 30); // Ensure 30-word limit
-          return generatedSummary;
+            const response = await axios.post(apiUrl, {
+                model,
+                messages: [
+                    {
+                        role: "user",
+                        content: userMessage
+                    }
+                ],
+                max_tokens: 50,
+                temperature: 0.7,
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${apiKey}`,
+                },
+            });
+    
+            console.log('Response:', response.data); // Log response data
+    
+            const choices = response.data.choices;
+            if (choices && choices.length > 0) {
+                const message = choices[0]?.message?.content;
+                if (message) {
+                    const generatedSummary = message.trim().slice(0, 800);
+                    return generatedSummary;
+                } else {
+                    throw new Error('Generated summary is undefined');
+                }
+            } else {
+                throw new Error('No choices found in the response');
+            }
         } catch (error) {
-          console.error('Error generating summary:', error);
-          throw error;
+            console.error('Error generating summary:', error);
+            throw error;
         }
-      };
-      
-      // Optional function to improve summary quality (example)
-      const enhanceSummary = (summary) => {
-        // Replace with your own logic to refine the summary (e.g., conciseness, clarity)
-        return summary.replace(/\s*\([^)]*\)\s*/g, '').replace(/\s+/g, ' '); // Remove parentheses and excess spaces
-      };
-      
+    };
 
- 
+    
 
+    useEffect(() => {
+        generateSummary(finalSummary, setFinalSummary);
+    }, [finalSummary]);
 
+    
 
+    
    
     return(
         <div className="formtemp-page">
