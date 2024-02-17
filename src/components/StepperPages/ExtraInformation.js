@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import TextField from "@mui/material/TextField";
 import CustomMultilineTextFields from '../CustomMultilineTextfield';
 import EditableChoose from '../EditableSelectOption';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
 import { CustomizedHook } from '../TextfieldButtonDataDisplay';
@@ -20,9 +20,12 @@ import Autocomplete from "@mui/material/Autocomplete";
 import Stack from "@mui/material/Stack";
 import { setRef } from '@mui/material';
 import RemoveIcon from '@mui/icons-material/Remove';
+import { collection, addDoc, getFirestore, query, where, getDocs, doc, updateDoc, getDoc,setDoc } from 'firebase/firestore';
+import { useAuth } from '../../hooks/useAuth.js';
 
 
-const ExtraInformation = () => {        
+const ExtraInformation = () => {     
+    const { currentUser } = useAuth();   
     const [refPerson, setRefPerson] = useState([{ name: '', phone: '' }]);
     const [award, setAward] = useState(['']);
     const [lang, setLang] = useState(['']);
@@ -44,10 +47,67 @@ const ExtraInformation = () => {
 
     const navigate = useNavigate();
     const prevPage = () => navigate('/summary');
-    const handleSubmit = (e) => {
+    
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        navigate('/templates')
+        try {
+            const formData = {
+                refPerson,
+                award,
+                lang,
+                ExtraInfoInterests,
+            };
+            await sendExtraInfoToFirestore(formData);
+            navigate('/templates');
+        } catch (error) {
+            console.error('Error submitting extra information: ', error);
+        }
     };
+
+    const sendExtraInfoToFirestore = async (data) => {
+        try {
+            const db = getFirestore();
+            const userDocument = doc(collection(db, 'studentdetails'), currentUser.email);
+
+            const docSnapshot = await getDoc(userDocument);
+            if (docSnapshot.exists()) {
+                await setDoc(userDocument, { extraInfo: data }, { merge: true });
+            } else {
+                console.error('Document does not exist for the current user.');
+            }
+        } catch (error) {
+            console.error('Error adding extra information to Firestore: ', error);
+        }
+    };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const db = getFirestore();
+                const userDocument = doc(collection(db, 'studentdetails'), currentUser.email);
+                const docSnapshot = await getDoc(userDocument);
+    
+                if (docSnapshot.exists()) {
+                    const extraInfoData = docSnapshot.data().extraInfo || {};
+
+                    console.log('Fetched extra information:', extraInfoData);
+    
+                    setRefPerson(extraInfoData.refPerson || [{ name: '', phone: '' }]);
+                    setAward(extraInfoData.award || ['']);
+                    setLang(extraInfoData.lang || ['']); // Change from languages to lang
+                    setExtraInfoInterests(extraInfoData.ExtraInfoInterests || []);
+                } else {
+                    console.error('Document does not exist for the current user.');
+                }
+            } catch (error) {
+                console.error('Error fetching extra information from Firestore: ', error);
+            }
+        };
+    
+        fetchData();
+    }, [currentUser]);
+    
 
     //ref person
     const handleRedNmChange = (index, event) => {
@@ -100,7 +160,7 @@ const ExtraInformation = () => {
                                         {refPerson.map((result, index) => (
                                             <Grid container item spacing={2} key={index}>
                                                 <Grid item xs={6} md={4} mb={3} pr={1}>
-                                                    <Typography mb={1}>
+                                                    <Typography mb={1} style={{ letterSpacing: '0px'}}>
                                                         {(index === 0) && <span style={{color: 'red'}}>*</span>}
                                                         Reference Person</Typography>
                                                     <TextField type="text" value={result.name} onChange={(event) => handleRedNmChange(index, event)} variant="outlined" fullWidth 
@@ -110,14 +170,14 @@ const ExtraInformation = () => {
                                                 <Grid item xs={5} md={3} mb={3}>
                                                     <Typography mb={1}>
                                                         {(index === 0) && <span style={{color: 'red'}}>*</span>}
-                                                        Contact</Typography>
+                                                        Contact No</Typography>
                                                     <TextField type="text" value={result.phone} onChange={(event) => handleRefPhChange(index, event)} variant="outlined" fullWidth 
-                                                    required = {(index === 0)? true: false}
+                                                    required = {(index === 0)? true: false}s
                                                     InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/>
                                                 </Grid>
                                                 {index !== 0 && (
                                                     <Grid item xs={1} md={2}  mt={3}>
-                                                        <IconButton onClick={() => handleRefRemoveRow(index)} color="primary" style={{ backgroundColor: 'black', borderRadius: '50%', width:'22px', height:'22px', marginRight: '15px' }}>
+                                                        <IconButton onClick={() => handleRefRemoveRow(index)} color="primary" style={{ backgroundColor: 'black', borderRadius: '50%', width:'22px', height:'22px', marginRight: '15px',marginTop:'25px'  }}>
                                                             <RemoveIcon style={{ color: 'white' }}/>
                                                         </IconButton>
                                                     </Grid>
@@ -133,20 +193,24 @@ const ExtraInformation = () => {
                                             </Typography>
                                         </Grid>
 
+                                        <Typography mb={0}>Award Title</Typography>
+
                                         {award.map((result, index) => (
                                             <Grid container item spacing={2} key={index}>
                                                 <Grid item xs={11} md={6} mb={3} mt={3}>
-                                                    <Typography mb={1}>Award Title</Typography>
-                                                    <TextField type="text" value={result.award} onChange={(event) => handleChange(index, event, award, setAward)} variant="outlined" fullWidth  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/>
-                                                </Grid>{index !== 0 && (
-                                                    <Grid item xs={1} md={2}  mt={3}>
-                                                        <IconButton onClick={() => handleRemoveRow(index, award, setAward)} color="primary" style={{ backgroundColor: 'black', borderRadius: '50%', width:'22px', height:'22px', marginRight: '15px' }}>
-                                                            <RemoveIcon style={{ color: 'white' }}/>
+                                                    
+                                                    <TextField type="text" value={result} onChange={(event) => handleChange(index, event, award, setAward)} variant="outlined" fullWidth InputProps={{ style: { borderRadius: '25px', backgroundColor: 'white' } }} placeholder='' />
+                                                </Grid>
+                                                {index !== 0 && (
+                                                    <Grid item xs={1} md={2} mt={3}>
+                                                        <IconButton onClick={() => handleRemoveRow(index, award, setAward)} color="primary" style={{ backgroundColor: 'black', borderRadius: '50%', width: '22px', height: '22px', marginRight: '15px',marginTop:'20px'  }}>
+                                                            <RemoveIcon style={{ color: 'white' }} />
                                                         </IconButton>
                                                     </Grid>
                                                 )}
                                             </Grid>
                                         ))}
+
                                         <Grid item xs={12} mt={1} mb={3}>
                                             <Typography>
                                                 <IconButton onClick={() => handleAddRow(award, setAward)} color="primary" style={{ backgroundColor: 'black', borderRadius: '50%', width:'22px', height:'22px', marginRight: '15px' }} >
@@ -156,20 +220,24 @@ const ExtraInformation = () => {
                                             </Typography>
                                         </Grid>
 
+                                        <Typography mb={0}>Fluent Languages</Typography>
+
                                         {lang.map((result, index) => (
                                             <Grid container item spacing={2} key={index}>
                                                 <Grid item xs={11} md={6} mb={3} mt={3}>
-                                                    <Typography mb={1}>Fluent Languages</Typography>
-                                                    <TextField type="text" value={result.lang} onChange={(event) => handleChange(index, event, lang, setLang)} variant="outlined" fullWidth  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/>
-                                                </Grid>{index !== 0 && (
-                                                    <Grid item xs={1} md={2}  mt={3}>
-                                                        <IconButton onClick={() => handleRemoveRow(index, lang, setLang)} color="primary" style={{ backgroundColor: 'black', borderRadius: '50%', width:'22px', height:'22px', marginRight: '15px' }}>
-                                                            <RemoveIcon style={{ color: 'white' }}/>
+                                                    
+                                                    <TextField type="text" value={result} onChange={(event) => handleChange(index, event, lang, setLang)} variant="outlined" fullWidth InputProps={{ style: { borderRadius: '25px', backgroundColor: 'white' } }} placeholder='' />
+                                                </Grid>
+                                                {index !== 0 && (
+                                                    <Grid item xs={1} md={2} mt={3}>
+                                                        <IconButton onClick={() => handleRemoveRow(index, lang, setLang)} color="primary" style={{ backgroundColor: 'black', borderRadius: '50%', width: '22px', height: '22px', marginRight: '15px',marginTop:'20px' }}>
+                                                            <RemoveIcon style={{ color: 'white' }} />
                                                         </IconButton>
                                                     </Grid>
                                                 )}
                                             </Grid>
                                         ))}
+
                                         <Grid item xs={12} mt={1} mb={3}>
                                             <Typography>
                                                 <IconButton onClick={() => handleAddRow(lang, setLang)} color="primary" style={{ backgroundColor: 'black', borderRadius: '50%', width:'22px', height:'22px', marginRight: '15px' }} >

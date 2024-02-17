@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../pages/interviewforms/Template.css';
 import InterviewFormFooter from '../InterviewFormFooter';
 import InterviewFormHeader from '../InterviewFormHeader';
@@ -15,9 +15,13 @@ import { useNavigate } from 'react-router-dom';
 import Autocomplete from "@mui/material/Autocomplete";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
+import { collection, doc, getFirestore, setDoc, getDoc } from 'firebase/firestore';
+import { useAuth } from '../../hooks/useAuth.js';
 
 
 const SkillTrack_1 = () => {
+
+    const { currentUser } = useAuth();
     
     const [leadership, setLeadership] = useState('');
     const [leadershipEx, setLeadershipEx] = useState('');
@@ -75,19 +79,67 @@ const SkillTrack_1 = () => {
 
     const navigate = useNavigate();
     const prevPage = () => navigate('/publications');
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        navigate('/summary')
-        // validate();
+    
 
-        // Check if validation passed
-        // if (validation) {
-        //     // Call the function to add data to Firestore
-        //     addDataToFirestore();
-        // } else {
-        //     console.log('Validation failed');
-        // }
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const formData = {
+                leadership,
+                leadershipEx,
+                skillContrib,
+                keySkills,
+                SoftSkills
+            };
+            await sendSkillTrackDataToFirestore(formData);
+            navigate('/summary');
+        } catch (error) {
+            console.error('Error submitting skill track data: ', error);
+        }
     };
+
+    const sendSkillTrackDataToFirestore = async (data) => {
+        try {
+            const db = getFirestore();
+            const studentDetailsCollection = collection(db, 'studentdetails');
+            const userDocument = doc(studentDetailsCollection, currentUser.email);
+
+            const docSnapshot = await getDoc(userDocument);
+            if (docSnapshot.exists()) {
+                await setDoc(userDocument, { skillTrack: data }, { merge: true });
+            } else {
+                console.error('Document does not exist for the current user.');
+            }
+        } catch (error) {
+            console.error('Error adding skill track info to Firestore: ', error);
+        }
+    };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const db = getFirestore();
+                const userDocument = doc(collection(db, 'studentdetails'), currentUser.email);
+                const docSnapshot = await getDoc(userDocument);
+
+                if (docSnapshot.exists()) {
+                    const skillTrackData = docSnapshot.data().skillTrack || {};
+
+                    setLeadership(skillTrackData.leadership || '');
+                    setLeadershipEx(skillTrackData.leadershipEx || '');
+                    setSkillContrib(skillTrackData.skillContrib || '');
+                    setkeySkills(skillTrackData.keySkills || []);
+                    setSoftSkills(skillTrackData.SoftSkills || []);
+                } else {
+                    console.error('Document does not exist for the current user.');
+                }
+            } catch (error) {
+                console.error('Error fetching skill track data from Firestore: ', error);
+            }
+        };
+
+        fetchData();
+    }, [currentUser]);
 
     
     return(
