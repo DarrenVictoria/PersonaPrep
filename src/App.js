@@ -15,6 +15,8 @@ import Dashboard from "./pages/Dashboard"
 import NoPage from './pages/NoPage'
 import Template from "./pages/interviewforms/Template"
 import AdminDash from "./pages/dashboard/adminDashboard";
+import AUserManageDash from "./pages/dashboard/UserManagement";
+import TestTemplate from "./pages/dashboard/TestTemplate";
 
 import TestFacultyDetails from "./components/StepperPages/TestFacultDetails";
 import FacultyDetails from "./components/StepperPages/FacultyDetails";
@@ -73,6 +75,8 @@ function App() {
           <Route path="/insightblog" element={<Insightblog />}/>
           <Route path="/login" element={<Login />}/>
           <Route path="/admindash" element={<AdminDash />}/>
+          <Route path="/userDash" element={<AUserManageDash />}/>
+          <Route path="/TestTemplate" element={<TestTemplate />}/>
 
           {/* <Route path="/testFaculty" element={<TestFacultyDetails />}/> */}
           
@@ -100,6 +104,7 @@ function App() {
           <Route path="/extraInfo" element={<ExtraInformation />}/>
           <Route path="/templates" element={<TemplateSelection />}/>
           <Route path="/feedback" element={<CvFeedback />}/>
+          
 
 
           <Route
