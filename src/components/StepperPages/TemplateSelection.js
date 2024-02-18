@@ -180,7 +180,7 @@ const TemplateSelection = () => {
                                         </div>
                                     </div>
                             </div>
-                        <InterviewFormFooter  prevForm='/extraInfo' nextForm='/feedback'/>
+                        <InterviewFormFooter  prevForm='finalisesummary' nextForm='/feedback'/>
                     </form>
                 </Grid>
             </Grid>

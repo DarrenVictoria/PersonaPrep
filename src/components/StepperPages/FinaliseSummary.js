@@ -36,11 +36,30 @@ const Summary_1 = () => {
 
     const navigate = useNavigate();
     const prevPage = () => navigate('/extraInfo');
-   
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        
+
+  
+
+    
+
+    const sendSummaryDataToFirestore = async (finalSummary) => {
+        try {
+            const db = getFirestore();
+            const userDocumentRef = doc(db, 'studentdetails', currentUser.email);
+    
+            await setDoc(userDocumentRef, { finalSummary }, { merge: true });
+        } catch (error) {
+            console.error('Error adding summary info to Firestore:', error);
+        }
     };
+    
+
+            
+            const handleSubmit = async (e) => {
+                e.preventDefault();
+                await sendSummaryDataToFirestore(finalSummary);
+                navigate('/templates');
+            };
+
 
     useEffect(() => {
         const fetchSummaryData = async () => {
@@ -71,19 +90,48 @@ const Summary_1 = () => {
         fetchSummaryData();
     }, [currentUser.email]);
 
-    const generateSummary = async (finalSummary, setFinalSummary) => {
-        if (finalSummary.trim() === '') {
+    useEffect(() => {
+        const fetchFinalSummary = async () => {
             try {
-                const generatedSummary = await promptChatGPT();
-                setFinalSummary(generatedSummary);
+                const db = getFirestore();
+                const userDocumentRef = doc(db, 'studentdetails', currentUser.email);
+                const docSnapshot = await getDoc(userDocumentRef);
+    
+                if (docSnapshot.exists()) {
+                    const docData = docSnapshot.data();
+                    const finalSummary = docData.finalSummary;
+                    if (finalSummary) {
+                        setFinalSummary(finalSummary);
+                    } else {
+                        // If no finalSummary is found, generate and set a new one
+                        generateAndSetSummary();
+                    }
+                } else {
+                    // If user document doesn't exist, generate and set a new summary
+                    generateAndSetSummary();
+                }
             } catch (error) {
-                console.error('Error generating summary:', error);
+                console.error('Error fetching final summary from Firestore:', error);
             }
+        };
+    
+        fetchFinalSummary();
+    }, [currentUser.email]);
+    
+    const generateAndSetSummary = async () => {
+        try {
+            const generatedSummary = await promptChatGPT();
+            setFinalSummary(generatedSummary);
+        } catch (error) {
+            console.error('Error generating summary:', error);
         }
     };
     
+
+    
+    
     const promptChatGPT = async () => {
-        const apiKey = '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';
+        const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
         const apiUrl = 'https://api.openai.com/v1/chat/completions';
         const model = 'gpt-3.5-turbo';
         const userMessage = `
@@ -144,9 +192,8 @@ const Summary_1 = () => {
 
     
 
-    useEffect(() => {
-        generateSummary(finalSummary, setFinalSummary);
-    }, [finalSummary]);
+    
+   
 
     
 
@@ -163,6 +210,7 @@ const Summary_1 = () => {
                                 <div className='summarymaindiv'>
                                     <Typography mb={1}>Your finalised AI generated summary </Typography>
                                     <CustomMultilineTextFieldslimited value={finalSummary} onChange={handleFinalSummaryChange} inputHeight={100} maxWidth={1300} maxWords={50} isRequired={true}/> 
+                                    <Button variant="contained" color="success" onClick={generateAndSetSummary} style={{marginTop:'1rem',borderRadius:'20px'}} >Regenerate AI Summary</Button>
 
                                 </div>
                             </div>

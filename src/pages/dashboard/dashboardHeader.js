@@ -37,10 +37,12 @@ const DashboardHeader = () => {
   const handleCloseUserMenu = () => setAnchorElUser(null);
 
   return ( 
+    
     <>
+    
     <CssBaseline />
     <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
-      <Container maxWidth="xl" style={{backgroundColor: '#292727'}}>
+      <Container  maxWidth="100%" style={{backgroundColor: '#292727'}}>
         <Toolbar disableGutters>
           <IconButton sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
             <a onClick={() => window.location.href = '/home'} style={{cursor: 'pointer'}}><img src={logo} alt="logo" style={{width:'80px'}}/></a>
@@ -143,7 +145,7 @@ const DashboardHeader = () => {
         display: {xs: 'none', md: 'flex'},
         width: drawerWidth,
         flexShrink: 0,
-        [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box' },
+        [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box',border:'none' },
       }}
     >
       <Toolbar />
@@ -162,7 +164,7 @@ const DashboardHeader = () => {
           <ListItem disablePadding sx={{mb: 1}}>
               <ListItemButton onClick={() => window.location.href = '/admindash'}>
                   <ListItemIcon> <HomeIcon /> </ListItemIcon>
-                  {/* <ListItemText primary={'Home'} /> */}
+                   {/* <ListItemText primary={'Home'} />  */}
                   <Typography variant='h6' fontWeight='bold'>Home</Typography>
               </ListItemButton>
           </ListItem>
@@ -199,6 +201,7 @@ const DashboardHeader = () => {
         </List>
       </Box>
     </Drawer>
+    
     </>
    );
 }
