@@ -15,6 +15,8 @@ import Dashboard from "./pages/Dashboard"
 import NoPage from './pages/NoPage'
 import Template from "./pages/interviewforms/Template"
 import AdminDash from "./pages/dashboard/adminDashboard";
+import AUserManageDash from "./pages/dashboard/UserManagement";
+import TestTemplate from "./pages/dashboard/TestTemplate";
 
 import TestFacultyDetails from "./components/StepperPages/TestFacultDetails";
 import FacultyDetails from "./components/StepperPages/FacultyDetails";
@@ -41,6 +43,7 @@ import Summary_1 from "./components/StepperPages/Summary1";
 import ExtraInformation from "./components/StepperPages/ExtraInformation";
 import TemplateSelection from "./components/StepperPages/TemplateSelection";
 import CvFeedback from "./components/StepperPages/CvFeedback";
+import FinalseSummary from "./components/StepperPages/FinaliseSummary"
 
 
 
@@ -73,6 +76,8 @@ function App() {
           <Route path="/insightblog" element={<Insightblog />}/>
           <Route path="/login" element={<Login />}/>
           <Route path="/admindash" element={<AdminDash />}/>
+          <Route path="/userDash" element={<AUserManageDash />}/>
+          <Route path="/TestTemplate" element={<TestTemplate />}/>
 
           {/* <Route path="/testFaculty" element={<TestFacultyDetails />}/> */}
           
@@ -97,8 +102,10 @@ function App() {
           <Route path="/skilltrack" element={<SkillTrack_1 />}/>
           <Route path="/summary" element={<Summary_1 />}/>
           <Route path="/extraInfo" element={<ExtraInformation />}/>
+          <Route path="/finalisesummary" element={<FinalseSummary/>}/>
           <Route path="/templates" element={<TemplateSelection />}/>
           <Route path="/feedback" element={<CvFeedback />}/>
+          
 
 
           <Route

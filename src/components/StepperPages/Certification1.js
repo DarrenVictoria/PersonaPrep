@@ -11,7 +11,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import EditableChoose from '../EditableSelectOption';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { CustomizedHook } from '../TextfieldButtonDataDisplay';
 import cdiary from '../../assets/images/iconcdiary.svg';
 import ccalander from '../../assets/images/iconccalander.svg';
@@ -43,9 +43,11 @@ import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCi
 import { useForm } from "react-hook-form";
 import Autocomplete from "@mui/material/Autocomplete";
 import Stack from "@mui/material/Stack";
-
+import { collection, doc, setDoc, getFirestore,getDoc } from 'firebase/firestore';
+import { useAuth } from '../../hooks/useAuth.js';
 
 const Certification1 = () => {
+    const { currentUser } = useAuth();
 
     const monthOption = [
         {value: 'January', label: 'January'},
@@ -80,10 +82,12 @@ const Certification1 = () => {
     const Certificate1issuedOrg = watch('Certificate1issuedOrg');
     const Certificate1Id = watch('Certificate1Id');
     const Certificate1LInk = watch('Certificate1LInk');
+    const [CertUrl, setCertUrl] = useState('');
+    const [CertFetchUrl, setCertFetchUrl] = useState('');
 
 
     //below handle function is for CustomizedHook
-    const CProj_Skills = ['c#','react','java'];
+    const CCert_Skills = ['c#','react','java'];
     const [Certificate1ProjSkills, setCertificate1ProjSkills] = useState([]);//usestate for autocomplete
     const maxSelections = 3;//max value for the autocomplete
     const handleCertificate1ProjSkills = (event, newSkill) => {
@@ -97,14 +101,131 @@ const Certification1 = () => {
     
     console.log(Certificate1ProjSkills);
 
+    const handleFileUploadSuccess = (url) => {
+        setCertUrl(url.downloadURL);
+        console.log(url);
+      };
+
+      const handleReset = () => {
+        // Your reset logic here
+        console.log('Reset button clicked');
+      };
+   
+
 
 
     const navigate = useNavigate();
     const prevPage = () => navigate('/project');
-    const onSubmit = (e) => {
-        // e.preventDefault();
-        handleClickOpen();
+  
+        
+    
+        
+    
+
+    const sendCertificationDataToFirestore = async (data) => {
+        try {
+            const db = getFirestore();
+            const studentDetailsCollection = collection(db, 'studentdetails');
+            const userDocument = doc(studentDetailsCollection, currentUser.email); // Use the email as document ID
+            
+
+            
+            const docSnapshot = await getDoc(userDocument);
+            if (docSnapshot.exists()) {
+                const docData = docSnapshot.data();
+                let certifications = docData.certifications || []; // Retrieve the certifications array or initialize an empty array
+
+                // Check if index 0 exists in the certifications array
+                if (certifications.length > 0) {
+                    // Update fields of Certification 1 at index 0
+                    certifications[0] = {
+                        ...certifications[0],
+                        ...data
+                    };
+                } else {
+                    // Create a new entry for Certification 1
+                    certifications.push(data);
+                }
+
+                // Update the document with the modified certifications array
+                await setDoc(userDocument, { certifications }, { merge: true });
+                handleClickOpen();
+            } else {
+                console.error('Document does not exist for the current user.');
+            }
+        } catch (error) {
+            console.error('Error adding certification info to Firestore: ', error);
+        }
     };
+
+    // Function to handle form submission
+    const onSubmit = async () => {
+        try {
+            const finalProjectEvd = CertUrl || CertFetchUrl;
+            // Construct formData object with all form fields
+            const formData = {
+                Certificate1IssueMonth,
+                Certificate1IssueYear,
+                Certificate1ExpMonth,
+                Certificate1ExpYear,
+                Certificate1Name,
+                Certificate1issuedOrg,
+                Certificate1Id,
+                Certificate1LInk,
+                Certificate1ProjSkills,
+                CertUrl: finalProjectEvd
+                // Add other form fields here...
+            };
+
+            // Send data to Firestore
+            await sendCertificationDataToFirestore(formData);
+
+            // Navigate to the next page
+            navigate('/secondCertification');
+        } catch (error) {
+            console.error('Error submitting certification data: ', error);
+        }
+    };
+
+    // useEffect to fetch certification data from Firestore upon component mount
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const db = getFirestore();
+                const userDocument = doc(collection(db, 'studentdetails'), currentUser.email);
+                const docSnapshot = await getDoc(userDocument);
+
+                if (docSnapshot.exists()) {
+                    const certificationData = docSnapshot.data().certifications && docSnapshot.data().certifications.length > 0 ? docSnapshot.data().certifications[0] : null;
+
+                    if (certificationData) {
+                        // Update state variables with fetched data
+                        setValue('Certificate1Name', certificationData.Certificate1Name || '');
+                        setValue('Certificate1issuedOrg', certificationData.Certificate1issuedOrg || '');
+                        setValue('Certificate1Id', certificationData.Certificate1Id || '');
+                         
+                        setValue('Certificate1LInk', certificationData.Certificate1LInk || ''); 
+                        setCertificate1IssueMonth(certificationData.Certificate1IssueMonth || '');
+                        setCertificate1IssueYear(certificationData.Certificate1IssueYear || '');
+                        setCertificate1ExpMonth(certificationData.Certificate1ExpMonth || '');
+                        setCertificate1ExpYear(certificationData.Certificate1ExpYear || '');
+                        setCertFetchUrl(certificationData.CertUrl || null);
+                        setCertificate1ProjSkills(certificationData.Certificate1ProjSkills || '');
+
+                       
+
+                        // Update other state variables...
+                    }
+                } else {
+                    console.error('Document does not exist for the current user.');
+                }
+            } catch (error) {
+                console.error('Error fetching certification data from Firestore: ', error);
+            }
+        };
+
+        fetchData();
+    }, [currentUser]);
 //below code for dialog
     const [open, setOpen] = React.useState(false);
     const theme = useTheme();
@@ -260,8 +381,8 @@ const Certification1 = () => {
                                                             <Autocomplete
                                                                 multiple
                                                                 id="tags-outlined"
-                                                                options={CProj_Skills}
-                                                                value={Certificate1ProjSkills} 
+                                                                options={CCert_Skills}
+                                                                value={Certificate1ProjSkills}  
                                                                 onChange={handleCertificate1ProjSkills}
                                                                 filterSelectedOptions
                                                                 disableCloseOnSelect
@@ -305,7 +426,9 @@ const Certification1 = () => {
                                                 <Typography>-OR-</Typography>
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
-                                                <FileUpload />
+                                            <FileUpload onFileUpload={handleFileUploadSuccess} onUploadSuccess={handleFileUploadSuccess} onReset={handleReset}    />
+                                                {CertFetchUrl && CertFetchUrl !== ' ' &&  <p style={{marginTop:'1rem',marginLeft:'1rem'}}>Your Certification Proof</p>}
+                                                {CertFetchUrl && CertFetchUrl !== ' ' && <img src={CertFetchUrl} alt="Profile Picture"  style={{ width: '15rem', height: '10rem', objectFit: 'cover',marginLeft:'1rem',border: '1px solid black' }}  />}
                                             </Grid>
                                         </Grid>
                                     </div>

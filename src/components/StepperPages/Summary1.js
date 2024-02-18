@@ -144,17 +144,17 @@ const Summary_1 = () => {
                             <div style={{ margin: '80px 25px 125px' }}>
                                 <div className='summarymaindiv'>
                                     <Typography mb={1}><span style={{color: 'red'}}>*</span> In which key industries have you worked in, and what were your key roles in each?</Typography>
-                                    <CustomMultilineTextFieldslimited value={industryExperience} onChange={handleIndustryExperienceChange} inputHeight={100} maxWidth={1300} maxWords={20} isRequired={true}/> 
+                                    <CustomMultilineTextFieldslimited value={industryExperience} onChange={handleIndustryExperienceChange} inputHeight={100} maxWidth={1300} maxWords={75} isRequired={true}/> 
                                     <Typography mb={1} mt={3}><span style={{color: 'red'}}>*</span> Have you led any projects or initiatives that had a notable impact?</Typography>
-                                    <CustomMultilineTextFieldslimited value={notableProjects} onChange={handleNotableProjectsChange} inputHeight={100} maxWidth={1300} maxWords={20} isRequired={true}/>
+                                    <CustomMultilineTextFieldslimited value={notableProjects} onChange={handleNotableProjectsChange} inputHeight={100} maxWidth={1300} maxWords={75} isRequired={true}/>
                                     <Typography mb={1} mt={3}><span style={{color: 'red'}}>*</span> Any highlights in your career so far you would like to describe about?</Typography>
-                                    <CustomMultilineTextFieldslimited value={careerHighlights} onChange={handleCareerHighlightsChange} inputHeight={100} maxWidth={1300} maxWords={20} isRequired={true}/>
+                                    <CustomMultilineTextFieldslimited value={careerHighlights} onChange={handleCareerHighlightsChange} inputHeight={100} maxWidth={1300} maxWords={75} isRequired={true}/>
                                     <Typography mb={1} mt={3}><span style={{color: 'red'}}>*</span> Are there specific milestones or promotions that stand out?</Typography>
-                                    <CustomMultilineTextFieldslimited inputHeight={100} maxWidth={1300} value={promotions} onChange={handlePromotions} maxWords={20} isRequired={true}/>
+                                    <CustomMultilineTextFieldslimited inputHeight={100} maxWidth={1300} value={promotions} onChange={handlePromotions} maxWords={75} isRequired={true}/>
                                     <Typography mb={1} mt={3}><span style={{color: 'red'}}>*</span> Where do you see your career heading in the next few years?</Typography>
-                                    <CustomMultilineTextFieldslimited inputHeight={100} maxWidth={1300} value={futureCareer} onChange={handleFutureCareer} maxWords={20} isRequired={true}/>
+                                    <CustomMultilineTextFieldslimited inputHeight={100} maxWidth={1300} value={futureCareer} onChange={handleFutureCareer} maxWords={75} isRequired={true}/>
                                     <Typography mb={1} mt={3}><span style={{color: 'red'}}>*</span> What sets you apart from others in your field?</Typography>
-                                    <CustomMultilineTextFieldslimited inputHeight={100} maxWidth={1300} value={uniqueSkills} onChange={handleUniqueSkills} maxWords={20} isRequired={true}/>
+                                    <CustomMultilineTextFieldslimited inputHeight={100} maxWidth={1300} value={uniqueSkills} onChange={handleUniqueSkills} maxWords={75} isRequired={true}/>
                                 </div>
                             </div>
                             <Grid container spacing={2} style={{position: 'absolute', bottom: 80}}>            
