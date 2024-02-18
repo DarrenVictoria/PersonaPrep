@@ -16,9 +16,9 @@ import NoPage from './pages/NoPage'
 import Template from "./pages/interviewforms/Template"
 import AdminDash from "./pages/dashboard/adminDashboard";
 import AUserManageDash from "./pages/dashboard/UserManagement";
-import TestTemplate from "./pages/dashboard/TestTemplate";
+import AAddUserManageDash from "./pages/dashboard/UserMAddAccount";
+import AEditUserManageDash from "./pages/dashboard/UserMEditAccount";
 
-import TestFacultyDetails from "./components/StepperPages/TestFacultDetails";
 import FacultyDetails from "./components/StepperPages/FacultyDetails";
 import PersonalInfo from "./components/StepperPages/PersonalInfo";
 import ContactDetails_1 from "./components/StepperPages/ContactDetails1";
@@ -76,7 +76,8 @@ function App() {
           <Route path="/login" element={<Login />}/>
           <Route path="/admindash" element={<AdminDash />}/>
           <Route path="/userDash" element={<AUserManageDash />}/>
-          <Route path="/TestTemplate" element={<TestTemplate />}/>
+          <Route path="/AdduserDash" element={<AAddUserManageDash />}/>
+          <Route path="/EdituserDash" element={<AEditUserManageDash />}/>
 
           {/* <Route path="/testFaculty" element={<TestFacultyDetails />}/> */}
           
