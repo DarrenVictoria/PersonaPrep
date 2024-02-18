@@ -17,6 +17,8 @@ import Template from "./pages/interviewforms/Template"
 import AdminDash from "./pages/dashboard/adminDashboard";
 import AUserManageDash from "./pages/dashboard/UserManagement";
 import TestTemplate from "./pages/dashboard/TestTemplate";
+import UserReviews from "./pages/dashboard/UserReviews";
+import InterviewBankEdit from "./pages/dashboard/InterviewBankEdit";
 
 import TestFacultyDetails from "./components/StepperPages/TestFacultDetails";
 import FacultyDetails from "./components/StepperPages/FacultyDetails";
@@ -78,6 +80,8 @@ function App() {
           <Route path="/admindash" element={<AdminDash />}/>
           <Route path="/userDash" element={<AUserManageDash />}/>
           <Route path="/TestTemplate" element={<TestTemplate />}/>
+          <Route path="/reviews" element={<UserReviews />}/>
+          <Route path="/interviewEdit" element={<InterviewBankEdit />}/>
 
           {/* <Route path="/testFaculty" element={<TestFacultyDetails />}/> */}
           
