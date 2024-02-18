@@ -43,6 +43,7 @@ import Summary_1 from "./components/StepperPages/Summary1";
 import ExtraInformation from "./components/StepperPages/ExtraInformation";
 import TemplateSelection from "./components/StepperPages/TemplateSelection";
 import CvFeedback from "./components/StepperPages/CvFeedback";
+import FinalseSummary from "./components/StepperPages/FinaliseSummary"
 
 
 
@@ -99,10 +100,10 @@ function App() {
           <Route path="/clubsAndSocs" element={<Club1 />}/>
           <Route path="/Secondclub" element={<Club2 />}/>
           <Route path="/publications" element={<Publications />}/>
-          
           <Route path="/skilltrack" element={<SkillTrack_1 />}/>
           <Route path="/summary" element={<Summary_1 />}/>
           <Route path="/extraInfo" element={<ExtraInformation />}/>
+          <Route path="/finalisesummary" element={<FinalseSummary/>}/>
           <Route path="/templates" element={<TemplateSelection />}/>
           <Route path="/feedback" element={<CvFeedback />}/>
           
