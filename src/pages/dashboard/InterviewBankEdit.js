@@ -1,14 +1,12 @@
-import  React from "react";
+import  React, { useState } from "react";
 import { Grid } from "@mui/material";
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import DashboardHeader from "./dashboardHeader";
-import { DataGrid } from '@mui/x-data-grid';
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import Avatar from "@mui/material/Avatar";
-import EditIcon from '@mui/icons-material/Edit'; // Import EditIcon
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import { blue } from "@mui/material/colors";
@@ -17,8 +15,14 @@ import TextField from "@mui/material/TextField";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
+
+
 
 const InterviewBankEdit = () => {
+    const [trnscrptDtls, setTrnscrptdtls] = useState(['']);
+
     const handleFileUploadSuccess = (url) => {
         // setProfilePictureUrl(url.downloadURL);
         console.log(url);
@@ -28,10 +32,28 @@ const InterviewBankEdit = () => {
         // Your reset logic here
         console.log('Reset button clicked');
     };
+
+    const handleChange = (index, event) => {
+        const newResults = [...trnscrptDtls];
+        newResults[index] = event.target.value;
+        setTrnscrptdtls(newResults);
+    }
+
+    const handleAddRow = (event) => {
+        event.preventDefault();
+        setTrnscrptdtls([...trnscrptDtls, '']);
+    }
+
+    const handleRemoveRow = (index) => {
+        const newResults = [...trnscrptDtls];
+        newResults.splice(index, 1);
+        setTrnscrptdtls(newResults);
+    };
+
     return ( 
         <Box sx={{ display: 'flex'}}>
             <DashboardHeader />
-            <Box component="main" sx={{ flexGrow: 1, p: 3, backgroundColor: '#d1d1d1' }} >
+            <Box component="main" sx={{ flexGrow: 1, p: 2, backgroundColor: '#d1d1d1' }} >
                 <Toolbar />
                 <Box sx={{ flexGrow: 1 }}>
                     <Card style={{ width:"100%", borderRadius:'25px', padding: '20px' }}>
@@ -85,17 +107,45 @@ const InterviewBankEdit = () => {
                                 placeholder="An interview between a software engineer and Virtusa for the role of a full stack developer"
                             />
                         </Grid>
-                        <Grid item xs={12} mb={3}>
-                            <Typography mb={1}>Interview Transcript</Typography>
-                            <TextField type="text" variant="outlined" fullWidth required multiline rows={100}
-                                // value={Proname}  
-                                InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
-                            />
+                        <Grid item xs={12} mb={1}>
+                            <Typography>Interview Transcript</Typography>
+                        </Grid>
+                        <Grid item xs={12} mb={3} sx={{border: '1px solid gray', borderRadius: '25px'}} p={2}>
+                            {trnscrptDtls.map((result, index) => (
+                                <Grid container item mb={3} key={index}>
+                                    <Grid item xs={2} mr={6}><Typography>{(index % 2 === 0)? 'Interviewer :' : 'Candidate :'}</Typography></Grid>
+                                    <Grid item xs={8}>
+                                        <TextField type="text" variant="outlined" fullWidth multiline rows={2}
+                                            value={result}  
+                                            onChange={(event) => handleChange(index, event)} 
+                                            InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                            placeholder=""
+                                        />
+                                    </Grid>
+                                    {/* no space left to add all 3 in a single row
+                                    {index !== 0 && (
+                                        <Grid item xs={2}>
+                                            <IconButton onClick={() => handleRemoveRow(index)} color="primary" style={{ backgroundColor: 'black', borderRadius: '50%', width:'22px', height:'22px', marginRight: '15px',marginTop:'25px'  }}>
+                                                <RemoveIcon style={{ color: 'white' }}/>
+                                            </IconButton>
+                                        </Grid>
+                                    )} */}
+                                </Grid> 
+                            ))}
+
+                            <Grid item xs={12} mt={2} mb={3}>
+                                <Typography>
+                                    <IconButton onClick={handleAddRow}  color="primary" style={{ backgroundColor: 'black', borderRadius: '50%', width:'22px', height:'22px', marginRight: '15px' }} >
+                                        <AddIcon style={{ color: 'white' }} />
+                                    </IconButton>
+                                    Add row
+                                </Typography>
+                            </Grid>
                         </Grid>
 
                         <Grid item xs={5} md={6}>
                             <Button startIcon={<ArrowBackIcon />} 
-                                // onClick={}
+                                onClick={() => window.location.href = '/interviewDash'}
                                 sx={{
                                     backgroundColor:'#d1d1d1',
                                     color:'black',
@@ -112,7 +162,7 @@ const InterviewBankEdit = () => {
                             </Button>
                         </Grid>                        
                         <Grid container xs={7} md={6} justifyContent='flex-end' alignItems='flex-end'> 
-                            <Grid item xs={7} md={4} pr={1}>
+                            <Grid item xs={7} md={4}>
                                 <Button endIcon={<DeleteIcon />} 
                                     // onClick={}
                                     sx={{
