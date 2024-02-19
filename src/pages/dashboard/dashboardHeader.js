@@ -175,7 +175,7 @@ const DashboardHeader = () => {
               </ListItemButton>
           </ListItem>
           <ListItem disablePadding sx={{mb: 1}}>
-              <ListItemButton>
+              <ListItemButton onClick={() => window.location.href = '/resumeManage'}>
                   <ListItemIcon> <HomeIcon /> </ListItemIcon>
                   <Typography variant='h6' fontWeight='bold'>Resume Management</Typography>
               </ListItemButton>
