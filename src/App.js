@@ -18,6 +18,8 @@ import AdminDash from "./pages/dashboard/adminDashboard";
 import AUserManageDash from "./pages/dashboard/UserManagement";
 import AAddUserManageDash from "./pages/dashboard/UserMAddAccount";
 import AEditUserManageDash from "./pages/dashboard/UserMEditAccount";
+import UserReviews from "./pages/dashboard/UserReviews";
+import InterviewBankEdit from "./pages/dashboard/InterviewBankEdit";
 
 import FacultyDetails from "./components/StepperPages/FacultyDetails";
 import PersonalInfo from "./components/StepperPages/PersonalInfo";
@@ -79,6 +81,8 @@ function App() {
           <Route path="/userDash" element={<AUserManageDash />}/>
           <Route path="/AdduserDash" element={<AAddUserManageDash />}/>
           <Route path="/EdituserDash" element={<AEditUserManageDash />}/>
+          <Route path="/reviews" element={<UserReviews />}/>
+          <Route path="/interviewEdit" element={<InterviewBankEdit />}/>
 
           {/* <Route path="/testFaculty" element={<TestFacultyDetails />}/> */}
           

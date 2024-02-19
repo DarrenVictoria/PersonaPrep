@@ -161,39 +161,39 @@ const DashboardHeader = () => {
               </ListItemButton>
             </ListItem>
           ))} */}
-          <ListItem disablePadding>
+          <ListItem disablePadding sx={{mb: 1}}>
               <ListItemButton onClick={() => window.location.href = '/admindash'}>
                   <ListItemIcon> <HomeIcon /> </ListItemIcon>
                    {/* <ListItemText primary={'Home'} />  */}
                   <Typography variant='h6' fontWeight='bold'>Home</Typography>
               </ListItemButton>
           </ListItem>
-          <ListItem disablePadding>
-              <ListItemButton onClick={() => window.location.href = '/userDash'} >
+          <ListItem disablePadding sx={{mb: 1}}>
+              <ListItemButton onClick={() => window.location.href = '/userDash'}>
                   <ListItemIcon> <HomeIcon /> </ListItemIcon>
                   <Typography variant='h6' fontWeight='bold'>User Management</Typography>
               </ListItemButton>
           </ListItem>
-          <ListItem disablePadding>
+          <ListItem disablePadding sx={{mb: 1}}>
               <ListItemButton>
                   <ListItemIcon> <HomeIcon /> </ListItemIcon>
                   <Typography variant='h6' fontWeight='bold'>Resume Management</Typography>
               </ListItemButton>
           </ListItem>
-          <ListItem disablePadding>
-              <ListItemButton>
+          <ListItem disablePadding sx={{mb: 1}}>
+              <ListItemButton onClick={() => window.location.href = '/reviews'}>
                   <ListItemIcon> <HomeIcon /> </ListItemIcon>
                   <Typography variant='h6' fontWeight='bold'>Reviews</Typography>
               </ListItemButton>
           </ListItem>
-          <ListItem disablePadding>
+          <ListItem disablePadding sx={{mb: 1}}>
               <ListItemButton>
                   <ListItemIcon> <HomeIcon /> </ListItemIcon>
                   <Typography variant='h6' fontWeight='bold'>API Usage</Typography>
               </ListItemButton>
           </ListItem>
-          <ListItem disablePadding>
-              <ListItemButton>
+          <ListItem disablePadding sx={{mb: 1}}>
+              <ListItemButton onClick={() => window.location.href = '/interviewEdit'}>
                   <ListItemIcon> <HomeIcon /> </ListItemIcon>
                   <Typography variant='h6' fontWeight='bold'>Interview Bank Edit</Typography>
               </ListItemButton>
