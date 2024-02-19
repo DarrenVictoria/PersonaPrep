@@ -25,7 +25,6 @@ import HomeIcon from '@mui/icons-material/Home';
 const drawerWidth = 240;
 
 const settings = ['Option1', 'Option2'];
-const pages = ['Home', 'User Management', 'Resume Management', 'Reviews', 'API Usage', 'Interview Bank Edit'];
 
 const DashboardHeader = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -78,11 +77,24 @@ const DashboardHeader = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem onClick={() => window.location.href = '/admindash'}>
+                <Typography textAlign="center">Home</Typography>
+              </MenuItem>
+              <MenuItem onClick={() => window.location.href = '/userDash'}>
+                <Typography textAlign="center">User Management</Typography>
+              </MenuItem>
+              <MenuItem onClick={() => window.location.href = '/resumeManage'}>
+                <Typography textAlign="center">Resume Management</Typography>
+              </MenuItem>
+              <MenuItem onClick={() => window.location.href = '/reviews'}>
+                <Typography textAlign="center">Reviews</Typography>
+              </MenuItem>
+              <MenuItem onClick={() => window.location.href = '/admindash'}>
+                <Typography textAlign="center">API Usage</Typography>
+              </MenuItem>
+              <MenuItem onClick={() => window.location.href = '/interviewDash'}>
+                <Typography textAlign="center">Interview Bank Edit</Typography>
+              </MenuItem>
             </Menu>
           </Box>
 
@@ -151,16 +163,6 @@ const DashboardHeader = () => {
       <Toolbar />
       <Box sx={{ overflow: 'auto' }}>
         <List>
-          {/* {pages.map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))} */}
           <ListItem disablePadding sx={{mb: 1}}>
               <ListItemButton onClick={() => window.location.href = '/admindash'}>
                   <ListItemIcon> <HomeIcon /> </ListItemIcon>
@@ -187,13 +189,13 @@ const DashboardHeader = () => {
               </ListItemButton>
           </ListItem>
           <ListItem disablePadding sx={{mb: 1}}>
-              <ListItemButton>
+              <ListItemButton onClick={() => window.location.href = '/admindash'}>
                   <ListItemIcon> <HomeIcon /> </ListItemIcon>
                   <Typography variant='h6' fontWeight='bold'>API Usage</Typography>
               </ListItemButton>
           </ListItem>
           <ListItem disablePadding sx={{mb: 1}}>
-              <ListItemButton onClick={() => window.location.href = '/interviewEdit'}>
+              <ListItemButton onClick={() => window.location.href = '/interviewDash'}>
                   <ListItemIcon> <HomeIcon /> </ListItemIcon>
                   <Typography variant='h6' fontWeight='bold'>Interview Bank Edit</Typography>
               </ListItemButton>
