@@ -1,4 +1,4 @@
-import  React from "react";
+import  React,{ useEffect, useState } from "react";
 // import { Grid } from "@mui/material";
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -18,7 +18,7 @@ import TableCell from '@mui/material/TableCell';//Table with progress and percen
 import TableContainer from '@mui/material/TableContainer';//Table with progress and percentage
 import TableHead from '@mui/material/TableHead';//Table with progress and percentage
 import TableRow from '@mui/material/TableRow';//Table with progress and percentage
-
+import { getFirestore, collection, getDocs } from "firebase/firestore";
 
 const LineChartData = [
     {
@@ -67,78 +67,78 @@ const LineChartData = [
   const BarChartData = [
     {
       name: '20.3',
-      uv: 4000,
-      pv: 2400,
+      NotRecruited: 4000,
+      Recruited: 2400,
       amt: 2400,
     },
     {
       name: '20.4',
-      uv: 3000,
-      pv: 1398,
+      NotRecruited: 3000,
+      Recruited: 1398,
       amt: 2210,
     },
     {
       name: '21.1',
-      uv: 2000,
-      pv: 9800,
+      NotRecruited: 2000,
+      Recruited: 9800,
       amt: 2290,
     },
     {
       name: '21.2',
-      uv: 2780,
-      pv: 3908,
+      NotRecruited: 2780,
+      Recruited: 3908,
       amt: 2000,
     },
     {
       name: '21.3',
-      uv: 1890,
-      pv: 4800,
+      NotRecruited: 1890,
+      Recruited: 4800,
       amt: 2181,
     },
     {
       name: '21.4',
-      uv: 2390,
-      pv: 3800,
+      NotRecruited: 2390,
+      Recruited: 3800,
       amt: 2500,
     },
     {
       name: '22.1',
-      uv: 3490,
-      pv: 4300,
+      NotRecruited: 3490,
+      Recruited: 4300,
       amt: 2100,
     },
     {
       name: '22.2',
-      uv: 3490,
-      pv: 4300,
+      NotRecruited: 3490,
+      Recruited: 4300,
       amt: 2100,
     },
     {
       name: '22.3',
-      uv: 3000,
-      pv: 1398,
+      NotRecruited: 3000,
+      Recruited: 1398,
       amt: 2210,
     },
     {
       name: '22.4',
-      uv: 3490,
-      pv: 4300,
+      NotRecruited: 3490,
+      Recruited: 4300,
       amt: 2100,
     },
     {
       name: '23.1',
-      uv: 2000,
-      pv: 9800,
+      NotRecruited: 2000,
+      Recruited: 9800,
       amt: 2290,
     },
   ];
-  const PieChartData = [
-    { name: 'Recruted', value: 63 },
-    { name: 'Not Recruted', value: 47 },
+  // const PieChartData = [
+  //   { name: 'Recruted', value: 63 },
+  //   { name: 'Not Recruted', value: 47 },
     
-  ];
-  const PieChartCOLORS = ['#161863', '#00bffe'];
-  //below code is to show the percentage in the piechart itself
+  // ];
+  // const PieChartCOLORS = ['#161863', '#00bffe'];
+  // //below code is to show the percentage in the piechart itself
   const RADIAN = Math.PI / 180;
   const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
     const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
@@ -165,10 +165,61 @@ const LineChartData = [
   //End of Code for Table with progress and percentage
   
 const AdminDash = () => {
+  const [PieChartData, setPieChartData] = useState([]);
+  const PieChartCOLORS = ['#161863', '#00bffe']; // Colors for the pie chart
+  const [barChartData, setBarChartData] = useState([]);
+  useEffect(() => {
+      fetchDataFromFirestore();
+  }, []);
+
+  const fetchDataFromFirestore = async () => {
+      const firestore = getFirestore();
+      const snapshot = await getDocs(collection(firestore, "studentdetails")); 
+      const data = snapshot.docs.map(doc => doc.data());
+      const recruitedCount = data.filter(item => item["Recruitment-Status"] === "recruited").length;
+      const nonRecruitedCount = data.filter(item => item["Recruitment-Status"] === "not-recruited").length;
+      console.log(nonRecruitedCount);
+      console.log(recruitedCount)
+      setPieChartData([
+          { name: 'Recruited', value: recruitedCount },
+          { name: 'Not Recruited', value: nonRecruitedCount }
+      ]);
+
+      // Organize data by batch
+      const batchMap = new Map();
+      data.forEach(item => {
+        const batch = item.batch;
+        const status = item["Recruitment-Status"];
+        const count = batchMap.get(batch) || { Recruited: 0, NotRecruited: 0 };
+        if (status === "recruited") {
+          count.Recruited++;
+        } else if (status === "not-recruited") {
+          count.NotRecruited++;
+        }
+        batchMap.set(batch, count);
+      });
+    // Convert map to array for bar chart data
+    const chartData = Array.from(batchMap)
+    .map(([name, { Recruited, NotRecruited }]) => ({
+      name: Number(name) || 0, // Handle potential non-numeric batch names
+      Recruited,
+      NotRecruited
+    })).sort((a, b) => a.name - b.name);
+
+    setBarChartData(chartData);
+    console.log(chartData);
+};
+    
+  
+     
+      
+  
+  
+  
     return ( 
         <Box sx={{ display: 'flex'}}>
             <DashboardHeader />
-            <Box component="main" sx={{ flexGrow: 1, p: 3, backgroundColor: '#d1d1d1' }} >
+            <Box component="main" sx={{ flexGrow: 1, p: 3, backgroundColor: '#d1d1d1',width:"100%" }} >
                 <Toolbar />
                 <Box sx={{ flexGrow: 1 }}>
                     <Grid
@@ -203,7 +254,7 @@ const AdminDash = () => {
                                 {/* You can add an icon here if you want */}
                                 </Avatar>
                             }
-                            title="Reviews Received"
+                            title="Users"
                             subheader="88"
                             sx={{
                                 "& .MuiCardHeader-title": {
@@ -240,7 +291,7 @@ const AdminDash = () => {
                                     {/* You can add an icon here if you want */}
                                     </Avatar>
                                 }
-                                title="Reviews Received"
+                                title="CVs Generated"
                                 subheader="88"
                                 sx={{
                                     "& .MuiCardHeader-title": {
@@ -277,7 +328,7 @@ const AdminDash = () => {
                                     {/* You can add an icon here if you want */}
                                     </Avatar>
                                 }
-                                title="Reviews Received"
+                                title="Interviews taken"
                                 subheader="88"
                                 sx={{
                                     "& .MuiCardHeader-title": {
@@ -362,14 +413,14 @@ const AdminDash = () => {
                         <Card sx={{borderRadius:"25px",display: "flex",alignItems: "center",justifyContent: "center",flexDirection: "column"}}>
                             <h3>Batch Wise Recruitement</h3>
                             <ResponsiveContainer width="100%" height={400}>
-                            <BarChart data={BarChartData} margin={{top: 5, right: 30, left: 20,bottom: 5 }}>
+                            <BarChart data={barChartData} margin={{top: 5, right: 30, left: 20,bottom: 5 }}>
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <XAxis dataKey="name" />
                                 <YAxis />
                                 <Tooltip />
                                 <Legend />
-                                <Bar dataKey="pv" stackId="a" fill="#8884d8" />
-                                <Bar dataKey="uv" stackId="a" fill="#82ca9d" />
+                                <Bar dataKey="Recruited" stackId="a" fill="#8884d8" />
+                                <Bar dataKey="NotRecruited" stackId="a" fill="#82ca9d" />
                             </BarChart>
                             </ResponsiveContainer>
                         </Card>
@@ -443,6 +494,7 @@ const AdminDash = () => {
                                 cy="50%"
                                 labelLine={false}
                                 label={renderCustomizedLabel}
+                                // label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
                                 outerRadius={80}
                                 fill="#8884d8"
                                 dataKey="value"

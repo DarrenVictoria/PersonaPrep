@@ -1,4 +1,4 @@
-import  React from "react";
+import  React,{ useEffect, useState } from "react";
 import Grid from "@mui/material/Unstable_Grid2";
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -12,65 +12,67 @@ import EditIcon from '@mui/icons-material/Edit'; // Import EditIcon
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import { blue } from "@mui/material/colors";
-const resumeColumns = [
-    { field: 'id', headerName: 'Email', width: 300 }, // Rename "ID" to "Name"
-    { field: 'Name', headerName: 'Name', width: 300 }, 
-    { field: 'Field', headerName: 'Field', width: 300 },
-    { field: 'CreatedDate', headerName: 'Created Date', width: 300 },
-    {
-        field: 'View',
-        headerName: 'View',
-        description: 'This column has a value getter and is not sortable.',
-        sortable: false,
-        width: 150,
-        renderCell: (params) => (
-          <>
-            <Button
-            // variant="contained"
-            // color="warning"
-            variant="contained" 
-            sx={{borderRadius:"25px",backgroundColor: '#242624',height:'28px'}}
-            >
-                View CV
-            </Button>
-          </>
-        ),
-      },
-    {
-      field: 'Action',
-      headerName: 'Action',
-      description: 'This column has a value getter and is not sortable.',
-      sortable: false,
-      width: 100,
-      renderCell: (params) => (
-        <>
-          <IconButton>
-              <DeleteIcon />{/* Edit functionality to be implemented later */}
-          </IconButton>
-          {/* <IconButton>
-          <EditIcon /> (comment this)Edit functionality to be implemented later 
-          </IconButton> */}
-        </>
-      ),
-    },
-  ];
+import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
+// const resumeColumns = [
+//     { field: 'id', headerName: 'Email', width: 300 }, // Rename "ID" to "Name"
+//     { field: 'Name', headerName: 'Name', width: 300 }, 
+//     { field: 'Field', headerName: 'Field', width: 300 },
+//     { field: 'CreatedDate', headerName: 'Created Date', width: 300 },
+//     {
+//         field: 'View',
+//         headerName: 'View',
+//         description: 'This column has a value getter and is not sortable.',
+//         sortable: false,
+//         width: 150,
+//         renderCell: (params) => (
+//           <>
+//             <Button
+//             // variant="contained"
+//             // color="warning"
+//             variant="contained" 
+//             sx={{borderRadius:"25px",backgroundColor: '#242624',height:'28px'}}
+//             >
+//                 View CV
+//             </Button>
+//           </>
+//         ),
+//       },
+//     {
+//       field: 'Action',
+//       headerName: 'Action',
+//       description: 'This column has a value getter and is not sortable.',
+//       sortable: false,
+//       width: 100,
+//       renderCell: (params) => (
+//         <>
+//           <IconButton onClick={() => handleDeleteRow(params.row.id)}>
+//               <DeleteIcon />{/* Edit functionality to be implemented later */}
+//           </IconButton>
+//           {/* <IconButton>
+//           <EditIcon /> (comment this)Edit functionality to be implemented later 
+//           </IconButton> */}
+//         </>
+//       ),
+//     },
+//   ];
   
-  const resumeRows = [
-    { id: "isuruushan2003@gmail.com", Name: 'Snow',Field: 'Snow', CreatedDate: 'Admin'},
-    { id: "Darrenvictoria@gmail.com", Name: 'Snow',Field: 'Lannister', CreatedDate: 'Manager'},
-    { id: "isuruushan2004@gmail.com", Name: 'Snow',Field: 'Lannister', CreatedDate: 'Admin'},
-    { id: "isuruushan2005@gmail.com", Name: 'Snow',Field: 'Stark', CreatedDate: 'Admin'},
-    { id: "Darrenvictoria1@gmail.com", Name: 'Snow',Field: 'Targaryen', CreatedDate: 'Admin'},
-    { id: "Darrenvictoria2@gmail.com", Name: 'Snow',Field: 'Melisandre', CreatedDate: null},
-    { id: "Darrenvictoria3@gmail.com", Name: 'Snow',Field: 'Clifford', CreatedDate: 'Manager'},
-    { id: "Darrenvictoria4@gmail.com", Name: 'Snow',Field: 'Frances', CreatedDate: 'Manager'},
-    { id: "Darrenvictoria5@gmail.com", Name: 'Snow',Field: 'Roxie', CreatedDate: 'Manager'},
-    { id: "Darrenvictoria6@gmail.com", Name: 'Snow',Field: 'Roxie', CreatedDate: 'Manager'},
-    { id: "Darrenvictoria7@gmail.com", Name: 'Snow',Field: 'Roxie', CreatedDate: 'Manager'},
-    { id: "Darrenvictoria8@gmail.com", Name: 'Snow',Field: 'Roxie', CreatedDate: 'Manager'},
-    { id: "Darrenvictoria9@gmail.com", Name: 'Snow',Field: 'Roxie', CreatedDate: 'Manager'},
+  // const resumeRows = [
+  //   { id: "isuruushan2003@gmail.com", Name: 'Snow',Field: 'Snow', CreatedDate: 'Admin'},
+  //   { id: "Darrenvictoria@gmail.com", Name: 'Snow',Field: 'Lannister', CreatedDate: 'Manager'},
+  //   { id: "isuruushan2004@gmail.com", Name: 'Snow',Field: 'Lannister', CreatedDate: 'Admin'},
+  //   { id: "isuruushan2005@gmail.com", Name: 'Snow',Field: 'Stark', CreatedDate: 'Admin'},
+  //   { id: "Darrenvictoria1@gmail.com", Name: 'Snow',Field: 'Targaryen', CreatedDate: 'Admin'},
+  //   { id: "Darrenvictoria2@gmail.com", Name: 'Snow',Field: 'Melisandre', CreatedDate: null},
+  //   { id: "Darrenvictoria3@gmail.com", Name: 'Snow',Field: 'Clifford', CreatedDate: 'Manager'},
+  //   { id: "Darrenvictoria4@gmail.com", Name: 'Snow',Field: 'Frances', CreatedDate: 'Manager'},
+  //   { id: "Darrenvictoria5@gmail.com", Name: 'Snow',Field: 'Roxie', CreatedDate: 'Manager'},
+  //   { id: "Darrenvictoria6@gmail.com", Name: 'Snow',Field: 'Roxie', CreatedDate: 'Manager'},
+  //   { id: "Darrenvictoria7@gmail.com", Name: 'Snow',Field: 'Roxie', CreatedDate: 'Manager'},
+  //   { id: "Darrenvictoria8@gmail.com", Name: 'Snow',Field: 'Roxie', CreatedDate: 'Manager'},
+  //   { id: "Darrenvictoria9@gmail.com", Name: 'Snow',Field: 'Roxie', CreatedDate: 'Manager'},
    
-  ];
+  // ];
 
   const feedbackColumns = [
     { field: 'id', headerName: 'Email', width: 400 }, 
@@ -115,6 +117,87 @@ const ResumeManagement = () => {
     //   // Update the local rows array after successful deletion
     //   setResumeRows(resumeRows.filter((row) => row.id !== id));
     // };
+  const [resumeRows, setResumeRows] = useState([]);
+  const [successMessage, setSuccessMessage] = useState("");
+  useEffect(() => {
+    fetchResumeData();
+  }, []);
+
+  const firestore = getFirestore();
+
+  const fetchResumeData = async () => {
+    const resumeCollectionRef = collection(firestore, "studentdetails");
+    const snapshot = await getDocs(resumeCollectionRef);
+    const data = snapshot.docs.map((doc) => {
+      const data = doc.data();
+      return {
+        id: doc.id,
+        // email: doc.id,
+        Name: data.Proname || "",
+        Field: data.PJobRoles ? data.PJobRoles.join(", ") : "",
+        CreatedDate: data.createdAt ? new Date(data.createdAt.seconds * 1000) : null,
+      };
+    });
+    setResumeRows(data);
+  };
+
+  const resumeColumns = [
+    { field: 'id', headerName: 'Email', width: 300 }, // Rename "ID" to "Name"
+    { field: 'Name', headerName: 'Name', width: 300 }, 
+    { field: 'Field', headerName: 'Field', width: 300 },
+    { field: 'CreatedDate', headerName: 'Created Date', width: 300 },
+    {
+        field: 'View',
+        headerName: 'View',
+        description: 'This column has a value getter and is not sortable.',
+        sortable: false,
+        width: 150,
+        renderCell: (params) => (
+          <>
+            <Button
+            // variant="contained"
+            // color="warning"
+            variant="contained" 
+            sx={{borderRadius:"25px",backgroundColor: '#242624',height:'28px'}}
+            >
+                View CV
+            </Button>
+          </>
+        ),
+      },
+    {
+      field: 'Action',
+      headerName: 'Action',
+      description: 'This column has a value getter and is not sortable.',
+      sortable: false,
+      width: 100,
+      renderCell: (params) => (
+        <>
+          <IconButton onClick={() => handleDeleteRow(params.row.id)}>
+              <DeleteIcon />{/* Edit functionality to be implemented later */}
+          </IconButton>
+          {/* <IconButton>
+          <EditIcon /> (comment this)Edit functionality to be implemented later 
+          </IconButton> */}
+        </>
+      ),
+    },
+  ];
+  const handleDeleteRow = (id) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this resume?");
+    if (confirmDelete) {
+      deleteRow(id);
+    }
+  };
+  const deleteRow = async (id) => {
+    const docRef = doc(firestore, "studentdetails", id);
+    await deleteDoc(docRef);
+    setSuccessMessage("Row deleted successfully!");
+    setResumeRows(resumeRows.filter((row) => row.id !== id));
+    setTimeout(() => {
+      setSuccessMessage("");
+    }, 3000); // Clear the success message after 3 seconds
+  };
     return ( 
             <Box sx={{ display: 'flex'}}>
                 <DashboardHeader />
