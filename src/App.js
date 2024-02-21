@@ -48,7 +48,7 @@ import CvFeedback from "./components/StepperPages/CvFeedback";
 import FinalseSummary from "./components/StepperPages/FinaliseSummary"
 import ResumeManagement from "./pages/dashboard/ResumeManagement";
 import InterviewBankDash from "./pages/dashboard/InterviewBankDash";
-
+import InterviewCard from "./pages/dashboard/InterviewCard";
 
 import "@fontsource/inter"; // Defaults to weight 400
 import "@fontsource/inter/400.css"; // Specify weight
@@ -86,7 +86,8 @@ function App() {
           <Route path="/interviewEdit" element={<InterviewBankEdit />}/>
           <Route path="/resumeManage" element={<ResumeManagement />}/>
           <Route path="/interviewDash" element={<InterviewBankDash />}/>
-          {/* <Route path="/testFaculty" element={<TestFacultyDetails />}/> */}
+          <Route path="/interviewCard" element={<InterviewCard />}/>
+
           
           <Route path="/personalInfo" element={<PersonalInfo />}/>
           <Route path="/contactDetMain" element={<ContactDetails_1 />}/>
