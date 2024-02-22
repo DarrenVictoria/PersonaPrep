@@ -1,10 +1,11 @@
 import './interviewBank.css'
 import TranscriptCard from '../../components/TranscriptCard'
 import thumbnail from '../../assets/images/post-thumbnail.png'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Footer from '../../components/footer'
 import NavBar from '../../components/Navbar'
 import { Button, styled } from '@mui/material'
+import { collection, getFirestore, query, getDocs, orderBy } from 'firebase/firestore';
 
 const TopicsBtn = styled(Button)(({theme}) => ({
     fontSize: '1.5vw',
@@ -22,10 +23,27 @@ const TopicsBtn = styled(Button)(({theme}) => ({
 }))
 
 export default function InterviewBank(){
-    // const [selectedCategory, setSelectedCategory] = useState('');
-    // const filterCard = (category) => {
-    //     setSelectedCategory(category);
-    // }
+    const [interviewData, setInterviewData] = useState([]);
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try{
+                const db = getFirestore();
+                const interviewCollection = collection(db, 'interviewcards');
+                const querySnapshot = await getDocs(query(interviewCollection, orderBy('createdAt', 'desc')));
+                const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                setInterviewData(data);
+            }catch (err) {
+                console.log('error fetching data', err.message);
+            }
+        }
+
+        fetchUserData();
+    }, []);
+
+    
+
+    
 
     return(
         <div>
@@ -45,23 +63,20 @@ export default function InterviewBank(){
 
                 <div className="interviewBank-transcript">
                     <h3>Interview Transcripts</h3>
-                    <TranscriptCard 
+                    {interviewData.map((data, index) => (
+                        <TranscriptCard 
                         // category={selectedCategory}
-                        name="SOFTWARE ENGINEER"
-                        date="AUGUST 13, 2023"
-                        position="FULL STACK DEV POSITON [VIRTUSA]"
-                        detail="An interview between a software engineer and Virtusa for the role of a full stack developer"
-                        path={thumbnail}
+                        key={index}
+                        id = {data.id}
+                        name = {data.field}
+                        date = "AUGUST 13, 2023"
+                        position = {data.topic}
+                        detail = {data.description}
+                        path = {thumbnail}
                     />
-                    <TranscriptCard 
-                        // category={selectedCategory}
-                        name="SOFTWARE ENGINEER"
-                        date="AUGUST 13, 2023"
-                        position="FULL STACK DEV POSITON [VIRTUSA]"
-                        detail="An interview between a software engineer and Virtusa for the role of a full stack developer"
-                        path={thumbnail}
-                    />
+                    ))}
                 </div>
+                {/* <button onClick={(event) => {event.preventDefault(); console.log(interviewData)}}>btn</button> */}
             </div>
             <Footer />
         </div>
