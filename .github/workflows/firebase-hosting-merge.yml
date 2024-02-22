@@ -24,7 +24,7 @@ jobs:
 
       - name: Install dependencies and build
         run: |
-          npm ci --no-optional --legacy-peer-deps
+          npm ci --force
           npm run build
 
       - name: Deploy to Firebase Hosting
