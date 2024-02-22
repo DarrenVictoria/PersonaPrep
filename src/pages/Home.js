@@ -212,8 +212,8 @@ export default function SplitLayout() {
         window.location.href = '/faculty';
       };
     
-      const redirectToNSBM = () => {
-        window.location.href = 'https://www.nsbm.ac.lk/';
+      const redirectToInterview = () => {
+        window.location.href = '/interviewgen';
       };
 
       const redirectTo = (url) => {
@@ -245,7 +245,8 @@ export default function SplitLayout() {
         </div>
       </div>
     </div>
-    <div className={`bottom-right-box interview-box ${isDisabled ? 'disabled' : ''}`} onClick={isDisabled ? null : redirectToNSBM}>
+    {/* <div className={`bottom-right-box interview-box ${isDisabled ? 'disabled' : ''}`} onClick={isDisabled ? null : redirectToInterview}> */}
+    <div className="bottom-right-box interview-box" onClick={redirectToInterview}>
       <div className="box-content">
         <div>
           <h2 className="inter-top">Interview Simulator</h2>
