@@ -1,4 +1,4 @@
-import React from "react";
+import React,{ useState } from "react";
 import Grid from "@mui/material/Unstable_Grid2";
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -7,44 +7,89 @@ import DashboardHeader from "./dashboardHeader";
 import Button from '@mui/material/Button';
 import { useForm } from "react-hook-form";
 import TextField from "@mui/material/TextField";
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import OutlinedInput from "@mui/material/OutlinedInput";
-import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCircleOutlined';
-
+import { collection, doc, updateDoc, getFirestore, getDoc } from "firebase/firestore";
 
 
 
   
 const AAddUserManageDash = () => {
-const [Role, setRole] = React.useState("");
-console.log(Role);
-const { register, handleSubmit, watch, formState: { errors }, getValues, setValue } = useForm();
 
-const password = watch('password');
-const pemail = watch('pemail');
-const name = watch('name');
-const city = watch('city');
-    console.log(password);
-    console.log(pemail);
-    console.log(name);
-    console.log(city);
+// const [Role, setRole] = React.useState("");
+// console.log(Role);
+// const { register, handleSubmit, watch, formState: { errors }, getValues, setValue } = useForm();
+// const aemail = watch('aemail');
+//     console.log(aemail);
+   
+const { register, handleSubmit, formState: { errors }, reset } = useForm();
+const [saving, setSaving] = useState(false);
+const [error, setError] = useState(null);
+
+const onSubmit = async (data) => {
+    // Clear previous errors
+    setError(null);
+
+    // Check if email field is empty
+    if (!data.aemail) {
+        setError("Email field is required");
+        return;
+    }
+
+    // Check if email is valid
+    const emailPattern = /\S+@\S+\.\S+/;
+    if (!emailPattern.test(data.aemail)) {
+        setError("Please enter a valid email address");
+        return;
+    }
+
+    try {
+        setSaving(true);
+        const firestore = getFirestore();
+        const adminRef = doc(firestore, "adminaccounts", "admins");
+
+        // Fetch current list of allowed emails
+        const adminSnapshot = await getDoc(adminRef);
+        const allowedEmails = adminSnapshot.data().allowedEmails;
+
+        // Check if email already exists
+        if (allowedEmails.includes(data.aemail)) {
+            setError("Email already exists in allowed emails list");
+            setSaving(false);
+            return;
+        }
+
+        // Add the new email to the list
+        const updatedAllowedEmails = [...allowedEmails, data.aemail];
+        await updateDoc(adminRef, { allowedEmails: updatedAllowedEmails });
+
+        reset(); // Clear the form after successful submission
+        setSaving(false);
+        setError(null); // Clear any previous errors
+    } catch (error) {
+        setSaving(false);
+        setError("Failed to save changes. Please try again later.");
+        console.error("Error updating document: ", error);
+    }
+};
+    
+
+
     return ( 
             <Box sx={{ display: 'flex'}}>
                 <DashboardHeader />
-                <Box component="main" sx={{ flexGrow: 1, p: 3, backgroundColor: '#d1d1d1',width:"100%"}} >
+                <Box component="main" sx={{ flexGrow: 1, p: 3, backgroundColor: '#d1d1d1',width:"100%"}}>
                     <Toolbar />
                     
                 
                     <Box sx={{ flexGrow: 1,display: "flex",justifyContent: "center",minHeight:"950px"}}>
-                        <form>
+                        <form onSubmit={handleSubmit(onSubmit)}>
+                            
                             <Grid container spacing={2} >
                         
                                 <Grid item xs={12} textAlign={"left"} sx={{paddingBottom:"20px"}}>
                                     <Button
                                     variant="contained" 
                                     sx={{borderRadius:"25px",backgroundColor: '#242624'}}
+                                    onClick={() => window.location.href = '/userDash'}
                                     >
                                         Back
                                     </Button>
@@ -54,74 +99,27 @@ const city = watch('city');
                                     <h2>Add account</h2>
                                 </Grid>
 
-                                <Grid item xs={12} md={6}>
-                                    
-                                    <Typography ><span style={{color: 'red'}}>*</span> Full Name</Typography>
-                                
-                                    <TextField type="text" variant="outlined" 
-                                    
-                                    value={name}
-                                    fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}}
-                                    
-                                    {...register("name", { required: true, maxLength: 30, pattern: /^[a-zA-Z\s]+$/})}
-                                    />
-                                    {errors.name && errors.name.type === "required" ? "This field is required" : errors.name && "Please enter only letters"}
-                                </Grid>
-
-                                <Grid item xs={12} md={6}>
+                                <Grid item xs={12} md={12}>
                                     
                                     <Typography ><span style={{color: 'red'}}>*</span> Email</Typography>
                                 
                                     <TextField type="email" variant="outlined" 
-                                    
-                                    value={pemail}
-                                    fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
-                                    
-                                    {...register("pemail", { required: true })}
-                                    />
-                                    {errors.pemail && "This field is required"}
-                                </Grid>
-
-                                <Grid item xs={12} md={6}>
-                                    
-                                    <Typography ><span style={{color: 'red'}}>*</span> Password</Typography>
                                 
-                                    <TextField type="password" variant="outlined" 
-                                    
-                                    value={password}
+                                    {...register("aemail", { required: true })}
                                     fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
-                                    
-                                     {...register("password", {required: true})} />
-                                    
-                                     {errors.password && errors.password.type === "required" ? "This field is required" : errors.password && "Please enter a valid password"}
+                                    />
+                                    {errors.aemail && "This field is required"}
                                 </Grid>
-
-                               
-
-                                <Grid item xs={12}  md={6}>
-                                    <Typography sx={{paddingLeft:1}}><span style={{color: 'red'}}>*</span> Role</Typography>
-                                    <FormControl variant="outlined" fullWidth>
-                                        <Select
-                                            value={Role}
-                                            onChange={(event) => setRole(event.target.value)}
-                                            displayEmpty
-                                            input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD',}} />}
-                                            IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
-                                            
-                                            
-                                        >
-                                            <MenuItem disabled value="">Role</MenuItem>
-                                            <MenuItem value="Full-Time">Full-Time</MenuItem>
-                                            <MenuItem value="Part-Time">Part-Time</MenuItem>
-                                            
-                                        </Select>
-                                    </FormControl>
+                                <Grid item md={12}  sx={12}>
+                                    {error && <div>{error}</div>}
                                 </Grid>
                                 
                                 <Grid item sx={3}  >
                                     <Button
                                     variant="contained" 
                                     sx={{borderRadius:"25px",backgroundColor: '#242624'}}
+                                    onClick={() => reset()}
+                                    disabled={saving}
                                     >
                                         Cancel
                                     </Button>
@@ -131,6 +129,7 @@ const city = watch('city');
                                     <Button
                                     variant="contained" 
                                     sx={{borderRadius:"25px",backgroundColor: '#242624'}}
+                                    type='submit'
                                     >
                                         Save Changes
                                     </Button>
@@ -138,6 +137,7 @@ const city = watch('city');
                                 
                             </Grid>
                         </form>
+                        
                     </Box>
                 </Box>
             </Box>
