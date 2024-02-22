@@ -36,8 +36,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "stop": "npm run stop:all",
-    "stop:all": "kill-port --port 3000 && kill-port --port 3001",
-    "install": "npm install --legacy-peer-deps"
+    "stop:all": "kill-port --port 3000 && kill-port --port 3001"
   },
   "eslintConfig": {
     "extends": [
