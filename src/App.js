@@ -4,8 +4,6 @@ import {BrowserRouter,Routes,Route, useNavigate, Navigate } from 'react-router-d
 
 import { AuthProvider,useAuth } from './hooks/useAuth';
 
-
-
 import Home from './pages/Home'
 import InterviewBank from './pages/interviewbank/InterviewBank'
 import InterviewDisplay from './pages/interviewbank/interviewDisplay'
@@ -20,7 +18,6 @@ import AAddUserManageDash from "./pages/dashboard/UserMAddAccount";
 import AEditUserManageDash from "./pages/dashboard/UserMEditAccount";
 import UserReviews from "./pages/dashboard/UserReviews";
 import InterviewBankEdit from "./pages/dashboard/InterviewBankEdit";
-
 import FacultyDetails from "./components/StepperPages/FacultyDetails";
 import PersonalInfo from "./components/StepperPages/PersonalInfo";
 import ContactDetails_1 from "./components/StepperPages/ContactDetails1";
@@ -48,14 +45,11 @@ import CvFeedback from "./components/StepperPages/CvFeedback";
 import FinalseSummary from "./components/StepperPages/FinaliseSummary"
 import ResumeManagement from "./pages/dashboard/ResumeManagement";
 import InterviewBankDash from "./pages/dashboard/InterviewBankDash";
-
+import InterviewCard from "./pages/dashboard/InterviewCard";
+import InterviewGen from "./pages/interviewgenerator/InterviewGen"
 
 import "@fontsource/inter"; // Defaults to weight 400
 import "@fontsource/inter/400.css"; // Specify weight
-
-
-
-
 
 import logo from './logo.svg';
 import './App.css';
@@ -64,9 +58,6 @@ import './App.css';
 function App() {
 
   const { currentUser } = useAuth();
-  
-
-
   return (
     <AuthProvider>
     <BrowserRouter>
@@ -86,8 +77,7 @@ function App() {
           <Route path="/interviewEdit" element={<InterviewBankEdit />}/>
           <Route path="/resumeManage" element={<ResumeManagement />}/>
           <Route path="/interviewDash" element={<InterviewBankDash />}/>
-          {/* <Route path="/testFaculty" element={<TestFacultyDetails />}/> */}
-          
+          <Route path="/interviewCard" element={<InterviewCard />}/>
           <Route path="/personalInfo" element={<PersonalInfo />}/>
           <Route path="/contactDetMain" element={<ContactDetails_1 />}/>
           <Route path="/contactDetSocial" element={<ContactDetails_2 />}/>
@@ -112,9 +102,8 @@ function App() {
           <Route path="/finalisesummary" element={<FinalseSummary/>}/>
           <Route path="/templates" element={<TemplateSelection />}/>
           <Route path="/feedback" element={<CvFeedback />}/>
+          <Route path="/interviewgen" element={<InterviewGen />}/>
           
-
-
           <Route
             path="/dashboard"
             element={
@@ -128,8 +117,6 @@ function App() {
               currentUser ? <FacultyDetails /> : <Navigate to="/login" />
             }
           />
-
-
           <Route path="*" element={<NoPage />}/>
         </Routes>
     </BrowserRouter>

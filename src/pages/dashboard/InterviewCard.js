@@ -1,4 +1,4 @@
-import  React, { useState } from "react";
+import  React, { useEffect, useState } from "react";
 import { Grid } from "@mui/material";
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -10,6 +10,7 @@ import Button from '@mui/material/Button';
 import FileUpload from "../../components/FileUpload";
 import TextField from "@mui/material/TextField";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import DeleteIcon from '@mui/icons-material/Delete';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
@@ -18,15 +19,21 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import OutlinedInput from "@mui/material/OutlinedInput";
 import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCircleOutlined';
-import { collection, addDoc, getFirestore, serverTimestamp } from 'firebase/firestore';
+import { collection, addDoc, getFirestore, getDocs, doc, updateDoc, serverTimestamp, deleteDoc } from 'firebase/firestore';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 
-const InterviewBankEdit = () => {
+const InterviewCard = () => {
     const [topic, setTopic] = useState('');
     const [faculty, setFaculty] = useState('');
     const [field, setField] = useState('');
     const [description, setDescription] = useState('');
     const [trnscrptDtls, setTrnscrptdtls] = useState(['']);
+
+    //to get the card id
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const interviewId = searchParams.get('id');
 
     const handleFileUploadSuccess = (url) => {
         // setProfilePictureUrl(url.downloadURL);
@@ -52,13 +59,40 @@ const InterviewBankEdit = () => {
         setTrnscrptdtls(newResults);
     };
 
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try{
+                const db = getFirestore();
+                const interviewCollection = collection(db, 'interviewcards');
+                // const querySnapshot = await getDocs(query(interviewCollection, where('id', '==', 'VP3sDRrGGWaAHAv79djc')));
+                const querySnapshot = await getDocs(interviewCollection);
+                querySnapshot.forEach((doc) => {
+                    if(doc.id == interviewId){
+                        const interviewData = doc.data();
+                        setTopic(interviewData.topic || '');
+                        setFaculty(interviewData.faculty || '');
+                        setField(interviewData.field || '');
+                        setDescription(interviewData.description || '');
+                        setTrnscrptdtls(interviewData.transcript || '');
+                    }
+                })
+                // const existingDoc = querySnapshot.docs[0]; //gets the first doc that match the data                
+            }catch (err) {
+                console.log("error fetching data" , err.message)
+            }
+        };
+
+        fetchUserData();
+    }, []);
+
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         try{
             const db = getFirestore();
             const interviewCollection = collection(db, 'interviewcards');
-            const docRef = await addDoc(interviewCollection, {
+            const docRef = doc(interviewCollection, interviewId);
+            await updateDoc(docRef, {
                 topic: topic,
                 faculty: faculty,
                 field: field,
@@ -66,15 +100,27 @@ const InterviewBankEdit = () => {
                 transcript: trnscrptDtls,
                 createdAt: serverTimestamp(),
             })
-            console.log('interview card added', docRef.id);
-            setTopic('');
-            setField('');
-            setFaculty('');
-            setDescription('');
-            setTrnscrptdtls(['']);
+            console.log('interview card updated with id', docRef.id);
 
         }catch (err) { console.log('error adding details', err.message) }
     };
+
+    const navigate = useNavigate();
+    const deleteCardBtn = async (event) => {
+        event.preventDefault();
+
+        try{
+            const db = getFirestore();
+            const interviewCollection = collection(db, 'interviewcards');
+            const docRef = doc(interviewCollection, interviewId);
+            await deleteDoc(docRef);
+            console.log('document deleted successfully');
+            navigate('/interviewDash');
+        }
+        catch (err) {
+            console.log(err.message);
+        }
+    }
 
     return ( 
         <Box sx={{ display: 'flex'}}>
@@ -203,6 +249,24 @@ const InterviewBankEdit = () => {
                             </Button>
                         </Grid>                        
                         <Grid container xs={7} md={6} justifyContent='flex-end' alignItems='flex-end'> 
+                            <Grid item xs={7} md={4}>
+                                <Button endIcon={<DeleteIcon />} 
+                                    onClick={deleteCardBtn}
+                                    sx={{
+                                        backgroundColor:'#d1d1d1',
+                                        color:'black',
+                                        borderRadius:'25px',
+                                        // margin: '25px',
+                                        fontFamily: 'Inter , sans-serif',
+                                        fontWeight: '800',
+                                        ':hover': {
+                                            backgroundColor: '#d1d1d1',
+                                            border: 'none',
+                                        }
+                                    }}>
+                                    Delete
+                                </Button>
+                            </Grid>
                             <Grid item xs={5} md={3}>
                                 <Button type="submit" endIcon={<AddCircleOutlineIcon />} 
                                     sx={{
@@ -217,12 +281,12 @@ const InterviewBankEdit = () => {
                                             border: 'none',
                                         }
                                     }}>
-                                    Create
+                                    Update
                                 </Button>
                             </Grid>                        
                         </Grid>
                     </Grid>
-                    {/* <button onClick={(e) => {e.preventDefault(); console.log(trnscrptDtls)}}>btn</button> */}
+                    {/* <button onClick={(e) => {e.preventDefault(); console.log(interviewId)}}>btn</button> */}
                     </form>
                     </Card>
                 </Box>
@@ -231,4 +295,4 @@ const InterviewBankEdit = () => {
      );
 }
  
-export default InterviewBankEdit;
+export default InterviewCard;

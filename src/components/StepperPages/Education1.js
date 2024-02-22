@@ -229,7 +229,7 @@ const School1 = () => {
                                                 value={School1City}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder=''
-                                                {...register("School1City", { required: true, maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                {...register("School1City", { required: true, maxLength: 30, pattern: /^[a-zA-Z0-9\s]+$/ })}
                                                 />
                                                 {errors.School1City && errors.School1City.type === "required" ? "This field is required" : errors.School1City && "Please enter only letters"}
                                             </Grid>
@@ -241,7 +241,7 @@ const School1 = () => {
                                                 placeholder=''                                                
                                                 {...register("School1Country", { required: true, maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
                                                 />
-                                                {errors.School1Country && errors.School1Country.type === "required" ? "This field is required" : errors.School1Country && "Please enter only letters"}
+                                                {errors.School1Country && errors.School1Country.type === "required" ? "This field is required" : errors.School1Country && "Please enter only letters and numbers"}
                                             </Grid>
                                             <Grid item xs={12} mb={1}>
                                                 <Typography><span style={{color: 'red'}}>*</span>Start Date</Typography>

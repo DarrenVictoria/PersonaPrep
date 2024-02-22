@@ -1,4 +1,4 @@
-import  React, { useState } from "react";
+import  React, { useEffect, useState } from "react";
 import { Grid } from "@mui/material";
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -6,41 +6,33 @@ import Typography from '@mui/material/Typography';
 import DashboardHeader from "./dashboardHeader";
 import { DataGrid } from '@mui/x-data-grid';
 import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import Avatar from "@mui/material/Avatar";
-import EditIcon from '@mui/icons-material/Edit'; // Import EditIcon
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
-import { blue } from "@mui/material/colors";
-import FileUpload from "../../components/FileUpload";
-import TextField from "@mui/material/TextField";
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import DeleteIcon from '@mui/icons-material/Delete';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import OutlinedInput from "@mui/material/OutlinedInput";
 import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCircleOutlined';
+import { collection, addDoc, getFirestore, query, getDocs, orderBy } from 'firebase/firestore';
 
-const feedbackColumns = [
+
+const interviewCols = [
     { field: 'id', headerName: '', width: 50 }, 
-    { field: 'name', headerName: 'Name', width: 350 }, 
-    // { field: 'time', headerName: 'Time', width: 300 },
+    { field: 'cardid', headerName: 'CardId', width: 150 }, 
+    { field: 'Name', headerName: 'Name', width: 350 }, 
     {
       field: 'action',
       headerName: 'Action',
-    //   description: 'This column has a value getter and is not sortable.',
       sortable: false,
       width: 155,
-      renderCell: () => (
+      renderCell: (params) => (
         <>
             <Button
                 variant="contained" 
                 sx={{borderRadius:"25px",backgroundColor: '#242624',height:'28px'}}
-                onClick={() => window.location.href = '/interviewEdit'}
+                onClick={() => window.location.href = `/interviewCard?id=${params.row.cardid}`}
+                // onClick={() => console.log(params.row.cardid)}
             >
                 View
             </Button>
@@ -48,17 +40,34 @@ const feedbackColumns = [
       ),
     },
 ];
-  
-const feedbackRows = [
-    { id: '1', name: 'FULL STACK DEV POSITION [VIRTUSA]' },
-    { id: '2', name: 'FULL STACK DEV POSITION [VIRTUSA]' },
-    { id: '3', name: 'FULL STACK DEV POSITION [VIRTUSA]' },
-    { id: '4', name: 'FULL STACK DEV POSITION [VIRTUSA]' },
-    { id: '5', name: 'FULL STACK DEV POSITION [VIRTUSA]' },
-];
 
 const InterviewBankDash = () => {
     const [faculty, setFaculty] = useState('');
+    const [interviewRows, setInterviewRows] = useState('');
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try{
+                const db = getFirestore();
+                const interviewCollection = collection(db, 'interviewcards');
+                const querySnapshot = await getDocs(query(interviewCollection, orderBy('createdAt', 'desc')));
+                const docRef = querySnapshot.docs.map((doc, index) => {
+                    const interviewData = doc.data();
+                    return {
+                        id: (index+1), 
+                        cardid: doc.id, 
+                        Name: interviewData.topic
+                    }
+                });
+                setInterviewRows(docRef);
+
+            }catch (err) {
+                console.log('error fetching data', err.message)
+            }
+        };
+
+        fetchUserData();
+    }, []);
 
     return ( 
         <Box sx={{ display: 'flex'}}>
@@ -94,8 +103,8 @@ const InterviewBankDash = () => {
                 <Box sx={{ flexGrow: 1,display: "flex",alignItems: "center",justifyContent: "center"}}>                      
                     <Card style={{ height: 631,width:"100%",maxWidth:1460,borderRadius:'25px', }}>                     
                         <DataGrid                                
-                            rows={feedbackRows}
-                            columns={feedbackColumns}
+                            rows={interviewRows}
+                            columns={interviewCols}
                             initialState={{
                             pagination: {
                                 paginationModel: { page: 0, pageSize: 5 },

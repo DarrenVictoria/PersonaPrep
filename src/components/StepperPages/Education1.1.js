@@ -219,11 +219,11 @@ const School2 = () => {
                                                 {/* <TextField type="text" variant="outlined" value={School2City} onChange={School2CityChange} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/> */}
                                                 <TextField type="text" variant="outlined" fullWidth required  
                                                 value={School2City}
-                                                InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white', pattern: "^[a-zA-Z]+$"}}} 
+                                                InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder=''
-                                                {...register("School2City", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                {...register("School2City", { maxLength: 30, pattern: /^[a-zA-Z0-9\s]+$/ })}
                                                 />
-                                                {errors.School2City && "Please enter only letters"}
+                                                {errors.School2City && "Please enter only letters and numbers"}
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>Country</Typography>
