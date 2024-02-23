@@ -50,16 +50,15 @@ export default function InterviewBank(){
             <NavBar />
             <div className="interviewBank-container">
                 <h1 >Interview Bank</h1>
-                <div className="interviewBank-topics">
+                {/* <div className="interviewBank-topics">
                     <h3>Topics</h3>
                     <div>
-                        {/* <button onClick={() => filterCard('computing')}>Computing</button> */}
                         <TopicsBtn variant='outlined'>Computing</TopicsBtn>
                         <TopicsBtn variant='outlined'>Business</TopicsBtn>
                         <TopicsBtn variant='outlined'>Engineering</TopicsBtn>
                         <TopicsBtn variant='outlined'>Science</TopicsBtn>
                     </div>
-                </div>
+                </div> */}
 
                 <div className="interviewBank-transcript">
                     <h3>Interview Transcripts</h3>
@@ -69,7 +68,7 @@ export default function InterviewBank(){
                         key={index}
                         id = {data.id}
                         name = {data.field}
-                        date = "AUGUST 13, 2023"
+                        // date = "AUGUST 13, 2023"
                         position = {data.topic}
                         detail = {data.description}
                         path = {thumbnail}

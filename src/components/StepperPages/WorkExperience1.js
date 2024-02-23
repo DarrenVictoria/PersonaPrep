@@ -48,6 +48,8 @@ import { useAuth } from '../../hooks/useAuth.js';
 import Autocomplete from "@mui/material/Autocomplete";
 import Stack from "@mui/material/Stack";
 import { useForm } from "react-hook-form";
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
 
 
 const WorkExperience1 = () => {
@@ -77,8 +79,7 @@ const WorkExperience1 = () => {
     const [WorkExp1StartYear, setWorkExp1StartYear] = useState('');
     const [WorkExp1EndMonth, setWorkExp1EndMonth] = useState('');
     const [WorkExp1EndYear, setWorkExp1EndYear] = useState('');
-    const [WorkExp1Working, setWorkExp1Working] = useState('no');
-    const [WorkExp1WorkChecked, setWorkExp1WorkChecked] = useState(false);
+    const [WorkExp1Working, setWorkExp1Working] = useState('');
     const [WorkExp1TaskDnWithTools, setWorkExp1TaskDnWithTools] = useState("");
     const [WorkExp1EmploymentType, setWorkExp1EmploymentType] = React.useState("");
 
@@ -102,39 +103,17 @@ const WorkExperience1 = () => {
         return WorkExp1JbSkillAcquired.length >= maxSelections && !WorkExp1JbSkillAcquired.includes(option);
     };
     
-    console.log(WorkExp1JbSkillAcquired);
-
-    const handleWorkExp1WorkChecked = (event) => {
-        setWorkExp1Working(event.target.checked ? 'yes' : 'no');
-    }
-    
     const handleWorkExp1TaskDnWithTools = (event) => {
         //the below commented code is to test 
         // console.log(`Work => ${event.target.value}`)
         setWorkExp1TaskDnWithTools(event.target.value);
       };
-
-    // the below handle for custom hook does not work yet
-
-    useEffect(() => {
-        console.log('WorkExp1WorkChecked:', WorkExp1WorkChecked);
-        console.log('WorkExp1Working:', WorkExp1Working);
-        if (!WorkExp1WorkChecked) setWorkExp1Working('no');
-        else setWorkExp1Working('yes');
-    }, [WorkExp1WorkChecked]);
-    
-    
-    useEffect(() => {
-        // Update the checkbox state based on the value fetched from Firestore
-        setWorkExp1WorkChecked(WorkExp1Working === 'yes');
-    }, [WorkExp1Working]);
     
 
     const navigate = useNavigate();
     const prevPage = () => navigate('/university');
     
     const onSubmit = async (e) => {
-        // e.preventDefault();
         const formData = {
             WorkExp1JobTitle,
             WorkExp1Company,
@@ -147,7 +126,7 @@ const WorkExperience1 = () => {
             WorkExp1Working,
             WorkExp1TaskDnWithTools,
             WorkExp1EmploymentType,
-            WorkExp1JbSkillAcquired
+            WorkExp1JbSkillAcquired,
         };
 
         // Send data to Firestore
@@ -181,6 +160,7 @@ const WorkExperience1 = () => {
 
                 // Update the document with the modified work data array
                 await setDoc(userDocument, { work }, { merge: true });
+                handleClickOpen();
             } else {
                 console.error('Document does not exist for the current user.');
             }
@@ -198,7 +178,7 @@ const WorkExperience1 = () => {
                 const docSnapshot = await getDoc(userDocument);
                 if (docSnapshot.exists()) {
                     const userData = docSnapshot.data();
-                    const workData = userData.work && userData.work.length > 1 ? userData.work[0] : null;
+                    const workData = userData.work && userData.work.length > 0 ? userData.work[0] : null;
 
                     if (workData) {
                         // setWorkExp1JobTitle(workData.WorkExp1JobTitle || '');
@@ -213,7 +193,7 @@ const WorkExperience1 = () => {
                         setWorkExp1StartYear(workData.WorkExp1StartYear || '');
                         setWorkExp1EndMonth(workData.WorkExp1EndMonth || '');
                         setWorkExp1EndYear(workData.WorkExp1EndYear || '');
-                        setWorkExp1Working(workData.WorkExp1Working === 'yes');
+                        setWorkExp1Working(workData.WorkExp1Working || '');
                         setWorkExp1TaskDnWithTools(workData.WorkExp1TaskDnWithTools || '');
                         setWorkExp1EmploymentType(workData.WorkExp1EmploymentType || '');
                         setWorkExp1JbSkillAcquired(workData.WorkExp1JbSkillAcquired || []);
@@ -393,8 +373,16 @@ const WorkExperience1 = () => {
                                                     </Select>
                                                 </FormControl>
                                             </Grid>
-                                            <Grid item xs={12} pl={2} mb={3}>
-                                                <FormControlLabel control={<Checkbox checked={WorkExp1WorkChecked} onChange={handleWorkExp1WorkChecked}/>} label="Currently Work here" /> {/*if need to make this requires put required before control and if need to make it already checked put check inside the control next to the Checkbx*/}
+                                            <Grid item xs={12} >
+                                                <Typography>Currently work here</Typography>
+                                            </Grid>
+                                            <Grid item xs={12} mb={2} pl={2}>
+                                                <FormControl>
+                                                    <RadioGroup row name="project-working-status" value={WorkExp1Working} onChange={(event) => setWorkExp1Working(event.target.value)}>
+                                                        <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+                                                        <FormControlLabel value="no" control={<Radio />} label="No" />
+                                                    </RadioGroup>
+                                                </FormControl>
                                             </Grid>
                                             <Grid item xs={12} mb={1}>
                                             <Typography>List five significant tasks you did in your job role with the tools / software used? <small>Ex:- Developed and maintained responsive web applications using React, Angular, and Node.js.</small></Typography>

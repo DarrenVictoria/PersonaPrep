@@ -179,9 +179,9 @@ const Certification1 = () => {
 
             // Send data to Firestore
             await sendCertificationDataToFirestore(formData);
-
+            handleClickOpen();
             // Navigate to the next page
-            navigate('/secondCertification');
+            // navigate('/secondCertification');
         } catch (error) {
             console.error('Error submitting certification data: ', error);
         }
