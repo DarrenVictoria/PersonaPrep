@@ -200,7 +200,7 @@ const InterviewCard = () => {
                         <Grid item xs={12} mb={3} sx={{border: '1px solid gray', borderRadius: '25px'}} p={2}>
                             {trnscrptDtls.map((result, index) => (
                                 <Grid container item mb={3} key={index}>
-                                    <Grid item xs={2} mr={6}><Typography>{(index % 2 === 0)? 'Interviewer :' : 'Candidate :'}</Typography></Grid>
+                                    <Grid item xs={2} mr={6}><Typography>{(index % 2 === 0)? 'Interviewer:' : 'Candidate:'}</Typography></Grid>
                                     <Grid item xs={8}>
                                         <TextField type="text" variant="outlined" fullWidth multiline rows={2}
                                             value={result}  

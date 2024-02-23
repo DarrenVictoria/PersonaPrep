@@ -21,6 +21,11 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import Badge from '@mui/material/Badge';
 import logo from '../../assets/logo/Persona Prep Light.png';
 import HomeIcon from '@mui/icons-material/Home';
+import InsightsIcon from '@mui/icons-material/Insights';
+import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
+import ContactPageIcon from '@mui/icons-material/ContactPage';
+import ReviewsIcon from '@mui/icons-material/Reviews';
+import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
 
 const drawerWidth = 240;
 
@@ -88,9 +93,6 @@ const DashboardHeader = () => {
               </MenuItem>
               <MenuItem onClick={() => window.location.href = '/reviews'}>
                 <Typography textAlign="center">Reviews</Typography>
-              </MenuItem>
-              <MenuItem onClick={() => window.location.href = '/admindash'}>
-                <Typography textAlign="center">API Usage</Typography>
               </MenuItem>
               <MenuItem onClick={() => window.location.href = '/interviewDash'}>
                 <Typography textAlign="center">Interview Bank Edit</Typography>
@@ -165,38 +167,32 @@ const DashboardHeader = () => {
         <List>
           <ListItem disablePadding sx={{mb: 1}}>
               <ListItemButton onClick={() => window.location.href = '/admindash'}>
-                  <ListItemIcon> <HomeIcon /> </ListItemIcon>
+                  <ListItemIcon> <InsightsIcon /> </ListItemIcon>
                    {/* <ListItemText primary={'Home'} />  */}
                   <Typography variant='h6' fontWeight='bold'>Home</Typography>
               </ListItemButton>
           </ListItem>
           <ListItem disablePadding sx={{mb: 1}}>
               <ListItemButton onClick={() => window.location.href = '/userDash'}>
-                  <ListItemIcon> <HomeIcon /> </ListItemIcon>
+                  <ListItemIcon> <SupervisedUserCircleIcon /> </ListItemIcon>
                   <Typography variant='h6' fontWeight='bold'>User Management</Typography>
               </ListItemButton>
           </ListItem>
           <ListItem disablePadding sx={{mb: 1}}>
               <ListItemButton onClick={() => window.location.href = '/resumeManage'}>
-                  <ListItemIcon> <HomeIcon /> </ListItemIcon>
+                  <ListItemIcon> <ContactPageIcon /> </ListItemIcon>
                   <Typography variant='h6' fontWeight='bold'>Resume Management</Typography>
               </ListItemButton>
           </ListItem>
           <ListItem disablePadding sx={{mb: 1}}>
               <ListItemButton onClick={() => window.location.href = '/reviews'}>
-                  <ListItemIcon> <HomeIcon /> </ListItemIcon>
+                  <ListItemIcon> <ReviewsIcon /> </ListItemIcon>
                   <Typography variant='h6' fontWeight='bold'>Reviews</Typography>
               </ListItemButton>
           </ListItem>
           <ListItem disablePadding sx={{mb: 1}}>
-              <ListItemButton onClick={() => window.location.href = '/admindash'}>
-                  <ListItemIcon> <HomeIcon /> </ListItemIcon>
-                  <Typography variant='h6' fontWeight='bold'>API Usage</Typography>
-              </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding sx={{mb: 1}}>
               <ListItemButton onClick={() => window.location.href = '/interviewDash'}>
-                  <ListItemIcon> <HomeIcon /> </ListItemIcon>
+                  <ListItemIcon> <RecordVoiceOverIcon /> </ListItemIcon>
                   <Typography variant='h6' fontWeight='bold'>Interview Bank Edit</Typography>
               </ListItemButton>
           </ListItem>

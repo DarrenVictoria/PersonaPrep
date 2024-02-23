@@ -49,7 +49,7 @@ const InterviewDisplay = () => {
             <NavBar />
             <InterviewHeader 
                 position = {topic}
-                date="AUGUST 13, 2023"
+                // date="AUGUST 13, 2023"
                 tag = {field}
                 tag2="#"
                 tag1="#"

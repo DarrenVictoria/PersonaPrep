@@ -10,7 +10,6 @@ import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt
 import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
 import Typography from '@mui/material/Typography';
 import RatingComp from '../RatingComp';
-import InterviewFormFooter from '../InterviewFormFooter';
 import InterviewFormHeader from '../InterviewFormHeader';
 import CustomMultilineTextFieldslimited from '../MultilineMaxWordLimit';
 import Button from "@mui/material/Button";
@@ -18,8 +17,12 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { back } from '../BackButton.js';
 import { next } from '../NextButton.js';
 import { useNavigate } from 'react-router-dom';
+import { collection, addDoc, getFirestore } from 'firebase/firestore';
+import { useAuth } from '../../hooks/useAuth.js';
+
 
 const CvFeedback = () => {
+    const { currentUser } = useAuth();
     const [rating1, setRating1] = useState('');
     const [rating2, setRating2] = useState('');
     const [rating3, setRating3] = useState('');
@@ -143,18 +146,35 @@ const CvFeedback = () => {
 
     const navigate = useNavigate();
     const prevPage = () => navigate('/templates');
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // navigate('/contactDetMain')
-        // validate();
 
-        // Check if validation passed
-        // if (validation) {
-        //     // Call the function to add data to Firestore
-        //     addDataToFirestore();
-        // } else {
-        //     console.log('Validation failed');
-        // }
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        
+        try{
+            const db = getFirestore();
+            const cvfeedbackCol = collection(db, 'cvfeedback');
+            const docRef = await addDoc(cvfeedbackCol, {
+                experience: rating1, 
+                quality: rating2,
+                customization: rating3,
+                accuracy: rating4,
+                feedback: feedback,
+                email: currentUser.email
+            });
+            console.log('feedback added', docRef.email);
+            setRating1('');
+            setRating2('');
+            setRating3('');
+            setRating4('');
+            setFeedback('');
+
+            setEmoji1Clr(['']);
+            setEmoji2Clr(['']);
+            setEmoji3Clr(['']);
+            setEmoji4Clr(['']);
+        }catch (error) {
+            console.log('error adding details', error.message);
+        }
     };
 
     return(

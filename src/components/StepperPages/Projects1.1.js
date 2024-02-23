@@ -141,7 +141,7 @@ const Projects2 = () => {
             };
 
             await sendProjectDataToFirestore(formData);
-
+            handleClickOpen();
             
         } catch (error) {
             console.error('Error adding project to Firestore: ', error);
@@ -173,6 +173,7 @@ const Projects2 = () => {
 
                 // Update the document with the modified projects array
                 await setDoc(userDocument, { projects }, { merge: true });
+                handleClickOpen();
             } else {
                 console.error('Document does not exist for the current user.');
             }
@@ -576,7 +577,7 @@ const Projects2 = () => {
                                 </Grid>
                                     
                                 <Grid xs={6}>
-                                    <Button type='submit' style={next} onClick={handleClickOpen}>Next Step</Button>
+                                    <Button type='submit' style={next}>Next Step</Button>
                                     <Dialog
                                         fullScreen={fullScreen}
                                         open={open}
