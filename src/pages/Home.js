@@ -361,7 +361,7 @@ export default function SplitLayout() {
       </Item>
     </Grid>
 
-    <Grid item xs={12} sm={6} md={6} className={`grid-item additional-feature-item-2`} onClick={() => redirectTo('https://www.example.com/feature2')}>
+    <Grid item xs={12} sm={6} md={6} className={`grid-item additional-feature-item-2`} onClick={() => redirectTo('/admindash')}>
       <Item style={{ backgroundColor: '#DEB113', height: '7rem', position: 'relative', border: '3px solid #000' }}>
         <h1 className="IBText">Corporate Login</h1>
         <div style={{ position: 'absolute', bottom: '10px', right: '10px' }}>
