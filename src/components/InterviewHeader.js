@@ -12,7 +12,7 @@ const InterviewHeader = ({position, date, tag, tag1, tag2}) => {
             </div>
 
             <div className='interviewDisplay-rightCol'>
-                <InterviewDate date={date} />
+                {/* <InterviewDate date={date} /> */}
                 <BlogShareIcons title={position} tag1={tag1} tag2={tag2}/>
             </div>
         </div>

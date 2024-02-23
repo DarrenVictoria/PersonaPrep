@@ -41,7 +41,8 @@ import { useAuth } from '../../hooks/useAuth.js';
 import Autocomplete from "@mui/material/Autocomplete";
 import Stack from "@mui/material/Stack";
 import { useForm } from "react-hook-form";
-
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
 
 const WorkExperience2 = () => {
     const { currentUser } = useAuth();
@@ -73,8 +74,7 @@ const WorkExperience2 = () => {
     const [WorkExp2StartYear, setWorkExp2StartYear] = useState('');
     const [WorkExp2EndMonth, setWorkExp2EndMonth] = useState('');
     const [WorkExp2EndYear, setWorkExp2EndYear] = useState('');
-    const [WorkExp2Working, setWorkExp2Working] = useState('no');
-    const [WorkExp2WorkChecked, setWorkExp2WorkChecked] = useState(false);
+    const [WorkExp2Working, setWorkExp2Working] = useState('');
     const [WorkExp2TaskDnWithTools, setWorkExp2TaskDnWithTools] = useState("");
     const [WorkExp2EmploymentType, setWorkExp2EmploymentType] = React.useState("");
 
@@ -98,23 +98,12 @@ const WorkExperience2 = () => {
     };
     
     console.log(WorkExp2JbSkillAcquired);
-    const handleWorkExp2WorkChecked = (event) => {
-        setWorkExp2WorkChecked(event.target.checked)
-    }
     
     const handleWorkExp2TaskDnWithTools = (event) => {
         //the below commented code is to test 
         // console.log(`Work => ${event.target.value}`)
         setWorkExp2TaskDnWithTools(event.target.value);
-      };
-
-    // the below handle for custom hook does not work yet
-    
-
-    useEffect(() => {
-        if(!WorkExp2WorkChecked) setWorkExp2Working('no');
-        else setWorkExp2Working('yes');
-    }, [WorkExp2WorkChecked]);
+    };    
 
     const navigate = useNavigate();
     const prevPage = () => navigate('/work');
@@ -196,7 +185,7 @@ const WorkExperience2 = () => {
                         setWorkExp2StartYear(workData.WorkExp2StartYear || '');
                         setWorkExp2EndMonth(workData.WorkExp2EndMonth || '');
                         setWorkExp2EndYear(workData.WorkExp2EndYear || '');
-                        setWorkExp2Working(workData.WorkExp2Working === 'yes');
+                        setWorkExp2Working(workData.WorkExp2Working || '');
                         setWorkExp2TaskDnWithTools(workData.WorkExp2TaskDnWithTools || '');
                         setWorkExp2EmploymentType(workData.WorkExp2EmploymentType || '');
                         setWorkExp2JbSkillAcquired(workData.WorkExp2JbSkillAcquired || []);
@@ -367,8 +356,16 @@ const WorkExperience2 = () => {
                                                     </Select>
                                                 </FormControl>
                                             </Grid>
-                                            <Grid item xs={12} pl={2} mb={3}>
-                                                <FormControlLabel control={<Checkbox checked={WorkExp2WorkChecked} onChange={handleWorkExp2WorkChecked}/>} label="Currently Work here" /> {/*if need to make this requires put required before control and if need to make it already checked put check inside the control next to the Checkbx*/}
+                                            <Grid item xs={12} >
+                                                <Typography>Currently work here</Typography>
+                                            </Grid>
+                                            <Grid item xs={12} mb={2} pl={2}>
+                                                <FormControl>
+                                                    <RadioGroup row name="project-working-status" value={WorkExp2Working} onChange={(event) => setWorkExp2Working(event.target.value)}>
+                                                        <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+                                                        <FormControlLabel value="no" control={<Radio />} label="No" />
+                                                    </RadioGroup>
+                                                </FormControl>
                                             </Grid>
                                             <Grid item xs={12} mb={1}>
                                             <Typography>List five significant tasks you did in your job role with the tools / software used? <small>Ex:- Developed and maintained responsive web applications using React, Angular, and Node.js.</small></Typography>
