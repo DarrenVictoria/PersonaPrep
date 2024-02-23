@@ -53,6 +53,7 @@ const AdminDash = () => {
   const [userCount, setUserCount] = useState(0);//to store the user count that is taken from the DB
   const [feedbackCount, setFeedbackCount] = useState(0);//to store the reviews count that is taken from the DB
   const [DegbarChartData, setDegBarChartData] = useState([]);
+  const [topSkills, setTopSkills] = useState([]);
   useEffect(() => {
       fetchDataFromFirestore();
   }, []);
@@ -123,8 +124,76 @@ const AdminDash = () => {
 
     setDegBarChartData(DegChartData);
     console.log(DegChartData);
+
+    
+    // Combine all skills from different arrays into one array
+    let allSkills = [];
+    data.forEach((item) => {
+      allSkills = allSkills.concat(
+        item.work?.[0]?.WorkExp1JbSkillAcquired || [],
+        item.work?.[1]?.WorkExp2JbSkillAcquired || [],
+        item.projects?.[0]?.WorkExp2JbSkillAcquired || [],
+        item.projects?.[1]?.Proj2Skills || [],
+        item.projects?.[2]?.Proj3Skills || [],
+        item.certifications?.[0]?.Certificate1ProjSkills || [],
+        item.certifications?.[1]?.Certificate1ProjSkills || []
+      );
+    });
+
+    // Count occurrences of each skill
+    const skillCounts = {};
+    allSkills.forEach((skill) => {
+      skillCounts[skill] = (skillCounts[skill] || 0) + 1;
+    });
+
+    // Convert counts to percentages
+    const totalCount = Object.values(skillCounts).reduce(
+      (total, count) => total + count,
+      0
+    );
+    const skillPercentages = {};
+    Object.entries(skillCounts).forEach(([skill, count]) => {
+      skillPercentages[skill] = (count / totalCount) * 100;
+    });
+
+    // Sort skills by percentage in descending order
+    const sortedSkills = Object.entries(skillPercentages).sort(
+      ([, a], [, b]) => b - a
+    );
+
+    // Generate unique colors for each skill
+    const colors = generateUniqueColors(sortedSkills.length);
+
+    // Create rows for the table
+    const tableRows = sortedSkills.map(([skill, percentage], index) => ({
+      rank: index + 1,
+      name: skill,
+      popularity: percentage.toFixed(2),
+      color: colors[index],
+    }));
+
+    // Set the top skills state
+    setTopSkills(tableRows.slice(0, 10)); // Display top 10 skills
+
 };
 
+// Function to generate unique colors (lighter shades)
+const generateUniqueColors = (count) => {
+  const colors = [];
+  for (let i = 0; i < count; i++) {
+    const color = getRandomLightColor();
+    colors.push(color);
+  }
+  return colors;
+};
+
+// Function to generate random light color
+const getRandomLightColor = () => {
+  const r = Math.floor(Math.random() * 150) + 100; // Red component
+  const g = Math.floor(Math.random() * 150) + 100; // Green component
+  const b = Math.floor(Math.random() * 150) + 100; // Blue component
+  return `rgb(${r}, ${g}, ${b})`;
+};
      
 return ( 
   <Box sx={{ display: 'flex'}}>
@@ -237,7 +306,7 @@ return (
                         {/* You can add an icon here if you want */}
                         </Avatar>
                     }
-                    title="Interviews taken"
+                    title="CV Feedback"
                     subheader="88"
                     sx={{
                         "& .MuiCardHeader-title": {
@@ -362,9 +431,10 @@ return (
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {rows.map((row, index) => (
-                            <TableRow key={index} >
-                                <TableCell>{index + 1}</TableCell>
+                            {/* {rows.map((row, index) => ( */}
+                            {topSkills.map((row) => (
+                            <TableRow key={row.rank} >
+                                <TableCell>{row.rank}</TableCell>
                                 <TableCell>{row.name}</TableCell>
                                 <TableCell >
                                 <div
