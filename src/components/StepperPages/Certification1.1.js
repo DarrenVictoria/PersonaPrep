@@ -403,7 +403,8 @@ const Certification2 = () => {
                                                                 />
                                                                 )}
                                                             />
-                                                    </Stack>                                            </Grid>
+                                                    </Stack>                                            
+                                                    </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>Certification evidence link</Typography>
                                                 {/* <TextField type="text" variant="outlined" value={Certificate1LInk} onChange={(event) => setCertificate1LInk(event.target.value)} fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='CV Builder'/> */}
