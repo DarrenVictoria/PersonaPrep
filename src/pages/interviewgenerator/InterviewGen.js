@@ -8,6 +8,7 @@ import InterviewFormHeader from '../../components/InterviewFormHeader';
 import Box from '@mui/material/Box';
 export default function AudioTranscriptionComponent() {
   const [audioSrc, setAudioSrc] = useState('');
+  const [chatResponse, setChatResponse] = useState('');
   const [isRecording, setIsRecording] = useState(false);
   
   const handleStartRecording = () => {
@@ -42,7 +43,10 @@ export default function AudioTranscriptionComponent() {
       }
 
       const audioBase64 = data.audio_base64;
+      const chatResponse = data.chat_response;
+
       setAudioSrc(`data:audio/wav;base64,${audioBase64}`);
+      setChatResponse(chatResponse); // Set the chat response state
     } catch (error) {
       console.error('Error transcribing audio:', error);
       alert(error.message);
@@ -84,10 +88,13 @@ export default function AudioTranscriptionComponent() {
                           record={isRecording}
                           onStop={handleAudioData}
                           mimeType="audio/wav"
+                          backgroundColor="#D9D9D9"
+                                                 
+
                           
                         />
                         
-                        {audioSrc && <ReactAudioPlayer src={audioSrc} autoPlay controls />}
+                       
                       </Grid>
                       <Grid xs={6}md={6} mt={2}>
                         <button onClick={handleStartRecording} disabled={isRecording}>
@@ -98,6 +105,12 @@ export default function AudioTranscriptionComponent() {
                         <button onClick={handleStopRecording} disabled={!isRecording}>
                           Stop Recording
                         </button>
+                      </Grid>
+
+                      {/* Display chat response */}
+                      <Grid xs={12} md={12} mt={2}>
+                        {audioSrc && <ReactAudioPlayer src={audioSrc} autoPlay controls />}
+                        <p>{chatResponse}</p>
                       </Grid>
                                     
                                       

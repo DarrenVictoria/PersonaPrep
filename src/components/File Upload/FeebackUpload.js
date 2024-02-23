@@ -20,6 +20,7 @@ const FileUpload = ({ onFileUpload, onReset }) => {
         deleteObject(fileRef)
           .then(() => {
             console.log('File deleted successfully from storage');
+            setUploadedFile(null);
           })
           .catch((error) => {
             console.error('Error deleting file from storage:', error);

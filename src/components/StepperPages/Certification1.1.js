@@ -16,7 +16,7 @@ import { CustomizedHook } from '../TextfieldButtonDataDisplay';
 import cdiary from '../../assets/images/iconcdiary.svg';
 import ccalander from '../../assets/images/iconccalander.svg';
 import chat from '../../assets/images/iconchat.svg';
-import FileUpload from '../FileUpload';
+import FileUpload from '../File Upload/DocFileUpload.js';
 import InterviewFormFooter from '../InterviewFormFooter';
 import InterviewFormHeader from '../InterviewFormHeader';
 import '../../pages/interviewforms/Template.css';
@@ -403,7 +403,8 @@ const Certification2 = () => {
                                                                 />
                                                                 )}
                                                             />
-                                                    </Stack>                                            </Grid>
+                                                    </Stack>                                            
+                                                    </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>Certification evidence link</Typography>
                                                 {/* <TextField type="text" variant="outlined" value={Certificate1LInk} onChange={(event) => setCertificate1LInk(event.target.value)} fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='CV Builder'/> */}
@@ -418,9 +419,15 @@ const Certification2 = () => {
                                                 <Typography>-OR-</Typography>
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
-                                            <FileUpload onFileUpload={handleFileUploadSuccess} onUploadSuccess={handleFileUploadSuccess} onReset={handleReset}    />
-                                                {CertFetchUrl && CertFetchUrl !== ' ' &&  <p style={{marginTop:'1rem',marginLeft:'1rem'}}>Your Certification Proof</p>}
-                                                {CertFetchUrl && CertFetchUrl !== ' ' && <img src={CertFetchUrl} alt="Profile Picture"  style={{ width: '15rem', height: '10rem', objectFit: 'cover',marginLeft:'1rem',border: '1px solid black' }}  />}
+                                            <Typography mb={2}>Upload Graduation Transcript</Typography>
+                                            <FileUpload style={{marginBottom:'1rem'}} onFileUpload={handleFileUploadSuccess} onUploadSuccess={handleFileUploadSuccess} onReset={handleReset} />
+                                            {CertFetchUrl && CertFetchUrl !== '' && 
+                                                <Typography mb={1} mt={4}>Uploaded Graduation Transcript Preview</Typography>
+                                            }
+                                            {CertFetchUrl && CertFetchUrl !== '' && 
+                                                <iframe src={CertFetchUrl} style={{ width: '60%', height: '400px', border: '1px solid black' }} />
+                                            }
+                                            
                                             </Grid>
                                         </Grid>
                                     </div>
