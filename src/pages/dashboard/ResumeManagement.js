@@ -14,65 +14,14 @@ import Button from '@mui/material/Button';
 import { blue } from "@mui/material/colors";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { getFirestore } from "firebase/firestore";
-// const resumeColumns = [
-//     { field: 'id', headerName: 'Email', width: 300 }, // Rename "ID" to "Name"
-//     { field: 'Name', headerName: 'Name', width: 300 }, 
-//     { field: 'Field', headerName: 'Field', width: 300 },
-//     { field: 'CreatedDate', headerName: 'Created Date', width: 300 },
-//     {
-//         field: 'View',
-//         headerName: 'View',
-//         description: 'This column has a value getter and is not sortable.',
-//         sortable: false,
-//         width: 150,
-//         renderCell: (params) => (
-//           <>
-//             <Button
-//             // variant="contained"
-//             // color="warning"
-//             variant="contained" 
-//             sx={{borderRadius:"25px",backgroundColor: '#242624',height:'28px'}}
-//             >
-//                 View CV
-//             </Button>
-//           </>
-//         ),
-//       },
-//     {
-//       field: 'Action',
-//       headerName: 'Action',
-//       description: 'This column has a value getter and is not sortable.',
-//       sortable: false,
-//       width: 100,
-//       renderCell: (params) => (
-//         <>
-//           <IconButton onClick={() => handleDeleteRow(params.row.id)}>
-//               <DeleteIcon />{/* Edit functionality to be implemented later */}
-//           </IconButton>
-//           {/* <IconButton>
-//           <EditIcon /> (comment this)Edit functionality to be implemented later 
-//           </IconButton> */}
-//         </>
-//       ),
-//     },
-//   ];
-  
-  // const resumeRows = [
-  //   { id: "isuruushan2003@gmail.com", Name: 'Snow',Field: 'Snow', CreatedDate: 'Admin'},
-  //   { id: "Darrenvictoria@gmail.com", Name: 'Snow',Field: 'Lannister', CreatedDate: 'Manager'},
-  //   { id: "isuruushan2004@gmail.com", Name: 'Snow',Field: 'Lannister', CreatedDate: 'Admin'},
-  //   { id: "isuruushan2005@gmail.com", Name: 'Snow',Field: 'Stark', CreatedDate: 'Admin'},
-  //   { id: "Darrenvictoria1@gmail.com", Name: 'Snow',Field: 'Targaryen', CreatedDate: 'Admin'},
-  //   { id: "Darrenvictoria2@gmail.com", Name: 'Snow',Field: 'Melisandre', CreatedDate: null},
-  //   { id: "Darrenvictoria3@gmail.com", Name: 'Snow',Field: 'Clifford', CreatedDate: 'Manager'},
-  //   { id: "Darrenvictoria4@gmail.com", Name: 'Snow',Field: 'Frances', CreatedDate: 'Manager'},
-  //   { id: "Darrenvictoria5@gmail.com", Name: 'Snow',Field: 'Roxie', CreatedDate: 'Manager'},
-  //   { id: "Darrenvictoria6@gmail.com", Name: 'Snow',Field: 'Roxie', CreatedDate: 'Manager'},
-  //   { id: "Darrenvictoria7@gmail.com", Name: 'Snow',Field: 'Roxie', CreatedDate: 'Manager'},
-  //   { id: "Darrenvictoria8@gmail.com", Name: 'Snow',Field: 'Roxie', CreatedDate: 'Manager'},
-  //   { id: "Darrenvictoria9@gmail.com", Name: 'Snow',Field: 'Roxie', CreatedDate: 'Manager'},
-   
-  // ];
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogActions from '@mui/material/DialogActions';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
 
   const feedbackColumns = [
     { field: 'id', headerName: 'Email', width: 400 }, 
@@ -111,14 +60,12 @@ const feedbackRows = [
     { id: "Darrenvictoria5@gmail.com", name: 'Snow', time: '30s'},
 ];
 const ResumeManagement = () => {
-    // const handleDeleteRow = async (id) => {
-    //   const docRef = doc(collection(firestore, 'your-collection-name'), id); // Replace with your collection name
-    //   await deleteDoc(docRef);
-    //   // Update the local rows array after successful deletion
-    //   setResumeRows(resumeRows.filter((row) => row.id !== id));
-    // };
+    
   const [resumeRows, setResumeRows] = useState([]);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
+
   useEffect(() => {
     fetchResumeData();
   }, []);
@@ -176,28 +123,32 @@ const ResumeManagement = () => {
           <IconButton onClick={() => handleDeleteRow(params.row.id)}>
               <DeleteIcon />{/* Edit functionality to be implemented later */}
           </IconButton>
-          {/* <IconButton>
-          <EditIcon /> (comment this)Edit functionality to be implemented later 
-          </IconButton> */}
+          
         </>
       ),
     },
   ];
   const handleDeleteRow = (id) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this resume?");
-    if (confirmDelete) {
-      deleteRow(id);
-    }
-  };
-  const deleteRow = async (id) => {
-    const docRef = doc(firestore, "studentdetails", id);
-    await deleteDoc(docRef);
-    setSuccessMessage("Row deleted successfully!");
-    setResumeRows(resumeRows.filter((row) => row.id !== id));
-    setTimeout(() => {
-      setSuccessMessage("");
-    }, 3000); // Clear the success message after 3 seconds
-  };
+    setOpenDialog(true);
+    setDeleteId(id);
+};
+const handleConfirmDelete = async () => {
+  try {
+      const docRef = doc(firestore, "studentdetails", deleteId);
+      await deleteDoc(docRef);
+      setSuccessMessage("Resume deleted sucessfullt!");
+      setResumeRows(resumeRows.filter((row) => row.id !== deleteId));
+  } catch (error) {
+      console.error("Error deleting row: ", error);
+  } finally {
+      setOpenDialog(false);
+       
+  }
+};
+
+const handleCloseSnackbar = () => {
+  setSuccessMessage("");
+};
     return ( 
             <Box sx={{ display: 'flex'}}>
                 <DashboardHeader />
@@ -214,8 +165,7 @@ const ResumeManagement = () => {
                       <div style={{textAlign:"right",maxWidth:730,width:"100%",paddingBottom:"10px"}}>
                       
                             <Button
-                            // variant="contained"
-                            // color="warning"
+                            
                             variant="contained" 
                             sx={{borderRadius:"25px",backgroundColor: '#242624'}}
                             >
@@ -329,6 +279,27 @@ const ResumeManagement = () => {
                     </Card>
                     </Box>
                 </Box>
+                <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
+                <DialogTitle>Confirmation</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        Are you sure you want to delete this resume?
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => setOpenDialog(false)} color="primary">
+                        Cancel
+                    </Button>
+                    <Button onClick={handleConfirmDelete} color="primary" autoFocus>
+                        Delete
+                    </Button>
+                </DialogActions>
+            </Dialog>
+            <Snackbar open={successMessage !== ""} autoHideDuration={6000} onClose={handleCloseSnackbar}>
+                <MuiAlert onClose={handleCloseSnackbar} severity="success" elevation={6} variant="filled">
+                    {successMessage}
+                </MuiAlert>
+            </Snackbar>
             </Box>
         );
 }

@@ -212,8 +212,8 @@ export default function SplitLayout() {
         window.location.href = '/faculty';
       };
     
-      const redirectToNSBM = () => {
-        window.location.href = 'https://www.nsbm.ac.lk/';
+      const redirectToInterview = () => {
+        window.location.href = '/interviewgen';
       };
 
       const redirectTo = (url) => {
@@ -245,7 +245,8 @@ export default function SplitLayout() {
         </div>
       </div>
     </div>
-    <div className={`bottom-right-box interview-box ${isDisabled ? 'disabled' : ''}`} onClick={isDisabled ? null : redirectToNSBM}>
+    {/* <div className={`bottom-right-box interview-box ${isDisabled ? 'disabled' : ''}`} onClick={isDisabled ? null : redirectToInterview}> */}
+    <div className="bottom-right-box interview-box" onClick={redirectToInterview}>
       <div className="box-content">
         <div>
           <h2 className="inter-top">Interview Simulator</h2>
@@ -360,7 +361,7 @@ export default function SplitLayout() {
       </Item>
     </Grid>
 
-    <Grid item xs={12} sm={6} md={6} className={`grid-item additional-feature-item-2`} onClick={() => redirectTo('https://www.example.com/feature2')}>
+    <Grid item xs={12} sm={6} md={6} className={`grid-item additional-feature-item-2`} onClick={() => redirectTo('/admindash')}>
       <Item style={{ backgroundColor: '#DEB113', height: '7rem', position: 'relative', border: '3px solid #000' }}>
         <h1 className="IBText">Corporate Login</h1>
         <div style={{ position: 'absolute', bottom: '10px', right: '10px' }}>
