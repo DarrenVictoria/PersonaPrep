@@ -17,7 +17,7 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { CustomizedHook } from '../TextfieldButtonDataDisplay';
-import FileUpload from '../FileUpload';
+import FileUpload from '../File Upload/DocFileUpload.js';
 import InterviewFormFooter from '../InterviewFormFooter';
 import InterviewFormHeader from '../InterviewFormHeader';
 import '../../pages/interviewforms/Template.css';
@@ -141,7 +141,7 @@ const Projects2 = () => {
             };
 
             await sendProjectDataToFirestore(formData);
-
+            handleClickOpen();
             
         } catch (error) {
             console.error('Error adding project to Firestore: ', error);
@@ -173,6 +173,7 @@ const Projects2 = () => {
 
                 // Update the document with the modified projects array
                 await setDoc(userDocument, { projects }, { merge: true });
+                handleClickOpen();
             } else {
                 console.error('Document does not exist for the current user.');
             }
@@ -476,8 +477,12 @@ const Projects2 = () => {
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                             <FileUpload onFileUpload={handleFileUploadSuccess} onUploadSuccess={handleFileUploadSuccess} onReset={handleReset}    />
-                                                {ProjectEvdFetchUrl && ProjectEvdFetchUrl !== ' ' &&  <p style={{marginTop:'1rem',marginLeft:'1rem'}}>Your Project Evidence</p>}
-                                                {ProjectEvdFetchUrl && ProjectEvdFetchUrl !== ' ' && <img src={ProjectEvdFetchUrl} alt="Profile Picture"  style={{ width: '15rem', height: '10rem', objectFit: 'cover',marginLeft:'1rem',border: '1px solid black' }}  />}
+                                            {ProjectEvdFetchUrl && ProjectEvdFetchUrl !== '' && 
+                                            <Typography mb={1} mt={4}>Uploaded Project File Preview</Typography>
+                                                }
+                                                {ProjectEvdFetchUrl && ProjectEvdFetchUrl !== '' && 
+                                                    <iframe src={ProjectEvdFetchUrl} style={{ width: '60%', height: '400px', border: '1px solid black' }} />
+                                                }
                                             </Grid>
                                         </Grid>
                                     </div>
@@ -576,7 +581,7 @@ const Projects2 = () => {
                                 </Grid>
                                     
                                 <Grid xs={6}>
-                                    <Button type='submit' style={next} onClick={handleClickOpen}>Next Step</Button>
+                                    <Button type='submit' style={next}>Next Step</Button>
                                     <Dialog
                                         fullScreen={fullScreen}
                                         open={open}

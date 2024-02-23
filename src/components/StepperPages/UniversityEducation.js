@@ -3,7 +3,7 @@ import './css/personalInfo.css';
 import Grid from "@mui/material/Grid";
 import Typography from '@mui/material/Typography';
 import TextField from "@mui/material/TextField";
-import FileUpload from '../FileUpload';
+import FileUpload from '../File Upload/DocFileUpload.js';
 import EditableChoose from '../EditableSelectOption';
 import InterviewFormFooter from '../InterviewFormFooter';
 import InterviewFormHeader from '../InterviewFormHeader';
@@ -378,10 +378,14 @@ const UniversityEducation1 = () => {
                                         </Grid>
                                     </div>
                                     <div className="personalInfo-rightCol university-fileUpload">
-                                        <Typography mb={2}>Graduation Transcript Upload</Typography>
-                                        <FileUpload onFileUpload={handleFileUploadSuccess} onUploadSuccess={handleFileUploadSuccess} onReset={handleReset}    />
-                                        {graduationTransFetchUrl && graduationTransFetchUrl !== ' ' &&  <p style={{marginTop:'1rem',marginLeft:'1rem'}}>Your current Graduation Transcript</p>}
-                                        {graduationTransFetchUrl && graduationTransFetchUrl !== ' ' && <img src={graduationTransFetchUrl} alt="Profile Picture"  style={{ width: '300px', height: '400px', objectFit: 'cover',marginLeft:'1rem',border: '1px solid black' }}  />}
+                                        <Typography mb={2}>Upload Graduation Transcript</Typography>
+                                        <FileUpload style={{marginBottom:'1rem'}} onFileUpload={handleFileUploadSuccess} onUploadSuccess={handleFileUploadSuccess} onReset={handleReset} />
+                                        {graduationTransFetchUrl && graduationTransFetchUrl !== '' && 
+                                            <Typography mb={1} mt={4}>Uploaded Graduation Transcript Preview</Typography>
+                                        }
+                                        {graduationTransFetchUrl && graduationTransFetchUrl !== '' && 
+                                            <iframe src={graduationTransFetchUrl} style={{ width: '60%', height: '400px', border: '1px solid black' }} />
+                                        }
                                     </div>
                                 </div>
                             </div>

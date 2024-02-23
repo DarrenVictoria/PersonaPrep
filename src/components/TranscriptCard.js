@@ -3,7 +3,7 @@ import JobPosition from './JobPosition';
 import InterviewDetails from './InterviewDetails';
 import Thumbnail from './Thumbnail';
 
-export default function TranscriptCard({name, date, position, detail, path, category, id}){
+export default function TranscriptCard({name, position, detail, path, category, id}){
     const handleClick = () => {
         window.location.href = `/interviewDisplay?id=${id}`;
     }
@@ -13,7 +13,7 @@ export default function TranscriptCard({name, date, position, detail, path, cate
         <div className='interviewBank-transcriptCard' style={{marginBottom: '30px'}}>
             <a href="#" style={{textDecoration: 'none', color: 'black'}} onClick={handleClick}>
                 <div className='interviewBank-transcriptCardDetails'>
-                    <TranscriptLabels name={name} date={date} />
+                    <TranscriptLabels name={name} />
                     <JobPosition position={position} />
                     <InterviewDetails detail={detail} />
                 </div>                 

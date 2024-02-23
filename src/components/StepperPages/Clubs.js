@@ -123,7 +123,7 @@ const yearOption = ["2024"];
     
         // Send data to Firestore
         await sendClubDataToFirestore(formData);
-    
+        handleClickOpen();
         // Navigate to the next page
        
     };
