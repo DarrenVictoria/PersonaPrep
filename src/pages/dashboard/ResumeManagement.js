@@ -130,6 +130,7 @@ const fetchFeedbackData = async () => {
           customization: data.customization || 0,
           experience: data.experience || 0,
           quality: data.quality || 0,
+          date: data.addedAt ? new Date(data.addedAt .seconds * 1000) : null,
       };
   });
 
