@@ -75,38 +75,38 @@ const WorkExperience1 = () => {
         }
     const Jb_SkillsAcquired = ["c#","Winforms"];
     
-    const [WorkExp1StartMonth, setWorkExp1StartMonth] = useState('');
-    const [WorkExp1StartYear, setWorkExp1StartYear] = useState('');
-    const [WorkExp1EndMonth, setWorkExp1EndMonth] = useState('');
-    const [WorkExp1EndYear, setWorkExp1EndYear] = useState('');
-    const [WorkExp1Working, setWorkExp1Working] = useState('');
-    const [WorkExp1TaskDnWithTools, setWorkExp1TaskDnWithTools] = useState("");
-    const [WorkExp1EmploymentType, setWorkExp1EmploymentType] = React.useState("");
+    const [WorkStartMonth, setWorkStartMonth] = useState('');
+    const [WorkStartYear, setWorkStartYear] = useState('');
+    const [WorkEndMonth, setWorkEndMonth] = useState('');
+    const [WorkEndYear, setWorkEndYear] = useState('');
+    const [WorkWorking, setWorkWorking] = useState('');
+    const [WorkTaskDnWithTools, setWorkTaskDnWithTools] = useState("");
+    const [WorkEmploymentType, setWorkEmploymentType] = React.useState("");
 
     const { register, handleSubmit, watch, formState: { errors }, getValues, setValue } = useForm();
 
-    const WorkExp1JobTitle = watch('WorkExp1JobTitle');
-    const WorkExp1Company = watch('WorkExp1Company');
-    const WorkExp1City = watch('WorkExp1City');
-    const WorkExp1Postal = watch('WorkExp1Postal');
+    const WorkJobTitle = watch('WorkJobTitle');
+    const WorkCompany = watch('WorkCompany');
+    const WorkCity = watch('WorkCity');
+    const WorkPostal = watch('WorkPostal');
 
 
     // the below useState for custom hook does not work yet
-    const [WorkExp1JbSkillAcquired, setWorkExp1JbSkillAcquired] = useState([]);
+    const [WorkJbSkillAcquired, setWorkJbSkillAcquired] = useState([]);
     const maxSelections = 3;//max value for the autocomplete
-    const handleWorkExp1JbSkillAcquired = (event, newSkill) => {
+    const handleWorkJbSkillAcquired = (event, newSkill) => {
         if (newSkill.length <= maxSelections) {
-            setWorkExp1JbSkillAcquired(newSkill);
+            setWorkJbSkillAcquired(newSkill);
         }
     };
     const isOptionDisabled = (option) => {
-        return WorkExp1JbSkillAcquired.length >= maxSelections && !WorkExp1JbSkillAcquired.includes(option);
+        return WorkJbSkillAcquired.length >= maxSelections && !WorkJbSkillAcquired.includes(option);
     };
     
-    const handleWorkExp1TaskDnWithTools = (event) => {
+    const handleWorkTaskDnWithTools = (event) => {
         //the below commented code is to test 
         // console.log(`Work => ${event.target.value}`)
-        setWorkExp1TaskDnWithTools(event.target.value);
+        setWorkTaskDnWithTools(event.target.value);
       };
     
 
@@ -115,18 +115,18 @@ const WorkExperience1 = () => {
     
     const onSubmit = async (e) => {
         const formData = {
-            WorkExp1JobTitle,
-            WorkExp1Company,
-            WorkExp1City,
-            WorkExp1Postal,
-            WorkExp1StartMonth,
-            WorkExp1StartYear,
-            WorkExp1EndMonth,
-            WorkExp1EndYear,
-            WorkExp1Working,
-            WorkExp1TaskDnWithTools,
-            WorkExp1EmploymentType,
-            WorkExp1JbSkillAcquired,
+            WorkJobTitle,
+            WorkCompany,
+            WorkCity,
+            WorkPostal,
+            WorkStartMonth,
+            WorkStartYear,
+            WorkEndMonth,
+            WorkEndYear,
+            WorkWorking,
+            WorkTaskDnWithTools,
+            WorkEmploymentType,
+            WorkJbSkillAcquired,
         };
 
         // Send data to Firestore
@@ -181,22 +181,22 @@ const WorkExperience1 = () => {
                     const workData = userData.work && userData.work.length > 0 ? userData.work[0] : null;
 
                     if (workData) {
-                        // setWorkExp1JobTitle(workData.WorkExp1JobTitle || '');
-                        // setWorkExp1Company(workData.WorkExp1Company || '');
-                        // setWorkExp1City(workData.WorkExp1City || '');
-                        // setWorkExp1Postal(workData.WorkExp1Postal || '');
-                        setValue('WorkExp1JobTitle', workData.WorkExp1JobTitle || '');
-                        setValue('WorkExp1Company', workData.WorkExp1Company || '');
-                        setValue('WorkExp1City', workData.WorkExp1City || '');
-                        setValue('WorkExp1Postal', workData.WorkExp1Postal || '');
-                        setWorkExp1StartMonth(workData.WorkExp1StartMonth || '');
-                        setWorkExp1StartYear(workData.WorkExp1StartYear || '');
-                        setWorkExp1EndMonth(workData.WorkExp1EndMonth || '');
-                        setWorkExp1EndYear(workData.WorkExp1EndYear || '');
-                        setWorkExp1Working(workData.WorkExp1Working || '');
-                        setWorkExp1TaskDnWithTools(workData.WorkExp1TaskDnWithTools || '');
-                        setWorkExp1EmploymentType(workData.WorkExp1EmploymentType || '');
-                        setWorkExp1JbSkillAcquired(workData.WorkExp1JbSkillAcquired || []);
+                        // setWorkJobTitle(workData.WorkJobTitle || '');
+                        // setWorkCompany(workData.WorkCompany || '');
+                        // setWorkCity(workData.WorkCity || '');
+                        // setWorkPostal(workData.WorkPostal || '');
+                        setValue('WorkJobTitle', workData.WorkJobTitle || '');
+                        setValue('WorkCompany', workData.WorkCompany || '');
+                        setValue('WorkCity', workData.WorkCity || '');
+                        setValue('WorkPostal', workData.WorkPostal || '');
+                        setWorkStartMonth(workData.WorkStartMonth || '');
+                        setWorkStartYear(workData.WorkStartYear || '');
+                        setWorkEndMonth(workData.WorkEndMonth || '');
+                        setWorkEndYear(workData.WorkEndYear || '');
+                        setWorkWorking(workData.WorkWorking || '');
+                        setWorkTaskDnWithTools(workData.WorkTaskDnWithTools || '');
+                        setWorkEmploymentType(workData.WorkEmploymentType || '');
+                        setWorkJbSkillAcquired(workData.WorkJbSkillAcquired || []);
                     }
                 } else {
                     console.error('Document does not exist for the current user.');
@@ -222,7 +222,7 @@ const WorkExperience1 = () => {
 
     return(
         <div className="formtemp-page">
-            <InterviewFormHeader title='Work Experience' />
+            <InterviewFormHeader title='Latest Work Experience (Work 1/2)' />
             <div className="formtemp-bodyform">
                 <Grid container spacing={2} style={{ height: '100%' }}>
                     <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
@@ -233,47 +233,47 @@ const WorkExperience1 = () => {
                                         <Grid container>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}>Job Title</Typography>
-                                                {/* <TextField type="text" variant="outlined" value={WorkExp1JobTitle} onChange={(event) => setWorkExp1JobTitle(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Full Stack Developer'/> */}
+                                                {/* <TextField type="text" variant="outlined" value={WorkJobTitle} onChange={(event) => setWorkJobTitle(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Full Stack Developer'/> */}
                                                 <TextField type="text" variant="outlined" fullWidth   
-                                                value={WorkExp1JobTitle}
+                                                value={WorkJobTitle}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder='Full Stack Developer'
-                                                {...register("WorkExp1JobTitle", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                {...register("WorkJobTitle", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
                                                 />
-                                                {errors.WorkExp1JobTitle &&  "Please enter only letters"}
+                                                {errors.WorkJobTitle &&  "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}>Company</Typography>
-                                                {/* <TextField type="text" variant="outlined" value={WorkExp1Company} onChange={(event) => setWorkExp1Company(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Surge Global Pvt.'/> */}
+                                                {/* <TextField type="text" variant="outlined" value={WorkCompany} onChange={(event) => setWorkCompany(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Surge Global Pvt.'/> */}
                                                 <TextField type="text" variant="outlined" fullWidth   
-                                                value={WorkExp1Company}
+                                                value={WorkCompany}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder='Surge Global Pvt.'
-                                                {...register("WorkExp1Company", { maxLength: 30, pattern: /^[a-zA-Z\s.,@]+$/ })}
+                                                {...register("WorkCompany", { maxLength: 30, pattern: /^[a-zA-Z\s.,@]+$/ })}
                                                 />
-                                                {errors.WorkExp1Company &&  "Please enter only letters"}
+                                                {errors.WorkCompany &&  "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={6} mb={3} pr={1}>
                                                 <Typography mb={1}>City</Typography>
-                                                {/* <TextField type="text" variant="outlined" value={WorkExp1City} onChange={(event) => setWorkExp1City(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Colombo'/> */}
+                                                {/* <TextField type="text" variant="outlined" value={WorkCity} onChange={(event) => setWorkCity(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Colombo'/> */}
                                                 <TextField type="text" variant="outlined" fullWidth   
-                                                value={WorkExp1City}
+                                                value={WorkCity}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder='Colombo'
-                                                {...register("WorkExp1City", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                {...register("WorkCity", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
                                                 />
-                                                {errors.WorkExp1City &&  "Please enter only letters"}
+                                                {errors.WorkCity &&  "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={6} mb={3} pl={1}>
                                                 <Typography mb={1}>Postal code</Typography>
-                                                {/* <TextField type="text" variant="outlined" value={WorkExp1Postal} onChange={(event) => setWorkExp1Postal(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='00300'/> */}
+                                                {/* <TextField type="text" variant="outlined" value={WorkPostal} onChange={(event) => setWorkPostal(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='00300'/> */}
                                                 <TextField type="text" variant="outlined" fullWidth   
-                                                value={WorkExp1Postal}
+                                                value={WorkPostal}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder='10300'
-                                                {...register("WorkExp1Postal", { maxLength: 30, pattern: /^[0-9]+$/ })}
+                                                {...register("WorkPostal", { maxLength: 30, pattern: /^[0-9]+$/ })}
                                                 />
-                                                {errors.WorkExp1Postal &&  "Please enter only numbers"}
+                                                {errors.WorkPostal &&  "Please enter only numbers"}
                                             </Grid>
                                             <Grid item xs={12} mb={1}>
                                                 <Typography>Start Date</Typography>
@@ -281,14 +281,14 @@ const WorkExperience1 = () => {
                                             <Grid item xs={6} pr={1}>
                                                 {/* <EditableChoose
                                                     options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                                                    onSelect={setWorkExp1StartMonth}
+                                                    onSelect={setWorkStartMonth}
                                                     disabledOptions={[]}
                                                     isRequired={true}
                                                 /> */}
                                                 <FormControl variant="outlined" fullWidth>
                                                     <Select
-                                                        value={WorkExp1StartMonth}
-                                                        onChange={(event) => setWorkExp1StartMonth(event.target.value)}
+                                                        value={WorkStartMonth}
+                                                        onChange={(event) => setWorkStartMonth(event.target.value)}
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
                                                         IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
@@ -304,14 +304,14 @@ const WorkExperience1 = () => {
                                             <Grid item xs={6} mb={3} pl={1}>
                                                 {/* <EditableChoose
                                                     options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                                                    onSelect={setWorkExp1StartYear}
+                                                    onSelect={setWorkStartYear}
                                                     disabledOptions={["2024"]}
                                                     isRequired={true}
                                                 /> */}
                                                 <FormControl variant="outlined" fullWidth>
                                                     <Select
-                                                        value={WorkExp1StartYear}
-                                                        onChange={(event) => setWorkExp1StartYear(event.target.value)}
+                                                        value={WorkStartYear}
+                                                        onChange={(event) => setWorkStartYear(event.target.value)}
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
                                                         IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
@@ -330,14 +330,14 @@ const WorkExperience1 = () => {
                                             <Grid item xs={6} pr={1}>
                                                 {/* <EditableChoose
                                                     options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                                                    onSelect={setWorkExp1EndMonth}
+                                                    onSelect={setWorkEndMonth}
                                                     disabledOptions={[]}
                                                     isRequired={true}
                                                 /> */}
                                                 <FormControl variant="outlined" fullWidth>
                                                     <Select
-                                                        value={WorkExp1EndMonth}
-                                                        onChange={(event) => setWorkExp1EndMonth(event.target.value)}
+                                                        value={WorkEndMonth}
+                                                        onChange={(event) => setWorkEndMonth(event.target.value)}
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
                                                         IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
@@ -353,14 +353,14 @@ const WorkExperience1 = () => {
                                             <Grid item xs={6} mb={3} pl={1}>
                                                 {/* <EditableChoose
                                                     options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                                                    onSelect={setWorkExp1EndYear}
+                                                    onSelect={setWorkEndYear}
                                                     disabledOptions={["2024"]}
                                                     isRequired={true}
                                                 /> */}
                                                 <FormControl variant="outlined" fullWidth>
                                                     <Select
-                                                        value={WorkExp1EndYear}
-                                                        onChange={(event) => setWorkExp1EndYear(event.target.value)}
+                                                        value={WorkEndYear}
+                                                        onChange={(event) => setWorkEndYear(event.target.value)}
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
                                                         IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
@@ -378,7 +378,7 @@ const WorkExperience1 = () => {
                                             </Grid>
                                             <Grid item xs={12} mb={2} pl={2}>
                                                 <FormControl>
-                                                    <RadioGroup row name="project-working-status" value={WorkExp1Working} onChange={(event) => setWorkExp1Working(event.target.value)}>
+                                                    <RadioGroup row name="project-working-status" value={WorkWorking} onChange={(event) => setWorkWorking(event.target.value)}>
                                                         <FormControlLabel value="yes" control={<Radio />} label="Yes" />
                                                         <FormControlLabel value="no" control={<Radio />} label="No" />
                                                     </RadioGroup>
@@ -392,8 +392,8 @@ const WorkExperience1 = () => {
                                                     inputHeight="150px"
                                                     maxWidth="1300px"
                                                     isRequired={true}
-                                                    value={WorkExp1TaskDnWithTools}
-                                                    onChange={handleWorkExp1TaskDnWithTools}
+                                                    value={WorkTaskDnWithTools}
+                                                    onChange={handleWorkTaskDnWithTools}
                                                     maxWords={100} // Pass the maximum number of words as a prop
                                                 />
                                             </Grid>
@@ -403,7 +403,7 @@ const WorkExperience1 = () => {
                                             <Grid item xs={12} mb={3}>
                                                 {/* <EditableChoose
                                                     options={["Full-Time", "Part-Time"]}
-                                                    onSelect={setWorkExp1EmploymentType}
+                                                    onSelect={setWorkEmploymentType}
                                                     disabledOptions={[]}
                                                     maxWidth={300}
                                                     isRequired={true}
@@ -411,8 +411,8 @@ const WorkExperience1 = () => {
                                                 /> */}
                                                 <FormControl variant="outlined" fullWidth>
                                                     <Select
-                                                        value={WorkExp1EmploymentType}
-                                                        onChange={(event) => setWorkExp1EmploymentType(event.target.value)}
+                                                        value={WorkEmploymentType}
+                                                        onChange={(event) => setWorkEmploymentType(event.target.value)}
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD',maxWidth:300}} />}
                                                         IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
@@ -433,8 +433,8 @@ const WorkExperience1 = () => {
                                                                 multiple
                                                                 id="tags-outlined"
                                                                 options={Jb_SkillsAcquired}
-                                                                value={WorkExp1JbSkillAcquired} 
-                                                                onChange={handleWorkExp1JbSkillAcquired}
+                                                                value={WorkJbSkillAcquired} 
+                                                                onChange={handleWorkJbSkillAcquired}
                                                                 filterSelectedOptions
                                                                 disableCloseOnSelect
                                                                 getOptionDisabled={isOptionDisabled}
