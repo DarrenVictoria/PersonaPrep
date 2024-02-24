@@ -16,7 +16,8 @@ import { useAuth } from '../../hooks/useAuth.js';
 const TemplateSelection = () => {
     const {currentUser} = useAuth();
     const [template, setTemplate] = useState('');
-    const [color, setColor] = useState('');
+    const [secondarycolor, setsecondaryColor] = useState('');
+    const [primarycolor, setprimaryColor] = useState('');
     const [typography, setTypography] = useState('');
 
     const navigate = useNavigate();
@@ -32,7 +33,8 @@ const TemplateSelection = () => {
 
             const formData = {
                 template: template,
-                color: color,
+                primarycolor: primarycolor,
+                secondarycolor:secondarycolor,
                 typography: typography,
             };
 
@@ -144,43 +146,43 @@ const TemplateSelection = () => {
                                                             <tbody>
                                                                 <tr>
                                                                     <td className="TemplateSelection-ColorCell">
-                                                                        <button onClick={(e) =>{e.preventDefault(); setColor('red')}} className="TemplateSelection-ColorButton FirstRowColorButton1">Red</button>
+                                                                        <button onClick={(e) =>{e.preventDefault(); setprimaryColor('red')}} className="TemplateSelection-ColorButton FirstRowColorButton1">Red</button>
                                                                     </td>
                                                                     <td className="TemplateSelection-ColorCell">
-                                                                        <button onClick={(e) =>{e.preventDefault(); setColor('blue')}} className="TemplateSelection-ColorButton FirstRowColorButton2">Blue</button>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td className="TemplateSelection-ColorCell">
-                                                                        <button onClick={(e) =>{e.preventDefault(); setColor('green')}} className="TemplateSelection-ColorButton SecondRowColorButton1">Green</button>
-                                                                    </td>
-                                                                    <td className="TemplateSelection-ColorCell">
-                                                                        <button onClick={(e) =>{e.preventDefault(); setColor('yellow')}} className="TemplateSelection-ColorButton SecondRowColorButton2">Yellow</button>
+                                                                        <button onClick={(e) =>{e.preventDefault(); setsecondaryColor('blue')}} className="TemplateSelection-ColorButton FirstRowColorButton2">Blue</button>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td className="TemplateSelection-ColorCell">
-                                                                        <button onClick={(e) =>{e.preventDefault(); setColor('orange')}} className="TemplateSelection-ColorButton ThirdRowColorButton1">Orange</button>
+                                                                        <button onClick={(e) =>{e.preventDefault(); setprimaryColor('green')}} className="TemplateSelection-ColorButton SecondRowColorButton1">Green</button>
                                                                     </td>
                                                                     <td className="TemplateSelection-ColorCell">
-                                                                        <button onClick={(e) =>{e.preventDefault(); setColor('purple')}} className="TemplateSelection-ColorButton ThirdRowColorButton2">Purple</button>
+                                                                        <button onClick={(e) =>{e.preventDefault(); setsecondaryColor('yellow')}} className="TemplateSelection-ColorButton SecondRowColorButton2">Yellow</button>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td className="TemplateSelection-ColorCell">
+                                                                        <button onClick={(e) =>{e.preventDefault(); setprimaryColor('orange')}} className="TemplateSelection-ColorButton ThirdRowColorButton1">Orange</button>
+                                                                    </td>
+                                                                    <td className="TemplateSelection-ColorCell">
+                                                                        <button onClick={(e) =>{e.preventDefault(); setsecondaryColor('purple')}} className="TemplateSelection-ColorButton ThirdRowColorButton2">Purple</button>
                                                                     </td>
                                                                 </tr>
                                                                 {/* Below i added more sample buttons in the color theme table just to check the scroll bar */}
                                                                 <tr>
                                                                     <td className="TemplateSelection-ColorCell">
-                                                                        <button onClick={(e) =>{e.preventDefault(); setColor('red')}} className="TemplateSelection-ColorButton ThirdRowColorButton1">Orange</button>
+                                                                        <button onClick={(e) =>{e.preventDefault(); setprimaryColor('red')}} className="TemplateSelection-ColorButton ThirdRowColorButton1">Orange</button>
                                                                     </td>
                                                                     <td className="TemplateSelection-ColorCell">
-                                                                        <button onClick={(e) =>{e.preventDefault(); setColor('red')}} className="TemplateSelection-ColorButton ThirdRowColorButton2">Purple</button>
+                                                                        <button onClick={(e) =>{e.preventDefault(); setsecondaryColor('red')}} className="TemplateSelection-ColorButton ThirdRowColorButton2">Purple</button>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td className="TemplateSelection-ColorCell">
-                                                                        <button onClick={(e) =>{e.preventDefault(); setColor('red')}} className="TemplateSelection-ColorButton ThirdRowColorButton1">Orange</button>
+                                                                        <button onClick={(e) =>{e.preventDefault(); setprimaryColor('red')}} className="TemplateSelection-ColorButton ThirdRowColorButton1">Orange</button>
                                                                     </td>
                                                                     <td className="TemplateSelection-ColorCell">
-                                                                        <button onClick={(e) =>{e.preventDefault(); setColor('red')}} className="TemplateSelection-ColorButton ThirdRowColorButton2">Purple</button>
+                                                                        <button onClick={(e) =>{e.preventDefault(); setsecondaryColor('red')}} className="TemplateSelection-ColorButton ThirdRowColorButton2">Purple</button>
                                                                     </td>
                                                                 </tr>
                                                         

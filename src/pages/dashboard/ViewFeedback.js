@@ -233,7 +233,7 @@ return (
             //   justifyContent: "center",
             //   }}
             >
-            <Grid xs={12} sm={6} md={6} mt={2} >
+            <Grid xs={12} sm={4} md={4} mt={2} >
                 
             <Card variant="outlined" sx={{height:'100%',minHeight: 150, width:'100%',maxWidth: 900,borderRadius:'10px', border: 'none', overflowY:'auto',overflowX:'auto','@media (max-width:769px)':{borderColor:'white'},'@media (min-width:769px)':{overflowY:'hidden'}}}>
                     <CardHeader
@@ -256,12 +256,35 @@ return (
                     />
                 </Card>
             </Grid>
-            <Grid xs={12} sm={6} md={6} mt={2}>
+            <Grid xs={12} sm={4} md={4} mt={2}>
                 
                 <Card variant="outlined" sx={{height:'100%',minHeight: 150, width:'100%',maxWidth: 900,borderRadius:'10px', border: 'none', overflowY:'auto',overflowX:'auto','@media (max-width:769px)':{borderColor:'white'},'@media (min-width:769px)':{overflowY:'hidden'}}}>
                         <CardHeader
                         title="Feedback"
                          subheader={feedbackData.feedback} //feedback
+                        sx={{
+                            "& .MuiCardHeader-title": {
+                            fontSize: "22px",
+                            fontWeight: "bold",
+                            paddingRight: "1px",
+                            },
+                            "& .MuiCardHeader-subheader": {
+                            fontSize: "20px",
+                            fontWeight: "bold",
+                            paddingTop:"30px",
+                            color: "black",
+                            },
+                            
+                        }}
+                        />
+                    </Card>
+                </Grid>
+                <Grid xs={12} sm={4} md={4} mt={2}>
+                
+                <Card variant="outlined" sx={{height:'100%',minHeight: 150, width:'100%',maxWidth: 900,borderRadius:'10px', border: 'none', overflowY:'auto',overflowX:'auto','@media (max-width:769px)':{borderColor:'white'},'@media (min-width:769px)':{overflowY:'hidden'}}}>
+                        <CardHeader
+                        title="Feedback Date"
+                         subheader={feedbackData.date ? new Date(feedbackData.date).toLocaleDateString() : ''} //Date
                         sx={{
                             "& .MuiCardHeader-title": {
                             fontSize: "22px",
