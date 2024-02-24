@@ -71,7 +71,7 @@ export default function InterviewBank(){
                         // date = "AUGUST 13, 2023"
                         position = {data.topic}
                         detail = {data.description}
-                        path = {thumbnail}
+                        path = {data.coverImage}
                     />
                     ))}
                 </div>
