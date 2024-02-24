@@ -11,7 +11,7 @@ export default function TranscriptCard({name, position, detail, path, category, 
     return(
         // <div className={`interviewBank-transcriptCard ${category !== '' && 'interviewBank-hideCard'}`} data-category={category}>
         <div className='interviewBank-transcriptCard' style={{marginBottom: '30px'}}>
-            <a href="#" style={{textDecoration: 'none', color: 'black'}} onClick={handleClick}>
+            <a style={{textDecoration: 'none', color: 'black'}} onClick={handleClick}>
                 <div className='interviewBank-transcriptCardDetails'>
                     <TranscriptLabels name={name} />
                     <JobPosition position={position} />

@@ -34,16 +34,16 @@ return (
 };
   
 //Code for Table with progress and percentage
-const rows = [
-  { name: 'C#', popularity: 66, color: '#007bff' },
-  { name: 'Web', popularity: 75, color: '#28a745' },
-  { name: 'Database', popularity: 34, color: '#ffc107' },
-  { name: 'Full-stack', popularity: 52, color: '#dc3545' },
-];
+// const rows = [
+//   { name: 'C#', popularity: 66, color: '#007bff' },
+//   { name: 'Web', popularity: 75, color: '#28a745' },
+//   { name: 'Database', popularity: 34, color: '#ffc107' },
+//   { name: 'Full-stack', popularity: 52, color: '#dc3545' },
+// ];
   
-function createData(name, popularity, color) {
-  return { name, popularity, color };
-}
+// function createData(name, popularity, color) {
+//   return { name, popularity, color };
+// }
 //End of Code for Table with progress and percentage
   
 const AdminDash = () => {
@@ -133,13 +133,13 @@ const AdminDash = () => {
     let allSkills = [];
     data.forEach((item) => {
       allSkills = allSkills.concat(
-        item.work?.[0]?.WorkExp1JbSkillAcquired || [],
-        item.work?.[1]?.WorkExp2JbSkillAcquired || [],
-        item.projects?.[0]?.Proj1Skills || [],
-        item.projects?.[1]?.Proj2Skills || [],
-        item.projects?.[2]?.Proj3Skills || [],
-        item.certifications?.[0]?.Certificate1ProjSkills || [],
-        item.certifications?.[1]?.Certificate1ProjSkills || []
+        item.work?.[0]?.WorkExpJbSkillAcquired || [],
+        item.work?.[1]?.WorkExpJbSkillAcquired || [],
+        item.projects?.[0]?.ProjSkills || [],
+        item.projects?.[1]?.ProjSkills || [],
+        item.projects?.[2]?.ProjSkills || [],
+        item.certifications?.[0]?.CertificateProjSkills || [],
+        item.certifications?.[1]?.CertificateProjSkills || []
       );
     });
 

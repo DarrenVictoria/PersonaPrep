@@ -17,7 +17,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { back } from '../BackButton.js';
 import { next } from '../NextButton.js';
 import { useNavigate } from 'react-router-dom';
-import { collection, addDoc, getFirestore } from 'firebase/firestore';
+import { collection, addDoc, getFirestore, serverTimestamp } from 'firebase/firestore';
 import { useAuth } from '../../hooks/useAuth.js';
 
 
@@ -159,7 +159,8 @@ const CvFeedback = () => {
                 customization: rating3,
                 accuracy: rating4,
                 feedback: feedback,
-                email: currentUser.email
+                email: currentUser.email,
+                addedAt: serverTimestamp(),
             });
             console.log('feedback added', docRef.email);
             setRating1('');
