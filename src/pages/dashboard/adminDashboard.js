@@ -52,6 +52,7 @@ const AdminDash = () => {
   const [RecBarChartData, setRecBarChartData] = useState([]);
   const [userCount, setUserCount] = useState(0);//to store the user count that is taken from the DB
   const [feedbackCount, setFeedbackCount] = useState(0);//to store the reviews count that is taken from the DB
+  const [cvfeedbackCount, setcvfeedbackCount] = useState(0);//to store the reviews count that is taken from the DB
   const [DegbarChartData, setDegBarChartData] = useState([]);
   const [topSkills, setTopSkills] = useState([]);
   useEffect(() => {
@@ -60,6 +61,8 @@ const AdminDash = () => {
 
   const fetchDataFromFirestore = async () => {
     const firestore = getFirestore();
+    const cvfeedbackSnapshot = await getDocs(collection(firestore, "cvfeedback"));
+    setcvfeedbackCount(cvfeedbackSnapshot.size);//to get the reviews count from the db
     const feedbackSnapshot = await getDocs(collection(firestore, "feedback"));
     setFeedbackCount(feedbackSnapshot.size);//to get the reviews count from the db
     const snapshot = await getDocs(collection(firestore, "studentdetails")); 
@@ -132,7 +135,7 @@ const AdminDash = () => {
       allSkills = allSkills.concat(
         item.work?.[0]?.WorkExp1JbSkillAcquired || [],
         item.work?.[1]?.WorkExp2JbSkillAcquired || [],
-        item.projects?.[0]?.WorkExp2JbSkillAcquired || [],
+        item.projects?.[0]?.Proj1Skills || [],
         item.projects?.[1]?.Proj2Skills || [],
         item.projects?.[2]?.Proj3Skills || [],
         item.certifications?.[0]?.Certificate1ProjSkills || [],
@@ -307,7 +310,7 @@ return (
                         </Avatar>
                     }
                     title="CV Feedback"
-                    subheader="88"
+                    subheader={cvfeedbackCount}//cv Feedback count goes here
                     sx={{
                         "& .MuiCardHeader-title": {
                         fontSize: "13px",
