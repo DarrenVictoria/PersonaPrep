@@ -8,6 +8,7 @@ const InterviewFormHeader = ({title}) => {
             <div className="formtemp-variable">
                 <p className="formtemp-variablename">{title}</p>
             </div>
+            
         </div>
     );
 }

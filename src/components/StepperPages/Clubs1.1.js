@@ -49,13 +49,13 @@ const yearOption = ["2024"];
     for (let year = 2023; year >= 1990; year--) {
     yearOption.push(String(year));
     }
-    const [Club2Name, setClub2Name] = useState('');
-    const [Club2StartMonth, setClub2StartMonth] = useState('');
-    const [Club2StartYear, setClub2StartYear] = useState('');
-    const [Club2EndMonth, setClub2EndMonth] = useState('');
-    const [Club2EndYear, setClub2EndYear] = useState('');
-    const [Club2Volunteer, setClub2Volunteer] = useState('no');
-    const [Club2VolunteerChecked, setClub2VolunteerChecked] = useState(false);
+    const [ClubName, setClubName] = useState('');
+    const [ClubStartMonth, setClubStartMonth] = useState('');
+    const [ClubStartYear, setClubStartYear] = useState('');
+    const [ClubEndMonth, setClubEndMonth] = useState('');
+    const [ClubEndYear, setClubEndYear] = useState('');
+    const [ClubVolunteer, setClubVolunteer] = useState('no');
+    const [ClubVolunteerChecked, setClubVolunteerChecked] = useState(false);
    
 
     
@@ -63,39 +63,39 @@ const yearOption = ["2024"];
 
     //Use state for auto complete component for RolesPlayed
     const  Clbs_RolesPlayed = ['Volunteer','Member','Council Members'];
-    const [Club2RolesPlayed, setClub2RolesPlayed] = useState([]);//usestate for autocomplete Roles played
+    const [ClubRolesPlayed, setClubRolesPlayed] = useState([]);//usestate for autocomplete Roles played
     const maxSelectionsRolesPlayed = 3;//max value for the autocomplete
-    const handleClub2RolesPlayed = (event, newSkill) => {
+    const handleClubRolesPlayed = (event, newSkill) => {
         if (newSkill.length <= maxSelectionsRolesPlayed) {
-            setClub2RolesPlayed(newSkill);
+            setClubRolesPlayed(newSkill);
         }
     };
     const isOptionDisabledRolesPlayed = (option) => {
-        return Club2RolesPlayed.length >= maxSelectionsRolesPlayed && !Club2RolesPlayed.includes(option);
+        return ClubRolesPlayed.length >= maxSelectionsRolesPlayed && !ClubRolesPlayed.includes(option);
     };
     
-    console.log(Club2RolesPlayed);
+    console.log(ClubRolesPlayed);
     
 
 //Use state for auto complete component for SkillsEarned
     const Clbs_SkillsEarned = ['Leadership#','Teamwork'];
-    const [Club2SkillsEarned, setClub2SkillsEarned] = useState([]);//usestate for autocomplete skills earned
+    const [ClubSkillsEarned, setClubSkillsEarned] = useState([]);//usestate for autocomplete skills earned
     const maxSelectionsSkillsEarned = 3;//max value for the autocomplete
-    const handleClub2SkillsEarned = (event, newSkill) => {
+    const handleClubSkillsEarned = (event, newSkill) => {
         if (newSkill.length <= maxSelectionsSkillsEarned) {
-            setClub2SkillsEarned(newSkill);
+            setClubSkillsEarned(newSkill);
         }
     };
     const isOptionDisabled = (option) => {
-        return Club2SkillsEarned.length >= maxSelectionsSkillsEarned && !Club2SkillsEarned.includes(option);
+        return ClubSkillsEarned.length >= maxSelectionsSkillsEarned && !ClubSkillsEarned.includes(option);
     };
     
-    console.log(Club2SkillsEarned);
+    console.log(ClubSkillsEarned);
 
     useEffect(() => {
-      if(!Club2VolunteerChecked) setClub2Volunteer('no');
-      else setClub2Volunteer('yes');
-    }, [Club2VolunteerChecked]);
+      if(!ClubVolunteerChecked) setClubVolunteer('no');
+      else setClubVolunteer('yes');
+    }, [ClubVolunteerChecked]);
 
     const navigate = useNavigate();
     const prevPage = () => navigate('/clubsAndSocs');
@@ -103,15 +103,15 @@ const yearOption = ["2024"];
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = {
-            Club2Name,
-            Club2StartMonth,
-            Club2StartYear,
-            Club2EndMonth,
-            Club2EndYear,
-            Club2Volunteer,
-            Club2RolesPlayed,
-            Club2SkillsEarned,
-            Club2VolunteerChecked
+            ClubName,
+            ClubStartMonth,
+            ClubStartYear,
+            ClubEndMonth,
+            ClubEndYear,
+            ClubVolunteer,
+            ClubRolesPlayed,
+            ClubSkillsEarned,
+            ClubVolunteerChecked
         };
     
         // Send data to Firestore
@@ -134,8 +134,8 @@ const yearOption = ["2024"];
                 // Check if index 0 exists in the clubs data array
                 if (clubs.length > 0) {
                     // Update fields of Club 1 at index 0
-                    clubs[0] = {
-                        ...clubs[0],
+                    clubs[1] = {
+                        ...clubs[1],
                         ...data
                     };
                 } else {
@@ -163,18 +163,18 @@ const yearOption = ["2024"];
                 const docSnapshot = await getDoc(userDocument);
                 if (docSnapshot.exists()) {
                     const userData = docSnapshot.data();
-                    const clubData = userData.clubs && userData.clubs.length > 0 ? userData.clubs[0] : null;
+                    const clubData = userData.clubs && userData.clubs.length > 1 ? userData.clubs[1] : null;
     
                     if (clubData) {
-                        setClub2Name(clubData.Club2Name || '');
-                        setClub2StartMonth(clubData.Club2StartMonth || '');
-                        setClub2StartYear(clubData.Club2StartYear || '');
-                        setClub2EndMonth(clubData.Club2EndMonth || '');
-                        setClub2EndYear(clubData.Club2EndYear || '');
-                        setClub2Volunteer(clubData.Club2Volunteer || 'no');
-                        setClub2RolesPlayed(clubData.Club2RolesPlayed || []);
-                        setClub2SkillsEarned(clubData.Club2SkillsEarned || []);
-                        setClub2VolunteerChecked(clubData.Club2VolunteerChecked || false);
+                        setClubName(clubData.ClubName || '');
+                        setClubStartMonth(clubData.ClubStartMonth || '');
+                        setClubStartYear(clubData.ClubStartYear || '');
+                        setClubEndMonth(clubData.ClubEndMonth || '');
+                        setClubEndYear(clubData.ClubEndYear || '');
+                        setClubVolunteer(clubData.ClubVolunteer || 'no');
+                        setClubRolesPlayed(clubData.ClubRolesPlayed || []);
+                        setClubSkillsEarned(clubData.ClubSkillsEarned || []);
+                        setClubVolunteerChecked(clubData.ClubVolunteerChecked || false);
                     }
                 } else {
                     console.error('Document does not exist for the current user.');
@@ -197,7 +197,7 @@ const yearOption = ["2024"];
 
     return(
       <div className="formtemp-page">
-            <InterviewFormHeader title='Second Club' />
+            <InterviewFormHeader title='Club 2/2' />
             <div className="formtemp-bodyform">
                 <Grid container spacing={2} style={{ height: '100%' }}>
                     <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
@@ -212,8 +212,8 @@ const yearOption = ["2024"];
                                   </Grid>
                                   <Grid item xs={12} mb={3}>
                                       {/* <EditableChoose
-                                        options={["Clubs","Club2", "Club2", "Club3"]}
-                                        onSelect={setClub2Name}
+                                        options={["Clubs","Club", "Club", "Club3"]}
+                                        onSelect={setClubName}
                                         disabledOptions={["Clubs"]}
                                         isRequired={true}
                                         //the below width did not work have to check
@@ -221,8 +221,8 @@ const yearOption = ["2024"];
                                         /> */}
                                         <FormControl variant="outlined" fullWidth>
                                           <Select
-                                              value={Club2Name}
-                                              onChange={(event) => setClub2Name(event.target.value)}
+                                              value={ClubName}
+                                              onChange={(event) => setClubName(event.target.value)}
                                               displayEmpty
                                               input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD'}} />}
                                               IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
@@ -230,8 +230,8 @@ const yearOption = ["2024"];
                                               
                                           >
                                               <MenuItem disabled value="">Clubs</MenuItem>
-                                              <MenuItem value="Club2">Club2</MenuItem>
-                                              <MenuItem value="Club2">Club2</MenuItem>
+                                              <MenuItem value="Club">Club</MenuItem>
+                                              <MenuItem value="Club">Club</MenuItem>
                                               <MenuItem value="Club3">Club3</MenuItem>
                                               
                                           </Select>
@@ -245,7 +245,7 @@ const yearOption = ["2024"];
                                     
                                   {/* <EditableChoose
                                   options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                                  onSelect={setClub2StartMonth}
+                                  onSelect={setClubStartMonth}
                                   disabledOptions={[]}
                                   isRequired={true}
                                   //the below width did not work have to check
@@ -253,8 +253,8 @@ const yearOption = ["2024"];
                                 /> */}
                                 <FormControl variant="outlined" fullWidth>
                                     <Select
-                                        value={Club2StartMonth}
-                                        onChange={(event) => setClub2StartMonth(event.target.value)}
+                                        value={ClubStartMonth}
+                                        onChange={(event) => setClubStartMonth(event.target.value)}
                                         displayEmpty
                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
                                         IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
@@ -271,7 +271,7 @@ const yearOption = ["2024"];
                                   <Grid item xs={6} mb={3} pl={1}>
                                   {/* <EditableChoose
                                   options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                                  onSelect={setClub2StartYear}
+                                  onSelect={setClubStartYear}
                                   disabledOptions={["2024"]}
                                   isRequired={true}
                                   //the below width did not work have to check
@@ -279,8 +279,8 @@ const yearOption = ["2024"];
                                 /> */}
                                 <FormControl variant="outlined" fullWidth>
                                       <Select
-                                          value={Club2StartYear}
-                                          onChange={(event) => setClub2StartYear(event.target.value)}
+                                          value={ClubStartYear}
+                                          onChange={(event) => setClubStartYear(event.target.value)}
                                           displayEmpty
                                           input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
                                           IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
@@ -301,7 +301,7 @@ const yearOption = ["2024"];
                                     
                                   {/* <EditableChoose
                                   options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                                  onSelect={setClub2EndMonth}
+                                  onSelect={setClubEndMonth}
                                   disabledOptions={[]}
                                   isRequired={true}
                                   //the below width did not work have to check
@@ -309,8 +309,8 @@ const yearOption = ["2024"];
                                 /> */}
                                 <FormControl variant="outlined" fullWidth>
                                       <Select
-                                          value={Club2EndMonth}
-                                          onChange={(event) => setClub2EndMonth(event.target.value)}
+                                          value={ClubEndMonth}
+                                          onChange={(event) => setClubEndMonth(event.target.value)}
                                           displayEmpty
                                           input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
                                           IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
@@ -327,7 +327,7 @@ const yearOption = ["2024"];
                                   <Grid item xs={6} mb={3} pl={1}>
                                   {/* <EditableChoose
                                   options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                                  onSelect={setClub2EndYear}
+                                  onSelect={setClubEndYear}
                                   disabledOptions={["2024"]}
                                   isRequired={true}
                                   //the below width did not work have to check
@@ -335,8 +335,8 @@ const yearOption = ["2024"];
                                 /> */}
                                 <FormControl variant="outlined" fullWidth>
                                       <Select
-                                          value={Club2EndYear}
-                                          onChange={(event) => setClub2EndYear(event.target.value)}
+                                          value={ClubEndYear}
+                                          onChange={(event) => setClubEndYear(event.target.value)}
                                           displayEmpty
                                           input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
                                           IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
@@ -364,8 +364,8 @@ const yearOption = ["2024"];
                                                   multiple
                                                   id="tags-outlined"
                                                   options={Clbs_RolesPlayed}
-                                                  value={Club2RolesPlayed} 
-                                                  onChange={handleClub2RolesPlayed}
+                                                  value={ClubRolesPlayed} 
+                                                  onChange={handleClubRolesPlayed}
                                                   filterSelectedOptions
                                                   disableCloseOnSelect
                                                   getOptionDisabled={isOptionDisabledRolesPlayed}
@@ -403,8 +403,8 @@ const yearOption = ["2024"];
                                                     multiple
                                                     id="tags-outlined"
                                                     options={Clbs_SkillsEarned}
-                                                    value={Club2SkillsEarned} 
-                                                    onChange={handleClub2SkillsEarned}
+                                                    value={ClubSkillsEarned} 
+                                                    onChange={handleClubSkillsEarned}
                                                     filterSelectedOptions
                                                     disableCloseOnSelect
                                                     getOptionDisabled={isOptionDisabled}
@@ -437,7 +437,7 @@ const yearOption = ["2024"];
 
                                   <Grid item xs={12}  mb={3} pl={2} sx={{"@media (max-width: 376px)": {pl: 0}}}>
                                     
-                                    <FormControlLabel control={<Checkbox checked={Club2VolunteerChecked} onChange={(event) => setClub2VolunteerChecked(event.target.checked)}/>} label="Currently Volunteering" /> {/*if need to make this requires put required before control and if need to make it already checked put check inside the control next to the Checkbx*/}
+                                    <FormControlLabel control={<Checkbox checked={ClubVolunteerChecked} onChange={(event) => setClubVolunteerChecked(event.target.checked)}/>} label="Currently Volunteering" /> {/*if need to make this requires put required before control and if need to make it already checked put check inside the control next to the Checkbx*/}
                                     
                                   </Grid>
                                   

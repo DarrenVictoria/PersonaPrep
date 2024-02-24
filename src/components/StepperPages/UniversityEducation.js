@@ -50,18 +50,18 @@ const UniversityEducation1 = () => {
         yearOption.push(String(year));
         }
     
-    const [Uni1Degree, setUni1Degree] = useState('');
-    const [Uni1CurrentYear, setUni1CurrentYear] = useState('');
-    const [Uni1StartMonth, setUni1StartMonth] = useState('');
-    const [Uni1StartYear, setUni1StartYear] = useState('');
-    const [Uni1EndMonth, setUni1EndMonth] = useState('');
-    const [Uni1EndYear, setUni1EndYear] = useState('');
+    const [UniDegree, setUniDegree] = useState('');
+    const [UniCurrentYear, setUniCurrentYear] = useState('');
+    const [UniStartMonth, setUniStartMonth] = useState('');
+    const [UniStartYear, setUniStartYear] = useState('');
+    const [UniEndMonth, setUniEndMonth] = useState('');
+    const [UniEndYear, setUniEndYear] = useState('');
 
     const { register, handleSubmit, watch, formState: { errors }, getValues, setValue } = useForm();
 
-    const Uni1Name = watch('Uni1Name');
-    const Uni1City = watch('Uni1City');
-    const Uni1Country = watch('Uni1Country');
+    const UniName = watch('UniName');
+    const UniCity = watch('UniCity');
+    const UniCountry = watch('UniCountry');
 
     const navigate = useNavigate();
     const prevPage = () => navigate('/exams');
@@ -69,12 +69,12 @@ const UniversityEducation1 = () => {
         // e.preventDefault();
         const formData = {
             ...data,
-            Uni1Degree: Uni1Degree, // Include selected degree
-            Uni1StartMonth: Uni1StartMonth, // Include selected start month
-            Uni1StartYear: Uni1StartYear, // Include selected start year
-            Uni1EndMonth: Uni1EndMonth, // Include selected end month
-            Uni1EndYear: Uni1EndYear, // Include selected end year
-            Uni1CurrentYear: Uni1CurrentYear, // Include selected current year
+            UniDegree: UniDegree, // Include selected degree
+            UniStartMonth: UniStartMonth, // Include selected start month
+            UniStartYear: UniStartYear, // Include selected start year
+            UniEndMonth: UniEndMonth, // Include selected end month
+            UniEndYear: UniEndYear, // Include selected end year
+            UniCurrentYear: UniCurrentYear, // Include selected current year
             graduationTransUrl: graduationTransUrl || graduationTransFetchUrl, 
         };
 
@@ -155,23 +155,23 @@ const UniversityEducation1 = () => {
                     if (docData.universityData && docData.universityData.length > 0) {
                         const universityData = docData.universityData[0]; // Assuming you only want data from the first university in the array
                         
-                        setValue('Uni1Name', universityData.Uni1Name || '');
-                        setValue('Uni1City', universityData.Uni1City || '');
-                        setValue('Uni1Country', universityData.Uni1Country || '');
-                        setValue('Uni1Degree', universityData.Uni1Degree || '');
-                        setValue('Uni1StartMonth', universityData.Uni1StartMonth || '');
-                        setValue('Uni1StartYear', universityData.Uni1StartYear || '');
-                        setValue('Uni1EndMonth', universityData.Uni1EndMonth || '');
-                        setValue('Uni1EndYear', universityData.Uni1EndYear || '');
-                        setValue('Uni1CurrentYear', universityData.Uni1CurrentYear || '');
+                        setValue('UniName', universityData.UniName || '');
+                        setValue('UniCity', universityData.UniCity || '');
+                        setValue('UniCountry', universityData.UniCountry || '');
+                        setValue('UniDegree', universityData.UniDegree || '');
+                        setValue('UniStartMonth', universityData.UniStartMonth || '');
+                        setValue('UniStartYear', universityData.UniStartYear || '');
+                        setValue('UniEndMonth', universityData.UniEndMonth || '');
+                        setValue('UniEndYear', universityData.UniEndYear || '');
+                        setValue('UniCurrentYear', universityData.UniCurrentYear || '');
                         setGraduationTransFetchUrl(universityData.graduationTransUrl || '');
 
-                        setUni1Degree(universityData.Uni1Degree || '');
-                        setUni1StartMonth(universityData.Uni1StartMonth || '');
-                        setUni1StartYear(universityData.Uni1StartYear || '');
-                        setUni1EndMonth(universityData.Uni1EndMonth || '');
-                        setUni1EndYear(universityData.Uni1EndYear || '');
-                        setUni1CurrentYear(universityData.Uni1CurrentYear || '');
+                        setUniDegree(universityData.UniDegree || '');
+                        setUniStartMonth(universityData.UniStartMonth || '');
+                        setUniStartYear(universityData.UniStartYear || '');
+                        setUniEndMonth(universityData.UniEndMonth || '');
+                        setUniEndYear(universityData.UniEndYear || '');
+                        setUniCurrentYear(universityData.UniCurrentYear || '');
                     }
                 }
             } catch (error) {
@@ -184,7 +184,7 @@ const UniversityEducation1 = () => {
 
     return(
         <div className="formtemp-page">
-            <InterviewFormHeader title='University' />
+            <InterviewFormHeader title='Latest University (University 1/2)' />
             <div className="formtemp-bodyform">
                 <Grid container spacing={2} style={{ height: '100%' }}>
                     <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
@@ -195,14 +195,14 @@ const UniversityEducation1 = () => {
                                         <Grid container>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>University</Typography>
-                                                {/* <TextField type="text" variant="outlined" value={Uni1Name} onChange={(event) => setUni1Name(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='NSBM Green University'/> */}
+                                                {/* <TextField type="text" variant="outlined" value={UniName} onChange={(event) => setUniName(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='NSBM Green University'/> */}
                                                 <TextField type="text" variant="outlined" fullWidth required  
-                                                value={Uni1Name}
+                                                value={UniName}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder='NSBM Green University'
-                                                {...register("Uni1Name", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                {...register("UniName", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
                                                 />
-                                                {errors.Uni1Name &&  "Please enter only letters"}
+                                                {errors.UniName &&  "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={1}>
                                                 <Typography><span style={{color: 'red'}}>*</span>Degree</Typography>
@@ -210,13 +210,13 @@ const UniversityEducation1 = () => {
                                             <Grid item xs={12} mb={3}>
                                                 {/* <EditableChoose
                                                     options={["Degree Name", "BSc. (Hons) in Software Engineering","BSc. (Hons) in Computer Science","BSc. (Hons) in Cyber Security"]}
-                                                    onSelect={setUni1Degree}
+                                                    onSelect={setUniDegree}
                                                     disabledOptions={[]}
                                                 /> */}
                                                 <FormControl variant="outlined" fullWidth>
                                                     <Select
-                                                        value={Uni1Degree}
-                                                        onChange={(event) => setUni1Degree(event.target.value)}
+                                                        value={UniDegree}
+                                                        onChange={(event) => setUniDegree(event.target.value)}
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD'}} />}
                                                         IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
@@ -233,25 +233,25 @@ const UniversityEducation1 = () => {
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>City</Typography>
-                                                {/* <TextField type="text" variant="outlined" value={Uni1City} onChange={(event) => setUni1City(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Homagama'/> */}
+                                                {/* <TextField type="text" variant="outlined" value={UniCity} onChange={(event) => setUniCity(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Homagama'/> */}
                                                 <TextField type="text" variant="outlined" fullWidth required  
-                                                value={Uni1City}
+                                                value={UniCity}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder='Homagama'
-                                                {...register("Uni1City", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                {...register("UniCity", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
                                                 />
-                                                {errors.Uni1City &&  "Please enter only letters"}
+                                                {errors.UniCity &&  "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>Country</Typography>
-                                                {/* <TextField type="text" variant="outlined" value={Uni1Country} onChange={(event) => setUni1Country(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Sri lanka'/> */}
+                                                {/* <TextField type="text" variant="outlined" value={UniCountry} onChange={(event) => setUniCountry(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Sri lanka'/> */}
                                                 <TextField type="text" variant="outlined" fullWidth required  
-                                                value={Uni1Country}
+                                                value={UniCountry}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder='Sri Lanka'
-                                                {...register("Uni1Country", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                {...register("UniCountry", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
                                                 />
-                                                {errors.Uni1Country &&  "Please enter only letters"}
+                                                {errors.UniCountry &&  "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={1}>
                                                 <Typography><span style={{color: 'red'}}>*</span>Start Date</Typography>
@@ -259,13 +259,13 @@ const UniversityEducation1 = () => {
                                             <Grid item xs={6} pr={1}>
                                                 {/* <EditableChoose
                                                     options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                                                    onSelect={setUni1StartMonth}
+                                                    onSelect={setUniStartMonth}
                                                     disabledOptions={[]}
                                                 /> */}
                                                 <FormControl variant="outlined" fullWidth>
                                                     <Select
-                                                        value={Uni1StartMonth}
-                                                        onChange={(event) => setUni1StartMonth(event.target.value)}
+                                                        value={UniStartMonth}
+                                                        onChange={(event) => setUniStartMonth(event.target.value)}
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
                                                         IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
@@ -281,13 +281,13 @@ const UniversityEducation1 = () => {
                                             <Grid item xs={6} mb={3} pl={1}>
                                                 {/* <EditableChoose
                                                     options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                                                    onSelect={setUni1StartYear}
+                                                    onSelect={setUniStartYear}
                                                     disabledOptions={["2024"]}
                                                 /> */}
                                                 <FormControl variant="outlined" fullWidth>
                                                     <Select
-                                                        value={Uni1StartYear}
-                                                        onChange={(event) => setUni1StartYear(event.target.value)}
+                                                        value={UniStartYear}
+                                                        onChange={(event) => setUniStartYear(event.target.value)}
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
                                                         IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
@@ -307,13 +307,13 @@ const UniversityEducation1 = () => {
                                             <Grid item xs={6} mb={3}>
                                                 {/* <EditableChoose
                                                     options={["year", "Year 1","Year 2","Year 3","Year 4"]}
-                                                    onSelect={setUni1CurrentYear}
+                                                    onSelect={setUniCurrentYear}
                                                     disabledOptions={[]}
                                                 /> */}
                                                  <FormControl variant="outlined" fullWidth>
                                                     <Select
-                                                        value={Uni1CurrentYear}
-                                                        onChange={(event) => setUni1CurrentYear(event.target.value)}
+                                                        value={UniCurrentYear}
+                                                        onChange={(event) => setUniCurrentYear(event.target.value)}
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD'}} />}
                                                         IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
@@ -334,13 +334,13 @@ const UniversityEducation1 = () => {
                                             <Grid item xs={6} pr={1}>
                                                 {/* <EditableChoose
                                                     options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                                                    onSelect={setUni1EndMonth}
+                                                    onSelect={setUniEndMonth}
                                                     disabledOptions={[]}
                                                 /> */}
                                                 <FormControl variant="outlined" fullWidth>
                                                     <Select
-                                                        value={Uni1EndMonth}
-                                                        onChange={(event) => setUni1EndMonth(event.target.value)}
+                                                        value={UniEndMonth}
+                                                        onChange={(event) => setUniEndMonth(event.target.value)}
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
                                                         IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
@@ -356,13 +356,13 @@ const UniversityEducation1 = () => {
                                             <Grid item xs={6} mb={3} pl={1}>
                                                 {/* <EditableChoose
                                                     options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                                                    onSelect={setUni1EndYear}
+                                                    onSelect={setUniEndYear}
                                                     disabledOptions={["2024"]}
                                                 /> */}
                                                 <FormControl variant="outlined" fullWidth>
                                                     <Select
-                                                        value={Uni1EndYear}
-                                                        onChange={(event) => setUni1EndYear(event.target.value)}
+                                                        value={UniEndYear}
+                                                        onChange={(event) => setUniEndYear(event.target.value)}
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
                                                         IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
