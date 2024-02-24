@@ -47,6 +47,9 @@ import ResumeManagement from "./pages/dashboard/ResumeManagement";
 import InterviewBankDash from "./pages/dashboard/InterviewBankDash";
 import InterviewCard from "./pages/dashboard/InterviewCard";
 import InterviewGen from "./pages/interviewgenerator/InterviewGen"
+
+import Template1 from "./cvtemplates/template1"
+
 import ViewFeedback from "./pages/dashboard/ViewFeedback"
 import "@fontsource/inter"; // Defaults to weight 400
 import "@fontsource/inter/400.css"; // Specify weight
@@ -118,6 +121,12 @@ function App() {
             }
           />
           <Route path="*" element={<NoPage />}/>
+
+
+
+          <Route path="/template1" element={<Template1 />}/>
+
+
         </Routes>
     </BrowserRouter>
     </AuthProvider>
