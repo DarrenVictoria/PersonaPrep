@@ -29,6 +29,8 @@ const InterviewCard = () => {
     const [field, setField] = useState('');
     const [description, setDescription] = useState('');
     const [trnscrptDtls, setTrnscrptdtls] = useState(['']);
+    const [coverImageUrl, setCoverImageUrl] = useState('');
+    const [coverImageFetchUrl, setCoverImageFetchUrl] = useState('');
 
     //to get the card id
     const location = useLocation();
@@ -36,13 +38,17 @@ const InterviewCard = () => {
     const interviewId = searchParams.get('id');
 
     const handleFileUploadSuccess = (url) => {
-        // setProfilePictureUrl(url.downloadURL);
-        console.log(url);
+        console.log('File upload successful:', url);
+        setCoverImageUrl(prevUrl => url.downloadURL);
+        console.log('coverImageUrl:', coverImageUrl);
+        
     };
-    const handleReset = () => {
+    
+    
+      const handleReset = () => {
         // Your reset logic here
         console.log('Reset button clicked');
-    };
+      };
 
     const handleChange = (index, event) => {
         const newResults = [...trnscrptDtls];
@@ -74,6 +80,8 @@ const InterviewCard = () => {
                         setField(interviewData.field || '');
                         setDescription(interviewData.description || '');
                         setTrnscrptdtls(interviewData.transcript || '');
+                        setCoverImageFetchUrl(interviewData.coverImage || null);
+                        console.log(coverImageUrl);
                     }
                 })
                 // const existingDoc = querySnapshot.docs[0]; //gets the first doc that match the data                
@@ -85,6 +93,10 @@ const InterviewCard = () => {
         fetchUserData();
     }, []);
 
+    
+
+
+
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -92,6 +104,8 @@ const InterviewCard = () => {
             const db = getFirestore();
             const interviewCollection = collection(db, 'interviewcards');
             const docRef = doc(interviewCollection, interviewId);
+            const finalCoverImageUrl = coverImageUrl || coverImageFetchUrl;
+
             await updateDoc(docRef, {
                 topic: topic,
                 faculty: faculty,
@@ -99,11 +113,14 @@ const InterviewCard = () => {
                 description: description,
                 transcript: trnscrptDtls,
                 createdAt: serverTimestamp(),
+                coverImage: finalCoverImageUrl,
             })
             console.log('interview card updated with id', docRef.id);
 
         }catch (err) { console.log('error adding details', err.message) }
     };
+
+   
 
     const navigate = useNavigate();
     const deleteCardBtn = async (event) => {
@@ -135,11 +152,13 @@ const InterviewCard = () => {
                         <Grid item xs={12} mb={1}>
                             <Typography>Change cover image</Typography>
                         </Grid>
-                        <Grid item xs={12} md={6} mb={4}>
-                            <FileUpload onFileUpload={handleFileUploadSuccess} onUploadSuccess={handleFileUploadSuccess} onReset={handleReset}    />
-                            {/* {profilePictureFetchUrl && profilePictureFetchUrl !== ' ' &&  <p style={{marginTop:'1rem',marginLeft:'1rem'}}>Current cover image</p>}
-                            {profilePictureFetchUrl && profilePictureFetchUrl !== ' ' && <img src={profilePictureFetchUrl} alt="Profile Picture"  style={{ width: '100px', height: '100px', objectFit: 'cover',marginLeft:'1rem',border: '1px solid black' }}  />} */}                            
-                        </Grid>
+                        <Grid item xs={12} mb={3}>
+                             <Typography mb={1}><span style={{color: 'red'}}>*</span> Interview Cover</Typography>
+                             <FileUpload onFileUpload={handleFileUploadSuccess} onUploadSuccess={handleFileUploadSuccess} onReset={handleReset}    />
+                             {coverImageFetchUrl && coverImageFetchUrl !== ' ' &&  <p style={{marginTop:'1rem',marginLeft:'1rem'}}>Cover Photo</p>}
+                             {coverImageFetchUrl && coverImageFetchUrl !== ' ' && <img src={coverImageFetchUrl} alt="Profile Picture"  style={{ width: '400px', height: '225px', objectFit: 'cover',marginLeft:'1rem',border: '1px solid black' }}  />}
+                                                
+                         </Grid>
                         <Grid item xs={12} mb={3}>
                             <Typography mb={1}>Topic</Typography>
                             <TextField type="text" variant="outlined" fullWidth required 
@@ -268,20 +287,22 @@ const InterviewCard = () => {
                                 </Button>
                             </Grid>
                             <Grid item xs={5} md={3}>
-                                <Button type="submit" endIcon={<AddCircleOutlineIcon />} 
+                                <Button onClick={handleSubmit} type="submit" href="/interviewDash" 
                                     sx={{
-                                        backgroundColor:'#d1d1d1',
-                                        color:'black',
+                                        backgroundColor:'#000000',
+                                        width:'100px',
+                                        color:'white',
                                         borderRadius:'25px',
                                         // margin: '25px',
                                         fontFamily: 'Inter , sans-serif',
                                         fontWeight: '800',
                                         ':hover': {
-                                            backgroundColor: '#d1d1d1',
+                                            backgroundColor: '#000000',
                                             border: 'none',
                                         }
                                     }}>
                                     Update
+                                    
                                 </Button>
                             </Grid>                        
                         </Grid>

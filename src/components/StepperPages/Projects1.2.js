@@ -64,35 +64,35 @@ const Projects3 = () => {
         yearOption.push(String(year));
         }
     
-    const [Proj3Type, setProj3Type] = useState('');
-    const [Proj3Status, setProj3Status] = useState('');
+    const [ProjType, setProjType] = useState('');
+    const [ProjStatus, setProjStatus] = useState('');
 
-    const [Proj3StartMonth, setProj3StartMonth] = useState('');
-    const [Proj3StartYear, setProj3StartYear] = useState('');
-    const [Proj3EndMonth, setProj3EndMonth] = useState('');
-    const [Proj3EndYear, setProj3EndYear] = useState('');
-    const [Proj3Place, setProj3Place] = useState('');
+    const [ProjStartMonth, setProjStartMonth] = useState('');
+    const [ProjStartYear, setProjStartYear] = useState('');
+    const [ProjEndMonth, setProjEndMonth] = useState('');
+    const [ProjEndYear, setProjEndYear] = useState('');
+    const [ProjPlace, setProjPlace] = useState('');
 
     const { register, handleSubmit, watch, formState: { errors }, getValues, setValue } = useForm();
 
-    const Proj3Name = watch('Proj3Name');
-    const Proj3Role = watch('Proj3Role');
-    const Proj3Evidence = watch('Proj3Evidence');
+    const ProjName = watch('ProjName');
+    const ProjRole = watch('ProjRole');
+    const ProjEvidence = watch('ProjEvidence');
 
     const Proj_Skills = ['c#','react','java'];
-    const [Proj3Skills, setProj3Skills] = useState([]);//usestate for autocomplete
+    const [ProjSkills, setProjSkills] = useState([]);//usestate for autocomplete
     const [ProjectEvdUrl, setProjectEvdUrl] = useState('');
     const [ProjectEvdFetchUrl, setProjectEvdFetchUrl] = useState('');
 
     const maxSelections = 3;//max value for the autocomplete
 
-    const handleProj3Skills = (event, newSkill) => {
+    const handleProjSkills = (event, newSkill) => {
         if (newSkill.length <= maxSelections) {
-            setProj3Skills(newSkill);
+            setProjSkills(newSkill);
         }
     };
     const isOptionDisabled = (option) => {
-        return Proj3Skills.length >= maxSelections && !Proj3Skills.includes(option);
+        return ProjSkills.length >= maxSelections && !ProjSkills.includes(option);
     };
     
     const handleFileUploadSuccess = (url) => {
@@ -113,17 +113,17 @@ const Projects3 = () => {
             const finalProjectEvd = ProjectEvdUrl || ProjectEvdFetchUrl;
 
             const formData = {
-                Proj3Name,
-                Proj3Type,
-                Proj3Status,
-                Proj3Role,
-                Proj3StartMonth,
-                Proj3StartYear,
-                Proj3EndMonth,
-                Proj3EndYear,
-                Proj3Place,
-                Proj3Evidence,
-                Proj3Skills,
+                ProjName,
+                ProjType,
+                ProjStatus,
+                ProjRole,
+                ProjStartMonth,
+                ProjStartYear,
+                ProjEndMonth,
+                ProjEndYear,
+                ProjPlace,
+                ProjEvidence,
+                ProjSkills,
                 ProjectEvdUrl: finalProjectEvd,
             };
 
@@ -181,18 +181,18 @@ const Projects3 = () => {
                     if (projectData) {
                         
 
-                        setValue('Proj3Name', projectData.Proj3Name || '');
-                        setValue('Proj3Evidence', projectData.Proj3Evidence || '');
-                        setValue('Proj3Role', projectData.Proj3Role || '');
+                        setValue('ProjName', projectData.ProjName || '');
+                        setValue('ProjEvidence', projectData.ProjEvidence || '');
+                        setValue('ProjRole', projectData.ProjRole || '');
 
-                        setProj3Type(projectData.Proj3Type || '');
-                        setProj3Status(projectData.Proj3Status || '');
-                        setProj3StartMonth(projectData.Proj3StartMonth || '');
-                        setProj3StartYear(projectData.Proj3StartYear || '');
-                        setProj3EndMonth(projectData.Proj3EndMonth || '');
-                        setProj3EndYear(projectData.Proj3EndYear || '');
-                        setProj3Place(projectData.Proj3Place || '');
-                        setProj3Skills(projectData.Proj3Skills || []);
+                        setProjType(projectData.ProjType || '');
+                        setProjStatus(projectData.ProjStatus || '');
+                        setProjStartMonth(projectData.ProjStartMonth || '');
+                        setProjStartYear(projectData.ProjStartYear || '');
+                        setProjEndMonth(projectData.ProjEndMonth || '');
+                        setProjEndYear(projectData.ProjEndYear || '');
+                        setProjPlace(projectData.ProjPlace || '');
+                        setProjSkills(projectData.ProjSkills || []);
                         setProjectEvdFetchUrl(projectData.ProjectEvdUrl|| null);
                     }
                 } else {
@@ -209,7 +209,7 @@ const Projects3 = () => {
     
     return(
         <div className="formtemp-page">
-            <InterviewFormHeader title='Third Project' />
+            <InterviewFormHeader title='Project 3/3' />
             <div className="formtemp-bodyform">
                 <Grid container spacing={2} style={{ height: '100%' }}>
                     <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
@@ -221,14 +221,14 @@ const Projects3 = () => {
                                         <Grid container>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>Project Name</Typography>
-                                                {/* <TextField type="text" variant="outlined" value={Proj3Name} onChange={(event) => setProj3Name(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='CV Builder'/> */}
+                                                {/* <TextField type="text" variant="outlined" value={ProjName} onChange={(event) => setProjName(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='CV Builder'/> */}
                                                 <TextField type="text" variant="outlined" fullWidth required  
-                                                value={Proj3Name}
+                                                value={ProjName}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder='CV Builder'
-                                                {...register("Proj3Name", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                {...register("ProjName", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
                                                 />
-                                                {errors.Proj3Name &&  "Please enter only letters"}
+                                                {errors.ProjName &&  "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={1}>
                                                 <Typography><span style={{color: 'red'}}>*</span>Was it an individual or a group project?</Typography>
@@ -236,13 +236,13 @@ const Projects3 = () => {
                                             <Grid item xs={12} md={6} mb={3}>
                                                 {/* <EditableChoose
                                                     options={["Project Type", "Group Project","Individual Project"]}
-                                                    onSelect={setProj3Type}
+                                                    onSelect={setProjType}
                                                     disabledOptions={[]}
                                                 /> */}
                                                 <FormControl variant="outlined" fullWidth>
                                                     <Select
-                                                        value={Proj3Type}
-                                                        onChange={(event) => setProj3Type(event.target.value)}
+                                                        value={ProjType}
+                                                        onChange={(event) => setProjType(event.target.value)}
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD'}} />}
                                                         IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
@@ -258,21 +258,21 @@ const Projects3 = () => {
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>What was your role in the project</Typography>
-                                                {/* <TextField type="text" variant="outlined" value={Proj3Role} onChange={(event) => setProj3Role(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Full stack developer'/> */}
+                                                {/* <TextField type="text" variant="outlined" value={ProjRole} onChange={(event) => setProjRole(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Full stack developer'/> */}
                                                 <TextField type="text" variant="outlined" fullWidth required  
-                                                value={Proj3Role}
+                                                value={ProjRole}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder='Full stack developer'
-                                                {...register("Proj3Role", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                {...register("ProjRole", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
                                                 />
-                                                {errors.Proj3Role &&  "Please enter only letters"}
+                                                {errors.ProjRole &&  "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} >
                                                 <Typography><span style={{color: 'red'}}>*</span>Are you still working on the project?</Typography>
                                             </Grid>
                                             <Grid item xs={12} mb={2} pl={2}>
                                                 <FormControl>
-                                                    <RadioGroup row name="project-working-status" value={Proj3Status} onChange={(event) => setProj3Status(event.target.value)}>
+                                                    <RadioGroup row name="project-working-status" value={ProjStatus} onChange={(event) => setProjStatus(event.target.value)}>
                                                         <FormControlLabel value="yes" control={<Radio />} label="Yes" required/>
                                                         <FormControlLabel value="no" control={<Radio />} label="No" />
                                                     </RadioGroup>
@@ -286,8 +286,8 @@ const Projects3 = () => {
                                                                 multiple
                                                                 id="tags-outlined"
                                                                 options={Proj_Skills}
-                                                                value={Proj3Skills} 
-                                                                onChange={handleProj3Skills}
+                                                                value={ProjSkills} 
+                                                                onChange={handleProjSkills}
                                                                 filterSelectedOptions
                                                                 disableCloseOnSelect
                                                                 getOptionDisabled={isOptionDisabled}
@@ -323,13 +323,13 @@ const Projects3 = () => {
                                             <Grid item xs={6} pr={1}>
                                                 {/* <EditableChoose
                                                     options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                                                    onSelect={setProj3StartMonth}
+                                                    onSelect={setProjStartMonth}
                                                     disabledOptions={[]}
                                                 /> */}
                                                 <FormControl variant="outlined" fullWidth>
                                                     <Select
-                                                        value={Proj3StartMonth}
-                                                        onChange={(event) => setProj3StartMonth(event.target.value)}
+                                                        value={ProjStartMonth}
+                                                        onChange={(event) => setProjStartMonth(event.target.value)}
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
                                                         IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
@@ -345,13 +345,13 @@ const Projects3 = () => {
                                             <Grid item xs={6} mb={3} pl={1}>
                                                 {/* <EditableChoose
                                                     options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                                                    onSelect={setProj3StartYear}
+                                                    onSelect={setProjStartYear}
                                                     disabledOptions={["2024"]}
                                                 /> */}
                                                 <FormControl variant="outlined" fullWidth>
                                                     <Select
-                                                        value={Proj3StartYear}
-                                                        onChange={(event) => setProj3StartYear(event.target.value)}
+                                                        value={ProjStartYear}
+                                                        onChange={(event) => setProjStartYear(event.target.value)}
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
                                                         IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
@@ -370,13 +370,13 @@ const Projects3 = () => {
                                             <Grid item xs={6} pr={1}>
                                                 {/* <EditableChoose
                                                     options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                                                    onSelect={setProj3EndMonth}
+                                                    onSelect={setProjEndMonth}
                                                     disabledOptions={[]}
                                                 /> */}
                                                  <FormControl variant="outlined" fullWidth>
                                                     <Select
-                                                        value={Proj3EndMonth}
-                                                        onChange={(event) => setProj3EndMonth(event.target.value)}
+                                                        value={ProjEndMonth}
+                                                        onChange={(event) => setProjEndMonth(event.target.value)}
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
                                                         IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
@@ -392,13 +392,13 @@ const Projects3 = () => {
                                             <Grid item xs={6} mb={3} pl={1}>
                                                 {/* <EditableChoose
                                                     options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                                                    onSelect={setProj3EndYear}
+                                                    onSelect={setProjEndYear}
                                                     disabledOptions={["2024"]}
                                                 /> */}
                                                 <FormControl variant="outlined" fullWidth>
                                                     <Select
-                                                        value={Proj3EndYear}
-                                                        onChange={(event) => setProj3EndYear(event.target.value)}
+                                                        value={ProjEndYear}
+                                                        onChange={(event) => setProjEndYear(event.target.value)}
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
                                                         IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
@@ -417,13 +417,13 @@ const Projects3 = () => {
                                             <Grid item xs={12} md={5} mb={3}>
                                                 {/* <EditableChoose
                                                     options={["Place", "University","University"]}
-                                                    onSelect={setProj3Place}
+                                                    onSelect={setProjPlace}
                                                     disabledOptions={[]}
                                                 /> */}
                                                  <FormControl variant="outlined" fullWidth>
                                                     <Select
-                                                        value={Proj3Place}
-                                                        onChange={(event) => setProj3Place(event.target.value)}
+                                                        value={ProjPlace}
+                                                        onChange={(event) => setProjPlace(event.target.value)}
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD'}} />}
                                                         IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
@@ -439,14 +439,14 @@ const Projects3 = () => {
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>Project evidence</Typography>
-                                                {/* <TextField type="text" variant="outlined" value={Proj3Evidence} onChange={(event) => setProj3Evidence(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='CV Builder'/> */}
+                                                {/* <TextField type="text" variant="outlined" value={ProjEvidence} onChange={(event) => setProjEvidence(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='CV Builder'/> */}
                                                 <TextField type="text" variant="outlined" fullWidth required  
-                                                value={Proj3Evidence}
+                                                value={ProjEvidence}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder=''
-                                                {...register("Proj3Evidence", { maxLength: 30, pattern: /^[a-zA-Z\s0-9.,@]+$/ })}
+                                                {...register("ProjEvidence", { maxLength: 30, pattern: /^[a-zA-Z\s0-9.,@]+$/ })}
                                                 />
-                                                {errors.Proj3Evidence &&  "Only accepts letters, numbers and (. , @)"}
+                                                {errors.ProjEvidence &&  "Only accepts letters, numbers and (. , @)"}
                                             </Grid>
                                             <Grid item xs={12} mb={2} style={{display: 'flex', justifyContent: 'center'}}>
                                                 <Typography>-OR-</Typography>
