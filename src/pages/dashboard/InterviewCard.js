@@ -38,10 +38,13 @@ const InterviewCard = () => {
     const interviewId = searchParams.get('id');
 
     const handleFileUploadSuccess = (url) => {
-        setCoverImageUrl(url.downloadURL);
-        console.log(url);
-      };
-
+        console.log('File upload successful:', url);
+        setCoverImageUrl(prevUrl => url.downloadURL);
+        console.log('coverImageUrl:', coverImageUrl);
+        
+    };
+    
+    
       const handleReset = () => {
         // Your reset logic here
         console.log('Reset button clicked');
@@ -90,6 +93,10 @@ const InterviewCard = () => {
         fetchUserData();
     }, []);
 
+    
+
+
+
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -112,6 +119,8 @@ const InterviewCard = () => {
 
         }catch (err) { console.log('error adding details', err.message) }
     };
+
+   
 
     const navigate = useNavigate();
     const deleteCardBtn = async (event) => {
@@ -278,7 +287,7 @@ const InterviewCard = () => {
                                 </Button>
                             </Grid>
                             <Grid item xs={5} md={3}>
-                                <Button type="submit" href="/interviewDash" 
+                                <Button onClick={handleSubmit} type="submit" href="/interviewDash" 
                                     sx={{
                                         backgroundColor:'#000000',
                                         width:'100px',

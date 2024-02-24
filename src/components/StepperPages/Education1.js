@@ -183,7 +183,7 @@ const School1 = () => {
 
     return(
         <div className="formtemp-page">
-            <InterviewFormHeader title='Latest School' />
+            <InterviewFormHeader title='Latest School (School 1/2)' />
             <div className="formtemp-bodyform">
                 <Grid container spacing={2} style={{ height: '100%' }}>
                     <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
