@@ -27,10 +27,13 @@ const InterviewBankEdit = () => {
     const [field, setField] = useState('');
     const [description, setDescription] = useState('');
     const [trnscrptDtls, setTrnscrptdtls] = useState(['']);
+    const [coverImageUrl, setCoverImageUrl] = useState('');
+    const [coverImageFetchUrl, setCoverImageFetchUrl] = useState('');
 
     const handleFileUploadSuccess = (url) => {
-        // setProfilePictureUrl(url.downloadURL);
-        console.log(url);
+        console.log('File upload successful:', url);
+        setCoverImageUrl(prevUrl => url.downloadURL);
+        console.log('coverImageUrl:', coverImageUrl);
     };
     const handleReset = () => {
         // Your reset logic here
@@ -65,6 +68,7 @@ const InterviewBankEdit = () => {
                 description: description,
                 transcript: trnscrptDtls,
                 createdAt: serverTimestamp(),
+                coverImage: coverImageUrl,
             })
             console.log('interview card added', docRef.id);
             setTopic('');
@@ -72,6 +76,7 @@ const InterviewBankEdit = () => {
             setFaculty('');
             setDescription('');
             setTrnscrptdtls(['']);
+            setCoverImageUrl('');
 
         }catch (err) { console.log('error adding details', err.message) }
     };
@@ -87,12 +92,12 @@ const InterviewBankEdit = () => {
                     <Grid container>
                         <Grid item xs={12} mb={6}><Typography variant="h4" fontWeight='bold'>Interview Bank Edit</Typography></Grid>
                         <Grid item xs={12} mb={1}>
-                            <Typography>Change cover image</Typography>
+                            <Typography>Add cover image</Typography>
                         </Grid>
                         <Grid item xs={12} md={6} mb={4}>
                             <FileUpload onFileUpload={handleFileUploadSuccess} onUploadSuccess={handleFileUploadSuccess} onReset={handleReset}    />
                             {/* {profilePictureFetchUrl && profilePictureFetchUrl !== ' ' &&  <p style={{marginTop:'1rem',marginLeft:'1rem'}}>Current cover image</p>}
-                            {profilePictureFetchUrl && profilePictureFetchUrl !== ' ' && <img src={profilePictureFetchUrl} alt="Profile Picture"  style={{ width: '100px', height: '100px', objectFit: 'cover',marginLeft:'1rem',border: '1px solid black' }}  />} */}                            
+                            {profilePictureFetchUrl && profilePictureFetchUrl !== ' ' && <img src={profilePictureFetchUrl} alt="Profile Picture"  style={{ width: '100px', height: '100px', objectFit: 'cover',marginLeft:'1rem',border: '1px solid black' }}  />}                             */}
                         </Grid>
                         <Grid item xs={12} mb={3}>
                             <Typography mb={1}>Topic</Typography>
