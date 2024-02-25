@@ -1,17 +1,14 @@
+import { useNavigate } from "react-router-dom";
 import  React,{ useEffect, useState } from "react";
-import Grid from "@mui/material/Unstable_Grid2";
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import DashboardHeader from "./dashboardHeader";
 import { DataGrid } from '@mui/x-data-grid';
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import DeleteIcon from '@mui/icons-material/Delete'; // Import DeleteIcon
-import EditIcon from '@mui/icons-material/Edit'; // Import EditIcon
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
-import { blue } from "@mui/material/colors";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { getFirestore } from "firebase/firestore";
 import Dialog from '@mui/material/Dialog';
@@ -23,51 +20,19 @@ import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 
 
-  const feedbackColumns = [
-    { field: 'id', headerName: 'Email', width: 400 }, 
-    { field: 'name', headerName: 'Name', width: 300 }, 
-    { field: 'time', headerName: 'Time', width: 300 },
-    {
-      field: 'action',
-      headerName: 'Action',
-    //   description: 'This column has a value getter and is not sortable.',
-      sortable: false,
-      width: 155,
-      renderCell: () => (
-        <>
-            <Button
-                // variant="contained"
-                // color="warning"
-                variant="contained" 
-                sx={{borderRadius:"25px",backgroundColor: '#242624',height:'28px'}}
-                >
-                    Open review
-            </Button>
-        </>
-      ),
-    },
-];
-  
-const feedbackRows = [
-    { id: "isuruushan2003@gmail.com", name: 'Snow', time: '30s'},
-    { id: "Darrenvictoria@gmail.com", name: 'Snow', time: '30s'},
-    { id: "isuruushan2004@gmail.com", name: 'Snow', time: '30s'},
-    { id: "isuruushan2005@gmail.com", name: 'Snow', time: '30s'},
-    { id: "Darrenvictoria1@gmail.com", name: 'Snow', time: '30s'},
-    { id: "Darrenvictoria2@gmail.com", name: 'Snow', time: '30s'},
-    { id: "Darrenvictoria3@gmail.com", name: 'Snow', time: '30s'},
-    { id: "Darrenvictoria4@gmail.com", name: 'Snow', time: '30s'},
-    { id: "Darrenvictoria5@gmail.com", name: 'Snow', time: '30s'},
-];
+
 const ResumeManagement = () => {
     
   const [resumeRows, setResumeRows] = useState([]);
+  const [feedbackRows, setFeedbackRows] = useState([]);
+  const [cvfeedbackCount, setcvfeedbackCount] = useState(0);
   const [openDialog, setOpenDialog] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
-
+  const navigate = useNavigate(); // Initialize useHistory hook
   useEffect(() => {
     fetchResumeData();
+    fetchFeedbackData();
   }, []);
 
   const firestore = getFirestore();
@@ -121,7 +86,7 @@ const ResumeManagement = () => {
       renderCell: (params) => (
         <>
           <IconButton onClick={() => handleDeleteRow(params.row.id)}>
-              <DeleteIcon />{/* Edit functionality to be implemented later */}
+              <DeleteIcon />
           </IconButton>
           
         </>
@@ -149,6 +114,83 @@ const handleConfirmDelete = async () => {
 const handleCloseSnackbar = () => {
   setSuccessMessage("");
 };
+
+const fetchFeedbackData = async () => {
+  const feedbackCollectionRef = collection(firestore, "cvfeedback");
+  const snapshot = await getDocs(feedbackCollectionRef);
+  setcvfeedbackCount(snapshot.size);
+  console.log(feedbackCollectionRef);
+  const data = snapshot.docs.map((doc) => {
+      const data = doc.data();
+      return {
+          id: doc.id,
+          email: data.email || "",
+          feedback:data.feedback || "",
+          accuracy: data.accuracy || 0,
+          customization: data.customization || 0,
+          experience: data.experience || 0,
+          quality: data.quality || 0,
+          date: data.addedAt ? new Date(data.addedAt .seconds * 1000) : null,
+      };
+  });
+
+  // Calculate average feedback
+  data.forEach(row => {
+      row.averageFeedback = (row.accuracy + row.customization + row.experience + row.quality) / 4;
+  });
+
+  setFeedbackRows(data);
+};
+
+const feedbackColumns = [
+  { field: 'id', headerName: 'ID', width: 300 },
+  { field: 'email', headerName: 'Email', width: 300 },
+  { field: 'averageFeedback', headerName: 'Average Feedback', width: 300 },
+  { field: 'date', headerName: 'Date', width: 300 },
+  {
+      field: 'View',
+      headerName: 'View',
+      sortable: false,
+      width: 255,
+      renderCell: (params) => (
+          <>
+              <Button
+                  variant="contained"
+                  sx={{ borderRadius: "25px", backgroundColor: '#242624', height: '28px' }}
+                  onClick={() => handleViewFeedback(params)}
+              >
+                  View
+              </Button>
+          </>
+      ),
+  },
+];
+const handleViewFeedback = (params) => {
+  // Check if params and params.row exist and have the id property
+  if (params && params.row && params.row.id) {
+    // Logic to view feedback details for the given ID
+    console.log("View feedback for ID:", params.row.id);
+    // Find the feedback data corresponding to the ID
+    const feedbackData = params.row;
+    // Navigate to ViewFeedback page and pass the feedbackData as state
+    navigate("/viewfeedback", { state: { feedbackData } });
+    console.log("feedback ", feedbackData);
+  } else {
+    console.error("Invalid params or params.row:", params);
+  }
+};
+
+// const handleViewFeedback = (id) => {
+//   // Logic to view feedback details for the given ID
+//   console.log("View feedback for ID:", id);
+//   // Find the feedback data corresponding to the ID
+//   const feedbackData = id;
+//   // Navigate to ViewFeedback page and pass the feedbackData as state
+//   navigate("/viewfeedback", {feedbackData: feedbackData });
+//   console.log("View feedback ", feedbackData);
+// };
+
+
     return ( 
             <Box sx={{ display: 'flex'}}>
                 <DashboardHeader />
@@ -156,13 +198,13 @@ const handleCloseSnackbar = () => {
                     <Toolbar />
                     
                     <div style={{display: "flex",alignItems: "center",justifyContent: "center"}}>
-                      <div style={{textAlign:"left",maxWidth:730,width:"100%",paddingBottom:"10px"}}>
-                      
+                      {/* <div style={{textAlign:"left",maxWidth:730,width:"100%",paddingBottom:"10px"}}> */}
+                      <div style={{textAlign:"left",maxWidth:1460,width:"100%",paddingBottom:"10px"}}>
                         <h2>All Resumes</h2>
                 
                 
                       </div>
-                      <div style={{textAlign:"right",maxWidth:730,width:"100%",paddingBottom:"10px"}}>
+                      {/* <div style={{textAlign:"right",maxWidth:730,width:"100%",paddingBottom:"10px"}}>
                       
                             <Button
                             
@@ -173,7 +215,7 @@ const handleCloseSnackbar = () => {
                             </Button>
                       
                       
-                      </div>
+                      </div> */}
                     </div>
                     <Box sx={{ flexGrow: 1,display: "flex",alignItems: "center",justifyContent: "center"}}>
                       
@@ -200,7 +242,7 @@ const handleCloseSnackbar = () => {
                         <p>Overall user experience of the CV generator platform</p>
                 
                       </div>
-                      <div style={{textAlign:"right",maxWidth:730,width:"100%",paddingBottom:"10px"}}>
+                      <div style={{textAlign:"center",maxWidth:730,width:"100%",paddingBottom:"10px"}}>
                       
                         <Card
                             sx={{
@@ -214,8 +256,8 @@ const handleCloseSnackbar = () => {
                             flexDirection: "column",
                             alignItems: "center",
                             justifyContent: "center",
-                            bgcolor: blue[800],
-                            color: 'white',
+                            bgcolor: "white",
+                            color: 'black',
                             marginLeft: "auto"
                             }}
                         >
@@ -225,22 +267,23 @@ const handleCloseSnackbar = () => {
                             //     {/* You can add an icon here if you want */}
                             //     </Avatar>
                             // }
-                            // title="Feedbacks"
-                            subheader="123"
+                            title="Feedbacks"
+                            subheader={cvfeedbackCount}
                             sx={{
-                                "& .MuiCardHeader-title": {
-                                fontSize: "13px",
-                                fontWeight: "bold",
-                                paddingRight: "1px",
-                                },
-                                "& .MuiCardHeader-subheader": {
-                                fontSize: "20px",
-                                fontWeight: "bold",
-                                color: "white",                                        
-                                },
+                              "& .MuiCardHeader-title": {
+                              fontSize: "21px",
+                              fontWeight: "bold",
+                              
+                              },
+                              "& .MuiCardHeader-subheader": {
+                              fontSize: "20px",
+                              fontWeight: "bold",
+                              paddingTop:"30px",
+                              color: "black",
+                              },
                             }}
                             />
-                            <CardHeader
+                            {/* <CardHeader
                             subheader="Feedbacks"
                             sx={{
                                 "& .MuiCardHeader-title": {
@@ -251,10 +294,10 @@ const handleCloseSnackbar = () => {
                                 "& .MuiCardHeader-subheader": {
                                 fontSize: "20px",
                                 fontWeight: "bold",
-                                color: "white",                                        
+                                color: "black",                                        
                                 },
                             }}
-                            />
+                            /> */}
                         </Card>
                     
                       

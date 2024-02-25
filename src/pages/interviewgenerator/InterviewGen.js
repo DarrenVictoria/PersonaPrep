@@ -97,14 +97,24 @@ export default function AudioTranscriptionComponent() {
                        
                       </Grid>
                       <Grid xs={6}md={6} mt={2}>
-                        <button onClick={handleStartRecording} disabled={isRecording}>
-                          Start Recording
-                        </button>
+                      <Button
+                        variant="contained" 
+                        sx={{borderRadius:"25px",backgroundColor: '#242624'}}
+                        onClick={handleStartRecording}
+                        disabled={isRecording}
+                        >
+                           Start Recording
+                        </Button>
                       </Grid>
                       <Grid xs={6}md={6} mt={2}>
-                        <button onClick={handleStopRecording} disabled={!isRecording}>
-                          Stop Recording
-                        </button>
+                        <Button
+                        variant="contained" 
+                        sx={{borderRadius:"25px",backgroundColor: '#242624'}}
+                        onClick={handleStopRecording}
+                        disabled={!isRecording}
+                        >
+                           Stop Recording
+                        </Button>
                       </Grid>
 
                       {/* Display chat response */}

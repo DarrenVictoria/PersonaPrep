@@ -15,6 +15,7 @@
     "dotenv": "^16.3.1",
     "firebase": "^10.7.2",
     "flowbite-react": "^0.6.4",
+    "html2pdf.js": "^0.10.1",
     "mdb-react-ui-kit": "^7.0.0",
     "os-browserify": "^0.3.0",
     "path-browserify": "^1.0.1",

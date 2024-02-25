@@ -241,7 +241,7 @@ useEffect(() => {
                                       </Grid>
                                       <Grid item xs={12}>
                                         
-                                        <Typography ><span style={{color: 'red'}}>*</span> Project Description</Typography>
+                                        <Typography ><span style={{color: 'red'}}>*</span> Publication Description</Typography>
                                         {/* <CustomMultilineTextFields  height="115px" value={PblDesc} onChange={(event) => setPblDesc(event.target.value)} required /> */}
                                         <CustomMultilineTextFieldslimited
                                             inputHeight="150px"

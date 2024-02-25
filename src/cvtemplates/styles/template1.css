@@ -1,0 +1,260 @@
+.cvbody{
+    background-color: #000;
+   
+}
+.cvbody{
+    background-color: white;
+    width: 794px;
+    height: 2200px;
+    margin: 0 auto;
+    font-family: 'Inter', sans-serif;
+    border: 1px solid black;
+}
+/*right contact pane*/
+.contactPane{
+    padding: 35px 15px;
+    width: 38%;
+    height: 136rem;
+    background-color: #EDE2D9;
+    overflow:hidden;
+}
+.profile{
+    width: 14rem;
+    height: 14rem;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+.profileImage{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.section{
+    width: 100%;
+    height: 22%;
+}
+/*Contact details section*/
+.contactSection{
+    width: 14rem;
+    height: 14rem;
+    margin: 20px;
+    max-width: 300px;
+}
+.contactSection h3{
+    color: #5E5854;
+    font-size: 20px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+
+}
+.contactDetails {
+    display: flex;
+    flex-direction: column;
+    margin-top: -20px;
+}
+.contactItem {
+    display: flex;
+    align-items: center;
+    gap: 15px;  
+}
+.contactItem img {
+    min-width: 20px;  
+}
+.contactItem p {
+    overflow-wrap: break-word;
+    width: 100%;/*word wrap thing*/
+}
+.contacth3{
+    padding-bottom: 20px;
+}
+/*links sections*/
+.links {
+    display: flex;
+    flex-direction: column;
+    margin-top: -5px;
+}
+.linkItem {
+    display: flex;
+    align-items: center;
+    gap: 20px;  
+    margin-bottom: -10px;
+}
+.linkItem img {
+    min-width: 20px;  
+}
+.linkItem p {
+    overflow-wrap: break-word;
+    width: 90%;/*word wrap thing*/
+    text-decoration: underline;
+}
+/*school education*/
+.schools {
+    display: flex;
+    flex-direction: column;
+    margin-top: -5px;
+}
+.schoolInfo {
+    align-items: center;
+    gap: 20px;  
+    margin-bottom: -10px;
+}
+.school-year{
+    overflow-wrap: break-word;
+    width: 90%;/*word wrap thing*/
+    color: #8D8782;
+    margin-bottom: -4px;
+}
+.school-name{
+    overflow-wrap: break-word;
+    font-size: 15;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: -10px;
+}
+.school-location{
+    overflow-wrap: break-word;
+    width: 90%;/*word wrap thing*/
+    color:#5E5854;
+}
+ 
+.OL-marks{
+    display: inline-block;  
+    margin-right: 5px;  
+  }
+/*clubs and societies*/                                                                                                                              
+.club-name{
+    overflow-wrap: break-word;
+    font-size: 10;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: -10px;
+    color: #5E5854;
+}
+.club-role{
+    display: inline-block;  
+    margin-right: 5px;  
+  }
+.society-name{
+    margin-top: 5px;
+    font-weight: 600;
+}
+/*Skills*/
+.skillItem li {
+    overflow-wrap: break-word;
+    width: 90%;/*word wrap thing*/
+    line-height: 2;
+    padding-right: -80px;
+     
+}
+/*references*/
+.reference-number{
+    margin-top: -8px;
+}
+.research-intrests{
+    line-height: 2;
+}
+
+/*left container section!!!!*/
+.left-container {
+    width: calc(100% - 42%);
+    height: 69.9rem;
+    background-color:white;  
+    float: right;
+}
+.left-container h2{
+    font-size: 55px;
+    text-transform: uppercase;
+}
+.job-field{
+    font-size: 18px;
+    margin-top: -20px;
+    text-transform:capitalize;
+    color: #8D8782;
+}
+.professional-summary{
+    margin-right: 80px;
+    line-height: 1.5;
+}
+.left-topics{
+    margin-top: 15px;
+    font-size: 25px;
+    text-transform:uppercase;
+}
+/*work experience*/
+.work-year{
+    margin-top: -10px;
+    color:#8D8782;
+    margin-bottom: -4px;
+}
+.work-role{
+    margin-top: 15px;
+    font-size: 22px;
+    font-weight: 600;
+}
+.company-name{
+    margin-top: -15px;
+}
+.company-description{
+    margin-top: -5px;
+    margin-right: 100px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+/*university*/
+.university{
+    font-size: 17px;
+    font-weight: 600;
+    margin-top: -10px;
+}
+.university-location{
+    margin-top: -10px;
+    font-size: 14px; 
+    margin-bottom: 20px;
+}
+/*projects*/
+.project-evidence{
+    margin-top: -5px;
+    font-size: 17px;
+    text-decoration: underline;
+    margin-bottom: 20px;
+}
+.project-location{
+    font-size: 17px;
+    margin-top: -10px;
+}
+.project-skills{
+    margin-top: -5px;
+    font-weight: 550;
+    margin-bottom: 20px;
+}
+/*certifications*/
+.certifications{
+    display: flex;
+    gap: 20px;   
+    margin-bottom: -20px;
+}
+.certification-name{
+    margin-top:15px;
+    font-size: 20px;
+    font-weight: bold;
+    
+}
+.certification-organization{
+    margin-top: -13px;
+    text-transform: capitalize;
+}
+/*awards*/
+.awards{
+    margin-top: -30px;
+    display: flex;
+    gap: 20px;  
+    margin-bottom: -20px;
+}
+/*publications*/
+.publication-url{
+    margin-top: -5px;
+    font-size: 17px;
+    text-decoration: underline;
+    margin-bottom: 20px;
+}
+
