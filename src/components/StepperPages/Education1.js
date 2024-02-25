@@ -60,9 +60,13 @@ const School1 = () => {
         {value: 'November', label: 'November'},
         {value: 'December', label: 'December'}
     ];
-    const yearOption = ["2024"];
-        for (let year = 2023; year >= 1990; year--) {
-        yearOption.push(String(year));
+    const StartyearOption = ["2024"];
+        for (let year = 2023; year >= 2000; year--) {
+            StartyearOption.push(String(year));
+        }
+    const EndyearOption = ["2024"];
+        for (let year = 2023; year >= 2015; year--) {
+            EndyearOption.push(String(year));
         }
     const { currentUser } = useAuth();
 
@@ -286,7 +290,7 @@ const School1 = () => {
                                                         required
                                                     >
                                                         <MenuItem value="">Year</MenuItem>
-                                                        {yearOption.map(year => (
+                                                        {StartyearOption.map(year => (
                                                             <MenuItem key={year} value={year}>{year}</MenuItem>
                                                         ))}
                                                     </Select>
@@ -335,7 +339,7 @@ const School1 = () => {
                                                         required
                                                     >
                                                         <MenuItem value="">Year</MenuItem>
-                                                        {yearOption.map(year => (
+                                                        {EndyearOption.map(year => (
                                                             <MenuItem key={year} value={year}>{year}</MenuItem>
                                                         ))}
                                                     </Select>
