@@ -28,7 +28,7 @@ const Education_2 = () => {
     const { currentUser } = useAuth();
 
     const yearOption = ["2024"];
-        for (let year = 2023; year >= 1990; year--) {
+        for (let year = 2023; year >= 2010; year--) {
         yearOption.push(String(year));
         }
     
@@ -219,7 +219,6 @@ const Education_2 = () => {
                                                                 <MenuItem value="B">B</MenuItem>
                                                                 <MenuItem value="C">C</MenuItem>
                                                                 <MenuItem value="S">S</MenuItem>
-                                                                <MenuItem value="F">F</MenuItem>
                                                             </Select>
                                                         </FormControl>
                                                     </Grid>

@@ -23,7 +23,7 @@ const TemplateSelection = () => {
     const [typography, setTypography] = useState('');
 
     const navigate = useNavigate();
-    const prevPage = () => navigate('finalisesummary');
+    const prevPage = () => navigate('/finalisesummary');
 
     useEffect(() => {
         const fetchData = async () => {
@@ -60,6 +60,7 @@ const TemplateSelection = () => {
                 cvColor: primarycolor,
                 fontColor:secondarycolor,
                 typography: typography,
+                cvstatus: 'created'
             };
 
             if(existingDoc){
@@ -71,7 +72,7 @@ const TemplateSelection = () => {
             //     console.log('document created with id', existingDoc.id);
             // }
 
-            navigate('/feedback');
+            navigate(`/${template}`);
         }catch (err) {
             console.log('error updating details', err.message);
         }
@@ -143,36 +144,36 @@ const TemplateSelection = () => {
                                                                 <tr className="TemplateSelection-TemplateRow">
                                                                     <td className="TemplateSelection-TemplateCell-Left">
                                                                         <div className="TemplateSelection-Templatediv FirstRowTemplatediv1">
-                                                                            <button onClick={(e) => {e.preventDefault(); setTemplate('template 1')}}><img src={image5} alt='image'className='TemplateSelection-image'/></button>
+                                                                            <button onClick={(e) => {e.preventDefault(); setTemplate('template1')}}><img src={image5} alt='image'className='TemplateSelection-image'/></button>
                                                                         </div>
                                                                     </td>
                                                                     <td className="TemplateSelection-TemplateCell-Right">
                                                                         <div className="TemplateSelection-Templatediv FirstRowTemplatediv2">
-                                                                            <button onClick={(e) => {e.preventDefault(); setTemplate('template 2')}}><img src={image5} alt='image'className='TemplateSelection-image'/></button>
+                                                                            <button onClick={(e) => {e.preventDefault(); setTemplate('template2')}}><img src={image5} alt='image'className='TemplateSelection-image'/></button>
                                                                         </div>
                                                                     </td>
                                                                 </tr>
                                                                 <tr className="TemplateSelection-TemplateRow">
                                                                     <td className="TemplateSelection-TemplateCell-Left">
                                                                         <div className="TemplateSelection-Templatediv SecondRowTemplatediv1">
-                                                                            <button onClick={(e) => {e.preventDefault(); setTemplate('template 3')}}><img src={image5} alt='image'className='TemplateSelection-image'/></button>
+                                                                            <button onClick={(e) => {e.preventDefault(); setTemplate('template3')}}><img src={image5} alt='image'className='TemplateSelection-image'/></button>
                                                                         </div>
                                                                     </td>
                                                                     <td className="TemplateSelection-TemplateCell-Right">
                                                                         <div className="TemplateSelection-Templatediv SecondRowTemplatediv2">
-                                                                            <button onClick={(e) => {e.preventDefault(); setTemplate('template 4')}}><img src={image5} alt='image'className='TemplateSelection-image'/></button>
+                                                                            <button onClick={(e) => {e.preventDefault(); setTemplate('template4')}}><img src={image5} alt='image'className='TemplateSelection-image'/></button>
                                                                         </div>
                                                                     </td>
                                                                 </tr>
                                                                 <tr className="TemplateSelection-TemplateRow">
                                                                     <td className="TemplateSelection-TemplateCell-Left">
                                                                         <div className="TemplateSelection-Templatediv ThirdRowTemplatediv1">
-                                                                            <button onClick={(e) => {e.preventDefault(); setTemplate('template 5')}}><img src={image5} alt='image'className='TemplateSelection-image'/></button>
+                                                                            <button onClick={(e) => {e.preventDefault(); setTemplate('template5')}}><img src={image5} alt='image'className='TemplateSelection-image'/></button>
                                                                         </div>
                                                                     </td>
                                                                     <td className="TemplateSelection-TemplateCell-Right">
                                                                         <div className="TemplateSelection-Templatediv ThirdRowTemplatediv2">
-                                                                            <button onClick={(e) => {e.preventDefault(); setTemplate('template 6')}}><img src={image5} alt='image'className='TemplateSelection-image'/></button>
+                                                                            <button onClick={(e) => {e.preventDefault(); setTemplate('template6')}}><img src={image5} alt='image'className='TemplateSelection-image'/></button>
                                                                         </div>
                                                                     </td>
                                                                 </tr>

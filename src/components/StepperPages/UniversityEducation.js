@@ -45,9 +45,13 @@ const UniversityEducation1 = () => {
         {value: 'November', label: 'November'},
         {value: 'December', label: 'December'}
     ];
-    const yearOption = ["2024"];
-        for (let year = 2023; year >= 1990; year--) {
-        yearOption.push(String(year));
+    const StartyearOption = ["2024"];
+        for (let year = 2023; year >= 2015; year--) {
+            StartyearOption.push(String(year));
+        }
+    const GraduationyearOption = ["2024"];
+        for (let year = 2023; year >= 2018; year--) {
+            GraduationyearOption.push(String(year));
         }
     
     const [UniDegree, setUniDegree] = useState('');
@@ -294,7 +298,7 @@ const UniversityEducation1 = () => {
                                                         required
                                                     >
                                                         <MenuItem disabled value="">Year</MenuItem>
-                                                        {yearOption.map(year => (
+                                                        {StartyearOption.map(year => (
                                                             <MenuItem key={year} value={year}>{year}</MenuItem>
                                                         ))}
                                                     </Select>
@@ -369,7 +373,7 @@ const UniversityEducation1 = () => {
                                                         // required
                                                     >
                                                         <MenuItem disabled value="">Year</MenuItem>
-                                                        {yearOption.map(year => (
+                                                        {GraduationyearOption.map(year => (
                                                             <MenuItem key={year} value={year}>{year}</MenuItem>
                                                         ))}
                                                     </Select>

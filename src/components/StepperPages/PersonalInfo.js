@@ -36,7 +36,33 @@ const PersonalInfo = () => {
     const [profilePictureUrl, setProfilePictureUrl] = useState('');
     const [profilePictureFetchUrl, setProfilePictureFetchUrl] = useState('');
    
-    const job_roles = ["Software Engineer","Systems Analyst","Network Administrator","Data Scientist","Quality assurance"];
+    const job_roles = [
+        "Software Engineer",
+        "Web Developer",
+        "Mobile App Developer",
+        "Full-Stack Developer",
+        "Front-End Developer",
+        "Back-End Developer",
+        "UI/UX Designer",
+        "UI/UX Engineer",
+        "Quality Assurance (QA) Engineer",
+        "Database Administrator (DBA)",
+        "Systems Administrator",
+        "Network Administrator",
+        "IT Support Engineer",
+        "Cybersecurity Analyst",
+        "Data Analyst",
+        "Data Scientist",
+        "Machine Learning Engineer",
+        "AI Engineer",
+        "Cloud Engineer",
+        "DevOps Engineer",
+        "Business Analyst (IT)",
+        "System Analyst",
+        "Virtual Reality (VR)/Augmented Reality (AR) Developer",
+        "Product Manager (Tech)",
+        "IT Project Manager"
+    ];
 
     // const [Proname, setProname] = useState('');
     const [PJobRoles, setPJobRoles] = useState([]);
