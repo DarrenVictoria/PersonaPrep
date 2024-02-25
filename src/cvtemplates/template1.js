@@ -153,9 +153,9 @@ const SchoolComponent = ({ schools }) => {
         {publications.map((publication, index) => (
           <div className="publication-item" key={index}>
             <p className="work-year">{publication.PblMonth} {publication.PblYear}</p>
-            <p className="certification-name">
+            <p className="certification-name" style={{color:'#ffffff'}}>
             {publication.PblUrl !== null && publication.PblUrl && (
-                <a href={(publication.PblUrl && publication.PblUrl.startsWith && publication.PblUrl.startsWith('http')) ? publication.PblUrl : `https://${publication.PblUrl}`}
+                <a  href={(publication.PblUrl && publication.PblUrl.startsWith && publication.PblUrl.startsWith('http')) ? publication.PblUrl : `https://${publication.PblUrl}`}
                     target="_blank"
                     rel="noopener noreferrer">
                     {publication.PblTitle}
@@ -368,6 +368,10 @@ function Template1() {
         navigate('/feedback');
     };
 
+    const backClick = () => {
+        navigate('/templates');
+    };
+
    
     
 
@@ -419,8 +423,8 @@ function Template1() {
                 const docSnapshot = await getDoc(userDocumentRef);
                 if (docSnapshot.exists()) {
                     const docData = docSnapshot.data();
-                    setcvcolor(docData.templateSelection.cvcolor || '');
-                    setfontscolor(docData.templateSelection.fontcolor || '');
+                    setcvcolor(docData.templateSelection.cvColor || '');
+                    setfontscolor(docData.templateSelection.fontColor || '');
                     setfont(docData.templateSelection.typography || '');
 
 
@@ -543,7 +547,7 @@ function Template1() {
 
                 
 
-                <h3 className="left-topics" style={{marginTop:'5rem'}}>Project Experience</h3>
+                <h3 className="left-topics" >Project Experience</h3>
 
                 <div>
                     
@@ -616,8 +620,8 @@ function Template1() {
                             </div>
                         </div>
 
-                        <h3>Links</h3>
-                        <div>
+                        <h3 >Links</h3>
+                        <div style={{color:fontscolor}}>
                             {/* Other components */}
                             
                             {/* Display the LinksComponent with the fetched social media links data */}
@@ -640,13 +644,13 @@ function Template1() {
                                     <p>No school information available</p>
                                 )}
                             </div>
-                            <div style={{marginTop:'8.63rem'}}>
+                            <div >
                                 
                                 <ExamResultsComponent olExamResults={olExamResults} alExamResults={alExamResults} />
                             </div>
                         </div>
 
-                        <h3 style={{marginTop:'2.8rem'}}>Clubs / Societies</h3>
+                        <h3 >Clubs / Societies</h3>
                         <div>
                             {/* Other components */}
 
@@ -706,6 +710,8 @@ function Template1() {
 
 
                 <Button style={next}  onClick={exportToPDF}>Export to PDF</Button> {/* Button to export PDF */}
+
+                <Button onClick={backClick} style={next}>Next Step</Button> 
              </div>
 
         
