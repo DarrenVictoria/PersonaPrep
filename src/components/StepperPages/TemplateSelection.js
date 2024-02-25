@@ -23,7 +23,7 @@ const TemplateSelection = () => {
     const [typography, setTypography] = useState('');
 
     const navigate = useNavigate();
-    const prevPage = () => navigate('finalisesummary');
+    const prevPage = () => navigate('/finalisesummary');
 
     useEffect(() => {
         const fetchData = async () => {
@@ -60,6 +60,7 @@ const TemplateSelection = () => {
                 cvColor: primarycolor,
                 fontColor:secondarycolor,
                 typography: typography,
+                cvstatus: 'created'
             };
 
             if(existingDoc){
@@ -71,7 +72,7 @@ const TemplateSelection = () => {
             //     console.log('document created with id', existingDoc.id);
             // }
 
-            navigate('/feedback');
+            navigate('/${template}');
         }catch (err) {
             console.log('error updating details', err.message);
         }
@@ -85,51 +86,43 @@ const TemplateSelection = () => {
             <div className="formtemp-bodyform">
                 <Grid container spacing={2} style={{ height: '100%' }}>
                     <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
-                        <Grid container px={4} pt={4} justifyContent='center' alignItems='center'>
-                            {/* <Grid item xs={12} mb={4}><Typography variant='h5' fontWeight='bold'>Your Selection</Typography></Grid> */}
-                            <Grid container xs={12} md={2} pr={5}>
-                                <Grid item xs={6} md={12}><Typography>CV Template:</Typography></Grid>
-                                <Grid item xs={6} md={12} mb={2}>
-                                    <TextField type="text" variant="outlined" fullWidth
-                                        value={template} 
-                                        InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
-                                        placeholder=""
-                                        disabled
-                                    />
-                                </Grid>
+                        <Grid container px={4} pt={4}>
+                            <Grid item xs={12} mb={4}><Typography variant='h5' fontWeight='bold'>Your Selection</Typography></Grid>
+                            <Grid item xs={5} pl={3}><Typography>CV Template:</Typography></Grid>
+                            <Grid item xs={7} pr={3} mb={2}>
+                                <TextField type="text" variant="outlined" fullWidth
+                                    value={template} 
+                                    InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                    placeholder=""
+                                    disabled
+                                />
                             </Grid>
-                            <Grid container xs={12} md={2} pr={5}>
-                                <Grid item xs={6} md={12}><Typography>CV Color:</Typography></Grid>
-                                <Grid item xs={6} md={12} mb={2}>
-                                    <TextField type="text" variant="outlined" fullWidth
-                                        value={primarycolor} 
-                                        InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
-                                        placeholder=""
-                                        disabled
-                                    />
-                                </Grid>
+                            <Grid item xs={5} pl={3}><Typography>CV Color:</Typography></Grid>
+                            <Grid item xs={7} pr={3} mb={2}>
+                                <TextField type="text" variant="outlined" fullWidth
+                                    value={primarycolor} 
+                                    InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                    placeholder=""
+                                    disabled
+                                />
                             </Grid>
-                            <Grid container xs={12} md={2} pr={5}>
-                                <Grid item xs={6} md={12}><Typography>Font Color:</Typography></Grid>
-                                <Grid item xs={6} md={12} mb={2}>
-                                    <TextField type="text" variant="outlined" fullWidth
-                                        value={secondarycolor} 
-                                        InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
-                                        placeholder=""
-                                        disabled
-                                    />
-                                </Grid>
+                            <Grid item xs={5} pl={3}><Typography>Font Color:</Typography></Grid>
+                            <Grid item xs={7} pr={3} mb={2}>
+                                <TextField type="text" variant="outlined" fullWidth
+                                    value={secondarycolor} 
+                                    InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                    placeholder=""
+                                    disabled
+                                />
                             </Grid>
-                            <Grid container xs={12} md={2} pr={5}>
-                                <Grid item xs={6} md={12}><Typography>Font:</Typography></Grid>
-                                <Grid item xs={6} md={12} mb={2}>
-                                    <TextField type="text" variant="outlined" fullWidth
-                                        value={typography} 
-                                        InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
-                                        placeholder=""
-                                        disabled
-                                    />
-                                </Grid>
+                            <Grid item xs={5} pl={3}><Typography>Font:</Typography></Grid>
+                            <Grid item xs={7} pr={3}>
+                                <TextField type="text" variant="outlined" fullWidth
+                                    value={typography} 
+                                    InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                    placeholder=""
+                                    disabled
+                                />
                             </Grid>
                         </Grid>
                         <form onSubmit={handleSubmit} style={{ height: '100%', position: 'relative' }}>
@@ -318,8 +311,9 @@ const TemplateSelection = () => {
                                         </div>
                                     </div>
                             {/* <button type='submit'>btn</button> */}
+                           
                             </div>
-                        <Grid container spacing={2} style={{ bottom: 80}}>            
+                            <Grid container spacing={2} style={{position: 'absolute',top:"1320px"}}>            
                             <Grid xs={6} paddingLeft={'10px'}>
                                 <Button startIcon={<ArrowBackIcon />} style={back} onClick={prevPage}>Go Back</Button>
                             </Grid>
@@ -327,7 +321,7 @@ const TemplateSelection = () => {
                             <Grid xs={6}>
                                 <Button type='submit' style={next}>Next Step</Button>                                    
                             </Grid>
-                        </Grid>
+                            </Grid>
                     </form>
                 </Grid>
             </Grid>

@@ -21,10 +21,16 @@ import { getFirestore, addDoc, collection,updateDoc, doc, setDoc, getDoc, server
 import { useAuth } from '../hooks/useAuth';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
+import { useNavigate } from 'react-router-dom';
+
+
 
 
 
 const UserProfileDiv = () => {
+
+  
+
   const { currentUser } = useAuth();
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
@@ -32,25 +38,31 @@ const UserProfileDiv = () => {
    const [cvStatus, setCvStatus] = useState('');
 
    useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        if (currentUser) {
-          const { displayName } = currentUser;
-          const username = displayName.toLowerCase().replace(/\s/g, '');
+    const fetchSummaryData = async () => {
+        try {
+             const db = getFirestore();
 
-          // Fetch user data from Firestore based on the username
-          const userCollectionRef = doc(getFirestore(), 'recruitmentStatus', username);
-          const userDocSnap = await getDoc(userCollectionRef);
+                            
+            const userDocumentRef = doc(db, 'studentdetails',currentUser.email);
 
-          if (userDocSnap.exists()) {
-            const userData = userDocSnap.data();
-            setCvStatus(userData['Cv-Status'] || '');
-          }
+            const docSnapshot = await getDoc(userDocumentRef);
+            if (docSnapshot.exists()) {
+                const docData = docSnapshot.data();
+                setCvStatus(docData.templateSelection.cvstatus || '');
+                console.log('CV Status:', cvStatus);              
+                
+            }
+        } catch (error) {
+            console.error('Error fetching summary info from Firestore:', error);
         }
-      } catch (error) {
-        console.error('Error fetching user data from Firestore:', error);
-      }
     };
+
+    fetchSummaryData();
+    
+}, [currentUser.email]);
+
+   useEffect(() => {
+    
 
     const fetchProfileData = async () => {
       try {
@@ -65,7 +77,7 @@ const UserProfileDiv = () => {
       }
     };
 
-    fetchUserData();
+    
     fetchProfileData();
   }, [currentUser]);
 
@@ -230,6 +242,13 @@ const RecruitmentStatus = () => {
 };
 
   const CVGenerator = () => {
+    const navigate = useNavigate();
+
+      const CVEdit = () => {
+        navigate('/faculty');
+    };
+
+
     return (
       <div>
         <h2 style={{ fontFamily: 'Inter', fontWeight: 'bold', fontSize: '24px', margin: '10px 0',marginLeft:'2%' }}>CV Generator</h2>
@@ -247,7 +266,7 @@ const RecruitmentStatus = () => {
           boxSizing: 'border-box',
         }}>
           {/* CV Generator Box Replica */}
-          <div className="cv-box-new" >
+          <div className="cv-box-new" onClick={CVEdit} >
             <div>
               <h1>Edit your CV</h1>
               <p>Make seamless adjustments, update information, and elevate your CV effortlessly.</p>
@@ -258,10 +277,10 @@ const RecruitmentStatus = () => {
   
         {/* Right Section (Four Buttons) */}
         <div className="right-section" >
-          <Button className='cv-gen-butt' style={{ flex: 1, margin: '1%', border: '3px solid #000', backgroundColor: '#ffffff',color:'#000000' }} >Export CV <OutboxIcon style={{marginLeft:'3%'}}/> </Button>
+          {/* <Button className='cv-gen-butt' style={{ flex: 1, margin: '1%', border: '3px solid #000', backgroundColor: '#ffffff',color:'#000000' }} >Export CV <OutboxIcon style={{marginLeft:'3%'}}/> </Button> */}
           <Button className='cv-gen-butt' style={{ flex: 1, margin: '1%', border: '3px solid #000', backgroundColor: '#ffffff',color:'#000000' }}>Quick View <SlideshowIcon style={{marginLeft:'3%'}}/></Button>
           <Button className='cv-gen-butt' style={{ flex: 1, margin: '1%', border: '3px solid #000', backgroundColor: '#ffffff',color:'#000000' }}>Export Link <AddLinkIcon style={{marginLeft:'3%'}}/></Button>
-          <Button className='cv-gen-butt'style={{ flex: 1, margin: '1%', border: '3px solid #000', backgroundColor: '#ffffff',color:'#000000' }}>Social Share <ShareIcon style={{marginLeft:'3%'}}/></Button>
+          {/* <Button className='cv-gen-butt'style={{ flex: 1, margin: '1%', border: '3px solid #000', backgroundColor: '#ffffff',color:'#000000' }}>Social Share <ShareIcon style={{marginLeft:'3%'}}/></Button> */}
         </div>
       </div>
       </div>
@@ -270,6 +289,14 @@ const RecruitmentStatus = () => {
 
 
   const AIInterview = () => {
+    const navigate = useNavigate();
+
+  
+
+const InterviewGen = () => {
+  navigate('/interviewgen');
+};
+
     return (
       <div>
         <h2 style={{ fontFamily: 'Inter', fontWeight: 'bold', fontSize: '24px', margin: '10px 0',marginLeft:'2%' }}>AI Mock Interview Simulator</h2>
@@ -287,7 +314,7 @@ const RecruitmentStatus = () => {
           boxSizing: 'border-box',
         }}>
           {/* CV Generator Box Replica */}
-          <div className="interview-box" style={{ 
+          <div className="interview-box" onClick={InterviewGen} style={{ 
             padding: '35px', 
             textAlign: 'left',
             background: `
