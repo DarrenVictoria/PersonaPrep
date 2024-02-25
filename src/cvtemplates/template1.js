@@ -1,10 +1,12 @@
 import React,{ useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
+import { useNavigate } from 'react-router-dom';
 import './styles/template1.css';
 import html2pdf from 'html2pdf.js';
 import { collection, doc, getFirestore, setDoc, getDoc } from 'firebase/firestore';
 import { useAuth } from '../hooks/useAuth';
-
+import { next } from '../components/NextButton';
+import Button from "@mui/material/Button";
 
 import Call from './assets/call.svg'
 import Email from './assets/email.svg';
@@ -16,7 +18,15 @@ import GitHub from './assets/github.svg'
 import Twitter from './assets/twitter.svg'
 import Medium from './assets/medium.svg'
 
+
+
+
 const SchoolComponent = ({ schools }) => {
+
+    
+
+    
+
     return (
       <>
         {schools.map((school, index) => (
@@ -76,9 +86,9 @@ const SchoolComponent = ({ schools }) => {
           <div className="project-info" key={index}>
             <p className="work-year">{`${project.ProjStartMonth} ${project.ProjStartYear} - ${project.ProjEndMonth} ${project.ProjEndYear}`}</p>
             <p className="work-role">
-                {project.ProjEvidence || project.ProjectEvdUrl ? (
+            {(project.ProjEvidence !== null && project.ProjEvidence !== undefined) || project.ProjectEvdUrl ? (
                 <a
-                    href={project.ProjEvidence ? project.ProjEvidence : project.ProjectEvdUrl}
+                    href={(project.ProjEvidence && project.ProjEvidence.startsWith && project.ProjEvidence.startsWith('http')) ? project.ProjEvidence : `https://${project.ProjEvidence}`}
                     target="_blank"
                     rel="noopener noreferrer"
                 >
@@ -87,15 +97,17 @@ const SchoolComponent = ({ schools }) => {
                 ) : (
                 <span>{project.ProjName}</span>
                 )}
-            </p>
+
+          </p>
             <p className="project-location">{project.ProjPlace}</p>
-            <p className="project-skills">Skills gained - {project.ProjSkills.join(', ')}</p>
-            
+            {/* Add conditional check to prevent error */}
+            <p className="project-skills">Skills gained - {project.ProjSkills ? project.ProjSkills.join(', ') : 'Not specified'}</p>
           </div>
         ))}
       </>
     );
   };
+  
 
   const CertificationComponent = ({ certifications }) => {
     return (
@@ -104,9 +116,9 @@ const SchoolComponent = ({ schools }) => {
           <div className="certification-item" key={index}>
             <p className="work-year">{certification.CertificateIssueMonth} {certification.CertificateIssueYear}</p>
             <p className="certification-name">
-                {certification.CertificateLInk || certification.CertUrl ? (
+            {(certification.CertificateLInk !== null && certification.CertificateLInk !== undefined) || certification.CertUrl ? (
                 <a
-                    href={certification.CertificateLInk ? certification.CertificateLInk : certification.CertUrl}
+                    href={(certification.CertificateLInk && certification.CertificateLInk.startsWith && certification.CertificateLInk.startsWith('http')) ? certification.CertificateLInk : `https://${certification.CertificateLInk}`}
                     target="_blank"
                     rel="noopener noreferrer"
                 >
@@ -115,7 +127,8 @@ const SchoolComponent = ({ schools }) => {
                 ) : (
                 <span>{certification.CertificateName}</span>
                 )}
-            </p>
+
+          </p>
             <p className="certification-organization">{certification.CertificateissuedOrg}</p>
             
           </div>
@@ -141,12 +154,15 @@ const SchoolComponent = ({ schools }) => {
           <div className="publication-item" key={index}>
             <p className="work-year">{publication.PblMonth} {publication.PblYear}</p>
             <p className="certification-name">
-                {publication.PblUrl && (
-                <a href={publication.PblUrl} target="_blank" rel="noopener noreferrer">
+            {publication.PblUrl !== null && publication.PblUrl && (
+                <a href={(publication.PblUrl && publication.PblUrl.startsWith && publication.PblUrl.startsWith('http')) ? publication.PblUrl : `https://${publication.PblUrl}`}
+                    target="_blank"
+                    rel="noopener noreferrer">
                     {publication.PblTitle}
                 </a>
                 )}
-            </p>
+
+          </p>
             <p className="certification-organization">{publication.Publisher}</p>
             
           </div>
@@ -328,20 +344,36 @@ const getImageSource = (platform) => {
     }
 };
 
+
+
+
+
 function Template1() {
     const { currentUser } = useAuth();
+    const navigate = useNavigate();
 
     const exportToPDF = () => {
         const element = document.getElementById('resume-body');
         const opt = {
-            margin:       2,
-            filename:     'Janudi_Thirimanna_CV.pdf',
+            margin:       0,
+            filename:     `${Proname}'s CV.pdf`,
             image:        { type: 'jpeg', quality: 0.98 },
             html2canvas:  { scale: 2 },
             jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
         };
         html2pdf().from(element).set(opt).save(); // Convert and save as PDF
     };
+
+    const nextClick = () => {
+        navigate('/feedback');
+    };
+
+   
+    
+
+    const [cvcolor, setcvcolor] = useState('');
+    const [fontscolor, setfontscolor] = useState('');
+    const [font, setfont] = useState('');
 
     const [Proname, setProname] = useState([]);
     const [profilePictureUrl, setprofilePictureUrl] = useState([]);
@@ -368,19 +400,30 @@ function Template1() {
     const [references, setReferences] = useState([]);
     const [researchInterests, setResearchInterests] = useState([]);
     const [socialMediaLinks, setSocialMediaLinks] = useState({});
-    
 
-    
-
+   
     useEffect(() => {
         const fetchSummaryData = async () => {
+            console.log('currentUser.email', currentUser.email);
             try {
+                
+                const urlParams = new URLSearchParams(window.location.search);
+                const username = urlParams.get('username');
+                const usernameWithoutQuotes = username ? username.replace(/^"(.*)"$/, '$1') : '';
+
                 const db = getFirestore();
-                const userDocumentRef = doc(db, 'studentdetails', currentUser.email);
+
+                                
+                const userDocumentRef = doc(db, 'studentdetails', usernameWithoutQuotes || currentUser.email);
 
                 const docSnapshot = await getDoc(userDocumentRef);
                 if (docSnapshot.exists()) {
                     const docData = docSnapshot.data();
+                    setcvcolor(docData.templateSelection.cvcolor || '');
+                    setfontscolor(docData.templateSelection.fontcolor || '');
+                    setfont(docData.templateSelection.typography || '');
+
+
                     setProname(docData  .Proname || '');
                     setprofilePictureUrl(docData  .profilePictureUrl || '');
                     setPJobRoles(docData.PJobRoles || []);
@@ -390,7 +433,7 @@ function Template1() {
                     setcity(docData.city || '');
                     setcountry(docData.country || '');
                     setportfolioSite(docData.portfolioSite || '');
-                    setSchools(docData.schools);
+                    setSchools(docData.schools || []);
 
                     const fetchedSchools = docData.schools || []; // Assuming 'schools' is an array in your Firestore document
                     setSchools(fetchedSchools);
@@ -445,8 +488,14 @@ function Template1() {
     
 
     return (
-        <div>
-        <div id="resume-body" className="cvbody">
+    <div>
+
+           
+        
+            
+        <div id="resume-body" className="cvbody" style={{ color: fontscolor, fontFamily: font }}>
+
+        
             
             <div className="left-container">
 
@@ -490,7 +539,11 @@ function Template1() {
                     )}
                 </div>
 
-                <h3 className="left-topics">Project Experience</h3>
+               
+
+                
+
+                <h3 className="left-topics" style={{marginTop:'5rem'}}>Project Experience</h3>
 
                 <div>
                     
@@ -536,7 +589,7 @@ function Template1() {
                 
             </div>
 
-            <div className="contactPane">
+            <div className="contactPane" style={{ backgroundColor: cvcolor }}>
                 <div className="section">
                     <div className="profile">
                         <img src={profilePictureUrl} alt="" srcSet="" className="profileImage" />
@@ -571,10 +624,10 @@ function Template1() {
                             <LinksComponent socialMediaLinks={socialMediaLinks} />
                         </div>
 
-                        <h3>School education</h3>
+                        <h3 >School education</h3>
                         <div className="schools">
                             <div>
-                                <h2>School Information</h2>
+                                
                                 {schools.length === 1 ? (
                                     <div className="schoolContainer">
                                     <SchoolComponent schools={schools.slice(0, 1)} />
@@ -587,8 +640,8 @@ function Template1() {
                                     <p>No school information available</p>
                                 )}
                             </div>
-                            <div>
-                                <h2>Exam Results</h2>
+                            <div style={{marginTop:'8.63rem'}}>
+                                
                                 <ExamResultsComponent olExamResults={olExamResults} alExamResults={alExamResults} />
                             </div>
                         </div>
@@ -649,10 +702,16 @@ function Template1() {
         </div>
 
         <div style={{ textAlign: 'center', marginTop: '20px' }}>
-            <button onClick={exportToPDF}>Export to PDF</button> {/* Button to export PDF */}
-        </div>
+                <Button onClick={nextClick} style={next}>Next Step</Button> 
 
-        </div>
+
+                <Button style={next}  onClick={exportToPDF}>Export to PDF</Button> {/* Button to export PDF */}
+             </div>
+
+        
+
+
+    </div>
         
     );
 }

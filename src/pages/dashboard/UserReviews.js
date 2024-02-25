@@ -12,33 +12,25 @@ import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import { blue } from "@mui/material/colors";
 
-
-const feedbackColumns = [
-    { field: 'id', headerName: 'Email', width: 400 }, 
-    { field: 'name', headerName: 'Name', width: 300 }, 
-    { field: 'time', headerName: 'Time', width: 300 },
+const columns = [
+    { field: 'id', headerName: 'Email', width: 250 }, 
+    { field: 'name', headerName: 'Name', width: 150 }, 
+    { field: 'time', headerName: 'Time', width: 150 },
     {
       field: 'action',
       headerName: 'Action',
     //   description: 'This column has a value getter and is not sortable.',
       sortable: false,
-      width: 155,
+      width: 125,
       renderCell: () => (
         <>
-            <Button
-                // variant="contained"
-                // color="warning"
-                variant="contained" 
-                sx={{borderRadius:"25px",backgroundColor: '#242624',height:'28px'}}
-                >
-                    Open review
-            </Button>
+          <Button sx={{width: '300px', border: '1px solid gray', borderRadius: '50px', padding: '0 5px', color: 'black'}}>view</Button>
         </>
       ),
     },
 ];
   
-const feedbackRows = [
+const rows = [
     { id: "isuruushan2003@gmail.com", name: 'Snow', time: '30s'},
     { id: "Darrenvictoria@gmail.com", name: 'Snow', time: '30s'},
     { id: "isuruushan2004@gmail.com", name: 'Snow', time: '30s'},
@@ -54,84 +46,92 @@ const UserReviews = () => {
     return ( 
         <Box sx={{ display: 'flex'}}>
             <DashboardHeader />
-            <Box component="main" sx={{ flexGrow: 1, p: 3, backgroundColor: '#d1d1d1', width:"100%", minHeight:"950px"}} >
+            <Box component="main" sx={{ flexGrow: 1, p: 3, backgroundColor: '#d1d1d1' }} >
                 <Toolbar />
-                <div style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
-                    <div style={{textAlign:"left", maxWidth:730, width:"100%", paddingBottom:"10px"}}>                    
-                        <h2>Cv Feedback</h2>
-                        <p>Overall user experience of the CV generator platform</p>            
-                    </div>
+                <Box sx={{ flexGrow: 1 }}>
+                    <Card style={{ width:"100%", borderRadius:'25px', padding: '20px' }}>
+                        <Grid container justifyContent="center" alignItems="center">
+                            <Grid item xs={12} md={8} mb={3}>
+                                <Grid container>
+                                    <Grid item xs={12} mb={3}>
+                                        <Typography variant="h5" fontWeight='bold'>On-Display Feedback</Typography>
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <Typography variant="body2" fontWeight='bold'>Overrall user experience of the PersonaPrep platform</Typography>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                            <Grid item xs={12} md={4} mb={3}>
+                                <Card
+                                    sx={{
+                                    // maxWidth: 300,
+                                    width: 250,
+                                    minHeight: 100,
+                                    // bgcolor: "white",
+                                    borderRadius: "10px",
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    bgcolor: blue[800],
+                                    color: 'white'
+                                    }}
+                                >
+                                    <CardHeader
+                                    // avatar={
+                                    //     <Avatar sx={{ bgcolor: blue[800] }} aria-label="review">
+                                    //     {/* You can add an icon here if you want */}
+                                    //     </Avatar>
+                                    // }
+                                    // title="Feedbacks"
+                                    subheader="123"
+                                    sx={{
+                                        "& .MuiCardHeader-title": {
+                                        fontSize: "13px",
+                                        fontWeight: "bold",
+                                        paddingRight: "1px",
+                                        },
+                                        "& .MuiCardHeader-subheader": {
+                                        fontSize: "20px",
+                                        fontWeight: "bold",
+                                        color: "white",                                        
+                                        },
+                                    }}
+                                    />
+                                    <CardHeader
+                                    subheader="Feedbacks"
+                                    sx={{
+                                        "& .MuiCardHeader-title": {
+                                        fontSize: "13px",
+                                        fontWeight: "bold",
+                                        paddingRight: "1px",
+                                        },
+                                        "& .MuiCardHeader-subheader": {
+                                        fontSize: "20px",
+                                        fontWeight: "bold",
+                                        color: "white",                                        
+                                        },
+                                    }}
+                                    />
+                                </Card>
+                            </Grid>
+                        </Grid>
 
-                    <div style={{textAlign:"right", maxWidth:730, width:"100%", paddingBottom:"10px", paddingLeft: '50px'}}>                    
-                        <Card
-                            sx={{
-                            // maxWidth: 300,
-                            width:"100%",
-                            maxWidth: 250,
-                            maxHeight: 100,
-                            // bgcolor: "white",
-                            borderRadius: "10px",
-                            display: "flex",
-                            flexDirection: "column",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            bgcolor: blue[800],
-                            color: 'white',
-                            marginLeft: "auto"
-                            }}
-                        >
-                            <CardHeader
-                            // avatar={
-                            //     <Avatar sx={{ bgcolor: blue[800] }} aria-label="review">
-                            //     {/* You can add an icon here if you want */}
-                            //     </Avatar>
-                            // }
-                            // title="Feedbacks"
-                            subheader="123"
-                            sx={{
-                                "& .MuiCardHeader-title": {
-                                fontSize: "13px",
-                                fontWeight: "bold",
-                                paddingRight: "1px",
-                                },
-                                "& .MuiCardHeader-subheader": {
-                                fontSize: "20px",
-                                fontWeight: "bold",
-                                color: "white",                                        
-                                },
-                            }}
-                            />
-                            <CardHeader
-                            subheader="Feedbacks"
-                            sx={{
-                                "& .MuiCardHeader-title": {
-                                fontSize: "13px",
-                                fontWeight: "bold",
-                                paddingRight: "1px",
-                                },
-                                "& .MuiCardHeader-subheader": {
-                                fontSize: "20px",
-                                fontWeight: "bold",
-                                color: "white",                                        
-                                },
-                            }}
-                            />
-                        </Card>                                    
-                    </div>
-                </div>
-
-                <Box sx={{ flexGrow: 1,display: "flex",alignItems: "center",justifyContent: "center"}}>                      
-                    <Card style={{ height: 631,width:"100%",maxWidth:1460,borderRadius:'25px', }}>                     
                         <DataGrid                                
-                            rows={feedbackRows}
-                            columns={feedbackColumns}
+                            rows={rows}
+                            columns={columns}
                             initialState={{
                             pagination: {
                                 paginationModel: { page: 0, pageSize: 5 },
                             },
                             }}
-                            pageSizeOptions={[5,10,20]}                            
+                            pageSizeOptions={[5, 10]}
+                            sx={{
+                                borderRadius: '25px',
+                                maxHeight: '400px'
+                            }}
                         />
+
                     </Card>
                 </Box>
             </Box>
