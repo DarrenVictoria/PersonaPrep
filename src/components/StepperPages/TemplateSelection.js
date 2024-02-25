@@ -60,6 +60,7 @@ const TemplateSelection = () => {
                 cvColor: primarycolor,
                 fontColor:secondarycolor,
                 typography: typography,
+                cvstatus: 'created'
             };
 
             if(existingDoc){
@@ -71,7 +72,7 @@ const TemplateSelection = () => {
             //     console.log('document created with id', existingDoc.id);
             // }
 
-            navigate('/feedback');
+            navigate(`/${template}`);
         }catch (err) {
             console.log('error updating details', err.message);
         }
@@ -85,49 +86,56 @@ const TemplateSelection = () => {
             <div className="formtemp-bodyform">
                 <Grid container spacing={2} style={{ height: '100%' }}>
                     <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
-                        
+                        <Grid container px={4} pt={4} justifyContent='center' alignItems='center'>
+                            {/* <Grid item xs={12} mb={4}><Typography variant='h5' fontWeight='bold'>Your Selection</Typography></Grid> */}
+                            <Grid container xs={12} md={2} pr={5}>
+                                <Grid item xs={6} md={12}><Typography>CV Template:</Typography></Grid>
+                                <Grid item xs={6} md={12} mb={2}>
+                                    <TextField type="text" variant="outlined" fullWidth
+                                        value={template} 
+                                        InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                        placeholder=""
+                                        disabled
+                                    />
+                                </Grid>
+                            </Grid>
+                            <Grid container xs={12} md={2} pr={5}>
+                                <Grid item xs={6} md={12}><Typography>CV Color:</Typography></Grid>
+                                <Grid item xs={6} md={12} mb={2}>
+                                    <TextField type="text" variant="outlined" fullWidth
+                                        value={primarycolor} 
+                                        InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                        placeholder=""
+                                        disabled
+                                    />
+                                </Grid>
+                            </Grid>
+                            <Grid container xs={12} md={2} pr={5}>
+                                <Grid item xs={6} md={12}><Typography>Font Color:</Typography></Grid>
+                                <Grid item xs={6} md={12} mb={2}>
+                                    <TextField type="text" variant="outlined" fullWidth
+                                        value={secondarycolor} 
+                                        InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                        placeholder=""
+                                        disabled
+                                    />
+                                </Grid>
+                            </Grid>
+                            <Grid container xs={12} md={2} pr={5}>
+                                <Grid item xs={6} md={12}><Typography>Font:</Typography></Grid>
+                                <Grid item xs={6} md={12} mb={2}>
+                                    <TextField type="text" variant="outlined" fullWidth
+                                        value={typography} 
+                                        InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                        placeholder=""
+                                        disabled
+                                    />
+                                </Grid>
+                            </Grid>
+                        </Grid>
                         <form onSubmit={handleSubmit} style={{ height: '100%', position: 'relative' }}>
                             <div style={{ margin: '80px 25px 125px' }}>
                                     <div className='TemplateSelection-maindiv'>
-                                            <Grid container px={4} pt={4} mb={6} mt={-5}>
-                                                <Grid item xs={12} mb={4}><Typography variant='h5' fontWeight='bold'>Your Selection</Typography></Grid>
-                                                <Grid item xs={5} pl={3}><Typography>CV Template:</Typography></Grid>
-                                                <Grid item xs={7} pr={3} mb={2}>
-                                                    <TextField type="text" variant="outlined" fullWidth
-                                                        value={template} 
-                                                        InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
-                                                        placeholder=""
-                                                        disabled
-                                                    />
-                                                </Grid>
-                                                <Grid item xs={5} pl={3}><Typography>CV Color:</Typography></Grid>
-                                                <Grid item xs={7} pr={3} mb={2}>
-                                                    <TextField type="text" variant="outlined" fullWidth
-                                                        value={primarycolor} 
-                                                        InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
-                                                        placeholder=""
-                                                        disabled
-                                                    />
-                                                </Grid>
-                                                <Grid item xs={5} pl={3}><Typography>Font Color:</Typography></Grid>
-                                                <Grid item xs={7} pr={3} mb={2}>
-                                                    <TextField type="text" variant="outlined" fullWidth
-                                                        value={secondarycolor} 
-                                                        InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
-                                                        placeholder=""
-                                                        disabled
-                                                    />
-                                                </Grid>
-                                                <Grid item xs={5} pl={3}><Typography>Font:</Typography></Grid>
-                                                <Grid item xs={7} pr={3}>
-                                                    <TextField type="text" variant="outlined" fullWidth
-                                                        value={typography} 
-                                                        InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
-                                                        placeholder=""
-                                                        disabled
-                                                    />
-                                                </Grid>
-                                            </Grid>
                                         <div className='TemplateSelection-Container'>
                                             <div className='TemplateSelection-LeftColumn'>
                                                 <h2 className="TemplateSelection-TemplateTableHeading">Templates</h2>
@@ -205,50 +213,50 @@ const TemplateSelection = () => {
                                                         <table className="TemplateSelection-ColorTable">
                                                             <thead>
                                                                 <tr>
-                                                                    <th className='TemplateSelection-ColorTablecolumnheading'>Primary</th>
-                                                                    <th className='TemplateSelection-ColorTablecolumnheading'>Secondary</th>
+                                                                    <th className='TemplateSelection-ColorTablecolumnheading'>CV Colour</th>
+                                                                    <th className='TemplateSelection-ColorTablecolumnheading'>Font Colour</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
                                                                 <tr>
                                                                     <td className="TemplateSelection-ColorCell">
-                                                                        <button onClick={(e) =>{e.preventDefault(); setprimaryColor('red')}} className="TemplateSelection-ColorButton FirstRowColorButton1">Red</button>
+                                                                        <button onClick={(e) =>{e.preventDefault(); setprimaryColor('#deccbb')}} className="TemplateSelection-ColorButton FirstRowColorButton1">Cream</button>
                                                                     </td>
                                                                     <td className="TemplateSelection-ColorCell">
-                                                                        <button onClick={(e) =>{e.preventDefault(); setsecondaryColor('blue')}} className="TemplateSelection-ColorButton FirstRowColorButton2">Blue</button>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td className="TemplateSelection-ColorCell">
-                                                                        <button onClick={(e) =>{e.preventDefault(); setprimaryColor('green')}} className="TemplateSelection-ColorButton SecondRowColorButton1">Green</button>
-                                                                    </td>
-                                                                    <td className="TemplateSelection-ColorCell">
-                                                                        <button onClick={(e) =>{e.preventDefault(); setsecondaryColor('yellow')}} className="TemplateSelection-ColorButton SecondRowColorButton2">Yellow</button>
+                                                                        <button onClick={(e) =>{e.preventDefault(); setsecondaryColor('#ffffff')}} className="TemplateSelection-ColorButton FirstRowColorButton2">Black</button>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td className="TemplateSelection-ColorCell">
-                                                                        <button onClick={(e) =>{e.preventDefault(); setprimaryColor('orange')}} className="TemplateSelection-ColorButton ThirdRowColorButton1">Orange</button>
+                                                                        <button onClick={(e) =>{e.preventDefault(); setprimaryColor('#b8d4bd')}} className="TemplateSelection-ColorButton SecondRowColorButton1">Green</button>
                                                                     </td>
                                                                     <td className="TemplateSelection-ColorCell">
-                                                                        <button onClick={(e) =>{e.preventDefault(); setsecondaryColor('purple')}} className="TemplateSelection-ColorButton ThirdRowColorButton2">Purple</button>
+                                                                        <button onClick={(e) =>{e.preventDefault(); setsecondaryColor('#323232')}} className="TemplateSelection-ColorButton SecondRowColorButton2">Charcoal</button>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td className="TemplateSelection-ColorCell">
+                                                                        <button onClick={(e) =>{e.preventDefault(); setprimaryColor('#dadada')}} className="TemplateSelection-ColorButton ThirdRowColorButton1">Gray</button>
+                                                                    </td>
+                                                                    <td className="TemplateSelection-ColorCell">
+                                                                        <button onClick={(e) =>{e.preventDefault(); setsecondaryColor('#2d4956')}} className="TemplateSelection-ColorButton ThirdRowColorButton2">Blue</button>
                                                                     </td>
                                                                 </tr>
                                                                 {/* Below i added more sample buttons in the color theme table just to check the scroll bar */}
                                                                 <tr>
                                                                     <td className="TemplateSelection-ColorCell">
-                                                                        <button onClick={(e) =>{e.preventDefault(); setprimaryColor('red')}} className="TemplateSelection-ColorButton ThirdRowColorButton1">Orange</button>
+                                                                        <button onClick={(e) =>{e.preventDefault(); setprimaryColor('#bf99ba')}} className="TemplateSelection-ColorButton FourthRowColorButton1">Purple</button>
                                                                     </td>
                                                                     <td className="TemplateSelection-ColorCell">
-                                                                        <button onClick={(e) =>{e.preventDefault(); setsecondaryColor('red')}} className="TemplateSelection-ColorButton ThirdRowColorButton2">Purple</button>
+                                                                        <button onClick={(e) =>{e.preventDefault(); setsecondaryColor('#553734')}} className="TemplateSelection-ColorButton FourthRowColorButton2">Brown</button>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td className="TemplateSelection-ColorCell">
-                                                                        <button onClick={(e) =>{e.preventDefault(); setprimaryColor('red')}} className="TemplateSelection-ColorButton ThirdRowColorButton1">Orange</button>
+                                                                        <button onClick={(e) =>{e.preventDefault(); setprimaryColor('#a4dcf1')}} className="TemplateSelection-ColorButton FifthRowColorButton1">Blue</button>
                                                                     </td>
                                                                     <td className="TemplateSelection-ColorCell">
-                                                                        <button onClick={(e) =>{e.preventDefault(); setsecondaryColor('red')}} className="TemplateSelection-ColorButton ThirdRowColorButton2">Purple</button>
+                                                                        <button onClick={(e) =>{e.preventDefault(); setsecondaryColor('#19474b')}} className="TemplateSelection-ColorButton FifthRowColorButton2">Green</button>
                                                                     </td>
                                                                 </tr>
                                                         
@@ -295,14 +303,7 @@ const TemplateSelection = () => {
                                                                         <button onClick={(e) => {e.preventDefault(); setTypography('Lato')}} className="TemplateSelection-TypographyButton FourthRowTypographyButton2">Lato</button>
                                                                     </td>
                                                                 </tr>
-                                                                <tr>
-                                                                    <td className="TemplateSelection-TypographyCell">
-                                                                        <button onClick={(e) => {e.preventDefault(); setTypography('calibri')}} className="TemplateSelection-TypographyButton ThirdRowTypographyButton1">Orange</button>
-                                                                    </td>
-                                                                    <td className="TemplateSelection-TypographyCell">
-                                                                        <button onClick={(e) => {e.preventDefault(); setTypography('calibri')}} className="TemplateSelection-TypographyButton ThirdRowTypographyButton2">Purple</button>
-                                                                    </td>
-                                                                </tr>
+                                                                
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -311,9 +312,8 @@ const TemplateSelection = () => {
                                         </div>
                                     </div>
                             {/* <button type='submit'>btn</button> */}
-                           
                             </div>
-                            <Grid container spacing={2} style={{position: 'absolute',bottom:80}}>            
+                        <Grid container spacing={2} style={{ bottom: 80}}>            
                             <Grid xs={6} paddingLeft={'10px'}>
                                 <Button startIcon={<ArrowBackIcon />} style={back} onClick={prevPage}>Go Back</Button>
                             </Grid>
@@ -321,7 +321,7 @@ const TemplateSelection = () => {
                             <Grid xs={6}>
                                 <Button type='submit' style={next}>Next Step</Button>                                    
                             </Grid>
-                            </Grid>
+                        </Grid>
                     </form>
                 </Grid>
             </Grid>
