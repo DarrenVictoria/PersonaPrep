@@ -73,7 +73,7 @@ const InterviewCard = () => {
                 // const querySnapshot = await getDocs(query(interviewCollection, where('id', '==', 'VP3sDRrGGWaAHAv79djc')));
                 const querySnapshot = await getDocs(interviewCollection);
                 querySnapshot.forEach((doc) => {
-                    if(doc.id == interviewId){
+                    if(doc.id === interviewId){
                         const interviewData = doc.data();
                         setTopic(interviewData.topic || '');
                         setFaculty(interviewData.faculty || '');

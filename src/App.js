@@ -1,6 +1,7 @@
-import React from "react"
+import React, {useState, useEffect} from "react"
 import ReactDOM from "react-dom"
 import {BrowserRouter,Routes,Route, useNavigate, Navigate } from 'react-router-dom'
+import { collection, doc, getDoc, getFirestore, getDocs } from 'firebase/firestore';
 
 import { AuthProvider,useAuth } from './hooks/useAuth';
 
@@ -56,7 +57,8 @@ import FinalseSummary from "./components/StepperPages/FinaliseSummary"
 import ResumeManagement from "./pages/dashboard/ResumeManagement";
 import InterviewBankDash from "./pages/dashboard/InterviewBankDash";
 import InterviewCard from "./pages/dashboard/InterviewCard";
-import InterviewGen from "./pages/interviewgenerator/InterviewGen"
+import InterviewGen from "./pages/interviewgenerator/InterviewGen";
+import ViewReviews from "./pages/dashboard/ViewReviews";
 
 import Template1 from "./cvtemplates/template1"
 
@@ -71,6 +73,33 @@ import './App.css';
 function App() {
 
   const { currentUser } = useAuth();
+
+  const [adminEmails, setAdminEmails] = useState([]);
+
+  useEffect(() => {
+    const fetchAdminEmails = async () => {
+      try {
+        const db = getFirestore();
+        const adminCol = collection(db, 'adminaccounts');
+        const adminDoc = doc(adminCol, 'admins');
+        const querySnapshot = await getDoc(adminDoc);
+
+        if (querySnapshot.exists()) {
+          const allowedEmails = querySnapshot.data().allowedEmails;
+          setAdminEmails(allowedEmails);
+        } else {
+          console.log('email not allowed');
+        }
+      } catch (err) {
+        console.log('error fetching admin emails', err.message);
+      }
+    };
+
+    fetchAdminEmails();
+  }, []); 
+
+  const isAdmin = currentUser && adminEmails.includes(currentUser.email);
+
   return (
     <AuthProvider>
     <BrowserRouter>
@@ -94,11 +123,12 @@ function App() {
           <Route path="/interviewDisplay" element={<InterviewDisplay />}/>
          
           <Route path="/login" element={<Login />}/>
-          <Route path="/admindash" element={<AdminDash />}/>
+          <Route path="/admindash" element={ isAdmin? <AdminDash /> : <Navigate to='/login' />}/>
           <Route path="/userDash" element={<AUserManageDash />}/>
           <Route path="/AdduserDash" element={<AAddUserManageDash />}/>
           <Route path="/EdituserDash" element={<AEditUserManageDash />}/>
           <Route path="/reviews" element={<UserReviews />}/>
+          <Route path="/viewReviews" element={<ViewReviews />}/>
           <Route path="/interviewEdit" element={<InterviewBankEdit />}/>
           <Route path="/resumeManage" element={<ResumeManagement />}/>
           <Route path="/interviewDash" element={<InterviewBankDash />}/>
