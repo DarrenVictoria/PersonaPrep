@@ -9,7 +9,7 @@ import CardHeader from "@mui/material/CardHeader";
 import DeleteIcon from '@mui/icons-material/Delete'; // Import DeleteIcon
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
-import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
+import { collection, getDocs, deleteDoc, doc,getDoc } from "firebase/firestore";
 import { getFirestore } from "firebase/firestore";
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -67,10 +67,9 @@ const ResumeManagement = () => {
         renderCell: (params) => (
           <>
             <Button
-            // variant="contained"
-            // color="warning"
-            variant="contained" 
-            sx={{borderRadius:"25px",backgroundColor: '#242624',height:'28px'}}
+              variant="contained"
+              sx={{borderRadius:"25px",backgroundColor: '#242624',height:'28px'}}
+              onClick={() => handleViewCV(params.row)}
             >
                 View CV
             </Button>
@@ -115,6 +114,27 @@ const handleCloseSnackbar = () => {
   setSuccessMessage("");
 };
 
+const handleViewCV = async (row) => {
+  try {
+    const resumeDocRef = doc(firestore, "studentdetails", row.id);
+    const docSnap = await getDoc(resumeDocRef);
+    const data = docSnap.data();
+
+    // Extract necessary data
+    const email = data.email; // Assuming email is stored in the "email" field
+    const templateName = encodeURIComponent(data.templateSelection.template); // Assuming template name is stored in the "templateSelection" field
+
+    // Construct URL
+    const url = `http://personaprep.web.app/${templateName}?username=${email}`;
+    console.log("templateName",templateName);
+    console.log("email",email);
+
+    // Redirect user to the constructed URL
+    window.location.href = url;
+  } catch (error) {
+    console.error("Error fetching document:", error);
+  }
+};
 const fetchFeedbackData = async () => {
   const feedbackCollectionRef = collection(firestore, "cvfeedback");
   const snapshot = await getDocs(feedbackCollectionRef);
@@ -141,6 +161,7 @@ const fetchFeedbackData = async () => {
 
   setFeedbackRows(data);
 };
+
 
 const feedbackColumns = [
   { field: 'id', headerName: 'ID', width: 300 },

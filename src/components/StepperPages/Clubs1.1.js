@@ -45,10 +45,14 @@ const Club2 = () => {
     {value: 'November', label: 'November'},
     {value: 'December', label: 'December'}
 ];
-const yearOption = ["2024"];
-    for (let year = 2023; year >= 1990; year--) {
-    yearOption.push(String(year));
-    }
+    const StartyearOption = ["2024"];
+        for (let year = 2023; year >= 2015; year--) {
+            StartyearOption.push(String(year));
+        }
+    const EndyearOption = ["2035"];
+        for (let year = 2023; year >= 2025; year--) {
+            EndyearOption.push(String(year));
+        }
     const [ClubName, setClubName] = useState('');
     const [ClubStartMonth, setClubStartMonth] = useState('');
     const [ClubStartYear, setClubStartYear] = useState('');
@@ -62,7 +66,7 @@ const yearOption = ["2024"];
 
 
     //Use state for auto complete component for RolesPlayed
-    const  Clbs_RolesPlayed = ['Volunteer','Member','Council Members'];
+    const  Clbs_RolesPlayed = ['Volunteer','Top board','Executive committee'];
     const [ClubRolesPlayed, setClubRolesPlayed] = useState([]);//usestate for autocomplete Roles played
     const maxSelectionsRolesPlayed = 3;//max value for the autocomplete
     const handleClubRolesPlayed = (event, newSkill) => {
@@ -77,8 +81,19 @@ const yearOption = ["2024"];
     console.log(ClubRolesPlayed);
     
 
-//Use state for auto complete component for SkillsEarned
-    const Clbs_SkillsEarned = ['Leadership#','Teamwork'];
+    //Use state for auto complete component for SkillsEarned
+    const Clbs_SkillsEarned = [
+        "Teamwork",
+        "Leadership",
+        "Communication",
+        "Problem-solving",
+        "Time management",
+        "Adaptability",
+        "Critical thinking",
+        "Creativity",
+        "Networking",
+        "Project management"
+    ];
     const [ClubSkillsEarned, setClubSkillsEarned] = useState([]);//usestate for autocomplete skills earned
     const maxSelectionsSkillsEarned = 3;//max value for the autocomplete
     const handleClubSkillsEarned = (event, newSkill) => {
@@ -287,7 +302,7 @@ const yearOption = ["2024"];
                                           required
                                       >
                                           <MenuItem disabled value="">Year</MenuItem>
-                                          {yearOption.map(year => (
+                                          {StartyearOption.map(year => (
                                               <MenuItem key={year} value={year}>{year}</MenuItem>
                                           ))}
                                       </Select>
@@ -343,7 +358,7 @@ const yearOption = ["2024"];
                                           required
                                       >
                                           <MenuItem disabled value="">Year</MenuItem>
-                                          {yearOption.map(year => (
+                                          {EndyearOption.map(year => (
                                               <MenuItem key={year} value={year}>{year}</MenuItem>
                                           ))}
                                       </Select>
