@@ -173,6 +173,8 @@ const CvFeedback = () => {
             setEmoji2Clr(['']);
             setEmoji3Clr(['']);
             setEmoji4Clr(['']);
+
+            navigate('/home');
         }catch (error) {
             console.log('error adding details', error.message);
         }
