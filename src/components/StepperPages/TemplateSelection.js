@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './css/TemplateSelection.css';
 import image5 from '../../assets/images/image5.png'
 import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 import InterviewFormFooter from '../InterviewFormFooter';
 import InterviewFormHeader from '../InterviewFormHeader';
 import Button from "@mui/material/Button";
@@ -11,6 +12,7 @@ import { next } from '../NextButton.js';
 import { collection, addDoc, getFirestore, query, where, getDocs, doc, updateDoc, setDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth.js';
+import TextField from "@mui/material/TextField";
 
 
 const TemplateSelection = () => {
@@ -23,6 +25,28 @@ const TemplateSelection = () => {
     const navigate = useNavigate();
     const prevPage = () => navigate('finalisesummary');
 
+    useEffect(() => {
+        const fetchData = async () => {
+            try{
+                const db = getFirestore();
+                const studentDetailsCollection = collection(db, 'studentdetails');
+                const querySnapshot = await getDocs(query(studentDetailsCollection, where('email', '==', currentUser.email)));
+                const existingDoc = querySnapshot.docs[0];
+
+                if(existingDoc){
+                    const templateData = existingDoc.data().templateSelection || {};
+                    setTemplate(templateData.template || '');
+                    setprimaryColor(templateData.cvColor || '');
+                    setsecondaryColor(templateData.fontColor || '');
+                    setTypography(templateData.typography || '');
+                }
+            }catch (err) {
+                console.log('error fetching data', err.message);
+            }
+        };
+        fetchData();
+    }, [currentUser]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try{
@@ -33,8 +57,8 @@ const TemplateSelection = () => {
 
             const formData = {
                 template: template,
-                primarycolor: primarycolor,
-                secondarycolor:secondarycolor,
+                cvColor: primarycolor,
+                fontColor:secondarycolor,
                 typography: typography,
             };
 
@@ -53,12 +77,53 @@ const TemplateSelection = () => {
         }
     };
 
+    useEffect(() => {}, [template, primarycolor, secondarycolor, typography])
+
   return (
     <div className="formtemp-page">
             <InterviewFormHeader title='Template Selection' />
             <div className="formtemp-bodyform">
                 <Grid container spacing={2} style={{ height: '100%' }}>
                     <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
+                        <Grid container px={4} pt={4}>
+                            <Grid item xs={12} mb={4}><Typography variant='h5' fontWeight='bold'>Your Selection</Typography></Grid>
+                            <Grid item xs={5} pl={3}><Typography>CV Template:</Typography></Grid>
+                            <Grid item xs={7} pr={3} mb={2}>
+                                <TextField type="text" variant="outlined" fullWidth
+                                    value={template} 
+                                    InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                    placeholder=""
+                                    disabled
+                                />
+                            </Grid>
+                            <Grid item xs={5} pl={3}><Typography>CV Color:</Typography></Grid>
+                            <Grid item xs={7} pr={3} mb={2}>
+                                <TextField type="text" variant="outlined" fullWidth
+                                    value={primarycolor} 
+                                    InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                    placeholder=""
+                                    disabled
+                                />
+                            </Grid>
+                            <Grid item xs={5} pl={3}><Typography>Font Color:</Typography></Grid>
+                            <Grid item xs={7} pr={3} mb={2}>
+                                <TextField type="text" variant="outlined" fullWidth
+                                    value={secondarycolor} 
+                                    InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                    placeholder=""
+                                    disabled
+                                />
+                            </Grid>
+                            <Grid item xs={5} pl={3}><Typography>Font:</Typography></Grid>
+                            <Grid item xs={7} pr={3}>
+                                <TextField type="text" variant="outlined" fullWidth
+                                    value={typography} 
+                                    InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                    placeholder=""
+                                    disabled
+                                />
+                            </Grid>
+                        </Grid>
                         <form onSubmit={handleSubmit} style={{ height: '100%', position: 'relative' }}>
                             <div style={{ margin: '80px 25px 125px' }}>
                                     <div className='TemplateSelection-maindiv'>
@@ -244,9 +309,9 @@ const TemplateSelection = () => {
                                             </div>
                                         </div>
                                     </div>
-                            {/* <button onClick={(e) => {e.preventDefault(); console.log(color)}}>btn</button> */}
+                            <button type='submit'>btn</button>
                             </div>
-                        <Grid container spacing={2} style={{position: 'absolute', bottom: 80}}>            
+                        {/* <Grid container spacing={2} style={{position: 'absolute', bottom: 80}}>            
                             <Grid xs={6} paddingLeft={'10px'}>
                                 <Button startIcon={<ArrowBackIcon />} style={back} onClick={prevPage}>Go Back</Button>
                             </Grid>
@@ -254,7 +319,7 @@ const TemplateSelection = () => {
                             <Grid xs={6}>
                                 <Button type='submit' style={next}>Next Step</Button>                                    
                             </Grid>
-                        </Grid>
+                        </Grid> */}
                     </form>
                 </Grid>
             </Grid>
