@@ -55,7 +55,7 @@ const Publications = () => {
     {value: 'December', label: 'December'}
 ];
 const yearOption = ["2024"];
-    for (let year = 2023; year >= 1990; year--) {
+    for (let year = 2023; year >= 2015; year--) {
     yearOption.push(String(year));
     }
 

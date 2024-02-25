@@ -53,12 +53,13 @@ const AdminDash = () => {
   const [userCount, setUserCount] = useState(0);//to store the user count that is taken from the DB
   const [feedbackCount, setFeedbackCount] = useState(0);//to store the reviews count that is taken from the DB
   const [cvfeedbackCount, setcvfeedbackCount] = useState(0);//to store the reviews count that is taken from the DB
+  const [cvGeneratedCount, setCvGeneratedCount] = useState(0);//to store the cvs generated count
   const [DegbarChartData, setDegBarChartData] = useState([]);
   const [topSkills, setTopSkills] = useState([]);
   useEffect(() => {
       fetchDataFromFirestore();
   }, []);
-
+ 
   const fetchDataFromFirestore = async () => {
     const firestore = getFirestore();
     const cvfeedbackSnapshot = await getDocs(collection(firestore, "cvfeedback"));
@@ -178,6 +179,22 @@ const AdminDash = () => {
     // Set the top skills state
     setTopSkills(tableRows.slice(0, 10)); // Display top 10 skills
 
+    let Count = 0;
+
+    // Iterate through each document in the snapshot
+    snapshot.forEach(doc => {
+        const data = doc.data();
+        // Check if the document contains the "templateSelection" field
+        if (data.templateSelection) {
+            // Check if the "cvstatus" field in "templateSelection" has the value "created"
+            if (data.templateSelection.cvstatus === "created") {
+                // Increment the count if the condition is met
+                Count++;
+            }
+        }
+    });
+    setCvGeneratedCount(Count);
+    
 };
 
 // Function to generate unique colors (lighter shades)
@@ -273,7 +290,7 @@ return (
                         </Avatar>
                     }
                     title="CVs Generated"
-                    subheader="88"
+                    subheader={cvGeneratedCount}//The cv generated count goes here
                     sx={{
                         "& .MuiCardHeader-title": {
                         fontSize: "13px",

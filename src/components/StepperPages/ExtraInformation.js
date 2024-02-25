@@ -31,7 +31,59 @@ const ExtraInformation = () => {
     const [lang, setLang] = useState(['']);
 
     //below handle function is for CustomizedHook
-    const ExtraInfo_Intrest = ['role1','role2','role3'];
+    const ExtraInfo_Intrest = [
+        "Artificial Intelligence and Machine Learning",
+        "Data Mining and Big Data Analytics",
+        "Natural Language Processing",
+        "Computer Vision",
+        "Deep Learning",
+        "Human-Computer Interaction",
+        "Internet of Things (IoT)",
+        "Cybersecurity and Privacy",
+        "Bioinformatics and Computational Biology",
+        "Quantum Computing",
+        "Robotics and Autonomous Systems",
+        "Augmented Reality and Virtual Reality",
+        "Social Network Analysis",
+        "Cloud Computing and Edge Computing",
+        "Blockchain Technology",
+        "Renewable Energy Systems",
+        "Environmental Sustainability",
+        "Biomedical Engineering",
+        "Healthcare Informatics",
+        "Urban Planning and Smart Cities",
+        "Educational Technology",
+        "Financial Technology (FinTech)",
+        "Predictive Analytics and Forecasting",
+        "Supply Chain Management",
+        "Crisis Management and Disaster Recovery",
+        "Humanitarian Engineering",
+        "Sustainable Agriculture",
+        "Materials Science and Nanotechnology",
+        "Aerospace Engineering",
+        "Behavioral Economics and Decision Making",
+        "Cultural Studies and Anthropology",
+        "Linguistics and Language Acquisition",
+        "History and Archaeology",
+        "Psychology and Cognitive Science",
+        "Sociology and Social Sciences",
+        "Political Science and International Relations",
+        "Public Health and Epidemiology",
+        "Climate Change and Environmental Policy",
+        "Gender Studies and Diversity Research",
+        "Media and Communication Studies",
+        "Arts and Humanities Research",
+        "Philosophy and Ethics",
+        "Education Policy and Reform",
+        "Urban Development and Transportation Planning",
+        "Legal Studies and Law Reform",
+        "Religious Studies and Theology",
+        "Musicology and Music Theory",
+        "Theater and Performance Studies",
+        "Literary Studies and Comparative Literature",
+        "Cultural Heritage Preservation and Conservation"
+    ];
+    
     const [ExtraInfoInterests, setExtraInfoInterests] = useState([]);//usestate for autocomplete ExtraInfoInterests
     const maxSelections = 3;//max value for the autocomplete
     const handleExtraInfoInterests = (event, newSkill) => {
