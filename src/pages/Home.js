@@ -88,7 +88,7 @@ const gridItems = [
       `,
       height: '9rem',
       border: '3px solid #000',
-      url: '/insightblog',
+      url: '/five-top-mistakes',
     },
     {
       id: 2,
@@ -101,7 +101,7 @@ const gridItems = [
       `,
       height: '9rem',
       border: '3px solid #000',
-      url: 'https://www.example.com/page2',
+      url: '/reasons-reject-cvs',
     },
     {
       id: 3,
@@ -114,7 +114,7 @@ const gridItems = [
     `,
       height: '9rem',
       border: '3px solid #000',
-      url: 'https://www.example.com/page2',
+      url: '/cv-design',
     },
     {
       id: 4,
@@ -127,11 +127,11 @@ const gridItems = [
     `,
       height: '9rem',
       border: '3px solid #000',
-      url: 'https://www.example.com/page2',
+      url: '/interview-mistakes',
     },
     {
       id: 5,
-      title: "Weak CV Objectives",
+      title: "Path from University to Career",
       position: 'relative',
       background: `
         linear-gradient(0deg, #F9C5ED 0%, #F9C5ED 100%),
@@ -140,7 +140,7 @@ const gridItems = [
       `,
       height: '9rem',
       border: '3px solid #000',
-      url: 'https://www.example.com/page2',
+      url: '/university-to-career',
     },
     {
       id: 6,
@@ -153,7 +153,7 @@ const gridItems = [
       `,
       height: '9rem',
       border: '3px solid #000',
-      url: 'https://www.example.com/page2',
+      url: '/interiew-nerves',
     },
     
   ];

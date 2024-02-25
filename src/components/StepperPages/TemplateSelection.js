@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import './css/TemplateSelection.css';
-import image5 from '../../assets/images/image5.png'
+import Temp1 from '../../assets/images/template1.png'
+import Temp2 from '../../assets/images/template2.png'
+import Temp3 from '../../assets/images/template3.png'
+import Temp4 from '../../assets/images/template4.png'
+import Temp5 from '../../assets/images/template5.png'
+import Temp6 from '../../assets/images/template6.png'
+
+
+
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import InterviewFormFooter from '../InterviewFormFooter';
@@ -144,66 +152,44 @@ const TemplateSelection = () => {
                                                                 <tr className="TemplateSelection-TemplateRow">
                                                                     <td className="TemplateSelection-TemplateCell-Left">
                                                                         <div className="TemplateSelection-Templatediv FirstRowTemplatediv1">
-                                                                            <button onClick={(e) => {e.preventDefault(); setTemplate('template1')}}><img src={image5} alt='image'className='TemplateSelection-image'/></button>
+                                                                            <button onClick={(e) => {e.preventDefault(); setTemplate('template1')}}><img src={Temp1} alt='image'className='TemplateSelection-image'/></button>
                                                                         </div>
                                                                     </td>
-                                                                    <td className="TemplateSelection-TemplateCell-Right">
+                                                                    <td className="TemplateSelection-TemplateCell-Right" style={{opacity:'0.5',pointerEvents:'none'}}>
                                                                         <div className="TemplateSelection-Templatediv FirstRowTemplatediv2">
-                                                                            <button onClick={(e) => {e.preventDefault(); setTemplate('template2')}}><img src={image5} alt='image'className='TemplateSelection-image'/></button>
+                                                                            <button onClick={(e) => {e.preventDefault(); setTemplate('template2')}}><img src={Temp2} alt='image'className='TemplateSelection-image'/></button>
                                                                         </div>
                                                                     </td>
                                                                 </tr>
                                                                 <tr className="TemplateSelection-TemplateRow">
-                                                                    <td className="TemplateSelection-TemplateCell-Left">
+                                                                    <td className="TemplateSelection-TemplateCell-Left" style={{opacity:'0.5',pointerEvents:'none'}}>
                                                                         <div className="TemplateSelection-Templatediv SecondRowTemplatediv1">
-                                                                            <button onClick={(e) => {e.preventDefault(); setTemplate('template3')}}><img src={image5} alt='image'className='TemplateSelection-image'/></button>
+                                                                            <button onClick={(e) => {e.preventDefault(); setTemplate('template3')}}><img src={Temp3} alt='image'className='TemplateSelection-image'/></button>
                                                                         </div>
                                                                     </td>
-                                                                    <td className="TemplateSelection-TemplateCell-Right">
+                                                                    <td className="TemplateSelection-TemplateCell-Right" style={{opacity:'0.5',pointerEvents:'none'}}>
                                                                         <div className="TemplateSelection-Templatediv SecondRowTemplatediv2">
-                                                                            <button onClick={(e) => {e.preventDefault(); setTemplate('template4')}}><img src={image5} alt='image'className='TemplateSelection-image'/></button>
+                                                                            <button onClick={(e) => {e.preventDefault(); setTemplate('template4')}}><img src={Temp4} alt='image'className='TemplateSelection-image'/></button>
                                                                         </div>
                                                                     </td>
                                                                 </tr>
                                                                 <tr className="TemplateSelection-TemplateRow">
-                                                                    <td className="TemplateSelection-TemplateCell-Left">
+                                                                    <td className="TemplateSelection-TemplateCell-Left" style={{opacity:'0.5',pointerEvents:'none'}}>
                                                                         <div className="TemplateSelection-Templatediv ThirdRowTemplatediv1">
-                                                                            <button onClick={(e) => {e.preventDefault(); setTemplate('template5')}}><img src={image5} alt='image'className='TemplateSelection-image'/></button>
+                                                                            <button onClick={(e) => {e.preventDefault(); setTemplate('template5')}}><img src={Temp5} alt='image'className='TemplateSelection-image'/></button>
                                                                         </div>
                                                                     </td>
-                                                                    <td className="TemplateSelection-TemplateCell-Right">
+                                                                    <td className="TemplateSelection-TemplateCell-Right" style={{opacity:'0.5',pointerEvents:'none'}}>
                                                                         <div className="TemplateSelection-Templatediv ThirdRowTemplatediv2">
-                                                                            <button onClick={(e) => {e.preventDefault(); setTemplate('template6')}}><img src={image5} alt='image'className='TemplateSelection-image'/></button>
+                                                                            <button onClick={(e) => {e.preventDefault(); setTemplate('template6')}}><img src={Temp6} alt='image'className='TemplateSelection-image'/></button>
                                                                         </div>
                                                                     </td>
                                                                 </tr>
                                                             
-                                                                {/* <tr className="TemplateSelection-TemplateRow">
-                                                                    <td className="TemplateSelection-TemplateCell-Left">
-                                                                        <div className="TemplateSelection-Templatediv FourthRowTemplatediv1">
-                                                                            <a onClick={console.log('')}><img src={image5} alt='image'className='TemplateSelection-image'/></a>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td className="TemplateSelection-TemplateCell-Right">
-                                                                        <div className="TemplateSelection-Templatediv FourthRowTemplatediv2">
-                                                                            <a onClick={console.log('')}><img src={image5} alt='image'className='TemplateSelection-image'/></a>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr className="TemplateSelection-TemplateRow">
-                                                                    <td className="TemplateSelection-TemplateCell-Left">
-                                                                        <div className="TemplateSelection-Templatediv ThirdRowTemplatediv1">
-                                                                            <a onClick={console.log('')}><img src={image5} alt='image'className='TemplateSelection-image'/></a>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td className="TemplateSelection-TemplateCell-Right">
-                                                                        <div className="TemplateSelection-Templatediv ThirdRowTemplatediv2">
-                                                                            <a onClick={console.log('')}><img src={image5} alt='image'className='TemplateSelection-image'/></a>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr> */}
+                                                                
                                                             </tbody>
                                                         </table>
+                                                        <p>More templates coming soon...</p>
                                             </div>
                                             <div className='TemplateSelection-RightColumn'>
                                                 {/*the below is the first div tag with the class name 'TemplateSelection-RightRow' is the Color theme table*/}
@@ -213,50 +199,50 @@ const TemplateSelection = () => {
                                                         <table className="TemplateSelection-ColorTable">
                                                             <thead>
                                                                 <tr>
-                                                                    <th className='TemplateSelection-ColorTablecolumnheading'>Primary</th>
-                                                                    <th className='TemplateSelection-ColorTablecolumnheading'>Secondary</th>
+                                                                    <th className='TemplateSelection-ColorTablecolumnheading'>CV Colour</th>
+                                                                    <th className='TemplateSelection-ColorTablecolumnheading'>Font Colour</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
                                                                 <tr>
                                                                     <td className="TemplateSelection-ColorCell">
-                                                                        <button onClick={(e) =>{e.preventDefault(); setprimaryColor('red')}} className="TemplateSelection-ColorButton FirstRowColorButton1">Red</button>
+                                                                        <button onClick={(e) =>{e.preventDefault(); setprimaryColor('#deccbb')}} className="TemplateSelection-ColorButton FirstRowColorButton1">Cream</button>
                                                                     </td>
                                                                     <td className="TemplateSelection-ColorCell">
-                                                                        <button onClick={(e) =>{e.preventDefault(); setsecondaryColor('blue')}} className="TemplateSelection-ColorButton FirstRowColorButton2">Blue</button>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td className="TemplateSelection-ColorCell">
-                                                                        <button onClick={(e) =>{e.preventDefault(); setprimaryColor('green')}} className="TemplateSelection-ColorButton SecondRowColorButton1">Green</button>
-                                                                    </td>
-                                                                    <td className="TemplateSelection-ColorCell">
-                                                                        <button onClick={(e) =>{e.preventDefault(); setsecondaryColor('yellow')}} className="TemplateSelection-ColorButton SecondRowColorButton2">Yellow</button>
+                                                                        <button onClick={(e) =>{e.preventDefault(); setsecondaryColor('#ffffff')}} className="TemplateSelection-ColorButton FirstRowColorButton2">Black</button>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td className="TemplateSelection-ColorCell">
-                                                                        <button onClick={(e) =>{e.preventDefault(); setprimaryColor('orange')}} className="TemplateSelection-ColorButton ThirdRowColorButton1">Orange</button>
+                                                                        <button onClick={(e) =>{e.preventDefault(); setprimaryColor('#b8d4bd')}} className="TemplateSelection-ColorButton SecondRowColorButton1">Green</button>
                                                                     </td>
                                                                     <td className="TemplateSelection-ColorCell">
-                                                                        <button onClick={(e) =>{e.preventDefault(); setsecondaryColor('purple')}} className="TemplateSelection-ColorButton ThirdRowColorButton2">Purple</button>
+                                                                        <button onClick={(e) =>{e.preventDefault(); setsecondaryColor('#323232')}} className="TemplateSelection-ColorButton SecondRowColorButton2">Charcoal</button>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td className="TemplateSelection-ColorCell">
+                                                                        <button onClick={(e) =>{e.preventDefault(); setprimaryColor('#dadada')}} className="TemplateSelection-ColorButton ThirdRowColorButton1">Gray</button>
+                                                                    </td>
+                                                                    <td className="TemplateSelection-ColorCell">
+                                                                        <button onClick={(e) =>{e.preventDefault(); setsecondaryColor('#2d4956')}} className="TemplateSelection-ColorButton ThirdRowColorButton2">Blue</button>
                                                                     </td>
                                                                 </tr>
                                                                 {/* Below i added more sample buttons in the color theme table just to check the scroll bar */}
                                                                 <tr>
                                                                     <td className="TemplateSelection-ColorCell">
-                                                                        <button onClick={(e) =>{e.preventDefault(); setprimaryColor('red')}} className="TemplateSelection-ColorButton ThirdRowColorButton1">Orange</button>
+                                                                        <button onClick={(e) =>{e.preventDefault(); setprimaryColor('#bf99ba')}} className="TemplateSelection-ColorButton FourthRowColorButton1">Purple</button>
                                                                     </td>
                                                                     <td className="TemplateSelection-ColorCell">
-                                                                        <button onClick={(e) =>{e.preventDefault(); setsecondaryColor('red')}} className="TemplateSelection-ColorButton ThirdRowColorButton2">Purple</button>
+                                                                        <button onClick={(e) =>{e.preventDefault(); setsecondaryColor('#553734')}} className="TemplateSelection-ColorButton FourthRowColorButton2">Brown</button>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td className="TemplateSelection-ColorCell">
-                                                                        <button onClick={(e) =>{e.preventDefault(); setprimaryColor('red')}} className="TemplateSelection-ColorButton ThirdRowColorButton1">Orange</button>
+                                                                        <button onClick={(e) =>{e.preventDefault(); setprimaryColor('#a4dcf1')}} className="TemplateSelection-ColorButton FifthRowColorButton1">Blue</button>
                                                                     </td>
                                                                     <td className="TemplateSelection-ColorCell">
-                                                                        <button onClick={(e) =>{e.preventDefault(); setsecondaryColor('red')}} className="TemplateSelection-ColorButton ThirdRowColorButton2">Purple</button>
+                                                                        <button onClick={(e) =>{e.preventDefault(); setsecondaryColor('#19474b')}} className="TemplateSelection-ColorButton FifthRowColorButton2">Green</button>
                                                                     </td>
                                                                 </tr>
                                                         
@@ -303,14 +289,7 @@ const TemplateSelection = () => {
                                                                         <button onClick={(e) => {e.preventDefault(); setTypography('Lato')}} className="TemplateSelection-TypographyButton FourthRowTypographyButton2">Lato</button>
                                                                     </td>
                                                                 </tr>
-                                                                <tr>
-                                                                    <td className="TemplateSelection-TypographyCell">
-                                                                        <button onClick={(e) => {e.preventDefault(); setTypography('calibri')}} className="TemplateSelection-TypographyButton ThirdRowTypographyButton1">Orange</button>
-                                                                    </td>
-                                                                    <td className="TemplateSelection-TypographyCell">
-                                                                        <button onClick={(e) => {e.preventDefault(); setTypography('calibri')}} className="TemplateSelection-TypographyButton ThirdRowTypographyButton2">Purple</button>
-                                                                    </td>
-                                                                </tr>
+                                                                
                                                             </tbody>
                                                         </table>
                                                     </div>

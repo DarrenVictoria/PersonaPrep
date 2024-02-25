@@ -122,27 +122,44 @@
 }
 
 .FirstRowColorButton1 {
-  background-color: red;
+  background-color: #deccbb;
 }
 
 .FirstRowColorButton2 {
-  background-color: blue;
+  background-color: black;
 }
 
 .SecondRowColorButton1 {
-  background-color: green;
+  background-color: #b8d4bd;
 }
 
 .SecondRowColorButton2 {
-  background-color: yellow;
+  background-color: #323232;
 }
 
 .ThirdRowColorButton1 {
-  background-color: orange;
+  background-color: #dadada;
 }
 
 .ThirdRowColorButton2 {
-  background-color: purple;
+  background-color: #2d4956;
+}
+
+
+.FourthRowColorButton1 {
+  background-color: #bf99ba;
+}
+
+.FourthRowColorButton2 {
+  background-color: #553734;
+}
+
+.FifthRowColorButton1 {
+  background-color: #a4dcf1;
+}
+
+.FifthRowColorButton2 {
+  background-color: #19474b;
 }
 
 

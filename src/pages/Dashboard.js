@@ -17,7 +17,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import FileUpload from '../components/File Upload/FeebackUpload';
 
 import {useForm, Controller, useWatch } from 'react-hook-form';
-import { getFirestore, addDoc, collection,updateDoc, doc, setDoc, getDoc, serverTimestamp  } from 'firebase/firestore';
+import { getFirestore, addDoc, collection,updateDoc, doc, setDoc, getDoc, serverTimestamp, getDocs,query ,where  } from 'firebase/firestore';
 import { useAuth } from '../hooks/useAuth';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
@@ -242,11 +242,55 @@ const RecruitmentStatus = () => {
 };
 
   const CVGenerator = () => {
+
+    const { currentUser } = useAuth();
+
+    const [template, setTemplate] = useState('');
+
+    useEffect(() => {
+      const fetchData = async () => {
+          try{
+              const db = getFirestore();
+              const studentDetailsCollection = collection(db, 'studentdetails');
+              const querySnapshot = await getDocs(query(studentDetailsCollection, where('email', '==', currentUser.email)));
+              const existingDoc = querySnapshot.docs[0];
+
+              if(existingDoc){
+                  const templateData = existingDoc.data().templateSelection || {};
+                  setTemplate(templateData.template || '');
+              }
+          }catch (err) {
+              console.log('error fetching data', err.message);
+          }
+      };
+      fetchData();
+  }, [currentUser]);
+
+
     const navigate = useNavigate();
 
       const CVEdit = () => {
         navigate('/faculty');
     };
+
+    const CVView = () => {
+      navigate(`/${template}`);
+  };
+
+      const handleExportLink = () => {
+        const link = `https://personaprep.web.app/${template}?username=${currentUser.email}`;
+        navigator.clipboard.writeText(link)
+          .then(() => {
+            console.log('Link copied to clipboard:', link);
+            alert('Link copied to clipboard successfully!');
+            // You can optionally show a success message here
+          })
+          .catch((error) => {
+            console.error('Failed to copy link to clipboard:', error);
+            alert('Failed to copy link to clipboard. Please try again.');
+            // You can optionally show an error message here
+          });
+      };
 
 
     return (
@@ -278,8 +322,8 @@ const RecruitmentStatus = () => {
         {/* Right Section (Four Buttons) */}
         <div className="right-section" >
           {/* <Button className='cv-gen-butt' style={{ flex: 1, margin: '1%', border: '3px solid #000', backgroundColor: '#ffffff',color:'#000000' }} >Export CV <OutboxIcon style={{marginLeft:'3%'}}/> </Button> */}
-          <Button className='cv-gen-butt' style={{ flex: 1, margin: '1%', border: '3px solid #000', backgroundColor: '#ffffff',color:'#000000' }}>Quick View <SlideshowIcon style={{marginLeft:'3%'}}/></Button>
-          <Button className='cv-gen-butt' style={{ flex: 1, margin: '1%', border: '3px solid #000', backgroundColor: '#ffffff',color:'#000000' }}>Export Link <AddLinkIcon style={{marginLeft:'3%'}}/></Button>
+          <Button onClick={CVView} className='cv-gen-butt' style={{ flex: 1, margin: '1%', border: '3px solid #000', backgroundColor: '#ffffff',color:'#000000' }}>Quick View <SlideshowIcon style={{marginLeft:'3%'}}/></Button>
+          <Button onClick={handleExportLink}  className='cv-gen-butt' style={{ flex: 1, margin: '1%', border: '3px solid #000', backgroundColor: '#ffffff',color:'#000000' }}>Export Link <AddLinkIcon style={{marginLeft:'3%'}}/></Button>
           {/* <Button className='cv-gen-butt'style={{ flex: 1, margin: '1%', border: '3px solid #000', backgroundColor: '#ffffff',color:'#000000' }}>Social Share <ShareIcon style={{marginLeft:'3%'}}/></Button> */}
         </div>
       </div>
