@@ -23,7 +23,7 @@ const TemplateSelection = () => {
     const [typography, setTypography] = useState('');
 
     const navigate = useNavigate();
-    const prevPage = () => navigate('finalisesummary');
+    const prevPage = () => navigate('/finalisesummary');
 
     useEffect(() => {
         const fetchData = async () => {
@@ -309,9 +309,10 @@ const TemplateSelection = () => {
                                             </div>
                                         </div>
                                     </div>
-                            <button type='submit'>btn</button>
+                            {/* <button type='submit'>btn</button> */}
+                           
                             </div>
-                        {/* <Grid container spacing={2} style={{position: 'absolute', bottom: 80}}>            
+                            <Grid container spacing={2} style={{position: 'absolute',top:"1320px"}}>            
                             <Grid xs={6} paddingLeft={'10px'}>
                                 <Button startIcon={<ArrowBackIcon />} style={back} onClick={prevPage}>Go Back</Button>
                             </Grid>
@@ -319,7 +320,7 @@ const TemplateSelection = () => {
                             <Grid xs={6}>
                                 <Button type='submit' style={next}>Next Step</Button>                                    
                             </Grid>
-                        </Grid> */}
+                            </Grid>
                     </form>
                 </Grid>
             </Grid>
