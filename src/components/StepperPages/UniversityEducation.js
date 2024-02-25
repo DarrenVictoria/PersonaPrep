@@ -228,9 +228,13 @@ const UniversityEducation1 = () => {
                                                         
                                                     >
                                                         <MenuItem disabled value="">Degree Name</MenuItem>
-                                                        <MenuItem value="BSc. (Hons) in Software Engineering">BSc. (Hons) in Software Engineering</MenuItem>
-                                                        <MenuItem value="BSc. (Hons) in Computer Science">BSc. (Hons) in Computer Science</MenuItem>
-                                                        <MenuItem value="BSc. (Hons) in Cyber Security">BSc. (Hons) in Cyber Security</MenuItem>
+                                                        <MenuItem value="BSc (Hons) in Data Science">BSc (Hons) in Data Science</MenuItem>,
+                                                        <MenuItem value="BSc (Hons) in Computer Networks">BSc (Hons) in Computer Networks</MenuItem>,
+                                                        <MenuItem value="BSc (Hons) in Computer Science">BSc (Hons) in Computer Science</MenuItem>,
+                                                        <MenuItem value="BSc (Hons) in Software Engineering">BSc (Hons) in Software Engineering</MenuItem>,
+                                                        <MenuItem value="BSc in Management Information Systems (Special)">BSc in Management Information Systems (Special)</MenuItem>,
+                                                        <MenuItem value="Bachelor of Information Technology (Major in Cyber Security)">Bachelor of Information Technology (Major in Cyber Security)</MenuItem>,
+                                                        <MenuItem value="BSc (Hons) Technology Management">BSc (Hons) Technology Management</MenuItem>
                                                         
                                                     </Select>
                                                 </FormControl>

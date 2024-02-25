@@ -46,7 +46,59 @@ const SkillTrack_1 = () => {
 
 
     //Use state for auto complete component for keySkills
-    const  Skilldataset = ['c#','Java','c python'];
+    const CoreSkilldataset = [
+        "Programming",
+        "Cybersecurity",
+        "Cloud Computing",
+        "Networking",
+        "Data Analysis",
+        "Database Management",
+        "Web Development",
+        "Software Development",
+        "System Administration",
+        "IT Project Management",
+        "Artificial Intelligence",
+        "Machine Learning",
+        "DevOps",
+        "Automation",
+        "Virtualization",
+        "Information Security",
+        "Penetration Testing",
+        "Incident Response",
+        "Cryptography",
+        "Risk Assessment",
+        "Threat Detection",
+        "IT Governance",
+        "Disaster Recovery",
+        "Agile Methodologies",
+        "Scrum",
+        "Continuous Integration/Continuous Deployment (CI/CD)",
+        "Version Control (e.g., Git)",
+        "Containerization (e.g., Docker)",
+        "Microservices",
+        "API Development",
+        "Scripting",
+        "Linux/Unix Administration",
+        "Windows Administration",
+        "Mobile Development",
+        "UI/UX Design",
+        "Quality Assurance (QA)",
+        "Test Automation",
+        "Big Data",
+        "Data Warehousing",
+        "Business Intelligence (BI)",
+        "ITIL Framework",
+        "ServiceNow",
+        "Enterprise Resource Planning (ERP) Systems",
+        "Customer Relationship Management (CRM) Systems",
+        "IT Asset Management",
+        "Compliance Management",
+        "Network Security",
+        "Endpoint Security",
+        "Security Operations Center (SOC) Operations",
+        "Cloud Security"
+    ];
+    
     const [keySkills, setkeySkills] = useState([]);//usestate for autocomplete keySkills
     const maxSelectionskeySkills = 3;//max value for the autocomplete
     const handlekeySkills = (event, newSkill) => {
@@ -61,8 +113,59 @@ const SkillTrack_1 = () => {
     console.log(keySkills);
     
 
-//Use state for auto complete component for SoftSkills
-    const SoftSkilldataset = ['team','confid'];
+//Use state for auto complete component for SoftSkill
+    const SoftSkilldataset = [
+        "Communication",
+        "Collaboration",
+        "Problem-solving",
+        "Critical thinking",
+        "Adaptability",
+        "Creativity",
+        "Leadership",
+        "Teamwork",
+        "Time management",
+        "Emotional intelligence",
+        "Interpersonal skills",
+        "Conflict resolution",
+        "Decision making",
+        "Flexibility",
+        "Resilience",
+        "Empathy",
+        "Active listening",
+        "Open-mindedness",
+        "Positivity",
+        "Networking",
+        "Stress management",
+        "Patience",
+        "Negotiation",
+        "Organization",
+        "Presentation skills",
+        "Public speaking",
+        "Empowerment",
+        "Delegation",
+        "Motivation",
+        "Innovation",
+        "Persuasion",
+        "Self-awareness",
+        "Self-motivation",
+        "Self-discipline",
+        "Attention to detail",
+        "Customer service",
+        "Conflict management",
+        "Cultural sensitivity",
+        "Trustworthiness",
+        "Professionalism",
+        "Diplomacy",
+        "Mentoring",
+        "Feedback",
+        "Tolerance",
+        "Analytical skills",
+        "Problem analysis",
+        "Advising",
+        "Coaching",
+        "Inspiration"
+    ];
+    
     const [SoftSkills, setSoftSkills] = useState([]);//usestate for autocomplete SoftSkills 
     const maxSelectionsSoftSkills = 3;//max value for the autocomplete
     const handleSoftSkills = (event, newSkill) => {
@@ -156,7 +259,7 @@ const SkillTrack_1 = () => {
                                                 <Autocomplete
                                                     multiple
                                                     id="tags-outlined"
-                                                    options={Skilldataset}
+                                                    options={CoreSkilldataset}
                                                     value={keySkills} 
                                                     onChange={handlekeySkills}
                                                     filterSelectedOptions
