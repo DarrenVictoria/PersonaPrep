@@ -8,6 +8,16 @@ import Home from './pages/Home'
 import InterviewBank from './pages/interviewbank/InterviewBank'
 import InterviewDisplay from './pages/interviewbank/interviewDisplay'
 import Insightblog from "./pages/insightblog/insightBlog"
+import Insightblog2 from "./pages/insightblog/insightBlog2"
+import Insightblog3 from "./pages/insightblog/insightBlog3"
+import Insightblog4 from "./pages/insightblog/insightBlog4"
+import Insightblog5 from "./pages/insightblog/insightBlog5"
+import Insightblog6 from "./pages/insightblog/insightBlog6"
+
+
+
+
+
 import Login from "./pages/authentication/login"
 import Dashboard from "./pages/Dashboard"
 import NoPage from './pages/NoPage'
@@ -66,11 +76,23 @@ function App() {
     <BrowserRouter>
         <Routes>
           <Route index element={<Home/>} />
+
+          <Route path="/five-top-mistakes" element={<Insightblog />}/>
+          <Route path="/reasons-reject-cvs" element={<Insightblog2 />}/>
+          <Route path="/cv-design" element={<Insightblog3 />}/>
+          <Route path="/interview-mistakes" element={<Insightblog4 />}/>
+          <Route path="/university-to-career" element={<Insightblog5 />}/>
+          <Route path="/interiew-nerves" element={<Insightblog6 />}/>
+
+
+
+
+
           <Route path="/startform" element={<Template />}/>
           <Route path="/home" element={<Home />}/>
           <Route path="/interviewbank" element={<InterviewBank />}/>
           <Route path="/interviewDisplay" element={<InterviewDisplay />}/>
-          <Route path="/insightblog" element={<Insightblog />}/>
+         
           <Route path="/login" element={<Login />}/>
           <Route path="/admindash" element={<AdminDash />}/>
           <Route path="/userDash" element={<AUserManageDash />}/>

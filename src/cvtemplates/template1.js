@@ -7,6 +7,7 @@ import { collection, doc, getFirestore, setDoc, getDoc } from 'firebase/firestor
 import { useAuth } from '../hooks/useAuth';
 import { next } from '../components/NextButton';
 import Button from "@mui/material/Button";
+import NavBar from '../components/Navbar'
 
 import Call from './assets/call.svg'
 import Email from './assets/email.svg';
@@ -492,10 +493,12 @@ function Template1() {
     
 
     return (
-    <div>
 
-           
+    <div>
         
+        <NavBar/>
+           
+        <h1 style={{marginLeft:'2rem'}}>Your Curriculam Vitae</h1>
             
         <div id="resume-body" className="cvbody" style={{ color: fontscolor, fontFamily: font }}>
 
@@ -706,12 +709,12 @@ function Template1() {
         </div>
 
         <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                <Button onClick={nextClick} style={next}>Next Step</Button> 
+                <Button onClick={nextClick} style={next}>Next - Give Feedback</Button> 
 
 
                 <Button style={next}  onClick={exportToPDF}>Export to PDF</Button> {/* Button to export PDF */}
 
-                <Button onClick={backClick} style={next}>Next Step</Button> 
+                <Button onClick={backClick} style={next}>Alter template</Button> 
              </div>
 
         
