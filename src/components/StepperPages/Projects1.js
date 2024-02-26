@@ -389,7 +389,7 @@ const Projects1 = () => {
         "XFCE",
         "ZIGBEE"
     ];
-    
+    console.log(Proj_Skills);
     const [ProjSkills, setProjSkills] = useState([]);//usestate for autocomplete
     const [ProjectEvdUrl, setProjectEvdUrl] = useState('');
     const [ProjectEvdFetchUrl, setProjectEvdFetchUrl] = useState('');
@@ -618,7 +618,7 @@ const Projects1 = () => {
                                                                 <TextField
                                                                     {...params}
                                                                     
-                                                                    placeholder="Pick your job roles"
+                                                                    placeholder="Pick your skills"
                                                                     sx={{
                                                                         "& .MuiOutlinedInput-root": {
                                                                             borderRadius: "25px", 

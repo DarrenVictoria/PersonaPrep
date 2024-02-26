@@ -67,8 +67,8 @@ const Certification1 = () => {
         for (let year = 2023; year >= 2015; year--) {
             IssueyearOption.push(String(year));
         }
-    const ExpirationyearOption = ["2035"];
-        for (let year = 2023; year >= 2025; year--) {
+    const ExpirationyearOption = ["2025"];
+        for (let year = 2026; year <= 2035; year++) {
             ExpirationyearOption.push(String(year));
         }
 
@@ -691,7 +691,7 @@ const Certification1 = () => {
                                                                 <TextField
                                                                     {...params}
                                                                     
-                                                                    placeholder="Pick your job roles"
+                                                                    placeholder="Pick your skills"
                                                                     sx={{
                                                                         "& .MuiOutlinedInput-root": {
                                                                             borderRadius: "25px", 
@@ -711,7 +711,8 @@ const Certification1 = () => {
                                                                 />
                                                                 )}
                                                             />
-                                                    </Stack>                                            </Grid>
+                                                    </Stack>                                            
+                                                </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>Certification evidence link</Typography>
                                                 {/* <TextField type="text" variant="outlined" value={CertificateLInk} onChange={(event) => setCertificateLInk(event.target.value)} fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='CV Builder'/> */}

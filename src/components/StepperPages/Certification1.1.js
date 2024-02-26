@@ -67,8 +67,8 @@ const Certification2 = () => {
         for (let year = 2023; year >= 2015; year--) {
             IssueyearOption.push(String(year));
         }
-    const ExpirationyearOption = ["2035"];
-        for (let year = 2023; year >= 2025; year--) {
+    const ExpirationyearOption = ["2025"];
+        for (let year = 2026; year <= 2035; year++) {
             ExpirationyearOption.push(String(year));
         }
 
