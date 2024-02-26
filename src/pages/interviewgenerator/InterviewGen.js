@@ -6,10 +6,19 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import InterviewFormHeader from '../../components/InterviewFormHeader';
 import Box from '@mui/material/Box';
+import { useAuth } from '../../hooks/useAuth';
+
+
 export default function AudioTranscriptionComponent() {
   const [audioSrc, setAudioSrc] = useState('');
   const [chatResponse, setChatResponse] = useState('');
   const [isRecording, setIsRecording] = useState(false);
+
+  const difficultyLevel = 'easy';
+  const jobRole = 'se_engineer';
+
+  const { currentUser } = useAuth();
+  console.log(currentUser.email);
   
   const handleStartRecording = () => {
     setIsRecording(true);
@@ -28,7 +37,7 @@ export default function AudioTranscriptionComponent() {
     formData.append('file', audioBlob);
 
     try {
-      const response = await fetch('http://localhost:8000/transcribe', {
+      const response = await fetch(`http://159.89.167.135:8000/transcribe?user_email=${currentUser.email}&difficulty_level=${difficultyLevel}&job_role=${jobRole}`, {
         method: 'POST',
         body: formData,
       });
