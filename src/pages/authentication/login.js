@@ -18,7 +18,7 @@ export default function Login(){
     const [studentTxt, setStudentTxt] = useState('white');
     const [corpTxt, setCorpTxt] = useState('black');
     const [loader, setLoader] = useState({ microsoftLoading: false });
-    const [userType, setUserType] = useState('');
+    const [userType, setUserType] = useState('student');
     // const [isAdmin, setIsAdmin] = useState(false);
 
     const msLoginBtn = {
