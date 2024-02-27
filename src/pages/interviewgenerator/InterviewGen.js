@@ -46,7 +46,7 @@ export default function AudioTranscriptionComponent() {
     formData.append('file', audioBlob);
 
     try {
-      const response = await fetch('http://localhost:8000/transcribe', {
+      const response = await fetch(`https://personaprepapi.galleryofgalleries.live/transcribe?user_email=${currentUser.email}&difficulty_level=${difficultyLevel}&job_role=${jobRole}`, {
         method: 'POST',
         body: formData,
       });
