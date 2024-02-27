@@ -104,7 +104,11 @@ const DashboardHeader = () => {
             <Typography variant='h4' fontWeight='bold' ml={6}>Dashboard</Typography>
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+          <IconButton sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }}>
+            <a onClick={() => window.location.href = '/home'} style={{cursor: 'pointer'}}><img src={logo} alt="logo" style={{width:'80px'}}/></a>
+          </IconButton>
+
+          {/* <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="" />
@@ -132,9 +136,9 @@ const DashboardHeader = () => {
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
+          </Box> */}
 
-          <Box sx={{ flexGrow: 0 }}>
+          {/* <Box sx={{ flexGrow: 0 }}>
             <MenuItem>
               <IconButton
                 size="large"
@@ -146,7 +150,7 @@ const DashboardHeader = () => {
                 </Badge>
               </IconButton>
             </MenuItem>
-          </Box>
+          </Box> */}
 
         </Toolbar>
       </Container>

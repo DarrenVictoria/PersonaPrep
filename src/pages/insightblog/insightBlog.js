@@ -10,7 +10,7 @@ export default function Insightblog(){
     return(
         <div>
             <Navbar />
-            <div className='insightBlog-container'>
+            <div className='insightBlog-container' style={{backgroundColor:'#f9eac5'}}>
                 <BlogHeader 
                     title="5 Top Mistakes in CV's"
                     tag1="CV"
