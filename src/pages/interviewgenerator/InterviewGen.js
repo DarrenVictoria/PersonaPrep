@@ -23,8 +23,8 @@ export default function AudioTranscriptionComponent() {
   const [JobRole, setJobRole] = useState('');
   console.log(JobRole);
 
-  const difficultyLevel = 'easy';
-  const jobRole = 'se_engineer';
+  // const difficultyLevel = 'easy';
+  // const jobRole = 'se_engineer';
 
   const { currentUser } = useAuth();
   console.log(currentUser.email);
@@ -46,7 +46,7 @@ export default function AudioTranscriptionComponent() {
     formData.append('file', audioBlob);
 
     try {
-      const response = await fetch(`https://personaprepapi.galleryofgalleries.live/transcribe?user_email=${currentUser.email}&difficulty_level=${difficultyLevel}&job_role=${jobRole}`, {
+      const response = await fetch(`https://personaprepapi.galleryofgalleries.live/transcribe?user_email=${currentUser.email}&difficulty_level=${Difficultylevel}&job_role=${JobRole}`, {
         method: 'POST',
         body: formData,
       });
