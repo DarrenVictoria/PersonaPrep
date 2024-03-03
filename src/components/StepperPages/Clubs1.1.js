@@ -49,8 +49,8 @@ const Club2 = () => {
         for (let year = 2023; year >= 2015; year--) {
             StartyearOption.push(String(year));
         }
-    const EndyearOption = ["2035"];
-        for (let year = 2023; year >= 2025; year--) {
+        const EndyearOption = ["2023"];
+        for (let year = 2024; year <= 2025; year++) {
             EndyearOption.push(String(year));
         }
     const [ClubName, setClubName] = useState('');
