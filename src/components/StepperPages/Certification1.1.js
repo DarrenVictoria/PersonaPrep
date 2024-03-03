@@ -664,8 +664,9 @@ const Certification2 = () => {
                                                 value={CertificateId}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder=''
-                                                {...register("CertificateId", { maxLength: 30})}
+                                                {...register("CertificateId", { maxLength: 200})}
                                                 />
+                                                {errors.CertificateId &&  "Maximum of 200 characters"}
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1} mt={3}><span style={{color: 'red'}}>*</span>Skills acquired from the project ?</Typography>
@@ -712,7 +713,7 @@ const Certification2 = () => {
                                                 value={CertificateLInk}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder=''
-                                                {...register("CertificateLInk", { maxLength: 30})}
+                                                {...register("CertificateLInk")}
                                                 />
                                             </Grid>
                                             <Grid item xs={12} mb={2} style={{display: 'flex', justifyContent: 'center'}}>
