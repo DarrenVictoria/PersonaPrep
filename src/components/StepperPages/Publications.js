@@ -235,7 +235,7 @@ useEffect(() => {
                                             value={PblUrl}
                                             InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                             placeholder=''
-                                            {...register("PblUrl", { maxLength: 30 })}
+                                            {...register("PblUrl")}
                                             />
                                             {/* {errors.PblUrl &&  "Please enter only letters"} */}
                                       </Grid>
