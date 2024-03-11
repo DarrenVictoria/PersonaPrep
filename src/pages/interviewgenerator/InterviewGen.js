@@ -29,47 +29,130 @@ export default function AudioTranscriptionComponent() {
   const { currentUser } = useAuth();
   console.log(currentUser.email);
   
-  const handleStartRecording = () => {
+  // const handleStartRecording = () => {
+  //   setIsRecording(true);
+  // };
+
+  let isRecordingStarted = false;
+
+  const handleStartRecording = async () => {
     setIsRecording(true);
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const mediaRecorder = new MediaRecorder(stream);
+  
+      mediaRecorder.addEventListener('dataavailable', (event) => {
+        handleAudioData(event.data);
+      });
+  
+      mediaRecorder.start();
+      isRecordingStarted = true;
+    } catch (error) {
+      console.error('Error accessing microphone:', error);
+      if (error.name === 'NotAllowedError') {
+        alert('Microphone access denied. Please allow microphone access to use this feature.');
+        //reloading page after the alert
+        window.location.reload();
+      } else {
+        alert('An error occurred while accessing the microphone. Please try again later.');
+      }
+    }
   };
 
-  const handleStopRecording = () => {
+  // const handleStopRecording = () => {
+  //   setIsRecording(false);
+  // };
+
+  const handleStopRecording = async () => {
     setIsRecording(false);
+    try {
+      isRecordingStarted = false; // Reset the flag when recording stops
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleAudioData = (recordedBlob) => {
     sendAudioForTranscription(recordedBlob.blob);
   };
 
-  const sendAudioForTranscription = async (audioBlob) => {
-    const formData = new FormData();
-    formData.append('file', audioBlob);
+  // const sendAudioForTranscription = async (audioBlob) => {
+  //   const formData = new FormData();
+  //   formData.append('file', audioBlob);
 
+  //   try {
+  //     const response = await fetch(`https://personaprepapi.galleryofgalleries.live/transcribe?user_email=${currentUser.email}&difficulty_level=${Difficultylevel}&job_role=${JobRole}`, {
+  //       method: 'POST',
+  //       body: formData,
+  //     });
+
+  //     if (!response.ok) {
+  //       throw new Error(`HTTP error! status: ${response.status}`);
+  //     }
+
+  //     const data = await response.json();
+  //     if (data.error) {
+  //       throw new Error(`Server error: ${data.error}`);
+  //     }
+
+  //     const audioBase64 = data.audio_base64;
+  //     const chatResponse = data.chat_response;
+
+  //     setAudioSrc(`data:audio/wav;base64,${audioBase64}`);
+  //     setChatResponse(chatResponse); // Set the chat response state
+  //   } catch (error) {
+  //     console.error('Error transcribing audio:', error);
+  //     if (error.name === 'NotAllowedError') {
+  //       // Handle denied permission error
+  //       alert('Microphone access denied. Please allow microphone access to use this feature.');
+  //     } else {
+  //       alert('An error occurred while transcribing audio. Please try again later.');
+  //     }
+  //   }
+  // };
+  
+  const sendAudioForTranscription = async (audioStream) => {
     try {
+      // Check if recording has started
+      if (!isRecordingStarted) {
+        console.log('Recording has not started yet');
+        return; // Don't proceed with transcription if recording has not started
+      }
+
+      // Now that we have access to the microphone, send audio for transcription
+      const formData = new FormData();
+      formData.append('file', audioStream);
+  
       const response = await fetch(`https://personaprepapi.galleryofgalleries.live/transcribe?user_email=${currentUser.email}&difficulty_level=${Difficultylevel}&job_role=${JobRole}`, {
         method: 'POST',
         body: formData,
       });
-
+  
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-
+  
       const data = await response.json();
       if (data.error) {
         throw new Error(`Server error: ${data.error}`);
       }
-
+  
       const audioBase64 = data.audio_base64;
       const chatResponse = data.chat_response;
-
+  
       setAudioSrc(`data:audio/wav;base64,${audioBase64}`);
       setChatResponse(chatResponse); // Set the chat response state
     } catch (error) {
       console.error('Error transcribing audio:', error);
-      alert(error.message);
+      if (error.name === 'NotAllowedError') {
+        // Handle denied permission error
+        alert('Microphone access denied. Please allow microphone access to use this feature.');
+      } else {
+        alert('An error occurred while transcribing audio. Please try again later.');
+      }
     }
   };
+  
   
 
   return (
