@@ -9,6 +9,7 @@ import { next } from '../components/NextButton';
 import Button from "@mui/material/Button";
 import NavBar from '../components/Navbar'
 
+
 import Call from './assets/call.svg'
 import Email from './assets/email.svg';
 import Location from './assets/location.svg'
@@ -353,17 +354,17 @@ function Template1() {
     const { currentUser } = useAuth();
     const navigate = useNavigate();
 
-    const exportToPDF = () => {
-        const element = document.getElementById('resume-body');
-        const opt = {
-            margin:       0,
-            filename:     `${Proname}'s CV.pdf`,
-            image:        { type: 'jpeg', quality: 0.98 },
-            html2canvas:  { scale: 2 },
-            jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
-        };
-        html2pdf().from(element).set(opt).save(); // Convert and save as PDF
-    };
+    // const exportToPDF = () => {
+    //     const element = document.getElementById('resume-body');
+    //     const opt = {
+    //         margin:       0,
+    //         filename:     `${Proname}'s CV.pdf`,
+    //         image:        { type: 'jpeg', quality: 0.98 },
+    //         html2canvas:  { scale: 2, useCORS: true },
+    //         jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+    //     };
+    //     html2pdf().from(element).set(opt).save(); // Convert and save as PDF
+    // };
 
     const nextClick = () => {
         navigate('/feedback');
@@ -372,9 +373,6 @@ function Template1() {
     const backClick = () => {
         navigate('/templates');
     };
-
-   
-    
 
     const [cvcolor, setcvcolor] = useState('');
     const [fontscolor, setfontscolor] = useState('');
@@ -406,7 +404,7 @@ function Template1() {
     const [researchInterests, setResearchInterests] = useState([]);
     const [socialMediaLinks, setSocialMediaLinks] = useState({});
 
-   
+    
     useEffect(() => {
         const fetchSummaryData = async () => {
             console.log('currentUser.email', currentUser.email);
@@ -488,7 +486,54 @@ function Template1() {
 
         fetchSummaryData();
         
+        
     }, [currentUser.email]);
+
+    const exportToPDF = async () => {
+        try {
+            // Check if profile picture URL is available
+            if (!profilePictureUrl) {
+                console.error('Profile picture URL is not available');
+                return;
+            }
+
+            // Fetch profile picture asynchronously
+            const profilePictureResponse = await fetch(profilePictureUrl);
+            if (!profilePictureResponse.ok) {
+                throw new Error(`Failed to fetch profile picture: ${profilePictureResponse.statusText}`);
+            }
+            const profilePictureBlob = await profilePictureResponse.blob();
+
+            // Convert profile picture blob to base64
+            const profilePictureBase64 = await new Promise(resolve => {
+                const reader = new FileReader();
+                reader.onloadend = () => resolve(reader.result);
+                reader.readAsDataURL(profilePictureBlob);
+            });
+
+            // Construct HTML content with profile picture
+            const htmlContent = `
+                <div>
+                    <img src="${profilePictureBase64}" style="width: 200px; height: 220px;" />
+                    <!-- Other resume content -->
+                </div>
+            `;
+
+            // Configure PDF options
+            const options = {
+                margin: 0,
+                filename: 'resume.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+            };
+
+            // Generate PDF
+            html2pdf().from(htmlContent).set(options).save();
+        } catch (error) {
+            console.error('Error exporting to PDF:', error);
+        }
+    };
 
     
 
@@ -507,7 +552,7 @@ function Template1() {
             <div className="left-container">
 
                 <h2>{Proname}</h2>
-                <p className="job-field">{commaJobs}</p>
+                <p style={{paddingRight:'1rem'}} className="job-field">{commaJobs}</p>
                 <p className="professional-summary">
                     {finalSummary}
                 </p>
@@ -598,9 +643,10 @@ function Template1() {
 
             <div className="contactPane" style={{ backgroundColor: cvcolor }}>
                 <div className="section">
-                    <div className="profile">
-                        <img src={profilePictureUrl} alt="" srcSet="" className="profileImage" />
+                    <div className="profile                                   ">
+                            <img src={profilePictureUrl} className="profileImage" alt="Profile" style={{ width: '200px', height: '220px' }} />
                     </div>
+
                     <div className="contactSection">
 
                         <h3 className="contacth3">CONTACT</h3>
@@ -610,7 +656,7 @@ function Template1() {
                                 <p>{phone}</p>
                             </div>
                             <div className="contactItem">
-                                <img src={Email} width="18px" />
+                                <img src={Email} width="18px" /> 
                                 <p style={{ margin: '4px' }}>{pemail}</p>
                             </div>
                             <div className="contactItem">
