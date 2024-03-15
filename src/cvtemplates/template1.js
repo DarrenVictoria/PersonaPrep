@@ -500,7 +500,7 @@ function Template1() {
             }
 
             // Fetch profile picture asynchronously
-            const profilePictureResponse = await fetch('https://firebasestorage.googleapis.com/v0/b/personaprep.appspot.com/o/uploads%2FIMG_9891.JPG?alt=media&token=2da9f2f7-57ed-4da2-a619-c78c0e5b24ba', { mode: 'cors' });
+            const profilePictureResponse = await fetch('https://firebasestorage.googleapis.com/v0/b/personaprep.appspot.com/o/uploads%2FIMG_9891.JPG?alt=media&token=2da9f2f7-57ed-4da2-a619-c78c0e5b24ba', { mode: 'no-cors' });
             if (!profilePictureResponse.ok) {
                 throw new Error(`Failed to fetch profile picture: ${profilePictureResponse.statusText}`);
             }
