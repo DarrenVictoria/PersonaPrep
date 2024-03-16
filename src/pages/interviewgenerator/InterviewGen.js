@@ -19,6 +19,7 @@ export default function AudioTranscriptionComponent() {
   const [chatResponse, setChatResponse] = useState('');
   const [isRecording, setIsRecording] = useState(false);
   const [Difficultylevel, setDifficultylevel] = useState('');
+  const [hasRecorded, setHasRecorded] = useState(false); // Track if a recording has been made
   console.log(Difficultylevel);
   const [JobRole, setJobRole] = useState('');
   console.log(JobRole);
@@ -29,52 +30,18 @@ export default function AudioTranscriptionComponent() {
   const { currentUser } = useAuth();
   console.log(currentUser.email);
   
+  //original code
   // const handleStartRecording = () => {
   //   setIsRecording(true);
   // };
-
-  let isRecordingStarted = false;
-
-  const handleStartRecording = async () => {
-    setIsRecording(true);
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const mediaRecorder = new MediaRecorder(stream);
-  
-      mediaRecorder.addEventListener('dataavailable', (event) => {
-        handleAudioData(event.data);
-      });
-  
-      mediaRecorder.start();
-      isRecordingStarted = true;
-    } catch (error) {
-      console.error('Error accessing microphone:', error);
-      if (error.name === 'NotAllowedError') {
-        alert('Microphone access denied. Please allow microphone access to use this feature.');
-        //reloading page after the alert
-        window.location.reload();
-      } else {
-        alert('An error occurred while accessing the microphone. Please try again later.');
-      }
-    }
-  };
 
   // const handleStopRecording = () => {
   //   setIsRecording(false);
   // };
 
-  const handleStopRecording = async () => {
-    setIsRecording(false);
-    try {
-      isRecordingStarted = false; // Reset the flag when recording stops
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleAudioData = (recordedBlob) => {
-    sendAudioForTranscription(recordedBlob.blob);
-  };
+  // const handleAudioData = (recordedBlob) => {
+  //   sendAudioForTranscription(recordedBlob.blob);
+  // };
 
   // const sendAudioForTranscription = async (audioBlob) => {
   //   const formData = new FormData();
@@ -111,49 +78,87 @@ export default function AudioTranscriptionComponent() {
   //   }
   // };
   
-  const sendAudioForTranscription = async (audioStream) => {
-    try {
-      // Check if recording has started
-      if (!isRecordingStarted) {
-        console.log('Recording has not started yet');
-        return; // Don't proceed with transcription if recording has not started
-      }
 
-      // Now that we have access to the microphone, send audio for transcription
+  console.log('new version');
+  const requestMicrophonePermission = async () => {
+    try {
+      const permission = await navigator.mediaDevices.getUserMedia({ audio: true });
+      // Permission granted, proceed with recording
+      return permission;
+    } catch (error) {
+      if (error.name === 'NotAllowedError') {
+        // Handle denied permission error
+        alert('Microphone access denied. Please allow access in your browser settings to use this feature.');
+      } else {
+        console.error('Error requesting microphone permission:', error);
+      }
+      throw error; // Re-throw to handle in higher-level functions
+    }
+  };
+
+  const handleStartRecording = async () => {
+    try {
+      const stream = await requestMicrophonePermission();
+      // ... start recording using the stream
+      setIsRecording(true);
+      setHasRecorded(true); // Flag that a recording has been attempted
+    } catch (error) {
+      // Handle permission error
+      console.error('Error starting recording:', error);
+    }
+  };
+
+  const handleStopRecording = () => {
+    setIsRecording(false);
+  };
+
+  const handleAudioData = async (recordedBlob) => {
+    // sendAudioForTranscription(recordedBlob.blob);
+    try {
+      await sendAudioForTranscription(recordedBlob.blob);
+      // Success handling (optional)
+    } catch (error) {
+      alert('An error occurred while transcribing audio. Please try again later.');
+      console.error(error); // Log the error for debugging
+      // Optionally clear recording state (audioSrc, chatResponse)
+    }
+  };
+
+  const sendAudioForTranscription = async (audioBlob) => {
+    try {
       const formData = new FormData();
-      formData.append('file', audioStream);
-  
+      formData.append('file', audioBlob);
+
       const response = await fetch(`https://personaprepapi.galleryofgalleries.live/transcribe?user_email=${currentUser.email}&difficulty_level=${Difficultylevel}&job_role=${JobRole}`, {
         method: 'POST',
         body: formData,
       });
-  
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-  
+
       const data = await response.json();
       if (data.error) {
         throw new Error(`Server error: ${data.error}`);
       }
-  
+
       const audioBase64 = data.audio_base64;
       const chatResponse = data.chat_response;
-  
+
       setAudioSrc(`data:audio/wav;base64,${audioBase64}`);
       setChatResponse(chatResponse); // Set the chat response state
     } catch (error) {
       console.error('Error transcribing audio:', error);
-      if (error.name === 'NotAllowedError') {
-        // Handle denied permission error
-        alert('Microphone access denied. Please allow microphone access to use this feature.');
-      } else {
-        alert('An error occurred while transcribing audio. Please try again later.');
-      }
+      throw error; // Re-throw the error for handling at the call site
+      // if (error.name === 'NotAllowedError') {
+      //   // Offer a way for user to manually grant permission
+      //   requestMicrophonePermission();
+      // } else {
+      //   alert('An error occurred while transcribing audio. Please try again later.');
+      // }
     }
   };
-  
-  
 
   return (
     
