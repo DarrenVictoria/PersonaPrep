@@ -20,12 +20,7 @@ export default function AudioTranscriptionComponent() {
   const [isRecording, setIsRecording] = useState(false);
   const [Difficultylevel, setDifficultylevel] = useState('');
   const [hasRecorded, setHasRecorded] = useState(false); // Track if a recording has been made
-  console.log(Difficultylevel);
   const [JobRole, setJobRole] = useState('');
-  console.log(JobRole);
-
-  // const difficultyLevel = 'easy';
-  // const jobRole = 'se_engineer';
 
   const { currentUser } = useAuth();
   console.log(currentUser.email);
@@ -79,7 +74,6 @@ export default function AudioTranscriptionComponent() {
   // };
   
 
-  console.log('new version');
   const requestMicrophonePermission = async () => {
     try {
       const permission = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -150,173 +144,162 @@ export default function AudioTranscriptionComponent() {
       setChatResponse(chatResponse); // Set the chat response state
     } catch (error) {
       console.error('Error transcribing audio:', error);
-      throw error; // Re-throw the error for handling at the call site
-      // if (error.name === 'NotAllowedError') {
-      //   // Offer a way for user to manually grant permission
-      //   requestMicrophonePermission();
-      // } else {
-      //   alert('An error occurred while transcribing audio. Please try again later.');
-      // }
+      // throw error; // Re-throw the error for handling at the call site
+      if (error.name === 'NotAllowedError') {
+        // Offer a way for user to manually grant permission
+        requestMicrophonePermission();
+      } else {
+        alert('An error occurred while transcribing audio. Please try again later.');
+      }
     }
   };
+
+  const isButtonDisabled = () => {
+    return Difficultylevel === '' || JobRole === '' || isRecording;
+  }
 
   return (
     
     <div className="formtemp-page">
-        <InterviewFormHeader title='Degree Information' />
+      <InterviewFormHeader title='Degree Information' />
       <div className="formtemp-bodyform" >
         <Grid container spacing={2} style={{ height: '100%' }}>
           <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
-            <form  >
-                   
-              <div style={{ margin: '80px 25px 125px' }}>
-                           
-                <div className='Genmaindiv'>
-                                
-                  
-                                  
-                    <Grid container>
-                      <Grid item xs={12} textAlign={"left"} sx={{paddingBottom:"20px"}}>
-                        <Button
-                        variant="contained" 
-                        sx={{borderRadius:"25px",backgroundColor: '#242624'}}
-                        onClick={() => window.location.href = '/home'}
+            <form  >                   
+              <div style={{ margin: '80px 25px 125px' }}>                           
+                <div className='Genmaindiv'>               
+                  <Grid container>
+                    <Grid item xs={12} textAlign={"left"} sx={{paddingBottom:"20px"}}>
+                      <Button
+                      variant="contained" 
+                      sx={{borderRadius:"25px",backgroundColor: '#242624'}}
+                      onClick={() => window.location.href = '/home'}
+                      >
+                        Back
+                      </Button>
+                    </Grid>
+                  </Grid>
+
+                  <Grid container justifyContent={'center'} mb={4}>
+                    <Grid xs={12} md={4} mb={3} sx={{textAlign:'center', display:'flex', alignItems:'center'}}>
+                      <FormControl variant="outlined" fullWidth sx={{textAlign:'center', display:'flex', alignItems:'center'}}>
+                        <Select
+                            value={Difficultylevel}
+                            onChange={(event) => setDifficultylevel(event.target.value)}
+                            displayEmpty
+                            input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD', width: '300px' }} />}
+                            IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
+                            required
+                            fullWidth
+                            disabled={Difficultylevel !== ''}
                         >
-                            Back
-                        </Button>
-                      </Grid>
+                            <MenuItem value="">Difficulty Level</MenuItem>
+                            <MenuItem value="Entry Level">Entry Level</MenuItem>
+                            <MenuItem value="Intermediate">Intermediate</MenuItem>
+                            <MenuItem value="Advanced">Advanced</MenuItem>
+                            <MenuItem value="Expert">Expert</MenuItem>
+                        </Select>
+                      </FormControl>
                     </Grid>
-                    <Grid container justifyContent={'center'} mb={4}>
-                      <Grid xs={12} md={3} sx={{textAlign:'center', display:'flex', alignItems:'center'}}>
-                            <FormControl variant="outlined" fullWidth sx={{textAlign:'center', display:'flex', alignItems:'center'}}>
-                              <Select
-                                  value={Difficultylevel}
-                                  onChange={(event) => setDifficultylevel(event.target.value)}
-                                  displayEmpty
-                                  input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD', width: '300px' }} />}
-                                  IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
-                                  required
-                                  fullWidth
-                                  disabled={Difficultylevel !== ''}
-                              >
-                                  <MenuItem value="">Difficulty Level</MenuItem>
-                                  <MenuItem value="Entry Level">Entry Level</MenuItem>
-                                  <MenuItem value="Intermediate">Intermediate</MenuItem>
-                                  <MenuItem value="Advanced">Advanced</MenuItem>
-                                  <MenuItem value="Expert">Expert</MenuItem>
-                              </Select>
-                            </FormControl>
-                        </Grid>
-                        <Grid xs={12} md={3} sx={{textAlign:'center', display:'flex', alignItems:'center'}}>
-                            <FormControl variant="outlined" fullWidth sx={{textAlign:'center', display:'flex', alignItems:'center'}}>
-                              <Select
-                                  value={JobRole}
-                                  onChange={(event) => setJobRole(event.target.value)}
-                                  displayEmpty
-                                  input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD', width: '300px' }} />}
-                                  IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
-                                  required
-                                  fullWidth
-                                  disabled={JobRole !== ''}
-                              >
-                                  <MenuItem value="">Job Role</MenuItem>
-                                  <MenuItem value="Software Engineer/Developer">Software Engineer/Developer</MenuItem>
-                                  <MenuItem value="Data Scientist">Data Scientist</MenuItem>
-                                  <MenuItem value="Database Administrator">Database Administrator</MenuItem>
-                                  <MenuItem value="Network Administrator/Engineer">Network Administrator/Engineer</MenuItem>
-                                  <MenuItem value="Systems Analyst">Systems Analyst</MenuItem>
-                                  <MenuItem value="Cybersecurity Analyst/Engineer">Cybersecurity Analyst/Engineer</MenuItem>
-                                  <MenuItem value="IT Project Manager">IT Project Manager</MenuItem>
-                                  <MenuItem value="DevOps Engineer">DevOps Engineer</MenuItem>
-                                  <MenuItem value="Cloud Solutions Architect">Cloud Solutions Architect</MenuItem>
-                                  <MenuItem value="AI/Machine Learning Engineer">AI/Machine Learning Engineer</MenuItem>
-                                  <MenuItem value="Web Developer">Web Developer</MenuItem>
-                                  <MenuItem value="IT Consultant">IT Consultant</MenuItem>
-                                  <MenuItem value="IT Support Specialist">IT Support Specialist</MenuItem>
-                                  <MenuItem value="Business Intelligence Analyst">Business Intelligence Analyst</MenuItem>
-                                  <MenuItem value="IT Auditor">IT Auditor</MenuItem>
-                                  <MenuItem value="Mobile App Developer">Mobile App Developer</MenuItem>
-                                  <MenuItem value="UI/UX Designer">UI/UX Designer</MenuItem>
-                                  <MenuItem value="Quality Assurance Engineer">Quality Assurance Engineer</MenuItem>
-                                  <MenuItem value="Blockchain Developer">Blockchain Developer</MenuItem>
-                                  <MenuItem value="ERP Consultant">ERP Consultant</MenuItem>
-                                  <MenuItem value="Digital Marketing Analyst">Digital Marketing Analyst</MenuItem>
-                                  <MenuItem value="Network Security Engineer">Network Security Engineer</MenuItem>
-                                  <MenuItem value="Full Stack Developer">Full Stack Developer</MenuItem>
-                                  <MenuItem value="IT Trainer">IT Trainer</MenuItem>
-                                  <MenuItem value="Data Engineer">Data Engineer</MenuItem>
-                                  <MenuItem value="Systems Administrator">Systems Administrator</MenuItem>
-                                  <MenuItem value="Technical Writer">Technical Writer</MenuItem>
-                                  <MenuItem value="IT Sales Representative">IT Sales Representative</MenuItem>
-                                  <MenuItem value="Computer Forensic Investigator">Computer Forensic Investigator</MenuItem>
-                                  <MenuItem value="IT Risk Manager">IT Risk Manager</MenuItem>
-                                  <MenuItem value="IT Compliance Officer">IT Compliance Officer</MenuItem>
-                                  <MenuItem value="IT Procurement Specialist">IT Procurement Specialist</MenuItem>
-                                  <MenuItem value="Virtual Reality Developer">Virtual Reality Developer</MenuItem>
-                                  <MenuItem value="Augmented Reality Developer">Augmented Reality Developer</MenuItem>
-                                  <MenuItem value="Robotics Engineer">Robotics Engineer</MenuItem>
-
-                              </Select>
-                            </FormControl>
-                        </Grid>
+                    <Grid xs={12} md={4} mb={3} sx={{textAlign:'center', display:'flex', alignItems:'center'}}>
+                      <FormControl variant="outlined" fullWidth sx={{textAlign:'center', display:'flex', alignItems:'center'}}>
+                        <Select
+                            value={JobRole}
+                            onChange={(event) => setJobRole(event.target.value)}
+                            displayEmpty
+                            input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD', width: '300px' }} />}
+                            IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
+                            required
+                            fullWidth
+                            disabled={JobRole !== ''}
+                        >
+                          <MenuItem value="">Job Role</MenuItem>
+                          <MenuItem value="Software Engineer/Developer">Software Engineer/Developer</MenuItem>
+                          <MenuItem value="Data Scientist">Data Scientist</MenuItem>
+                          <MenuItem value="Database Administrator">Database Administrator</MenuItem>
+                          <MenuItem value="Network Administrator/Engineer">Network Administrator/Engineer</MenuItem>
+                          <MenuItem value="Systems Analyst">Systems Analyst</MenuItem>
+                          <MenuItem value="Cybersecurity Analyst/Engineer">Cybersecurity Analyst/Engineer</MenuItem>
+                          <MenuItem value="IT Project Manager">IT Project Manager</MenuItem>
+                          <MenuItem value="DevOps Engineer">DevOps Engineer</MenuItem>
+                          <MenuItem value="Cloud Solutions Architect">Cloud Solutions Architect</MenuItem>
+                          <MenuItem value="AI/Machine Learning Engineer">AI/Machine Learning Engineer</MenuItem>
+                          <MenuItem value="Web Developer">Web Developer</MenuItem>
+                          <MenuItem value="IT Consultant">IT Consultant</MenuItem>
+                          <MenuItem value="IT Support Specialist">IT Support Specialist</MenuItem>
+                          <MenuItem value="Business Intelligence Analyst">Business Intelligence Analyst</MenuItem>
+                          <MenuItem value="IT Auditor">IT Auditor</MenuItem>
+                          <MenuItem value="Mobile App Developer">Mobile App Developer</MenuItem>
+                          <MenuItem value="UI/UX Designer">UI/UX Designer</MenuItem>
+                          <MenuItem value="Quality Assurance Engineer">Quality Assurance Engineer</MenuItem>
+                          <MenuItem value="Blockchain Developer">Blockchain Developer</MenuItem>
+                          <MenuItem value="ERP Consultant">ERP Consultant</MenuItem>
+                          <MenuItem value="Digital Marketing Analyst">Digital Marketing Analyst</MenuItem>
+                          <MenuItem value="Network Security Engineer">Network Security Engineer</MenuItem>
+                          <MenuItem value="Full Stack Developer">Full Stack Developer</MenuItem>
+                          <MenuItem value="IT Trainer">IT Trainer</MenuItem>
+                          <MenuItem value="Data Engineer">Data Engineer</MenuItem>
+                          <MenuItem value="Systems Administrator">Systems Administrator</MenuItem>
+                          <MenuItem value="Technical Writer">Technical Writer</MenuItem>
+                          <MenuItem value="IT Sales Representative">IT Sales Representative</MenuItem>
+                          <MenuItem value="Computer Forensic Investigator">Computer Forensic Investigator</MenuItem>
+                          <MenuItem value="IT Risk Manager">IT Risk Manager</MenuItem>
+                          <MenuItem value="IT Compliance Officer">IT Compliance Officer</MenuItem>
+                          <MenuItem value="IT Procurement Specialist">IT Procurement Specialist</MenuItem>
+                          <MenuItem value="Virtual Reality Developer">Virtual Reality Developer</MenuItem>
+                          <MenuItem value="Augmented Reality Developer">Augmented Reality Developer</MenuItem>
+                          <MenuItem value="Robotics Engineer">Robotics Engineer</MenuItem>
+                        </Select>
+                      </FormControl>
                     </Grid>
-                    <Grid container >
-                      
-                      <Grid xs={12} md={12} >
-                        <h1>Your AI Interview Generator</h1>
-                      </Grid>
+                  </Grid>
 
-                      <Grid xs={12}md={12} >
-                        <ReactMic
-                          record={isRecording}
-                          onStop={handleAudioData}
-                          mimeType="audio/wav"
-                          backgroundColor="#D9D9D9"
-                                   
-                        />
-                        
-                      </Grid>  
+                  <Grid container >
+                    <Grid xs={12} md={12} >
+                      <h1>Your AI Interview Generator</h1>
+                    </Grid>
+
+                    <Grid xs={12}md={12} >
+                      <ReactMic
+                        record={isRecording}
+                        onStop={handleAudioData}
+                        mimeType="audio/wav"
+                        backgroundColor="#D9D9D9"                                  
+                      />                      
+                    </Grid>  
                       
-                    {/* </Grid> */}
-                    {/* <Grid container> */}
-                      
-                      <Grid xs={12}sm={6} md={6} mt={2} >
+                    <Grid xs={12}sm={6} md={6} mt={2} >
                       <Button
                         variant="contained" 
                         sx={{borderRadius:"25px",backgroundColor: '#242624'}}
                         onClick={handleStartRecording}
-                        disabled={isRecording}
-                        >
-                           Start Recording
-                        </Button>
-                      </Grid>
-                      <Grid xs={12} sm={6} md={6} mt={2} >
-                        <Button
+                        disabled={isButtonDisabled()}
+                      >
+                        Start Recording
+                      </Button>
+                    </Grid>
+
+                    <Grid xs={12} sm={6} md={6} mt={2} >
+                      <Button
                         variant="contained" 
                         sx={{borderRadius:"25px",backgroundColor: '#242624'}}
                         onClick={handleStopRecording}
                         disabled={!isRecording}
-                        >
-                           Stop Recording
-                        </Button>
-                      </Grid>
+                      >
+                        Stop Recording
+                      </Button>
+                    </Grid>
 
-                      {/* Display chat response */}
-                      <Grid xs={12} md={12} mt={2}>
-                        {audioSrc && <ReactAudioPlayer src={audioSrc} autoPlay controls />}
-                        <p>{chatResponse}</p>
-                      </Grid>
-                                  
-                    {/* </Grid> */}
-                                    
-                  </Grid>               
-                  
-                                
+                    {/* Display chat response */}
+                    <Grid xs={12} md={12} mt={2}>
+                      {audioSrc && <ReactAudioPlayer src={audioSrc} autoPlay controls />}
+                      <p>{chatResponse}</p>
+                    </Grid>
+                                                                      
+                  </Grid>                                                                 
                   
                 </div>
-
-              </div>
-              
+              </div>              
             </form>
           </Grid>
         </Grid>
