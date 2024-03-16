@@ -145,7 +145,7 @@ const CvFeedback = () => {
     // const btn = (event) => {event.preventDefault(); console.log(feedback)};
 
     const navigate = useNavigate();
-    const prevPage = () => navigate('/templates');
+    const prevPage = () => navigate('/home');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -261,7 +261,7 @@ const CvFeedback = () => {
                             </div>
                             <Grid container spacing={2} style={{position: 'absolute', bottom: 80}}>            
                                 <Grid xs={6} paddingLeft={'10px'}>
-                                    <Button startIcon={<ArrowBackIcon />} style={back} onClick={prevPage}>Go Back</Button>
+                                    <Button startIcon={<ArrowBackIcon />} style={back} onClick={prevPage}>Return to Home</Button>
                                 </Grid>
                                     
                                 <Grid xs={6}>

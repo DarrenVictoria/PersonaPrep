@@ -1,128 +1,149 @@
-.cvbody{
+.cvbody {
     background-color: #000;
-   
 }
-.cvbody{
+
+.cvbody {
     background-color: white;
     width: 794px;
-    height: 2200px;
+    height: 2233px;
     margin: 0 auto;
     font-family: 'Inter', sans-serif;
-    border: 1px solid black;
+    
+    
 }
+
 /*right contact pane*/
-.contactPane{
+.contactPane {
     padding: 35px 15px;
     width: 38%;
     height: 136rem;
     background-color: #EDE2D9;
-    overflow:hidden;
+    overflow: hidden;
 }
-.profile{
+
+.profile {
     width: 14rem;
     height: 14rem;
     border-radius: 50%;
     margin: 0 auto;
 }
-.profileImage{
+
+.profileImage {
     width: 100%;
     height: 100%;
     border-radius: 50%;
 }
-.section{
+
+.section {
     width: 100%;
     height: 22%;
 }
+
 /*Contact details section*/
-.contactSection{
+.contactSection {
     width: 14rem;
     height: 14rem;
     margin: 20px;
     max-width: 300px;
 }
-.contactSection h3{
+
+.contactSection h3 {
     color: #5E5854;
     font-size: 20px;
     margin-bottom: 5px;
     text-transform: uppercase;
-
 }
+
 .contactDetails {
     display: flex;
     flex-direction: column;
     margin-top: -20px;
 }
+
 .contactItem {
     display: flex;
     align-items: center;
-    gap: 15px;  
+    gap: 15px;
 }
+
 .contactItem img {
-    min-width: 20px;  
+    min-width: 20px;
 }
+
 .contactItem p {
     overflow-wrap: break-word;
-    width: 100%;/*word wrap thing*/
+    width: 100%; /*word wrap thing*/
 }
-.contacth3{
+
+.contacth3 {
     padding-bottom: 20px;
 }
+
 /*links sections*/
 .links {
     display: flex;
     flex-direction: column;
     margin-top: -5px;
 }
+
 .linkItem {
     display: flex;
     align-items: center;
-    gap: 20px;  
+    gap: 20px;
     margin-bottom: -10px;
 }
+
 .linkItem img {
-    min-width: 20px;  
+    min-width: 20px;
 }
+
 .linkItem p {
     overflow-wrap: break-word;
-    width: 90%;/*word wrap thing*/
+    width: 90%; /*word wrap thing*/
     text-decoration: underline;
 }
+
 /*school education*/
 .schools {
     display: flex;
     flex-direction: column;
     margin-top: -5px;
 }
+
 .schoolInfo {
     align-items: center;
-    gap: 20px;  
+    gap: 20px;
     margin-bottom: -10px;
 }
-.school-year{
+
+.school-year {
     overflow-wrap: break-word;
-    width: 90%;/*word wrap thing*/
+    width: 90%; /*word wrap thing*/
     color: #8D8782;
     margin-bottom: -4px;
 }
-.school-name{
+
+.school-name {
     overflow-wrap: break-word;
     font-size: 15;
     font-weight: bold;
     margin-top: 10px;
     margin-bottom: -10px;
 }
-.school-location{
+
+.school-location {
     overflow-wrap: break-word;
-    width: 90%;/*word wrap thing*/
-    color:#5E5854;
+    width: 90%; /*word wrap thing*/
+    color: #5E5854;
 }
- 
-.OL-marks{
-    display: inline-block;  
-    margin-right: 5px;  
-  }
-/*clubs and societies*/                                                                                                                              
-.club-name{
+
+.OL-marks {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+/*clubs and societies*/
+.club-name {
     overflow-wrap: break-word;
     font-size: 10;
     font-weight: bold;
@@ -130,27 +151,31 @@
     margin-bottom: -10px;
     color: #5E5854;
 }
-.club-role{
-    display: inline-block;  
-    margin-right: 5px;  
-  }
-.society-name{
+
+.club-role {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.society-name {
     margin-top: 5px;
     font-weight: 600;
 }
+
 /*Skills*/
 .skillItem li {
     overflow-wrap: break-word;
-    width: 90%;/*word wrap thing*/
+    width: 90%; /*word wrap thing*/
     line-height: 2;
     padding-right: -80px;
-     
 }
+
 /*references*/
-.reference-number{
+.reference-number {
     margin-top: -8px;
 }
-.research-intrests{
+
+.research-intrests {
     line-height: 2;
 }
 
@@ -158,103 +183,204 @@
 .left-container {
     width: calc(100% - 42%);
     height: 69.9rem;
-    background-color:white;  
+    background-color: white;
     float: right;
 }
-.left-container h2{
+
+.left-container h2 {
     font-size: 55px;
     text-transform: uppercase;
 }
-.job-field{
+
+.job-field {
     font-size: 18px;
     margin-top: -20px;
-    text-transform:capitalize;
+    text-transform: capitalize;
     color: #8D8782;
 }
-.professional-summary{
+
+.professional-summary {
     margin-right: 80px;
     line-height: 1.5;
 }
-.left-topics{
+
+.left-topics {
     margin-top: 15px;
     font-size: 25px;
-    text-transform:uppercase;
+    text-transform: uppercase;
 }
+
 /*work experience*/
-.work-year{
+.work-year {
     margin-top: -10px;
-    color:#8D8782;
+    color: #8D8782;
     margin-bottom: -4px;
 }
-.work-role{
+
+.work-role {
     margin-top: 15px;
     font-size: 22px;
     font-weight: 600;
 }
-.company-name{
+
+.company-name {
     margin-top: -15px;
 }
-.company-description{
+
+.company-description {
     margin-top: -5px;
     margin-right: 100px;
     line-height: 1.5;
     margin-bottom: 20px;
 }
+
 /*university*/
-.university{
+.university {
     font-size: 17px;
     font-weight: 600;
     margin-top: -10px;
 }
-.university-location{
+
+.university-location {
     margin-top: -10px;
-    font-size: 14px; 
+    font-size: 14px;
     margin-bottom: 20px;
 }
+
 /*projects*/
-.project-evidence{
-    margin-top: -5px;
-    font-size: 17px;
-    text-decoration: underline;
-    margin-bottom: 20px;
-}
-.project-location{
-    font-size: 17px;
-    margin-top: -10px;
-}
-.project-skills{
-    margin-top: -5px;
-    font-weight: 550;
-    margin-bottom: 20px;
-}
-/*certifications*/
-.certifications{
-    display: flex;
-    gap: 20px;   
-    margin-bottom: -20px;
-}
-.certification-name{
-    margin-top:15px;
-    font-size: 20px;
-    font-weight: bold;
-    
-}
-.certification-organization{
-    margin-top: -13px;
-    text-transform: capitalize;
-}
-/*awards*/
-.awards{
-    margin-top: -30px;
-    display: flex;
-    gap: 20px;  
-    margin-bottom: -20px;
-}
-/*publications*/
-.publication-url{
+.project-evidence {
     margin-top: -5px;
     font-size: 17px;
     text-decoration: underline;
     margin-bottom: 20px;
 }
 
+.project-location {
+    font-size: 17px;
+    margin-top: -10px;
+}
+
+.project-skills {
+    margin-top: -5px;
+    font-weight: 550;
+    margin-bottom: 20px;
+}
+
+/*certifications*/
+.certifications {
+    display: flex;
+    gap: 20px;
+    margin-bottom: -20px;
+}
+
+.certification-name {
+    margin-top: 15px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.certification-organization {
+    margin-top: -13px;
+    text-transform: capitalize;
+}
+
+/*awards*/
+.awards {
+    margin-top: -30px;
+    display: flex;
+    gap: 20px;
+    margin-bottom: -20px;
+}
+
+/*publications*/
+.publication-url {
+    margin-top: -5px;
+    font-size: 17px;
+    text-decoration: underline;
+    margin-bottom: 20px;
+}
+
+.mobile-only {
+    display: none;
+  }
+
+.desktop-only {
+    display: block;
+  }
+  
+
+  @media only screen and (max-width: 768px) {
+    .cvbody {
+        max-width: 100%;
+    }
+    
+    .contactPane {
+        width: 100%;
+    }
+
+    .left-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 20px; /* Add padding for better spacing */
+        box-sizing: border-box; /* Include padding in the width calculation */
+        order: 3; /* Set the order of left pane to 3 */
+          display: block; /* Show left pane on smaller screens */
+      }
+
+    .mobile-only {
+        display: block;
+    }
+
+    .desktop-only {
+        display: none;
+    }
+    
+    /* Show left pane below contact pane on smaller screens */
+    .cvbody {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .contactPane {
+        order: 2; /* Set the order of contact pane to 2 */
+        margin-right: auto;
+    }
+
+    
+
+    /* Style for the buttons */
+    .buttons-container {
+        position: fixed; /* Set position to fixed */
+        bottom: 10px; /* Set distance from the bottom */
+        left: 50%; /* Set to center horizontally */
+        transform: translateX(-50%); /* Center horizontally */
+        width: auto; /* Auto width */
+        display: flex; /* Use flexbox */
+        justify-content: space-between; /* Space between buttons */
+        z-index: 999; /* Ensure the buttons appear above other content */
+    
+    }
+
+    .button {
+        padding: 10px 20px;
+        background-color: #ccc;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 0 5px;
+    }
+
+    .export-to-pdf-button {
+        display: none;
+        pointer-events: none; /* Disable button interaction */
+        background-color: white; /* Change the button background color to white */
+        color: #ccc; /* Change the text color to a light gray */
+        cursor: default; /* Change cursor to default */
+        
+    }
+
+    
+}

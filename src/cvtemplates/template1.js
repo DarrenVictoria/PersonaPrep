@@ -8,6 +8,7 @@ import { useAuth } from '../hooks/useAuth';
 import { next } from '../components/NextButton';
 import Button from "@mui/material/Button";
 import NavBar from '../components/Navbar'
+import html2canvas from 'html2canvas';
 
 
 import Call from './assets/call.svg'
@@ -21,7 +22,32 @@ import Twitter from './assets/twitter.svg'
 import Medium from './assets/medium.svg'
 
 
+const PageBreak = () => {
+    return (
+      <div
+        style={{
+          position: 'relative',
+          height: '120px',
+          width: '100%',
+          backgroundColor: 'transparent',
+        }}
+      />
+    );
+  };
 
+
+  const PageBreakSide = () => {
+    return (
+      <div
+        style={{
+          position: 'relative',
+          height: '230px',
+          width: '100%',
+          backgroundColor: 'transparent',
+        }}
+      />
+    );
+  };
 
 const SchoolComponent = ({ schools }) => {
 
@@ -354,17 +380,17 @@ function Template1() {
     const { currentUser } = useAuth();
     const navigate = useNavigate();
 
-    // const exportToPDF = () => {
-    //     const element = document.getElementById('resume-body');
-    //     const opt = {
-    //         margin:       0,
-    //         filename:     `${Proname}'s CV.pdf`,
-    //         image:        { type: 'jpeg', quality: 0.98 },
-    //         html2canvas:  { scale: 2, useCORS: true },
-    //         jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
-    //     };
-    //     html2pdf().from(element).set(opt).save(); // Convert and save as PDF
-    // };
+    const exportToPDF = () => {
+        const element = document.getElementById('resume-body');
+        const opt = {
+            margin: 0, 
+            filename:     `${Proname}'s CV.pdf`,
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2, useCORS: true },
+            jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+        };
+        html2pdf().from(element).set(opt).save(); // Convert and save as PDF
+    };
 
     const nextClick = () => {
         navigate('/feedback');
@@ -403,6 +429,36 @@ function Template1() {
     const [references, setReferences] = useState([]);
     const [researchInterests, setResearchInterests] = useState([]);
     const [socialMediaLinks, setSocialMediaLinks] = useState({});
+    const [profilePictureBase64, setProfilePictureBase64] = useState('');
+
+    useEffect(() => {
+        const fetchProfilePicture = async () => {
+            try {
+                // Fetch profile picture asynchronously
+                const profilePictureResponse = await fetch(profilePictureUrl);
+                if (!profilePictureResponse.ok) {
+                    throw new Error(`Failed to fetch profile picture: ${profilePictureResponse.statusText}`);
+                }
+                const profilePictureBlob = await profilePictureResponse.blob();
+    
+                // Convert profile picture blob to base64
+                const profilePictureBase64 = await new Promise(resolve => {
+                    const reader = new FileReader();
+                    reader.onloadend = () => resolve(reader.result);
+                    reader.readAsDataURL(profilePictureBlob);
+                });
+    
+                // Set profile picture base64 to state
+                setProfilePictureBase64(profilePictureBase64);
+            } catch (error) {
+                console.error('Error fetching profile picture:', error);
+            }
+        };
+    
+        // Call the fetchProfilePicture function when the component mounts
+        fetchProfilePicture();
+    }, [profilePictureUrl]); // Run the effect whenever profilePictureUrl changes
+    
 
     
 
@@ -491,57 +547,56 @@ function Template1() {
         
     }, [currentUser.email]);
 
-    const exportToPDF = async () => {
-        try {
-            // Check if profile picture URL is available
-            if (!profilePictureUrl) {
-                console.error('Profile picture URL is not available');
-                return;
-            }
-
-            // Fetch profile picture asynchronously
-            const profilePictureResponse = await fetch('https://firebasestorage.googleapis.com/v0/b/personaprep.appspot.com/o/uploads%2FIMG_9891.JPG?alt=media&token=2da9f2f7-57ed-4da2-a619-c78c0e5b24ba', { mode: 'no-cors' });
-            if (!profilePictureResponse.ok) {
-                throw new Error(`Failed to fetch profile picture: ${profilePictureResponse.statusText}`);
-            }
-            const profilePictureBlob = await profilePictureResponse.blob();
-
-            // Convert profile picture blob to base64
-            const profilePictureBase64 = await new Promise(resolve => {
-                const reader = new FileReader();
-                reader.onloadend = () => resolve(reader.result);
-                reader.readAsDataURL(profilePictureBlob);
-            });
-
-            // Construct HTML content with profile picture
-            const htmlContent = `
-                <div>
-                    <img src="${profilePictureBase64}" style="width: 200px; height: 220px;" />
-                    <!-- Other resume content -->
-                </div>
-            `;
-
-            // Configure PDF options
-            const options = {
-                margin: 0,
-                filename: 'resume.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true },
-                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
-            };
-
-            // Generate PDF
-            html2pdf().from(htmlContent).set(options).save();
-        } catch (error) {
-            console.error('Error exporting to PDF:', error);
-        }
-    };
+    // const exportToPDF = async () => {
+    //     try {
+    //         // Fetch profile picture asynchronously
+    //         const profilePictureResponse = await fetch(profilePictureUrl);
+    //         if (!profilePictureResponse.ok) {
+    //             throw new Error(`Failed to fetch profile picture: ${profilePictureResponse.statusText}`);
+    //         }
+    //         const profilePictureBlob = await profilePictureResponse.blob();
+    
+    //         // Convert profile picture blob to base64
+    //         const profilePictureBase64 = await new Promise(resolve => {
+    //             const reader = new FileReader();
+    //             reader.onloadend = () => resolve(reader.result);
+    //             reader.readAsDataURL(profilePictureBlob);
+    //         });
+    
+    //         // Construct HTML content with profile picture
+    //         const htmlContent = `
+    //             <div>
+    //                 <img src="${profilePictureBase64}" style="width: 200px; height: 220px;" />
+    //                 <!-- Other resume content -->
+    //             </div>
+    //         `;
+    
+    //         // Configure PDF options
+    //         const options = {
+    //             margin: 0,
+    //             filename: 'resume.pdf',
+    //             image: { type: 'jpeg', quality: 0.98 },
+    //             html2canvas: { scale: 2 },
+    //             jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+    //         };
+    
+    //         // Generate PDF
+    //         html2pdf().from(htmlContent).set(options).save();
+    //     } catch (error) {
+    //         console.error('Error exporting to PDF:', error);
+    //     }
+    // };
+    
 
     
 
     return (
 
-    <div>
+     <div>
+
+        
+
+    <div >
         
         <NavBar/>
            
@@ -553,15 +608,15 @@ function Template1() {
             
             <div className="left-container">
 
-                <h2>{Proname}</h2>
-                <p style={{paddingRight:'1rem'}} className="job-field">{commaJobs}</p>
+                <h2 className='desktop-only'>{Proname}</h2>
+                <p  style={{paddingRight:'1rem'}} className="job-field desktop-only">{commaJobs}</p>
                 <p className="professional-summary">
                     {finalSummary}
                 </p>
 
                 <h3 className="left-topics">Work experience</h3>
 
-                <div>
+                <div >
                     
                     {work.length === 1 ? (
                         <div className="workContainer">
@@ -595,7 +650,7 @@ function Template1() {
 
                
 
-                
+                <PageBreak />
 
                 <h3 className="left-topics" >Project Experience</h3>
 
@@ -646,10 +701,15 @@ function Template1() {
             <div className="contactPane" style={{ backgroundColor: cvcolor }}>
                 <div className="section">
                     <div className="profile                                   ">
-                            <img src={profilePictureUrl} className="profileImage" alt="Profile" style={{ width: '200px', height: '220px' }} />
+                            <img src={profilePictureBase64} className="profileImage" alt="Profile" style={{ width: '200px', height: '220px' }} />
+                            
                     </div>
 
+                    
+
                     <div className="contactSection">
+
+                    <h1 className="mobile-only">{Proname}</h1>
 
                         <h3 className="contacth3">CONTACT</h3>
                         <div className="contactDetails">
@@ -695,6 +755,9 @@ function Template1() {
                                     <p>No school information available</p>
                                 )}
                             </div>
+
+                            <PageBreakSide />
+
                             <div >
                                 
                                 <ExamResultsComponent olExamResults={olExamResults} alExamResults={alExamResults} />
@@ -754,23 +817,22 @@ function Template1() {
                 
             </div>
             
+            
+        </div>
+    
+
         </div>
 
-        <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                <Button onClick={nextClick} style={next}>Next - Give Feedback</Button> 
+        <div style={{ textAlign: 'center', marginTop: '20px', marginBottom: '20px' }} className="buttons-container">
+            <Button className="button" onClick={backClick} style={{ borderRadius: '30px', backgroundColor: 'black', color: 'white', marginRight: '10px' , padding:'15px' }}>Alter template</Button>
+            <Button className="button export-to-pdf-button" style={{ borderRadius: '30px', backgroundColor: 'black', color: 'white', marginRight: '10px' , padding:'15px' }} onClick={exportToPDF}>Export to PDF</Button> {/* Button to export PDF */}
+            <Button className="button" onClick={nextClick} style={{ borderRadius: '30px', backgroundColor: 'black', color: 'white', marginRight: '10px' , padding:'15px' }}>Next - Give Feedback</Button>
+           
+        </div>
 
+        </div>
 
-                <Button style={next}  onClick={exportToPDF}>Export to PDF</Button> {/* Button to export PDF */}
-
-                <Button onClick={backClick} style={next}>Alter template</Button> 
-             </div>
-
-        
-
-
-    </div>
-        
-    );
+        );
 }
 
 export default Template1;
