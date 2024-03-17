@@ -124,12 +124,9 @@ export default function AudioTranscriptionComponent() {
     try {
       const formData = new FormData();
       formData.append('file', audioBlob);
-
-      console.log(Difficultylevel);
-      console.log(JobRole);
   
       // Use the updated state values here
-      const response = await fetch(`https://personaprepapi.galleryofgalleries.live/transcribe?user_email=${currentUser.email}&difficulty_level=${Difficultylevel}&job_role=${JobRole}`, {
+      const response = await fetch(`https://personaprepapi.galleryofgalleries.live/transcribe?user_email=${currentUser.email}&difficulty_level=${encodeURIComponent(Difficultylevel)}&job_role=${encodeURIComponent(JobRole)}`, {
         method: 'POST',
         body: formData,
       });
