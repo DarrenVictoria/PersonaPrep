@@ -24,6 +24,8 @@ export default function AudioTranscriptionComponent() {
 
   const { currentUser } = useAuth();
   console.log(currentUser.email);
+  console.log(Difficultylevel);
+  console.log(JobRole);
   
   //original code
   // const handleStartRecording = () => {
@@ -123,23 +125,27 @@ export default function AudioTranscriptionComponent() {
       const formData = new FormData();
       formData.append('file', audioBlob);
 
+      console.log(Difficultylevel);
+      console.log(JobRole);
+  
+      // Use the updated state values here
       const response = await fetch(`https://personaprepapi.galleryofgalleries.live/transcribe?user_email=${currentUser.email}&difficulty_level=${Difficultylevel}&job_role=${JobRole}`, {
         method: 'POST',
         body: formData,
       });
-
+  
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-
+  
       const data = await response.json();
       if (data.error) {
         throw new Error(`Server error: ${data.error}`);
       }
-
+  
       const audioBase64 = data.audio_base64;
       const chatResponse = data.chat_response;
-
+  
       setAudioSrc(`data:audio/wav;base64,${audioBase64}`);
       setChatResponse(chatResponse); // Set the chat response state
     } catch (error) {
@@ -153,6 +159,7 @@ export default function AudioTranscriptionComponent() {
       }
     }
   };
+  
 
   const isButtonDisabled = () => {
     return Difficultylevel === '' || JobRole === '' || isRecording;
