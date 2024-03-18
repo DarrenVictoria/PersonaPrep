@@ -111,7 +111,7 @@ export default function AudioTranscriptionComponent() {
   const handleAudioData = async (recordedBlob) => {
     // sendAudioForTranscription(recordedBlob.blob);
     try {
-      await sendAudioForTranscription(recordedBlob.blob);
+      await sendAudioForTranscription(recordedBlob.blob, Difficultylevel, JobRole);
       // Success handling (optional)
     } catch (error) {
       alert('An error occurred while transcribing audio. Please try again later.');
@@ -120,13 +120,14 @@ export default function AudioTranscriptionComponent() {
     }
   };
 
-  const sendAudioForTranscription = async (audioBlob) => {
+  const sendAudioForTranscription = async (audioBlob, difficultyLevel, jobRole) => {
     try {
       const formData = new FormData();
       formData.append('file', audioBlob);
   
       // Use the updated state values here
-      const response = await fetch(`https://personaprepapi.galleryofgalleries.live/transcribe?user_email=${currentUser.email}&difficulty_level=${encodeURIComponent(Difficultylevel)}&job_role=${encodeURIComponent(JobRole)}`, {
+      const apiUrl = 'https://personaprepapi.galleryofgalleries.live/transcribe?user_email=' + currentUser.email + '&difficulty_level=' + difficultyLevel + '&job_role=' + jobRole;
+      const response = await fetch(apiUrl, {
         method: 'POST',
         body: formData,
       });
@@ -311,4 +312,3 @@ export default function AudioTranscriptionComponent() {
     </div>
   );
 }
-
