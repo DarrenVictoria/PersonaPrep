@@ -188,7 +188,7 @@ export default function AudioTranscriptionComponent() {
                       </Button>
                       <Button
                       variant="contained" 
-                      sx={{borderRadius:"25px",backgroundColor: '#242624'}}
+                      sx={{borderRadius:"25px",backgroundColor: '#ff0000',paddingLeft:'1rem'}}
                       onClick={() => fetch(`https://personaprepapi.galleryofgalleries.live/reset?user_email=${currentUser.email}`, {method:'POST'}).then(() => alert('Session reset successfully.'))}
                       >
                         Reset Session
