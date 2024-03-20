@@ -184,11 +184,11 @@ const onSubmit = async (formData) => {
                                               <TextField type="text" variant="outlined" 
                                                 // value={jobTitle} onChange={(event) => setJobTitle(event.target.value)} 
                                                 value={phone}
-                                                fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                                fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder='Full Stack Developer'
                                                 {...register("phone", { required: true, maxLength: 30, pattern: /^[0-9]+$/  })}
                                                 />
-                                                {errors.phone && errors.phone.type === "required" ? "This field is required" : errors.phone && "Please enter only numbers"}
+                                                {errors.phone && errors.phone.type === "maxLength" ? "Max word limit is 30" : errors.phone && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={6}>
                                               
@@ -197,7 +197,7 @@ const onSubmit = async (formData) => {
                                                 <TextField type="email" variant="outlined" 
                                                 // value={jobTitle} onChange={(event) => setJobTitle(event.target.value)} 
                                                 value={pemail}
-                                                fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                                fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 // placeholder='Full Stack Developer'
                                                 {...register("pemail", { required: true })}
                                                 />
@@ -210,11 +210,11 @@ const onSubmit = async (formData) => {
                                                 <TextField type="text" variant="outlined" 
                                                 // value={jobTitle} onChange={(event) => setJobTitle(event.target.value)} 
                                                 value={district}
-                                                fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                                fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 // placeholder='Full Stack Developer'
                                                 {...register("district", { required: true, maxLength: 30, pattern: /^[a-zA-Z\s]+$/})}
                                                 />
-                                                {errors.district && errors.district.type === "required" ? "This field is required" : errors.district && "Please enter only letters"}
+                                                {errors.district && errors.district.type === "maxLength" ? "Max word limit is 30" : errors.district && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={6}>
                                               
@@ -223,11 +223,11 @@ const onSubmit = async (formData) => {
                                                 <TextField type="text" variant="outlined" 
                                                 // value={jobTitle} onChange={(event) => setJobTitle(event.target.value)} 
                                                 value={city}
-                                                fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                                fullWidth  required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 // placeholder='Full Stack Developer'
-                                                {...register("city", { required: true, maxLength: 30, pattern: /^[a-zA-Z\s]+$/  })}
+                                                {...register("city", { required: true, maxLength: 50, pattern: /^[a-zA-Z\s]+$/  })}
                                                 />
-                                                {errors.city && errors.city.type === "required" ? "This field is required" : errors.city && "Please enter only letters"}
+                                                {errors.city && errors.city.type === "maxLength" ? "Max word limit is 50" : errors.city && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={6}>
                                               
@@ -236,11 +236,11 @@ const onSubmit = async (formData) => {
                                                 <TextField type="text" variant="outlined" 
                                                 // value={jobTitle} onChange={(event) => setJobTitle(event.target.value)} 
                                                 value={postal}
-                                                fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                                fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 // placeholder='Full Stack Developer'
                                                 {...register("postal", { required: true, maxLength: 30, pattern: /^[0-9]+$/  })}
                                                 />
-                                                {errors.postal && errors.postal.type === "required" ? "This field is required" : errors.postal && "Please enter only numbers"}
+                                                {errors.postal && errors.postal.type === "maxLength" ? "Max word limit is 30" : errors.postal && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={6}>
                                               
@@ -249,11 +249,11 @@ const onSubmit = async (formData) => {
                                                 <TextField type="text" variant="outlined" 
                                                 // value={jobTitle} onChange={(event) => setJobTitle(event.target.value)} 
                                                 value={country}
-                                                fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                                fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 // placeholder='Full Stack Developer'
                                                 {...register("country", { required: true, maxLength: 30  })}
                                                 />
-                                                {errors.country && errors.country.type === "required" ? "This field is required" : errors.country && "Please enter only letters"}
+                                                {errors.country && errors.country.type === "maxLength" ? "Max word limit is 30" : errors.country && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12}>
                                               
