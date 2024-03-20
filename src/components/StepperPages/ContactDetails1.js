@@ -264,7 +264,7 @@ const onSubmit = async (formData) => {
                                                 value={portfolioSite}
                                                 fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 // placeholder='Full Stack Developer'
-                                                {...register("portfolioSite", { required: true, maxLength: 30 })}
+                                                {...register("portfolioSite", { required: true})}
                                                 />
                                                 {/* {errors.portfolioSite && errors.portfolioSite.type === "required" ? "This field is required" : errors.portfolioSite && "Please enter only letters"} */}
                                                 {errors.portfolioSite && "This field is required"}

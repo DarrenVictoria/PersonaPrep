@@ -768,9 +768,9 @@ const Projects1 = () => {
                                                 value={ProjEvidence}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder=''
-                                                {...register("ProjEvidence", { maxLength: 30, pattern: /^[a-zA-Z\s0-9.,@]+$/})}
+                                                {...register("ProjEvidence")}
                                                 />
-                                                {errors.ProjEvidence &&  "Only accepts letters, numbers and (. , @)"}
+                                                {/* {errors.ProjEvidence &&  "Only accepts letters, numbers and (. , @)"} */}
                                             </Grid>
                                             <Grid item xs={12} mb={2} style={{display: 'flex', justifyContent: 'center'}}>
                                                 <Typography>-OR-</Typography>
