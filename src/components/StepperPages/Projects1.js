@@ -551,7 +551,7 @@ const Projects1 = () => {
                                                 placeholder='CV Builder'
                                                 {...register("ProjName", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
                                                 />
-                                                {errors.ProjName &&  "Please enter only letters"}
+                                                {errors.ProjName && errors.ProjName.type === "maxLength" ? "Max word limit is 30" : errors.ProjName && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={1}>
                                                 <Typography><span style={{color: 'red'}}>*</span>Was it an individual or a group project?</Typography>
@@ -588,7 +588,7 @@ const Projects1 = () => {
                                                 placeholder='Full stack developer'
                                                 {...register("ProjRole", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
                                                 />
-                                                {errors.ProjRole &&  "Please enter only letters"}
+                                                {errors.ProjRole && errors.ProjRole.type === "maxLength" ? "Max word limit is 30" : errors.ProjRole && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} >
                                                 <Typography><span style={{color: 'red'}}>*</span>Are you still working on the project?</Typography>

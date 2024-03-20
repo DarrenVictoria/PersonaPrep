@@ -156,7 +156,7 @@ useEffect(() => {
                                           placeholder=''
                                           {...register("PblTitle", { maxLength: 30, pattern: /^[a-zA-Z\s0-9]+$/ })}
                                           />
-                                          {errors.PblTitle &&  "Please enter only letters"}
+                                          {errors.PblTitle && errors.PblTitle.type === "maxLength" ? "Max word limit is 30" : errors.PblTitle && "Please enter only letters"}
                                       </Grid>
                                       <Grid item xs={12}>
                                         
@@ -168,7 +168,7 @@ useEffect(() => {
                                           placeholder=''
                                           {...register("Publisher", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
                                           />
-                                          {errors.Publisher &&  "Please enter only letters"}
+                                          {errors.Publisher && errors.Publisher.type === "maxLength" ? "Max word limit is 30" : errors.Publisher && "Please enter only letters"}
                                       </Grid>
                                       <Grid item xs={12} mb={1}>
                                       <Typography ><span style={{color: 'red'}}>*</span> Publication date</Typography>
