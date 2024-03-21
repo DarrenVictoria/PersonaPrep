@@ -100,7 +100,7 @@ const handleConfirmDelete = async () => {
   try {
       const docRef = doc(firestore, "studentdetails", deleteId);
       await deleteDoc(docRef);
-      setSuccessMessage("Resume deleted sucessfullt!");
+      setSuccessMessage("Resume deleted sucessfully !");
       setResumeRows(resumeRows.filter((row) => row.id !== deleteId));
   } catch (error) {
       console.error("Error deleting row: ", error);

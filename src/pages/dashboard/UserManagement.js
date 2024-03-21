@@ -113,11 +113,11 @@ const AUserManageDash = () => {
                 const updatedEmails = data.allowedEmails.filter(email => email !== deleteId);
                 await updateDoc(docRef, { allowedEmails: updatedEmails });
                 setRows(rows.filter(row => row.id !== deleteId));
-                setDeleteMessage("Email successfully deleted from allowedEmails array!");
+                setDeleteMessage("Email successfully deleted from allowed Emails array!");
             }
         }
     } catch (error) {
-        console.error("Error deleting email from allowedEmails array: ", error);
+        console.error("Error deleting email from allowed Emails array: ", error);
     } finally {
         setOpenDialog(false);
         
