@@ -202,9 +202,9 @@ const School1 = () => {
                                                 value={School1Name}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white', pattern: "^[a-zA-Z]+$"}}} 
                                                 placeholder='St. Thomas Catholic International'
-                                                {...register("School1Name", { required: true, maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                {...register("School1Name", { required: true, maxLength: 50, pattern: /^[a-zA-Z\s]+$/ })}
                                                 />
-                                                {errors.School1Name && errors.School1Name.type === "required" ? "This field is required" : errors.School1Name && "Please enter only letters"}
+                                                {errors.School1Name && errors.School1Name.type === "maxLength" ? "Max word limit is 50" : errors.School1Name && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>School experience or description</Typography>
@@ -223,9 +223,9 @@ const School1 = () => {
                                                     value={School1Experience}
                                                     InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}}
                                                     required
-                                                    {...register("School1Experience", { required: true, maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                    {...register("School1Experience", { required: true, maxLength: 100, pattern: /^[a-zA-Z\s]+$/ })}
                                                 />
-                                                {errors.School1Experience && errors.School1Experience.type === "required" ? "This field is required" : errors.School1Experience && "Please enter only letters"}
+                                                {errors.School1Experience && errors.School1Experience.type === "maxLength" ? "Max word limit is 100" : errors.School1Experience && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>City</Typography>
@@ -233,9 +233,9 @@ const School1 = () => {
                                                 value={School1City}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder=''
-                                                {...register("School1City", { required: true, maxLength: 30, pattern: /^[a-zA-Z0-9\s]+$/ })}
+                                                {...register("School1City", { required: true, maxLength: 50, pattern: /^[a-zA-Z0-9\s]+$/ })}
                                                 />
-                                                {errors.School1City && errors.School1City.type === "required" ? "This field is required" : errors.School1City && "Please enter only letters"}
+                                                {errors.School1City && errors.School1City.type === "maxLength" ? "Max word limit is 50" : errors.School1City && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>Country</Typography>
@@ -245,7 +245,7 @@ const School1 = () => {
                                                 placeholder=''                                                
                                                 {...register("School1Country", { required: true, maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
                                                 />
-                                                {errors.School1Country && errors.School1Country.type === "required" ? "This field is required" : errors.School1Country && "Please enter only letters and numbers"}
+                                                {errors.School1Country && errors.School1Country.type === "maxLength" ? "Max word limit is 30" : errors.School1Country && "Please enter only letters and numbers"}
                                             </Grid>
                                             <Grid item xs={12} mb={1}>
                                                 <Typography><span style={{color: 'red'}}>*</span>Start Date</Typography>
