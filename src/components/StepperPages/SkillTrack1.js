@@ -1,9 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import '../../pages/interviewforms/Template.css';
-import InterviewFormFooter from '../InterviewFormFooter';
 import InterviewFormHeader from '../InterviewFormHeader';
-import {CustomizedHook, CustomizedHookLarge} from '../TextfieldButtonDataDisplay';
 import CustomMultilineTextFieldslimited from '../MultilineMaxWordLimit';
 import Typography from '@mui/material/Typography';
 import Grid from "@mui/material/Grid";

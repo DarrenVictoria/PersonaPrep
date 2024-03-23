@@ -4,8 +4,6 @@ import Grid from "@mui/material/Grid";
 import Typography from '@mui/material/Typography';
 import TextField from "@mui/material/TextField";
 import FileUpload from '../FileUpload';
-// import TestAutoComplete from '../TestAutoComplete';
-import {CustomizedHook, CustomizedHookLarge} from '../TextfieldButtonDataDisplay';
 import Card from '@mui/material/Card'; 
 import CardContent from '@mui/material/CardContent'; 
 import Avatar from '@mui/material/Avatar';
@@ -13,8 +11,6 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
-import cphone from '../../assets/images/iconcphone.svg';
-import InterviewFormFooter from '../InterviewFormFooter';
 import InterviewFormHeader from '../InterviewFormHeader';
 import React,{ useState, useEffect } from 'react';
 import Button from "@mui/material/Button";
@@ -22,7 +18,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { back } from '../BackButton.js';
 import { next } from '../NextButton.js';
 import { useNavigate } from 'react-router-dom';
-import { collection, addDoc,doc , getDoc, setDoc, getFirestore, query, where, getDocs } from 'firebase/firestore';
+import { collection, addDoc,doc , getDoc, setDoc, getFirestore } from 'firebase/firestore';
 import { useAuth } from '../../hooks/useAuth.js';
 import EditIcon from '@mui/icons-material/Edit';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -87,16 +83,13 @@ const PersonalInfo = () => {
       };
 
       const handleReset = () => {
-        // Your reset logic here
         console.log('Reset button clicked');
       };
 
-    // const phoneChange = (event) => setProname(event.target.value);
 
     const navigate = useNavigate();
     
     const onSubmit = async (e) => {
-        // e.preventDefault();
         
         try {
             console.log("Profile Picture URL:", profilePictureUrl); // Log profilePictureUrl before calling setDoc
@@ -113,7 +106,7 @@ const PersonalInfo = () => {
                 Proname,
                 PJobRoles,
                 profilePictureUrl: finalProfilePictureUrl,
-                userId: currentUser.uid // assuming you have a user ID to associate with the data
+                userId: currentUser.uid 
             }, { merge: true }); // Merge with existing document if it exists
             
             navigate('/contactDetMain');

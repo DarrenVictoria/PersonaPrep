@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import './css/WorkExperience1.css';
 import '../../pages/interviewforms/Template.css';
-import InterviewFormFooter from '../InterviewFormFooter';
 import InterviewFormHeader from '../InterviewFormHeader';
 import Grid from "@mui/material/Grid";
 import Typography from '@mui/material/Typography';
@@ -13,15 +12,8 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
-import EditableChoose from '../EditableSelectOption';
-import FormGroup from "@mui/material/FormGroup";//for the check box
-import FormControlLabel from "@mui/material/FormControlLabel";//for the check box
-import Checkbox from "@mui/material/Checkbox";//for the check box
-import ccheck_box from '../../assets/images/iconccheck_box.svg';
-import cacute from '../../assets/images/iconcacute.svg';
-import ccalander from '../../assets/images/iconccalander.svg';
+import FormControlLabel from "@mui/material/FormControlLabel";
 import CustomMultilineTextFieldslimited from '../MultilineMaxWordLimit';
-import {CustomizedHook, CustomizedHookLarge} from '../TextfieldButtonDataDisplay';
 import {useState } from 'react';
 import Button from "@mui/material/Button";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';

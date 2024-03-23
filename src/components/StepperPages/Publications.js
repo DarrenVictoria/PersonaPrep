@@ -10,14 +10,8 @@ import ListItemText from '@mui/material/ListItemText';// for the right column
 import ListItemAvatar from '@mui/material/ListItemAvatar';// for the right column
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
-import cstat from '../../assets/images/iconcstat.svg';
-import ckey from '../../assets/images/iconckeyboard.svg';
-import cbatch from '../../assets/images/iconcbatch.svg';
-import EditableChoose from '../EditableSelectOption';
-import CustomMultilineTextFields from '../CustomMultilineTextfield';
 import { useState,useEffect } from 'react';
 import CustomMultilineTextFieldslimited from '../MultilineMaxWordLimit';
-import InterviewFormFooter from '../InterviewFormFooter';
 import InterviewFormHeader from '../InterviewFormHeader';
 import '../../pages/interviewforms/Template.css';
 import Button from "@mui/material/Button";
@@ -116,7 +110,7 @@ useEffect(() => {
             if (docSnapshot.exists()) {
                 const docData = docSnapshot.data();
                 if (docData.publications && docData.publications.length >= 1) {
-                    const publicationData = docData.publications[0]; // Assuming you're retrieving data at index 0
+                    const publicationData = docData.publications[0]; 
                     // Populate form fields with publicationData
                     setValue('PblTitle', publicationData.PblTitle || '');
                     setValue('Publisher', publicationData.Publisher || '');

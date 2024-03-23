@@ -1,6 +1,5 @@
 import './interviewBank.css'
 import TranscriptCard from '../../components/TranscriptCard'
-import thumbnail from '../../assets/images/post-thumbnail.png'
 import { useEffect, useState } from 'react'
 import Footer from '../../components/footer'
 import NavBar from '../../components/Navbar'

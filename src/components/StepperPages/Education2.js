@@ -4,8 +4,6 @@ import InterviewFormHeader from '../InterviewFormHeader';
 import Grid from "@mui/material/Grid";
 import Typography from '@mui/material/Typography';
 import TextField from "@mui/material/TextField";
-import CustomMultilineTextFields from '../CustomMultilineTextfield';
-import EditableChoose from '../EditableSelectOption';
 import React,{ useState, useEffect } from 'react';
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';

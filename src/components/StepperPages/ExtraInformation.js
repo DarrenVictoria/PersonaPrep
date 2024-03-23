@@ -1,16 +1,12 @@
 import './css/personalInfo.css';
 import '../../pages/interviewforms/Template.css';
-import InterviewFormFooter from '../InterviewFormFooter';
 import InterviewFormHeader from '../InterviewFormHeader';
 import Grid from "@mui/material/Grid";
 import Typography from '@mui/material/Typography';
 import TextField from "@mui/material/TextField";
-import CustomMultilineTextFields from '../CustomMultilineTextfield';
-import EditableChoose from '../EditableSelectOption';
 import { useState, useEffect } from 'react';
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
-import { CustomizedHook } from '../TextfieldButtonDataDisplay';
 import Button from "@mui/material/Button";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { back } from '../BackButton.js';
@@ -18,9 +14,8 @@ import { next } from '../NextButton.js';
 import { useNavigate } from 'react-router-dom';
 import Autocomplete from "@mui/material/Autocomplete";
 import Stack from "@mui/material/Stack";
-import { setRef } from '@mui/material';
 import RemoveIcon from '@mui/icons-material/Remove';
-import { collection, addDoc, getFirestore, query, where, getDocs, doc, updateDoc, getDoc,setDoc } from 'firebase/firestore';
+import { collection, getFirestore, doc, getDoc,setDoc } from 'firebase/firestore';
 import { useAuth } from '../../hooks/useAuth.js';
 
 

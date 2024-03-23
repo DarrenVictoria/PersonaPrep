@@ -1,6 +1,4 @@
 import './css/FacultyDetails.css';
-import Choose from '../FacultySelectOption';
-import InterviewFormFooter from '../InterviewFormFooter';
 import InterviewFormHeader from '../InterviewFormHeader';
 import '../../pages/interviewforms/Template.css';
 import Grid from "@mui/material/Grid";
@@ -12,7 +10,6 @@ import { back } from '../BackButton.js';
 import { next } from '../NextButton.js';
 import { useNavigate } from 'react-router-dom';
 import { collection, addDoc, getFirestore, query, where, getDocs, doc, updateDoc } from 'firebase/firestore';
-import { getAuth } from 'firebase/auth';
 import { useAuth } from '../../hooks/useAuth.js'; 
 import LoadingScreen from 'react-loading-screen';
 import Logo from "../../assets/logo/Persona Prep Dark.png"

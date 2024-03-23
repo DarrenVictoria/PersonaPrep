@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { collection, addDoc, getFirestore, query, where, getDocs, doc, updateDoc } from 'firebase/firestore';
 import InterviewFormHeader from '../InterviewFormHeader';
 import '../../pages/interviewforms/Template.css';
@@ -93,7 +93,6 @@ const onSubmit = async (formData) => {
                 postal: formData.postal,
                 country: formData.country,
                 portfolioSite: formData.portfolioSite,
-                // ... (We can add more fields as needed)
             });
 
             console.log('Document updated with ID: ', existingDoc.id);
@@ -107,7 +106,6 @@ const onSubmit = async (formData) => {
                 postal: formData.postal,
                 country: formData.country,
                 portfolioSite: formData.portfolioSite,
-                // ... (We can add more fields as needed)
             });
 
             console.log('Document written with ID: ', newDocRef.id);
