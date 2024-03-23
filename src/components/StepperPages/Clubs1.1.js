@@ -66,7 +66,29 @@ const Club2 = () => {
 
 
     //Use state for auto complete component for RolesPlayed
-    const  Clbs_RolesPlayed = ['Volunteer','Top board','Executive committee'];
+    const  Clbs_RolesPlayed = [
+        'Volunteer',
+        'Top board',
+        'Executive committee',
+        'President',
+        'Vice president',
+        'Secretary',
+        'Assistant secretary',
+        'Treasurer',
+        'Assistant treasurer',
+        'Designer',
+        'Director – social media',
+        'Director – arts',
+        'Media coordinator',
+        'Event coordinator',
+        'Director of events',
+        'Editor',
+        'Content writer',
+        'Executive member',
+        'Council member',
+        'Chairperson',
+        'Vice chairperson'
+    ];
     const [ClubRolesPlayed, setClubRolesPlayed] = useState([]);//usestate for autocomplete Roles played
     const maxSelectionsRolesPlayed = 3;//max value for the autocomplete
     const handleClubRolesPlayed = (event, newSkill) => {
