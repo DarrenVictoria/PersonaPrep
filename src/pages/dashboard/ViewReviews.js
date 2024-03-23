@@ -2,14 +2,12 @@ import {useLocation}  from "react-router-dom";
 import  React,{ useEffect, useState } from "react";
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import DashboardHeader from "./dashboardHeader";
 import Grid from "@mui/material/Unstable_Grid2";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
-import Avatar from "@mui/material/Avatar";
 import Button from '@mui/material/Button';
-import { collection, getFirestore, getDocs, doc, serverTimestamp } from 'firebase/firestore';
+import { collection, getFirestore, getDocs } from 'firebase/firestore';
 
   
 const ViewReviews = () => {

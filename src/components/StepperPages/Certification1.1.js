@@ -10,14 +10,8 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
-import EditableChoose from '../EditableSelectOption';
 import { useState, useEffect } from 'react';
-import { CustomizedHook } from '../TextfieldButtonDataDisplay';
-import cdiary from '../../assets/images/iconcdiary.svg';
-import ccalander from '../../assets/images/iconccalander.svg';
-import chat from '../../assets/images/iconchat.svg';
 import FileUpload from '../File Upload/DocFileUpload.js';
-import InterviewFormFooter from '../InterviewFormFooter';
 import InterviewFormHeader from '../InterviewFormHeader';
 import '../../pages/interviewforms/Template.css';
 import Button from "@mui/material/Button";
@@ -28,13 +22,6 @@ import { useNavigate } from 'react-router-dom';
 import BookIcon from '@mui/icons-material/Book';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import LayersIcon from '@mui/icons-material/Layers';
-import Dialog from "@mui/material/Dialog";//dialog
-import DialogActions from "@mui/material/DialogActions";//dialog
-import DialogContent from "@mui/material/DialogContent";//dialog
-import DialogContentText from "@mui/material/DialogContentText";//dialog
-import DialogTitle from "@mui/material/DialogTitle";//dialog
-import useMediaQuery from "@mui/material/useMediaQuery";//dialog
-import { useTheme } from "@mui/material/styles";//dialog
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
@@ -407,7 +394,6 @@ const Certification2 = () => {
       };
 
       const handleReset = () => {
-        // Your reset logic here
         console.log('Reset button clicked');
       };
    
@@ -474,7 +460,6 @@ const Certification2 = () => {
                 CertificateLInk,
                 CertificateProjSkills,
                 CertUrl: finalProjectEvd
-                // Add other form fields here...
             };
 
             // Send data to Firestore
@@ -514,7 +499,6 @@ const Certification2 = () => {
 
                         console.log("Cet det :",CertFetchUrl);
 
-                        // Update other state variables...
                     }
                 } else {
                     console.error('Document does not exist for the current user.');
@@ -543,7 +527,6 @@ const Certification2 = () => {
                                         <Grid container>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography ><span style={{color: 'red'}}>*</span> Name of Certification</Typography>
-                                                {/* <TextField type="text" variant="outlined" value={CertificateName} onChange={(event) => setCertificateName(event.target.value)} fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}} /> */}
                                                 <TextField type="text" variant="outlined" fullWidth required  
                                                 value={CertificateName}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
@@ -554,7 +537,6 @@ const Certification2 = () => {
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography ><span style={{color: 'red'}}>*</span> Issuing Organization</Typography>
-                                                {/* <TextField type="text" variant="outlined" value={CertificateissuedOrg} onChange={(event) => setCertificateissuedOrg(event.target.value)} fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}}/> */}
                                                 <TextField type="text" variant="outlined" fullWidth required  
                                                 value={CertificateissuedOrg}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
@@ -567,11 +549,6 @@ const Certification2 = () => {
                                                 <Typography><span style={{color: 'red'}}>*</span>Issue Date</Typography>
                                             </Grid>
                                             <Grid item xs={6} pr={1}>
-                                                {/* <EditableChoose
-                                                    options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                                                    onSelect={setCertificateIssueMonth}
-                                                    disabledOptions={[]}
-                                                /> */}
                                                  <FormControl variant="outlined" fullWidth>
                                                     <Select
                                                         value={CertificateIssueMonth}
@@ -589,11 +566,6 @@ const Certification2 = () => {
                                                 </FormControl>
                                             </Grid>
                                             <Grid item xs={6} mb={3} pl={1}>
-                                                {/* <EditableChoose
-                                                    options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                                                    onSelect={setCertificateIssueYear}
-                                                    disabledOptions={["2024"]}
-                                                /> */}
                                                 <FormControl variant="outlined" fullWidth>
                                                     <Select
                                                         value={CertificateIssueYear}
@@ -614,11 +586,6 @@ const Certification2 = () => {
                                                 <Typography><span style={{color: 'red'}}>*</span>Expiration Date</Typography>
                                             </Grid>
                                             <Grid item xs={6} pr={1}>
-                                                {/* <EditableChoose
-                                                    options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                                                    onSelect={setCertificateExpMonth}
-                                                    disabledOptions={[]}
-                                                /> */}
                                                 <FormControl variant="outlined" fullWidth>
                                                     <Select
                                                         value={CertificateExpMonth}
@@ -636,11 +603,6 @@ const Certification2 = () => {
                                                 </FormControl>
                                             </Grid>
                                             <Grid item xs={6} mb={3} pl={1}>
-                                                {/* <EditableChoose
-                                                    options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                                                    onSelect={setCertificateExpYear}
-                                                    disabledOptions={["2024"]}
-                                                /> */}
                                                 <FormControl variant="outlined" fullWidth>
                                                     <Select
                                                         value={CertificateExpYear}
@@ -659,7 +621,6 @@ const Certification2 = () => {
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography ><span style={{color: 'red'}}>*</span>Certification ID</Typography>
-                                                {/* <TextField type="text" variant="outlined" value={CertificateId} onChange={(event) => setCertificateId(event.target.value)} fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}}/> */}
                                                 <TextField type="text" variant="outlined" fullWidth required  
                                                 value={CertificateId}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
@@ -708,7 +669,6 @@ const Certification2 = () => {
                                                     </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>Certification evidence link</Typography>
-                                                {/* <TextField type="text" variant="outlined" value={CertificateLInk} onChange={(event) => setCertificateLInk(event.target.value)} fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='CV Builder'/> */}
                                                 <TextField type="text" variant="outlined" fullWidth required  
                                                 value={CertificateLInk}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
@@ -753,7 +713,6 @@ const Certification2 = () => {
                                                     </ListItem>
                                                     <ListItem >
                                                         <ListItemAvatar>
-                                                            {/* <Avatar sx={{borderRadius: '12px', display: 'flex', justifyContent: 'center', alignItems: 'center'  }}> */}
                                                             <Avatar sx={{borderRadius: '12px'}}>
                                                                 <CalendarMonthIcon sx={{color:'black'}}/>
                                                             </Avatar>

@@ -10,15 +10,11 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
-import cphone from '../../assets/images/iconcphone.svg';
-import EditableChoose from '../EditableSelectOption';
 import { useState, useEffect } from 'react';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import { CustomizedHook } from '../TextfieldButtonDataDisplay';
 import FileUpload from '../File Upload/DocFileUpload.js';
-import InterviewFormFooter from '../InterviewFormFooter';
 import InterviewFormHeader from '../InterviewFormHeader';
 import '../../pages/interviewforms/Template.css';
 import Button from "@mui/material/Button";
@@ -412,7 +408,6 @@ const Projects2 = () => {
       };
 
       const handleReset = () => {
-        // Your reset logic here
         console.log('Reset button clicked');
       };
    
