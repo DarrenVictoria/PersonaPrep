@@ -3,7 +3,6 @@ import { useState } from 'react';
 import CustomMultilineTextFieldslimited from '../MultilineMaxWordLimit';
 import EditableChoose from '../EditableSelectOption';
 import Grid from '@mui/material/Grid';
-// import { useEffect } from 'react';
 import {CustomizedHook, CustomizedHookLarge} from '../TextfieldButtonDataDisplay';
 import Typography from '@mui/material/Typography';
 import './css/WorkExperience2.css';
@@ -18,16 +17,11 @@ const WorkExperience_2 = () => {
     //the handleChange is for CustomMultilineTextFieldslimited
     const handleTaskDnWithTools = (event) => {
         //the below commented code is to test 
-        // console.log(`Work => ${event.target.value}`)
         setTaskDnWithTools(event.target.value);
       };
       
     // The below code is for the editablechoose
     const [Employmenttype, setEmploymentType] = React.useState("");
-    //below commented code is to test that the variable Employmenttype has stored the value for it to work uncomment the import of useEffect
-    // useEffect(() => {
-    //     console.log('Employmenttype:', Employmenttype);
-    // }, [Employmenttype]);
     const [selectedValues, setSelectedValues] = useState([]);
 
     const handleSelectedValues = (values) => {

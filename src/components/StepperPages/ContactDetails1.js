@@ -11,14 +11,6 @@ import List from '@mui/material/List';// for the right column
 import ListItem from '@mui/material/ListItem';// for the right column
 import ListItemText from '@mui/material/ListItemText';// for the right column
 import ListItemAvatar from '@mui/material/ListItemAvatar';// for the right column
-//import { styled } from "@mui/material/styles";
-//import Box from "@mui/material/Box"; //did not use this for the grid since it effects some css i have applied and comented temperory incase any issue come we can  uncomment it
-//import Paper from "@mui/material/Paper";
-//import InputAdornment from '@mui/material/InputAdornment';
-import IconButton from '@mui/material/IconButton';
-import AddIcon from '@mui/icons-material/Add'
-import CloseIcon from '@mui/icons-material/Close';
-//import Button from '@mui/material/Button';
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -32,38 +24,9 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import EmailIcon from '@mui/icons-material/Email';
 import FolderCopyIcon from '@mui/icons-material/FolderCopy';
 
-const predefinedButtonName = ['github','figma','behance','linkedin','facebook','whatsapp','instragram','twitter'];
+
 const ContactDetails_1 = () => {
   const { currentUser } = useAuth();
-  // const [phone, setPhone] = useState('');
-  // const [pemail, setEmail] = useState('');
-  // const [district, setDistrict] = useState('');
-  // const [city, setCity] = useState('');
-  // const [postal, setPostal] = useState('');
-  // const [country, setCountry] = useState('');
-  // const [portfolioSite, setPortfolioSite] = useState('');
-
-  //below usestate is to keep the user entered url
-  const [inputUrl, setInputUrl] = useState(''); 
-  //to keep array of already shown buttons
-  const[shownbuttons,setShownButtons] = useState([]);
-  const checkUrl = () =>{
-    //converting the url to lowercase
-    const lowerCaseUrl = inputUrl.toLowerCase();
-
-    //checking the lowerCaseUrl with the predefined button for matches
-    const matchedresult = predefinedButtonName.filter(buttonName => lowerCaseUrl.includes(buttonName));
-
-    // updating the shownbutton 
-    setShownButtons(prevButtons =>{
-      const uniqueButtons = Array.from(new Set([...prevButtons,...matchedresult]));
-      return uniqueButtons
-    });
-  };
-  const removeButton = (buttonName) => {
-    setShownButtons(prevButtons => prevButtons.filter(button => button !== buttonName));
-  };
-
   //react hook form stuff
   const { register, handleSubmit, watch, formState: { errors }, getValues, setValue } = useForm();
 
@@ -75,11 +38,7 @@ const ContactDetails_1 = () => {
   const country = watch('country');
   const portfolioSite = watch('portfolioSite');
 
-  // const onSubmit = (e) => {
-  //     // e.preventDefault();
-  //     // Call the function to add data to Firestore
-  //     addDataToFirestore();
-  // };
+  
 
   useEffect(() => {
     // Fetch user data when the component mounts
@@ -94,7 +53,6 @@ const ContactDetails_1 = () => {
 
             if (existingDoc) {
                 const userData = existingDoc.data();
-                // console.log(userData)
                 setValue('phone', userData.phone || ''); 
                 setValue('pemail', userData.pemail || ''); 
                 setValue('district', userData.district || ''); 
@@ -135,7 +93,7 @@ const onSubmit = async (formData) => {
                 postal: formData.postal,
                 country: formData.country,
                 portfolioSite: formData.portfolioSite,
-                // ... (Add more fields as needed)
+                // ... (We can add more fields as needed)
             });
 
             console.log('Document updated with ID: ', existingDoc.id);
@@ -149,7 +107,7 @@ const onSubmit = async (formData) => {
                 postal: formData.postal,
                 country: formData.country,
                 portfolioSite: formData.portfolioSite,
-                // ... (Add more fields as needed)
+                // ... (We can add more fields as needed)
             });
 
             console.log('Document written with ID: ', newDocRef.id);
@@ -175,14 +133,11 @@ const onSubmit = async (formData) => {
                                   
                                       
                                     <div className='Contactdetails1-LeftColumn'>
-                                          {/*<Box sx={{ flexGrow: 1 }}>*/}
                                           <Grid container spacing={2} >
                                             <Grid item xs={6}>
                                               
                                               <Typography ><span style={{color: 'red'}}>*</span> Phone</Typography>
-                                              {/* <TextField type="text" variant="outlined" value={phone} onChange={(event) => setPhone(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}} /> */}
                                               <TextField type="text" variant="outlined" 
-                                                // value={jobTitle} onChange={(event) => setJobTitle(event.target.value)} 
                                                 value={phone}
                                                 fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder='Full Stack Developer'
@@ -193,12 +148,9 @@ const onSubmit = async (formData) => {
                                             <Grid item xs={6}>
                                               
                                             <Typography ><span style={{color: 'red'}}>*</span> Email</Typography>
-                                                {/* <TextField type="email" variant="outlined" value={pemail} onChange={(event) => setEmail(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/> */}
                                                 <TextField type="email" variant="outlined" 
-                                                // value={jobTitle} onChange={(event) => setJobTitle(event.target.value)} 
                                                 value={pemail}
                                                 fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
-                                                // placeholder='Full Stack Developer'
                                                 {...register("pemail", { required: true })}
                                                 />
                                                 {errors.pemail && "This field is required"}
@@ -206,12 +158,9 @@ const onSubmit = async (formData) => {
                                             <Grid item xs={6}>
                                               
                                             <Typography ><span style={{color: 'red'}}>*</span> District</Typography>
-                                                {/* <TextField type="text" variant="outlined" value={district} onChange={(event) => setDistrict(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/> */}
                                                 <TextField type="text" variant="outlined" 
-                                                // value={jobTitle} onChange={(event) => setJobTitle(event.target.value)} 
                                                 value={district}
                                                 fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
-                                                // placeholder='Full Stack Developer'
                                                 {...register("district", { required: true, maxLength: 30, pattern: /^[a-zA-Z\s]+$/})}
                                                 />
                                                 {errors.district && errors.district.type === "maxLength" ? "Max word limit is 30" : errors.district && "Please enter only letters"}
@@ -219,12 +168,9 @@ const onSubmit = async (formData) => {
                                             <Grid item xs={6}>
                                               
                                             <Typography ><span style={{color: 'red'}}>*</span> City</Typography>
-                                                {/* <TextField type="text" variant="outlined" value={city} onChange={(event) => setCity(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/> */}
                                                 <TextField type="text" variant="outlined" 
-                                                // value={jobTitle} onChange={(event) => setJobTitle(event.target.value)} 
                                                 value={city}
                                                 fullWidth  required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
-                                                // placeholder='Full Stack Developer'
                                                 {...register("city", { required: true, maxLength: 50, pattern: /^[a-zA-Z\s]+$/  })}
                                                 />
                                                 {errors.city && errors.city.type === "maxLength" ? "Max word limit is 50" : errors.city && "Please enter only letters"}
@@ -232,12 +178,9 @@ const onSubmit = async (formData) => {
                                             <Grid item xs={6}>
                                               
                                             <Typography ><span style={{color: 'red'}}>*</span> Postalcode</Typography>
-                                                {/* <TextField type="text" variant="outlined" value={postal} onChange={(event) => setPostal(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/> */}
                                                 <TextField type="text" variant="outlined" 
-                                                // value={jobTitle} onChange={(event) => setJobTitle(event.target.value)} 
                                                 value={postal}
                                                 fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
-                                                // placeholder='Full Stack Developer'
                                                 {...register("postal", { required: true, maxLength: 30, pattern: /^[0-9]+$/  })}
                                                 />
                                                 {errors.postal && errors.postal.type === "maxLength" ? "Max word limit is 30" : errors.postal && "Please enter only letters"}
@@ -245,12 +188,9 @@ const onSubmit = async (formData) => {
                                             <Grid item xs={6}>
                                               
                                             <Typography ><span style={{color: 'red'}}>*</span> Country</Typography>
-                                                {/* <TextField type="text" variant="outlined" value={country} onChange={(event) => setCountry(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/> */}
                                                 <TextField type="text" variant="outlined" 
-                                                // value={jobTitle} onChange={(event) => setJobTitle(event.target.value)} 
                                                 value={country}
                                                 fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
-                                                // placeholder='Full Stack Developer'
                                                 {...register("country", { required: true, maxLength: 30  })}
                                                 />
                                                 {errors.country && errors.country.type === "maxLength" ? "Max word limit is 30" : errors.country && "Please enter only letters"}
@@ -258,20 +198,15 @@ const onSubmit = async (formData) => {
                                             <Grid item xs={12}>
                                               
                                             <Typography ><span style={{color: 'red'}}>*</span> Portfolio Website</Typography>
-                                                {/* <TextField type="text" variant="outlined" value={portfolioSite} onChange={(event) => setPortfolioSite(event.target.value)} fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white',},}}/> */}
                                                 <TextField type="text" variant="outlined" 
-                                                // value={jobTitle} onChange={(event) => setJobTitle(event.target.value)} 
                                                 value={portfolioSite}
                                                 fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
-                                                // placeholder='Full Stack Developer'
                                                 {...register("portfolioSite", { required: true})}
                                                 />
-                                                {/* {errors.portfolioSite && errors.portfolioSite.type === "required" ? "This field is required" : errors.portfolioSite && "Please enter only letters"} */}
                                                 {errors.portfolioSite && "This field is required"}
                                             </Grid>
                                             
                                           </Grid>
-                                        {/*</Box>*/}
                                             
                                     </div>
                                           

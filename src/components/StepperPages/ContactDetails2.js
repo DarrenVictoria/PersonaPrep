@@ -33,12 +33,6 @@ import { useForm } from "react-hook-form";
 
 const ContactDetails_2 = () => {
     const { currentUser } = useAuth();
-    // const [GitHubUN, setGitTxt] = useState('');
-    // const [LinkedInUN, setLinkedInTxt] = useState('');
-    // const [TwitterUN, setTwitterTxt] = useState('');
-    // const [StackOverUN, setSoTxt] = useState('');
-    // const [MediumUN, setMediumTxt] = useState('');
-
     const { register, handleSubmit, watch, formState: { errors }, getValues, setValue } = useForm();
     const GitHubUN = watch('GitHubUN');
     const LinkedInUN = watch('LinkedInUN');
@@ -50,8 +44,6 @@ const ContactDetails_2 = () => {
     const prevPage = () => navigate('/contactDetMain');
     
     const onSubmit = async (e) => {
-        // e.preventDefault();
-        
         // Check if text fields have values before sending to the database
         const dataToUpdate = {};
         if (GitHubUN.trim() !== '') dataToUpdate.GitHubUN = GitHubUN;
@@ -72,7 +64,6 @@ const ContactDetails_2 = () => {
                 await updateDoc(existingDocRef, dataToUpdate);
     
                 console.log('Document updated with ID: ', existingDoc.id);
-                // console.log(dataToUpdate);
                 navigate('/school');
             } else {
                 console.error('Document does not exist for the current user.');
@@ -132,7 +123,6 @@ const ContactDetails_2 = () => {
                                                     <Avatar sx={{ width: 40, height: 40 }} alt="GitHub" src={github} />
                                                 </Grid>
                                                 <Grid item xs={10} ml={-1}>
-                                                    {/* <TextField value={GitHubUN} onChange={(e) => setGitTxt(e.target.value)} variant="outlined" fullWidth InputProps={{ style: { borderRadius: '25px', backgroundColor: 'white' }}} placeholder='GitHub Username'/> */}
                                                     <TextField type="text" variant="outlined" 
                                                     value={GitHubUN}
                                                     fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
@@ -147,7 +137,6 @@ const ContactDetails_2 = () => {
                                                     <Avatar sx={{ width: 40, height: 40 }} alt="LinkedIn" src={linkedIn} />
                                                 </Grid>
                                                 <Grid item xs={10} ml={-1}>
-                                                    {/* <TextField value={LinkedInUN} onChange={(e) => setLinkedInTxt(e.target.value)} variant="outlined" fullWidth InputProps={{ style: { borderRadius: '25px', backgroundColor: 'white' }}} placeholder='LinkedIn Username'/> */}
                                                     <TextField type="text" variant="outlined" 
                                                     value={LinkedInUN}
                                                     fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
@@ -162,7 +151,6 @@ const ContactDetails_2 = () => {
                                                     <Avatar sx={{ width: 40, height: 40 }} alt="Twitter" src={twitter} />
                                                 </Grid>
                                                 <Grid item xs={10} ml={-1}>
-                                                    {/* <TextField value={TwitterUN} onChange={(e) => setTwitterTxt(e.target.value)} variant="outlined" fullWidth InputProps={{ style: { borderRadius: '25px', backgroundColor: 'white' }}} placeholder='Twitter Username'/> */}
                                                     <TextField type="text" variant="outlined" 
                                                     value={TwitterUN}
                                                     fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
@@ -177,7 +165,6 @@ const ContactDetails_2 = () => {
                                                     <Avatar sx={{ width: 40, height: 40 }} alt="StackOverflow" src={stackoverflow} />
                                                 </Grid>
                                                 <Grid item xs={10} ml={-1}>
-                                                    {/* <TextField value={StackOverUN} onChange={(e) => setSoTxt(e.target.value)} variant="outlined" fullWidth InputProps={{ style: { borderRadius: '25px', backgroundColor: 'white' }}} placeholder='StackOverflow Username'/> */}
                                                     <TextField type="text" variant="outlined" 
                                                     value={StackOverUN}
                                                     fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
@@ -192,7 +179,6 @@ const ContactDetails_2 = () => {
                                                     <Avatar sx={{ width: 40, height: 40 }} alt="Medium" src={medium} />
                                                 </Grid>
                                                 <Grid item xs={10} ml={-1}>
-                                                    {/* <TextField value={MediumUN} onChange={(e) => setMediumTxt(e.target.value)} variant="outlined" fullWidth InputProps={{ style: { borderRadius: '25px', backgroundColor: 'white' }}} placeholder='Medium Username'/> */}
                                                     <TextField type="text" variant="outlined" 
                                                     value={MediumUN}
                                                     fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 

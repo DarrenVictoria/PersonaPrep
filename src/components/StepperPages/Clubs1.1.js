@@ -2,13 +2,8 @@ import React, { useEffect, useState } from 'react';
 import './css/Clubs.css';
 import Typography from '@mui/material/Typography'; //this is for the card in the right column
 import Grid from "@mui/material/Grid";
-import EditableChoose from '../EditableSelectOption';
-import { styled } from "@mui/system";
-import FormGroup from "@mui/material/FormGroup";//for the check box
 import FormControlLabel from "@mui/material/FormControlLabel";//for the check box
 import Checkbox from "@mui/material/Checkbox";//for the check box
-import {CustomizedHook, CustomizedHookLarge} from '../TextfieldButtonDataDisplay';
-import InterviewFormFooter from '../InterviewFormFooter';
 import InterviewFormHeader from '../InterviewFormHeader';
 import '../../pages/interviewforms/Template.css';
 import Button from "@mui/material/Button";
@@ -66,7 +61,29 @@ const Club2 = () => {
 
 
     //Use state for auto complete component for RolesPlayed
-    const  Clbs_RolesPlayed = ['Volunteer','Top board','Executive committee'];
+    const  Clbs_RolesPlayed = [
+        'Volunteer',
+        'Top board',
+        'Executive committee',
+        'President',
+        'Vice president',
+        'Secretary',
+        'Assistant secretary',
+        'Treasurer',
+        'Assistant treasurer',
+        'Designer',
+        'Director – social media',
+        'Director – arts',
+        'Media coordinator',
+        'Event coordinator',
+        'Director of events',
+        'Editor',
+        'Content writer',
+        'Executive member',
+        'Council member',
+        'Chairperson',
+        'Vice chairperson'
+    ];
     const [ClubRolesPlayed, setClubRolesPlayed] = useState([]);//usestate for autocomplete Roles played
     const maxSelectionsRolesPlayed = 3;//max value for the autocomplete
     const handleClubRolesPlayed = (event, newSkill) => {
@@ -220,20 +237,11 @@ const Club2 = () => {
                             <div style={{ margin: '80px 25px 125px' }}>
                                 <div className='Clubs-Maindiv'>
                                 <div className='Clubs-LeftColumn'>
-                                {/*<Box sx={{ flexGrow: 1 }}>*/}
                                 <Grid container>
                                 <Grid item xs={12} mb={1}>
                                 <Typography ><span style={{color: 'red'}}>*</span> Club / Society you were a part of ?</Typography>
                                   </Grid>
                                   <Grid item xs={12} mb={3}>
-                                      {/* <EditableChoose
-                                        options={["Clubs","Club", "Club", "Club3"]}
-                                        onSelect={setClubName}
-                                        disabledOptions={["Clubs"]}
-                                        isRequired={true}
-                                        //the below width did not work have to check
-                                        
-                                        /> */}
                                         <FormControl variant="outlined" fullWidth>
                                           <Select
                                               value={ClubName}
@@ -257,15 +265,6 @@ const Club2 = () => {
                                   <Typography ><span style={{color: 'red'}}>*</span> Start Date</Typography>
                                   </Grid>
                                   <Grid item xs={6} mb={3} pr={1}>
-                                    
-                                  {/* <EditableChoose
-                                  options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                                  onSelect={setClubStartMonth}
-                                  disabledOptions={[]}
-                                  isRequired={true}
-                                  //the below width did not work have to check
-                                
-                                /> */}
                                 <FormControl variant="outlined" fullWidth>
                                     <Select
                                         value={ClubStartMonth}
@@ -284,14 +283,6 @@ const Club2 = () => {
                                     
                                   </Grid>
                                   <Grid item xs={6} mb={3} pl={1}>
-                                  {/* <EditableChoose
-                                  options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                                  onSelect={setClubStartYear}
-                                  disabledOptions={["2024"]}
-                                  isRequired={true}
-                                  //the below width did not work have to check
-                                
-                                /> */}
                                 <FormControl variant="outlined" fullWidth>
                                       <Select
                                           value={ClubStartYear}
@@ -313,15 +304,6 @@ const Club2 = () => {
                                   <Typography ><span style={{color: 'red'}}>*</span> End Date</Typography>
                                   </Grid>
                                   <Grid item xs={6} mb={3} pr={1}>
-                                    
-                                  {/* <EditableChoose
-                                  options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                                  onSelect={setClubEndMonth}
-                                  disabledOptions={[]}
-                                  isRequired={true}
-                                  //the below width did not work have to check
-                                
-                                /> */}
                                 <FormControl variant="outlined" fullWidth>
                                       <Select
                                           value={ClubEndMonth}
@@ -340,14 +322,6 @@ const Club2 = () => {
                                     
                                   </Grid>
                                   <Grid item xs={6} mb={3} pl={1}>
-                                  {/* <EditableChoose
-                                  options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                                  onSelect={setClubEndYear}
-                                  disabledOptions={["2024"]}
-                                  isRequired={true}
-                                  //the below width did not work have to check
-                                
-                                /> */}
                                 <FormControl variant="outlined" fullWidth>
                                       <Select
                                           value={ClubEndYear}
@@ -365,12 +339,6 @@ const Club2 = () => {
                                     </FormControl>
                                     
                                   </Grid>
-                                  {/* /*<Grid item xs={1}>
-                                    {this is a blank space just to take the correct position of the below check box }
-                                  </Grid>*/}
-
-
-
                                   <Grid item xs={12} mb={3}>
                                     
                                     <Typography mb={1} mt={3}>Roles Played</Typography>
@@ -457,12 +425,12 @@ const Club2 = () => {
                                   </Grid>
                                   
                                 </Grid>
-                              {/*</Box>*/}
+                              
                                   
                           </div>
-                                
+                                {/* below div is the divide the page into two columns and below is the right column */}
                             <div className='Clubs-RightColumn'>
-                              {/* <CustomizedHookLarge width={360}  height={373} data={SkillsEarned} label={<Typography>Skills Earned</Typography>}/> */}
+                              
                             </div>
                         </div> 
                         </div>

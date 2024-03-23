@@ -95,7 +95,7 @@ const ExtraInformation = () => {
         return ExtraInfoInterests.length >= maxSelections && !ExtraInfoInterests.includes(option);
     };
     
-    // console.log(ExtraInfoInterests);
+    
 
     const navigate = useNavigate();
     const prevPage = () => navigate('/summary');
@@ -339,7 +339,7 @@ const ExtraInformation = () => {
                                             
                                         </Grid>
                                     </Grid>
-                                    {/* <button onClick={(event) => {event.preventDefault(); console.log(award)}}>btn</button> */}
+                                    
                                 </div>
                             </div>
                             <Grid container spacing={2} style={{position: 'absolute', bottom: 80}}>            

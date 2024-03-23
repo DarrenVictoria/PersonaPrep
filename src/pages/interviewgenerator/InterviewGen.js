@@ -5,9 +5,7 @@ import { ReactMic } from 'react-mic';
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import InterviewFormHeader from '../../components/InterviewFormHeader';
-import Box from '@mui/material/Box';
 import { useAuth } from '../../hooks/useAuth';
-import { Padding } from '@mui/icons-material';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
@@ -196,8 +194,8 @@ export default function AudioTranscriptionComponent() {
                     </Grid>
                   </Grid>
 
-                  <Grid container justifyContent={'center'} mb={4}>
-                    <Grid xs={12} md={4} mb={3} sx={{textAlign:'center', display:'flex', alignItems:'center'}}>
+                  <Grid container justifyContent={'center'} mb={4}> 
+                    <Grid xs={12} md={4} mb={3} sx={{textAlign:'center', display:'flex', alignItems:'center',paddingRight: { xs: 0, md: 6 }}}>
                       <FormControl variant="outlined" fullWidth sx={{textAlign:'center', display:'flex', alignItems:'center'}}>
                         <Select
                             value={Difficultylevel}
@@ -217,7 +215,7 @@ export default function AudioTranscriptionComponent() {
                         </Select>
                       </FormControl>
                     </Grid>
-                    <Grid xs={12} md={4} mb={3} sx={{textAlign:'center', display:'flex', alignItems:'center'}}>
+                    <Grid xs={12} md={4} mb={3} sx={{textAlign:'center', display:'flex', alignItems:'center',paddingLeft: { xs: 0, md: 6 }}}>
                       <FormControl variant="outlined" fullWidth sx={{textAlign:'center', display:'flex', alignItems:'center'}}>
                         <Select
                             value={JobRole}

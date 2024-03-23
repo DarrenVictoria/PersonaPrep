@@ -166,11 +166,6 @@ const Education_2 = () => {
                                                 <Typography><span style={{color: 'red'}}>*</span>In which year did you complete your OL exams?</Typography>
                                             </Grid>
                                             <Grid item xs={6} md={2}>
-                                                {/* <EditableChoose
-                                                    options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                                                    onSelect={setOlYear}
-                                                    disabledOptions={["2024"]}
-                                                /> */}
                                                  <FormControl variant="outlined" fullWidth>
                                                     <Select
                                                         value={olYear}
@@ -248,11 +243,6 @@ const Education_2 = () => {
                                                 <Typography>In which year did you complete your AL exams? (First/Final attempt)</Typography>
                                             </Grid>
                                             <Grid item xs={6} md={2}>
-                                                {/* <EditableChoose
-                                                    options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                                                    onSelect={setAlYear}
-                                                    disabledOptions={["2024"]}
-                                                /> */}
                                                 <FormControl variant="outlined" fullWidth>
                                                     <Select
                                                         value={alYear}
@@ -282,7 +272,7 @@ const Education_2 = () => {
                                                             InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}}
                                                             value={result.subject}
                                                             onChange={(event) => handleAlSubjectChange(index, event)}
-                                                            // required = {(index === 0)? true: false}
+                                                           
                                                         />
                                                     </Grid>
                                                     <Grid item xs={4} md={3} mt={3}>
@@ -293,7 +283,7 @@ const Education_2 = () => {
                                                                 displayEmpty
                                                                 input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
                                                                 IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
-                                                                // required = {(index === 0)? true: false}
+                                                               
                                                             >
                                                                 <MenuItem disabled value="">Result</MenuItem>
                                                                 <MenuItem value="A">A</MenuItem>

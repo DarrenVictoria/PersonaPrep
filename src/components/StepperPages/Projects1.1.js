@@ -545,7 +545,6 @@ const Projects2 = () => {
                                         <Grid container>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>Project Name</Typography>
-                                                {/* <TextField type="text" variant="outlined" value={ProjName} onChange={(event) => setProjName(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='CV Builder'/> */}
                                                 <TextField type="text" variant="outlined" fullWidth required  
                                                 value={ProjName}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
@@ -558,11 +557,6 @@ const Projects2 = () => {
                                                 <Typography><span style={{color: 'red'}}>*</span>Was it an individual or a group project?</Typography>
                                             </Grid>
                                             <Grid item xs={12} md={6} mb={3}>
-                                                {/* <EditableChoose
-                                                    options={["Project Type", "Group Project","Individual Project"]}
-                                                    onSelect={setProjType}
-                                                    disabledOptions={[]}
-                                                /> */}
                                                 <FormControl variant="outlined" fullWidth>
                                                     <Select
                                                         value={ProjType}
@@ -582,7 +576,6 @@ const Projects2 = () => {
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>What was your role in the project</Typography>
-                                                {/* <TextField type="text" variant="outlined" value={ProjRole} onChange={(event) => setProjRole(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Full stack developer'/> */}
                                                 <TextField type="text" variant="outlined" fullWidth required  
                                                 value={ProjRole}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
@@ -645,11 +638,6 @@ const Projects2 = () => {
                                                 <Typography><span style={{color: 'red'}}>*</span>Project Start Date</Typography>
                                             </Grid>
                                             <Grid item xs={6} pr={1}>
-                                                {/* <EditableChoose
-                                                    options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                                                    onSelect={setProjStartMonth}
-                                                    disabledOptions={[]}
-                                                /> */}
                                                 <FormControl variant="outlined" fullWidth>
                                                     <Select
                                                         value={ProjStartMonth}
@@ -667,11 +655,6 @@ const Projects2 = () => {
                                                 </FormControl>
                                             </Grid>
                                             <Grid item xs={6} mb={3} pl={1}>
-                                                {/* <EditableChoose
-                                                    options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                                                    onSelect={setProjStartYear}
-                                                    disabledOptions={["2024"]}
-                                                /> */}
                                                 <FormControl variant="outlined" fullWidth>
                                                     <Select
                                                         value={ProjStartYear}
@@ -692,11 +675,6 @@ const Projects2 = () => {
                                                 <Typography><span style={{color: 'red'}}>*</span>Project End Date</Typography>
                                             </Grid>
                                             <Grid item xs={6} pr={1}>
-                                                {/* <EditableChoose
-                                                    options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                                                    onSelect={setProjEndMonth}
-                                                    disabledOptions={[]}
-                                                /> */}
                                                 <FormControl variant="outlined" fullWidth>
                                                     <Select
                                                         value={ProjEndMonth}
@@ -714,11 +692,6 @@ const Projects2 = () => {
                                                 </FormControl>
                                             </Grid>
                                             <Grid item xs={6} mb={3} pl={1}>
-                                                {/* <EditableChoose
-                                                    options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                                                    onSelect={setProjEndYear}
-                                                    disabledOptions={["2024"]}
-                                                /> */}
                                                 <FormControl variant="outlined" fullWidth>
                                                     <Select
                                                         value={ProjEndYear}
@@ -739,11 +712,6 @@ const Projects2 = () => {
                                                 <Typography>Where this project took place (optional)</Typography>
                                             </Grid>
                                             <Grid item xs={12} md={5} mb={3}>
-                                                {/* <EditableChoose
-                                                    options={["Place", "University","University"]}
-                                                    onSelect={setProjPlace}
-                                                    disabledOptions={[]}
-                                                /> */}
                                                 <FormControl variant="outlined" fullWidth>
                                                     <Select
                                                         value={ProjPlace}
@@ -751,7 +719,7 @@ const Projects2 = () => {
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD'}} />}
                                                         IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
-                                                        // required
+                                                      
                                                         
                                                     >
                                                         <MenuItem disabled value="">Place</MenuItem>
@@ -763,14 +731,12 @@ const Projects2 = () => {
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>Project evidence</Typography>
-                                                {/* <TextField type="text" variant="outlined" value={ProjEvidence} onChange={(event) => setProjEvidence(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='CV Builder'/> */}
                                                 <TextField type="text" variant="outlined" fullWidth required  
                                                 value={ProjEvidence}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder=''
                                                 {...register("ProjEvidence")}
                                                 />
-                                                {/* {errors.ProjEvidence &&  "Only accepts letters, numbers and (. , @)"} */}
                                             </Grid>
                                             <Grid item xs={12} mb={2} style={{display: 'flex', justifyContent: 'center'}}>
                                                 <Typography>-OR-</Typography>
@@ -807,7 +773,6 @@ const Projects2 = () => {
                                                     </ListItem>
                                                     <ListItem >
                                                         <ListItemAvatar>
-                                                            {/* <Avatar sx={{borderRadius: '12px', display: 'flex', justifyContent: 'center', alignItems: 'center'  }}> */}
                                                             <Avatar sx={{borderRadius: '12px'}}>
                                                                 <PersonIcon sx={{color:'black'}}/>
                                                             </Avatar>
