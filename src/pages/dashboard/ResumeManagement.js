@@ -44,7 +44,6 @@ const ResumeManagement = () => {
       const data = doc.data();
       return {
         id: doc.id,
-        // email: doc.id,
         Name: data.Proname || "",
         Field: data.PJobRoles ? data.PJobRoles.join(", ") : "",
         CreatedDate: data.createdAt ? new Date(data.createdAt.seconds * 1000) : null,
@@ -54,7 +53,7 @@ const ResumeManagement = () => {
   };
 
   const resumeColumns = [
-    { field: 'id', headerName: 'Email', width: 300 }, // Rename "ID" to "Name"
+    { field: 'id', headerName: 'Email', width: 300 }, 
     { field: 'Name', headerName: 'Name', width: 300 }, 
     { field: 'Field', headerName: 'Field', width: 300 },
     { field: 'CreatedDate', headerName: 'Created Date', width: 300 },
@@ -100,7 +99,7 @@ const handleConfirmDelete = async () => {
   try {
       const docRef = doc(firestore, "studentdetails", deleteId);
       await deleteDoc(docRef);
-      setSuccessMessage("Resume deleted sucessfullt!");
+      setSuccessMessage("Resume deleted sucessfully !");
       setResumeRows(resumeRows.filter((row) => row.id !== deleteId));
   } catch (error) {
       console.error("Error deleting row: ", error);
@@ -121,8 +120,8 @@ const handleViewCV = async (row) => {
     const data = docSnap.data();
 
     // Extract necessary data
-    const email = data.email; // Assuming email is stored in the "email" field
-    const templateName = encodeURIComponent(data.templateSelection.template); // Assuming template name is stored in the "templateSelection" field
+    const email = data.email; 
+    const templateName = encodeURIComponent(data.templateSelection.template); 
 
     // Construct URL
     const url = `http://personaprep.web.app/${templateName}?username=${email}`;
@@ -201,15 +200,7 @@ const handleViewFeedback = (params) => {
   }
 };
 
-// const handleViewFeedback = (id) => {
-//   // Logic to view feedback details for the given ID
-//   console.log("View feedback for ID:", id);
-//   // Find the feedback data corresponding to the ID
-//   const feedbackData = id;
-//   // Navigate to ViewFeedback page and pass the feedbackData as state
-//   navigate("/viewfeedback", {feedbackData: feedbackData });
-//   console.log("View feedback ", feedbackData);
-// };
+
 
 
     return ( 
@@ -219,24 +210,11 @@ const handleViewFeedback = (params) => {
                     <Toolbar />
                     
                     <div style={{display: "flex",alignItems: "center",justifyContent: "center"}}>
-                      {/* <div style={{textAlign:"left",maxWidth:730,width:"100%",paddingBottom:"10px"}}> */}
                       <div style={{textAlign:"left",maxWidth:1460,width:"100%",paddingBottom:"10px"}}>
                         <h2>All Resumes</h2>
                 
                 
                       </div>
-                      {/* <div style={{textAlign:"right",maxWidth:730,width:"100%",paddingBottom:"10px"}}>
-                      
-                            <Button
-                            
-                            variant="contained" 
-                            sx={{borderRadius:"25px",backgroundColor: '#242624'}}
-                            >
-                            Add Account
-                            </Button>
-                      
-                      
-                      </div> */}
                     </div>
                     <Box sx={{ flexGrow: 1,display: "flex",alignItems: "center",justifyContent: "center"}}>
                       
@@ -267,11 +245,9 @@ const handleViewFeedback = (params) => {
                       
                         <Card
                             sx={{
-                            // maxWidth: 300,
                             width:"100%",
                             maxWidth: 250,
                             maxHeight: 100,
-                            // bgcolor: "white",
                             borderRadius: "10px",
                             display: "flex",
                             flexDirection: "column",
@@ -283,11 +259,6 @@ const handleViewFeedback = (params) => {
                             }}
                         >
                             <CardHeader
-                            // avatar={
-                            //     <Avatar sx={{ bgcolor: blue[800] }} aria-label="review">
-                            //     {/* You can add an icon here if you want */}
-                            //     </Avatar>
-                            // }
                             title="Feedbacks"
                             subheader={cvfeedbackCount}
                             sx={{
@@ -304,21 +275,6 @@ const handleViewFeedback = (params) => {
                               },
                             }}
                             />
-                            {/* <CardHeader
-                            subheader="Feedbacks"
-                            sx={{
-                                "& .MuiCardHeader-title": {
-                                fontSize: "13px",
-                                fontWeight: "bold",
-                                paddingRight: "1px",
-                                },
-                                "& .MuiCardHeader-subheader": {
-                                fontSize: "20px",
-                                fontWeight: "bold",
-                                color: "black",                                        
-                                },
-                            }}
-                            /> */}
                         </Card>
                     
                       

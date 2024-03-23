@@ -152,11 +152,7 @@ const FacultyDetails = () => {
 
     const prevPage = () => navigate('/home');
 
-    // useEffect(() => {
-    //     console.log('selectedFaculty:', selectedFaculty);
-    //     console.log('selectedBatch:', selectedBatch);
-    //     console.log('selectedDegree:', selectedDegree);
-    // }, [selectedFaculty, selectedBatch, selectedDegree]);
+    
 
     if (loading) {
         return <div>
@@ -189,13 +185,6 @@ const FacultyDetails = () => {
                                     <br />
                                     <div>
                                         <Typography><span style={{ color: 'red' }}>*</span> Please specify your faculty</Typography>
-                                        {/* <Choose
-                                            options={["Faculty","Faculty of Computing", "Faculty of Business", "Faculty of Engineering", "Faculty of Science"]}
-                                            onSelect={setSelectedFaculty}
-                                            disabledOptions={["Faculty","Faculty of Business","Faculty of Engineering", "Faculty of Science"]}
-                                            isRequired={true}
-                                            defaultValue={selectedFaculty}
-                                        /> */}
                                         <FormControl variant="outlined" fullWidth>
                                             <Select
                                                 value={selectedFaculty}
@@ -218,13 +207,6 @@ const FacultyDetails = () => {
                                     <br />
                                     <div>
                                         <Typography><span style={{ color: 'red' }}>*</span> Please specify your batch</Typography>
-                                        {/* <Choose
-                                            options={["Batch","23.2","23.1","22.2", "22.1", "21.2", "21.1", "20.2", "20.3"]}
-                                            onSelect={setSelectedBatch}
-                                            disabledOptions={["Batch"]}
-                                            isRequired={true}
-                                            defaultValue={selectedBatch}
-                                        /> */}
                                         <FormControl variant="outlined" fullWidth>
                                             <Select
                                                 value={selectedBatch}
@@ -250,13 +232,7 @@ const FacultyDetails = () => {
                                     <br />
                                     <div>
                                         <Typography><span style={{ color: 'red' }}>*</span> Degree affiliation</Typography>
-                                        {/* <Choose
-                                            options={["University","Plymouth University", "Victoria University", "NSBM Green University"]}
-                                            onSelect={setSelectedDegree}
-                                            disabledOptions={["University"]}
-                                            isRequired={true}
-                                            defaultValue={selectedDegree}
-                                        /> */}
+                                        
                                         <FormControl variant="outlined" fullWidth>
                                             <Select
                                                 value={selectedDegree}
@@ -277,7 +253,6 @@ const FacultyDetails = () => {
                                 </div>
 
                             </div>
-                            {/* <InterviewFormFooter nextForm='/personalInfo' prevForm='/home' onClick={validate} validation={validation} /> */}
                             <Grid container spacing={2} style={{position: 'absolute', bottom: 80}}>            
                                 <Grid xs={6} paddingLeft={'10px'}>
                                     <Button startIcon={<ArrowBackIcon />} style={back} onClick={prevPage}>Go Back</Button>

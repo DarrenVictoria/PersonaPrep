@@ -121,7 +121,7 @@ const School1 = () => {
     }, [currentUser.email, setValue]);
 
     const onSubmit = async (e) => {
-        // e.preventDefault();
+        
     
         try {
             const db = getFirestore();
@@ -165,7 +165,7 @@ const School1 = () => {
                 await updateDoc(existingDocRef, { schools: existingSchools });
     
                 console.log('Document updated with ID: ', existingDoc.id);
-                // navigate('/secondSchool');
+                
                 handleClickOpen();
             } else {
                 console.error('Document does not exist for the current user.');
@@ -208,14 +208,6 @@ const School1 = () => {
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>School experience or description</Typography>
-                                                {/* <CustomMultilineTextFieldslimited
-                                                    inputHeight="150px"
-                                                    maxWidth="1300px"
-                                                    isRequired={true}
-                                                    value={School1Experience}
-                                                    onChange={School1ExperienceChange}
-                                                    maxWords={50} 
-                                                /> */}
                                                 <TextField
                                                     multiline
                                                     rows={4}
@@ -251,12 +243,6 @@ const School1 = () => {
                                                 <Typography><span style={{color: 'red'}}>*</span>Start Date</Typography>
                                             </Grid>
                                             <Grid item xs={6} pr={1}>
-                                                {/* <EditableChoose
-                                                    options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                                                    onSelect={setSchool1StartMonth}
-                                                    disabledOptions={["Month"]}
-                                                    defaultValue={School1StartMonth}
-                                                /> */}
                                                 <FormControl variant="outlined" fullWidth>
                                                     <Select
                                                         value={School1StartMonth}
@@ -274,12 +260,6 @@ const School1 = () => {
                                                 </FormControl>
                                             </Grid>
                                             <Grid item xs={6} mb={3} pl={1}>
-                                                {/* <EditableChoose
-                                                    options={option}
-                                                    onSelect={setSchool1StartYear}
-                                                    disabledOptions={["Year"]}
-                                                    defaultValue={School1StartYear}
-                                                /> */}
                                                 <FormControl variant="outlined" fullWidth>
                                                     <Select
                                                         value={School1StartYear}
@@ -300,12 +280,6 @@ const School1 = () => {
                                                 <Typography><span style={{color: 'red'}}>*</span>End Date</Typography>
                                             </Grid>
                                             <Grid item xs={6} pr={1}>
-                                                {/* <EditableChoose
-                                                    options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                                                    onSelect={setSchool1EndMonth}
-                                                    disabledOptions={["Month"]}
-                                                    defaultValue={School1EndMonth}
-                                                /> */}
                                                 <FormControl variant="outlined" fullWidth>
                                                     <Select
                                                         value={School1EndMonth}
@@ -323,12 +297,6 @@ const School1 = () => {
                                                 </FormControl>
                                             </Grid>
                                             <Grid item xs={6} mb={3} pl={1}>
-                                                {/* <EditableChoose
-                                                    options={option}
-                                                    onSelect={setSchool1EndYear}
-                                                    disabledOptions={["Year"]}
-                                                    defaultValue={School1EndYear}
-                                                /> */}
                                                 <FormControl variant="outlined" fullWidth>
                                                     <Select
                                                         value={School1EndYear}
@@ -369,7 +337,6 @@ const School1 = () => {
                                                     </ListItem>
                                                     <ListItem >
                                                         <ListItemAvatar>
-                                                            {/* <Avatar sx={{borderRadius: '12px', display: 'flex', justifyContent: 'center', alignItems: 'center'  }}> */}
                                                             <Avatar sx={{borderRadius: '12px'}}>
                                                                 <EmojiEventsIcon sx={{color:'black'}}/>
                                                             </Avatar>

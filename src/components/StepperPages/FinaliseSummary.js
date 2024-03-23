@@ -30,7 +30,7 @@ const Summary_1 = () => {
     
 
     const handleFinalSummaryChange = e => {
-        // console.log(`IE => ${e.target.value}`)
+        
         setFinalSummary(e.target.value);
     };
 

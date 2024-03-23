@@ -70,7 +70,6 @@ const InterviewCard = () => {
             try{
                 const db = getFirestore();
                 const interviewCollection = collection(db, 'interviewcards');
-                // const querySnapshot = await getDocs(query(interviewCollection, where('id', '==', 'VP3sDRrGGWaAHAv79djc')));
                 const querySnapshot = await getDocs(interviewCollection);
                 querySnapshot.forEach((doc) => {
                     if(doc.id === interviewId){
@@ -84,7 +83,6 @@ const InterviewCard = () => {
                         console.log(coverImageUrl);
                     }
                 })
-                // const existingDoc = querySnapshot.docs[0]; //gets the first doc that match the data                
             }catch (err) {
                 console.log("error fetching data" , err.message)
             }
@@ -307,7 +305,6 @@ const InterviewCard = () => {
                             </Grid>                        
                         </Grid>
                     </Grid>
-                    {/* <button onClick={(e) => {e.preventDefault(); console.log(interviewId)}}>btn</button> */}
                     </form>
                     </Card>
                 </Box>

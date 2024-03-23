@@ -24,32 +24,27 @@ const Summary_1 = () => {
     const [uniqueSkills, setUniqueSkills] = useState('');
 
     const handleIndustryExperienceChange = e => {
-        // console.log(`IE => ${e.target.value}`)
+      
         setIndustryExperience(e.target.value);
     };
 
     const handleNotableProjectsChange = (e) => {
-        // console.log(`NP => ${e.target.value}`)
         setNotableProjects(e.target.value);
     };
 
     const handleCareerHighlightsChange = (e) => {
-        // console.log(`CH => ${e.target.value}`)
         setCareerHighlights(e.target.value);
     };
 
     const handlePromotions = (e) => {
-        // console.log(`P => ${e.target.value}`)
         setPromotions(e.target.value)
     };
 
     const handleFutureCareer = (e) => {
-        // console.log(`FE => ${e.target.value}`)
         setFutureCareer(e.target.value)
     };
 
     const handleUniqueSkills = (e) => {
-        // console.log(`US => ${e.target.value}`)
         setUniqueSkills(e.target.value)
     };
 

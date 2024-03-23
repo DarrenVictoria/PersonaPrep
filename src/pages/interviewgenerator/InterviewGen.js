@@ -5,9 +5,7 @@ import { ReactMic } from 'react-mic';
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import InterviewFormHeader from '../../components/InterviewFormHeader';
-import Box from '@mui/material/Box';
 import { useAuth } from '../../hooks/useAuth';
-import { Padding } from '@mui/icons-material';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
@@ -24,56 +22,12 @@ export default function AudioTranscriptionComponent() {
 
   const { currentUser } = useAuth();
   console.log(currentUser.email);
+  console.log(Difficultylevel);
+  console.log(JobRole);
+  currentUser.difficultyLevel = Difficultylevel;
+  currentUser.jobRole = JobRole;
+  console.log(currentUser);
   
-  //original code
-  // const handleStartRecording = () => {
-  //   setIsRecording(true);
-  // };
-
-  // const handleStopRecording = () => {
-  //   setIsRecording(false);
-  // };
-
-  // const handleAudioData = (recordedBlob) => {
-  //   sendAudioForTranscription(recordedBlob.blob);
-  // };
-
-  // const sendAudioForTranscription = async (audioBlob) => {
-  //   const formData = new FormData();
-  //   formData.append('file', audioBlob);
-
-  //   try {
-  //     const response = await fetch(`https://personaprepapi.galleryofgalleries.live/transcribe?user_email=${currentUser.email}&difficulty_level=${Difficultylevel}&job_role=${JobRole}`, {
-  //       method: 'POST',
-  //       body: formData,
-  //     });
-
-  //     if (!response.ok) {
-  //       throw new Error(`HTTP error! status: ${response.status}`);
-  //     }
-
-  //     const data = await response.json();
-  //     if (data.error) {
-  //       throw new Error(`Server error: ${data.error}`);
-  //     }
-
-  //     const audioBase64 = data.audio_base64;
-  //     const chatResponse = data.chat_response;
-
-  //     setAudioSrc(`data:audio/wav;base64,${audioBase64}`);
-  //     setChatResponse(chatResponse); // Set the chat response state
-  //   } catch (error) {
-  //     console.error('Error transcribing audio:', error);
-  //     if (error.name === 'NotAllowedError') {
-  //       // Handle denied permission error
-  //       alert('Microphone access denied. Please allow microphone access to use this feature.');
-  //     } else {
-  //       alert('An error occurred while transcribing audio. Please try again later.');
-  //     }
-  //   }
-  // };
-  
-
   const requestMicrophonePermission = async () => {
     try {
       const permission = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -107,39 +61,39 @@ export default function AudioTranscriptionComponent() {
   };
 
   const handleAudioData = async (recordedBlob) => {
-    // sendAudioForTranscription(recordedBlob.blob);
     try {
-      await sendAudioForTranscription(recordedBlob.blob);
+      await sendAudioForTranscription(recordedBlob.blob, Difficultylevel, JobRole);
       // Success handling (optional)
     } catch (error) {
       alert('An error occurred while transcribing audio. Please try again later.');
       console.error(error); // Log the error for debugging
-      // Optionally clear recording state (audioSrc, chatResponse)
     }
   };
 
-  const sendAudioForTranscription = async (audioBlob) => {
+  const sendAudioForTranscription = async (audioBlob, difficultyLevel, jobRole) => {
     try {
       const formData = new FormData();
       formData.append('file', audioBlob);
-
-      const response = await fetch(`https://personaprepapi.galleryofgalleries.live/transcribe?user_email=${currentUser.email}&difficulty_level=${Difficultylevel}&job_role=${JobRole}`, {
+  
+      // Use the updated state values here
+      const apiUrl = 'https://personaprepapi.galleryofgalleries.live/transcribe?user_email=' + currentUser.email + '&difficulty_level=' + currentUser.difficultyLevel + '&job_role=' + currentUser.jobRole;
+      const response = await fetch(apiUrl, {
         method: 'POST',
         body: formData,
       });
-
+  
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-
+  
       const data = await response.json();
       if (data.error) {
         throw new Error(`Server error: ${data.error}`);
       }
-
+  
       const audioBase64 = data.audio_base64;
       const chatResponse = data.chat_response;
-
+  
       setAudioSrc(`data:audio/wav;base64,${audioBase64}`);
       setChatResponse(chatResponse); // Set the chat response state
     } catch (error) {
@@ -153,6 +107,7 @@ export default function AudioTranscriptionComponent() {
       }
     }
   };
+  
 
   const isButtonDisabled = () => {
     return Difficultylevel === '' || JobRole === '' || isRecording;
@@ -177,11 +132,18 @@ export default function AudioTranscriptionComponent() {
                       >
                         Back
                       </Button>
+                      <Button
+                      variant="contained" 
+                      sx={{borderRadius:"25px",backgroundColor: '#ff0000',paddingLeft:'1rem'}}
+                      onClick={() => fetch(`https://personaprepapi.galleryofgalleries.live/reset?user_email=${currentUser.email}`, {method:'POST'}).then(() => alert('Session reset successfully.'))}
+                      >
+                        Reset Session
+                      </Button>
                     </Grid>
                   </Grid>
 
-                  <Grid container justifyContent={'center'} mb={4}>
-                    <Grid xs={12} md={4} mb={3} sx={{textAlign:'center', display:'flex', alignItems:'center'}}>
+                  <Grid container justifyContent={'center'} mb={4}> 
+                    <Grid xs={12} md={4} mb={3} sx={{textAlign:'center', display:'flex', alignItems:'center',paddingRight: { xs: 0, md: 6 }}}>
                       <FormControl variant="outlined" fullWidth sx={{textAlign:'center', display:'flex', alignItems:'center'}}>
                         <Select
                             value={Difficultylevel}
@@ -201,7 +163,7 @@ export default function AudioTranscriptionComponent() {
                         </Select>
                       </FormControl>
                     </Grid>
-                    <Grid xs={12} md={4} mb={3} sx={{textAlign:'center', display:'flex', alignItems:'center'}}>
+                    <Grid xs={12} md={4} mb={3} sx={{textAlign:'center', display:'flex', alignItems:'center',paddingLeft: { xs: 0, md: 6 }}}>
                       <FormControl variant="outlined" fullWidth sx={{textAlign:'center', display:'flex', alignItems:'center'}}>
                         <Select
                             value={JobRole}
@@ -307,4 +269,3 @@ export default function AudioTranscriptionComponent() {
     </div>
   );
 }
-

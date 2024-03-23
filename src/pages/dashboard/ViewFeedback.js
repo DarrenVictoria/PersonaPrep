@@ -21,24 +21,6 @@ const ViewFeedback = () => {
   useEffect(() => {
     console.log("feedbackDatavi:", feedbackData);
   }, [feedbackData]);
-    // const [feedbackData, setfeedbackData] = useState(null);
-    // useEffect(() => {
-    //     // Fetch feedback details from Firestore based on feedbackData
-    //     const fetchfeedbackData = async () => {
-    //         if (feedbackData) {
-    //             const db = getFirestore();
-    //             const docRef = doc(db, "cvfeedback", feedbackData.id); // Assuming feedbackData contains the document ID
-    //             const docSnap = await getDoc(docRef);
-    //             if (docSnap.exists()) {
-    //                 setfeedbackData(docSnap.data());
-    //             } else {
-    //                 console.log("No such document!");
-    //             }
-    //         }
-    //     };
-
-    //     fetchfeedbackData();
-    // }, [feedbackData]);
   
 return ( 
     <Box sx={{ display: 'flex'}}>
@@ -78,15 +60,9 @@ return (
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "left",
-                    // justifyContent: "center",
                     }}
                 >
                     <CardHeader
-                    // avatar={
-                    //     <Avatar sx={{ bgcolor: blue[800] }} aria-label="review">
-                        
-                    //     </Avatar>
-                    // }
                     title="Accuracy"
                      subheader={feedbackData.accuracy}//accuracy
                     sx={{
@@ -116,15 +92,9 @@ return (
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "left",
-                    // justifyContent: "center",
                         }}
                     >
                         <CardHeader
-                        // avatar={
-                        //     <Avatar sx={{ bgcolor: blue[800] }} aria-label="review">
-                        //     {/* You can add an icon here if you want */}
-                        //     </Avatar>
-                        // }
                         title="Customization"
                          subheader={feedbackData.customization}
                         sx={{
@@ -154,15 +124,9 @@ return (
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "left",
-                    // justifyContent: "center",
                         }}
                     >
                         <CardHeader
-                        // avatar={
-                        //     <Avatar sx={{ bgcolor: blue[800] }} aria-label="review">
-                        //     {/* You can add an icon here if you want */}
-                        //     </Avatar>
-                        // }
                         title="Experience"
                          subheader={feedbackData.experience}//experience
                         sx={{
@@ -192,15 +156,9 @@ return (
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "left",
-                        // justifyContent: "center",
                         }}
                     >
                         <CardHeader
-                        // avatar={
-                        //     <Avatar sx={{ bgcolor: blue[800] }} aria-label="review">
-                        //     {/* You can add an icon here if you want */}
-                        //     </Avatar>
-                        // }
                         title="Quality"
                          subheader={feedbackData.quality}//quality
                         sx={{
@@ -226,12 +184,6 @@ return (
               container
               spacing={{ xs: 2, md: 2,sm: 2 }}
               columns={{ md: 12 }}
-              //below styling is to align the grids inside the contianer center.
-            //   sx={{
-            //   display: "flex",
-            //   alignItems: "center",
-            //   justifyContent: "center",
-            //   }}
             >
             <Grid xs={12} sm={4} md={4} mt={2} >
                 
@@ -302,44 +254,7 @@ return (
                         />
                     </Card>
                 </Grid>
-            </Grid> 
-            {/* <Grid
-              container
-              spacing={{ xs: 2, md: 2,sm: 2 }}
-              columns={{ md: 12 }}
-              //below styling is to align the grids inside the contianer center.
-            //   sx={{
-            //   display: "flex",
-            //   alignItems: "center",
-            //   justifyContent: "center",
-            //   }}
-            > */}
-            {/* <Grid xs={12} sm={6} md={6} mt={2}>
-                
-            <Card variant="outlined" sx={{height:'100%',maxHeight: '400px', width:'100%',maxWidth: 900,borderRadius:'10px', border: 'none', overflowY:'auto',overflowX:'auto','@media (max-width:769px)':{borderColor:'white'},'@media (min-width:769px)':{overflowY:'hidden'}}}>
-                    <CardHeader
-                    title="Feedback"
-                    subheader="isuruushan2003@gmail.comdcdfvdsvdfsvfdvzvfsvs dcd cd cd cd c dc dc d vd v dsvvfvsvsfv vsdsvswsdvs vfsvdvewsvwdsvs vsvsvsavsv svsdve" //reviews count 
-                    sx={{
-                        "& .MuiCardHeader-title": {
-                        fontSize: "22px",
-                        fontWeight: "bold",
-                        paddingRight: "1px",
-                        },
-                        "& .MuiCardHeader-subheader": {
-                        fontSize: "20px",
-                        fontWeight: "bold",
-                        paddingTop:"30px",
-                        color: "black",
-                        },
-                        
-                    }}
-                    />
-                </Card>
-            </Grid>
-            </Grid>  */}
-          
-                    
+            </Grid>          
         </Box>
     </Box>
   </Box>

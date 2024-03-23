@@ -405,7 +405,6 @@ const WorkExperience1 = () => {
     
     const handleWorkTaskDnWithTools = (event) => {
         //the below commented code is to test 
-        // console.log(`Work => ${event.target.value}`)
         setWorkTaskDnWithTools(event.target.value);
       };
     
@@ -481,10 +480,6 @@ const WorkExperience1 = () => {
                     const workData = userData.work && userData.work.length > 0 ? userData.work[0] : null;
 
                     if (workData) {
-                        // setWorkJobTitle(workData.WorkJobTitle || '');
-                        // setWorkCompany(workData.WorkCompany || '');
-                        // setWorkCity(workData.WorkCity || '');
-                        // setWorkPostal(workData.WorkPostal || '');
                         setValue('WorkJobTitle', workData.WorkJobTitle || '');
                         setValue('WorkCompany', workData.WorkCompany || '');
                         setValue('WorkCity', workData.WorkCity || '');
@@ -533,7 +528,6 @@ const WorkExperience1 = () => {
                                         <Grid container>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}>Job Title</Typography>
-                                                {/* <TextField type="text" variant="outlined" value={WorkJobTitle} onChange={(event) => setWorkJobTitle(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Full Stack Developer'/> */}
                                                 <TextField type="text" variant="outlined" fullWidth   
                                                 value={WorkJobTitle}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
@@ -544,7 +538,6 @@ const WorkExperience1 = () => {
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}>Company</Typography>
-                                                {/* <TextField type="text" variant="outlined" value={WorkCompany} onChange={(event) => setWorkCompany(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Surge Global Pvt.'/> */}
                                                 <TextField type="text" variant="outlined" fullWidth   
                                                 value={WorkCompany}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
@@ -555,7 +548,6 @@ const WorkExperience1 = () => {
                                             </Grid>
                                             <Grid item xs={6} mb={3} pr={1}>
                                                 <Typography mb={1}>City</Typography>
-                                                {/* <TextField type="text" variant="outlined" value={WorkCity} onChange={(event) => setWorkCity(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='Colombo'/> */}
                                                 <TextField type="text" variant="outlined" fullWidth   
                                                 value={WorkCity}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
@@ -566,7 +558,6 @@ const WorkExperience1 = () => {
                                             </Grid>
                                             <Grid item xs={6} mb={3} pl={1}>
                                                 <Typography mb={1}>Postal code</Typography>
-                                                {/* <TextField type="text" variant="outlined" value={WorkPostal} onChange={(event) => setWorkPostal(event.target.value)} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='00300'/> */}
                                                 <TextField type="text" variant="outlined" fullWidth   
                                                 value={WorkPostal}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
@@ -579,12 +570,6 @@ const WorkExperience1 = () => {
                                                 <Typography>Start Date</Typography>
                                             </Grid>
                                             <Grid item xs={6} pr={1}>
-                                                {/* <EditableChoose
-                                                    options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                                                    onSelect={setWorkStartMonth}
-                                                    disabledOptions={[]}
-                                                    isRequired={true}
-                                                /> */}
                                                 <FormControl variant="outlined" fullWidth>
                                                     <Select
                                                         value={WorkStartMonth}
@@ -592,7 +577,6 @@ const WorkExperience1 = () => {
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
                                                         IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
-                                                        // required
                                                     >
                                                         <MenuItem disabled value="">Month</MenuItem>
                                                         {monthOption.map (option => (
@@ -602,12 +586,6 @@ const WorkExperience1 = () => {
                                                 </FormControl>
                                             </Grid>
                                             <Grid item xs={6} mb={3} pl={1}>
-                                                {/* <EditableChoose
-                                                    options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                                                    onSelect={setWorkStartYear}
-                                                    disabledOptions={["2024"]}
-                                                    isRequired={true}
-                                                /> */}
                                                 <FormControl variant="outlined" fullWidth>
                                                     <Select
                                                         value={WorkStartYear}
@@ -615,7 +593,6 @@ const WorkExperience1 = () => {
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
                                                         IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
-                                                        // required
                                                     >
                                                         <MenuItem disabled value="">Year</MenuItem>
                                                         {StartyearOption.map(year => (
@@ -628,12 +605,6 @@ const WorkExperience1 = () => {
                                                 <Typography>End Date</Typography>
                                             </Grid>
                                             <Grid item xs={6} pr={1}>
-                                                {/* <EditableChoose
-                                                    options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                                                    onSelect={setWorkEndMonth}
-                                                    disabledOptions={[]}
-                                                    isRequired={true}
-                                                /> */}
                                                 <FormControl variant="outlined" fullWidth>
                                                     <Select
                                                         value={WorkEndMonth}
@@ -641,7 +612,6 @@ const WorkExperience1 = () => {
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
                                                         IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
-                                                        // required
                                                     >
                                                         <MenuItem disabled value="">Month</MenuItem>
                                                         {monthOption.map (option => (
@@ -651,12 +621,6 @@ const WorkExperience1 = () => {
                                                 </FormControl>
                                             </Grid>
                                             <Grid item xs={6} mb={3} pl={1}>
-                                                {/* <EditableChoose
-                                                    options={["Year","2018","2019","2020","2021","2022","2023","2024",]}
-                                                    onSelect={setWorkEndYear}
-                                                    disabledOptions={["2024"]}
-                                                    isRequired={true}
-                                                /> */}
                                                 <FormControl variant="outlined" fullWidth>
                                                     <Select
                                                         value={WorkEndYear}
@@ -664,7 +628,6 @@ const WorkExperience1 = () => {
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
                                                         IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
-                                                        // required
                                                     >
                                                         <MenuItem disabled value="">Year</MenuItem>
                                                         {EndyearOption.map(year => (
@@ -701,14 +664,6 @@ const WorkExperience1 = () => {
                                             <Typography>Employment type</Typography>
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
-                                                {/* <EditableChoose
-                                                    options={["Full-Time", "Part-Time"]}
-                                                    onSelect={setWorkEmploymentType}
-                                                    disabledOptions={[]}
-                                                    maxWidth={300}
-                                                    isRequired={true}
-
-                                                /> */}
                                                 <FormControl variant="outlined" fullWidth>
                                                     <Select
                                                         value={WorkEmploymentType}
@@ -716,7 +671,6 @@ const WorkExperience1 = () => {
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD',maxWidth:300}} />}
                                                         IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
-                                                        // required
                                                         
                                                     >
                                                         <MenuItem disabled value="">Type</MenuItem>

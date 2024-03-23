@@ -50,32 +50,19 @@ export default function InterviewBank(){
             <NavBar />
             <div className="interviewBank-container">
                 <h1 >Interview Bank</h1>
-                {/* <div className="interviewBank-topics">
-                    <h3>Topics</h3>
-                    <div>
-                        <TopicsBtn variant='outlined'>Computing</TopicsBtn>
-                        <TopicsBtn variant='outlined'>Business</TopicsBtn>
-                        <TopicsBtn variant='outlined'>Engineering</TopicsBtn>
-                        <TopicsBtn variant='outlined'>Science</TopicsBtn>
-                    </div>
-                </div> */}
-
                 <div className="interviewBank-transcript">
                     <h3>Interview Transcripts</h3>
                     {interviewData.map((data, index) => (
                         <TranscriptCard 
-                        // category={selectedCategory}
                         key={index}
                         id = {data.id}
                         name = {data.field}
-                        // date = "AUGUST 13, 2023"
                         position = {data.topic}
                         detail = {data.description}
                         path = {data.coverImage}
                     />
                     ))}
                 </div>
-                {/* <button onClick={(event) => {event.preventDefault(); console.log(interviewData)}}>btn</button> */}
             </div>
             <Footer />
         </div>
