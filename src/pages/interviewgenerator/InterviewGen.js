@@ -28,56 +28,6 @@ export default function AudioTranscriptionComponent() {
   currentUser.jobRole = JobRole;
   console.log(currentUser);
   
-  
-  //original code
-  // const handleStartRecording = () => {
-  //   setIsRecording(true);
-  // };
-
-  // const handleStopRecording = () => {
-  //   setIsRecording(false);
-  // };
-
-  // const handleAudioData = (recordedBlob) => {
-  //   sendAudioForTranscription(recordedBlob.blob);
-  // };
-
-  // const sendAudioForTranscription = async (audioBlob) => {
-  //   const formData = new FormData();
-  //   formData.append('file', audioBlob);
-
-  //   try {
-  //     const response = await fetch(`https://personaprepapi.galleryofgalleries.live/transcribe?user_email=${currentUser.email}&difficulty_level=${Difficultylevel}&job_role=${JobRole}`, {
-  //       method: 'POST',
-  //       body: formData,
-  //     });
-
-  //     if (!response.ok) {
-  //       throw new Error(`HTTP error! status: ${response.status}`);
-  //     }
-
-  //     const data = await response.json();
-  //     if (data.error) {
-  //       throw new Error(`Server error: ${data.error}`);
-  //     }
-
-  //     const audioBase64 = data.audio_base64;
-  //     const chatResponse = data.chat_response;
-
-  //     setAudioSrc(`data:audio/wav;base64,${audioBase64}`);
-  //     setChatResponse(chatResponse); // Set the chat response state
-  //   } catch (error) {
-  //     console.error('Error transcribing audio:', error);
-  //     if (error.name === 'NotAllowedError') {
-  //       // Handle denied permission error
-  //       alert('Microphone access denied. Please allow microphone access to use this feature.');
-  //     } else {
-  //       alert('An error occurred while transcribing audio. Please try again later.');
-  //     }
-  //   }
-  // };
-  
-
   const requestMicrophonePermission = async () => {
     try {
       const permission = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -111,14 +61,12 @@ export default function AudioTranscriptionComponent() {
   };
 
   const handleAudioData = async (recordedBlob) => {
-    // sendAudioForTranscription(recordedBlob.blob);
     try {
       await sendAudioForTranscription(recordedBlob.blob, Difficultylevel, JobRole);
       // Success handling (optional)
     } catch (error) {
       alert('An error occurred while transcribing audio. Please try again later.');
       console.error(error); // Log the error for debugging
-      // Optionally clear recording state (audioSrc, chatResponse)
     }
   };
 

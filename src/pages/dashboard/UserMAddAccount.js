@@ -13,12 +13,6 @@ import { collection, doc, updateDoc, getFirestore, getDoc } from "firebase/fires
 
   
 const AAddUserManageDash = () => {
-
-// const [Role, setRole] = React.useState("");
-// console.log(Role);
-// const { register, handleSubmit, watch, formState: { errors }, getValues, setValue } = useForm();
-// const aemail = watch('aemail');
-//     console.log(aemail);
    
 const { register, handleSubmit, formState: { errors }, reset } = useForm();
 const [saving, setSaving] = useState(false);

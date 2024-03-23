@@ -29,8 +29,6 @@ import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
 
 const drawerWidth = 240;
 
-const settings = ['Option1', 'Option2'];
-
 const DashboardHeader = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -107,51 +105,6 @@ const DashboardHeader = () => {
           <IconButton sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }}>
             <a onClick={() => window.location.href = '/home'} style={{cursor: 'pointer'}}><img src={logo} alt="logo" style={{width:'80px'}}/></a>
           </IconButton>
-
-          {/* <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box> */}
-
-          {/* <Box sx={{ flexGrow: 0 }}>
-            <MenuItem>
-              <IconButton
-                size="large"
-                aria-label="show 17 new notifications"
-                color="inherit"
-              >
-                <Badge badgeContent={17} color="error">
-                  <NotificationsIcon />
-                </Badge>
-              </IconButton>
-            </MenuItem>
-          </Box> */}
-
         </Toolbar>
       </Container>
     </AppBar>
@@ -172,7 +125,6 @@ const DashboardHeader = () => {
           <ListItem disablePadding sx={{mb: 1}}>
               <ListItemButton onClick={() => window.location.href = '/admindash'}>
                   <ListItemIcon> <InsightsIcon /> </ListItemIcon>
-                   {/* <ListItemText primary={'Home'} />  */}
                   <Typography variant='h6' fontWeight='bold'>Home</Typography>
               </ListItemButton>
           </ListItem>

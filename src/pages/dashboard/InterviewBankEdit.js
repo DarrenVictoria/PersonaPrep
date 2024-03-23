@@ -96,8 +96,6 @@ const InterviewBankEdit = () => {
                         </Grid>
                         <Grid item xs={12} md={6} mb={4}>
                             <FileUpload onFileUpload={handleFileUploadSuccess} onUploadSuccess={handleFileUploadSuccess} onReset={handleReset}    />
-                            {/* {profilePictureFetchUrl && profilePictureFetchUrl !== ' ' &&  <p style={{marginTop:'1rem',marginLeft:'1rem'}}>Current cover image</p>}
-                            {profilePictureFetchUrl && profilePictureFetchUrl !== ' ' && <img src={profilePictureFetchUrl} alt="Profile Picture"  style={{ width: '100px', height: '100px', objectFit: 'cover',marginLeft:'1rem',border: '1px solid black' }}  />}                             */}
                         </Grid>
                         <Grid item xs={12} mb={3}>
                             <Typography mb={1}>Topic</Typography>
@@ -227,7 +225,6 @@ const InterviewBankEdit = () => {
                             </Grid>                        
                         </Grid>
                     </Grid>
-                    {/* <button onClick={(e) => {e.preventDefault(); console.log(trnscrptDtls)}}>btn</button> */}
                     </form>
                     </Card>
                 </Box>

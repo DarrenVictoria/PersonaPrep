@@ -35,7 +35,6 @@ const InterviewDisplay = () => {
                         setTrnscrptdtls(interviewData.transcript || '');
                     }
                 })
-                // const existingDoc = querySnapshot.docs[0]; //gets the first doc that match the data                
             }catch (err) {
                 console.log("error fetching data" , err.message)
             }
@@ -49,7 +48,6 @@ const InterviewDisplay = () => {
             <NavBar />
             <InterviewHeader 
                 position = {topic}
-                // date="AUGUST 13, 2023"
                 tag = {field}
                 tag2="#"
                 tag1="#"

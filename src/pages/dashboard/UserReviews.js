@@ -17,7 +17,6 @@ import { collection, addDoc, getFirestore, query, getDocs, orderBy } from 'fireb
 const feedbackColumns = [
     {field: 'num', headerName: '', width: 50},
     { field: 'id', headerName: 'ID', width: 220 }, 
-    // { field: 'date', headerName: 'Date', width: 100 },
     {
         field: 'action',
         headerName: '',
@@ -26,8 +25,6 @@ const feedbackColumns = [
         renderCell: (params) => (
           <>
             <Button
-            // variant="contained"
-            // color="warning"
             variant="contained" 
             sx={{borderRadius:"25px",backgroundColor: '#242624',height:'28px'}}
             onClick={() => {window.location.href = `/viewReviews?id=${params.row.id}`}}
@@ -49,7 +46,7 @@ const UserReviews = () => {
             try{
                 const db = getFirestore();
                 const feedbackCol = collection(db, 'feedback');
-                const querySnapshot = await getDocs(query(feedbackCol)); //, orderBy('addedAt')
+                const querySnapshot = await getDocs(query(feedbackCol)); 
                 const docRef = querySnapshot.docs.map((doc, index) => {
                     const feedbackData = doc.data();
                     return {
@@ -83,18 +80,15 @@ const UserReviews = () => {
                     <div style={{textAlign:"right", maxWidth:730, width:"100%", paddingBottom:"10px", paddingLeft: '50px'}}>                    
                         <Card
                             sx={{
-                            // maxWidth: 300,
                             width:"100%",
                             maxWidth: 250,
                             maxHeight: 100,
-                            // bgcolor: "white",
                             borderRadius: "10px",
                             display: "flex",
                             flexDirection: "column",
                             alignItems: "center",
                             justifyContent: "center",
                             bgcolor: 'white',
-                            // color: 'black',
                             marginLeft: "auto"
                             }}
                         >

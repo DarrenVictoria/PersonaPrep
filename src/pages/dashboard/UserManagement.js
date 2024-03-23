@@ -22,53 +22,8 @@ import MuiAlert from '@mui/material/Alert';
 
 
 
-// const columns = [
-//     { field: 'id', headerName: 'Email', width: 300 }, // Rename "ID" to "Name"
-//     { field: 'Name', headerName: 'Name', width: 300 }, 
-//     { field: 'EmployeeID', headerName: 'Employee ID', width: 300 },
-//     { field: 'Role', headerName: 'Role', width: 300 },
-//     {
-//       field: 'fullName',
-//       headerName: 'Action',
-//       description: 'This column has a value getter and is not sortable.',
-//       sortable: false,
-//       width: 100,
-//       renderCell: (params) => (
-//         <>
-//           <IconButton onClick={() => handleDeleteRow(params.row.id)}>
-//               <DeleteIcon />{/* Edit functionality to be implemented later */}
-//           </IconButton>
-//           {/* <IconButton>
-//           <EditIcon /> Edit functionality to be implemented later
-//           </IconButton> */}
-//         </>
-//       ),
-//     },
-//   ];
-  
-  // const rows = [
-  //   { id: "isuruushan2003@gmail.com", Name: 'Snow',EmployeeID: 'Snow', Role: 'Admin'},
-  //   { id: "Darrenvictoria@gmail.com", Name: 'Snow',EmployeeID: 'Lannister', Role: 'Manager'},
-  //   { id: "isuruushan2004@gmail.com", Name: 'Snow',EmployeeID: 'Lannister', Role: 'Admin'},
-  //   { id: "isuruushan2005@gmail.com", Name: 'Snow',EmployeeID: 'Stark', Role: 'Admin'},
-  //   { id: "Darrenvictoria1@gmail.com", Name: 'Snow',EmployeeID: 'Targaryen', Role: 'Admin'},
-  //   { id: "Darrenvictoria2@gmail.com", Name: 'Snow',EmployeeID: 'Melisandre', Role: null},
-  //   { id: "Darrenvictoria3@gmail.com", Name: 'Snow',EmployeeID: 'Clifford', Role: 'Manager'},
-  //   { id: "Darrenvictoria4@gmail.com", Name: 'Snow',EmployeeID: 'Frances', Role: 'Manager'},
-  //   { id: "Darrenvictoria5@gmail.com", Name: 'Snow',EmployeeID: 'Roxie', Role: 'Manager'},
-  //   { id: "Darrenvictoria6@gmail.com", Name: 'Snow',EmployeeID: 'Roxie', Role: 'Manager'},
-  //   { id: "Darrenvictoria7@gmail.com", Name: 'Snow',EmployeeID: 'Roxie', Role: 'Manager'},
-  //   { id: "Darrenvictoria8@gmail.com", Name: 'Snow',EmployeeID: 'Roxie', Role: 'Manager'},
-  //   { id: "Darrenvictoria9@gmail.com", Name: 'Snow',EmployeeID: 'Roxie', Role: 'Manager'},
-   
-  // ];
+
 const AUserManageDash = () => {
-    // const handleDeleteRow = async (id) => {
-    //   const docRef = doc(collection(firestore, 'your-collection-name'), id); // Replace with your collection name
-    //   await deleteDoc(docRef);
-    //    Update the local rows array after successful deletion
-    //   setRows(rows.filter((row) => row.id !== id));
-    // };
     const [rows, setRows] = useState([]);
     const [openDialog, setOpenDialog] = useState(false);
     const [deleteId, setDeleteId] = useState(null);
@@ -105,7 +60,7 @@ const AUserManageDash = () => {
   const handleConfirmDelete = async () => {
     try {
         const db = getFirestore();
-        const docRef = doc(db, 'adminaccounts', 'admins'); // Assuming 'admins' is the document ID
+        const docRef = doc(db, 'adminaccounts', 'admins'); // Reference to the 'admins' document
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
             const data = docSnap.data();
@@ -129,9 +84,7 @@ const handleCloseSnackbar = () => {
 };
   const columns = [
     { field: 'id', headerName: 'Email', width: 1200 },
-    // { field: 'Name', headerName: 'Name', width: 300 }, 
-    // { field: 'EmployeeID', headerName: 'Employee ID', width: 300 },
-    // { field: 'Role', headerName: 'Role', width: 300 },
+    
     {
         field: 'fullName',
         headerName: 'Action',
@@ -143,9 +96,6 @@ const handleCloseSnackbar = () => {
                 <IconButton onClick={() => handleDeleteRow(params.row.id)}>
                     <DeleteIcon />
                 </IconButton>
-                {/* <IconButton>
-                    <EditIcon />
-                </IconButton> */}
             </>
         ),
     },
@@ -166,8 +116,6 @@ const handleCloseSnackbar = () => {
                       <div style={{textAlign:"right",maxWidth:660,width:"100%",paddingBottom:"10px"}}>
                       
                             <Button
-                            // variant="contained"
-                            // color="warning"
                             variant="contained" 
                             sx={{borderRadius:"25px",backgroundColor: '#242624'}}
                             onClick={() => window.location.href = '/AdduserDash'}

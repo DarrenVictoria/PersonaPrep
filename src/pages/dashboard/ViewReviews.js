@@ -159,38 +159,8 @@ return (
                 </Grid>               
             </Grid>
         
-            <Grid
-              container
-            //   spacing={{ xs: 2, md: 2,sm: 2 }}
-            //   columns={{ md: 12 }}
-              //below styling is to align the grids inside the contianer center.
-            //   sx={{
-            //   display: "flex",
-            //   alignItems: "center",
-            //   justifyContent: "center",
-            //   }}
-            >
+            <Grid container >
                 <Grid xs={12} sm={4} md={4} mt={2} >                
-                    {/* <Card variant="outlined" sx={{height:'100%',minHeight: 150, width:'100%',maxWidth: 900,borderRadius:'10px', border: 'none', overflowY:'auto',overflowX:'auto','@media (max-width:769px)':{borderColor:'white'},'@media (min-width:769px)':{overflowY:'hidden'}}}>
-                        <CardHeader
-                        title="Image"
-                        //  subheader={feedbackData.email} //emails
-                        sx={{
-                            "& .MuiCardHeader-title": {
-                            fontSize: "22px",
-                            fontWeight: "bold",
-                            paddingRight: "1px",
-                            },
-                            "& .MuiCardHeader-subheader": {
-                            fontSize: "20px",
-                            fontWeight: "bold",
-                            paddingTop:"30px",
-                            color: "black",
-                            },
-                            
-                        }}
-                        />
-                    </Card> */}
                         <img src={imageUrl} style={{width: '100%'}}/>
                 </Grid>                        
             </Grid>
