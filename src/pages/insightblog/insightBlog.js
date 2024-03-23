@@ -60,8 +60,7 @@ export default function Insightblog(){
                 <p>
                     Crafting an effective CV is crucial for securing your desired job. By avoiding these common mistakes, you can significantly improve your chances of standing out to potential employers. Remember to focus on clear, error-free content that highlights your skills, experiences, and achievements, making your CV a powerful tool in your job search arsenal.
                 </p>
-                {/* <div className='insightBlog-blogDetails'>
-                </div> */}
+                
             </div>
             <Footer />
         </div>

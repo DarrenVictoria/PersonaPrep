@@ -20,7 +20,7 @@ import TableHead from '@mui/material/TableHead';//Table with progress and percen
 import TableRow from '@mui/material/TableRow';//Table with progress and percentage
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 
-// //below code is to show the percentage in the piechart itself
+//below code is to show the percentage in the piechart itself
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
 const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
@@ -33,18 +33,7 @@ return (
 );
 };
   
-//Code for Table with progress and percentage
-// const rows = [
-//   { name: 'C#', popularity: 66, color: '#007bff' },
-//   { name: 'Web', popularity: 75, color: '#28a745' },
-//   { name: 'Database', popularity: 34, color: '#ffc107' },
-//   { name: 'Full-stack', popularity: 52, color: '#dc3545' },
-// ];
-  
-// function createData(name, popularity, color) {
-//   return { name, popularity, color };
-// }
-//End of Code for Table with progress and percentage
+
   
 const AdminDash = () => {
   const [PieChartData, setPieChartData] = useState([]);
@@ -233,7 +222,6 @@ return (
               }}>
               
             <Grid xs={12} sm={6} md={3} >
-            {/* <Grid xs="auto" sm="auto" md="auto"> */}
               <Card
                   sx={{
                   maxWidth: 387,
@@ -270,7 +258,6 @@ return (
                 </Card>
             </Grid>
             <Grid xs={12} sm={6} md={3} >
-            {/* <Grid xs="auto" sm="auto" md="auto"> */}
                 <Card
                     sx={{
                     maxWidth: 387,
@@ -286,11 +273,11 @@ return (
                     <CardHeader
                     avatar={
                         <Avatar sx={{ bgcolor: blue[800] }} aria-label="review">
-                        {/* You can add an icon here if you want */}
+                        
                         </Avatar>
                     }
                     title="CVs Generated"
-                    subheader={cvGeneratedCount}//The cv generated count goes here
+                    subheader={cvGeneratedCount}//This is the cv generated count
                     sx={{
                         "& .MuiCardHeader-title": {
                         fontSize: "13px",
@@ -307,7 +294,6 @@ return (
                 </Card>
             </Grid>
             <Grid xs={12} sm={6} md={3} >
-            {/* <Grid xs="auto" sm="auto" md="auto"> */}
                 <Card
                     sx={{
                     maxWidth: 387,
@@ -323,11 +309,11 @@ return (
                     <CardHeader
                     avatar={
                         <Avatar sx={{ bgcolor: blue[800] }} aria-label="review">
-                        {/* You can add an icon here if you want */}
+                        
                         </Avatar>
                     }
                     title="CV Feedback"
-                    subheader={cvfeedbackCount}//cv Feedback count goes here
+                    subheader={cvfeedbackCount}//This is the cv feedback count
                     sx={{
                         "& .MuiCardHeader-title": {
                         fontSize: "13px",
@@ -344,7 +330,6 @@ return (
                 </Card>
             </Grid>
             <Grid xs={12} sm={6} md={3} >
-            {/* <Grid xs="auto" sm="auto" md="auto"> */}
                 <Card
                     sx={{
                     maxWidth: 387,
@@ -360,11 +345,11 @@ return (
                     <CardHeader
                     avatar={
                         <Avatar sx={{ bgcolor: blue[800] }} aria-label="review">
-                        {/* You can add an icon here if you want */}
+                        
                         </Avatar>
                     }
                     title="Reviews Received"
-                    subheader={feedbackCount} //reviews count 
+                    subheader={feedbackCount} //This is the reviews count 
                     sx={{
                         "& .MuiCardHeader-title": {
                         fontSize: "13px",
@@ -401,11 +386,9 @@ return (
                         <YAxis />
                         <Tooltip />
                         <Legend />
-                        {/* {Object.keys(DegBarChartData[0] || {}).filter(key => key !== 'batch').map((degree, index) => ( */}
                         <Bar dataKey="Plymouth University" stackId="a" fill="#8884d8" />
                         <Bar dataKey="Victoria University" stackId="a" fill="#82ca9d" />
                         <Bar dataKey="NSBM Green University" stackId="a" fill="#ffc107" />
-                      {/* ))} */}
                     </BarChart>
                     </ResponsiveContainer>
                 </Card>
@@ -437,8 +420,9 @@ return (
             }}
             >
                 <Grid item xs={12} sm={6} md={6} mt={3}>
-                <Card sx={{borderRadius:"25px",display: "flex",alignItems: "center",justifyContent: "center",flexDirection: "column"}}>
+                <Card sx={{borderRadius:"25px",display: "flex",alignItems: "center",justifyContent: "center",flexDirection: "column",paddingBottom: "20px" }}>
                     <h3>Top Skills</h3>
+                    <div style={{ overflow: 'auto', maxHeight: '400px', width: '100%'}}>
                     <ResponsiveContainer width="100%" height={400}>
                     <TableContainer>
                         <Table aria-label="simple table" sx={{ borderCollapse: 'collapse' }}>
@@ -451,7 +435,6 @@ return (
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {/* {rows.map((row, index) => ( */}
                             {topSkills.map((row) => (
                             <TableRow key={row.rank} >
                                 <TableCell>{row.rank}</TableCell>
@@ -483,6 +466,7 @@ return (
                         </Table>
                     </TableContainer>
                     </ResponsiveContainer>
+                    </div>
                 </Card>
                 </Grid>
                 <Grid item xs={12} sm={6} md={6} mt={3}>
@@ -496,7 +480,6 @@ return (
                         cy="50%"
                         labelLine={false}
                         label={renderCustomizedLabel}
-                        // label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
                         outerRadius={80}
                         fill="#8884d8"
                         dataKey="value"

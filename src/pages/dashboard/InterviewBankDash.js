@@ -32,7 +32,7 @@ const interviewCols = [
                 variant="contained" 
                 sx={{borderRadius:"25px",backgroundColor: '#242624',height:'28px'}}
                 onClick={() => window.location.href = `/interviewCard?id=${params.row.cardid}`}
-                // onClick={() => console.log(params.row.cardid)}
+                
             >
                 View
             </Button>
