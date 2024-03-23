@@ -61,17 +61,6 @@ const School2 = () => {
     const [School2StartYear, setSchool2StartYear] = useState('');
     const [School2EndMonth, setSchool2EndMonth] = useState('');
     const [School2EndYear, setSchool2EndYear] = useState('');
-    // const [School2Name, setSchool2Name] = useState('');
-    // const [School2City, setSchool2City] = useState('');
-    // const [School2Country, setSchool2Country] = useState('');
-    // const [School2Experience, setSchool2Experience] = useState('');
-
-
-    // const School2NameChange = (e) => setSchool2Name(e.target.value);
-    // const School2CityChange = (e) => setSchool2City(e.target.value);
-    // const School2CountryChange = (e) => setSchool2Country(e.target.value);
-    // const School2ExperienceChange = (e) => setSchool2Experience(e.target.value);
-
     const { register, handleSubmit, watch, formState: { errors }, getValues, setValue } = useForm();
 
     const School2Name = watch('School2Name');
@@ -117,7 +106,7 @@ const School2 = () => {
     }, [currentUser.email, setValue]);
 
     const onSubmit = async (e) => {
-        // e.preventDefault();
+        
     
         try {
             const db = getFirestore();
@@ -188,26 +177,16 @@ const School2 = () => {
                                         <Grid container>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>School Name</Typography>
-                                                {/* <TextField type="text" variant="outlined" value={School2Name} onChange={School2NameChange} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='St. Thomas Catholic International'/> */}
                                                 <TextField type="text" variant="outlined" fullWidth required  
                                                 value={School2Name}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white', pattern: "^[a-zA-Z]+$"}}} 
                                                 placeholder='St. Thomas Catholic International'
                                                 {...register("School2Name", { maxLength: 50, pattern: /^[a-zA-Z\s]+$/ })}
                                                 />
-                                                {/* {errors.School2Name && "Please enter only letters"} */}
                                                 {errors.School2Name && errors.School2Name.type === "maxLength" ? "Max word limit is 50" : errors.School2Name && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>School experience or description</Typography>
-                                                {/* <CustomMultilineTextFieldslimited
-                                                    inputHeight="150px"
-                                                    maxWidth="1300px"
-                                                    isRequired={true}
-                                                    value={School2Experience}
-                                                    onChange={School2ExperienceChange}
-                                                    maxWords={50} 
-                                                /> */}
                                                 <TextField
                                                     multiline
                                                     rows={4}
@@ -221,7 +200,6 @@ const School2 = () => {
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>City</Typography>
-                                                {/* <TextField type="text" variant="outlined" value={School2City} onChange={School2CityChange} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/> */}
                                                 <TextField type="text" variant="outlined" fullWidth required  
                                                 value={School2City}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
@@ -232,7 +210,6 @@ const School2 = () => {
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>Country</Typography>
-                                                {/* <TextField type="text" variant="outlined" value={School2Country} onChange={School2CountryChange} fullWidth required  InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/> */}
                                                 <TextField type="text" variant="outlined" fullWidth required  
                                                 value={School2Country}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white', pattern: "^[a-zA-Z]+$"}}} 
@@ -245,12 +222,6 @@ const School2 = () => {
                                                 <Typography><span style={{color: 'red'}}>*</span>Start Date</Typography>
                                             </Grid>
                                             <Grid item xs={6} pr={1}>
-                                                {/* <EditableChoose
-                                                    options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                                                    onSelect={setSchool2StartMonth}
-                                                    disabledOptions={["Month"]}
-                                                    defaultValue={School2StartMonth}
-                                                /> */}
                                                  <FormControl variant="outlined" fullWidth>
                                                     <Select
                                                         value={School2StartMonth}
@@ -268,13 +239,6 @@ const School2 = () => {
                                                 </FormControl>
                                             </Grid>
                                             <Grid item xs={6} mb={3} pl={1}>
-                                                {/* <EditableChoose
-                                                    options={option}
-                                                    onSelect={setSchool2StartYear}
-                                                    disabledOptions={["Year"]}
-                                                    defaultValue={School2StartYear}
-                                                /> */}
-
                                                 <FormControl variant="outlined" fullWidth>
                                                     <Select
                                                         value={School2StartYear}
@@ -295,12 +259,6 @@ const School2 = () => {
                                                 <Typography><span style={{color: 'red'}}>*</span>End Date</Typography>
                                             </Grid>
                                             <Grid item xs={6} pr={1}>
-                                                {/* <EditableChoose
-                                                    options={["Month","January", "February", "March", "April","May", "June", "July", "August","September", "October", "November", "December"]}
-                                                    onSelect={setSchool2EndMonth}
-                                                    disabledOptions={["Month"]}
-                                                    defaultValue={School2EndMonth}
-                                                /> */}
                                                 <FormControl variant="outlined" fullWidth>
                                                     <Select
                                                         value={School2EndMonth}
@@ -318,12 +276,6 @@ const School2 = () => {
                                                 </FormControl>
                                             </Grid>
                                             <Grid item xs={6} mb={3} pl={1}>
-                                                {/* <EditableChoose
-                                                    options={option}
-                                                    onSelect={setSchool2EndYear}
-                                                    disabledOptions={["Year"]}
-                                                    defaultValue={School2EndYear}
-                                                /> */}
                                                 <FormControl variant="outlined" fullWidth>
                                                     <Select
                                                         value={School2EndYear}
@@ -364,7 +316,6 @@ const School2 = () => {
                                                     </ListItem>
                                                     <ListItem >
                                                         <ListItemAvatar>
-                                                            {/* <Avatar sx={{borderRadius: '12px', display: 'flex', justifyContent: 'center', alignItems: 'center'  }}> */}
                                                             <Avatar sx={{borderRadius: '12px'}}>
                                                                 <EmojiEventsIcon sx={{color:'black'}}/>
                                                             </Avatar>

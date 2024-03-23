@@ -142,7 +142,7 @@ const CvFeedback = () => {
         { onclick: () => rating4Click(5), color: emoji4Clr[4], icon: SentimentVerySatisfiedIcon },
     ];
 
-    // const btn = (event) => {event.preventDefault(); console.log(feedback)};
+    
 
     const navigate = useNavigate();
     const prevPage = () => navigate('/home');
@@ -225,7 +225,6 @@ const CvFeedback = () => {
                                                 ))}
                                             </Grid>
                                         </Grid>   
-                                        {/* <button onClick={btn}>btn</button> */}
                                     </div>
 
                                     <div className="feedback-rightCol">
@@ -244,7 +243,6 @@ const CvFeedback = () => {
                                                 <Typography variant='h6' >Are there any specific areas or features you think the CV generator could improve upon?</Typography>
                                             </Grid>
                                             <Grid item xs={12} mb={2} >
-                                            {/* <CustomMultilineTextFields height='100px' value={feedback} onChange={feedbackChange}/> */}
                                             <CustomMultilineTextFieldslimited
                                                 inputHeight="150px"
                                                 maxWidth="1300px"

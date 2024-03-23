@@ -76,9 +76,7 @@ const TemplateSelection = () => {
                 await setDoc(docRef, {templateSelection: formData}, {merge: true});
                 console.log('document updated with id', existingDoc.id);
             }
-            // else{
-            //     console.log('document created with id', existingDoc.id);
-            // }
+           
 
             navigate(`/${template}`);
         }catch (err) {
@@ -95,7 +93,6 @@ const TemplateSelection = () => {
                 <Grid container spacing={2} style={{ height: '100%' }}>
                     <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>
                         <Grid container px={4} pt={4} justifyContent='center' alignItems='center'>
-                            {/* <Grid item xs={12} mb={4}><Typography variant='h5' fontWeight='bold'>Your Selection</Typography></Grid> */}
                             <Grid container xs={12} md={2} pr={5}>
                                 <Grid item xs={6} md={12}><Typography>CV Template:</Typography></Grid>
                                 <Grid item xs={6} md={12} mb={2}>
@@ -297,7 +294,7 @@ const TemplateSelection = () => {
                                             </div>
                                         </div>
                                     </div>
-                            {/* <button type='submit'>btn</button> */}
+                            
                             </div>
                         <Grid container spacing={2} style={{ bottom: 80}}>            
                             <Grid xs={6} paddingLeft={'10px'}>
