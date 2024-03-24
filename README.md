@@ -2,6 +2,14 @@
 
 Persona Prep is a comprehensive platform designed to assist undergraduates and recent graduates in creating professional, well-structured CVs and preparing for corporate interviews. The project aims to bridge the gap between academic qualifications and the expectations of the corporate world, ultimately enhancing the employability and career prospects of aspiring candidates.
 
+# Team behind the project
+-**J.D Victoria 
+-**M.M.I.U Bandara
+-**W.I Avarjana
+-**S Balasooriya
+-**M.F.M Ruhaib
+-**J.S Thirimanna
+
 ## Features
 
 - **In-App Profile Management**: Users can maintain their individual information, including CVs, academic skills, certificates, and qualifications, within the application.
@@ -52,4 +60,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Acknowledgments
 
-We would like to express our gratitude to the NFORCE team of NSBM Green University for their valuable insights and collaboration throughout the development of Persona Prep.
+We would like to express our gratitude to the NFORCE team of NSBM Green University for their valuable insights and collaboration throughout the development of Persona Prep. Along side that we would also like to thanks Mr.Chamnidra Attanayake the module leader for playing a pivotal role in the success of the module aspects.
