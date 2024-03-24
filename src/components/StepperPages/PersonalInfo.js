@@ -171,7 +171,7 @@ const PersonalInfo = () => {
                                         <Grid container>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography><span style={{color: 'red'}}>*</span> Full Name</Typography>
-                                                <TextField type="text" variant="outlined" value={Proname} fullWidth required  
+                                                <TextField type="text" variant="outlined" value={Proname} fullWidth required  placeholder='John Doe'
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 {...register("Proname", {maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
                                                 />

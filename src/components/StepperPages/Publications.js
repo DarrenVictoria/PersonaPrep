@@ -141,8 +141,8 @@ useEffect(() => {
                                     <Grid container spacing={2} >
                                       <Grid item xs={12}>
                                         
-                                      <Typography ><span style={{color: 'red'}}>*</span> Publication Title</Typography>
-                                          <TextField type="text" variant="outlined" fullWidth required  
+                                      <Typography >Publication Title</Typography>
+                                          <TextField type="text" variant="outlined" fullWidth   
                                           value={PblTitle}
                                           InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                           placeholder=''
@@ -152,8 +152,8 @@ useEffect(() => {
                                       </Grid>
                                       <Grid item xs={12}>
                                         
-                                      <Typography ><span style={{color: 'red'}}>*</span> Publication / Publisher</Typography>
-                                          <TextField type="text" variant="outlined" fullWidth required  
+                                      <Typography>Publication / Publisher</Typography>
+                                          <TextField type="text" variant="outlined" fullWidth   
                                           value={Publisher}
                                           InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                           placeholder=''
@@ -162,7 +162,7 @@ useEffect(() => {
                                           {errors.Publisher && errors.Publisher.type === "maxLength" ? "Max word limit is 30" : errors.Publisher && "Please enter only letters"}
                                       </Grid>
                                       <Grid item xs={12} mb={1}>
-                                      <Typography ><span style={{color: 'red'}}>*</span> Publication date</Typography>
+                                      <Typography >Publication date</Typography>
                                       </Grid>
                                       <Grid item xs={6}>
                                      <FormControl variant="outlined" fullWidth>
@@ -171,8 +171,7 @@ useEffect(() => {
                                             onChange={(event) => setPblMonth(event.target.value)}
                                             displayEmpty
                                             input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
-                                            IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
-                                            required
+                                            IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}                                            
                                         >
                                             <MenuItem disabled value="">Month</MenuItem>
                                             {monthOption.map (option => (
@@ -189,8 +188,7 @@ useEffect(() => {
                                           onChange={(event) => setPblYear(event.target.value)}
                                           displayEmpty
                                           input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
-                                          IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
-                                          required
+                                          IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}                                          
                                       >
                                           <MenuItem disabled value="">Year</MenuItem>
                                           {yearOption.map(year => (
@@ -203,8 +201,8 @@ useEffect(() => {
                                       </Grid>
                                       <Grid item xs={12}>
                                         
-                                      <Typography ><span style={{color: 'red'}}>*</span> Publication URL</Typography>
-                                          <TextField type="text" variant="outlined" fullWidth required  
+                                      <Typography >Publication URL</Typography>
+                                          <TextField type="text" variant="outlined" fullWidth   
                                             value={PblUrl}
                                             InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                             placeholder=''
@@ -213,11 +211,10 @@ useEffect(() => {
                                       </Grid>
                                       <Grid item xs={12}>
                                         
-                                        <Typography ><span style={{color: 'red'}}>*</span> Publication Description</Typography>
+                                        <Typography >Publication Description</Typography>
                                         <CustomMultilineTextFieldslimited
                                             inputHeight="150px"
                                             maxWidth="1300px"
-                                            isRequired={true}
                                             value={PblDesc}
                                             onChange={(event) => setPblDesc(event.target.value)}
                                             maxWords={50} 

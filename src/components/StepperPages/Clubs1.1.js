@@ -239,7 +239,7 @@ const Club2 = () => {
                                 <div className='Clubs-LeftColumn'>
                                 <Grid container>
                                 <Grid item xs={12} mb={1}>
-                                <Typography ><span style={{color: 'red'}}>*</span> Club / Society you were a part of ?</Typography>
+                                <Typography >Club / Society you were a part of ?</Typography>
                                   </Grid>
                                   <Grid item xs={12} mb={3}>
                                         <FormControl variant="outlined" fullWidth>
@@ -249,8 +249,6 @@ const Club2 = () => {
                                               displayEmpty
                                               input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD'}} />}
                                               IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
-                                              required
-                                              
                                           >
                                               <MenuItem disabled value="">Clubs</MenuItem>
                                               <MenuItem value="Club">Club</MenuItem>
@@ -262,7 +260,7 @@ const Club2 = () => {
                                     
                                   </Grid>
                                   <Grid item xs={12} mb={1}>
-                                  <Typography ><span style={{color: 'red'}}>*</span> Start Date</Typography>
+                                  <Typography >Start Date</Typography>
                                   </Grid>
                                   <Grid item xs={6} mb={3} pr={1}>
                                 <FormControl variant="outlined" fullWidth>
@@ -271,8 +269,7 @@ const Club2 = () => {
                                         onChange={(event) => setClubStartMonth(event.target.value)}
                                         displayEmpty
                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
-                                        IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
-                                        required
+                                        IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}                                        
                                     >
                                         <MenuItem disabled value="">Month</MenuItem>
                                         {monthOption.map (option => (
@@ -289,8 +286,7 @@ const Club2 = () => {
                                           onChange={(event) => setClubStartYear(event.target.value)}
                                           displayEmpty
                                           input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
-                                          IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
-                                          required
+                                          IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}                                          
                                       >
                                           <MenuItem disabled value="">Year</MenuItem>
                                           {StartyearOption.map(year => (
@@ -301,7 +297,7 @@ const Club2 = () => {
                                     
                                   </Grid>
                                   <Grid item xs={12} mb={1}>
-                                  <Typography ><span style={{color: 'red'}}>*</span> End Date</Typography>
+                                  <Typography >End Date</Typography>
                                   </Grid>
                                   <Grid item xs={6} mb={3} pr={1}>
                                 <FormControl variant="outlined" fullWidth>
@@ -310,8 +306,7 @@ const Club2 = () => {
                                           onChange={(event) => setClubEndMonth(event.target.value)}
                                           displayEmpty
                                           input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
-                                          IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
-                                          required
+                                          IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}                                          
                                       >
                                           <MenuItem disabled value="">Month</MenuItem>
                                           {monthOption.map (option => (
@@ -328,8 +323,7 @@ const Club2 = () => {
                                           onChange={(event) => setClubEndYear(event.target.value)}
                                           displayEmpty
                                           input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
-                                          IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
-                                          required
+                                          IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}                                          
                                       >
                                           <MenuItem disabled value="">Year</MenuItem>
                                           {EndyearOption.map(year => (

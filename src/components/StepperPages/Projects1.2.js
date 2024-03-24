@@ -550,7 +550,7 @@ const Projects3 = () => {
                                                 <TextField type="text" variant="outlined" fullWidth required  
                                                 value={ProjRole}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
-                                                placeholder='Full stack developer'
+                                                placeholder='Front end developer'
                                                 {...register("ProjRole", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
                                                 />
                                                 {errors.ProjRole && errors.ProjRole.type === "maxLength" ? "Max word limit is 30" : errors.ProjRole && "Please enter only letters"}

@@ -542,27 +542,27 @@ const Certification1 = () => {
                                     <div className="Certification1-LeftColumn">
                                         <Grid container>
                                             <Grid item xs={12} mb={3}>
-                                                <Typography ><span style={{color: 'red'}}>*</span> Name of Certification</Typography>
-                                                <TextField type="text" variant="outlined" fullWidth required  
+                                                <Typography >Name of Certification</Typography>
+                                                <TextField type="text" variant="outlined" fullWidth   
                                                 value={CertificateName}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
-                                                placeholder=''
+                                                placeholder='Introduction to c# course'
                                                 {...register("CertificateName", { maxLength: 60, pattern: /^[a-zA-Z\s]+$/ })}
                                                 />
                                                 {errors.CertificateName && errors.CertificateName.type === "maxLength" ? "Max word limit is 50" : errors.CertificateName && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
-                                                <Typography ><span style={{color: 'red'}}>*</span> Issuing Organization</Typography>
-                                                <TextField type="text" variant="outlined" fullWidth required  
+                                                <Typography > Issuing Organization</Typography>
+                                                <TextField type="text" variant="outlined" fullWidthd  
                                                 value={CertificateissuedOrg}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
-                                                placeholder=''
+                                                placeholder='Udemy'
                                                 {...register("CertificateissuedOrg", { maxLength: 50, pattern: /^[a-zA-Z\s]+$/ })}
                                                 />
                                                 {errors.CertificateissuedOrg && errors.CertificateissuedOrg.type === "maxLength" ? "Max word limit is 50" : errors.CertificateissuedOrg && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={1}>
-                                                <Typography><span style={{color: 'red'}}>*</span>Issue Date</Typography>
+                                                <Typography>Issue Date</Typography>
                                             </Grid>
                                             <Grid item xs={6} pr={1}>
                                                  <FormControl variant="outlined" fullWidth>
@@ -571,8 +571,7 @@ const Certification1 = () => {
                                                         onChange={(event) => setCertificateIssueMonth(event.target.value)}
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
-                                                        IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
-                                                        required
+                                                        IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}                                                        
                                                     >
                                                         <MenuItem disabled value="">Month</MenuItem>
                                                         {monthOption.map (option => (
@@ -588,8 +587,7 @@ const Certification1 = () => {
                                                         onChange={(event) => setCertificateIssueYear(event.target.value)}
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
-                                                        IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
-                                                        required
+                                                        IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}                                                        
                                                     >
                                                         <MenuItem disabled value="">Year</MenuItem>
                                                         {IssueyearOption.map(year => (
@@ -599,7 +597,7 @@ const Certification1 = () => {
                                                 </FormControl>
                                             </Grid>
                                             <Grid item xs={12} mb={1}>
-                                                <Typography><span style={{color: 'red'}}>*</span>Expiration Date</Typography>
+                                                <Typography>Expiration Date</Typography>
                                             </Grid>
                                             <Grid item xs={6} pr={1}>
                                                 <FormControl variant="outlined" fullWidth>
@@ -608,8 +606,7 @@ const Certification1 = () => {
                                                         onChange={(event) => setCertificateExpMonth(event.target.value)}
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
-                                                        IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
-                                                        required
+                                                        IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}                                                        
                                                     >
                                                         <MenuItem disabled value="">Month</MenuItem>
                                                         {monthOption.map (option => (
@@ -625,8 +622,7 @@ const Certification1 = () => {
                                                         onChange={(event) => setCertificateExpYear(event.target.value)}
                                                         displayEmpty
                                                         input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
-                                                        IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
-                                                        required
+                                                        IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}                                                        
                                                     >
                                                         <MenuItem disabled value="">Year</MenuItem>
                                                         {ExpirationyearOption.map(year => (
@@ -636,8 +632,8 @@ const Certification1 = () => {
                                                 </FormControl>
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
-                                                <Typography ><span style={{color: 'red'}}>*</span>Certification ID</Typography>
-                                                <TextField type="text" variant="outlined" fullWidth required  
+                                                <Typography >Certification ID</Typography>
+                                                <TextField type="text" variant="outlined" fullWidth   
                                                 value={CertificateId}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder=''
@@ -646,7 +642,7 @@ const Certification1 = () => {
                                                 {errors.CertificateId &&  "Maximum of 200 characters"}
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
-                                                <Typography mb={1} mt={3}><span style={{color: 'red'}}>*</span>Skills acquired from the project ?</Typography>
+                                                <Typography mb={1} mt={3}>Skills acquired from the project ?</Typography>
                                                     <Stack spacing={3}>
                                                             <Autocomplete
                                                                 multiple
@@ -684,8 +680,8 @@ const Certification1 = () => {
                                                     </Stack>                                            
                                                 </Grid>
                                             <Grid item xs={12} mb={3}>
-                                                <Typography mb={1}><span style={{color: 'red'}}>*</span>Certification evidence link</Typography>
-                                                <TextField type="text" variant="outlined" fullWidth required  
+                                                <Typography mb={1}>Certification evidence link</Typography>
+                                                <TextField type="text" variant="outlined" fullWidth   
                                                 value={CertificateLInk}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder=''

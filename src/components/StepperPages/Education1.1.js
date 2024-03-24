@@ -199,7 +199,7 @@ const School2 = () => {
                                                 <TextField type="text" variant="outlined" fullWidth required  
                                                 value={School2City}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
-                                                placeholder=''
+                                                placeholder='Homagama'
                                                 {...register("School2City", { maxLength: 50, pattern: /^[a-zA-Z0-9\s]+$/ })}
                                                 />
                                                 {errors.School2City && errors.School2City.type === "maxLength" ? "Max word limit is 50" : errors.School2City && "Please enter only letters"}
@@ -209,7 +209,7 @@ const School2 = () => {
                                                 <TextField type="text" variant="outlined" fullWidth required  
                                                 value={School2Country}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white', pattern: "^[a-zA-Z]+$"}}} 
-                                                placeholder=''
+                                                placeholder='Sri Lanka'
                                                 {...register("School2Country", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
                                                 />
                                                 {errors.School2Country && errors.School2Country.type === "maxLength" ? "Max word limit is 30" : errors.School2Country && "Please enter only letters"}
