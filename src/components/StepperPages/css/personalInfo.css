@@ -1,0 +1,68 @@
+.personalInfo-main{
+    display: flex;
+    flex-direction: row;
+}
+.personalInfo-leftCol{
+    flex: 1;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 100%;
+    /* box-sizing: border-box; */
+    padding: 10px; 
+}
+.personalInfo-rightCol{
+    flex: 1;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    /* box-sizing: border-box; */
+    padding: 10px;
+    overflow: hidden;  
+}
+.feedback-rightCol{
+    flex: 1;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: flex-start;
+    max-width: 100%;
+    /* box-sizing: border-box; */
+    padding: 10px; 
+}
+/* .certificate {
+    flex: 1;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+    padding: 10px;
+    overflow: hidden; 
+} */
+
+@media (max-width: 700px){
+    .personalInfo-main{
+        flex-direction: column;
+    }
+    .personalInfo-leftCol,
+    .personalInfo-rightCol {
+        align-items: center;
+    }
+    .personalInfo-rightCol, .certificate{
+        order: -1;
+        /* overflow: scroll;   */
+    }
+    .university-fileUpload{
+        order: 1;
+    }
+    .certifaction2{
+        display: none;
+    }
+}

@@ -1,0 +1,60 @@
+  
+  
+  .Contactdetails1-LeftColumn {
+    flex: 1;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 100%;
+    /* padding-left: 30px; */
+    box-sizing: border-box;
+    padding: 10px;
+    
+  }
+  .Contactdetails1LeftColumn-textfield{
+    border-radius: 25px;
+  }
+  .Contactdetails1-RightColumn {
+    flex: 1;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding-right: 30px;
+    padding-left: 30px; 
+  }
+  
+  .Contactdetails1-Maindiv {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+  }
+  @media (max-width: 540px) {
+    .Contactdetails1-Maindiv {
+      flex-direction: column; /* Change back to column layout for smaller screens */
+    }
+  
+    .Contactdetails1-LeftColumn,
+    .Contactdetails1-RightColumn {
+      padding: 0 10px; /* Further adjusted padding for smaller screens */
+      
+    }
+  
+    .Contactdetails1-RightColumn {
+      order: -1; /* Move right column to the top on smaller screens */
+      margin-bottom: 20px; /* Add margin to separate the columns */
+    }
+  }
+  
+  /*.Contactdetails1-RightColumnCard{
+    overflow-y: auto;
+    
+    
+  }
+  */

@@ -1,0 +1,50 @@
+  .Publications-LeftColumn {
+    flex: 1;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 100%;
+    padding: 0 20px; /* Adjusted padding for smaller screens */
+    box-sizing: border-box;
+  }
+  
+  .PublicationsLeftColumn-textfield {
+    border-radius: 25px;
+  }
+  
+  .Publications-RightColumn {
+    flex: 1;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    padding: 0 20px; /* Adjusted padding for smaller screens */
+    box-sizing: border-box;
+  }
+  
+  .Publications-Maindiv {
+    display: flex;
+    flex-direction: row; /* Changed to column layout for smaller screens */
+    flex-wrap: wrap;
+  }
+  
+  /* Media queries for smaller screens */
+  @media (max-width: 540px) {
+    .Publications-Maindiv {
+      flex-direction: column; /* Change back to column layout for smaller screens */
+    }
+  
+    .Publications-LeftColumn,
+    .Publications-RightColumn {
+      padding: 0 10px; /* Further adjusted padding for smaller screens */
+    }
+  
+    .Publications-RightColumn {
+      order: -1; /* Move right column to the top on smaller screens */
+      margin-bottom: 20px; /* Add margin to separate the columns */
+    }
+  }

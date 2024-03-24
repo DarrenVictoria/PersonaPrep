@@ -1,0 +1,149 @@
+/* .interviewBank-hideCard{
+    display: none;
+} */
+.interviewBank-interviewDetails img{
+    display: none;
+}
+.interviewBank-container{
+    padding: 0 4%;
+    margin: 30px 0;
+}
+.interviewBank-container h1{
+    font-size: 5vw;
+    margin: 10px 0;
+}
+
+.interviewBank-topics h3, .interviewBank-transcript h3{
+    font-size: 3vw;
+    position: relative;
+}
+.interviewBank-topics h3::after, .interviewBank-transcript h3::after {
+    position: absolute;
+    content: '';
+    display: block;
+    width: 7%; 
+    height: 4px; 
+    background: #000; 
+    bottom: -18px;
+    left: 0; 
+    margin-bottom: 8px;
+}
+.interviewBank-topics div{
+    display: flex;
+    justify-content: space-around;
+}
+/* .interviewBank-topics div button{
+    font-size: 1.8vw;
+    width: 150px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+} */
+
+.interviewBank-transcript h3::after{
+    width: 12%;
+}
+.interviewBank-transcriptCard{
+    background-color: rgb(212, 212, 212);
+    margin: 15px 2%;
+    padding: 10px 5%;
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #000;
+    border-radius: 10px;    
+    &:hover{
+        cursor: pointer;
+    }
+}
+.interviewBank-transcriptCardDetails{
+    /* color: rgb(63, 63, 172); */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 15px;
+    width: 700px;
+}
+.interviewBank-transcriptLabels, .interviewBank-jobPosition, .interviewBank-interviewDetails{
+    flex: 1;
+}
+.interviewBank-transcriptLabels{
+    display: flex;
+    font-size: 10px;
+}
+.interviewBank-transcriptLabels div{
+    margin: 15px;
+    margin-left: 0;
+}
+.interviewBank-transcriptLabels div span{
+    background-color: #fff;
+    padding: 8px;
+    border-radius: 5px;
+}
+.interviewBank-jobPosition{
+    font-size: 30px;
+    font-weight: 700;
+    padding-bottom: 5px;
+}
+.interviewBank-thumbnail{
+    margin-left: 10px;
+}
+.interviewBank-thumbnail img{
+    width: 100%;
+    height: 150px;
+    border-radius: 10px;
+}
+
+@media(max-width: 700px){
+    .interviewBank-container h1{
+        font-size: 7vw;
+    }
+    .interviewBank-topics div{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin: 0 10px;
+    }
+    .interviewBank-topics h3, .interviewBank-transcript h3{
+        font-size: 5vw;
+    }
+    .interviewBank-transcript h3{
+        margin-bottom: 35px;
+    }
+    .interviewBank-topics h3::after{
+        width: 10%;
+    }
+    .interviewBank-transcript h3::after{
+        width: 20%;
+    }
+    .interviewBank-transcriptCard{
+        display: flex;
+        flex-direction: column;
+    }
+    .interviewBank-thumbnail{
+        order: -1;
+    }
+    .interviewBank-thumbnail img{
+        width: 100%;
+        height: 200px;
+    }
+    .interviewBank-transcriptLabels div{
+        font-size: 12px;
+    }
+    .interviewBank-jobPosition{
+        font-size: 23px;
+        padding-bottom: 10px;
+    }
+    .interviewBank-interviewDetails img{
+        display: inline-block;
+    }
+    .interviewBank-interviewDetails{
+        display: flex;
+        justify-content: space-between;
+        line-height: 20px;
+    }
+    .interviewBank-transcriptCardDetails{
+        width: 100%;
+    }
+}

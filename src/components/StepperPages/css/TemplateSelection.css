@@ -1,0 +1,447 @@
+/* YourComponent.css */
+
+.TemplateSelection-Container {
+    display: flex;
+    height: 610px;
+    padding-right: 18px;
+    
+  }
+  
+  .TemplateSelection-LeftColumn {
+    /*width: 640px;*/
+    flex: 1.5; /* Adjust the width of the left column as needed */
+    background-color: #ffffff;
+    padding: 20px;
+    margin: 5px;
+    margin-top: 5px;
+    box-sizing: border-box;
+    max-height: 610px;
+    overflow-y: auto;
+    
+  }
+  
+  /* .TemplateSelection-TemplateRow{
+     padding-top: 20px; 
+  } */
+  
+  .TemplateSelection-RightColumn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+   
+  }
+  
+  .TemplateSelection-RightRow {
+    flex: 1;
+    background-color: #ffffff;
+    padding: 10px;
+    margin: 5px;
+    overflow-y: auto;
+    
+  }
+/*Below css is for the template table*/
+
+.TemplateSelection-ResponsiveTemplateTableContainer {
+  overflow-x: auto;
+  
+}
+
+.TemplateSelection-TemplateTableHeading {
+  text-align: left;
+}
+
+.TemplateSelection-TemplateTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.TemplateSelection-TemplateCell-Left,.TemplateSelection-TemplateCell-Right {
+  padding: 8px;
+  text-align: center;
+  vertical-align: middle;
+  
+ 
+}
+
+.TemplateSelection-Templatediv {
+  width: 185px;
+  height: 259px;
+  max-width: 100%;
+  margin: 1px;
+  margin: 0 auto;
+  vertical-align: middle;
+  display: inline-block;
+  position: relative;
+  
+ 
+}
+.TemplateSelection-image{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/*Below css is for the color theme table*/
+  
+.TemplateSelection-responsiveColorTableContainer {
+  overflow-x: auto;
+}
+
+.TemplateSelection-ColorTableHeading {
+  text-align: left;
+  font-size: 20px;
+  font-family: Inter;
+}
+.TemplateSelection-ColorTablecolumnheading{
+  font-family: Inter;
+  font-size: 20px;
+}
+
+.TemplateSelection-ColorTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.TemplateSelection-ColorCell {
+  padding: 8px;
+  text-align: center;
+}
+
+.TemplateSelection-ColorButton {
+  width: 150px;
+  height: 43px;
+  max-width: 100%;
+  margin: 1px;
+  padding: 8px;
+  color: white;
+  font-family: Inter;
+  font-size: 20px;
+  border: none;
+  border-radius: 4px;
+  
+}
+
+.FirstRowColorButton1 {
+  background-color: #deccbb;
+}
+
+.FirstRowColorButton2 {
+  background-color: black;
+}
+
+.SecondRowColorButton1 {
+  background-color: #b8d4bd;
+}
+
+.SecondRowColorButton2 {
+  background-color: #323232;
+}
+
+.ThirdRowColorButton1 {
+  background-color: #dadada;
+}
+
+.ThirdRowColorButton2 {
+  background-color: #2d4956;
+}
+
+
+.FourthRowColorButton1 {
+  background-color: #bf99ba;
+}
+
+.FourthRowColorButton2 {
+  background-color: #553734;
+}
+
+.FifthRowColorButton1 {
+  background-color: #a4dcf1;
+}
+
+.FifthRowColorButton2 {
+  background-color: #19474b;
+}
+
+
+/*css for the typography table*/
+.TemplateSelection-ResponsiveTypographyTableContainer {
+  overflow-x: auto;
+  
+}
+
+.TemplateSelection-TypographyTableHeading {
+  text-align: left;
+}
+
+.TemplateSelection-TypographyTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.TemplateSelection-TypographyCell {
+  padding: 8px;
+  text-align: center;
+}
+
+.TemplateSelection-TypographyButton {
+  width: 154px;
+  height: 42px;
+  max-width: 100%;
+  margin: 1px;
+  padding: 8px;
+  color: white;
+  font-size: 20px;
+  border: none;
+  border-radius: 25px;
+  background-color: black;
+}
+.FirstRowTypographyButton1 {
+  font-family: Calibri;
+}
+
+.FirstRowTypographyButton2 {
+  font-family: Cambria;
+}
+
+.SecondRowTypographyButton1 {
+  font-family: Helvetica;
+}
+
+.SecondRowTypographyButton2 {
+  font-family: Georgia;
+}
+
+.ThirdRowTypographyButton1 {
+  font-family: Verdana;
+}
+
+.ThirdRowTypographyButton2 {
+  font-family: Garamond;
+}
+.FourthRowTypographyButton2 {
+  font-family: Trebuchet MS;
+}
+.FourthRowTypographyButton2 {
+  font-family: Lato;
+}
+
+  
+  /* Below css is to make the template selection form responsive  */
+  /* @media (max-width: 376px) and (min-width: 339px) {
+    .TemplateSelection-Container {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: auto;
+      padding-right: 0px;
+    }
+    .TemplateSelection-LeftColumn {
+      width: 220px;
+      max-height: 350px;
+    
+    }
+  
+    .TemplateSelection-RightColumn {
+      flex: none;
+    }
+  
+    .TemplateSelection-RightRow {
+      flex: none;
+      width: 220px;
+    }
+    .TemplateSelection-maindiv{
+      padding-bottom: 40px;
+    }
+  } */
+  @media (max-width:376px){
+    .TemplateSelection-Container {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: auto;
+      padding-right: 0px;
+    }
+    .TemplateSelection-LeftColumn {
+      width: 220px;
+      max-height: 350px;
+    
+    }
+  
+    .TemplateSelection-RightColumn {
+      flex: none;
+    }
+  
+    .TemplateSelection-RightRow {
+      flex: none;
+      width: 220px;
+    }
+    .TemplateSelection-maindiv{
+      padding-bottom: 40px;
+    }
+  
+  }
+  @media (max-width:528px) and (min-width: 377px) {
+    .TemplateSelection-Container {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: auto;
+      padding-right: 0px;
+    }
+    .TemplateSelection-LeftColumn {
+      width: 250px;
+      max-height: 350px;
+    
+    }
+  
+    .TemplateSelection-RightColumn {
+      flex: none;
+    }
+  
+    .TemplateSelection-RightRow {
+      flex: none;
+      width: 250px;
+    }
+    .TemplateSelection-maindiv{
+      padding-bottom: 40px;
+    }
+  
+  }
+
+  @media (max-width: 540px) and (min-width: 529px) {
+    .TemplateSelection-Container {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: auto;
+      padding-right: 0px;
+    }
+    .TemplateSelection-LeftColumn {
+      width: 280px;
+      max-height: 350px;
+    
+    }
+  
+    .TemplateSelection-RightColumn {
+      flex: none;
+    }
+  
+    .TemplateSelection-RightRow {
+      flex: none;
+      width: 280px;
+    }
+    .TemplateSelection-maindiv{
+      padding-bottom: 40px;
+    }
+  
+  
+  }
+  @media (max-width: 739px) and (min-width: 541px) {
+    .TemplateSelection-Container {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: auto;
+      padding-right: 0px;
+    }
+    .TemplateSelection-LeftColumn {
+      width: 280px;
+      max-height: 350px;
+    
+    }
+  
+    .TemplateSelection-RightColumn {
+      flex: none;
+    }
+  
+    .TemplateSelection-RightRow {
+      flex: none;
+      width: 280px;
+    }
+    .TemplateSelection-maindiv{
+      padding-bottom: 40px;
+    }
+  
+  
+  }
+  @media (max-width: 769px) and (min-width: 740px) {
+    .TemplateSelection-Container {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: auto;
+      padding-right: 0px;
+    }
+    .TemplateSelection-LeftColumn {
+      width: 600px;
+      max-height: 400px;
+    
+    }
+  
+    .TemplateSelection-RightColumn {
+      flex: none;
+    }
+  
+    .TemplateSelection-RightRow {
+      flex: none;
+      width: 600px;
+    }
+    .TemplateSelection-maindiv{
+      padding-bottom: 40px;
+    }
+  }
+  @media (max-width: 821px) and (min-width: 780px) {
+    .TemplateSelection-Container {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: auto;
+      padding-right: 0px;
+    }
+    .TemplateSelection-LeftColumn {
+      width: 580px;
+      max-height: 400px;
+    
+    }
+  
+    .TemplateSelection-RightColumn {
+      flex: none;
+    }
+  
+    .TemplateSelection-RightRow {
+      flex: none;
+      width: 580px;
+    }
+    .TemplateSelection-maindiv{
+      padding-bottom: 40px;
+    }
+  }
+  @media (max-width: 1016px) and (min-width: 822px) {
+    .TemplateSelection-Container {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: auto;
+      padding-right: 0px;
+    }
+    .TemplateSelection-LeftColumn {
+      width: 700px;
+      max-height: 400px;
+    
+    }
+  
+    .TemplateSelection-RightColumn {
+      flex: none;
+    }
+  
+    .TemplateSelection-RightRow {
+      flex: none;
+      width: 700px;
+    }
+    .TemplateSelection-maindiv{
+      padding-bottom: 40px;
+    }
+  
+  
+  }
+  

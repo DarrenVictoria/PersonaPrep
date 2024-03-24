@@ -1,0 +1,62 @@
+  
+  .Clubs-LeftColumn {
+    flex: 1;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 100%;
+    /* padding-left: 60px; */
+    padding: 0 20px;
+    box-sizing: border-box;
+    
+  }
+  .ClubsLeftColumn-textfield{
+    border-radius: 25px;
+  }
+  .Clubs-RightColumn {
+    flex: 1;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;  
+    max-width: 100%;
+    padding: 0 20px;
+    
+    /* box-sizing: border-box; */
+  }
+  
+  .Clubs-Maindiv {
+    /*padding: 10px;*/
+    display: flex;
+    flex-direction: row;
+   /* padding-top: 250px;*/
+    flex-wrap: wrap;
+    
+  }
+  
+  @media (max-width: 783px) {
+    .Clubs-Maindiv {
+      flex-direction: column; /* Change back to column layout for smaller screens */
+    }
+  
+    .Clubs-LeftColumn,
+    .Clubs-RightColumn {
+      padding: 0 10px; /* Further adjusted padding for smaller screens */
+    }
+  
+    .Clubs-RightColumn {
+      order: 1; /* Move right column to the top on smaller screens */
+      margin-top: 20px; /* Add margin to separate the columns */
+
+    }
+  
+  }
+  /*.Clubs-RightColumnCard{
+    overflow-y: auto;
+    
+    
+  }
+  */

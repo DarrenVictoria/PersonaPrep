@@ -1,0 +1,43 @@
+.Project-main{
+    display: flex;
+    flex-direction: row;
+}
+.Project-leftCol{
+    flex: 1;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 100%;
+    /* box-sizing: border-box; */
+    padding: 10px; 
+}
+.Project-rightCol{
+    flex: 1;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+    /* box-sizing: border-box; */
+    padding: 10px;
+    overflow: hidden;  
+}
+
+
+
+@media (max-width: 700px){
+    .Project-main{
+        flex-direction: column;
+    }
+    .Project-leftCol,
+    .Project-rightCol {
+        align-items: center;
+    }
+    .Project-rightCol{
+        order: -1;
+        /* overflow: scroll;   */
+    }
+    
+}

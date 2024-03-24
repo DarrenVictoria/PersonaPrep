@@ -1,0 +1,18 @@
+.Genmaindiv{
+    display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center; 
+    
+}
+
+@media (max-width: 540px) {
+    .Genmaindiv{
+        padding: 10px; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center; 
+        padding-left: -10px;
+    }
+}

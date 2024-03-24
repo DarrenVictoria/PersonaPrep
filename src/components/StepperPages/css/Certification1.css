@@ -1,0 +1,96 @@
+  
+  .Certification1-LeftColumn {
+    flex: 1;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 100%;
+    padding: 0 20px; /* Adjusted padding for smaller screens */
+    box-sizing: border-box;
+  }
+  
+  .Certification1LeftColumn-textfield {
+    border-radius: 25px;
+  }
+  
+  .Certification1-RightColumn {
+    flex: 1;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    max-width: 100%;
+    padding: 0 20px; /* Adjusted padding for smaller screens */
+    box-sizing: border-box;
+    overflow: auto;
+  }
+  
+  .Certification1-Maindiv {
+    display: flex;
+    flex-direction: row; /* Changed to column layout for smaller screens */
+    flex-wrap: wrap;
+  }
+  
+  /* Media queries for smaller screens */
+  @media (max-width: 540px) {
+    .Certification1-Maindiv {
+      flex-direction: column; /* Change back to column layout for smaller screens */
+    }
+  
+    .Certification1-LeftColumn,
+    .Certification1-RightColumn {
+      padding: 0 10px; /* Further adjusted padding for smaller screens */
+    }
+  
+    .Certification1-RightColumn {
+      order: -1; /* Move right column to the top on smaller screens */
+      margin-bottom: 20px; /* Add margin to separate the columns */
+    }
+  }
+  
+  /*
+  .Certification1-LeftColumn {
+    flex: 1;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 100%;
+    padding-left: 60px;
+    box-sizing: border-box;
+    
+  }
+  .Certification1LeftColumn-textfield{
+    border-radius: 25px;
+  }
+  .Certification1-RightColumn {
+    flex: 1;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    padding-right: 30px;
+    padding-left: 30px;
+  }
+  */
+  /*.Certification1-Maindiv {*/
+    /*padding: 10px;*/
+    /* display: flex;
+    flex-direction: row; */
+   /* padding-top: 250px;*/
+    /* flex-wrap: wrap; */
+    /* height: 10vh; */
+ /* }*/
+  
+  /*.Certification1-RightColumnCard{
+    overflow-y: auto;
+    
+    
+  }
+  */

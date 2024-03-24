@@ -1,0 +1,191 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+
+
+*{
+  box-sizing: border-box;
+}
+
+
+.inter {
+  color: #000;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+  margin:10px;
+  
+}
+
+.inter-picturebox {
+  color: #000;
+  font-size: 50px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+  margin:10px;
+  
+}
+
+
+.inter-bold {
+  font-family: 'Inter', sans-serif;
+  font-weight: bold;
+  margin-left: 5%;
+  
+}
+
+.inter-bold::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  width: 100%;
+  height: 2px;
+  background-color: #000;
+  transform: translateY(-50%);
+  margin-right: 10px; /* Adjust this value for your desired spacing between the text and the stroke line */
+}
+
+.inter-bold-center {
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  text-align: center;
+  
+}
+
+.inter-top {
+  color: #000;
+  font-size: 35px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+  margin: 10px;
+}
+
+.split-container {
+  margin-top:1rem;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  font-weight: 900;
+}
+
+.left-box {
+  flex: 1;
+  padding: 20px;
+  box-sizing: border-box;
+  border: 4px solid #000;
+  background: url("../assets/images/LandingTop.png"), lightgray 0px -0.012px / 162.277% 100.005% no-repeat;
+  height: 20rem;
+  background-repeat: no-repeat;
+
+  background-size: cover;
+  
+}
+
+.right-box {
+  flex: 1;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  /* Media query for smaller screens */
+  .split-container {
+    flex-direction: column; /* Change to column layout for smaller screens */
+  }
+
+  .left-box {
+    order: -1; /* Move the right box below the left box */
+  }
+
+  .right-box{
+    order:2;
+  }
+}
+
+.top-right-box {
+  flex: 1;
+  height: 50%;
+  background: 
+    linear-gradient(0deg, #FFDFDF 0%, #FFDFDF 100%),
+    linear-gradient(0deg, #FFC5C5 0%, #FFC5C5 100%),
+    #FFC5C5;
+  border: 3px solid #000;
+}
+
+.bottom-right-box {
+  flex: 1;
+  height: 50%;
+  background: 
+    linear-gradient(0deg, #EFFFDE 0%, #EFFFDE 100%),
+    linear-gradient(0deg, #EFFFDE 0%, #EFFFDE 100%),
+    #FFC5C5;
+  border: 3px solid #000;
+}
+
+.IBText{
+  font-family: 'Inter', sans-serif;
+  text-align: left;
+  margin-top: 0;
+  margin-right: '5rem';
+}
+
+.professional-text-container {
+  display: inline-block;
+  padding: 10px;
+  background-color: #d3d3d3; /* Gray box background color */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Mild black drop shadow */
+  margin-right: 10px; /* Add some margin between marquee items */
+}
+
+.professional-text {
+  font-weight: bold;
+  color: #000; /* Black text color */
+  margin: 0; /* Remove default margin */
+}
+
+
+.grid-item {
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+}
+
+
+.box-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.arrow-icon {
+  display: flex;
+  align-items: center;
+}
+
+.cv-box:hover,
+.interview-box:hover {
+  transform: scale(1.02);
+  transition: transform 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+
+.disabled {
+  opacity: 0.5; /* Example: Reduce opacity for a grayed-out effect */
+  pointer-events: none; /* Disable pointer events to prevent interactions */
+  /* Add any other styles for a disabled appearance */
+}
+
+
+
+
+
+
