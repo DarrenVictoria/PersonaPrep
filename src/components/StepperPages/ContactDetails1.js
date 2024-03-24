@@ -138,7 +138,7 @@ const onSubmit = async (formData) => {
                                               <TextField type="text" variant="outlined" 
                                                 value={phone}
                                                 fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
-                                                placeholder='Full Stack Developer'
+                                                placeholder='0713489420'
                                                 {...register("phone", { required: true, maxLength: 30, pattern: /^[0-9]+$/  })}
                                                 />
                                                 {errors.phone && errors.phone.type === "maxLength" ? "Max word limit is 30" : errors.phone && "Please enter only letters"}
@@ -149,6 +149,7 @@ const onSubmit = async (formData) => {
                                                 <TextField type="email" variant="outlined" 
                                                 value={pemail}
                                                 fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                                placeholder='Johndoe@example.com'
                                                 {...register("pemail", { required: true })}
                                                 />
                                                 {errors.pemail && "This field is required"}
@@ -159,6 +160,7 @@ const onSubmit = async (formData) => {
                                                 <TextField type="text" variant="outlined" 
                                                 value={district}
                                                 fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                                placeholder='Colombo'
                                                 {...register("district", { required: true, maxLength: 30, pattern: /^[a-zA-Z\s]+$/})}
                                                 />
                                                 {errors.district && errors.district.type === "maxLength" ? "Max word limit is 30" : errors.district && "Please enter only letters"}
@@ -169,6 +171,7 @@ const onSubmit = async (formData) => {
                                                 <TextField type="text" variant="outlined" 
                                                 value={city}
                                                 fullWidth  required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                                placeholder='Homagama'
                                                 {...register("city", { required: true, maxLength: 50, pattern: /^[a-zA-Z\s]+$/  })}
                                                 />
                                                 {errors.city && errors.city.type === "maxLength" ? "Max word limit is 50" : errors.city && "Please enter only letters"}
@@ -179,6 +182,7 @@ const onSubmit = async (formData) => {
                                                 <TextField type="text" variant="outlined" 
                                                 value={postal}
                                                 fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                                placeholder='10300'
                                                 {...register("postal", { required: true, maxLength: 30, pattern: /^[0-9]+$/  })}
                                                 />
                                                 {errors.postal && errors.postal.type === "maxLength" ? "Max word limit is 30" : errors.postal && "Please enter only letters"}
@@ -189,6 +193,7 @@ const onSubmit = async (formData) => {
                                                 <TextField type="text" variant="outlined" 
                                                 value={country}
                                                 fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                                placeholder='Sri Lanka'
                                                 {...register("country", { required: true, maxLength: 30  })}
                                                 />
                                                 {errors.country && errors.country.type === "maxLength" ? "Max word limit is 30" : errors.country && "Please enter only letters"}
@@ -199,6 +204,7 @@ const onSubmit = async (formData) => {
                                                 <TextField type="text" variant="outlined" 
                                                 value={portfolioSite}
                                                 fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                                placeholder='www.portfolio.com'
                                                 {...register("portfolioSite", { required: true})}
                                                 />
                                                 {errors.portfolioSite && "This field is required"}

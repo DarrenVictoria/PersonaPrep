@@ -471,7 +471,7 @@ return (
                 </Grid>
                 <Grid item xs={12} sm={6} md={6} mt={3}>
                 <Card sx={{borderRadius:"25px",display: "flex",alignItems: "center",justifyContent: "center",flexDirection: "column"}}>
-                    <h3>Your Pie Chart</h3>
+                    <h3>Recruitment Break Down</h3>
                     <ResponsiveContainer width="100%" height={400}>
                     <PieChart >
                         <Pie
