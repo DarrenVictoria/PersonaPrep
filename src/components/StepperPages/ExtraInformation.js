@@ -212,7 +212,7 @@ const ExtraInformation = () => {
                                                         Reference Person</Typography>
                                                     <TextField type="text" value={result.name} onChange={(event) => handleRedNmChange(index, event)} variant="outlined" fullWidth 
                                                     required = {(index === 0)? true: false}
-                                                    InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/>
+                                                    InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='John Doe'/>
                                                 </Grid>
                                                 <Grid item xs={5} md={3} mb={3}>
                                                     <Typography mb={1}>
@@ -220,7 +220,7 @@ const ExtraInformation = () => {
                                                         Contact No</Typography>
                                                     <TextField type="text" value={result.phone} onChange={(event) => handleRefPhChange(index, event)} variant="outlined" fullWidth 
                                                     required = {(index === 0)? true: false}s
-                                                    InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/>
+                                                    InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='0773325410'/>
                                                 </Grid>
                                                 {index !== 0 && (
                                                     <Grid item xs={1} md={2}  mt={3}>
@@ -273,7 +273,7 @@ const ExtraInformation = () => {
                                             <Grid container item spacing={2} key={index}>
                                                 <Grid item xs={11} md={6} mb={3} mt={3}>
                                                     
-                                                    <TextField type="text" value={result} onChange={(event) => handleChange(index, event, lang, setLang)} variant="outlined" fullWidth InputProps={{ style: { borderRadius: '25px', backgroundColor: 'white' } }} placeholder='' />
+                                                    <TextField type="text" value={result} onChange={(event) => handleChange(index, event, lang, setLang)} variant="outlined" fullWidth InputProps={{ style: { borderRadius: '25px', backgroundColor: 'white' } }} placeholder='English' />
                                                 </Grid>
                                                 {index !== 0 && (
                                                     <Grid item xs={1} md={2} mt={3}>
