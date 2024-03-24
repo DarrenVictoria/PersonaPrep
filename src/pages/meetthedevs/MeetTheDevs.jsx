@@ -40,7 +40,7 @@ function MeetTheDevs() {
   };
   return (
   <div>
-    <Navbar />
+    <NavBar />
     <Box sx={{ padding: 6 }}>
       <Typography variant='h1' gutterBottom>
         Meet the Devs
