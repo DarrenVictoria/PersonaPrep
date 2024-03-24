@@ -54,7 +54,7 @@ const GrayDiv = () => {
         <p style={{ fontFamily: 'Inter', marginBottom: '20px',paddingLeft:'8%',paddingRight:'8%' }}>
           NFORCE – NSBM for Career and Entrepreneurship is the Unit belonging to NSBM Green University which prepares the students for the world of work. For the first time in Sri Lanka, NSBM Green University, positioned the university career guidance as a corporate entity NFORCE, to give the exposure of corporates to the students from the beginning itself. NFORCE is responsible for making the graduates’ future ready to win the corporate world as well as to promote entrepreneurship among students.
         </p>
-        <Button style={{backgroundColor:'black', color:'white', padding:'0.7rem',fontFamily:'inter'}}>Meet the devs</Button>
+        <Button style={{backgroundColor:'black', color:'white', padding:'0.7rem',fontFamily:'inter'}} onClick={() => {window.location.href="/meetthedevs"}}>Meet the devs</Button>
       </div>
     </div>
   );
