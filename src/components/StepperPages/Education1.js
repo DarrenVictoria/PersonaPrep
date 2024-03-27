@@ -10,10 +10,6 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
-import cphone from '../../assets/images/iconcphone.svg';
-import EditableChoose from '../EditableSelectOption';
-import CustomMultilineTextFieldslimited from '../MultilineMaxWordLimit';
-import InterviewFormFooter from '../InterviewFormFooter';
 import InterviewFormHeader from '../InterviewFormHeader';
 import '../../pages/interviewforms/Template.css';
 import Button from "@mui/material/Button";
@@ -224,7 +220,7 @@ const School1 = () => {
                                                 <TextField type="text" variant="outlined" fullWidth required  
                                                 value={School1City}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
-                                                placeholder=''
+                                                placeholder='Homagama'
                                                 {...register("School1City", { required: true, maxLength: 50, pattern: /^[a-zA-Z0-9\s]+$/ })}
                                                 />
                                                 {errors.School1City && errors.School1City.type === "maxLength" ? "Max word limit is 50" : errors.School1City && "Please enter only letters"}
@@ -234,7 +230,7 @@ const School1 = () => {
                                                 <TextField type="text" variant="outlined" fullWidth required  
                                                 value={School1Country}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
-                                                placeholder=''                                                
+                                                placeholder='Sri Lanka'                                                
                                                 {...register("School1Country", { required: true, maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
                                                 />
                                                 {errors.School1Country && errors.School1Country.type === "maxLength" ? "Max word limit is 30" : errors.School1Country && "Please enter only letters and numbers"}

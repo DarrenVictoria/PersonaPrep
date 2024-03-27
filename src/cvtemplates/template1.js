@@ -27,7 +27,7 @@ const PageBreak = () => {
       <div
         style={{
           position: 'relative',
-          height: '120px',
+          height: '220px',
           width: '100%',
           backgroundColor: 'transparent',
         }}

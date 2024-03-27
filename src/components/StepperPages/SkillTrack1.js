@@ -1,9 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import '../../pages/interviewforms/Template.css';
-import InterviewFormFooter from '../InterviewFormFooter';
 import InterviewFormHeader from '../InterviewFormHeader';
-import {CustomizedHook, CustomizedHookLarge} from '../TextfieldButtonDataDisplay';
 import CustomMultilineTextFieldslimited from '../MultilineMaxWordLimit';
 import Typography from '@mui/material/Typography';
 import Grid from "@mui/material/Grid";
@@ -254,7 +252,7 @@ const SkillTrack_1 = () => {
                         <form onSubmit={handleSubmit} style={{ height: '100%', position: 'relative' }}>
                             <div style={{ margin: '80px 25px 125px' }}>
                                 <div>
-                                    <Typography mb={1} mt={3}><span style={{color: 'red'}}>*</span> What would you say are your core competencies or key skills?,<b>Min 3</b>/ Max 5</Typography>
+                                    <Typography mb={1} mt={3}>What would you say are your core competencies or key skills?,<b>Min 3</b>/ Max 5</Typography>
                                         <Stack spacing={3} maxWidth={1300}>
                                                 <Autocomplete
                                                     multiple
@@ -291,11 +289,11 @@ const SkillTrack_1 = () => {
                                                 />
                                         </Stack> 
                                     
-                                    <Typography mb={1} mt={3}><span style={{color: 'red'}}>*</span> If applicable, how would you describe your leadership style?</Typography>
+                                    <Typography mb={1} mt={3}>If applicable, how would you describe your leadership style?</Typography>
                                     <CustomMultilineTextFieldslimited inputHeight={100} maxWidth={1300} value={leadership} onChange={handleLeadership} maxWords={20} isRequired={true}/>
-                                    <Typography mb={1} mt={3}><span style={{color: 'red'}}>*</span> If applicable can you share examples of how you've led teams or projects?</Typography>
+                                    <Typography mb={1} mt={3}>If applicable can you share examples of how you've led teams or projects?</Typography>
                                     <CustomMultilineTextFieldslimited inputHeight={100} maxWidth={1300} value={leadershipEx} onChange={handleLeadershipEx} maxWords={20} isRequired={true}/>
-                                    <Typography mb={1} mt={3}><span style={{color: 'red'}}>*</span> What soft skills do you believe are your strengths?<b>Min 3</b>/ Max 5</Typography>
+                                    <Typography mb={1} mt={3}> What soft skills do you believe are your strengths?<b>Min 3</b>/ Max 5</Typography>
                                         <Stack spacing={3} maxWidth={1300}>
                                                 <Autocomplete
                                                     multiple
@@ -331,7 +329,7 @@ const SkillTrack_1 = () => {
                                                     )}
                                                 />
                                           </Stack>                 
-                                    <Typography mb={1} mt={3}><span style={{color: 'red'}}>*</span> How do these skills contribute to your overall effectiveness in the workplace?</Typography>
+                                    <Typography mb={1} mt={3}>How do these skills contribute to your overall effectiveness in the workplace?</Typography>
                                     <CustomMultilineTextFieldslimited inputHeight={100} maxWidth={1300} value={skillContrib} onChange={handleSkillContrib} maxWords={20} isRequired={true} mb={10}/>
                                 </div>
                             </div>

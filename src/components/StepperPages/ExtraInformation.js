@@ -1,16 +1,12 @@
 import './css/personalInfo.css';
 import '../../pages/interviewforms/Template.css';
-import InterviewFormFooter from '../InterviewFormFooter';
 import InterviewFormHeader from '../InterviewFormHeader';
 import Grid from "@mui/material/Grid";
 import Typography from '@mui/material/Typography';
 import TextField from "@mui/material/TextField";
-import CustomMultilineTextFields from '../CustomMultilineTextfield';
-import EditableChoose from '../EditableSelectOption';
 import { useState, useEffect } from 'react';
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
-import { CustomizedHook } from '../TextfieldButtonDataDisplay';
 import Button from "@mui/material/Button";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { back } from '../BackButton.js';
@@ -18,9 +14,8 @@ import { next } from '../NextButton.js';
 import { useNavigate } from 'react-router-dom';
 import Autocomplete from "@mui/material/Autocomplete";
 import Stack from "@mui/material/Stack";
-import { setRef } from '@mui/material';
 import RemoveIcon from '@mui/icons-material/Remove';
-import { collection, addDoc, getFirestore, query, where, getDocs, doc, updateDoc, getDoc,setDoc } from 'firebase/firestore';
+import { collection, getFirestore, doc, getDoc,setDoc } from 'firebase/firestore';
 import { useAuth } from '../../hooks/useAuth.js';
 
 
@@ -217,7 +212,7 @@ const ExtraInformation = () => {
                                                         Reference Person</Typography>
                                                     <TextField type="text" value={result.name} onChange={(event) => handleRedNmChange(index, event)} variant="outlined" fullWidth 
                                                     required = {(index === 0)? true: false}
-                                                    InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/>
+                                                    InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='John Doe'/>
                                                 </Grid>
                                                 <Grid item xs={5} md={3} mb={3}>
                                                     <Typography mb={1}>
@@ -225,7 +220,7 @@ const ExtraInformation = () => {
                                                         Contact No</Typography>
                                                     <TextField type="text" value={result.phone} onChange={(event) => handleRefPhChange(index, event)} variant="outlined" fullWidth 
                                                     required = {(index === 0)? true: false}s
-                                                    InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder=''/>
+                                                    InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} placeholder='0773325410'/>
                                                 </Grid>
                                                 {index !== 0 && (
                                                     <Grid item xs={1} md={2}  mt={3}>
@@ -278,7 +273,7 @@ const ExtraInformation = () => {
                                             <Grid container item spacing={2} key={index}>
                                                 <Grid item xs={11} md={6} mb={3} mt={3}>
                                                     
-                                                    <TextField type="text" value={result} onChange={(event) => handleChange(index, event, lang, setLang)} variant="outlined" fullWidth InputProps={{ style: { borderRadius: '25px', backgroundColor: 'white' } }} placeholder='' />
+                                                    <TextField type="text" value={result} onChange={(event) => handleChange(index, event, lang, setLang)} variant="outlined" fullWidth InputProps={{ style: { borderRadius: '25px', backgroundColor: 'white' } }} placeholder='English' />
                                                 </Grid>
                                                 {index !== 0 && (
                                                     <Grid item xs={1} md={2} mt={3}>

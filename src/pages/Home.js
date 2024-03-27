@@ -54,7 +54,7 @@ const GrayDiv = () => {
         <p style={{ fontFamily: 'Inter', marginBottom: '20px',paddingLeft:'8%',paddingRight:'8%' }}>
           NFORCE – NSBM for Career and Entrepreneurship is the Unit belonging to NSBM Green University which prepares the students for the world of work. For the first time in Sri Lanka, NSBM Green University, positioned the university career guidance as a corporate entity NFORCE, to give the exposure of corporates to the students from the beginning itself. NFORCE is responsible for making the graduates’ future ready to win the corporate world as well as to promote entrepreneurship among students.
         </p>
-        <Button style={{backgroundColor:'black', color:'white', padding:'0.7rem',fontFamily:'inter'}}>Meet the devs</Button>
+        <Button style={{backgroundColor:'black', color:'white', padding:'0.7rem',fontFamily:'inter'}} onClick={() => {window.location.href="/meetthedevs"}}>Meet the devs</Button>
       </div>
     </div>
   );
@@ -351,7 +351,7 @@ export default function SplitLayout() {
       <Box style={TotalIB} sx={{ width: '100%' }}>
   <Grid container rowSpacing={2} columnSpacing={{ xs: 0.5, sm: 1, md: 2 }}>
     <Grid item xs={12} sm={6} md={6} className={`grid-item additional-feature-item-1`} onClick={() => window.location.href = '/interviewBank'}>
-      <Item style={{ backgroundColor: '#973381', height: '7rem', position: 'relative', border: '3px solid #000' }}>
+      <Item style={{ backgroundColor: '#DEB113', height: '7rem', position: 'relative', border: '3px solid #000' }}>
         <h1 className="IBText">Interview Bank</h1>
         <div style={{ position: 'absolute', bottom: '10px', right: '10px' }}>
           <IconButton>
@@ -362,7 +362,7 @@ export default function SplitLayout() {
     </Grid>
 
     <Grid item xs={12} sm={6} md={6} className={`grid-item additional-feature-item-2`} onClick={() => redirectTo('/admindash')}>
-      <Item style={{ backgroundColor: '#DEB113', height: '7rem', position: 'relative', border: '3px solid #000' }}>
+      <Item style={{ backgroundColor: '#973381', height: '7rem', position: 'relative', border: '3px solid #000' }}>
         <h1 className="IBText">Corporate Login</h1>
         <div style={{ position: 'absolute', bottom: '10px', right: '10px' }}>
           <IconButton>
