@@ -200,9 +200,9 @@ const UniversityEducation1 = () => {
                                                 value={UniName}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder='NSBM Green University'
-                                                {...register("UniName", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                {...register("UniName", { maxLength: 50, pattern: /^[a-zA-Z\s,.']+$/ })}
                                                 />
-                                                {errors.UniName && errors.UniName.type === "maxLength" ? "Max word limit is 30" : errors.UniName && "Please enter only letters"}
+                                                {errors.UniName && errors.UniName.type === "maxLength" ? "Max character limit is 50" : errors.UniName && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={1}>
                                                 <Typography><span style={{color: 'red'}}>*</span>Degree</Typography>
@@ -236,9 +236,9 @@ const UniversityEducation1 = () => {
                                                 value={UniCity}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder='Homagama'
-                                                {...register("UniCity", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                {...register("UniCity", { maxLength: 30, pattern: /^[a-zA-Z\s,.']+$/ })}
                                                 />
-                                                {errors.UniCity && errors.UniCity.type === "maxLength" ? "Max word limit is 30" : errors.UniCity && "Please enter only letters"}
+                                                {errors.UniCity && errors.UniCity.type === "maxLength" ? "Max character limit is 30" : errors.UniCity && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>Country</Typography>
@@ -246,9 +246,9 @@ const UniversityEducation1 = () => {
                                                 value={UniCountry}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder='Sri Lanka'
-                                                {...register("UniCountry", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                {...register("UniCountry", { maxLength: 30, pattern: /^[a-zA-Z\s,.']+$/ })}
                                                 />
-                                                {errors.UniCountry && errors.UniCountry.type === "maxLength" ? "Max word limit is 30" : errors.UniCountry && "Please enter only letters"}
+                                                {errors.UniCountry && errors.UniCountry.type === "maxLength" ? "Max character limit is 30" : errors.UniCountry && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={1}>
                                                 <Typography><span style={{color: 'red'}}>*</span>Start Date</Typography>

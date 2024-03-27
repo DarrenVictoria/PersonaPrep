@@ -175,7 +175,7 @@ const PersonalInfo = () => {
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 {...register("Proname", {maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
                                                 />
-                                                {errors.Proname && errors.Proname.type === "maxLength" ? "Max word limit is 30" : errors.Proname && "Please enter only letters"}
+                                                {errors.Proname && errors.Proname.type === "maxLength" ? "Max character limit is 30" : errors.Proname && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span> Profile Picture</Typography>

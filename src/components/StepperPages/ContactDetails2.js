@@ -47,6 +47,7 @@ const ContactDetails_2 = () => {
         const dataToUpdate = {};
         if (GitHubUN.trim() !== '') dataToUpdate.GitHubUN = GitHubUN;
         if (LinkedInUN.trim() !== '') dataToUpdate.LinkedInUN = LinkedInUN;
+        // dataToUpdate.LinkedInUN = LinkedInUN;
         if (TwitterUN.trim() !== '') dataToUpdate.TwitterUN = TwitterUN;
         if (StackOverUN.trim() !== '') dataToUpdate.StackOverUN = StackOverUN;
         if (MediumUN.trim() !== '') dataToUpdate.MediumUN = MediumUN;
@@ -126,8 +127,9 @@ const ContactDetails_2 = () => {
                                                     value={GitHubUN}
                                                     fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                     placeholder='GitHub Username'
-                                                    {...register("GitHubUN", {maxLength: 20})}
+                                                    {...register("GitHubUN", {maxLength: 30})}
                                                     />
+                                                    {errors.GitHubUN && 'Max character limit is 30'}
                                                 </Grid>
                                             </Grid>
 
@@ -140,8 +142,9 @@ const ContactDetails_2 = () => {
                                                     value={LinkedInUN}
                                                     fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                     placeholder='LinkedIn Username'
-                                                    {...register("LinkedInUN", {maxLength: 20})}
+                                                    {...register("LinkedInUN", {maxLength: 30})}
                                                     />
+                                                    {errors.LinkedInUN && 'Max character limit is 30'}
                                                 </Grid>
                                             </Grid>
 
@@ -154,8 +157,9 @@ const ContactDetails_2 = () => {
                                                     value={TwitterUN}
                                                     fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                     placeholder='Twitter Username'
-                                                    {...register("TwitterUN", {maxLength: 20})}
+                                                    {...register("TwitterUN", {maxLength: 30})}
                                                     />
+                                                    {errors.TwitterUN && 'Max character limit is 30'}
                                                 </Grid>
                                             </Grid>
 
@@ -168,8 +172,9 @@ const ContactDetails_2 = () => {
                                                     value={StackOverUN}
                                                     fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                     placeholder='StackOverflow Username'
-                                                    {...register("StackOverUN", {maxLength: 20})}
+                                                    {...register("StackOverUN", {maxLength: 30})}
                                                     />
+                                                    {errors.StackOverUN && 'Max character limit is 30'}
                                                 </Grid>
                                             </Grid>
 
@@ -182,8 +187,9 @@ const ContactDetails_2 = () => {
                                                     value={MediumUN}
                                                     fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                     placeholder='Medium Username'
-                                                    {...register("MediumUN", {maxLength: 20})}
+                                                    {...register("MediumUN", {maxLength: 30})}
                                                     />
+                                                    {errors.MediumUN && 'Max character limit is 30'}
                                                 </Grid>
                                             </Grid>
                                         </Grid>
