@@ -76,7 +76,6 @@ const WorkExperience2 = () => {
     const WorkPostal = watch('WorkPostal');
 
     const Jb_SkillsAcquired = [
-        "c#",
         "Winforms",
         "Apache Groovy",
         "C",

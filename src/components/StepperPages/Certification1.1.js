@@ -79,7 +79,6 @@ const Certification2 = () => {
 
     //below handle function is for CustomizedHook
     const CCert_Skills = [
-        "C#",
         "Winforms",
         "Apache Groovy",
         "C",
