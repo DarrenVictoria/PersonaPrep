@@ -206,7 +206,7 @@ const TemplateSelection = () => {
                                                                         <button onClick={(e) =>{e.preventDefault(); setprimaryColor('#deccbb')}} className="TemplateSelection-ColorButton FirstRowColorButton1">Cream</button>
                                                                     </td>
                                                                     <td className="TemplateSelection-ColorCell">
-                                                                        <button onClick={(e) =>{e.preventDefault(); setsecondaryColor('#ffffff')}} className="TemplateSelection-ColorButton FirstRowColorButton2">Black</button>
+                                                                        <button onClick={(e) =>{e.preventDefault(); setsecondaryColor('#000000')}} className="TemplateSelection-ColorButton FirstRowColorButton2">Black</button>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>

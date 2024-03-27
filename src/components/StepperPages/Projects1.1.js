@@ -90,7 +90,6 @@ const Projects2 = () => {
     const ProjEvidence = watch('ProjEvidence');
     
     const Proj_Skills = [
-        "C#",
         "Winforms",
         "Apache Groovy",
         "C",
