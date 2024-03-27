@@ -546,9 +546,9 @@ const Certification1 = () => {
                                                 value={CertificateName}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder='Introduction to c# course'
-                                                {...register("CertificateName", { maxLength: 60, pattern: /^[a-zA-Z\s]+$/ })}
+                                                {...register("CertificateName", { maxLength: 100, pattern: /^[a-zA-Z\s,.'@]+$/ })}
                                                 />
-                                                {errors.CertificateName && errors.CertificateName.type === "maxLength" ? "Max word limit is 50" : errors.CertificateName && "Please enter only letters"}
+                                                {errors.CertificateName && errors.CertificateName.type === "maxLength" ? "Max character limit is 100" : errors.CertificateName && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography > Issuing Organization</Typography>
@@ -556,9 +556,9 @@ const Certification1 = () => {
                                                 value={CertificateissuedOrg}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder='Udemy'
-                                                {...register("CertificateissuedOrg", { maxLength: 50, pattern: /^[a-zA-Z\s]+$/ })}
+                                                {...register("CertificateissuedOrg", { maxLength: 100, pattern: /^[a-zA-Z\s,.'@]+$/ })}
                                                 />
-                                                {errors.CertificateissuedOrg && errors.CertificateissuedOrg.type === "maxLength" ? "Max word limit is 50" : errors.CertificateissuedOrg && "Please enter only letters"}
+                                                {errors.CertificateissuedOrg && errors.CertificateissuedOrg.type === "maxLength" ? "Max character limit is 100" : errors.CertificateissuedOrg && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={1}>
                                                 <Typography>Issue Date</Typography>

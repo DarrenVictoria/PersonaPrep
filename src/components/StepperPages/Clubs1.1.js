@@ -251,9 +251,52 @@ const Club2 = () => {
                                               IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
                                           >
                                               <MenuItem disabled value="">Clubs</MenuItem>
-                                              <MenuItem value="Club">Club</MenuItem>
-                                              <MenuItem value="Club">Club</MenuItem>
-                                              <MenuItem value="Club3">Club3</MenuItem>
+                                                <MenuItem value="Athletics Club">Athletics Club</MenuItem>
+                                                <MenuItem value="Badminton Club">Badminton Club</MenuItem>
+                                                <MenuItem value="Chess Club">Chess Club</MenuItem>
+                                                <MenuItem value="Cricket Club">Cricket Club</MenuItem>
+                                                <MenuItem value="Martial Arts Club">Martial Arts Club</MenuItem>
+                                                <MenuItem value="Netball Club">Netball Club</MenuItem>
+                                                <MenuItem value="Rugby Club">Rugby Club</MenuItem>
+                                                <MenuItem value="Swimming Club">Swimming Club</MenuItem>
+                                                <MenuItem value="Table Tennis Club">Table Tennis Club</MenuItem>
+                                                <MenuItem value="Tennis Club">Tennis Club</MenuItem>
+                                                <MenuItem value="Volleyball Club">Volleyball Club</MenuItem>
+                                                <MenuItem value="Dancing Club">Dancing Club</MenuItem>
+                                                <MenuItem value="Drama Club">Drama Club</MenuItem>
+                                                <MenuItem value="Literature Club">Literature Club</MenuItem>
+                                                <MenuItem value="Media & Photography Club">Media & Photography Club</MenuItem>
+                                                <MenuItem value="Music Club">Music Club</MenuItem>
+                                                <MenuItem value="Oratory & Debating Club">Oratory & Debating Club</MenuItem>
+                                                <MenuItem value="STEM UP Club">STEM UP Club</MenuItem>
+                                                <MenuItem value="Volunteers Club">Volunteers Club</MenuItem>
+                                                <MenuItem value="Wellbeing Club">Wellbeing Club</MenuItem>
+                                                <MenuItem value="Catholic & Christian Society">Catholic & Christian Society</MenuItem>
+                                                <MenuItem value="Buddhist Society">Buddhist Society</MenuItem>
+                                                <MenuItem value="Islamic Society">Islamic Society</MenuItem>
+                                                <MenuItem value="Hindu Society">Hindu Society</MenuItem>
+                                                <MenuItem value="AIESEC">AIESEC</MenuItem>
+                                                <MenuItem value="Rotaract Club">Rotaract Club</MenuItem>
+                                                <MenuItem value="Human Resource Circle">Human Resource Circle</MenuItem>
+                                                <MenuItem value="NFORCE">NFORCE</MenuItem>
+                                                <MenuItem value="Student Circle of Accounting and Finance">Student Circle of Accounting and Finance</MenuItem>
+                                                <MenuItem value="English Literary Association">English Literary Association</MenuItem>
+                                                <MenuItem value="Public Relations Team">Public Relations Team</MenuItem>
+                                                <MenuItem value="Young Business Researcher’s Club">Young Business Researcher’s Club</MenuItem>
+                                                <MenuItem value="International Centre for Cultural Exchange (ICCE)">International Centre for Cultural Exchange (ICCE)</MenuItem>
+                                                <MenuItem value="Entrepreneurship Circle">Entrepreneurship Circle</MenuItem>
+                                                <MenuItem value="Tourism Circle">Tourism Circle</MenuItem>
+                                                <MenuItem value="Marketing Circle">Marketing Circle</MenuItem>
+                                                <MenuItem value="Logistic Circle">Logistic Circle</MenuItem>
+                                                <MenuItem value="International Centre for Modern (ICML)">International Centre for Modern (ICML)</MenuItem>
+                                                <MenuItem value="IEEE">IEEE</MenuItem>
+                                                <MenuItem value="IoT Club">IoT Club</MenuItem>
+                                                <MenuItem value="Mathematics and Statistics Club">Mathematics and Statistics Club</MenuItem>
+                                                <MenuItem value="FOSS">FOSS</MenuItem>
+                                                <MenuItem value="CSSL">CSSL</MenuItem>
+                                                <MenuItem value="Young Scientist’s Circle">Young Scientist’s Circle</MenuItem>
+                                                <MenuItem value="International Centre for Innovation and Invention (ICII)">International Centre for Innovation and Invention (ICII)</MenuItem>
+                                                <MenuItem value="Aviation Club">Aviation Club</MenuItem>
                                               
                                           </Select>
                                         </FormControl>

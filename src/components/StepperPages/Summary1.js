@@ -143,9 +143,9 @@ const Summary_1 = () => {
                                         value={industryExperience}
                                         InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}}
                                         required
-                                        {...register("industryExperience", { required: true, maxLength: 75, pattern: /^[a-zA-Z\s]+$/ })}
+                                        {...register("industryExperience", { required: true, maxLength: 375, pattern: /^[a-zA-Z\s,.'@]+$/ })}
                                     />
-                                    {errors.industryExperience && errors.industryExperience.type === "maxLength" ? "Max word limit is 75" : errors.industryExperience && "Please enter only letters"}
+                                    {errors.industryExperience && errors.industryExperience.type === "maxLength" ? "Max character limit is 375" : errors.industryExperience && "Please enter only letters"}
 
                                     <Typography mb={1} mt={3}><span style={{color: 'red'}}>*</span> Have you led any projects or initiatives that had a notable impact?</Typography>
                                     <TextField
@@ -155,9 +155,9 @@ const Summary_1 = () => {
                                         value={notableProjects}
                                         InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}}
                                         required
-                                        {...register("notableProjects", { required: true, maxLength: 75, pattern: /^[a-zA-Z\s]+$/ })}
+                                        {...register("notableProjects", { required: true, maxLength: 375, pattern: /^[a-zA-Z\s,.'@]+$/ })}
                                     />
-                                    {errors.notableProjects && errors.notableProjects.type === "maxLength" ? "Max word limit is 75" : errors.notableProjects && "Please enter only letters"}
+                                    {errors.notableProjects && errors.notableProjects.type === "maxLength" ? "Max character limit is 375" : errors.notableProjects && "Please enter only letters"}
                                     
                                     <Typography mb={1} mt={3}><span style={{color: 'red'}}>*</span> Any highlights in your career so far you would like to describe about?</Typography>
                                     <TextField
@@ -167,9 +167,9 @@ const Summary_1 = () => {
                                         value={careerHighlights}
                                         InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}}
                                         required
-                                        {...register("careerHighlights", { required: true, maxLength: 75, pattern: /^[a-zA-Z\s]+$/ })}
+                                        {...register("careerHighlights", { required: true, maxLength: 375, pattern: /^[a-zA-Z\s,.'@]+$/ })}
                                     />
-                                    {errors.careerHighlights && errors.careerHighlights.type === "maxLength" ? "Max word limit is 75" : errors.careerHighlights && "Please enter only letters"}
+                                    {errors.careerHighlights && errors.careerHighlights.type === "maxLength" ? "Max character limit is 375" : errors.careerHighlights && "Please enter only letters"}
 
                                     <Typography mb={1} mt={3}><span style={{color: 'red'}}>*</span> Are there specific milestones or promotions that stand out?</Typography>
                                     <TextField
@@ -179,9 +179,9 @@ const Summary_1 = () => {
                                         value={promotions}
                                         InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}}
                                         required
-                                        {...register("promotions", { required: true, maxLength: 75, pattern: /^[a-zA-Z\s]+$/ })}
+                                        {...register("promotions", { required: true, maxLength: 375, pattern: /^[a-zA-Z\s,.'@]+$/ })}
                                     />
-                                    {errors.promotions && errors.promotions.type === "maxLength" ? "Max word limit is 75" : errors.promotions && "Please enter only letters"}
+                                    {errors.promotions && errors.promotions.type === "maxLength" ? "Max character limit is 375" : errors.promotions && "Please enter only letters"}
 
                                     <Typography mb={1} mt={3}><span style={{color: 'red'}}>*</span> Where do you see your career heading in the next few years?</Typography>
                                     <TextField
@@ -191,9 +191,9 @@ const Summary_1 = () => {
                                         value={futureCareer}
                                         InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}}
                                         required
-                                        {...register("futureCareer", { required: true, maxLength: 75, pattern: /^[a-zA-Z\s]+$/ })}
+                                        {...register("futureCareer", { required: true, maxLength: 375, pattern: /^[a-zA-Z\s,.'@]+$/ })}
                                     />
-                                    {errors.futureCareer && errors.futureCareer.type === "maxLength" ? "Max word limit is 75" : errors.futureCareer && "Please enter only letters"}
+                                    {errors.futureCareer && errors.futureCareer.type === "maxLength" ? "Max character limit is 375" : errors.futureCareer && "Please enter only letters"}
 
                                     <Typography mb={1} mt={3}><span style={{color: 'red'}}>*</span> What sets you apart from others in your field?</Typography>
                                     <TextField
@@ -203,9 +203,9 @@ const Summary_1 = () => {
                                         value={uniqueSkills}
                                         InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}}
                                         required
-                                        {...register("uniqueSkills", { required: true, maxLength: 75, pattern: /^[a-zA-Z\s]+$/ })}
+                                        {...register("uniqueSkills", { required: true, maxLength: 375, pattern: /^[a-zA-Z\s,.'@]+$/ })}
                                     />
-                                    {errors.uniqueSkills && errors.uniqueSkills.type === "maxLength" ? "Max word limit is 75" : errors.uniqueSkills && "Please enter only letters"}
+                                    {errors.uniqueSkills && errors.uniqueSkills.type === "maxLength" ? "Max character limit is 375" : errors.uniqueSkills && "Please enter only letters"}
 
                                     {/* <Typography mb={1} mt={3}><span style={{color: 'red'}}>*</span> Have you led any projects or initiatives that had a notable impact?</Typography>
                                     <CustomMultilineTextFieldslimited value={notableProjects} onChange={handleNotableProjectsChange} inputHeight={100} maxWidth={1300} maxWords={75} isRequired={true}/> */}

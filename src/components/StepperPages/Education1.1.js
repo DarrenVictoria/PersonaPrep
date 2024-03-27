@@ -177,9 +177,9 @@ const School2 = () => {
                                                 value={School2Name}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white', pattern: "^[a-zA-Z]+$"}}} 
                                                 placeholder='St. Thomas Catholic International'
-                                                {...register("School2Name", { maxLength: 50, pattern: /^[a-zA-Z\s]+$/ })}
+                                                {...register("School2Name", { maxLength: 50, pattern: /^[a-zA-Z\s,.']+$/ })}
                                                 />
-                                                {errors.School2Name && errors.School2Name.type === "maxLength" ? "Max word limit is 50" : errors.School2Name && "Please enter only letters"}
+                                                {errors.School2Name && errors.School2Name.type === "maxLength" ? "Max character limit is 50" : errors.School2Name && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>School experience or description</Typography>
@@ -190,9 +190,9 @@ const School2 = () => {
                                                     value={School2Experience}
                                                     InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}}
                                                     required
-                                                    {...register("School2Experience", { maxLength: 100, pattern: /^[a-zA-Z\s]+$/ })}
+                                                    {...register("School2Experience", { maxLength: 420, pattern: /^[a-zA-Z\s,.']+$/ })}
                                                 />
-                                                {errors.School2Experience && errors.School2Experience.type === "maxLength" ? "Max word limit is 100" : errors.School2Experience && "Please enter only letters"}
+                                                {errors.School2Experience && errors.School2Experience.type === "maxLength" ? "Max character limit is 420" : errors.School2Experience && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>City</Typography>
@@ -200,9 +200,9 @@ const School2 = () => {
                                                 value={School2City}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder='Homagama'
-                                                {...register("School2City", { maxLength: 50, pattern: /^[a-zA-Z0-9\s]+$/ })}
+                                                {...register("School2City", { maxLength: 50, pattern: /^[a-zA-Z0-9\s,.']+$/ })}
                                                 />
-                                                {errors.School2City && errors.School2City.type === "maxLength" ? "Max word limit is 50" : errors.School2City && "Please enter only letters"}
+                                                {errors.School2City && errors.School2City.type === "maxLength" ? "Max character limit is 50" : errors.School2City && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>Country</Typography>
@@ -210,9 +210,9 @@ const School2 = () => {
                                                 value={School2Country}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white', pattern: "^[a-zA-Z]+$"}}} 
                                                 placeholder='Sri Lanka'
-                                                {...register("School2Country", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                {...register("School2Country", { maxLength: 30, pattern: /^[a-zA-Z\s,.']+$/ })}
                                                 />
-                                                {errors.School2Country && errors.School2Country.type === "maxLength" ? "Max word limit is 30" : errors.School2Country && "Please enter only letters"}
+                                                {errors.School2Country && errors.School2Country.type === "maxLength" ? "Max character limit is 30" : errors.School2Country && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={1}>
                                                 <Typography><span style={{color: 'red'}}>*</span>Start Date</Typography>
