@@ -70,7 +70,6 @@ const WorkExperience1 = () => {
             EndyearOption.push(String(year));
         }
         const Jb_SkillsAcquired = [
-            "c#",
             "Winforms",
             "Apache Groovy",
             "C",
