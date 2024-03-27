@@ -6,6 +6,7 @@ import { AuthProvider,useAuth } from './hooks/useAuth';
 import LoadingScreen from 'react-loading-screen';
 import Logo from "./assets/logo/Persona Prep Dark.png"
 
+import MeetTheDevs from "./pages/meetthedevs/MeetTheDevs";
 import Home from './pages/Home'
 import InterviewBank from './pages/interviewbank/InterviewBank'
 import InterviewDisplay from './pages/interviewbank/interviewDisplay'
@@ -116,7 +117,8 @@ function App() {
           {/* Index Pages */}
 
           <Route index element={<Home/>} />
-          <Route path="/home" element={<Home />}/>
+          <Route path="/home" element={<Home />} />
+          <Route path="/meetthedevs" element={<MeetTheDevs/> } />
 
           {/* Insight Blog Pages */}
 

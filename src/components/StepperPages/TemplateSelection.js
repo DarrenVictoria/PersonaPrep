@@ -271,7 +271,7 @@ const TemplateSelection = () => {
                                                                 </tr>
                                                                 <tr>
                                                                     <td className="TemplateSelection-TypographyCell">
-                                                                        <button onClick={(e) => {e.preventDefault(); setTypography('Verdana')}} className="TemplateSelection-TypographyButton ThirdRowTypographyButton1">Verdana</button>
+                                                                         <button onClick={(e) => {e.preventDefault(); setTypography('Lato')}} className="TemplateSelection-TypographyButton FourthRowTypographyButton2">Lato</button>
                                                                     </td>
                                                                     <td className="TemplateSelection-TypographyCell">
                                                                         <button onClick={(e) => {e.preventDefault(); setTypography('Garamond')}} className="TemplateSelection-TypographyButton ThirdRowTypographyButton2">Garamond</button>
@@ -282,9 +282,7 @@ const TemplateSelection = () => {
                                                                     <td className="TemplateSelection-TypographyCell">
                                                                         <button onClick={(e) => {e.preventDefault(); setTypography('Trebuchet')}} className="TemplateSelection-TypographyButton FourthRowTypographyButton1">Trebuchet MS</button>
                                                                     </td>
-                                                                    <td className="TemplateSelection-TypographyCell">
-                                                                        <button onClick={(e) => {e.preventDefault(); setTypography('Lato')}} className="TemplateSelection-TypographyButton FourthRowTypographyButton2">Lato</button>
-                                                                    </td>
+                                                                    
                                                                 </tr>
                                                                 
                                                             </tbody>
