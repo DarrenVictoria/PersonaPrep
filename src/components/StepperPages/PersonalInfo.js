@@ -3,7 +3,7 @@ import '../../pages/interviewforms/Template.css';
 import Grid from "@mui/material/Grid";
 import Typography from '@mui/material/Typography';
 import TextField from "@mui/material/TextField";
-import FileUpload from '../FileUpload';
+import FileUpload from '../File Upload/ImageCropUpload.js';
 import Card from '@mui/material/Card'; 
 import CardContent from '@mui/material/CardContent'; 
 import Avatar from '@mui/material/Avatar';
@@ -77,9 +77,9 @@ const PersonalInfo = () => {
     const { register, handleSubmit, watch, formState: { errors }, getValues, setValue } = useForm();
     const Proname = watch('Proname');
     
-    const handleFileUploadSuccess = (url) => {
-        setProfilePictureUrl(url.downloadURL);
-        console.log(url);
+    const handleFileUploadSuccess = (data) => {
+        setProfilePictureUrl(data);
+        console.log('Hey Submit',data);
       };
 
       const handleReset = () => {
@@ -175,11 +175,16 @@ const PersonalInfo = () => {
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 {...register("Proname", {maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
                                                 />
-                                                {errors.Proname && errors.Proname.type === "maxLength" ? "Max word limit is 30" : errors.Proname && "Please enter only letters"}
+                                                {errors.Proname && errors.Proname.type === "maxLength" ? "Max character limit is 30" : errors.Proname && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span> Profile Picture</Typography>
-                                                <FileUpload onFileUpload={handleFileUploadSuccess} onUploadSuccess={handleFileUploadSuccess} onReset={handleReset}    />
+                                                <FileUpload
+                                                
+                                                onFileUpload={handleFileUploadSuccess}
+                                                onUploadSuccess={handleFileUploadSuccess}
+                                                onReset={handleReset}
+                                            />
                                                 {profilePictureFetchUrl && profilePictureFetchUrl !== ' ' &&  <p style={{marginTop:'1rem',marginLeft:'1rem'}}>Your current profile picture</p>}
                                                 {profilePictureFetchUrl && profilePictureFetchUrl !== ' ' && <img src={profilePictureFetchUrl} alt="Profile Picture"  style={{ width: '100px', height: '100px', objectFit: 'cover',marginLeft:'1rem',border: '1px solid black' }}  />}
                                                 

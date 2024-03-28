@@ -1,0 +1,11 @@
+.cropContainer {
+    position: relative;
+    width: 300px; /* Adjust the width as needed */
+    height: 300px; /* Adjust the height as needed */
+    background-color: #333;
+    margin: 0 auto; /* Center the cropper */
+  }
+  
+  .cropContainer > div {
+    position: absolute;
+  }

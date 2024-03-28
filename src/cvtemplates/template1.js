@@ -701,7 +701,7 @@ function Template1() {
             <div className="contactPane" style={{ backgroundColor: cvcolor }}>
                 <div className="section">
                     <div className="profile                                   ">
-                            <img src={profilePictureBase64} className="profileImage" alt="Profile" style={{ width: '200px', height: '220px' }} />
+                            <img src={profilePictureBase64} className="profileImage" alt="Profile" style={{ width: '200px', height: '200px' }} />
                             
                     </div>
 

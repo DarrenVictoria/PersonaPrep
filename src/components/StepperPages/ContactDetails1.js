@@ -139,9 +139,9 @@ const onSubmit = async (formData) => {
                                                 value={phone}
                                                 fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder='0713489420'
-                                                {...register("phone", { required: true, maxLength: 30, pattern: /^[0-9]+$/  })}
+                                                {...register("phone", { maxLength: 15, pattern: /^[0-9]+$/  })}
                                                 />
-                                                {errors.phone && errors.phone.type === "maxLength" ? "Max word limit is 30" : errors.phone && "Please enter only letters"}
+                                                {errors.phone && errors.phone.type === "maxLength" ? "Max character limit is 15" : errors.phone && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={6}>
                                               
@@ -161,9 +161,9 @@ const onSubmit = async (formData) => {
                                                 value={district}
                                                 fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder='Colombo'
-                                                {...register("district", { required: true, maxLength: 30, pattern: /^[a-zA-Z\s]+$/})}
+                                                {...register("district", {  maxLength: 30, pattern: /^[a-zA-Z\s]+$/})}
                                                 />
-                                                {errors.district && errors.district.type === "maxLength" ? "Max word limit is 30" : errors.district && "Please enter only letters"}
+                                                {errors.district && errors.district.type === "maxLength" ? "Max character limit is 30" : errors.district && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={6}>
                                               
@@ -172,9 +172,9 @@ const onSubmit = async (formData) => {
                                                 value={city}
                                                 fullWidth  required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder='Homagama'
-                                                {...register("city", { required: true, maxLength: 50, pattern: /^[a-zA-Z\s]+$/  })}
+                                                {...register("city", {  maxLength: 50, pattern: /^[a-zA-Z\s]+$/  })}
                                                 />
-                                                {errors.city && errors.city.type === "maxLength" ? "Max word limit is 50" : errors.city && "Please enter only letters"}
+                                                {errors.city && errors.city.type === "maxLength" ? "Max character limit is 50" : errors.city && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={6}>
                                               
@@ -183,9 +183,9 @@ const onSubmit = async (formData) => {
                                                 value={postal}
                                                 fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder='10300'
-                                                {...register("postal", { required: true, maxLength: 30, pattern: /^[0-9]+$/  })}
+                                                {...register("postal", { maxLength: 30, pattern: /^[0-9]+$/  })}
                                                 />
-                                                {errors.postal && errors.postal.type === "maxLength" ? "Max word limit is 30" : errors.postal && "Please enter only letters"}
+                                                {errors.postal && errors.postal.type === "maxLength" ? "Max character limit is 30" : errors.postal && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={6}>
                                               
@@ -194,9 +194,9 @@ const onSubmit = async (formData) => {
                                                 value={country}
                                                 fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder='Sri Lanka'
-                                                {...register("country", { required: true, maxLength: 30  })}
+                                                {...register("country", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/  })}
                                                 />
-                                                {errors.country && errors.country.type === "maxLength" ? "Max word limit is 30" : errors.country && "Please enter only letters"}
+                                                {errors.country && errors.country.type === "maxLength" ? "Max character limit is 30" : errors.country && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12}>
                                               

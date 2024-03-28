@@ -90,7 +90,6 @@ const Projects2 = () => {
     const ProjEvidence = watch('ProjEvidence');
     
     const Proj_Skills = [
-        "C#",
         "Winforms",
         "Apache Groovy",
         "C",
@@ -544,9 +543,9 @@ const Projects2 = () => {
                                                 value={ProjName}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder='CV Builder'
-                                                {...register("ProjName", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                {...register("ProjName", { maxLength: 70, pattern: /^[a-zA-Z\s,.@']+$/ })}
                                                 />
-                                                {errors.ProjName && errors.ProjName.type === "maxLength" ? "Max word limit is 30" : errors.ProjName && "Please enter only letters"}
+                                                {errors.ProjName && errors.ProjName.type === "maxLength" ? "Max character limit is 70" : errors.ProjName && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={1}>
                                                 <Typography><span style={{color: 'red'}}>*</span>Was it an individual or a group project?</Typography>
@@ -575,9 +574,9 @@ const Projects2 = () => {
                                                 value={ProjRole}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder='Front end developer'
-                                                {...register("ProjRole", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                {...register("ProjRole", { maxLength: 30, pattern: /^[a-zA-Z\s,.']+$/ })}
                                                 />
-                                                {errors.ProjRole && errors.ProjRole.type === "maxLength" ? "Max word limit is 30" : errors.ProjRole && "Please enter only letters"}
+                                                {errors.ProjRole && errors.ProjRole.type === "maxLength" ? "Max character limit is 30" : errors.ProjRole && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} >
                                                 <Typography><span style={{color: 'red'}}>*</span>Are you still working on the project?</Typography>
@@ -725,8 +724,8 @@ const Projects2 = () => {
                                                 </FormControl>
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
-                                                <Typography mb={1}><span style={{color: 'red'}}>*</span>Project evidence</Typography>
-                                                <TextField type="text" variant="outlined" fullWidth required  
+                                                <Typography mb={1}>Project evidence</Typography>
+                                                <TextField type="text" variant="outlined" fullWidth   
                                                 value={ProjEvidence}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder=''

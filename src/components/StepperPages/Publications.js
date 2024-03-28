@@ -146,9 +146,9 @@ useEffect(() => {
                                           value={PblTitle}
                                           InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                           placeholder=''
-                                          {...register("PblTitle", { maxLength: 30, pattern: /^[a-zA-Z\s0-9]+$/ })}
+                                          {...register("PblTitle", { maxLength: 100, pattern: /^[a-zA-Z\s0-9,.'@]+$/ })}
                                           />
-                                          {errors.PblTitle && errors.PblTitle.type === "maxLength" ? "Max word limit is 30" : errors.PblTitle && "Please enter only letters"}
+                                          {errors.PblTitle && errors.PblTitle.type === "maxLength" ? "Max character limit is 100" : errors.PblTitle && "Please enter only letters"}
                                       </Grid>
                                       <Grid item xs={12}>
                                         
@@ -157,9 +157,9 @@ useEffect(() => {
                                           value={Publisher}
                                           InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                           placeholder=''
-                                          {...register("Publisher", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                          {...register("Publisher", { maxLength: 100, pattern: /^[a-zA-Z\s,.']+$/ })}
                                           />
-                                          {errors.Publisher && errors.Publisher.type === "maxLength" ? "Max word limit is 30" : errors.Publisher && "Please enter only letters"}
+                                          {errors.Publisher && errors.Publisher.type === "maxLength" ? "Max character limit is 100" : errors.Publisher && "Please enter only letters"}
                                       </Grid>
                                       <Grid item xs={12} mb={1}>
                                       <Typography >Publication date</Typography>
