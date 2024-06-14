@@ -11,7 +11,7 @@ import IconButton from "@mui/material/IconButton";
 import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
 import KeyIcon from '@mui/icons-material/Key';
 import DiversityPicture from '../assets/images/DiversityPicture.svg';
-import NForceLogo from '../assets/images/NForceLogo.svg';
+import NForceLogo from '../assets/images/NForceLogo.png';
 import Marquee from "react-fast-marquee";
 import Footer from '../components/footer'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
@@ -47,7 +47,7 @@ const GrayDiv = () => {
           <img
             src={NForceLogo}
             alt="NForce Logo"
-            style={{ width: '50px', height: 'auto', marginRight: '20px' }} // Adjust the size as needed
+            style={{ width: '100px', height: 'auto', marginRight: '20px' }} // Adjust the size as needed
           />
           <h2 style={{ fontFamily: 'Inter', fontWeight: '900', margin: 0 ,fontSize:'40px'}}>Who are we at NSBM NFORCE</h2>
         </div>
