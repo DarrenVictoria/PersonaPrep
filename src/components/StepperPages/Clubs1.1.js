@@ -297,6 +297,7 @@ const Club2 = () => {
                                                 <MenuItem value="Young Scientist’s Circle">Young Scientist’s Circle</MenuItem>
                                                 <MenuItem value="International Centre for Innovation and Invention (ICII)">International Centre for Innovation and Invention (ICII)</MenuItem>
                                                 <MenuItem value="Aviation Club">Aviation Club</MenuItem>
+                                                <MenuItem value="Software Engineering Circle">Student Circle of Software Engineering</MenuItem>
                                               
                                           </Select>
                                         </FormControl>
