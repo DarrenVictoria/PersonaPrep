@@ -12,30 +12,36 @@ const FileUpload = ({ onFileUpload, onReset, onUploadSuccess }) => {
   const storage = getStorage();
 
   useEffect(() => {
-    // Cleanup when component unmounts or when onReset is called
     return () => {
       if (uploadedFile && uploadedFile.toBeDeleted) {
-        // Delete the uploaded file from Firebase storage
         const fileRef = ref(storage, `uploads/${uploadedFile.file.name}`);
-        onUploadSuccess(uploadedFile.downloadURL);
         deleteObject(fileRef)
           .then(() => {
             console.log('File deleted successfully from storage');
             setUploadedFile(null);
+            onReset();
           })
           .catch((error) => {
             console.error('Error deleting file from storage:', error);
           });
-
-        // Notify the parent component that the file has been deleted
-        onReset();
       }
     };
-  }, [uploadedFile, storage, onReset, onUploadSuccess]);
+  }, [uploadedFile, storage, onReset]);
 
   const handleReset = () => {
-    // Set a flag to mark the file for deletion in the cleanup
-    setUploadedFile((prevFile) => (prevFile ? { ...prevFile, toBeDeleted: true } : null));
+    if (uploadedFile) {
+      const fileRef = ref(storage, `uploads/${uploadedFile.file.name}`);
+      deleteObject(fileRef)
+        .then(() => {
+          console.log('File deleted successfully from storage');
+          setUploadedFile(null);
+          onReset();
+        })
+        .catch((error) => {
+          console.error('Error deleting file from storage:', error);
+          setError('Error deleting file from storage. Please try again.');
+        });
+    }
   };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -57,7 +63,6 @@ const FileUpload = ({ onFileUpload, onReset, onUploadSuccess }) => {
         const storageRef = ref(storage, `uploads/${file.name}`);
         const uploadTask = uploadBytesResumable(storageRef, file);
 
-        // Listen for state changes, errors, and completion of the upload.
         uploadTask.on(
           'state_changed',
           (snapshot) => {
@@ -69,15 +74,12 @@ const FileUpload = ({ onFileUpload, onReset, onUploadSuccess }) => {
             setError('Error uploading file to storage. Please try again.');
           },
           () => {
-            // Upload completed successfully, get download URL
             getDownloadURL(storageRef).then((downloadURL) => {
-              // Update the state with the new file object
-              setUploadedFile({ file, downloadURL, toBeDeleted: false });
-              setUploadProgress(0); // Reset progress
-              setError(null); // Clear any previous errors
+              setUploadedFile({ file, downloadURL });
+              setUploadProgress(0);
+              setError(null);
 
-              // Pass the file information to the parent component with a unique identifier
-              const fileId = Date.now(); // Unique identifier based on timestamp
+              const fileId = Date.now();
               onFileUpload({ file, downloadURL, fileId });
             });
           }
@@ -130,13 +132,16 @@ const FileUpload = ({ onFileUpload, onReset, onUploadSuccess }) => {
           <LinearProgress variant="determinate" value={uploadProgress} />
         </div>
       )}
-      <Button
-        variant="contained"
-        onClick={handleReset}
-        style={{ backgroundColor: '#FF0000', color: '#fff', marginTop: '1.5rem', marginLeft: '1.5rem' }}
-      >
-        Reset File Uploads
-      </Button>
+
+      {uploadedFile && (
+        <Button
+          variant="contained"
+          onClick={handleReset}
+          style={{ backgroundColor: '#FF0000', color: '#fff', marginTop: '1.5rem', marginLeft: '1.5rem' }}
+        >
+          Reset File Uploads
+        </Button>
+      )}
     </div>
   );
 };

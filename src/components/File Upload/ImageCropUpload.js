@@ -5,7 +5,7 @@ import { getStorage, ref, uploadBytesResumable, getDownloadURL, deleteObject } f
 import Button from '@mui/material/Button';
 import LinearProgress from '@mui/material/LinearProgress';
 import Cropper from 'react-easy-crop';
-// import getCroppedImg from './cropImage';
+import CircularProgress from '@mui/material/CircularProgress';
 import './styles.css';
 
 const FileUpload = ({ onFileUpload, onReset, onUploadSuccess }) => {
@@ -17,36 +17,58 @@ const FileUpload = ({ onFileUpload, onReset, onUploadSuccess }) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
-  const [croppedImage, setCroppedImage] = useState(null);
   const [isUploadingCroppedImage, setIsUploadingCroppedImage] = useState(false);
   const [showCropper, setShowCropper] = useState(true);
+  const [isResetting, setIsResetting] = useState(false);
 
   useEffect(() => {
-    // Cleanup when component unmounts or when onReset is called
-    return () => {
-      if (uploadedFile && uploadedFile.toBeDeleted) {
-        // Delete the uploaded file from Firebase storage
-        const fileRef = ref(storage, `uploads/${uploadedFile.file.name}`);
-        onUploadSuccess(uploadedFile.downloadURL);
-        deleteObject(fileRef)
-          .then(() => {
-            console.log('File deleted successfully from storage');
-            setUploadedFile(null);
-          })
-          .catch((error) => {
-            console.error('Error deleting file from storage:', error);
-          });
+    if (uploadedFile && uploadedFile.toBeDeleted) {
+      const fileRef = ref(storage, `uploads/${uploadedFile.file.name}`);
+      console.log(`Deleting file in useEffect: uploads/${uploadedFile.file.name}`);
+      deleteObject(fileRef)
+        .then(() => {
+          console.log('File deleted successfully from storage in useEffect');
+          setUploadedFile(null);
+        })
+        .catch((error) => {
+          console.error('Error deleting file from storage in useEffect:', error);
+        });
+      onReset();
+    }
+  }, [uploadedFile, storage, onReset]);
 
-        // Notify the parent component that the file has been deleted
+  const handleReset = async () => {
+    if (uploadedFile) {
+      setIsResetting(true);
+      const fileName = getFileNameFromUrl(uploadedFile.downloadURL);
+      const fileRef = ref(storage, `uploads/${fileName}`);
+      
+      try {
+        await deleteObject(fileRef);
+        console.log(`File '${fileName}' deleted successfully from storage`);
+        setUploadedFile(null);
+        setImageSrc(null);
+        setShowCropper(true);
         onReset();
+      } catch (error) {
+        console.error('Error deleting file from storage:', error);
+        setError('Error deleting file from storage. Please try again.');
+      } finally {
+        setIsResetting(false);
       }
-    };
-  }, [uploadedFile, storage, onReset, onUploadSuccess]);
-
-  const handleReset = () => {
-    // Set a flag to mark the file for deletion in the cleanup
-    setUploadedFile((prevFile) => (prevFile ? { ...prevFile, toBeDeleted: true } : null));
+    }
   };
+  
+  const getFileNameFromUrl = (url) => {
+    // Example URL: https://firebasestorage.googleapis.com/v0/b/your-app.appspot.com/o/uploads%2Fcropped_1718457211961.jpg?alt=media
+    const decodedUrl = decodeURIComponent(url);
+    const startIndex = decodedUrl.lastIndexOf('/') + 1;
+    const endIndex = decodedUrl.lastIndexOf('?');
+    return decodedUrl.substring(startIndex, endIndex);
+  };
+  
+
+  
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop: async (acceptedFiles) => {
@@ -76,15 +98,15 @@ const FileUpload = ({ onFileUpload, onReset, onUploadSuccess }) => {
   const uploadCroppedImageToFirebase = async (croppedImageBlob) => {
     setIsUploadingCroppedImage(true);
     setUploadProgress(0);
-  
+
     try {
       const fileName = `cropped_${Date.now()}.jpg`;
       const storageRef = ref(storage, `uploads/${fileName}`);
-  
+
       const uploadTask = uploadBytesResumable(storageRef, croppedImageBlob, {
         contentType: croppedImageBlob.type,
       });
-  
+
       uploadTask.on(
         'state_changed',
         (snapshot) => {
@@ -98,14 +120,14 @@ const FileUpload = ({ onFileUpload, onReset, onUploadSuccess }) => {
         () => {
           getDownloadURL(storageRef)
             .then((downloadURL) => {
-              setUploadedFile({ file: croppedImageBlob, downloadURL, toBeDeleted: false });
+              setUploadedFile({ file: croppedImageBlob, downloadURL, fileName, toBeDeleted: false });
               setUploadProgress(0);
               setError(null);
               setIsUploadingCroppedImage(false);
-  
+
               const fileId = Date.now();
               onFileUpload({ file: croppedImageBlob, downloadURL, fileId });
-              onUploadSuccess(downloadURL); // Pass the downloadURL to the onUploadSuccess prop
+              onUploadSuccess(downloadURL);
             })
             .catch((error) => {
               console.error('Error getting download URL:', error);
@@ -120,7 +142,6 @@ const FileUpload = ({ onFileUpload, onReset, onUploadSuccess }) => {
       setIsUploadingCroppedImage(false);
     }
   };
-  
 
   return (
     <div>
@@ -150,30 +171,32 @@ const FileUpload = ({ onFileUpload, onReset, onUploadSuccess }) => {
         </div>
 
         {uploadedFile && (
-            <div>
-              <p>Uploaded file : </p>
-              <img src={uploadedFile.downloadURL} alt={uploadedFile.file.name} style={{ maxWidth: '150px' }} />
-            </div>
-          )}
+          <div>
+            <p>Uploaded file :</p>
+            <img src={uploadedFile.downloadURL} alt={uploadedFile.fileName} style={{ maxWidth: '150px' }} />
+          </div>
+        )}
       </div>
       {(uploadProgress > 0 || isUploadingCroppedImage) && (
         <div style={{ marginTop: '10px' }}>
           <LinearProgress variant="determinate" value={uploadProgress} />
         </div>
       )}
-      <Button
-        variant="contained"
-        onClick={handleReset}
-        style={{ backgroundColor: '#FF0000', color: '#fff', marginTop: '1.5rem', marginLeft: '1.5rem',marginBottom:'1rem' }}
-      >
-        Reset File Uploads
-      </Button>
+      {uploadedFile && (
+        <Button
+          variant="contained"
+          onClick={handleReset}
+          style={{ backgroundColor: '#FF0000', color: '#fff', marginTop: '1.5rem', marginLeft: '1.5rem', marginBottom: '1rem' }}
+          disabled={isResetting}
+        >
+          {isResetting ? <CircularProgress size={24} style={{ color: '#fff' }} /> : 'Reset File Uploads'}
+        </Button>
+      )}
 
       {showCropper && imageSrc && (
         <div>
           <div className="cropContainer">
             <Cropper
-              
               image={imageSrc}
               crop={crop}
               zoom={zoom}
@@ -189,7 +212,6 @@ const FileUpload = ({ onFileUpload, onReset, onUploadSuccess }) => {
               onClick={async (e) => {
                 e.preventDefault();
                 const croppedImageBlob = await getCroppedImg(imageSrc, croppedAreaPixels, 0, createImage, getRadianAngle);
-                setCroppedImage(croppedImageBlob);
                 uploadCroppedImageToFirebase(croppedImageBlob);
                 setShowCropper(false);
               }}
@@ -198,7 +220,6 @@ const FileUpload = ({ onFileUpload, onReset, onUploadSuccess }) => {
                 color: 'white',
                 borderRadius: '25px',
                 padding: '15px',
-                
                 fontFamily: 'Inter, sans-serif',
                 fontWeight: 'bold',
               }}
@@ -229,43 +250,36 @@ export const getCroppedImg = async (imageSrc, pixelCrop, rotation = 0, createIma
   ctx.rotate(getRadianAngle(rotation));
   ctx.translate(-safeArea / 2, -safeArea / 2);
 
-  ctx.drawImage(
-    image,
-    safeArea / 2 - image.width * 0.5,
-    safeArea / 2 - image.height * 0.5
-  );
+  ctx.drawImage(image, safeArea / 2 - image.width / 2, safeArea / 2 - image.height / 2);
 
-  const scaleX = image.naturalWidth / image.width;
-  const scaleY = image.naturalHeight / image.height;
+  const data = ctx.getImageData(0, 0, safeArea, safeArea);
 
-  const cropX = pixelCrop.x * scaleX;
-  const cropY = pixelCrop.y * scaleY;
-  const cropWidth = pixelCrop.width * scaleX;
-  const cropHeight = pixelCrop.height * scaleY;
+  canvas.width = pixelCrop.width;
+  canvas.height = pixelCrop.height;
 
-  canvas.width = cropWidth;
-  canvas.height = cropHeight;
+  ctx.putImageData(data, 0 - safeArea / 2 + image.width / 2 - pixelCrop.x, 0 - safeArea / 2 + image.height / 2 - pixelCrop.y);
 
-  ctx.drawImage(image, cropX, cropY, cropWidth, cropHeight, 0, 0, cropWidth, cropHeight);
-
-  return new Promise((resolve) => {
-    canvas.toBlob((blob) => {
-      resolve(blob);
-    }, 'image/jpeg');
+  return new Promise((resolve, reject) => {
+    canvas.toBlob((file) => {
+      if (!file) {
+        reject(new Error('Canvas is empty'));
+        return;
+      }
+      file.name = 'croppedImage.png';
+      resolve(file);
+    }, 'image/png');
   });
 };
 
-// Function to create an HTMLImageElement from image source
-const createImage = (url) => {
-  return new Promise((resolve, reject) => {
+const createImage = (url) =>
+  new Promise((resolve, reject) => {
     const image = new Image();
-    image.onload = () => resolve(image);
-    image.onerror = (error) => reject(error);
+    image.addEventListener('load', () => resolve(image));
+    image.addEventListener('error', (error) => reject(error));
+    image.setAttribute('crossOrigin', 'anonymous');
     image.src = url;
   });
-};
 
-// Function to convert degrees to radians
-const getRadianAngle = (degree) => {
-  return (degree * Math.PI) / 180;
-};
+function getRadianAngle(degreeValue) {
+  return (degreeValue * Math.PI) / 180;
+}

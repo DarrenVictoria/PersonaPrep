@@ -15,7 +15,7 @@ const Footer = () => {
         <a href="/site-credits" className="link">Site Credits</a>
       </div>
       <div className="copyright">
-        &copy; 2023 Persona Prep
+        &copy; 2024 Persona Prep
       </div>
     </footer>
   );
