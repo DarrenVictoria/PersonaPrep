@@ -61,6 +61,7 @@ import ViewFeedback from "./pages/dashboard/ViewFeedback"
 import "@fontsource/inter"; // Defaults to weight 400
 import "@fontsource/inter/400.css"; // Specify weight
 import './App.css';
+import Template1PDF from "./cvtemplates/template1pdf";
 
 
 function App() {
@@ -189,6 +190,7 @@ function App() {
           {/* CV Templates */}
 
           <Route path="/template1" element={<Template1 />}/>
+          <Route path="/template1pdf" element={<Template1PDF />}/>
           
           {/* No Page Found */}
 
