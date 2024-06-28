@@ -173,9 +173,9 @@ const PersonalInfo = () => {
                                                 <Typography><span style={{color: 'red'}}>*</span> Full Name</Typography>
                                                 <TextField type="text" variant="outlined" value={Proname} fullWidth required  placeholder='John Doe'
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
-                                                {...register("Proname", {maxLength: 30, pattern: /^[a-zA-Z\s]+$/ })}
+                                                {...register("Proname", {minLength: 3, maxLength: 40, pattern: /^[a-zA-Z\s]+$/ })}
                                                 />
-                                                {errors.Proname && errors.Proname.type === "maxLength" ? "Max character limit is 30" : errors.Proname && "Please enter only letters"}
+                                                {errors.Proname && errors.Proname.type === "maxLength" ? "Max character limit is 40" : errors.Proname && errors.Proname.type === 'minLength'? "Min character limit is 3" : errors.Proname && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span> Profile Picture</Typography>

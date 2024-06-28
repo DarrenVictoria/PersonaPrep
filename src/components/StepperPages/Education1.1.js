@@ -45,11 +45,11 @@ const School2 = () => {
         {value: 'December', label: 'December'}
     ];
     const StartyearOption = ["2024"];
-        for (let year = 2023; year >= 2000; year--) {
+        for (let year = 2023; year >= 1990; year--) {
             StartyearOption.push(String(year));
     }
     const EndyearOption = ["2024"];
-        for (let year = 2023; year >= 2015; year--) {
+        for (let year = 2023; year >= 1990; year--) {
             EndyearOption.push(String(year));
     }
     const { currentUser } = useAuth();
@@ -200,9 +200,9 @@ const School2 = () => {
                                                 value={School2City}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder='Homagama'
-                                                {...register("School2City", { maxLength: 50, pattern: /^[a-zA-Z0-9\s,.']+$/ })}
+                                                {...register("School2City", { minLength: 4, maxLength: 50, pattern: /^[a-zA-Z0-9\s,.']+$/ })}
                                                 />
-                                                {errors.School2City && errors.School2City.type === "maxLength" ? "Max character limit is 50" : errors.School2City && "Please enter only letters"}
+                                                {errors.School2City && errors.School2City.type === "maxLength" ? "Max character limit is 50" : errors.School2City && errors.School2City.type === 'minLength'? "Min character limit is 4" : errors.School2City && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>Country</Typography>
@@ -210,9 +210,9 @@ const School2 = () => {
                                                 value={School2Country}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white', pattern: "^[a-zA-Z]+$"}}} 
                                                 placeholder='Sri Lanka'
-                                                {...register("School2Country", { maxLength: 30, pattern: /^[a-zA-Z\s,.']+$/ })}
+                                                {...register("School2Country", { minLength: 4, maxLength: 56, pattern: /^[a-zA-Z\s,.']+$/ })}
                                                 />
-                                                {errors.School2Country && errors.School2Country.type === "maxLength" ? "Max character limit is 30" : errors.School2Country && "Please enter only letters"}
+                                                {errors.School2Country && errors.School2Country.type === "maxLength" ? "Max character limit is 56" : errors.School2Country && errors.School2Country.type === 'minLength'? "Min character limit is 4" : errors.School2Country && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={1}>
                                                 <Typography><span style={{color: 'red'}}>*</span>Start Date</Typography>

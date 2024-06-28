@@ -26,12 +26,13 @@ const Education_2 = () => {
     const { currentUser } = useAuth();
 
     const yearOption = ["2024"];
-        for (let year = 2023; year >= 2010; year--) {
+        for (let year = 2023; year >= 1990; year--) {
         yearOption.push(String(year));
         }
     
     const [olYear, setOlYear] = useState('');
     const [alYear, setAlYear] = useState('');  
+    const [stream, setStream] = useState('');
     const [olExamResults, setOlExamResults] = useState([{ subject: '', result: '' }]);
     const [alExamResults, setAlExamResults] = useState([{ subject: '', result: '' }]);
     
@@ -51,6 +52,7 @@ const Education_2 = () => {
                     const userData = existingDoc.data();
                     setOlYear(userData.olYear || '');
                     setAlYear(userData.alYear || '');
+                    setStream(userData.stream || '');
                     setOlExamResults(userData.olExamResults || []);
                     setAlExamResults(userData.alExamResults || []);
                 }
@@ -77,6 +79,7 @@ const Education_2 = () => {
                 await updateDoc(existingDocRef, {
                     olYear: olYear,
                     alYear: alYear,
+                    stream: stream,
                     olExamResults: olExamResults,
                     alExamResults: alExamResults,
                 });
@@ -87,6 +90,7 @@ const Education_2 = () => {
                     email: currentUser.email,
                     olYear: olYear,
                     alYear: alYear,
+                    stream: stream,
                     olExamResults: olExamResults,
                     alExamResults: alExamResults,
                 });
@@ -194,7 +198,7 @@ const Education_2 = () => {
                                                             InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}}
                                                             value={result.subject}
                                                             onChange={(event) => handleOlSubjectChange(index, event)}
-                                                            required = {(index === 0)? true: false}
+                                                            required = {(index < 3)? true: false}
                                                         />
                                                     </Grid>
                                                     <Grid item xs={4} md={3} mt={3}>
@@ -205,7 +209,7 @@ const Education_2 = () => {
                                                                 displayEmpty
                                                                 input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
                                                                 IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
-                                                                required = {(index === 0)? true: false}
+                                                                required = {(index < 3)? true: false}
                                                             >
                                                                 <MenuItem  disabled value="">Result</MenuItem>
                                                                 <MenuItem value="A">A</MenuItem>
@@ -240,22 +244,43 @@ const Education_2 = () => {
                                             <Grid item xs={12} mb={1}> 
                                                 <Typography>In which year did you complete your AL exams? (First/Final attempt)</Typography>
                                             </Grid>
-                                            <Grid item xs={6} md={2}>
-                                                <FormControl variant="outlined" fullWidth>
-                                                    <Select
-                                                        value={alYear}
-                                                        onChange={(event) => setAlYear(event.target.value)}
-                                                        displayEmpty
-                                                        input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
-                                                        IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}                                                        
-                                                    >
-                                                        <MenuItem disabled value="">Year</MenuItem>
-                                                        {yearOption.map(year => (
-                                                            <MenuItem key={year} value={year}>{year}</MenuItem>
-                                                        ))}
-                                                    </Select>
-                                                </FormControl>
-                                            </Grid>                                         
+                                            <Grid container item spacing={3}>
+                                                <Grid item xs={6} md={2}>
+                                                    <FormControl variant="outlined" fullWidth>
+                                                        <Select
+                                                            value={alYear}
+                                                            onChange={(event) => setAlYear(event.target.value)}
+                                                            displayEmpty
+                                                            input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
+                                                            IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}                                                        
+                                                        >
+                                                            <MenuItem disabled value="">Year</MenuItem>
+                                                            {yearOption.map(year => (
+                                                                <MenuItem key={year} value={year}>{year}</MenuItem>
+                                                            ))}
+                                                        </Select>
+                                                    </FormControl>
+                                                </Grid>                                         
+                                                <Grid item xs={6} md={2}>
+                                                    <FormControl variant="outlined" fullWidth>
+                                                        <Select
+                                                            value={stream}
+                                                            onChange={(event) => setStream(event.target.value)}
+                                                            displayEmpty
+                                                            input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
+                                                            IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}                                                            
+                                                        >
+                                                            <MenuItem disabled value="">Stream</MenuItem>
+                                                            <MenuItem value="Physical science">Physical science</MenuItem>
+                                                            <MenuItem value="Bio">Bio</MenuItem>
+                                                            <MenuItem value="Commerce">Commerce</MenuItem>
+                                                            <MenuItem value="Arts">Arts</MenuItem>
+                                                            <MenuItem value="Technology">Technology</MenuItem>
+                                                            <MenuItem value="Aesthetics">Aesthetics</MenuItem>
+                                                        </Select>
+                                                    </FormControl>
+                                                </Grid>
+                                            </Grid>
                                             <Grid item xs={12} mt={3}>
                                                 <Typography>Subject Results</Typography>
                                             </Grid>
