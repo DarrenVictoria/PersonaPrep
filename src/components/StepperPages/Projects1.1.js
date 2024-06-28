@@ -63,11 +63,11 @@ const Projects2 = () => {
         {value: 'December', label: 'December'}
     ];
     const StartyearOption = ["2024"];
-        for (let year = 2023; year >= 2015; year--) {
+        for (let year = 2023; year >= 1990; year--) {
             StartyearOption.push(String(year));
     }
-    const EndyearOption = ["2024"];
-        for (let year = 2023; year >= 2015; year--) {
+    const EndyearOption = ["2030"];
+        for (let year = 2031; year >= 1990; year--) {
             EndyearOption.push(String(year));
     }
     
@@ -729,8 +729,9 @@ const Projects2 = () => {
                                                 value={ProjEvidence}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder=''
-                                                {...register("ProjEvidence")}
+                                                {...register("ProjEvidence", { pattern: /^[a-zA-Z0-9.:\/\-]+$/ })}
                                                 />
+                                                {errors.ProjEvidence && "Only letters, numbers, period (.), colon (:), and slash (/) are allowed"}
                                             </Grid>
                                             <Grid item xs={12} mb={2} style={{display: 'flex', justifyContent: 'center'}}>
                                                 <Typography>-OR-</Typography>
