@@ -290,9 +290,9 @@ const SkillTrack_1 = () => {
                                         </Stack> 
                                     
                                     <Typography mb={1} mt={3}>If applicable, how would you describe your leadership style?</Typography>
-                                    <CustomMultilineTextFieldslimited inputHeight={100} maxWidth={1300} value={leadership} onChange={handleLeadership} maxWords={20} isRequired={true}/>
+                                    <CustomMultilineTextFieldslimited inputHeight={100} maxWidth={1300} value={leadership} onChange={handleLeadership} maxWords={50} isRequired={true}/>
                                     <Typography mb={1} mt={3}>If applicable can you share examples of how you've led teams or projects?</Typography>
-                                    <CustomMultilineTextFieldslimited inputHeight={100} maxWidth={1300} value={leadershipEx} onChange={handleLeadershipEx} maxWords={20} isRequired={true}/>
+                                    <CustomMultilineTextFieldslimited inputHeight={100} maxWidth={1300} value={leadershipEx} onChange={handleLeadershipEx} maxWords={50} isRequired={true}/>
                                     <Typography mb={1} mt={3}> What soft skills do you believe are your strengths?<b>Min 3</b>/ Max 5</Typography>
                                         <Stack spacing={3} maxWidth={1300}>
                                                 <Autocomplete
@@ -330,7 +330,7 @@ const SkillTrack_1 = () => {
                                                 />
                                           </Stack>                 
                                     <Typography mb={1} mt={3}>How do these skills contribute to your overall effectiveness in the workplace?</Typography>
-                                    <CustomMultilineTextFieldslimited inputHeight={100} maxWidth={1300} value={skillContrib} onChange={handleSkillContrib} maxWords={20} isRequired={true} mb={10}/>
+                                    <CustomMultilineTextFieldslimited inputHeight={100} maxWidth={1300} value={skillContrib} onChange={handleSkillContrib} maxWords={50} isRequired={true} mb={10}/>
                                 </div>
                             </div>
                             <Grid container spacing={2} style={{position: 'absolute', bottom: 80}}>            

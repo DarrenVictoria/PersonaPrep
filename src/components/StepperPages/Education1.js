@@ -57,11 +57,11 @@ const School1 = () => {
         {value: 'December', label: 'December'}
     ];
     const StartyearOption = ["2024"];
-        for (let year = 2023; year >= 2000; year--) {
+        for (let year = 2023; year >= 1990; year--) {
             StartyearOption.push(String(year));
         }
     const EndyearOption = ["2024"];
-        for (let year = 2023; year >= 2015; year--) {
+        for (let year = 2023; year >= 1990; year--) {
             EndyearOption.push(String(year));
         }
     const { currentUser } = useAuth();
@@ -198,9 +198,9 @@ const School1 = () => {
                                                 value={School1Name}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white', pattern: "^[a-zA-Z]+$"}}} 
                                                 placeholder='St. Thomas Catholic International'
-                                                {...register("School1Name", { required: true, maxLength: 50, pattern: /^[a-zA-Z\s,.']+$/ })}
+                                                {...register("School1Name", { minLength: 5, maxLength: 50, pattern: /^[a-zA-Z\s,.']+$/ })}
                                                 />
-                                                {errors.School1Name && errors.School1Name.type === "maxLength" ? "Max character limit is 50" : errors.School1Name && "Please enter only letters"}
+                                                {errors.School1Name && errors.School1Name.type === "maxLength" ? "Max character limit is 50" : errors.School1Name && errors.School1Name.type === 'minLength'? "Min character limit is 5" : errors.School1Name && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>School experience or description</Typography>
@@ -211,7 +211,7 @@ const School1 = () => {
                                                     value={School1Experience}
                                                     InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}}
                                                     required
-                                                    {...register("School1Experience", { required: true, maxLength: 420, pattern: /^[a-zA-Z\s,.']+$/ })}
+                                                    {...register("School1Experience", { maxLength: 420, pattern: /^[a-zA-Z\s,.']+$/ })}
                                                 />
                                                 {errors.School1Experience && errors.School1Experience.type === "maxLength" ? "Max character limit is 420" : errors.School1Experience && "Please enter only letters"}
                                             </Grid>
@@ -221,9 +221,9 @@ const School1 = () => {
                                                 value={School1City}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder='Homagama'
-                                                {...register("School1City", { required: true, maxLength: 50, pattern: /^[a-zA-Z0-9\s,.']+$/ })}
+                                                {...register("School1City", { minLength: 4, maxLength: 50, pattern: /^[a-zA-Z0-9\s,.']+$/ })}
                                                 />
-                                                {errors.School1City && errors.School1City.type === "maxLength" ? "Max character limit is 50" : errors.School1City && "Please enter only letters"}
+                                                {errors.School1City && errors.School1City.type === "maxLength" ? "Max character limit is 50" : errors.School1City && errors.School1City.type === 'minLength'? "Min character limit is 4" : errors.School1City && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>Country</Typography>
@@ -231,9 +231,9 @@ const School1 = () => {
                                                 value={School1Country}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder='Sri Lanka'                                                
-                                                {...register("School1Country", { required: true, maxLength: 50, pattern: /^[a-zA-Z\s,.']+$/ })}
+                                                {...register("School1Country", { minLength: 4, maxLength: 56, pattern: /^[a-zA-Z\s,.']+$/ })}
                                                 />
-                                                {errors.School1Country && errors.School1Country.type === "maxLength" ? "Max character limit is 50" : errors.School1Country && "Please enter only letters and numbers"}
+                                                {errors.School1Country && errors.School1Country.type === "maxLength" ? "Max character limit is 56" : errors.School1Country && errors.School1Country.type === 'minLength'? "Min character limit is 4" : errors.School1Country && "Please enter only letters and numbers"}
                                             </Grid>
                                             <Grid item xs={12} mb={1}>
                                                 <Typography><span style={{color: 'red'}}>*</span>Start Date</Typography>

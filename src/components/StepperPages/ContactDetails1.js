@@ -139,9 +139,9 @@ const onSubmit = async (formData) => {
                                                 value={phone}
                                                 fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder='0713489420'
-                                                {...register("phone", { maxLength: 15, pattern: /^[0-9]+$/  })}
+                                                {...register("phone", { maxLength: 10, pattern: /^[0-9]+$/  })}
                                                 />
-                                                {errors.phone && errors.phone.type === "maxLength" ? "Max character limit is 15" : errors.phone && "Please enter only letters"}
+                                                {errors.phone && errors.phone.type === "maxLength" ? "Max character limit is 10" : errors.phone && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={6}>
                                               
@@ -172,9 +172,9 @@ const onSubmit = async (formData) => {
                                                 value={city}
                                                 fullWidth  required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder='Homagama'
-                                                {...register("city", {  maxLength: 50, pattern: /^[a-zA-Z\s]+$/  })}
+                                                {...register("city", {minLength: 4, maxLength: 50, pattern: /^[a-zA-Z\s]+$/  })}
                                                 />
-                                                {errors.city && errors.city.type === "maxLength" ? "Max character limit is 50" : errors.city && "Please enter only letters"}
+                                                {errors.city && errors.city.type === "maxLength" ? "Max character limit is 50" : errors.city && errors.city.type === 'minLength'? "Min character limit is 4" : errors.city && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={6}>
                                               
@@ -183,9 +183,9 @@ const onSubmit = async (formData) => {
                                                 value={postal}
                                                 fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder='10300'
-                                                {...register("postal", { maxLength: 30, pattern: /^[0-9]+$/  })}
+                                                {...register("postal", {minLength: 4, maxLength: 10, pattern: /^[a-zA-Z0-9\s]+$/})}
                                                 />
-                                                {errors.postal && errors.postal.type === "maxLength" ? "Max character limit is 30" : errors.postal && "Please enter only letters"}
+                                                {errors.postal && errors.postal.type === "maxLength" ? "Max character limit is 10" : errors.postal && errors.postal.type === 'minLength'? "Min character limit is 4" : errors.postal && "Please enter only letters and numbers"}
                                             </Grid>
                                             <Grid item xs={6}>
                                               
@@ -194,20 +194,20 @@ const onSubmit = async (formData) => {
                                                 value={country}
                                                 fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder='Sri Lanka'
-                                                {...register("country", { maxLength: 30, pattern: /^[a-zA-Z\s]+$/  })}
+                                                {...register("country", {minLength: 4, maxLength: 56, pattern: /^[a-zA-Z\s]+$/  })}
                                                 />
-                                                {errors.country && errors.country.type === "maxLength" ? "Max character limit is 30" : errors.country && "Please enter only letters"}
+                                                {errors.country && errors.country.type === "maxLength" ? "Max character limit is 56" : errors.country && errors.country.type === 'minLength'? "Min character limit is 4" : errors.country && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12}>
                                               
                                             <Typography ><span style={{color: 'red'}}>*</span> Portfolio Website</Typography>
                                                 <TextField type="text" variant="outlined" 
                                                 value={portfolioSite}
-                                                fullWidth InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
+                                                fullWidth required InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder='www.portfolio.com'
-                                                {...register("portfolioSite", { required: true})}
+                                                {...register("portfolioSite", { pattern: /^[a-zA-Z0-9.:\/\-]+$/ })}
                                                 />
-                                                {errors.portfolioSite && "This field is required"}
+                                                {errors.portfolioSite && "Only letters, numbers, period (.), colon (:), and slash (/) are allowed"}
                                             </Grid>
                                             
                                           </Grid>

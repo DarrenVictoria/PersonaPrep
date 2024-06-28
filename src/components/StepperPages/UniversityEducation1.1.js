@@ -37,11 +37,11 @@ const UniversityEducation2 = () => {
         {value: 'December', label: 'December'}
     ];
     const StartyearOption = ["2024"];
-        for (let year = 2023; year >= 2015; year--) {
+        for (let year = 2023; year >= 1990; year--) {
             StartyearOption.push(String(year));
         }
-    const GraduationyearOption = ["2024"];
-        for (let year = 2023; year >= 2018; year--) {
+    const GraduationyearOption = ["2030"];
+        for (let year = 2031; year >= 1990; year--) {
             GraduationyearOption.push(String(year));
         }
     
@@ -174,9 +174,9 @@ const UniversityEducation2 = () => {
                                                 value={UniName}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder='NSBM Green University'
-                                                {...register("UniName", { maxLength: 50, pattern: /^[a-zA-Z\s,.']+$/ })}
+                                                {...register("UniName", { minLength: 6, maxLength: 50, pattern: /^[a-zA-Z\s,.']+$/ })}
                                                 />
-                                                {errors.UniName && errors.UniName.type === "maxLength" ? "Max character limit is 50" : errors.UniName && "Please enter only letters"}
+                                                {errors.UniName && errors.UniName.type === "maxLength" ? "Max character limit is 50" : errors.UniName && errors.UniName.type === 'minLength'? "Minimum character limit is 6" : errors.UniName && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={1}>
                                                 <Typography><span style={{color: 'red'}}>*</span>Degree</Typography>
@@ -206,9 +206,9 @@ const UniversityEducation2 = () => {
                                                 value={UniCity}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder='Homagama'
-                                                {...register("UniCity", { maxLength: 30, pattern: /^[a-zA-Z\s,.']+$/ })}
+                                                {...register("UniCity", { minLength: 4, maxLength: 30, pattern: /^[a-zA-Z\s,.']+$/ })}
                                                 />
-                                                {errors.UniCity && errors.UniCity.type === "maxLength" ? "Max character limit is 30" : errors.UniCity && "Please enter only letters"}
+                                                {errors.UniCity && errors.UniCity.type === "maxLength" ? "Max character limit is 30" : errors.UniCity && errors.UniCity.type === 'minLength'? "Minimum character limit is 4" : errors.UniCity && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}><span style={{color: 'red'}}>*</span>Country</Typography>
@@ -216,9 +216,9 @@ const UniversityEducation2 = () => {
                                                 value={UniCountry}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder='Sri Lanka'
-                                                {...register("UniCountry", { maxLength: 30, pattern: /^[a-zA-Z\s,.']+$/ })}
+                                                {...register("UniCountry", { minLength: 4, maxLength: 56, pattern: /^[a-zA-Z\s,.']+$/ })}
                                                 />
-                                                {errors.UniCountry && errors.UniCountry.type === "maxLength" ? "Max character limit is 30" : errors.UniCountry && "Please enter only letters"}
+                                                {errors.UniCountry && errors.UniCountry.type === "maxLength" ? "Max character limit is 56" : errors.UniCountry && errors.UniCountry.type === 'minLength'? "Minimum character limit is 4" : errors.UniCountry && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={1}>
                                                 <Typography><span style={{color: 'red'}}>*</span>Start Date</Typography>

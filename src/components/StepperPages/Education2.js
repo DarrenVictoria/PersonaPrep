@@ -26,7 +26,7 @@ const Education_2 = () => {
     const { currentUser } = useAuth();
 
     const yearOption = ["2024"];
-        for (let year = 2023; year >= 2010; year--) {
+        for (let year = 2023; year >= 1990; year--) {
         yearOption.push(String(year));
         }
     
@@ -198,7 +198,7 @@ const Education_2 = () => {
                                                             InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}}
                                                             value={result.subject}
                                                             onChange={(event) => handleOlSubjectChange(index, event)}
-                                                            required = {(index === 0)? true: false}
+                                                            required = {(index < 3)? true: false}
                                                         />
                                                     </Grid>
                                                     <Grid item xs={4} md={3} mt={3}>
@@ -209,7 +209,7 @@ const Education_2 = () => {
                                                                 displayEmpty
                                                                 input={<OutlinedInput sx={{ borderRadius: '25px', backgroundColor: '#FFFDFD' }} />}
                                                                 IconComponent={(props) => <ArrowDropDownCircleOutlinedIcon {...props} style={{ color: 'black' }} />}
-                                                                required = {(index === 0)? true: false}
+                                                                required = {(index < 3)? true: false}
                                                             >
                                                                 <MenuItem  disabled value="">Result</MenuItem>
                                                                 <MenuItem value="A">A</MenuItem>
