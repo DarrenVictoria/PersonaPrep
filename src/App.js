@@ -62,6 +62,7 @@ import "@fontsource/inter"; // Defaults to weight 400
 import "@fontsource/inter/400.css"; // Specify weight
 import './App.css';
 import Template1PDF from "./cvtemplates/template1pdf";
+import LaunchPage from "./pages/LaunchPage";
 
 
 function App() {
@@ -120,6 +121,8 @@ function App() {
           <Route index element={<Home/>} />
           <Route path="/home" element={<Home />} />
           <Route path="/meetthedevs" element={<MeetTheDevs/> } />
+          <Route path="/launch" element={<LaunchPage/> } />
+
 
           {/* Insight Blog Pages */}
 
