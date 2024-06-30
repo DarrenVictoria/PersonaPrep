@@ -27,7 +27,7 @@ const PageBreak = () => {
       <div
         style={{
           position: 'relative',
-          height: '0px', //220px
+          height: '220px', //220px
           width: '100%',
           backgroundColor: 'transparent',
         }}
@@ -41,7 +41,7 @@ const PageBreak = () => {
       <div
         style={{
           position: 'relative',
-          height: '0px', //230px
+          height: '192px', //230px
           width: '100%',
           backgroundColor: 'transparent',
         }}
@@ -389,18 +389,58 @@ function Template1() {
     const { currentUser } = useAuth();
     const navigate = useNavigate();
 
-   
+    const exportToPDF = () => {
+        const element = document.getElementById('resume-body');
+        const opt = {
+            margin: 0, 
+            filename:     `${Proname}'s CV.pdf`,
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2, useCORS: true },
+            jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+        };
+        html2pdf().from(element).set(opt).save(); // Convert and save as PDF
+    };
+
     const nextClick = () => {
         navigate('/feedback');
     };
 
-    const PDFExport = () => {
-      navigate('/template1pdf');
-  };
-
     const backClick = () => {
-        navigate('/templates');
+        navigate('/template1');
     };
+
+    const BlinkingText = () => {
+        const [isVisible, setIsVisible] = useState(true);
+        const [isCalibrated, setIsCalibrated] = useState(false);
+      
+        useEffect(() => {
+          const interval = setInterval(() => {
+            setIsVisible(prev => !prev);
+          }, 500); // Change visibility every 500ms
+      
+          const timeout = setTimeout(() => {
+            setIsCalibrated(true);
+            clearInterval(interval); // Stop blinking after calibration
+          }, 5000); // Change state after 5 seconds
+      
+          return () => {
+            clearInterval(interval);
+            clearTimeout(timeout);
+          };
+        }, []);
+      
+        return (
+          <div style={{ height: '30px', fontSize: '20px', fontWeight: 'bold', display: 'flex', alignItems: 'center', marginLeft:'40px' }}>
+            {isCalibrated ? (
+              <>
+                Calibrated into PDF <span style={{ color: 'green', marginLeft: '5px' }}>✔</span>
+              </>
+            ) : (
+              isVisible && 'Calibrating CV into PDF ...'
+            )}
+          </div>
+        );
+      };
 
     const [cvcolor, setcvcolor] = useState('');
     const [fontscolor, setfontscolor] = useState('');
@@ -603,6 +643,8 @@ function Template1() {
         <NavBar/>
            
         <h1 style={{marginLeft:'2rem'}}>Your Curriculam Vitae</h1>
+
+        <BlinkingText />
             
         <div id="resume-body" className="cvbody" style={{ color: fontscolor, fontFamily: font }}>
 
@@ -668,34 +710,36 @@ function Template1() {
                     )}
                 </div>
 
-                {certifications && certifications.length > 0 && certifications.some(cert => cert.CertificateName) && (
-                      <>
-                          <h3 className="left-topics">Licenses And Certifications</h3>
-                          <div>
-                              <div className="certifications">
-                                  <CertificationComponent certifications={certifications} />
-                              </div>
-                          </div>
-                      </>
-                  )}
+                <h3 className="left-topics">Licenses And Certifications </h3>
+                <div>
+                    <div className="certifications">
+                        {certifications.length > 0 ? (
+                        <CertificationComponent certifications={certifications} />
+                        ) : (
+                        <p>No certification information available</p>
+                        )}
+                    </div>
+                </div>
 
-                {awards && awards.length > 0 && awards.some(award => award !== '') && (
-                    <>
-                        <h3 className="left-topics">Awards</h3>
-                        <div>
-                            <AwardsComponent awards={awards} />
-                        </div>
-                    </>
-                )}
+                <h3 className="left-topics">Awards</h3>
+                <div>
+                   
+                    {awards.length > 0 ? (
+                        <AwardsComponent awards={awards} />
+                    ) : (
+                        <p>No awards information available</p>
+                    )}
+                </div>
 
-                {publications && publications.length > 0 && publications.some(pub => pub.PblTitle) && (
-                    <>
-                        <h3 className="left-topics">Publication</h3>
-                        <div>
-                            <PublicationsComponent publications={publications} />
-                        </div>
-                    </>
-                )}
+                <h3 className="left-topics">Publication </h3>
+                <div>
+                    
+                    {publications.length > 0 ? (
+                        <PublicationsComponent publications={publications} />
+                    ) : (
+                        <p>No publications available</p>
+                    )}
+                </div>
                 
             </div>
 
@@ -814,14 +858,13 @@ function Template1() {
                         </div>
 
                         <div className="research">
-                        {researchInterests && researchInterests.length > 0 && researchInterests.some(interest => interest !== '') && (
-                              <div className="research">
-                                  <h3>Research Interests</h3>
-                                  <div>
-                                      <ResearchInterestsComponent researchInterests={researchInterests} />
-                                  </div>
-                              </div>
-                          )}
+                            <h3>Research Interests</h3>
+                            <div>
+                                {/* Other components */}
+                                
+                                {/* Display the ResearchInterestsComponent with the fetched research interests data */}
+                                <ResearchInterestsComponent researchInterests={researchInterests} />
+                            </div>
                         </div>
                     </div>
                     
@@ -835,10 +878,12 @@ function Template1() {
 
         </div>
 
+        
+
         <div style={{ textAlign: 'center', marginTop: '20px', marginBottom: '20px' }} className="buttons-container">
-            <Button className="button" onClick={backClick} style={{ borderRadius: '30px', backgroundColor: 'black', color: 'white', marginRight: '10px' , padding:'15px' }}>Alter template</Button>
-            <Button className="button export-to-pdf-button" style={{ borderRadius: '30px', backgroundColor: 'black', color: 'white', marginRight: '10px' , padding:'15px' }} onClick={PDFExport}>Export to PDF</Button> {/* Button to export PDF */}
-            <Button className="button" onClick={nextClick} style={{ borderRadius: '30px', backgroundColor: 'black', color: 'white', marginRight: '10px' , padding:'15px' }}>Next - Give Feedback</Button>
+            <Button className="button" onClick={backClick} style={{ borderRadius: '30px', backgroundColor: 'black', color: 'white', marginRight: '10px' , padding:'15px' }}>Head to Online Template</Button>
+            <Button className="button export-to-pdf-button" style={{ borderRadius: '30px', backgroundColor: 'black', color: 'white', marginRight: '10px' , padding:'15px' }} onClick={exportToPDF}>Export to PDF</Button> {/* Button to export PDF */}
+
            
         </div>
 

@@ -116,7 +116,7 @@ export default function AudioTranscriptionComponent() {
   return (
     
     <div className="formtemp-page">
-      <InterviewFormHeader title='Degree Information' />
+      <InterviewFormHeader title='Interview Simulator' />
       <div className="formtemp-bodyform" >
         <Grid container spacing={2} style={{ height: '100%' }}>
           <Grid xs={12} style={{ backgroundColor: "#D9D9D9", borderRadius: "0px 0px 50px 0px", }}>

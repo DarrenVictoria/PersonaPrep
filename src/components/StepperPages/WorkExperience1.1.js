@@ -53,11 +53,11 @@ const WorkExperience2 = () => {
         {value: 'December', label: 'December'}
     ];
     const StartyearOption = ["2024"];
-        for (let year = 2023; year >= 2015; year--) {
+        for (let year = 2023; year >= 1990; year--) {
             StartyearOption.push(String(year));
         }
-    const EndyearOption = ["2024"];
-        for (let year = 2023; year >= 2015; year--) {
+    const EndyearOption = ["2030"];
+        for (let year = 2031; year >= 1990; year--) {
             EndyearOption.push(String(year));
         }
     const [WorkStartMonth, setWorkStartMonth] = useState('');
@@ -503,9 +503,9 @@ const WorkExperience2 = () => {
                                                 value={WorkJobTitle}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder='Full Stack Developer'
-                                                {...register("WorkJobTitle", { maxLength: 50, pattern: /^[a-zA-Z\s,.']+$/ })}
+                                                {...register("WorkJobTitle", { minLength: 5, maxLength: 50, pattern: /^[a-zA-Z\s,.']+$/ })}
                                                 />
-                                                {errors.WorkJobTitle && errors.WorkJobTitle.type === "maxLength" ? "Max character limit is 50" : errors.WorkJobTitle && "Please enter only letters"}
+                                                {errors.WorkJobTitle && errors.WorkJobTitle.type === "maxLength" ? "Max character limit is 50": errors.WorkJobTitle && errors.WorkJobTitle.type === 'minLength'? "Minimum character limit is 5" : errors.WorkJobTitle && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={12} mb={3}>
                                                 <Typography mb={1}>Company</Typography>
@@ -513,9 +513,9 @@ const WorkExperience2 = () => {
                                                 value={WorkCompany}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder='Surge Global Pvt.'
-                                                {...register("WorkCompany", { maxLength: 50, pattern: /^[a-zA-Z\s.,'@]+$/ })}
+                                                {...register("WorkCompany", { minLength: 5, maxLength: 50, pattern: /^[a-zA-Z\s.,'@]+$/ })}
                                                 />
-                                                {errors.WorkCompany && errors.WorkCompany.type === "maxLength" ? "Max character limit is 50" : errors.WorkCompany && "Please enter only letters"}
+                                                {errors.WorkCompany && errors.WorkCompany.type === "maxLength" ? "Max character limit is 50" : errors.WorkCompany && errors.WorkCompany.type === 'minLength'? "Minimum character limit is 5" : errors.WorkCompany && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={6} mb={3} pr={1}>
                                                 <Typography mb={1}>City</Typography>
@@ -523,9 +523,9 @@ const WorkExperience2 = () => {
                                                 value={WorkCity}
                                                 InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                                 placeholder='Colombo'
-                                                {...register("WorkCity", { maxLength: 30, pattern: /^[a-zA-Z\s,.']+$/ })}
+                                                {...register("WorkCity", { minLength: 4, maxLength: 30, pattern: /^[a-zA-Z\s,.']+$/ })}
                                                 />
-                                                {errors.WorkCity && errors.WorkCity.type === "maxLength" ? "Max character limit is 30" : errors.WorkCity && "Please enter only letters"}
+                                                {errors.WorkCity && errors.WorkCity.type === "maxLength" ? "Max character limit is 30" : errors.WorkCity && errors.WorkCity.type === 'minLength'? "Minimum character limit is 4" : errors.WorkCity && "Please enter only letters"}
                                             </Grid>
                                             <Grid item xs={6} mb={3} pl={1}>
                                                 <Typography mb={1}>Postal code</Typography>

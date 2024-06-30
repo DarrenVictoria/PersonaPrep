@@ -15,6 +15,7 @@ import Grid from '@mui/material/Grid';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
+import Footer from '../../components/footer'
 
 function MeetTheDevs() {
   const colour1 = '#FFC5C5';
@@ -69,7 +70,7 @@ function MeetTheDevs() {
                       }}
           >
             <Typography variant='body1' color='text.secondary'>
-              Group Lead
+              Team Lead
             </Typography>
             <Typography gutterBottom variant='h5' component='div'>
               Darren Victoria
@@ -609,6 +610,8 @@ function MeetTheDevs() {
         </Grid>
       </Grid>
     </Box>
+
+    <Footer />
   </div>
   );
 }

@@ -61,6 +61,8 @@ import ViewFeedback from "./pages/dashboard/ViewFeedback"
 import "@fontsource/inter"; // Defaults to weight 400
 import "@fontsource/inter/400.css"; // Specify weight
 import './App.css';
+import Template1PDF from "./cvtemplates/template1pdf";
+import LaunchPage from "./pages/LaunchPage";
 
 
 function App() {
@@ -119,6 +121,8 @@ function App() {
           <Route index element={<Home/>} />
           <Route path="/home" element={<Home />} />
           <Route path="/meetthedevs" element={<MeetTheDevs/> } />
+          <Route path="/launch" element={<LaunchPage/> } />
+
 
           {/* Insight Blog Pages */}
 
@@ -189,6 +193,7 @@ function App() {
           {/* CV Templates */}
 
           <Route path="/template1" element={<Template1 />}/>
+          <Route path="/template1pdf" element={<Template1PDF />}/>
           
           {/* No Page Found */}
 

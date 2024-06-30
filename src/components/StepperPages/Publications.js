@@ -49,7 +49,7 @@ const Publications = () => {
     {value: 'December', label: 'December'}
 ];
 const yearOption = ["2024"];
-    for (let year = 2023; year >= 2015; year--) {
+    for (let year = 2023; year >= 1990; year--) {
     yearOption.push(String(year));
     }
 
@@ -146,9 +146,9 @@ useEffect(() => {
                                           value={PblTitle}
                                           InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                           placeholder=''
-                                          {...register("PblTitle", { maxLength: 100, pattern: /^[a-zA-Z\s0-9,.'@]+$/ })}
+                                          {...register("PblTitle", { minLength: 6, maxLength: 100, pattern: /^[a-zA-Z\s0-9,.'@]+$/ })}
                                           />
-                                          {errors.PblTitle && errors.PblTitle.type === "maxLength" ? "Max character limit is 100" : errors.PblTitle && "Please enter only letters"}
+                                          {errors.PblTitle && errors.PblTitle.type === "maxLength" ? "Max character limit is 100" : errors.PblTitle && errors.PblTitle.type === 'minLength'? "Minimum character limit is 6" : errors.PblTitle && "Please enter only letters"}
                                       </Grid>
                                       <Grid item xs={12}>
                                         
@@ -157,9 +157,9 @@ useEffect(() => {
                                           value={Publisher}
                                           InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                           placeholder=''
-                                          {...register("Publisher", { maxLength: 100, pattern: /^[a-zA-Z\s,.']+$/ })}
+                                          {...register("Publisher", { minLength: 6, maxLength: 100, pattern: /^[a-zA-Z\s,.']+$/ })}
                                           />
-                                          {errors.Publisher && errors.Publisher.type === "maxLength" ? "Max character limit is 100" : errors.Publisher && "Please enter only letters"}
+                                          {errors.Publisher && errors.Publisher.type === "maxLength" ? "Max character limit is 100" : errors.Publisher && errors.Publisher.type === 'minLength'? "Minimum character limit is 6" : errors.Publisher && "Please enter only letters"}
                                       </Grid>
                                       <Grid item xs={12} mb={1}>
                                       <Typography >Publication date</Typography>
@@ -206,8 +206,9 @@ useEffect(() => {
                                             value={PblUrl}
                                             InputProps={{ style: {borderRadius: '25px',backgroundColor: 'white'}}} 
                                             placeholder=''
-                                            {...register("PblUrl")}
+                                            {...register("PblUrl", { pattern: /^[a-zA-Z0-9.:\/\-]+$/ })}
                                             />
+                                            {errors.PblUrl && "Only letters, numbers, period (.), colon (:), and slash (/) are allowed"}
                                       </Grid>
                                       <Grid item xs={12}>
                                         
