@@ -1,4 +1,6 @@
 import React from 'react';
+import logoImage from '../assets/logo/Persona Prep Coloured.png';
+import backgroundImage from '../assets/images/LaunchBG.jpg';
 
 function LaunchPage() {
   return (
@@ -66,7 +68,7 @@ function LaunchPage() {
             text-align: center;
             text-decoration: none;
             display: inline-block;
-            font-size: 50px;
+            font-size: 40px;
             margin: 4px 2px;
             transition-duration: 0.5s;
             cursor: pointer;
@@ -92,18 +94,18 @@ function LaunchPage() {
           }
           ol li {
             display: inline-block;
-            margin-right: 20px;
+            margin-right: 4px;
             font-size: 13px;
           }
         `}
       </style>
-      <img src="./1 (1).jpg" alt="Background Image" className="background-img" />
-      <img src="Persona Prep Coloured.png" alt="" className="logo-img" />
+      <img src={backgroundImage} alt="Background Image" className="background-img" />
+      <img src={logoImage} alt="" className="logo-img" />
       <div className="content">
         <ol>
-          <li><h1>CV Builder</h1></li>
-          <li><h1>Mock Interview Generator</h1></li>
-          <li><h1>Analytical Dashboard</h1></li>
+          <li><h1>CV Builder,</h1></li>
+          <li><h1>Mock Interview Generator,</h1></li>
+          <li><h1>Corporate analytical dashboard</h1></li>
         </ol>
         <p>
           Leveraging cutting-edge technology to prepare our students for
