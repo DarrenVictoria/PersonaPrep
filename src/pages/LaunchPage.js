@@ -104,7 +104,7 @@ function LaunchPage() {
       <div className="content">
         <ol>
           <li><h1>CV Builder,</h1></li>
-          <li><h1>Mock Interview Generator,</h1></li>
+          <li><h1>Mock Interview Simulator,</h1></li>
           <li><h1>Corporate analytical dashboard</h1></li>
         </ol>
         <p>
